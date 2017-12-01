@@ -2149,6 +2149,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
 				PRODUCT_NAME = App;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2187,6 +2188,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
 				PRODUCT_NAME = App;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

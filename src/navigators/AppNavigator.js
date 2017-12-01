@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import { Root } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import LoginScreen from '../components/LoginScreen';
-import Main from '../components/Main';
-import ImageCrop from '../components/ImageCrop';
+import LoginScreen from '../container/LoginScreen';
+import Main from '../container/Main';
+import ImageCrop from '../container/ImageCrop';
+import AppIndex from '../container/app';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
+  AppIndex: { screen: AppIndex },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

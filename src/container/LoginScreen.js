@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +34,6 @@ class LoginScreen extends React.Component {
     };
   }
   componentDidMount() {
-    SplashScreen.hide();
   }
   render() {
     return (

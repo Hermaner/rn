@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import home from '../components/home';
-import goods from '../components/goods';
-import carts from '../components/carts';
-import mine from '../components/mine';
+import home from '../container/home';
+import goods from '../container/goods';
+import carts from '../container/carts';
+import mine from '../container/mine';
 
 const TabsScreen = (navigationOptions = {}) => TabNavigator(
   {

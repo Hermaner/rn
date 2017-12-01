@@ -21,10 +21,12 @@ export const resetTwo = () => (
     type: 'resetTwo',
   }
 );
-export const pushRoute = value => (
+export const pushRoute = key => (
   {
     type: 'push',
-    routes: value,
+    routes: {
+      key,
+    },
   }
 );
 export const CommonError = value => (

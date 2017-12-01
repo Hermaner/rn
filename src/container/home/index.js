@@ -28,12 +28,18 @@ class HomeScreen extends base {
   }
   componentDidMount() {
   }
+  goRoute = (key) => {
+    this.props.push(key);
+  }
   render() {
     return (
       <Container>
         <Header>
           <Left>
-            <Button transparent >
+            <Button
+              onPress={() =>
+                this.goRoute('AppIndex')}
+            >
               <Icon name="menu" />
             </Button>
           </Left>
@@ -43,7 +49,7 @@ class HomeScreen extends base {
           <Right>
             <Button
               onPress={() =>
-              this.props.push({ key: 'ImageCrop' })
+              this.props.push('ImageCrop')
             }
             >
               <Icon name="menu" />

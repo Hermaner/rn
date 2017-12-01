@@ -50,7 +50,6 @@ JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [SplashScreen show];  // here
   return YES;
 }
 
