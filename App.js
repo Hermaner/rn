@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform } from 'react-native';
-import StatusBarAndroid from 'react-native-android-statusbar';
+import { AppRegistry, AsyncStorage } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import * as WeChat from 'react-native-wechat';
 import {
   persistStore,
   autoRehydrate,
@@ -14,10 +15,8 @@ import AppWithNavigationState from './src/navigators/AppNavigator';
 
 class App extends React.Component {
   componentDidMount() {
-    if (Platform.OS === 'android') {
-      StatusBarAndroid.hideStatusBar();
-      StatusBarAndroid.setHexColor('#AB1223');
-    }
+    SplashScreen.hide();
+    WeChat.registerApp('wx26b5853e6e77d138');
     persistStore(this.store, { storage: AsyncStorage });
   }
   store = createStore(

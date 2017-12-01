@@ -3,8 +3,10 @@ package com.app;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.yunpeng.alipay.AlipayPackage;
+import com.theweflex.react.WeChatPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.horcrux.svg.SvgPackage;
-import me.neo.react.StatusBarPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -37,13 +39,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AlipayPackage(),
+            new WeChatPackage(),
+            new PickerPackage(),
             new SvgPackage(),
             new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
             new RNDeviceInfo(),
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
             new RCTCameraPackage(),
-            new StatusBarPackage(),
             new PickerViewPackage(),
             new UpdatePackage()
       );

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 const BUTTONS = ['Option 0', 'Option 1', 'Option 2', 'Delete', 'Cancel'];
 const DESTRUCTIVE_INDEX = 3;
 const CANCEL_INDEX = BUTTONS.length - 1;
-class MainScreen extends base {
+class HomeScreen extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class MainScreen extends base {
       <Container>
         <Header>
           <Left>
-            <Button transparent>
+            <Button transparent >
               <Icon name="menu" />
             </Button>
           </Left>
@@ -41,7 +41,11 @@ class MainScreen extends base {
             <Title>Header</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button
+              onPress={() =>
+              this.props.push({ key: 'ImageCrop' })
+            }
+            >
               <Icon name="menu" />
             </Button>
           </Right>
@@ -134,7 +138,7 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+HomeScreen.propTypes = {
   push: PropTypes.func,
 };
-export default connect(null, { push: pushRoute })(MainScreen);
+export default connect(null, { push: pushRoute })(HomeScreen);

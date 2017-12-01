@@ -6,10 +6,12 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import LoginScreen from '../components/LoginScreen';
 import Main from '../components/Main';
+import ImageCrop from '../components/ImageCrop';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   Login: { screen: LoginScreen },
+  ImageCrop: { screen: ImageCrop },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

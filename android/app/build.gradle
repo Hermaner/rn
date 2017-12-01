@@ -106,6 +106,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [
                 JPUSH_APPKEY: "1f6e112a35a0d25e5749a896",   //在此替换你的APPKey
                 APP_CHANNEL: "developer-default"        //应用渠道号
@@ -126,6 +128,9 @@ android {
             universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86"
         }
+    }
+    dexOptions {
+        jumboMode true
     }
     buildTypes {
         release {
@@ -150,10 +155,12 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-yunpeng-alipay')
+    compile project(':react-native-wechat')
+    compile project(':react-native-image-crop-picker')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
     compile project(':react-native-splash-screen')
-    compile project(':react-native-android-statusbar')
     compile project(':react-native-picker')
     compile project(':react-native-device-info')
     compile project(':react-native-camera')
