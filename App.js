@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, DeviceEventEmitter, NativeAppEventEmitter } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import * as WeChat from 'react-native-wechat';
+import JPushModule from 'jpush-react-native';
 import {
   persistStore,
   autoRehydrate,
@@ -18,6 +19,42 @@ class App extends React.Component {
     SplashScreen.hide();
     WeChat.registerApp('wx26b5853e6e77d138');
     persistStore(this.store, { storage: AsyncStorage });
+    if (Platform.OS === 'android') {
+      JPushModule.notifyJSDidLoad((resultCode) => {
+        console.log(resultCode);
+      });
+      JPushModule.addReceiveNotificationListener((map) => {
+        console.log(map);
+      });
+      JPushModule.addReceiveOpenNotificationListener((map) => {
+        console.log(map);
+      });
+      JPushModule.getInfo((map) => {
+        this.setState({
+          myVersion: map.myVersion.slice(9),
+        });
+      });
+    } else {
+      JPushModule.setLocalNotification(234341234242424243, '2342342342342432423', 5, 'dfsa', 'dfaas', null, null);
+      NativeAppEventEmitter.addListener('networkDidSetup', (token) => {
+        console.log(token);
+      });
+      NativeAppEventEmitter.addListener('networkDidClose', (token) => {
+        console.log(token);
+      });
+      NativeAppEventEmitter.addListener('networkDidRegister', (token) => {
+        console.log(token);
+      });
+      NativeAppEventEmitter.addListener('networkDidLogin', (token) => {
+        console.log(token);
+      });
+      NativeAppEventEmitter.addListener('ReceiveNotification',
+        notification => console.log(notification));
+    }
+    JPushModule.getRegistrationID((registrationId) => {
+      console.log(registrationId);
+      this.setState({ cid: registrationId });
+    });
   }
   store = createStore(
     AppReducer,

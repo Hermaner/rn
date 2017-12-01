@@ -33,7 +33,7 @@
 JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
      entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
      [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-  [JPUSHService setupWithOption:launchOptions appKey:@"1f6e112a35a0d25e5749a896"
+  [JPUSHService setupWithOption:launchOptions appKey:@"0e8f23b4e92803de128c3c31"
                         channel:nil apsForProduction:nil];
   NSURL *jsCodeLocation;
 
