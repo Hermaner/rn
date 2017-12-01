@@ -6,7 +6,7 @@ import { AppNavigator } from '../navigators/AppNavigator';
 const initialNavState = {
   index: 0,
   routes: [
-    { key: 'Login', routeName: 'Login' },
+    { key: 'Main', routeName: 'Main' },
   ],
 };
 function nav(state = initialNavState, action) {

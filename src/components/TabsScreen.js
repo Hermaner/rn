@@ -2,18 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import createDumbStack from './createDumbStack';
+import home from '../components/home';
+import goods from '../components/goods';
+import carts from '../components/carts';
+import mine from '../components/mine';
 
-const TabsScreen = (navigationOptions = {}, DumbStack = createDumbStack()) => TabNavigator(
+const TabsScreen = (navigationOptions = {}) => TabNavigator(
   {
     Home: {
-      screen: DumbStack,
+      screen: home,
     },
-    Links: {
-      screen: DumbStack,
+    Goods: {
+      screen: goods,
     },
-    Settings: {
-      screen: DumbStack,
+    Carts: {
+      screen: carts,
+    },
+    Mine: {
+      screen: mine,
     },
   },
   {

@@ -4,11 +4,11 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.horcrux.svg.SvgPackage;
+import me.neo.react.StatusBarPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import com.react.rnspinkit.RNSpinkitPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -42,8 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNDeviceInfo(),
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
-            new RNSpinkitPackage(),
             new RCTCameraPackage(),
+            new StatusBarPackage(),
             new PickerViewPackage(),
             new UpdatePackage()
       );

@@ -1,24 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Root } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import LoginScreen from '../components/LoginScreen';
-import MainScreen from '../components/MainScreen';
-import ProfileScreen from '../components/ProfileScreen';
-import TabsScreen from '../components/screens/TabsScreen';
-import HomeScreen from '../components/home';
+import Main from '../components/Main';
 
 export const AppNavigator = StackNavigator({
+  Main: { screen: Main },
   Login: { screen: LoginScreen },
-  Main: { screen: MainScreen },
-  Home: { screen: HomeScreen },
-  TabsScreen: { screen: TabsScreen },
-  Profile: { screen: ProfileScreen },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+  <Root>
+    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+  </Root>
 );
 
 AppWithNavigationState.propTypes = {

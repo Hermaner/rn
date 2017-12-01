@@ -56,7 +56,7 @@ JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
  NSDictionary * userInfo = notification.request.content.userInfo;
   [JPUSHService handleRemoteNotification:userInfo];
  [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
-    
+
  completionHandler(UNNotificationPresentationOptionAlert);
 }
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
