@@ -1,4 +1,4 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

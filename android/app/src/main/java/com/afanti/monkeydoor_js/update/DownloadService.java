@@ -1,4 +1,4 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.app.R;
+import com.afanti.monkeydoor_js.R;
 
 public class DownloadService extends IntentService {
     // 10-10 19:14:32.618: D/DownloadService(1926): 测试缓存：41234 32kb

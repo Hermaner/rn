@@ -1,4 +1,4 @@
-package com.app.wxapi;
+package com.afanti.monkeydoor_js.wxapi;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Html;
-import com.app.R;
+import com.afanti.monkeydoor_js.R;
 
 class UpdateDialog {
 

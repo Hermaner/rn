@@ -1,4 +1,4 @@
-package com.app;
+package com.afanti.monkeydoor_js;
 
 import android.os.Bundle;
 

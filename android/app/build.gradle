@@ -98,7 +98,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.app"
+        applicationId "com.afanti.monkeydoor_js"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -115,10 +115,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file(MYAPP_HONGPLUS_FILE)
-            storePassword MYAPP_HONGPLUS_STORE_PASSWORD
-            keyAlias MYAPP_HONGPLUS_ALIAS
-            keyPassword MYAPP_HONGPLUS_KEY_PASSWORD
+          storeFile file(MYAPP_RELEASE_STORE_FILE)
+          storePassword MYAPP_RELEASE_STORE_PASSWORD
+          keyAlias MYAPP_RELEASE_KEY_ALIAS
+          keyPassword MYAPP_RELEASE_KEY_PASSWORD
         }
     }
     splits {

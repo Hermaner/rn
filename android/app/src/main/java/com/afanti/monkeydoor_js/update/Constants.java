@@ -1,4 +1,4 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 class Constants {
 

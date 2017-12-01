@@ -1,11 +1,11 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.app.update.UpdateChecker;
-import com.app.MainActivity;
+import com.afanti.monkeydoor_js.update.UpdateChecker;
+import com.afanti.monkeydoor_js.MainActivity;
 
 /**
  * Created by lj on 2017/5/6.

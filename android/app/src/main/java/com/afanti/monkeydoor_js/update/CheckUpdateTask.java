@@ -1,4 +1,4 @@
-package com.app.update;
+package com.afanti.monkeydoor_js.update;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.app.R;
+import com.afanti.monkeydoor_js.R;
 
 /**
  * @author feicien (ithcheng@gmail.com)

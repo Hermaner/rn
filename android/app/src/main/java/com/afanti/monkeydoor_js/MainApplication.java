@@ -1,4 +1,4 @@
-package com.app;
+package com.afanti.monkeydoor_js;
 
 import android.app.Application;
 
@@ -17,7 +17,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.beefe.picker.PickerViewPackage;
-import com.app.update.UpdatePackage;
+import com.afanti.monkeydoor_js.update.UpdatePackage;
 
 import java.util.Arrays;
 import java.util.List;
