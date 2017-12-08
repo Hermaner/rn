@@ -98,6 +98,7 @@
 		DF39BEED1FD12DE000877EF2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */; };
 		DF39BEEF1FD12DF100877EF2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEE1FD12DF100877EF2 /* libc++.tbd */; };
 		DF39BEF01FD137C100877EF2 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BED31FD12D9800877EF2 /* libRCTWeChat.a */; };
+		DFE0E9FF1FD4D97B00910057 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFE0E9FE1FD4D97B00910057 /* bundle */; };
 		E15D08402A2AE4CD276B8982 /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9277B5617F6B9B16D971EE2A /* libPods-App.a */; };
 		E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1A1610579242DF82AF1C4E /* libRCTBEEPickerManager.a */; };
 		E51702876FF7461E952DB52F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F7EF02090E427EA13EE716 /* CoreGraphics.framework */; };
@@ -599,6 +600,7 @@
 		DF39BE4F1FD1232A00877EF2 /* RSKImageCropper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = "<group>"; };
 		DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		DF39BEEE1FD12DF100877EF2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DFE0E9FE1FD4D97B00910057 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		E48D69E7C48B4737AA63EE14 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		E7FBEFFF606A435A84860122 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		EA4339197C8C4C78A9E51830 /* libyoga.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libyoga.a; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 		13B07FAE1A68108700A75B9A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DFE0E9FE1FD4D97B00910057 /* bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1722,6 +1725,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFE0E9FF1FD4D97B00910057 /* bundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				5999E5B756344FCE9FAC9F43 /* Entypo.ttf in Resources */,

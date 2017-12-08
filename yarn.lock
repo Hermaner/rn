@@ -4502,6 +4502,12 @@ react-native-swipe-left-hm@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/react-native-swipe-left-hm/-/react-native-swipe-left-hm-0.0.1.tgz#47b4bf92c895160b70b4a34fdb95e8335e0a4125"
 
+react-native-swiper@^1.5.13:
+  version "1.5.13"
+  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.13.tgz#fa695cd4ab77b9a9df2d2bfee38ea7274dd07a2e"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-switch-pro@^0.4.5:
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/react-native-switch-pro/-/react-native-switch-pro-0.4.6.tgz#d58c4e9d71d188c18c0c415ed29ef00d32abc815"

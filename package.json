@@ -4,6 +4,7 @@
  "private": true,
  "scripts": {
   "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
+  "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js  --platform ios --dev false --bundle-output ./ios/bundle/index.ios.jsbundle --assets-dest ./ios/bundle",
   "start": "node node_modules/react-native/local-cli/cli.js start",
   "test": "jest"
  },
@@ -35,6 +36,7 @@
   "react-native-splash-screen": "^3.0.6",
   "react-native-svg": "5.4.1",
   "react-native-swipe-left-hm": "^0.0.1",
+  "react-native-swiper": "^1.5.13",
   "react-native-switch-pro": "^0.4.5",
   "react-native-swrefresh-hm": "0.0.1",
   "react-native-vector-icons": "^4.4.0",

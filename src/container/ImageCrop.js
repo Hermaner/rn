@@ -1,26 +1,25 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, Alert,
-  Image, TouchableOpacity, NativeModules, Dimensions
+  Image, TouchableOpacity,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
-console.log(ImagePicker)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     backgroundColor: 'blue',
-    marginBottom: 10
+    marginBottom: 10,
   },
   text: {
     color: 'white',
     fontSize: 20,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default class App extends Component {
@@ -29,21 +28,20 @@ export default class App extends Component {
     super();
     this.state = {
       image: null,
-      images: null
+      images: null,
     };
   }
-
   pickSingleWithCamera(cropping) {
     ImagePicker.openCamera({
-      cropping: cropping,
+      cropping,
       width: 500,
       height: 500,
       includeExif: true,
-    }).then(image => {
+    }).then((image) => {
       console.log('received image', image);
       this.setState({
-        image: {uri: image.path, width: image.width, height: image.height},
-        images: null
+        image: { uri: image.path, width: image.width, height: image.height },
+        images: null,
       });
     }).catch(e => alert(e));
   }

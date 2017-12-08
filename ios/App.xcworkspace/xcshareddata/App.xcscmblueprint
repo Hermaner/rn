@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "AF27A10C9676E003BFB412BE419FB78BFA558552",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4094C44245B405BE9F4D9F068EA7467B2B108B1D" : 9223372036854775807,
+    "AF27A10C9676E003BFB412BE419FB78BFA558552" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0E7F7BB6-59B8-41C7-B66A-4DBFEF5DF657",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4094C44245B405BE9F4D9F068EA7467B2B108B1D" : "..",
+    "AF27A10C9676E003BFB412BE419FB78BFA558552" : "App\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "App",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/App.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Hermaner\/react-native-swipe-left.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4094C44245B405BE9F4D9F068EA7467B2B108B1D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.com\/fuwulabs\/app.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AF27A10C9676E003BFB412BE419FB78BFA558552"
+    }
+  ]
+}

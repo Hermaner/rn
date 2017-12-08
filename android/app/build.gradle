@@ -98,7 +98,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.afanti.monkeydoor_js"
+        applicationId "com.afanti.monkeydoor"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -109,7 +109,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [
-                JPUSH_APPKEY: "0e8f23b4e92803de128c3c31",   //在此替换你的APPKey
+                JPUSH_APPKEY: "de0af63626de1e41a17ae452",   //在此替换你的APPKey
                 APP_CHANNEL: "developer-default"        //应用渠道号
         ]
     }
