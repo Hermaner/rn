@@ -75,7 +75,6 @@
 		8A6B459A759749ED91AA84D2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A999F082603468880EDA65C /* CoreTelephony.framework */; };
 		9174E66DC3094334BE5FEA2B /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7714FFAF8F75480FAEEFDBFC /* libRCTJCoreModule.a */; };
 		AACC3811739A4260958B3C33 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6D9C21DB9DB474F992525C1 /* MaterialIcons.ttf */; };
-		ABEC21B7A0DA48999BC6E4E0 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 160947BE0B304682B10461CC /* libRNSpinkit.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B5784DD70CAD4DC4ADA1ECE2 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33B7432F7F89427084F8EC00 /* Feather.ttf */; };
 		B780D413419B4A5D8CA1A7E1 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E48D69E7C48B4737AA63EE14 /* Zocial.ttf */; };
@@ -661,7 +660,6 @@
 				E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */,
 				DF39BE861FD1237A00877EF2 /* RSKImageCropper.framework in Frameworks */,
 				2096A05F564246C89CABD712 /* libLRDRCTSimpleToast.a in Frameworks */,
-				ABEC21B7A0DA48999BC6E4E0 /* libRNSpinkit.a in Frameworks */,
 				0F98E3CF08F94D95BEB9E40D /* libSplashScreen.a in Frameworks */,
 				DF39BE501FD1232A00877EF2 /* QBImagePicker.framework in Frameworks */,
 				B9E8FE74EC6644B6AFB5B3B1 /* libRNSVG.a in Frameworks */,
@@ -923,6 +921,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				DE776556F2B04902AF98A4A1 /* Frameworks */,
 				965CCBB95EFE21DC87EE7147 /* Pods */,
+				A41530511FDA8FA40008FA17 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -951,6 +950,33 @@
 				CB7B51317A3F630883256D42 /* Pods-App-tvOSTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A41530511FDA8FA40008FA17 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				7714FFAF8F75480FAEEFDBFC /* libRCTJCoreModule.a */,
+				550FED7ABFC34A78A28D66B2 /* libRCTJPushModule.a */,
+				1BB5AB11A05E4D1CA28DDD6D /* libRCTCamera.a */,
+				8B0BF973EC18452F985C61C9 /* libRNDeviceInfo.a */,
+				5E1A1610579242DF82AF1C4E /* libRCTBEEPickerManager.a */,
+				CC62C3A2BFA34CBF832E8804 /* libLRDRCTSimpleToast.a */,
+				160947BE0B304682B10461CC /* libRNSpinkit.a */,
+				A2AA753483164D76B53098DF /* libSplashScreen.a */,
+				F9FC8EB3BD7D4D339F4048B3 /* libRNSVG.a */,
+				A27EADDF649D4C0D879F823A /* libRCTActionSheet.a */,
+				9D17BD5B25E04000B270E94D /* libRNVectorIcons.a */,
+				8FD66A60218A4FD085316F0E /* libReactNativeKeyboardManager.a */,
+				202B9900604646A68C0EC12D /* libimageCropPicker.a */,
+				49CEA090881844F6A49ACCF2 /* libReact.a */,
+				EA4339197C8C4C78A9E51830 /* libyoga.a */,
+				394BC85E00C34DA698510E36 /* libcxxreact.a */,
+				ECC9C1F4074C49AE968392AB /* libjschelpers.a */,
+				F7E0DA17B47B4A95A5D7A36B /* libthird-party.a */,
+				C5140B3895E44B50BDF408F2 /* libdouble-conversion.a */,
+				63DEC93CB59A4CAEB8C6449F /* libAlipayModule.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
@@ -1792,9 +1818,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-App/Pods-App-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePicker.bundle,
+				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1836,13 +1866,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-App-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8D99F702F13BC86AF2C7715B /* [CP] Embed Pods Frameworks */ = {
@@ -1881,13 +1914,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BF08546A866025112B83A6C9 /* [CP] Embed Pods Frameworks */ = {
@@ -1926,13 +1962,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-App-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2134,7 +2173,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-swrefresh-hm/RefreshDemo/ios/RefreshDemo",
@@ -2173,7 +2211,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-picker/ios/RCTBEEPickerManager",
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
-					"$(SRCROOT)/../node_modules/react-native-spinkit/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-swrefresh-hm/RefreshDemo/ios/RefreshDemo",

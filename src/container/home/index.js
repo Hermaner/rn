@@ -22,30 +22,6 @@ class HomeScreen extends base {
   goRoute = (obj) => {
     this.props.push(obj);
   }
-  _renderSwiper() {
-    const { swiperData } = this.state;
-    return (
-      <Swiper
-        showsButtons
-        showsPagination
-        nextButton={<Text style={styles.buttonText}>›</Text>}
-        prevButton={<Text style={styles.buttonText}>‹</Text>}
-        height={180}
-        autoplay
-        paginationStyle={{ bottom: 10 }}
-        dotStyle={{ backgroundColor: 'rgba(0,0,0,.2)', width: 6, height: 6 }}
-        activeDotStyle={{ backgroundColor: '#fff', width: 6, height: 6 }}
-      >
-        { swiperData.length > 0 &&
-          swiperData.map((item, i) => (
-            <TouchableHighlight underlayColor="#222" key={i} style={{ flex: 1 }} onPress={() => this.props.pushRoute('ModalDetail')}>
-              <Image source={{ uri: item.imgUrl }} style={styles.image} />
-            </TouchableHighlight>
-          ))
-        }
-      </Swiper>
-    );
-  }
   render() {
     return (
       <Container>

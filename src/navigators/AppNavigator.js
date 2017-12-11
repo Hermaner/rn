@@ -10,11 +10,13 @@ import MainSearch from '../container/mainSearch';
 import ImageCrop from '../container/ImageCrop';
 import User from '../container/user';
 import Agreement from '../container/user/agreement';
+import DfList from '../container/dfList';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   MainSearch: { screen: MainSearch },
   User: { screen: User },
+  DfList: { screen: DfList },
   Agreement: { screen: Agreement },
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
