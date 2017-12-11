@@ -1,12 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
+  fixTop: {
+    height: Platform.OS === 'ios' ? 99 : 79,
+  },
   Headerleft: {
     height: 44,
     width: 26,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  HeaderRightText: {
+    color: Mcolor,
+    fontSize: 14,
+    marginLeft: 10,
   },
   HeaderMain: {
     flex: 1,
@@ -25,6 +33,36 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 8,
   },
+  conditions: {
+    height: 35,
+    borderBottomColor: '#ddd',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+  },
+  cdsList: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  rightLine: {
+    position: 'absolute',
+    right: 0,
+    top: 10,
+    height: 15,
+    width: 0.7,
+    backgroundColor: '#ccc',
+  },
+  cddown: {
+    color: '#666',
+    fontSize: 12,
+    marginLeft: 3,
+  },
+  cdsListText: {
+    color: '#666',
+    fontSize: 12,
+  },
   mainView: {
     flex: 1,
     flexDirection: 'row',
@@ -41,6 +79,10 @@ const styles = StyleSheet.create({
   leftNav: {
     width: 90,
     backgroundColor: '#f2f2f2',
+  },
+  listContent: {
+    flex: 1,
+    backgroundColor: '#fff',
   },
   mainText: {
     color: '#555',

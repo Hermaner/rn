@@ -10,7 +10,7 @@ export function px(e) {
 }
 
 export const Mcolor = '#8bce21';
-export const Mred = '#f23130';
+export const Mred = '#f18334';
 export const Fred = '#ff0000';
 export const Mgreen = '#7eda99';
 export const Sgreen = '#3d9940';

@@ -7,6 +7,8 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import LoginScreen from '../container/LoginScreen';
 import Main from '../container/Main';
 import MainSearch from '../container/mainSearch';
+import MainSearcher from '../container/mainSearcher';
+import MainList from '../container/mainList';
 import ImageCrop from '../container/ImageCrop';
 import User from '../container/user';
 import Agreement from '../container/user/agreement';
@@ -15,6 +17,8 @@ import DfList from '../container/dfList';
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   MainSearch: { screen: MainSearch },
+  MainSearcher: { screen: MainSearcher },
+  MainList: { screen: MainList },
   User: { screen: User },
   DfList: { screen: DfList },
   Agreement: { screen: Agreement },
