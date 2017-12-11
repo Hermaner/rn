@@ -19,12 +19,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     height: 30,
   },
-  HeaderMainText: {
-    color: '#999',
-    fontSize: 14,
-    flex: 1,
-    marginLeft: 8,
-  },
   mainView: {
     flex: 1,
     flexDirection: 'row',
