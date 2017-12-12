@@ -12,7 +12,7 @@ import MainList from '../container/mainList';
 import ImageCrop from '../container/ImageCrop';
 import User from '../container/user';
 import Agreement from '../container/user/agreement';
-import DfList from '../container/dfList';
+import Payroll from '../container/payroll';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -20,10 +20,10 @@ export const AppNavigator = StackNavigator({
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
   User: { screen: User },
-  DfList: { screen: DfList },
   Agreement: { screen: Agreement },
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
+  Payroll: { screen: Payroll },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

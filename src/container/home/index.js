@@ -39,6 +39,12 @@ class HomeScreen extends base {
           >
             <Text>mainSearch</Text>
           </Button>
+          <Button
+            onPress={() =>
+              this.goRoute({ key: 'Payroll' })}
+          >
+            <Text>mainSearch</Text>
+          </Button>
         </Content>
       </Container>
     );
