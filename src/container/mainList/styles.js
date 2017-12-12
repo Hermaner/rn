@@ -1,15 +1,15 @@
 import { StyleSheet, Platform } from 'react-native';
-import { Mcolor } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
+  ...st,
   fixTop: {
     height: Platform.OS === 'ios' ? 99 : 79,
   },
   Headerleft: {
-    height: 44,
-    width: 26,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 48,
+    width: 20,
+    ...st.jacenter,
   },
   HeaderRightText: {
     color: Mcolor,
@@ -19,9 +19,8 @@ const styles = StyleSheet.create({
   HeaderMain: {
     flex: 1,
     paddingLeft: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...st.fr,
+    ...st.jacenter,
     backgroundColor: '#eee',
     borderRadius: 5,
     marginLeft: 10,
@@ -38,13 +37,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
     backgroundColor: '#fff',
-    flexDirection: 'row',
+    ...st.fr,
   },
   cdsList: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...st.fr,
+    ...st.jacenter,
   },
   rightLine: {
     position: 'absolute',
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
   },
   mainView: {
     flex: 1,
-    flexDirection: 'row',
+    ...st.fr,
   },
   HeaderIcon: {
     color: '#666',
@@ -90,8 +88,7 @@ const styles = StyleSheet.create({
   },
   leftNavList: {
     height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...st.jacenter,
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
     borderLeftWidth: 3,
@@ -103,6 +100,22 @@ const styles = StyleSheet.create({
     borderLeftColor: Mcolor,
     borderRightColor: '#fff',
     backgroundColor: '#fff',
+  },
+  addressLeftList: {
+    height: 45,
+    ...st.jcenter,
+    borderLeftWidth: 3,
+    paddingLeft: 20,
+    borderLeftColor: '#f2f2f2',
+  },
+  addressLeftListCur: {
+    borderLeftColor: Mcolor,
+    backgroundColor: '#f9f9f9',
+  },
+  addressRightList: {
+    height: 45,
+    paddingLeft: 20,
+    ...st.jcenter,
   },
   leftNavText: {
     color: '#555',
@@ -121,8 +134,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 4,
     marginBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...st.jacenter,
     height: 35,
   },
   rightContentView: {
@@ -133,16 +145,66 @@ const styles = StyleSheet.create({
     borderTopColor: '#ddd',
     borderTopWidth: 1,
   },
+  usedCityView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    minHeight: 40,
+  },
+  nousedCity: {
+    lineHeight: 40,
+    paddingLeft: 10,
+    color: '#888',
+    fontSize: 14,
+  },
   contetnTabView: {
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
     borderRightColor: '#ddd',
     borderRightWidth: 1,
-    height: 35,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    minWidth: '30%',
+    height: 40,
+    ...st.jacenter,
+    width: `${100 / 3}%`,
+  },
+  maskerContentView: {
+    ...st.fr,
+    ...st.f1,
+    flexWrap: 'wrap',
+  },
+  maskerBtns: {
+    ...st.fr,
+    height: 45,
+    borderTopColor: '#ddd',
+    borderTopWidth: 1,
+  },
+  maskerCancelBtn: {
+    ...st.f1,
+    ...st.jacenter,
+    backgroundColor: '#fff',
+  },
+  maskerSaveBtn: {
+    ...st.f1,
+    ...st.jacenter,
+    backgroundColor: Mcolor,
+  },
+  maskerBtnText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  maskerBtnTextCur: {
+    fontSize: 16,
+    color: '#FFF',
+  },
+  maskerTitle: {
+    backgroundColor: '#eee',
+    paddingLeft: 10,
+    height: 40,
+    borderBottomColor: '#ddd',
+    borderBottomWidth: 1,
+    ...st.jcenter,
+  },
+  maskerTitleText: {
+    fontSize: 14,
+    color: '#444',
   },
 });
 export default styles;

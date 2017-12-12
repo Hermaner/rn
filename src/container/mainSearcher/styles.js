@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   Headerleft: {
     height: 44,
     width: 26,
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...st.jacenter,
   },
   HeaderMain: {
     flex: 1,

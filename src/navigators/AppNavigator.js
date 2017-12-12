@@ -9,15 +9,21 @@ import Main from '../container/Main';
 import MainSearch from '../container/mainSearch';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
+import GoodsScreen from '../container/goodsScreen';
 import ImageCrop from '../container/ImageCrop';
 import User from '../container/user';
 import Agreement from '../container/user/agreement';
+import GoodDetail from '../container/goodDetail';
+import StoreDetail from '../container/storeDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   MainSearch: { screen: MainSearch },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
+  GoodsScreen: { screen: GoodsScreen },
+  StoreDetail: { screen: StoreDetail },
+  GoodDetail: { screen: GoodDetail },
   User: { screen: User },
   Agreement: { screen: Agreement },
   Login: { screen: LoginScreen },

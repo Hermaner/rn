@@ -17,3 +17,39 @@ export const Sgreen = '#3d9940';
 export const Myellow = '#c08b2e';
 export const Mblue = '#49d1f4';
 export const Sblue = '#79adcd';
+
+export const st = {
+  jacenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  jcenter: {
+    justifyContent: 'center',
+  },
+  acenter: {
+    alignItems: 'center',
+  },
+  fr: {
+    flexDirection: 'row',
+  },
+  utilsText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  f1: {
+    flex: 1,
+  },
+  masker: {
+    position: 'absolute',
+    flex: 1,
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+  maskerContent: {
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+};
