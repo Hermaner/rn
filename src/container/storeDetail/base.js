@@ -1,5 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { Image, ListView } from 'react-native';
+import { deviceW } from '../../utils';
 import { DeepClone } from '../../../api';
 
 class Base extends React.Component {
@@ -23,10 +25,25 @@ class Base extends React.Component {
         id: '4',
         cur: false,
       }],
-      distance: 50,
-      minPrice: '',
-      maxPrice: '',
-      count: '',
+      images: [
+        {
+          imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+        },
+        {
+          imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+        },
+      ],
+      otherItems: [
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+      ],
+      certifIndex: 0,
+      isCertifShow: false,
+      imageViewData: [],
     };
   }
   onChangeText = (txt, index) => {
@@ -49,9 +66,30 @@ class Base extends React.Component {
       default:
     }
   }
+  getImageHeight = () => {
+    const { images } = this.state;
+    for (let i = 0; i < images.length; i += 1) {
+      Image.getSize({ uri: images[i].imgUrl }, (width, height) => {
+        const pix = deviceW / width;
+        images[i].height = pix * height;
+        this.setState({
+          images,
+        });
+      });
+    }
+  }
   resetState = () => {
     this.setState({
       ...DeepClone(this.resetData),
+    });
+  }
+  showCertifImage = (certifIndex, imageData) => {
+    const imageViewData = [];
+    imageData.forEach(item => imageViewData.push({ url: item.imgUrl }));
+    this.setState({
+      certifIndex,
+      isCertifShow: true,
+      imageViewData,
     });
   }
   changeItem = (index) => {

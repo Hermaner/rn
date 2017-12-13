@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Slider, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, Modal } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, CheckBox, Text, Input, Button } from 'native-base';
+import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
-import { popRoute } from '../../actions';
-import { Header } from '../../components';
-import { Mcolor } from '../../utils';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ImageViewer from 'react-native-image-zoom-viewer';
+import { popRoute, pushRoute } from '../../actions';
+import { Header, ScrollableTab, GoodList } from '../../components';
 import { DeepClone } from '../../../api';
 import base from './base';
 import styles from './styles';
@@ -18,101 +19,187 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
+    this.getImageHeight();
   }
-  _renderContent() {
-    const { items } = this.state;
+  _renderTop() {
     return (
-      <View style={styles.itemContent}>
-        {
-          items.map((item, index) => (
-            <TouchableWithoutFeedback key={index} onPress={() => this.changeItem(index)}>
-              <View style={styles.itemList}>
-                <Text style={[styles.utilsText, styles.f1]}>{item.title}</Text>
-                <CheckBox checked={item.cur} color={Mcolor} />
+      <View style={styles.topView}>
+        <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.mainImg} />
+        <View style={styles.toplogo}>
+          <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.mainLogo} />
+        </View>
+        <View style={styles.topBtn}>
+          <Icon name="arrow-back" style={styles.topIcon} />
+          <Text style={styles.topText}>关注</Text>
+        </View>
+      </View>
+    );
+  }
+  _renderNameAP() {
+    return (
+      <View style={styles.midMainView}>
+        <View style={styles.nameOneView}>
+          <View style={styles.nameTextView}>
+            <Icon name="arrow-back" style={styles.nameIcon} />
+            <Icon name="arrow-back" style={styles.nameIcon} />
+            <Text style={styles.nameText}>吴涛</Text>
+          </View>
+          <View style={styles.nameLabelView}>
+            <Text style={styles.grayText}>基地直供基地直供</Text>
+          </View>
+        </View>
+        <View style={styles.midMainCount}>
+          <View style={styles.mmcList}>
+            <Text style={styles.mmcText}>3424</Text>
+            <Text style={styles.mmmLabel}>店铺访客</Text>
+          </View>
+          <View style={styles.mmcList}>
+            <Text style={styles.mmcText}>3</Text>
+            <Text style={styles.mmmLabel}>店铺访客</Text>
+          </View>
+          <View style={styles.mmcList}>
+            <Text style={styles.mmcText}>24</Text>
+            <Text style={styles.mmmLabel}>店铺访客</Text>
+          </View>
+          <View style={styles.mmcList}>
+            <Text style={styles.mmcText}>1</Text>
+            <Text style={styles.mmmLabel}>店铺访客</Text>
+          </View>
+        </View>
+        <View style={styles.midMainCredit}>
+          <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.creditImg} />
+          <View style={styles.creditView}>
+            <Text style={styles.creditText}>江西定都县</Text>
+            <Text style={styles.creditLabel}>已缴纳保证金5000元</Text>
+          </View>
+          <View style={styles.creditRight}>
+            <Text style={styles.creditRightText}>了解服务</Text>
+            <Icon name="arrow-back" style={styles.creditRightIcon} />
+          </View>
+        </View>
+      </View>
+    );
+  }
+  _renderProvideTypes() {
+    return (
+      <View style={styles.provideTypes}>
+        <View style={styles.provideTypesLeft}>
+          <View style={styles.ptlList}>
+            <Icon name="arrow-back" style={styles.ptlIcon} />
+            <Text style={styles.ptlText}>基地直供</Text>
+          </View>
+          <View style={styles.ptlList}>
+            <Icon name="arrow-back" style={styles.ptlIcon} />
+            <Text style={styles.ptlText}>基地直供</Text>
+          </View>
+          <View style={styles.ptlList}>
+            <Icon name="arrow-back" style={styles.ptlIcon} />
+            <Text style={styles.ptlText}>基地直供</Text>
+          </View>
+          <View style={styles.ptlList}>
+            <Icon name="arrow-back" style={styles.ptlIcon} />
+            <Text style={styles.ptlText}>基地直供</Text>
+          </View>
+        </View>
+        <Icon name="arrow-back" style={styles.ptrIcon} />
+      </View>
+    );
+  }
+  _renderSkuTable() {
+    const data = ['认证身份', '公司', '认证身份', '公司', '认证身份', '公司', '认证身份', '公司', '认证身份', '公司', '认证身份', '公司'];
+    const imageData = [{
+      imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+      name: '产品照片',
+    }, {
+      imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+      name: '产品照片',
+    }, {
+      imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+      name: '产品照片',
+    }, {
+      imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+      name: '产品照片',
+    }];
+    const { certifIndex, isCertifShow, imageViewData } = this.state;
+    return (
+      <View style={styles.skuTable}>
+        <View style={styles.skuTableTitle}>
+          <Text style={styles.skuTableTitleText}>实地认证</Text>
+        </View>
+        <View style={styles.stTabelView}>
+          {
+            data.map((item, index) => (
+              <View key={index} style={index % 2 === 0 ? styles.stLabelView : styles.stTextView}>
+                <Text style={styles.skuTableText}>{item}</Text>
               </View>
-            </TouchableWithoutFeedback>
+            ))
+          }
+        </View>
+        <View style={styles.certifView}>
+          {
+            imageData.map((item, index) => (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => this.showCertifImage(index, imageData)}
+              >
+                <View style={styles.certifList}>
+                  <Image source={{ uri: item.imgUrl }} style={styles.certifImg} />
+                  <Text style={styles.certifText}>{item.name}</Text>
+                </View>
+              </TouchableWithoutFeedback>
+            ))
+          }
+        </View>
+        <Modal
+          visible={isCertifShow}
+          index={certifIndex}
+          transparent
+        >
+          <ImageViewer
+            imageUrls={imageViewData}
+            onClick={() => this.setState({ isCertifShow: false })}
+          />
+        </Modal>
+      </View>
+    );
+  }
+  _renderTabs() {
+    const { otherItems } = this.state;
+    const Tab = () => (
+      <View>
+        {
+          otherItems.map((item, index) => (
+            <GoodList
+              data={item}
+              key={index}
+              onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
+            />
           ))
         }
       </View>
     );
-  }
-  _renderDistance() {
-    const { distance } = this.state;
     return (
-      <View style={styles.distanceContent}>
-        <Text style={styles.distanceTitle} >
-          设置看货距离({parseInt(distance, 10)})
-        </Text>
-        <Slider
-          minimumValue={50}
-          maximumValue={500}
-          minimumTrackTintColor={Mcolor}
-          onValueChange={c => this.setState({ distance: c })}
-        />
-        <View style={styles.distanceLabel}>
-          <Text style={styles.utilsText} >
-            50
-          </Text>
-          <Text style={styles.utilsText} >
-            100
-          </Text>
-          <Text style={styles.utilsText} >
-            200
-          </Text>
-          <Text style={styles.utilsText} >
-            300
-          </Text>
-          <Text style={styles.utilsText} >
-            400
-          </Text>
-        </View>
+      <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
+        <ScrollableTabView locked renderTabBar={() => <ScrollableTab />}>
+          <Tab tabLabel="供应" />
+        </ScrollableTabView>
       </View>
     );
   }
-  _renderCondition() {
-    const { minPrice, maxPrice, count } = this.state;
-    const { pop } = this.props;
+  _renderFooter() {
     return (
-      <View style={styles.condition}>
-        <View style={styles.itemList}>
-          <Text style={styles.utilsText}>价格区间</Text>
-          <Input
-            style={styles.input}
-            placeholderTextColor="#999"
-            placeholder="输入最低价"
-            keyboardType="numeric"
-            clearButtonMode="while-editing"
-            value={minPrice}
-            onChangeText={value => this.onChangeText(value, 0)}
-          />
-          <Text style={styles.utilsText}>-</Text>
-          <Input
-            style={styles.input}
-            placeholderTextColor="#999"
-            keyboardType="numeric"
-            placeholder="输入最低价"
-            clearButtonMode="while-editing"
-            value={maxPrice}
-            onChangeText={value => this.onChangeText(value, 1)}
-          />
+      <Footer>
+        <View style={styles.fotBtn1}>
+          <Icon name="arrow-back" style={styles.fotChatIcon} />
+          <Text style={styles.fotChatText}>聊生意</Text>
         </View>
-        <View style={styles.itemList}>
-          <Text style={styles.utilsText}>起订量</Text>
-          <Input
-            style={styles.input}
-            keyboardType="numeric"
-            placeholderTextColor="#999"
-            placeholder="输入起订量"
-            clearButtonMode="while-editing"
-            value={count}
-            onChangeText={value => this.onChangeText(value, 2)}
-          />
-          <Text style={styles.utilsText}>以下起订</Text>
+        <View style={styles.fotBtn2}>
+          <Text style={styles.fotText}>打电话</Text>
         </View>
-        <Button full rounded style={styles.saveBtn} onPress={() => { this.save(pop); }}>
-          <Text>填好了</Text>
-        </Button>
-      </View>
+        <View style={styles.fotBtn3}>
+          <Text style={styles.fotText}>立即购买</Text>
+        </View>
+      </Footer>
     );
   }
   render() {
@@ -121,16 +208,19 @@ class MainScreen extends base {
       <Container>
         <Header
           back={pop}
-          title="货品筛选"
+          title="供应详情"
           showRight
-          rightText="重置"
+          rightText="更多"
           rightPress={this.resetState}
         />
         <Content>
-          {this._renderContent()}
-          {this._renderDistance()}
-          {this._renderCondition()}
+          {this._renderTop()}
+          {this._renderNameAP()}
+          {this._renderProvideTypes()}
+          {this._renderSkuTable()}
+          {this._renderTabs()}
         </Content>
+        {this._renderFooter()}
       </Container>
     );
   }
@@ -138,5 +228,6 @@ class MainScreen extends base {
 
 MainScreen.propTypes = {
   pop: PropTypes.func,
+  push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
