@@ -106,36 +106,39 @@ class MainScreen extends base {
     );
   }
   _renderEval() {
+    const { push } = this.props;
     return (
-      <View style={styles.evalView}>
-        <View style={styles.evalViewTop}>
-          <Text style={styles.evalTopLabel}>评价</Text>
-          <View style={styles.evalTopRight}>
-            <Text style={styles.evalTopText}>查看<Text style={styles.evalTopColor}>4</Text>条评价</Text>
-            <Icon name="arrow-back" style={styles.evalTopIcon} />
-          </View>
-        </View>
-        <View style={styles.evalViewBom}>
-          <Text style={styles.evalMainText}>评价文字显示的确</Text>
-          <View style={styles.evalMain}>
-            <View style={styles.evalMainLeft}>
-              <StarRating
-                disabled
-                starSize={16}
-                emptyStar={'ios-star-outline'}
-                fullStar={'ios-star'}
-                halfStar={'ios-star-half'}
-                iconSet={'Ionicons'}
-                starColor={Mred}
-                maxStars={5}
-                rating={3.5}
-              />
-              <Text style={styles.evalMainCount}>购买数量：x2</Text>
+      <TouchableWithoutFeedback onPress={() => push({ key: 'EvalList' })}>
+        <View style={styles.evalView}>
+          <View style={styles.evalViewTop}>
+            <Text style={styles.evalTopLabel}>评价</Text>
+            <View style={styles.evalTopRight}>
+              <Text style={styles.evalTopText}>查看<Text style={styles.evalTopColor}>4</Text>条评价</Text>
+              <Icon name="arrow-back" style={styles.evalTopIcon} />
             </View>
-            <Text style={styles.evalMainName}>h****8</Text>
+          </View>
+          <View style={styles.evalViewBom}>
+            <Text style={styles.evalMainText}>评价文字显示的确</Text>
+            <View style={styles.evalMain}>
+              <View style={styles.evalMainLeft}>
+                <StarRating
+                  disabled
+                  starSize={16}
+                  emptyStar={'ios-star-outline'}
+                  fullStar={'ios-star'}
+                  halfStar={'ios-star-half'}
+                  iconSet={'Ionicons'}
+                  starColor={Mred}
+                  maxStars={5}
+                  rating={3.5}
+                />
+                <Text style={styles.evalMainCount}>购买数量：x2</Text>
+              </View>
+              <Text style={styles.evalMainName}>h****8</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
   _renderSkuTable() {

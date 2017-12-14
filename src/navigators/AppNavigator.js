@@ -16,6 +16,7 @@ import Agreement from '../container/user/agreement';
 import Payroll from '../container/payroll';
 import GoodDetail from '../container/goodDetail';
 import StoreDetail from '../container/storeDetail';
+import EvalList from '../container/evalList';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -29,6 +30,7 @@ export const AppNavigator = StackNavigator({
   Agreement: { screen: Agreement },
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
+  EvalList: { screen: EvalList },
   Payroll: { screen: Payroll },
 }, {
   headerMode: 'screen',
