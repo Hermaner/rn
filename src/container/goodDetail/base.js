@@ -23,6 +23,22 @@ class Base extends React.Component {
         id: '4',
         cur: false,
       }],
+      images: [
+        {
+          imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+        },
+        {
+          imgUrl: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG',
+        },
+      ],
+      otherItems: [
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+        { name: '石榴真好吃啊真好吃啊真好使' },
+      ],
       distance: 50,
       minPrice: '',
       maxPrice: '',
