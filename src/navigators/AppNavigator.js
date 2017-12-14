@@ -16,6 +16,7 @@ import Agreement from '../container/user/agreement';
 import Payroll from '../container/payroll';
 import GoodDetail from '../container/goodDetail';
 import StoreDetail from '../container/storeDetail';
+import WhyChoose from '../container/whyChoose';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -30,6 +31,7 @@ export const AppNavigator = StackNavigator({
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
   Payroll: { screen: Payroll },
+  WhyChoose: { screen: WhyChoose },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

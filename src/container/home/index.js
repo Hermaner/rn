@@ -45,6 +45,12 @@ class HomeScreen extends base {
           >
             <Text>mainSearch</Text>
           </Button>
+          <Button
+            onPress={() =>
+              this.goRoute({ key: 'WhyChoose' })}
+          >
+            <Text>mainSearch</Text>
+          </Button>
         </Content>
       </Container>
     );

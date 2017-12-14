@@ -1,14 +1,48 @@
 import { StyleSheet } from 'react-native';
-import { Mgreen } from '../../utils';
+import { Mgreen, st } from '../../utils';
 
 const styles = StyleSheet.create({
   form: {
     backgroundColor: '#fff', borderRadius: 8,
   },
+  Headerleft: {
+    height: 44,
+    width: 20,
+    ...st.jacenter,
+  },
+  HeaderMain: {
+    flex: 1,
+    paddingLeft: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#eee',
+    borderRadius: 5,
+    marginLeft: 10,
+    height: 30,
+  },
+  HeaderMainText: {
+    color: '#999',
+    fontSize: 14,
+    flex: 1,
+    marginLeft: 8,
+  },
+  mainView: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  HeaderIcon: {
+    color: '#666',
+    fontSize: 18,
+  },
+  HeaderInput: {
+    color: '#666',
+    fontSize: 14,
+    borderBottomColor: '#eee',
+  },
   Body: {
   },
   bodyHeader: {
-    borderWidth: 1,
   },
   Headerleft: {
     resizeMode: 'stretch',
@@ -26,6 +60,9 @@ const styles = StyleSheet.create({
   },
   flexOne: {
     flex: 1,
+  },
+  flexAlignItems: {
+    alignItems: 'center',
   },
   textCenter: {
     textAlign: 'center',
@@ -107,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     borderColor: '#999',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 10,
     marginTop: 6,
     marginBottom: 6,
     paddingTop: 2,
@@ -138,12 +175,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   Button: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingLeft: 8,
+    paddingRight: 8,
     color: '#77C000',
-    fontSize: 18,
+    fontSize: 16,
     borderColor: '#77C000',
     borderWidth: 1,
     borderRadius: 4,
