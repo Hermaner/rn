@@ -19,7 +19,6 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
-    this.getImageHeight();
   }
   _renderTop() {
     return (
@@ -152,11 +151,11 @@ class MainScreen extends base {
         </View>
         <Modal
           visible={isCertifShow}
-          index={certifIndex}
           transparent
         >
           <ImageViewer
             imageUrls={imageViewData}
+            index={certifIndex}
             onClick={() => this.setState({ isCertifShow: false })}
           />
         </Modal>
@@ -191,13 +190,13 @@ class MainScreen extends base {
       <Footer>
         <View style={styles.fotBtn1}>
           <Icon name="arrow-back" style={styles.fotChatIcon} />
-          <Text style={styles.fotChatText}>聊生意</Text>
+          <Text style={styles.fotChatText}>关注</Text>
         </View>
         <View style={styles.fotBtn2}>
-          <Text style={styles.fotText}>打电话</Text>
+          <Text style={styles.fotText}>聊生意</Text>
         </View>
         <View style={styles.fotBtn3}>
-          <Text style={styles.fotText}>立即购买</Text>
+          <Text style={styles.fotText}>打电话</Text>
         </View>
       </Footer>
     );

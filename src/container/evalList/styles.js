@@ -1,42 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st } from '../../utils';
+import { st } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
   evalView: {
-    marginTop: 10,
     backgroundColor: '#fff',
-  },
-  evalViewTop: {
-    ...st.fr,
-    paddingLeft: 10,
-    paddingRight: 10,
-    height: 40,
-    ...st.jacenter,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
-  },
-  evalTopLabel: {
-    fontSize: 14,
-    color: '#666',
-    flex: 1,
-  },
-  evalTopRight: {
-    ...st.fr,
-    ...st.jacenter,
-  },
-  evalTopText: {
-    marginRight: 5,
-    fontSize: 12,
-    color: '#666',
-  },
-  evalTopColor: {
-    fontSize: 12,
-    color: Mcolor,
-  },
-  evalTopIcon: {
-    fontSize: 16,
-    color: '#666',
+    marginBottom: 5,
   },
   evalViewBom: {
     paddingTop: 6,
@@ -47,6 +16,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#333',
     lineHeight: 18,
+  },
+  evalDateText: {
+    lineHeight: 30,
+    fontSize: 13,
+    color: '#888',
   },
   evalMain: {
     ...st.fr,
@@ -67,6 +41,20 @@ const styles = StyleSheet.create({
   evalMainName: {
     fontSize: 12,
     color: '#333',
+  },
+  evalImages: {
+    ...st.fr,
+    flexWrap: 'wrap',
+  },
+  evalImagesList: {
+    ...st.acenter,
+    width: 60,
+    marginTop: 10,
+    marginRight: 5,
+  },
+  evalImage: {
+    width: 60,
+    height: 60,
   },
 });
 export default styles;

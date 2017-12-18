@@ -1,7 +1,9 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { Animated } from 'react-native';
 import { DeepClone } from '../../../api';
 
+const time = 200;
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +45,8 @@ class Base extends React.Component {
       minPrice: '',
       maxPrice: '',
       count: '',
+      isBuyMaskerShow: false,
+      maskerHeight: new Animated.Value(300),
     };
   }
   onChangeText = (txt, index) => {
@@ -80,6 +84,39 @@ class Base extends React.Component {
   save = (callback) => {
     console.log(111);
     callback();
+  }
+  closeBuyMasker = () => {
+    setTimeout(() => {
+      this.setState({
+        isBuyMaskerShow: false,
+      });
+    }, time);
+    Animated.timing(
+      this.state.maskerHeight,
+      {
+        toValue: 300,
+        duration: time,
+      },
+    ).start();
+  }
+  openBuyMasker = () => {
+    this.ModalView.showModal()
+    return
+    this.setState({
+      isBuyMaskerShow: true,
+    }, () => {
+      Animated.timing(
+        this.state.maskerHeight,
+        {
+          toValue: 0,
+          duration: time,
+        },
+      ).start();
+    });
+  }
+  saveBuyMasker = () => {
+    console.log(11111)
+    this.ModalView.showModal();
   }
 }
 

@@ -66,18 +66,6 @@ class Base extends React.Component {
       default:
     }
   }
-  getImageHeight = () => {
-    const { images } = this.state;
-    for (let i = 0; i < images.length; i += 1) {
-      Image.getSize({ uri: images[i].imgUrl }, (width, height) => {
-        const pix = deviceW / width;
-        images[i].height = pix * height;
-        this.setState({
-          images,
-        });
-      });
-    }
-  }
   resetState = () => {
     this.setState({
       ...DeepClone(this.resetData),

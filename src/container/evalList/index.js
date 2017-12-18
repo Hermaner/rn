@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
+import { View, Image, Modal, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Icon } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import StarRating from 'react-native-star-rating';
 import { popRoute, pushRoute } from '../../actions';
-import { Header } from '../../components';
+import { Header, ScrollableTab, NoData } from '../../components';
 import { Mred } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -19,36 +21,89 @@ class MainScreen extends base {
   }
   componentDidMount() {
   }
-  _renderEval() {
-    return (
+  _renderTabs() {
+    const { items, imageDateIndex, isImageDateShow, imageViewData } = this.state;
+    const EvalList = ({ data }) => (
       <View style={styles.evalView}>
-        <View style={styles.evalViewTop}>
-          <Text style={styles.evalTopLabel}>评价</Text>
-          <View style={styles.evalTopRight}>
-            <Text style={styles.evalTopText}>查看<Text style={styles.evalTopColor}>4</Text>条评价</Text>
-            <Icon name="arrow-back" style={styles.evalTopIcon} />
-          </View>
-        </View>
         <View style={styles.evalViewBom}>
-          <Text style={styles.evalMainText}>评价文字显示的确</Text>
           <View style={styles.evalMain}>
             <View style={styles.evalMainLeft}>
               <StarRating
                 disabled
-                starSize={16}
+                starSize={18}
                 emptyStar={'ios-star-outline'}
                 fullStar={'ios-star'}
                 halfStar={'ios-star-half'}
                 iconSet={'Ionicons'}
                 starColor={Mred}
                 maxStars={5}
-                rating={3.5}
+                rating={data.star}
               />
               <Text style={styles.evalMainCount}>购买数量：x2</Text>
             </View>
             <Text style={styles.evalMainName}>h****8</Text>
           </View>
+          <Text style={styles.evalMainText}>{data.label}</Text>
+          <View style={styles.evalImages}>
+            {
+              data.imageData.length > 0 &&
+              data.imageData.map((item, index) => (
+                <TouchableWithoutFeedback
+                  key={index}
+                  onPress={() => this.showImageDate(index, data.imageData)}
+                >
+                  <View style={styles.evalImagesList}>
+                    <Image source={{ uri: item.imgUrl }} style={styles.evalImage} />
+                  </View>
+                </TouchableWithoutFeedback>
+              ))
+            }
+          </View>
+          <Text style={styles.evalDateText}>{data.date}</Text>
         </View>
+      </View>
+    );
+    EvalList.propTypes = {
+      data: PropTypes.object,
+    };
+    const Tab = () => (
+      <View style={{ flex: 1 }}>
+        {
+          items.length > 0 ?
+          items.map((item, index) => (
+            <EvalList
+              data={item}
+              key={index}
+            />
+          )) :
+          <NoData />
+        }
+      </View>
+    );
+    return (
+      <View style={{ flex: 1 }}>
+        <ScrollableTabView
+          locked
+          renderTabBar={() => <ScrollableTab />}
+          onChangeTab={(obj) => {
+            console.log(obj.i);
+          }}
+        >
+          <Tab tabLabel="全部" />
+          <Tab tabLabel="好评4" />
+          <Tab tabLabel="差评0" />
+          <Tab tabLabel="有图0" />
+        </ScrollableTabView>
+        <Modal
+          visible={isImageDateShow}
+          transparent
+        >
+          <ImageViewer
+            imageUrls={imageViewData}
+            index={imageDateIndex}
+            onClick={() => this.setState({ isImageDateShow: false })}
+          />
+        </Modal>
       </View>
     );
   }
@@ -58,13 +113,13 @@ class MainScreen extends base {
       <Container>
         <Header
           back={pop}
-          title="供应详情"
+          title="评价"
           showRight
           rightText="更多"
           rightPress={this.resetState}
         />
-        <Content>
-          {this._renderEval()}
+        <Content contentContainerStyle={{ flex: 1 }}>
+          {this._renderTabs()}
         </Content>
       </Container>
     );
