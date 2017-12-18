@@ -1,12 +1,12 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class TLight extends React.Component {
   static propTypes = {
-    content: React.PropTypes.element,
-    TPress: React.PropTypes.func,
-    LPress: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
+    content: PropTypes.element,
+    TPress: PropTypes.func,
+    style: PropTypes.any,
   };
   constructor(props) {
     super(props);
@@ -16,20 +16,23 @@ export default class TLight extends React.Component {
     this.lightPress = this.lightPress.bind(this);
   }
   async lightPress() {
-    this.props.TPress();
+    const { TPress } = this.props;
+    if (!TPress) {
+      return;
+    }
+    TPress();
     await this.setState({ isDisable: true });
     this.timer = setTimeout(async () => {
       await this.setState({ isDisable: false });
     }, 500);
   }
   render() {
-    const { style, content, disabled, LPress } = this.props;
+    const { style, content } = this.props;
     const { isDisable } = this.state;
     return (
       <TouchableOpacity
-        disabled={disabled || isDisable}
+        disabled={isDisable}
         onPress={this.lightPress}
-        onLongPress={LPress}
         style={style}
       >
         {content}

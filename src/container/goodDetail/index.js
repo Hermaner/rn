@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, Modal, Animated, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList } from '../../components';
+import { Header, ScrollableTab, GoodhList, ModalView } from '../../components';
 import { DeepClone } from '../../../api';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
@@ -106,36 +106,41 @@ class MainScreen extends base {
     );
   }
   _renderEval() {
+    const { push } = this.props;
     return (
-      <View style={styles.evalView}>
-        <View style={styles.evalViewTop}>
-          <Text style={styles.evalTopLabel}>评价</Text>
-          <View style={styles.evalTopRight}>
-            <Text style={styles.evalTopText}>查看<Text style={styles.evalTopColor}>4</Text>条评价</Text>
-            <Icon name="arrow-back" style={styles.evalTopIcon} />
-          </View>
-        </View>
-        <View style={styles.evalViewBom}>
-          <Text style={styles.evalMainText}>评价文字显示的确</Text>
-          <View style={styles.evalMain}>
-            <View style={styles.evalMainLeft}>
-              <StarRating
-                disabled
-                starSize={16}
-                emptyStar={'ios-star-outline'}
-                fullStar={'ios-star'}
-                halfStar={'ios-star-half'}
-                iconSet={'Ionicons'}
-                starColor={Mred}
-                maxStars={5}
-                rating={3.5}
-              />
-              <Text style={styles.evalMainCount}>购买数量：x2</Text>
+      <TouchableWithoutFeedback onPress={() => push({ key: 'EvalList' })}>
+        <View style={styles.evalView}>
+          <View style={styles.evalViewTop}>
+            <Text style={styles.evalTopLabel}>评价</Text>
+            <View style={styles.evalTopRight}>
+              <Text style={styles.evalTopText}>
+                查看<Text style={styles.evalTopColor}>4</Text>条评价
+              </Text>
+              <Icon name="arrow-back" style={styles.evalTopIcon} />
             </View>
-            <Text style={styles.evalMainName}>h****8</Text>
+          </View>
+          <View style={styles.evalViewBom}>
+            <Text style={styles.evalMainText}>评价文字显示的确</Text>
+            <View style={styles.evalMain}>
+              <View style={styles.evalMainLeft}>
+                <StarRating
+                  disabled
+                  starSize={16}
+                  emptyStar={'ios-star-outline'}
+                  fullStar={'ios-star'}
+                  halfStar={'ios-star-half'}
+                  iconSet={'Ionicons'}
+                  starColor={Mred}
+                  maxStars={5}
+                  rating={3.5}
+                />
+                <Text style={styles.evalMainCount}>购买数量：x2</Text>
+              </View>
+              <Text style={styles.evalMainName}>h****8</Text>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
   _renderSkuTable() {
@@ -275,10 +280,59 @@ class MainScreen extends base {
         <View style={styles.fotBtn2}>
           <Text style={styles.fotText}>打电话</Text>
         </View>
-        <View style={styles.fotBtn3}>
+        <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
           <Text style={styles.fotText}>立即购买</Text>
-        </View>
+        </TouchableOpacity>
       </Footer>
+    );
+  }
+  _renderBuyMasker() {
+    const { push } = this.props;
+    const { isBuyMaskerShow, maskerHeight } = this.state;
+    console.log(maskerHeight)
+    console.log(new Animated.Value(300))
+    return (
+      <Modal
+        animationType={'none'}
+        transparent
+        visible={isBuyMaskerShow}
+        onRequestClose={() => { console.log('关闭'); }}
+      >
+        <TouchableWithoutFeedback onPress={this.closeBuyMasker}>
+          <View style={styles.masker}>
+            <TouchableWithoutFeedback>
+              <Animated.View style={[styles.maskerContent, { transform: [{ translateY: new Animated.Value(30) }] }]}>
+                <View>
+                  <View style={styles.maskerTop}>
+                    <Text style={styles.maskerTitle}>该货品已经介入买家保障</Text>
+                    <TouchableOpacity style={styles.maskerCloseBtn} onPress={this.closeBuyMasker}>
+                      <Icon name="arrow-back" style={styles.maskerCloseIcon} />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.maskerContainer}>
+                    <Text style={styles.title}>该货品已经介入买家保障</Text>
+                  </View>
+                  <View style={styles.maskerBtns}>
+                    <TouchableOpacity style={styles.maskerConfirm} onPress={this.saveBuyMasker}>
+                      <Text style={styles.maskerConfirmText}>确认</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    );
+  }
+  _renderModalView() {
+    return (
+      <ModalView
+        ref={(o) => { this.ModalView = o; }}
+        title={'1231'}
+        content={<Text>1331313131</Text>}
+        onConfirm={() => console.log(111)}
+      />
     );
   }
   render() {
@@ -300,8 +354,10 @@ class MainScreen extends base {
           {this._renderEval()}
           {this._renderSkuTable()}
           {this._renderTabs()}
+          {this._renderModalView()}
         </Content>
         {this._renderFooter()}
+        {this._renderBuyMasker()}
       </Container>
     );
   }

@@ -391,5 +391,60 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#333',
   },
+  masker: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  maskerContent: {
+    backgroundColor: '#f2f2f2',
+    position: 'absolute',
+    height: 300,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  maskerTop: {
+    flexDirection: 'row',
+    height: 50,
+    paddingLeft: 40,
+    paddingRight: 40,
+  },
+  maskerTitle: {
+    flex: 1,
+    fontSize: 16,
+    color: '#222',
+    textAlign: 'center',
+    marginTop: 18,
+  },
+  maskerCloseBtn: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 40,
+    right: 0,
+    top: 0,
+  },
+  maskerBtns: {
+    height: 50,
+    flexDirection: 'row',
+    backgroundColor: '#f2f2f2',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+  },
+  maskerContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  maskerConfirm: {
+    justifyContent: 'center',
+    backgroundColor: Mred,
+    flex: 1,
+  },
+  maskerConfirmText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#fff',
+  },
 });
 export default styles;

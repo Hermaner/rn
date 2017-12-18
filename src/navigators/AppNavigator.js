@@ -26,6 +26,7 @@ import AccountCenter from '../container/accountCenter';
 import ChooseAccountType from '../container/chooseAccountType';
 import My from '../container/my';
 import SelfSet from '../container/selfSet';
+import EvalList from '../container/evalList';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -39,6 +40,7 @@ export const AppNavigator = StackNavigator({
   Agreement: { screen: Agreement },
   Login: { screen: LoginScreen },
   ImageCrop: { screen: ImageCrop },
+  EvalList: { screen: EvalList },
   Payroll: { screen: Payroll },
   WhyChoose: { screen: WhyChoose },
   AdjectiveInfo: { screen: AdjectiveInfo },

@@ -1,10 +1,12 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class TLight extends React.Component {
   static propTypes = {
-    content: React.PropTypes.element,
-    TPress: React.PropTypes.func,
+    content: PropTypes.element,
+    TPress: PropTypes.func,
+    style: PropTypes.any,
   };
   constructor(props) {
     super(props);
@@ -14,7 +16,11 @@ export default class TLight extends React.Component {
     this.lightPress = this.lightPress.bind(this);
   }
   async lightPress() {
-    this.props.TPress();
+    const { TPress } = this.props;
+    if (!TPress) {
+      return;
+    }
+    TPress();
     await this.setState({ isDisable: true });
     this.timer = setTimeout(async () => {
       await this.setState({ isDisable: false });
