@@ -1,0 +1,219 @@
+import React from 'react';
+import { TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, View, TextInput, Image } from 'react-native';
+import Swiper from 'react-native-swiper';
+import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { pushRoute, popRoute } from '../../actions';
+import base from './base';
+import styles from './styles';
+
+class MainScreen extends base {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+      swiperData: [],
+    };
+  }
+  componentDidMount() {
+  }
+  goRoute = (key) => {
+    this.props.push(key);
+  }
+  _renderBody() {
+    const { pop, push } = this.props;
+    return (
+      <View style={styles.pagebody}>
+        <View style={styles.headerImgBox}>
+          <Image style={styles.headerImg} source={require('../app/resource/imgs/avatar.jpg')} />
+        </View>
+        <View style={{ height: 150, paddingLeft: 10, paddingRight: 10 }}>
+          <View style={styles.accountMoney}>
+            <Text style={styles.textBackground}>消息</Text>
+            <TouchableOpacity onPress={pop} style={styles.rightBtn}>
+              <Text style={styles.textBackground}>设置</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Image style={styles.userImg} source={require('../app/resource/imgs/2.png')} />
+            <View>
+              <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
+              <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.detailInfo}>
+          <Text style={styles.myIdentity}>我是买家</Text>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>我发布的采购</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>买到的货品</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+        </View>
+        <View style={styles.detailInfo}>
+          <Text style={styles.myIdentity}>我是卖家</Text>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>我的供应</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>卖出的货品</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>发出的报价</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>商机推送</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>我的访客</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+        </View>
+        <View style={styles.detailInfo}>
+          <Text style={styles.myIdentity}>其他</Text>
+          <TouchableHighlight style={styles.infoBox} onPress={() => { push({ key: 'AccountCenter' }); }}>
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>账户中心</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Text style={{ color: '#999', fontSize: 14 }}>账户资金/提现/账户安全</Text>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
+            </View>
+          </TouchableHighlight>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>我的主页</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+          <View style={styles.infoBox}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+              <Text style={{ color: '#666', fontSize: 16 }}>一件代发</Text>
+            </View>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <Text style={{ color: '#999', fontSize: 14 }}>惠农优选</Text>
+              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
+  render() {
+    const { pop, push } = this.props;
+    return (
+      <Container>
+        {/* {this._readerHeader()} */}
+        <Content>
+          {this._renderBody()}
+        </Content>
+      </Container>
+    );
+  }
+}
+
+MainScreen.propTypes = {
+  pop: PropTypes.func,
+  push: PropTypes.func,
+};
+export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);

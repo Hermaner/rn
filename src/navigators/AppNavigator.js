@@ -17,6 +17,15 @@ import Payroll from '../container/payroll';
 import GoodDetail from '../container/goodDetail';
 import StoreDetail from '../container/storeDetail';
 import WhyChoose from '../container/whyChoose';
+import AdjectiveInfo from '../container/adjectiveInfo';
+import ReportPage from '../container/reportPage';
+import ReportDetailPage from '../container/reportDetailPage';
+import AddAccount from '../container/addAccount';
+import GatheringAccount from '../container/gatheringAccount';
+import AccountCenter from '../container/accountCenter';
+import ChooseAccountType from '../container/chooseAccountType';
+import My from '../container/my';
+import SelfSet from '../container/selfSet';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -32,6 +41,15 @@ export const AppNavigator = StackNavigator({
   ImageCrop: { screen: ImageCrop },
   Payroll: { screen: Payroll },
   WhyChoose: { screen: WhyChoose },
+  AdjectiveInfo: { screen: AdjectiveInfo },
+  ReportPage: { screen: ReportPage },
+  ReportDetailPage: { screen: ReportDetailPage },
+  AddAccount: { screen: AddAccount },
+  GatheringAccount: { screen: GatheringAccount },
+  AccountCenter: { screen: AccountCenter },
+  ChooseAccountType: { screen: ChooseAccountType },
+  My: { screen: My },
+  SelfSet: { screen: SelfSet },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({
