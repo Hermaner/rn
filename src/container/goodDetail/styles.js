@@ -391,59 +391,78 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#333',
   },
-  masker: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
   maskerContent: {
-    backgroundColor: '#f2f2f2',
-    position: 'absolute',
-    height: 300,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    flex: 1,
   },
   maskerTop: {
-    flexDirection: 'row',
-    height: 50,
-    paddingLeft: 40,
-    paddingRight: 40,
+    ...st.fr,
+    margin: 10,
   },
-  maskerTitle: {
+  maskerLeft: {
+    width: 60,
+    height: 60,
+    marginRight: 8,
+  },
+  maskerImg: {
+    width: 60,
+    height: 60,
+  },
+  maskerLabel: {
     flex: 1,
-    fontSize: 16,
-    color: '#222',
-    textAlign: 'center',
-    marginTop: 18,
   },
-  maskerCloseBtn: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 50,
-    width: 40,
-    right: 0,
-    top: 0,
+  maskerTitleText: {
+    fontSize: 12,
+    color: '#888',
+    lineHeight: 20,
   },
-  maskerBtns: {
+  maskerPriceText: {
+    fontSize: 14,
+    color: Mred,
+    lineHeight: 20,
+  },
+  maskerNumView: {
+    height: 35,
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginBottom: 6,
+    ...st.jacenter,
+    ...st.fr,
+  },
+  maskerNumText: {
+    fontSize: 14,
+    color: '#666',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  maskerLink: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  maskerLinkImg: {
+    width: '100%',
+    height: 70,
+  },
+  maskerBom: {
     height: 50,
-    flexDirection: 'row',
+    marginTop: 8,
+    ...st.fr,
+    ...st.jacenter,
+    paddingLeft: 10,
     backgroundColor: '#f2f2f2',
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
   },
-  maskerContainer: {
+  maskerBomPrice: {
+    fontSize: 14,
     flex: 1,
-    backgroundColor: '#fff',
+    color: Mred,
   },
-  maskerConfirm: {
-    justifyContent: 'center',
+  maskerBomBtn: {
+    width: 90,
+    height: 50,
+    ...st.jacenter,
     backgroundColor: Mred,
-    flex: 1,
   },
-  maskerConfirmText: {
-    textAlign: 'center',
-    fontSize: 16,
+  maskerBomText: {
+    fontSize: 14,
     color: '#fff',
   },
 });

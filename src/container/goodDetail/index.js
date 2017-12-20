@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback, Modal, Animated, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList, ModalView } from '../../components';
+import { Header, ScrollableTab, GoodhList, ModalView, InputNumber } from '../../components';
 import { DeepClone } from '../../../api';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
@@ -286,51 +286,48 @@ class MainScreen extends base {
       </Footer>
     );
   }
-  _renderBuyMasker() {
-    const { push } = this.props;
-    const { isBuyMaskerShow, maskerHeight } = this.state;
-    console.log(maskerHeight)
-    console.log(new Animated.Value(300))
-    return (
-      <Modal
-        animationType={'none'}
-        transparent
-        visible={isBuyMaskerShow}
-        onRequestClose={() => { console.log('关闭'); }}
-      >
-        <TouchableWithoutFeedback onPress={this.closeBuyMasker}>
-          <View style={styles.masker}>
-            <TouchableWithoutFeedback>
-              <Animated.View style={[styles.maskerContent, { transform: [{ translateY: new Animated.Value(30) }] }]}>
-                <View>
-                  <View style={styles.maskerTop}>
-                    <Text style={styles.maskerTitle}>该货品已经介入买家保障</Text>
-                    <TouchableOpacity style={styles.maskerCloseBtn} onPress={this.closeBuyMasker}>
-                      <Icon name="arrow-back" style={styles.maskerCloseIcon} />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.maskerContainer}>
-                    <Text style={styles.title}>该货品已经介入买家保障</Text>
-                  </View>
-                  <View style={styles.maskerBtns}>
-                    <TouchableOpacity style={styles.maskerConfirm} onPress={this.saveBuyMasker}>
-                      <Text style={styles.maskerConfirmText}>确认</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </Animated.View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    );
-  }
   _renderModalView() {
+    const { skuCount } = this.state;
+    const content = (
+      <View style={styles.maskerContent}>
+        <View style={styles.maskerTop}>
+          <View style={styles.maskerLeft}>
+            <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.maskerImg} />
+          </View>
+          <View style={styles.maskerLabel}>
+            <View style={styles.maskerTitle}>
+              <Text style={styles.maskerTitleText}>立即购买紫色水果多少钱</Text>
+            </View>
+            <View style={styles.maskerPrice}>
+              <Text style={styles.maskerPriceText}>5.00元/斤</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.maskerNumView}>
+          <Text style={styles.maskerNumText}>购买数量</Text>
+          <InputNumber
+            onChange={count => this.setState({ skuCount: count })}
+            value={skuCount}
+            min={1}
+          />
+          <Text style={styles.maskerNumText}>斤</Text>
+        </View>
+        <View style={styles.maskerLink}>
+          <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.maskerLinkImg} />
+        </View>
+        <View style={styles.maskerBom}>
+          <Text style={styles.maskerBomPrice}>50.00元</Text>
+          <TouchableOpacity style={styles.maskerBomBtn}>
+            <Text style={styles.maskerBomText}>立即购买</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
     return (
       <ModalView
         ref={(o) => { this.ModalView = o; }}
-        title={'1231'}
-        content={<Text>1331313131</Text>}
+        title={'商品数量'}
+        content={content}
         onConfirm={() => console.log(111)}
       />
     );
@@ -357,7 +354,6 @@ class MainScreen extends base {
           {this._renderModalView()}
         </Content>
         {this._renderFooter()}
-        {this._renderBuyMasker()}
       </Container>
     );
   }

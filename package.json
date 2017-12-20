@@ -52,6 +52,7 @@
   "redux": "^3.7.2",
   "redux-persist": "^4.5.0",
   "redux-thunk": "^2.2.0",
+  "rn-spinner": "^0.3.2",
   "utf8": "^2.1.2"
  },
  "devDependencies": {

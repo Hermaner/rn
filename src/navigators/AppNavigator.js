@@ -7,6 +7,7 @@ import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 import LoginScreen from '../container/LoginScreen';
 import Main from '../container/Main';
 import MainSearch from '../container/mainSearch';
+import CgCategory from '../container/cgCategory';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
 import GoodsScreen from '../container/goodsScreen';
@@ -31,6 +32,7 @@ import EvalList from '../container/evalList';
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
   MainSearch: { screen: MainSearch },
+  CgCategory: { screen: CgCategory },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
   GoodsScreen: { screen: GoodsScreen },

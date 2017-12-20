@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 
 class Base extends React.Component {
   constructor(props) {
@@ -46,6 +47,22 @@ class Base extends React.Component {
       leftIndex: index,
     });
   }
+  goPage = () => {
+    // type 1: main 2: 发采购
+    const { type } = this.props.navigation.state.params;
+    switch (type) {
+      case '1':
+        this.props.push({ key: 'MainList' });
+        break;
+      case '2':
+        this.props.push({ key: 'CgCategory' });
+        break;
+      default:
+    }
+  }
 }
-
+Base.propTypes = {
+  navigation: PropTypes.object,
+  push: PropTypes.func,
+};
 export default Base;

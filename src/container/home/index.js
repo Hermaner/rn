@@ -35,7 +35,7 @@ class HomeScreen extends base {
           </Button>
           <Button
             onPress={() =>
-              this.goRoute({ key: 'MainSearch' })}
+              this.goRoute({ key: 'MainSearch', params: { type: '2' } })}
           >
             <Text>mainSearch</Text>
           </Button>
