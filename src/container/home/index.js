@@ -105,6 +105,18 @@ class HomeScreen extends base {
           >
             <Text>SelfSet</Text>
           </Button>
+          <Button
+            onPress={() =>
+              this.goRoute({ key: 'PurchaseHome' })}
+          >
+            <Text>PurchaseHome</Text>
+          </Button>
+          <Button
+            onPress={() =>
+              this.goRoute({ key: 'MySupply' })}
+          >
+            <Text>MySupply</Text>
+          </Button>
         </Content>
       </Container>
     );

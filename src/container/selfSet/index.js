@@ -5,10 +5,10 @@ import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, But
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import base from './base';
+import selfSetBase from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class SelfSet extends selfSetBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,8 +111,8 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+SelfSet.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(SelfSet);

@@ -2,7 +2,7 @@ import React from 'react';
 import * as WeChat from 'react-native-wechat';
 import Alipay from 'react-native-yunpeng-alipay';
 
-class Base extends React.Component {
+class ReportDetailPagebase extends React.Component {
   wxLogin = () => {
     WeChat.sendAuthRequest('snsapi_userinfo', 'App')
     .then(res => console.log(res));
@@ -58,4 +58,4 @@ class Base extends React.Component {
     this.name = 'herman';
   }
 }
-export default Base;
+export default ReportDetailPagebase;
