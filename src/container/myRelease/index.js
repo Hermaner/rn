@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
+import { Container, Header, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab } from '../../components';
+import { ScrollableTab } from '../../components';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import mySupplyBase from './base';
+import myReleaseBase from './base';
 import styles from './styles';
 
-class MySupply extends mySupplyBase {
+class MyRelease extends myReleaseBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +18,24 @@ class MySupply extends mySupplyBase {
     };
   }
   componentDidMount() {
+  }
+  _readerHeader() {
+    const { pop, push } = this.props;
+    return (
+      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={pop}>
+            <Icon name="arrow-back" />
+          </TouchableOpacity>
+        </View>
+        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>采购管理</Text>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <TouchableOpacity onPress={pop}>
+            <Icon name="arrow-back" />
+          </TouchableOpacity>
+        </View>
+      </Header>
+    );
   }
   _randerBody() {
     const { pop } = this.props;
@@ -27,8 +45,8 @@ class MySupply extends mySupplyBase {
     return (
       <View style={styles.pagebody}>
         <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="销售中" />
-          <Tab2 tabLabel="已下架" />
+          <Tab1 tabLabel="采购中" />
+          <Tab2 tabLabel="已停止" />
           <Tab3 tabLabel="被驳回" />
         </ScrollableTabView>
       </View>
@@ -38,35 +56,34 @@ class MySupply extends mySupplyBase {
     return (
       <View style={styles.goodsitem}>
         <View style={styles.goodsDetail}>
-          <Image style={styles.goodsImg} source={require('../app/resource/imgs/avatar.jpg')} />
           <View style={{ flex: 1 }}>
             <View style={styles.goodsPrice}>
               <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>哈哈 野生 90-100g</Text>
               <View style={{}}>
-                <Text style={{ fontSize: 16, color: '#FC8521' }}>12.00元/斤</Text>
+                <Text style={{ fontSize: 16, color: '#FC8521' }}>面议</Text>
               </View>
             </View>
+            <View style={{ marginBottom: 6 }}>
+              <Text style={{ fontSize: 14, color: '#666' }}>品种:野生八月瓜</Text>
+            </View>
             <View>
-              <Text style={{ fontSize: 14, color: '#666' }}>90-100g,野生,红色</Text>
+              <Text style={{ fontSize: 14, color: '#666' }}>浏览次数:4次</Text>
             </View>
           </View>
         </View>
         <View style={styles.readPeople}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
-            <Text style={{ color: '#666', fontSize: 14 }}>人查看</Text>
+            <Text style={{ color: '#666', fontSize: 14 }}>人报价</Text>
           </View>
-          <Text style={styles.renovateTime}>2017-12-19 13:13:10 刷新</Text>
+          <Text style={styles.renovateTime}>距截止6天</Text>
         </View>
         <View style={styles.btnList}>
           <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>下架</Text>
+            <Text style={styles.btnText}>停止采购</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>修改</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>刷新</Text>
+          <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
+            <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -77,7 +94,7 @@ class MySupply extends mySupplyBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        <Header back={pop} title="我的供应" />
+        {this._readerHeader()}
         <Content style={{ backgroundColor: '#fff' }}>
           {this._randerBody()}
         </Content>
@@ -86,8 +103,8 @@ class MySupply extends mySupplyBase {
   }
 }
 
-MySupply.propTypes = {
+MyRelease.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MySupply);
+export default connect(null, { pop: popRoute, push: pushRoute })(MyRelease);

@@ -35,73 +35,87 @@ class My extends myBase {
               <Text style={styles.textBackground}>设置</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Image style={styles.userImg} source={require('../app/resource/imgs/2.png')} />
-            <View>
-              <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
-              <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image style={styles.userImg} source={require('../app/resource/imgs/2.png')} />
+              <View>
+                <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
+                <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.detailInfo}>
           <Text style={styles.myIdentity}>我是买家</Text>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>我发布的采购</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'MyRelease' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>我发布的采购</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { push({ key: 'MyBuyGoods' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>买到的货品</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>买到的货品</Text>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.detailInfo}>
           <Text style={styles.myIdentity}>我是卖家</Text>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>我的供应</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'MySupply' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>我的供应</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { push({ key: 'MySoldGoods' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>卖出的货品</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>卖出的货品</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { push({ key: 'MySendOffer' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>发出的报价</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { push({ key: 'MyNichePush' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>商机推送</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>发出的报价</Text>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#FD6A35' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>商机推送</Text>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.infoBox}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
