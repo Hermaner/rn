@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 
-class PayrollBase extends React.Component {
+class MySupplyBase extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
@@ -65,4 +65,4 @@ class PayrollBase extends React.Component {
   }
 }
 
-export default PayrollBase;
+export default MySupplyBase;

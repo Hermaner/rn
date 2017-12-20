@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
-import base from './base';
+import chooseAccountTypeBase from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class ChooseAccountType extends chooseAccountTypeBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,8 +84,8 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+ChooseAccountType.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(ChooseAccountType);

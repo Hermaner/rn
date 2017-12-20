@@ -66,5 +66,12 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     color: '#666',
   },
+  paddingB: {
+    paddingBottom: 30,
+  },
+  borderB: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
 });
 export default styles;

@@ -5,10 +5,10 @@ import { Container, Content, Header, Footer, Title, FooterTab, Button, Left, Rig
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import base from './base';
+import reportPageBase from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class ReportPage extends reportPageBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,8 +134,8 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+ReportPage.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(ReportPage);

@@ -2,7 +2,7 @@ import React from 'react';
 import * as WeChat from 'react-native-wechat';
 import Alipay from 'react-native-yunpeng-alipay';
 
-class Base extends React.Component {
+class AdjectiveInfoBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +95,4 @@ class Base extends React.Component {
     });
   }
 }
-export default Base;
+export default AdjectiveInfoBase;

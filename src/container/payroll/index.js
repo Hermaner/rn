@@ -5,10 +5,10 @@ import { Header, Container, Icon, Tab, Tabs, TabHeading } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
-import base from './base';
+import payrollBase from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class Payroll extends payrollBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -131,8 +131,8 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+Payroll.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(Payroll);

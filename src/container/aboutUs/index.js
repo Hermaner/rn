@@ -1,14 +1,16 @@
 import React from 'react';
-import { TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, View, TextInput } from 'react-native';
+import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import gatheringAccountBase from './base';
+import { ScrollableTab } from '../../components';
+import AboutUsBase from './base';
 import styles from './styles';
 
-class GatheringAccount extends gatheringAccountBase {
+class AboutUs extends AboutUsBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +32,7 @@ class GatheringAccount extends gatheringAccountBase {
             <Icon name="arrow-back" />
           </TouchableOpacity>
         </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>收款账号</Text>
+        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>关于我们</Text>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
           <TouchableOpacity onPress={pop}>
             <Icon name="arrow-back" />
@@ -42,8 +44,18 @@ class GatheringAccount extends gatheringAccountBase {
   _renderBody() {
     return (
       <View style={styles.pagebody}>
-        <View style={styles.addBtn}>
-          <Text style={{ textAlign: 'center', color: '#666', fontSize: 18 }}>添加新账号</Text>
+        <View style={styles.logoBox}>
+          <Image style={styles.logo} source={require('../app/resource/imgs/2.png')} />
+        </View>
+        <Text style={styles.title}>用科技力量，推动农业产业升级!</Text>
+        <View>
+          <TextInput
+            style={styles.inputText}
+            multiline={true}
+            placeholder="我们的成长需要您的建议"
+            // onChangeText={(text) => this.setState({text})}
+            // value={this.state.text}
+          />
         </View>
       </View>
     )
@@ -55,14 +67,21 @@ class GatheringAccount extends gatheringAccountBase {
         {this._readerHeader()}
         <Content style={{ backgroundColor: '#fff' }}>
           {this._renderBody()}
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>提交</Text>
+          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+            <Text style={{ color: '#666', fontSize: 14 }}>当前版本：</Text>
+            <Text style={{ color: '#666', fontSize: 14 }}>v4.6.4</Text>
+          </View>
         </Content>
       </Container>
     );
   }
 }
 
-GatheringAccount.propTypes = {
+AboutUs.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(GatheringAccount);
+export default connect(null, { pop: popRoute, push: pushRoute })(AboutUs);

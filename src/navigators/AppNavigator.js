@@ -28,6 +28,14 @@ import ChooseAccountType from '../container/chooseAccountType';
 import My from '../container/my';
 import SelfSet from '../container/selfSet';
 import EvalList from '../container/evalList';
+import Certification from '../container/certification';
+import IndividualAuthentication from '../container/individualAuthentication';
+import CollectiveAuthentication from '../container/collectiveAuthentication';
+import AboutUs from '../container/aboutUs';
+import SystemSet from '../container/systemSet';
+import PurchaseHome from '../container/purchaseHome';
+import PurchaseDetail from '../container/purchaseDetail';
+import MySupply from '../container/mySupply';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -52,8 +60,16 @@ export const AppNavigator = StackNavigator({
   GatheringAccount: { screen: GatheringAccount },
   AccountCenter: { screen: AccountCenter },
   ChooseAccountType: { screen: ChooseAccountType },
+  Certification: { screen: Certification },
   My: { screen: My },
   SelfSet: { screen: SelfSet },
+  IndividualAuthentication: { screen: IndividualAuthentication },
+  CollectiveAuthentication: { screen: CollectiveAuthentication },
+  AboutUs: { screen: AboutUs },
+  SystemSet: { screen: SystemSet },
+  PurchaseHome: { screen: PurchaseHome },
+  PurchaseDetail: { screen: PurchaseDetail },
+  MySupply: { screen: MySupply },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

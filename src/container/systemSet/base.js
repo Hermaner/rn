@@ -2,7 +2,7 @@ import React from 'react';
 import * as WeChat from 'react-native-wechat';
 import Alipay from 'react-native-yunpeng-alipay';
 
-class AddAccount extends React.Component {
+class SystemSetBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,4 +21,4 @@ class AddAccount extends React.Component {
     });
   }
 }
-export default AddAccount;
+export default SystemSetBase;
