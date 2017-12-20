@@ -45,8 +45,7 @@ class Base extends React.Component {
       minPrice: '',
       maxPrice: '',
       count: '',
-      isBuyMaskerShow: false,
-      maskerHeight: new Animated.Value(300),
+      skuCount: 1,
     };
   }
   onChangeText = (txt, index) => {
@@ -82,40 +81,17 @@ class Base extends React.Component {
     });
   }
   save = (callback) => {
-    console.log(111);
     callback();
   }
-  closeBuyMasker = () => {
-    setTimeout(() => {
-      this.setState({
-        isBuyMaskerShow: false,
-      });
-    }, time);
-    Animated.timing(
-      this.state.maskerHeight,
-      {
-        toValue: 300,
-        duration: time,
-      },
-    ).start();
-  }
-  openBuyMasker = () => {
-    this.ModalView.showModal()
-    return
+  InputNumberChange(skuCount) {
     this.setState({
-      isBuyMaskerShow: true,
-    }, () => {
-      Animated.timing(
-        this.state.maskerHeight,
-        {
-          toValue: 0,
-          duration: time,
-        },
-      ).start();
+      skuCount,
     });
   }
+  openBuyMasker = () => {
+    this.ModalView.showModal();
+  }
   saveBuyMasker = () => {
-    console.log(11111)
     this.ModalView.showModal();
   }
 }

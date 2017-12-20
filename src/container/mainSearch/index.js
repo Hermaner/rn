@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Input, Text, Header, Icon } from 'native-base';
+import { Container, Content, Text, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import base from './base';
@@ -60,7 +60,7 @@ class MainScreen extends base {
     return (
       <View style={styles.rightContent}>
         <Content>
-          <TouchableOpacity onPress={() => { push({ key: 'MainList' }); }}>
+          <TouchableOpacity onPress={this.goPage}>
             <View style={styles.rightAll}>
               <Text style={styles.mainText}>全部</Text>
             </View>

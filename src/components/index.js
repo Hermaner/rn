@@ -6,13 +6,14 @@ import GoodhList from './goodhList';
 import NoData from './NoData';
 import ModalView from './ModalView';
 import ScrollableTab from './ScrollableTab';
-
+import InputNumber from './InputNumber';
 
 export {
   TLight,
   TOpacity,
   GoodList,
   ModalView,
+  InputNumber,
   NoData,
   GoodhList,
   Header,

@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   contentView: {
     backgroundColor: '#f2f2f2',
     position: 'absolute',
-    transform: [{ translateY: '100%' }],
     left: 0,
     bottom: 0,
     right: 0,
@@ -75,7 +74,6 @@ export default class Prompt extends React.Component {
   static propTypes = {
     title: React.PropTypes.string,
     content: React.PropTypes.element,
-    onConfirm: React.PropTypes.func,
   };
   constructor(props) {
     super(props);
@@ -111,7 +109,7 @@ export default class Prompt extends React.Component {
     Animated.timing(
       this.state.CHeight,
       {
-        toValue: 3000,
+        toValue: 300,
         duration: time,
       },
     ).start();
@@ -127,7 +125,7 @@ export default class Prompt extends React.Component {
     });
   }
   render() {
-    const { title, content, onConfirm } = this.props;
+    const { title, content } = this.props;
     const { modalVisible, loadingSleek } = this.state;
     return (
       <Modal
@@ -139,7 +137,9 @@ export default class Prompt extends React.Component {
         <TouchableWithoutFeedback onPress={this.closeModal}>
           <View style={styles.container}>
             <TouchableWithoutFeedback>
-              <Animated.View style={[styles.contentView, { transform: [{ translateY: this.state.CHeight }] }]}>
+              <Animated.View
+                style={[styles.contentView, { transform: [{ translateY: this.state.CHeight }] }]}
+              >
                 <View style={styles.topView}>
                   <Text style={styles.title}>{title}</Text>
                   <TouchableOpacity style={styles.closeBtn} onPress={this.closeModal}>
@@ -148,11 +148,6 @@ export default class Prompt extends React.Component {
                 </View>
                 <View style={styles.content}>
                   {content}
-                </View>
-                <View style={styles.btnView}>
-                  <TouchableOpacity style={styles.confirm} onPress={onConfirm}>
-                    <Text style={styles.confirmText}>确认</Text>
-                  </TouchableOpacity>
                 </View>
               </Animated.View>
             </TouchableWithoutFeedback>
