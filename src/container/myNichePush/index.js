@@ -25,6 +25,9 @@ class MyNichePush extends myNichePushBase {
           <TouchableOpacity onPress={pop}>
             <Icon name="arrow-back" />
           </TouchableOpacity>
+          <TouchableOpacity onPress={pop}>
+            <Text style={{ marginLeft: 10 }}>关闭</Text>
+          </TouchableOpacity>
         </View>
         <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>商机推送</Text>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -57,26 +60,34 @@ class MyNichePush extends myNichePushBase {
   }
   _readerMasker() {
     const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow, isAddressShow } = this.state;
-    const { push } = this.props;
+    const { push, pop } = this.props;
     return (
       <View style={styles.masker}>
         <View style={styles.maskerContent}>
           {
             isVarietiesShow &&
             <View style={styles.maskerContentView}>
-              {
-                leftLists.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
-                    <View style={styles.contetnTabView}>
-                      <Text
-                        style={styles.mainText}
-                      >
-                        {item.label}
-                      </Text>
-                    </View>
-                  </TouchableWithoutFeedback>
-                ))
-              }
+              <View style={styles.topPart}>
+                <View style={styles.rowBox}>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>全部</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>一天内</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>一周内</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.rowBox}>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>半个月内</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>半年内</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           }
           {
@@ -110,9 +121,31 @@ class MyNichePush extends myNichePushBase {
           }
           {
             isCategoryShow &&
-            <View style={[styles.f1, styles.fr]}>
-              {this._renderCategoryLeft()}
-              {this._renderCategoryContent()}
+            <View style={styles.maskerContentView}>
+              <View style={styles.topPart}>
+                <View style={styles.rowBox}>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>全部</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>未读</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>已读</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.rowBox}>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>意向客户</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>联系不上买家</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.flexOne} onPress={pop}>
+                    <Text style={styles.flexText}>已联系</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           }
           {
@@ -121,70 +154,7 @@ class MyNichePush extends myNichePushBase {
               {this._renderAddressContent()}
             </View>
           }
-          {
-            (isVarietiesShow || isSkuShow) &&
-            <View style={styles.maskerBtns}>
-              <TouchableOpacity style={styles.maskerCancelBtn} onPress={this.hideMasker}>
-                <Text style={styles.maskerBtnText}>取消</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.maskerSaveBtn} onPress={this.saveMasker}>
-                <Text style={styles.maskerBtnTextCur}>确认</Text>
-              </TouchableOpacity>
-            </View>
-          }
         </View>
-      </View>
-    );
-  }
-  _renderCategoryLeft() {
-    const { leftLists } = this.state;
-    return (
-      <View style={styles.leftNav}>
-        <Content>
-          {
-            leftLists.map((item, index) => (
-              <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
-                <View style={[styles.leftNavList, item.cur && styles.leftNavListCur]}>
-                  <Text
-                    style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
-                  >
-                    {item.label}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            ))
-          }
-        </Content>
-      </View>
-    );
-  }
-  _renderCategoryContent() {
-    const { leftLists } = this.state;
-    const { push } = this.props;
-    return (
-      <View style={styles.rightContent}>
-        <Content>
-          <TouchableOpacity onPress={() => { push({ key: 'User' }); }}>
-            <View style={styles.rightAll}>
-              <Text style={styles.mainText}>全部</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.rightContentView}>
-            {
-              leftLists.map((item, index) => (
-                <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
-                  <View style={styles.contetnTabView}>
-                    <Text
-                      style={styles.mainText}
-                    >
-                      {item.label}
-                    </Text>
-                  </View>
-                </TouchableWithoutFeedback>
-              ))
-            }
-          </View>
-        </Content>
       </View>
     );
   }
@@ -271,6 +241,18 @@ class MyNichePush extends myNichePushBase {
       />
     </View>
   )
+  _renderFooter() {
+    return (
+      <View style={styles.maskerBtns}>
+        <TouchableOpacity style={styles.maskerCancelBtn} onPress={this.hideMasker}>
+          <Text style={styles.maskerBtnText}>累计已收到0条商机</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.maskerSaveBtn} onPress={this.saveMasker}>
+          <Text style={styles.maskerBtnTextCur}>设置关键词</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
   _renderContent() {
     const { noData, dataSource, nomore, loading, refresh } = this.state;
     return (
@@ -317,6 +299,7 @@ class MyNichePush extends myNichePushBase {
           {this._renderContent()}
           {isMaskerShow && this._readerMasker()}
         </View>
+        {this._renderFooter()}
       </Container>
     );
   }

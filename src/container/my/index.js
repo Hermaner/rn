@@ -116,15 +116,17 @@ class My extends myBase {
               </View>
             </View>
           </TouchableOpacity>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>我的访客</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'MyVisitor' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>我的访客</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={[styles.detailInfo, styles.paddingB]}>
           <Text style={styles.myIdentity}>其他</Text>
@@ -150,25 +152,29 @@ class My extends myBase {
               <Icon style={{ marginLeft: 10 }} name="arrow-back" />
             </View>
           </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>我的主页</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'MyInfo' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#66BC3C' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>我的主页</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { push({ key: 'MyFootprint' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>我的足迹</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Text style={{ color: '#999', fontSize: 14 }}>我看过的采购/供应/店铺</Text>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-          </View>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#00BAEE' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>我的足迹</Text>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Text style={{ color: '#999', fontSize: 14 }}>我看过的采购/供应/店铺</Text>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => { push({ key: 'Certification' }); }}>
             <View style={styles.infoBox}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -219,7 +225,6 @@ class My extends myBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {/* {this._readerHeader()} */}
         <Content>
           {this._renderBody()}
         </Content>

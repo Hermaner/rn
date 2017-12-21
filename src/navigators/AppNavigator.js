@@ -41,6 +41,9 @@ import MyBuyGoods from '../container/myBuyGoods';
 import MySoldGoods from '../container/mySoldGoods';
 import MySendOffer from '../container/mySendOffer';
 import MyNichePush from '../container/myNichePush';
+import MyVisitor from '../container/myVisitor';
+import MyInfo from '../container/myInfo';
+import MyFootprint from '../container/myFootprint';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -80,6 +83,9 @@ export const AppNavigator = StackNavigator({
   MySoldGoods: { screen: MySoldGoods },
   MySendOffer: { screen: MySendOffer },
   MyNichePush: { screen: MyNichePush },
+  MyVisitor: { screen: MyVisitor },
+  MyInfo: { screen: MyInfo },
+  MyFootprint: { screen: MyFootprint },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

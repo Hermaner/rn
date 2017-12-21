@@ -166,9 +166,7 @@ const styles = StyleSheet.create({
     width: `${100 / 3}%`,
   },
   maskerContentView: {
-    ...st.fr,
-    ...st.f1,
-    flexWrap: 'wrap',
+
   },
   maskerBtns: {
     ...st.fr,
@@ -177,9 +175,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   maskerCancelBtn: {
-    ...st.f1,
+    flex: 2,
     ...st.jacenter,
-    backgroundColor: '#fff',
+    backgroundColor: '#E5F5D9',
   },
   maskerSaveBtn: {
     ...st.f1,
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
   },
   maskerBtnText: {
     fontSize: 16,
-    color: '#666',
+    color: Mcolor,
   },
   maskerBtnTextCur: {
     fontSize: 16,
@@ -205,6 +203,28 @@ const styles = StyleSheet.create({
   maskerTitleText: {
     fontSize: 14,
     color: '#444',
+  },
+  topPart: {
+    backgroundColor: '#fff',
+  },
+  rowBox: {
+    // flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flexOne: {
+    width: '33.3%',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRightWidth: 1,
+    borderRightColor: '#eee',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  flexText: {
+    color: '#333',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 export default styles;

@@ -35,41 +35,44 @@ class MySupply extends mySupplyBase {
     )
   }
   _rendContent() {
+    const { pop, push } = this.props;
     return (
-      <View style={styles.goodsitem}>
-        <View style={styles.goodsDetail}>
-          <Image style={styles.goodsImg} source={require('../app/resource/imgs/avatar.jpg')} />
-          <View style={{ flex: 1 }}>
-            <View style={styles.goodsPrice}>
-              <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>哈哈 野生 90-100g</Text>
-              <View style={{}}>
-                <Text style={{ fontSize: 16, color: '#FC8521' }}>12.00元/斤</Text>
+      <TouchableOpacity onPress={() => { push({ key: 'GoodDetail' }); }}>
+        <View style={styles.goodsitem}>
+          <View style={styles.goodsDetail}>
+            <Image style={styles.goodsImg} source={require('../app/resource/imgs/avatar.jpg')} />
+            <View style={{ flex: 1 }}>
+              <View style={styles.goodsPrice}>
+                <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>哈哈 野生 90-100g</Text>
+                <View style={{}}>
+                  <Text style={{ fontSize: 16, color: '#FC8521' }}>12.00元/斤</Text>
+                </View>
+              </View>
+              <View>
+                <Text style={{ fontSize: 14, color: '#666' }}>90-100g,野生,红色</Text>
               </View>
             </View>
-            <View>
-              <Text style={{ fontSize: 14, color: '#666' }}>90-100g,野生,红色</Text>
+          </View>
+          <View style={styles.readPeople}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
+              <Text style={{ color: '#666', fontSize: 14 }}>人查看</Text>
             </View>
+            <Text style={styles.renovateTime}>2017-12-19 13:13:10 刷新</Text>
+          </View>
+          <View style={styles.btnList}>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>下架</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>修改</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>刷新</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.readPeople}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
-            <Text style={{ color: '#666', fontSize: 14 }}>人查看</Text>
-          </View>
-          <Text style={styles.renovateTime}>2017-12-19 13:13:10 刷新</Text>
-        </View>
-        <View style={styles.btnList}>
-          <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>下架</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>修改</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnBox}>
-            <Text style={styles.btnText}>刷新</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </TouchableOpacity>
     )
   }
   render() {

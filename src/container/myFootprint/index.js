@@ -39,24 +39,26 @@ class MyRelease extends myReleaseBase {
   }
   _randerBody() {
     const { pop } = this.props;
-    const Tab1 = () => this._rendContent();
-    const Tab2 = () => this._rendContent();
-    const Tab3 = () => this._rendContent();
+    const Tab1 = () => this._renderRelease();
+    const Tab2 = () => this._renderSupply();
+    const Tab3 = () => this._renderShop();
     return (
       <View style={styles.pagebody}>
         <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="采购中" />
-          <Tab2 tabLabel="已停止" />
-          <Tab3 tabLabel="被驳回" />
+          <Tab1 tabLabel="采购" />
+          <Tab2 tabLabel="供应" />
+          <Tab3 tabLabel="店铺" />
         </ScrollableTabView>
       </View>
     )
   }
-  _rendContent() {
-    const { pop, push } = this.props;
+  _renderRelease() {
     return (
-      <TouchableOpacity onPress={() => { push({ key: 'PurchaseDetail' }); }}>
+      <View style={styles.goodsList}>
         <View style={styles.goodsitem}>
+          <View style={styles.buyTime}>
+            <Text style={styles.buyTimeText}>12月20日</Text>
+          </View>
           <View style={styles.goodsDetail}>
             <View style={{ flex: 1 }}>
               <View style={styles.goodsPrice}>
@@ -69,27 +71,72 @@ class MyRelease extends myReleaseBase {
                 <Text style={{ fontSize: 14, color: '#666' }}>品种:野生八月瓜</Text>
               </View>
               <View>
-                <Text style={{ fontSize: 14, color: '#666' }}>浏览次数:4次</Text>
+                <Text style={{ fontSize: 14, color: '#666' }}>所在地:江苏省南京市</Text>
+              </View>
+              <View style={styles.activeDetail}>
+                <View style={{ flex: 1 }}>
+                  <View style={styles.time}>
+                    <Text style={styles.everyWeek}>不限</Text>
+                    <Text style={styles.scaleText}>距截止35天</Text>
+                  </View>
+                </View>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                  <View style={styles.offerBox}>
+                    <Text style={styles.offer}>去报价</Text>
+                  </View>
+                </View>
               </View>
             </View>
           </View>
-          <View style={styles.readPeople}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
-              <Text style={{ color: '#666', fontSize: 14 }}>人报价</Text>
-            </View>
-            <Text style={styles.renovateTime}>距截止6天</Text>
+        </View>
+      </View>
+    )
+  }
+  _renderSupply() {
+    return (
+      <View style={styles.goodsList}>
+        <View style={styles.goodsitem}>
+          <View style={styles.buyTime}>
+            <Text style={styles.buyTimeText}>12月20日</Text>
           </View>
-          <View style={styles.btnList}>
-            <TouchableOpacity style={styles.btnBox}>
-              <Text style={styles.btnText}>停止采购</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
-              <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
-            </TouchableOpacity>
+          <View style={styles.goodsInfoDetail}>
+            <Image style={styles.goodsImg} source={require('../app/resource/imgs/avatar.jpg')} />
+            <View>
+              <Text style={styles.goodsName}>波姬红</Text>
+              <Text style={styles.price}>25.00元/棵</Text>
+              <View style={styles.label}>
+                <Text style={styles.labelText}>协助找车</Text>
+              </View>
+              <View style={styles.address}>
+                <Icon style={{ fontSize: 14, marginRight: 6 }} name="arrow-back" />
+                <Text style={styles.addressText}>湖南省 岳阳市 岳阳县 王立雄</Text>
+              </View>
+            </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
+    )
+  }
+  _renderShop() {
+    return (
+      <View style={styles.goodsList}>
+        <View style={styles.goodsitem}>
+          <View style={styles.buyTime}>
+            <Text style={styles.buyTimeText}>12月20日</Text>
+          </View>
+          <View style={styles.userInfoDetail}>
+            <Image style={styles.userImg} source={require('../app/resource/imgs/avatar.jpg')} />
+            <View>
+              <Text style={styles.userName}>姓名</Text>
+              <Text style={styles.yw}>主营业务:</Text>
+              <Text style={styles.yw}>认证信息:</Text>
+              <View style={styles.userAddress}>
+                <Text style={styles.addressText}>地址:</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
     )
   }
   render() {
