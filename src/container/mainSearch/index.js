@@ -15,7 +15,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
-    this.GetLedeCategoryService();
+    // this.GetLedeCategoryService();
   }
   _readerHeader() {
     const { pop, push } = this.props;

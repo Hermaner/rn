@@ -56,7 +56,7 @@ class CgSkus extends base {
     const { push } = this.props;
     return (
       <View style={{ padding: 10, backgroundColor: '#fff' }}>
-        <Button onPress={() => { push({ key: 'User' }); }} full light style={styles.btn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
+        <Button onPress={() => { push({ key: 'CgComfirm' }); }} full light style={styles.btn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
       </View>
     );
   }

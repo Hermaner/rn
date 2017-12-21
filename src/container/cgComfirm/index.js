@@ -1,42 +1,145 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, TouchableOpacity, Modal } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button } from 'native-base';
+import { Container, Content, Text, Button, Icon, Input, ActionSheet } from 'native-base';
 import { connect } from 'react-redux';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TFeedback } from '../../components';
+import { Header } from '../../components';
 import base from './base';
 import styles from './styles';
 
 class CgCategory extends base {
   constructor(props) {
     super(props);
-    const { title } = props.navigation.state.params;
     this.state = {
       ...this.state,
-      title,
     };
   }
   componentDidMount() {
   }
-  _renderContent() {
+  _renderList() {
     const { items } = this.state;
     return (
-      <View style={styles.maskerContentView}>
+      <View>
         {
           items.map((item, index) => (
-            <TFeedback
-              key={index}
-              content={
-                <View style={[styles.contetnTabView, item.cur && styles.tabCur]}>
-                  <Text style={[styles.mainText, item.cur && styles.tabCurText]}>
-                    {item.label}
-                  </Text>
-                </View>}
-              onPress={() => this.goNext(index)}
-            />
+            <View style={[styles.list, item.last && styles.lastList]} key={index}>
+              <View style={styles.listTitle}>
+                <Text style={styles.listTitleText}>{item.title}</Text>
+              </View>
+              <View style={styles.listLabel}>
+                <Text style={styles.listLabelText}>{item.label}</Text>
+              </View>
+              <Icon name="md-arrow-dropright" style={styles.listIcon} />
+            </View>
           ))
         }
+      </View>
+    );
+  }
+  _renderUserInfo() {
+    const { items2 } = this.state;
+    return (
+      <View>
+        {
+          items2.map((item, index) => (
+            <View style={[styles.list, item.last && styles.lastList]} key={index}>
+              <View style={styles.listTitle}>
+                <Text style={styles.listTitleText}>{item.title}</Text>
+              </View>
+              <View style={styles.listLabel}>
+                <Text style={styles.listLabelText}>{item.label}</Text>
+              </View>
+              <Icon name="md-arrow-dropright" style={styles.listIcon} />
+            </View>
+          ))
+        }
+      </View>
+    );
+  }
+  _renderImageUpload() {
+    const {
+      upImg,
+      images,
+      imageCount,
+      imageDateIndex,
+      isImageDateShow,
+      imageViewData,
+    } = this.state;
+    const buttons = [
+      { text: '拍照' },
+      { text: '从相册选择' },
+      { text: '取消' },
+    ];
+    return (
+      <View>
+        <View style={styles.imagesView}>
+          {
+            images.map((item, index) => (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => this.showImageDate(index)}
+              >
+                <View style={styles.imageListView}>
+                  <Image source={{ uri: item.uri }} style={styles.imageList} />
+                  <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
+                    <Icon name="ios-close-outline" style={styles.imageDelIcon} />
+                  </TouchableOpacity>
+                </View>
+              </TouchableWithoutFeedback>
+            ))
+          }
+        </View>
+        {
+          images.length < 4 &&
+          <View style={styles.upView}>
+            <TouchableWithoutFeedback
+              onPress={() =>
+               ActionSheet.show(
+                 {
+                   options: buttons,
+                   cancelButtonIndex: 2,
+                 },
+                 buttonIndex => this.goAsheet(buttonIndex),
+               )}
+            >
+              <Image source={upImg} style={styles.upViewImg} />
+            </TouchableWithoutFeedback>
+            <Text style={styles.upViewText}>（选填）最多上传{imageCount}张照片</Text>
+          </View>
+        }
+        <Modal
+          visible={isImageDateShow}
+          transparent
+        >
+          <ImageViewer
+            imageUrls={imageViewData}
+            index={imageDateIndex}
+            onClick={() => this.setState({ isImageDateShow: false })}
+          />
+        </Modal>
+      </View>
+    );
+  }
+  _renderMemo() {
+    const { memoVal } = this.state;
+    return (
+      <View style={styles.memoView}>
+        <View style={styles.memoTitle}>
+          <Text style={styles.memoTitleText}>补充说明</Text>
+        </View>
+        <View style={styles.memoMain}>
+          <Input
+            style={styles.memoMainInput}
+            multiline
+            placeholderTextColor="#aaa"
+            placeholder="详细的描述采购要求，可以收到更满意的报价哦"
+            onChangeText={text => this.setState({ memoVal: text })}
+            value={memoVal}
+          />
+        </View>
+        {this._renderImageUpload()}
       </View>
     );
   }
@@ -49,12 +152,13 @@ class CgCategory extends base {
   }
   render() {
     const { pop } = this.props;
-    const { title } = this.state;
     return (
       <Container>
-        <Header back={pop} title={title} />
-        <Content style={{ backgroundColor: '#fff' }}>
-          {this._renderContent()}
+        <Header back={pop} title="发布求购" />
+        <Content>
+          {this._renderList()}
+          {this._renderMemo()}
+          {this._renderUserInfo()}
         </Content>
         {this._renderButton()}
       </Container>
