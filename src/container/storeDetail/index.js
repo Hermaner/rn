@@ -7,7 +7,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, ScrollableTab, GoodList } from '../../components';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
 

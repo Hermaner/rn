@@ -1,33 +1,15 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { GetLedeCategoryService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchVal: '',
-      leftLists: [{
-        id: '1',
-        label: '水果',
-        cur: true,
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }],
       leftIndex: 0,
+      items: [],
+      childItems: [],
     };
   }
   onSearchChange = (searchVal) => {
@@ -35,15 +17,33 @@ class Base extends React.Component {
       searchVal,
     });
   }
+  GetLedeCategoryService = () => {
+    GetLedeCategoryService()
+    .then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        res.data[0].cur = true;
+        this.setState({
+          items: res.data,
+          childItems: res.data[0].childs,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+  }
   changeLeftTab = (index) => {
-    const { leftLists, leftIndex } = this.state;
+    const { items, leftIndex } = this.state;
     if (leftIndex === index) {
       return;
     }
-    leftLists[index].cur = true;
-    leftLists[leftIndex].cur = false;
+    items[index].cur = true;
+    items[leftIndex].cur = false;
     this.setState({
-      leftLists,
+      items,
+      childItems: items[index].childs,
       leftIndex: index,
     });
   }

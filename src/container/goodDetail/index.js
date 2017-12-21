@@ -8,7 +8,7 @@ import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, ScrollableTab, GoodhList, ModalView, InputNumber } from '../../components';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';

@@ -15,6 +15,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
+    this.GetLedeCategoryService();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -33,18 +34,18 @@ class MainScreen extends base {
     );
   }
   _renderLeft() {
-    const { leftLists } = this.state;
+    const { items } = this.state;
     return (
       <View style={styles.leftNav}>
         <Content>
           {
-            leftLists.map((item, index) => (
+            items.map((item, index) => (
               <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
                 <View style={[styles.leftNavList, item.cur && styles.leftNavListCur]}>
                   <Text
                     style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
                   >
-                    {item.label}
+                    {item.name}
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
@@ -55,7 +56,7 @@ class MainScreen extends base {
     );
   }
   _renderContent() {
-    const { leftLists } = this.state;
+    const { childItems } = this.state;
     const { push } = this.props;
     return (
       <View style={styles.rightContent}>
@@ -67,13 +68,13 @@ class MainScreen extends base {
           </TouchableOpacity>
           <View style={styles.rightContentView}>
             {
-              leftLists.map((item, index) => (
+              childItems.map((item, index) => (
                 <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'MainList' }); }}>
                   <View style={styles.contetnTabView}>
                     <Text
                       style={styles.mainText}
                     >
-                      {item.label}
+                      {item.name}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>

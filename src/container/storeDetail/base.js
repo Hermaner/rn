@@ -2,7 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import { Image, ListView } from 'react-native';
 import { deviceW } from '../../utils';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {

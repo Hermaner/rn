@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import { Animated } from 'react-native';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 
 const time = 200;
 class Base extends React.Component {

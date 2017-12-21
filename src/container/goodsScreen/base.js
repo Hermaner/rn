@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
