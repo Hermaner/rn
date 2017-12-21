@@ -46,6 +46,8 @@ import MyNichePush from '../container/myNichePush';
 import MyVisitor from '../container/myVisitor';
 import MyInfo from '../container/myInfo';
 import MyFootprint from '../container/myFootprint';
+import VisitDetail from '../container/visitDetail';
+import TalkBusiness from '../container/talkBusiness';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -90,6 +92,8 @@ export const AppNavigator = StackNavigator({
   MyVisitor: { screen: MyVisitor },
   MyInfo: { screen: MyInfo },
   MyFootprint: { screen: MyFootprint },
+  VisitDetail: { screen: VisitDetail },
+  TalkBusiness: { screen: TalkBusiness },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

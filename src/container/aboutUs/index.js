@@ -30,16 +30,13 @@ class AboutUs extends AboutUsBase {
           <Image style={styles.logo} source={require('../app/resource/imgs/2.png')} />
         </View>
         <Text style={styles.title}>用科技力量，推动农业产业升级!</Text>
-        {/* <View>
+        <View>
           <Input
             style={styles.inputText}
-            multiline={true}
+            multiline
             placeholder="我们的成长需要您的建议"
           />
-        </View> */}
-        <Item fixedLabel>
-          <Input />
-        </Item>
+        </View>
       </View>
     )
   }

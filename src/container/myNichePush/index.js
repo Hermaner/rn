@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Header, Icon } from 'native-base';
+import { Container, Content, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { GoodList } from '../../components';
+import { GoodList, Header } from '../../components';
 import myNichePushBase from './base';
 import styles from './styles';
 
@@ -16,27 +16,6 @@ class MyNichePush extends myNichePushBase {
     };
   }
   componentDidMount() {
-  }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pop}>
-            <Text style={{ marginLeft: 10 }}>关闭</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>商机推送</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon style={{ color: '#5DA942' }} name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
   }
   _readerConditions() {
     return (
@@ -59,7 +38,7 @@ class MyNichePush extends myNichePushBase {
     );
   }
   _readerMasker() {
-    const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow, isAddressShow } = this.state;
+    const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow } = this.state;
     const { push, pop } = this.props;
     return (
       <View style={styles.masker}>
@@ -91,35 +70,6 @@ class MyNichePush extends myNichePushBase {
             </View>
           }
           {
-            isSkuShow &&
-            <View style={styles.f1}>
-              {
-                skuLists.map((items, index) => (
-                  <View key={index}>
-                    <View style={styles.maskerTitle}>
-                      <Text style={styles.maskerTitleText}>{items.title}</Text>
-                    </View>
-                    <View style={[styles.fr, { flexWrap: 'wrap' }]}>
-                      {
-                        items.items.map((item, i) => (
-                          <TouchableWithoutFeedback key={i} onPress={() => { push({ key: 'User' }); }}>
-                            <View style={styles.contetnTabView}>
-                              <Text
-                                style={styles.mainText}
-                              >
-                                {item.label}
-                              </Text>
-                            </View>
-                          </TouchableWithoutFeedback>
-                        ))
-                      }
-                    </View>
-                  </View>
-                ))
-              }
-            </View>
-          }
-          {
             isCategoryShow &&
             <View style={styles.maskerContentView}>
               <View style={styles.topPart}>
@@ -146,12 +96,6 @@ class MyNichePush extends myNichePushBase {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
-          }
-          {
-            isAddressShow &&
-            <View style={styles.f1}>
-              {this._renderAddressContent()}
             </View>
           }
         </View>
@@ -289,10 +233,11 @@ class MyNichePush extends myNichePushBase {
   }
   render() {
     const { isMaskerShow } = this.state;
+    const { pop, push } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>
-          {this._readerHeader()}
+          <Header back={pop} title="商机推送" />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>

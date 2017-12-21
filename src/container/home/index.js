@@ -65,12 +65,6 @@ class HomeScreen extends base {
           </Button>
           <Button
             onPress={() =>
-              this.goRoute({ key: 'GatheringAccount' })}
-          >
-            <Text>GatheringAccount</Text>
-          </Button>
-          <Button
-            onPress={() =>
               this.goRoute({ key: 'ChooseAccountType' })}
           >
             <Text>ChooseAccountType</Text>

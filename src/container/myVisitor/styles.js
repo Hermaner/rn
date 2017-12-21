@@ -64,5 +64,83 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
+  userImg: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  isHidden: {
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  userBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingBottom: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  leftPart: {
+    flex: 1,
+  },
+  rightIcn: {
+    textAlign: 'right',
+  },
+  userName: {
+    fontSize: 18,
+    color: '#333',
+    marginRight: 10,
+    marginBottom: 6,
+  },
+  time: {
+    color: '#666',
+    fontSize: 14,
+  },
+  userAdress: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 8,
+  },
+  btnList: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+  },
+  btn: {
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderWidth: 1,
+    borderColor: '#eee',
+    marginLeft: 6,
+    borderRadius: 5,
+  },
+  btnText: {
+    color: '#F2F2F2',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  btnLeft: {
+    flex: 4,
+  },
+  btnLeftText: {
+    color: '#333',
+  },
+  btnCenter: {
+    flex: 3,
+    color: '#fff',
+    backgroundColor: '#16B6F6',
+  },
+  btnRight: {
+    flex: 3,
+    color: '#fff',
+    backgroundColor: '#57B924',
+  },
 });
 export default styles;

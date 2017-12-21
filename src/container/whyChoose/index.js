@@ -1,9 +1,10 @@
 import React from 'react';
 import { TouchableHighlight, Image, View } from 'react-native';
-import { Container, Content, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
+import { Header } from '../../components';
 import whyChooseBase from './base';
 import styles from './styles';
 
@@ -19,15 +20,6 @@ class WhyChoose extends whyChooseBase {
   }
   goRoute = (key) => {
     this.props.push(key);
-  }
-  _renderHeader() {
-    return (
-      <Header>
-        <Body>
-          <Title>目的选择</Title>
-        </Body>
-      </Header>
-    )
   }
   _renderBody() {
     const { push } = this.props;
@@ -64,9 +56,10 @@ class WhyChoose extends whyChooseBase {
     )
   }
   render() {
+    const { pop, push } = this.props;
     return (
       <Container>
-        {this._renderHeader()}
+        <Header back={pop} title="目的选择" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderBody()}
         </Content>

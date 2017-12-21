@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity, View, TextInput } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Header, Footer, Title, FooterTab, Button, Left, Right, Card, Switch, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, Switch, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
+import { Header } from '../../components';
 import reportDetailPagebase from './base';
 import styles from './styles';
 
@@ -17,30 +18,6 @@ class ReportDetailPage extends reportDetailPagebase {
     };
   }
   componentDidMount() {
-  }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pop} style={{marginLeft:20}}>
-            <Text>关闭</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>举报-详细</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pop} style={{marginLeft:20}}>
-            <Text>关闭</Text>
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
   }
   _renderBody() {
     const { pop, push } = this.props;
@@ -74,7 +51,7 @@ class ReportDetailPage extends reportDetailPagebase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="举报-详细" />
         <Content>
           {this._renderBody()}
           <View style={styles.btnBox}>

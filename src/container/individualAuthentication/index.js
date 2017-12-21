@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
+import { Header } from '../../components';
 import individualAuthenticationBase from './base';
 import styles from './styles';
 
@@ -20,24 +21,6 @@ class IndividualAuthentication extends individualAuthenticationBase {
   }
   goRoute = (key) => {
     this.props.push(key);
-  }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>个人实名认证</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
   }
   _renderBody() {
     return (
@@ -89,7 +72,7 @@ class IndividualAuthentication extends individualAuthenticationBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="个人实名认证" />
         <Content>
           {this._renderBody()}
           <TouchableOpacity style={styles.button}>
