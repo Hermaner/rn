@@ -10,6 +10,12 @@ class MyReleaseBase extends React.Component {
       sec: 60,
       password: '',
       code: '',
+      BUTTONS: [
+        { text: '停止采购', icon: 'trash', iconColor: '#00ff00' },
+        { text: 'Cancel', icon: 'close', iconColor: '#25de5b' },
+      ],
+      DESTRUCTIVE_INDEX: 3,
+      CANCEL_INDEX: 4,
     };
   }
   onChangeText = (txt, index) => {

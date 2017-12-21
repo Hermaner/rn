@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Header, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
+import { Container, Header, Icon, Tab, Tabs, TabHeading, Content, ActionSheet } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
@@ -54,6 +54,7 @@ class MyRelease extends myReleaseBase {
   }
   _rendContent() {
     const { pop, push } = this.props;
+    const { BUTTONS, DESTRUCTIVE_INDEX, CANCEL_INDEX } = this.state;
     return (
       <TouchableOpacity onPress={() => { push({ key: 'PurchaseDetail' }); }}>
         <View style={styles.goodsitem}>
@@ -81,7 +82,21 @@ class MyRelease extends myReleaseBase {
             <Text style={styles.renovateTime}>距截止6天</Text>
           </View>
           <View style={styles.btnList}>
-            <TouchableOpacity style={styles.btnBox}>
+            <TouchableOpacity
+              style={styles.btnBox}
+              onPress={() =>
+                ActionSheet.show(
+                  {
+                    options: BUTTONS,
+                    cancelButtonIndex: CANCEL_INDEX,
+                    destructiveButtonIndex: DESTRUCTIVE_INDEX,
+                    title: '是否停止采购?'
+                  },
+                  buttonIndex => {
+                    this.setState({ clicked: BUTTONS[buttonIndex] });
+                  }
+                )}
+            >
               <Text style={styles.btnText}>停止采购</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
