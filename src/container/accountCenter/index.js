@@ -44,7 +44,7 @@ class AccountCenter extends AccountCenterBase {
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerImgBox}>
-          <Image style={styles.headerImg} source={require('../app/resource/imgs/avatar.jpg')} />
+          <Image style={styles.headerImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
         </View>
         <View style={{ height: 150 }}>
           <View style={styles.accountMoney}>

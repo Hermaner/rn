@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
     height: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
-    minWidth: '30%',
+    width: `${100 / 3}%`,
   },
 });
 export default styles;

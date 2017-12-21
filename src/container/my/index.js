@@ -26,7 +26,7 @@ class My extends myBase {
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerImgBox}>
-          <Image style={styles.headerImg} source={require('../app/resource/imgs/avatar.jpg')} />
+          <Image style={styles.headerImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
         </View>
         <View style={{ height: 150, paddingLeft: 10, paddingRight: 10 }}>
           <View style={styles.accountMoney}>
@@ -37,7 +37,7 @@ class My extends myBase {
           </View>
           <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
             <View style={{ flexDirection: 'row' }}>
-              <Image style={styles.userImg} source={require('../app/resource/imgs/2.png')} />
+              <Image style={styles.userImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
               <View>
                 <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
                 <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { popRoute } from '../../actions';
 import { Header } from '../../components';
 import { Mcolor } from '../../utils';
-import { DeepClone } from '../../../api';
+import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
 
