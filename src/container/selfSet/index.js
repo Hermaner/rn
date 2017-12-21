@@ -46,7 +46,7 @@ class SelfSet extends selfSetBase {
               <Text style={{ color: '#666', fontSize: 16 }}>我的头像</Text>
             </View>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Image style={styles.lookForImg} source={require('../app/resource/imgs/avatar.jpg')} />
+              <Image style={styles.lookForImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
             </View>
           </View>
           <View style={styles.infoBox}>

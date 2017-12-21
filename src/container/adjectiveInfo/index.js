@@ -52,7 +52,7 @@ class AdjectiveInfo extends adjectiveInfoBase {
             <View style={styles.identityOne}>
               <Image
                 style={[styles.headerImg, changeOne === 1 && styles.isChooseBackground]}
-                source={require('../app/resource/imgs/avatar.jpg')}
+                source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
               />
               <Text
                 style={[styles.identityText, changeOne === 1 && styles.isChooseText]}
@@ -65,7 +65,7 @@ class AdjectiveInfo extends adjectiveInfoBase {
             <View style={styles.identityOne}>
               <Image
                 style={[styles.headerImg, changeOne === 2 && styles.isChooseBackground]}
-                source={require('../app/resource/imgs/avatar.jpg')}
+                source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
               />
               <Text
                 style={[styles.identityText, changeOne === 2 && styles.isChooseText]}

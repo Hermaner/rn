@@ -50,7 +50,7 @@ class ReportDetailPage extends reportDetailPagebase {
         <View style={styles.infoBox}>
           <TextInput
             style = {styles.inputs}
-            multiline="true"
+            multiline
             returnKeyType = "search"
             placeholder= "详细描述被举报人的恶意行为(必填,最少输入20个字)"
           />

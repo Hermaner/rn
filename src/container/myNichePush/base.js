@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { GetHistoryOrderList } from '../../../api';
+import { GetHistoryOrderList } from '../../api';
 
 let canEnd = false;
 class MyNichePushBase extends React.Component {

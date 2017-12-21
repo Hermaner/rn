@@ -22,7 +22,7 @@ class Payroll extends payrollBase {
     return (
       <Container style={styles.Body}>
         <View style={styles.bodyHeader}>
-          <Image style={styles.Headerleft} source={require('../app/resource/imgs/avatar.jpg')} />
+          <Image style={styles.Headerleft} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
         </View>
         <View style={styles.productType}>
           <View style={[styles.flexOne, styles.flexAlignItems]}>
@@ -77,7 +77,7 @@ class Payroll extends payrollBase {
     return (
       <View style={styles.goodsList}>
         <View style={styles.goodsItem}>
-          <Image style={styles.goodsImg} source={require('../app/resource/imgs/avatar.jpg')} />
+          <Image style={styles.goodsImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
           <View style={styles.goodsInfo}>
             <Text style={styles.goodsName} numberOfLines={1}>新疆 红旗坡阿克苏苹果 10斤装果径80-90</Text>
             <Text style={styles.buyCounts}>已发20件</Text>
