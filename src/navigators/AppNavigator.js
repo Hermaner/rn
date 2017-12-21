@@ -37,6 +37,14 @@ import SystemSet from '../container/systemSet';
 import PurchaseHome from '../container/purchaseHome';
 import PurchaseDetail from '../container/purchaseDetail';
 import MySupply from '../container/mySupply';
+import MyRelease from '../container/myRelease';
+import MyBuyGoods from '../container/myBuyGoods';
+import MySoldGoods from '../container/mySoldGoods';
+import MySendOffer from '../container/mySendOffer';
+import MyNichePush from '../container/myNichePush';
+import MyVisitor from '../container/myVisitor';
+import MyInfo from '../container/myInfo';
+import MyFootprint from '../container/myFootprint';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -72,6 +80,14 @@ export const AppNavigator = StackNavigator({
   PurchaseHome: { screen: PurchaseHome },
   PurchaseDetail: { screen: PurchaseDetail },
   MySupply: { screen: MySupply },
+  MyRelease: { screen: MyRelease },
+  MyBuyGoods: { screen: MyBuyGoods },
+  MySoldGoods: { screen: MySoldGoods },
+  MySendOffer: { screen: MySendOffer },
+  MyNichePush: { screen: MyNichePush },
+  MyVisitor: { screen: MyVisitor },
+  MyInfo: { screen: MyInfo },
+  MyFootprint: { screen: MyFootprint },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

@@ -47,69 +47,76 @@ class ReportPage extends reportPageBase {
     return (
       <View style={{ flex: 1 }}>
         <Text style={styles.whyReport}>您为什么要举报该账号？</Text>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>货品信息有问题</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>诈骗</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>骚扰/广告</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>价格虚假</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>服务问题</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>发布色情/政治/违法内容</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.reason}>其他原因</Text>
-          <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
-            onPress={() => { push({ key: 'ReportDetailPage' }); }}
-          >
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>货品信息有问题</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>诈骗</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>骚扰/广告</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>价格虚假</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>服务问题</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>发布色情/政治/违法内容</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ReportDetailPage' }); }}>
+          <View style={styles.infoBox}>
+            <Text style={styles.reason}>其他原因</Text>
+            <View
+              style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
+            >
+              <Icon name="arrow-back" />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }

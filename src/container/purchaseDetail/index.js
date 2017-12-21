@@ -54,7 +54,13 @@ class PurchaseDetail extends purchaseDetailBase {
         </View>
         <View style={styles.userImg}>
           <Image style={styles.img} source={require('../app/resource/imgs/avatar.jpg')} />
-          <Text style={styles.purchaseCount}>已发1条采购</Text>
+          <View style={styles.userInfo}>
+            {
+              false &&
+              <Text style={styles.userName}>姓名</Text>
+            }
+            <Text style={styles.purchaseCount}>已发1条采购</Text>
+          </View>
         </View>
         <View style={styles.needGoodsDetail}>
           <View style={[styles.rowBox, styles.diffentBackground]}>
@@ -112,14 +118,17 @@ class PurchaseDetail extends purchaseDetailBase {
             </View>
           </View>
         </View>
-        <View style={styles.addExplain}>
-          <Text style={styles.addExplainText}>补充说明</Text>
-          <View style={{ borderTopWidth: 1, borderTopColor: '#eee' }}>
-            <Text style={{ color: '#666', fontSize: 14, paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10 }}>
-              求购胸径10公分五角松,2.2至2.5分枝,杆直冒圆,一级货源,土球75公分,数量400棵,有货速度联系我
-            </Text>
+        {
+          false &&
+          <View style={styles.addExplain}>
+            <Text style={styles.addExplainText}>补充说明</Text>
+            <View style={{ borderTopWidth: 1, borderTopColor: '#eee' }}>
+              <Text style={{ color: '#666', fontSize: 14, paddingTop: 10, paddingBottom: 10, paddingLeft: 10, paddingRight: 10 }}>
+                求购胸径10公分五角松,2.2至2.5分枝,杆直冒圆,一级货源,土球75公分,数量400棵,有货速度联系我
+              </Text>
+            </View>
           </View>
-        </View>
+        }
       </View>
     )
   }
@@ -131,9 +140,23 @@ class PurchaseDetail extends purchaseDetailBase {
         <Content>
           {this._renderBody()}
         </Content>
-        <TouchableOpacity style={styles.footerBtn}>
-          <Text style={styles.footerBtnText}>立即报价</Text>
-        </TouchableOpacity>
+        {
+          false &&
+          <TouchableOpacity style={styles.footerBtn}>
+            <Text style={styles.footerBtnText}>立即报价</Text>
+          </TouchableOpacity>
+        }
+        {
+          true &&
+          <View style={styles.btnList}>
+            <TouchableOpacity style={[styles.btnListOne, styles.leftBtn]}>
+              <Text style={styles.footerBtnText}>聊生意</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.btnListOne, styles.rightBtn]}>
+              <Text style={styles.footerBtnText}>打电话</Text>
+            </TouchableOpacity>
+          </View>
+        }
       </Container>
     );
   }

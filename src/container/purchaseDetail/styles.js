@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   purchaseCount: {
     color: '#666',
     fontSize: 14,
-    alignSelf: 'flex-end',
+    marginTop: 24,
   },
   needGoodsDetail: {
     backgroundColor: '#fff',
@@ -102,13 +102,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#FC8521',
     position: 'absolute',
     bottom: 0,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   footerBtnText: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 16,
+  },
+  btnList: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+  },
+  btnListOne: {
+    flex: 1,
+    backgroundColor: '#FC8521',
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+  leftBtn: {
+    backgroundColor: '#57B924',
+  },
+  rightBtn: {
+    backgroundColor: '#16B6F6',
+  },
+  userInfo: {
+    justifyContent: 'flex-end',
+  },
+  userName: {
+    color: '#333',
+    fontSize: 14,
   },
 });
 export default styles;
