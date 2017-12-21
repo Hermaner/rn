@@ -1,5 +1,6 @@
 import TLight from './TLight';
 import TOpacity from './TOpacity';
+import TFeedback from './TFeedback';
 import Header from './Header';
 import GoodList from './goodList';
 import GoodhList from './goodhList';
@@ -12,6 +13,7 @@ export {
   TLight,
   TOpacity,
   GoodList,
+  TFeedback,
   ModalView,
   InputNumber,
   NoData,

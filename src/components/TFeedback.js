@@ -1,12 +1,11 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 
-export default class TOpacity extends React.Component {
+export default class Feedback extends React.Component {
   static propTypes = {
     content: PropTypes.element,
     onPress: PropTypes.func,
-    style: PropTypes.any,
   };
   constructor(props) {
     super(props);
@@ -27,16 +26,15 @@ export default class TOpacity extends React.Component {
     }, 500);
   }
   render() {
-    const { style, content } = this.props;
+    const { content } = this.props;
     const { isDisable } = this.state;
     return (
-      <TouchableOpacity
+      <TouchableWithoutFeedback
         disabled={isDisable}
         onPress={this.lightPress}
-        style={style}
       >
         {content}
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
 

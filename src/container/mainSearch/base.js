@@ -55,7 +55,7 @@ class Base extends React.Component {
         this.props.push({ key: 'MainList' });
         break;
       case '2':
-        this.props.push({ key: 'CgCategory' });
+        this.props.push({ key: 'CgCategory', params: { title: '水果' } });
         break;
       default:
     }
