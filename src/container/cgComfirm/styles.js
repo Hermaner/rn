@@ -79,6 +79,11 @@ const styles = StyleSheet.create({
     right: 10,
     top: 10,
   },
+  selectType: {
+    width: 0,
+    height: 0,
+    overflow: 'hidden',
+  },
   imageDelIcon: {
     fontSize: 20,
     color: '#fff',
@@ -98,6 +103,15 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 13,
     color: '#888',
+  },
+  btn: {
+    backgroundColor: Mcolor,
+    borderRadius: 3,
+  },
+  phoneInput: {
+    fontSize: 14,
+    color: '#666',
+    flex: 1,
   },
 });
 export default styles;

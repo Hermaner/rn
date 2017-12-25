@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { Global } from '../../utils';
 
@@ -27,11 +28,24 @@ class CgSkusBase extends React.Component {
   }
   goCgComfirm = () => {
     Global.skus = Global.items[Global.firstIndex].childs[Global.secondIndex].specTypes;
-    const { push } = this.props;
-    push({ key: 'CgComfirm' });
+    const { push, resetTo, pop } = this.props;
+    switch (Global.cgType) {
+      case '1':
+        resetTo({ num: 3 });
+        break;
+      case '2':
+        DeviceEventEmitter.emit('getSku');
+        pop();
+        break;
+      default:
+        push({ key: 'CgComfirm' });
+        break;
+    }
   }
 }
 CgSkusBase.propTypes = {
   push: PropTypes.func,
+  pop: PropTypes.func,
+  resetTo: PropTypes.func,
 };
 export default CgSkusBase;

@@ -1,4 +1,4 @@
-import { NavigationActions, StateUtils } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 
 import { AppNavigator } from '../navigators/AppNavigator';
 
@@ -11,6 +11,7 @@ const initialNavState = {
 };
 function nav(state = initialNavState, action) {
   let nextState;
+  const newRoutes = [];
   switch (action.type) {
     case 'pop':
       nextState = AppNavigator.router.getStateForAction(NavigationActions.back(), state);
@@ -19,21 +20,25 @@ function nav(state = initialNavState, action) {
       nextState = AppNavigator.router.getStateForAction(NavigationActions.navigate(
         { routeName: action.routes.key, params: action.routes.params }), state);
       break;
-    case 'resetTwo':
-      state.routes.splice(state.routes.length - 2, 2);
-      nextState = StateUtils.reset(state, [...state.routes]);
-      break;
-    case 'Login':
+    case 'resetTo':
+      state.routes.forEach((item, index) => {
+        if (index < state.routes.length - action.routes.num) {
+          newRoutes.push(item);
+        }
+      });
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.back(),
-        state,
-      );
+        NavigationActions.reset({
+          index: state.index - action.routes.num,
+          actions: newRoutes.map(item => NavigationActions.navigate(
+            { routeName: item.routeName, params: item.params || {} },
+          )),
+        })
+      , state);
       break;
-    case 'Logout':
+    case 'resetHome':
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'Login' }),
-        state,
-      );
+        NavigationActions.reset(initialNavState)
+      , state);
       break;
     default:
       nextState = AppNavigator.router.getStateForAction(action, state);

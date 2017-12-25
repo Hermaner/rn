@@ -9,6 +9,8 @@ import Main from '../container/Main';
 import MainSearch from '../container/mainSearch';
 import CgCategory from '../container/cgCategory';
 import CgSkus from '../container/cgSkus';
+import CgCitys from '../container/cgCitys';
+import CgDemand from '../container/cgDemand';
 import CgComfirm from '../container/cgComfirm';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
@@ -68,6 +70,8 @@ export const AppNavigator = StackNavigator({
   MainSearch: { screen: MainSearch },
   CgCategory: { screen: CgCategory },
   CgSkus: { screen: CgSkus },
+  CgCitys: { screen: CgCitys },
+  CgDemand: { screen: CgDemand },
   CgComfirm: { screen: CgComfirm },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },

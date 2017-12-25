@@ -3,7 +3,7 @@ import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button } from 'native-base';
 import { connect } from 'react-redux';
-import { popRoute, pushRoute } from '../../actions';
+import { popRoute, pushRoute, resetTo, resetHome } from '../../actions';
 import { Header, TFeedback } from '../../components';
 import base from './base';
 import { Global } from '../../utils';
@@ -15,7 +15,7 @@ class CgSkus extends base {
     const data = Global.items[Global.firstIndex].childs[Global.secondIndex];
     this.state = {
       ...this.state,
-      items: data.specTypes,
+      items: data.specTypes || [],
     };
   }
   componentDidMount() {
@@ -78,4 +78,4 @@ CgSkus.propTypes = {
   navigation: PropTypes.object,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(CgSkus);
+export default connect(null, { pop: popRoute, push: pushRoute, resetTo, resetHome })(CgSkus);

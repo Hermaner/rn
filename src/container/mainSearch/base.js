@@ -62,11 +62,6 @@ class Base extends React.Component {
         Global.secondIndex = index;
         this.props.push({ key: 'CgCategory' });
         break;
-      case '3':
-        Global.secondIndex = index;
-        Global.secondIndex = index;
-        this.props.push({ key: 'CgCategory' });
-        break;
       default:
     }
   }

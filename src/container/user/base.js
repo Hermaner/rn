@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 
-class Base extends React.Component {
+class UserBase extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
@@ -15,6 +15,7 @@ class Base extends React.Component {
   onChangeText = (txt, index) => {
     switch (index) {
       case 0:
+        console.log(txt)
         this.setState({
           phone: txt,
         });
@@ -65,4 +66,4 @@ class Base extends React.Component {
   }
 }
 
-export default Base;
+export default UserBase;

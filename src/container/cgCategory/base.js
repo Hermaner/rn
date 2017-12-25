@@ -39,6 +39,7 @@ class CgCategoryBase extends React.Component {
   goNext = (index) => {
     const { items, itemIndex } = this.state;
     const { push } = this.props;
+    Global.thirdIndex = index;
     push({ key: 'CgSkus' });
     if (itemIndex === index) {
       return;
@@ -47,7 +48,6 @@ class CgCategoryBase extends React.Component {
       items[itemIndex].cur = false;
     }
     items[index].cur = true;
-    Global.thirdIndex = index;
     this.setState({
       items,
       itemIndex: index,

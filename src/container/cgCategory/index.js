@@ -15,7 +15,7 @@ class CgCategory extends base {
     const items = Global.items[Global.firstIndex].childs[Global.secondIndex];
     this.state = {
       ...this.state,
-      items: items.brands,
+      items: items.brands || [],
       title: items.name,
     };
   }
