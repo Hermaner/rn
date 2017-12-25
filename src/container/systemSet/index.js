@@ -1,12 +1,12 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { ScrollableTab } from '../../components';
+import { ScrollableTab, Header } from '../../components';
 import systemSetBase from './base';
 import styles from './styles';
 
@@ -23,24 +23,7 @@ class SystemSet extends systemSetBase {
   goRoute = (key) => {
     this.props.push(key);
   }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>系统设置</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
-  }
+
   _renderBody() {
     const { pop, push } = this.props;
     return (
@@ -58,7 +41,7 @@ class SystemSet extends systemSetBase {
             <Icon name="arrow-back" />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => { push({ key: 'ClauseAndAgreement' }); }}>
           <View style={styles.rowBox}>
             <Text style={styles.boxLeft}>服务条款与协议</Text>
             <Icon name="arrow-back" />
@@ -77,7 +60,7 @@ class SystemSet extends systemSetBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="系统设置" />
         <Content>
           {this._renderBody()}
           <TouchableOpacity style={{ backgroundColor: '#fff', paddingTop: 10, paddingBottom: 10 }}>

@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   individualImg: {
     width: 80,
-    height: 50,
+    height: 60,
     marginRight: 15,
   },
   individualText: {

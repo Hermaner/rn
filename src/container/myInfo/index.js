@@ -24,8 +24,9 @@ class MyInfo extends myInfoBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const Tab1 = () => this._rendContent();
-    const Tab2 = () => this._rendContent();
+    const { items } = this.state;
+    const Tab1 = () => this._rendContent1();
+    const Tab2 = () => this._rendContent2();
     return (
       <View style={styles.pagebody}>
         <View style={styles.topPart}>
@@ -58,20 +59,18 @@ class MyInfo extends myInfoBase {
           <Icon style={styles.RightPart} name="arrow-back" />
         </View>
         <View style={styles.myBusiness}>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>主营</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>所在地</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>注册时间</Text>
-            <Text style={styles.flexOneTextRight}>2017-12-3</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>备注</Text>
-            <Icon style={styles.flexOneTextRight} name="arrow-back" />
-          </View>
+          {
+            items.map((item, index) => (
+              <View style={styles.flexBox} key={index}>
+                <Text style={styles.flexOneTextLeft}>{item.title}</Text>
+                <Text style={styles.flexOneTextRight}>{item.label}</Text>
+                {
+                  item.isIcn &&
+                  <Icon style={styles.flexOneTextRight} name="arrow-back" />
+                }
+              </View>
+            ))
+          }
         </View>
         <View style={styles.type}>
           <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
@@ -82,9 +81,14 @@ class MyInfo extends myInfoBase {
       </View>
     )
   }
-  _rendContent() {
+  _rendContent1() {
     return (
       <Text>ddddd</Text>
+    )
+  }
+  _rendContent2() {
+    return (
+      <Text>eeee</Text>
     )
   }
   render() {

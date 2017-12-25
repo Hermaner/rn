@@ -69,10 +69,10 @@ class MyVisitor extends myVisitorBase {
                   <TouchableOpacity style={styles.btn} onPress={() => { push({ key: 'VisitDetail' }); }}>
                     <Text style={[styles.btnText, styles.btnLeftText]}>他浏览过什么</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={[styles.btn, styles.btnCenter]} onPress={() => { push({ key: 'TalkBusiness' }); }}>
+                  <TouchableOpacity style={[styles.btn, styles.btnCenter]}>
                     <Text style={styles.btnText}>打电话</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={[styles.btn, styles.btnRight]}>
+                  <TouchableOpacity style={[styles.btn, styles.btnRight]} onPress={() => { push({ key: 'TalkBusiness' }); }}>
                     <Text style={styles.btnText}>聊生意</Text>
                   </TouchableOpacity>
                 </View>

@@ -26,6 +26,7 @@ class GatheringAccount extends gatheringAccountBase {
     return (
       <View style={styles.pagebody}>
         <View style={styles.addBtn}>
+          <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
           <Text style={{ textAlign: 'center', color: '#666', fontSize: 18 }}>添加新账号</Text>
         </View>
       </View>

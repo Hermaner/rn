@@ -37,8 +37,9 @@ class MyBuyGoods extends myBuyGoodsBase {
     )
   }
   _rendContent() {
+    const { push } = this.props;
     return (
-      <View style={styles.goodsitem}>
+      <TouchableOpacity style={styles.goodsitem} onPress={() => { push({ key: 'GoodDetail' }); }}>
         <View style={styles.goodsDetail}>
           <View style={{ flex: 1 }}>
             <View style={styles.goodsPrice}>
@@ -70,7 +71,7 @@ class MyBuyGoods extends myBuyGoodsBase {
             <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
   render() {

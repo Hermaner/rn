@@ -186,12 +186,13 @@ class MyNichePush extends myNichePushBase {
     </View>
   )
   _renderFooter() {
+    const { push } = this.props;
     return (
       <View style={styles.maskerBtns}>
         <TouchableOpacity style={styles.maskerCancelBtn} onPress={this.hideMasker}>
           <Text style={styles.maskerBtnText}>累计已收到0条商机</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.maskerSaveBtn} onPress={this.saveMasker}>
+        <TouchableOpacity style={styles.maskerSaveBtn} onPress={() => { push({ key: 'Keyword' }); }}>
           <Text style={styles.maskerBtnTextCur}>设置关键词</Text>
         </TouchableOpacity>
       </View>

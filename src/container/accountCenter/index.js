@@ -32,23 +32,25 @@ class AccountCenter extends AccountCenterBase {
         <View style={{ height: 150 }}>
           <View style={styles.accountMoney}>
             <Text style={styles.textBackground}>账户资金</Text>
-            <TouchableOpacity onPress={pop} style={styles.rightBtn}>
+            <TouchableOpacity style={styles.rightBtn} onPress={() => { push({ key: 'ValidatePhone' }); }}>
               <Text style={styles.textBackground}>提现</Text>
             </TouchableOpacity>
           </View>
           <Text style={[styles.textBackground, styles.textMoney]}>￥0.00</Text>
         </View>
         <View style={styles.detailInfo}>
-          <View style={styles.infoBox}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon style={{ marginRight: 20, color: '#53BB20' }} name="arrow-back" />
-              <Text style={{ color: '#666', fontSize: 16 }}>账单</Text>
+          <TouchableOpacity onPress={() => { push({ key: 'Bill' }); }}>
+            <View style={styles.infoBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon style={{ marginRight: 20, color: '#53BB20' }} name="arrow-back" />
+                <Text style={{ color: '#666', fontSize: 16 }}>账单</Text>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Text style={{ color: '#999', fontSize: 14 }}>收支记录</Text>
+                <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+              </View>
             </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Text style={{ color: '#999', fontSize: 14 }}>收支记录</Text>
-              <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-            </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.infoBox}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Icon style={{ marginRight: 20, color: '#53BB20' }} name="arrow-back" />

@@ -71,12 +71,6 @@ class HomeScreen extends base {
           </Button>
           <Button
             onPress={() =>
-              this.goRoute({ key: 'My' })}
-          >
-            <Text>My</Text>
-          </Button>
-          <Button
-            onPress={() =>
               this.goRoute({ key: 'PurchaseHome' })}
           >
             <Text>PurchaseHome</Text>
@@ -86,6 +80,12 @@ class HomeScreen extends base {
               this.goRoute({ key: 'MySupply' })}
           >
             <Text>MySupply</Text>
+          </Button>
+          <Button
+            onPress={() =>
+              this.goRoute({ key: 'HuinongConsultDetail' })}
+          >
+            <Text>HuinongConsultDetail</Text>
           </Button>
         </Content>
       </Container>

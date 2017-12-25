@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity,  Image, View } from 'react-native';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Input, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -24,42 +24,61 @@ class TalkBusiness extends talkBusinessBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const Tab1 = () => this._rendContent();
-    const Tab2 = () => this._rendContent();
     return (
       <View style={styles.pagebody}>
-        <View style={styles.rowBox}>
-          <Icon style={styles.leftIcn} name="arrow-back" />
-          <Text style={styles.visitText}>访客姓名:钟莲花</Text>
-          <Icon style={styles.rightIcn} name="arrow-back" />
+        <View style={styles.isConcern}>
+          <Text style={styles.isConcernLeft}>你们是陌生人,关注他,方便联系</Text>
+          <Text style={styles.isConcernRight}>立即联系</Text>
         </View>
-        <View style={styles.rowBox}>
-          <Icon style={styles.leftIcn} name="arrow-back" />
-          <Text style={styles.visitText}>联系方式:124734378483</Text>
-        </View>
-        <View style={styles.rowBox}>
-          <Icon style={styles.leftIcn} name="arrow-back" />
-          <Text style={styles.visitText}>所在地:湖北省孝感市安陆市</Text>
-        </View>
-        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="访问详情" />
-          <Tab2 tabLabel="近期浏览详情" />
-        </ScrollableTabView>
       </View>
     )
   }
-  _rendContent() {
+  _rendFooter() {
     return (
-      <Text>ddddd</Text>
+      <View style={styles.footer}>
+        <View style={styles.talkRow}>
+          <View>
+            <Icon style={styles.voice} name="arrow-back" />
+          </View>
+          <Input
+            style={styles.inputs}
+            placeholder="请输入消息"
+          />
+          <Icon style={styles.look} name="arrow-back" />
+          <Icon style={styles.addImg} name="arrow-back" />
+        </View>
+        {
+          true &&
+          <View style={styles.add}>
+            <View style={styles.flexOne}>
+              <Icon style={styles.addIcn} name="arrow-back" />
+              <Text style={styles.addText}>相册</Text>
+            </View>
+            <View style={styles.flexOne}>
+              <Icon style={styles.addIcn} name="arrow-back" />
+              <Text style={styles.addText}>拍摄</Text>
+            </View>
+            <View style={styles.flexOne}>
+              <Icon style={styles.addIcn} name="arrow-back" />
+              <Text style={styles.addText}>快捷短语</Text>
+            </View>
+            <View style={styles.flexOne}>
+              <Icon style={styles.addIcn} name="arrow-back" />
+              <Text style={styles.addText}>发送货品</Text>
+            </View>
+          </View>
+        }
+      </View>
     )
   }
   render() {
     const { pop, push } = this.props;
     return (
       <Container>
-        <Header back={pop} title="访问详情" />
+        <Header back={pop} title="姓名" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderBody()}
+          {this._rendFooter()}
         </Content>
       </Container>
     );
