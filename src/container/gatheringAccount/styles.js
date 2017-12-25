@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingTop: 60,
     paddingBottom: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

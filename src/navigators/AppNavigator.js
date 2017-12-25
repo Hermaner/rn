@@ -46,6 +46,22 @@ import MyNichePush from '../container/myNichePush';
 import MyVisitor from '../container/myVisitor';
 import MyInfo from '../container/myInfo';
 import MyFootprint from '../container/myFootprint';
+import VisitDetail from '../container/visitDetail';
+import TalkBusiness from '../container/talkBusiness';
+import Bill from '../container/bill';
+import NotificationSystem from '../container/notificationSystem';
+import NotificationSystemDetail from '../container/notificationSystemDetail';
+import RevisePhone from '../container/revisePhone';
+import UserInfo from '../container/userInfo';
+import ShippingAddress from '../container/shippingAddress';
+import AddAddress from '../container/addAddress';
+import Authentication from '../container/authentication';
+import ClauseAndAgreement from '../container/clauseAndAgreement';
+import Keyword from '../container/keyword';
+import KeywordReturn from '../container/keywordReturn';
+import ValidatePhone from '../container/validatePhone';
+import HuinongConsult from '../container/huinongConsult';
+import HuinongConsultDetail from '../container/huinongConsultDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -90,6 +106,22 @@ export const AppNavigator = StackNavigator({
   MyVisitor: { screen: MyVisitor },
   MyInfo: { screen: MyInfo },
   MyFootprint: { screen: MyFootprint },
+  VisitDetail: { screen: VisitDetail },
+  TalkBusiness: { screen: TalkBusiness },
+  Bill: { screen: Bill },
+  NotificationSystem: { screen: NotificationSystem },
+  NotificationSystemDetail: { screen: NotificationSystemDetail },
+  RevisePhone: { screen: RevisePhone },
+  UserInfo: { screen: UserInfo },
+  ShippingAddress: { screen: ShippingAddress },
+  AddAddress: { screen: AddAddress },
+  Authentication: { screen: Authentication },
+  ClauseAndAgreement: { screen: ClauseAndAgreement },
+  Keyword: { screen: Keyword },
+  KeywordReturn: { screen: KeywordReturn },
+  ValidatePhone: { screen: ValidatePhone },
+  HuinongConsult: { screen: HuinongConsult },
+  HuinongConsultDetail: { screen: HuinongConsultDetail },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

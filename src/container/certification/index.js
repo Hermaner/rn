@@ -1,10 +1,11 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
+import { Header } from '../../components';
 import certificationBase from './base';
 import styles from './styles';
 
@@ -17,24 +18,6 @@ class Certification extends certificationBase {
     };
   }
   componentDidMount() {
-  }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>实名认证</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
   }
   _renderIndividual() {
     const { pop, push } = this.props;
@@ -129,7 +112,7 @@ class Certification extends certificationBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="实名认证" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderIndividual()}
           {this._renderCollective()}

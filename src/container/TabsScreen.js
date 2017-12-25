@@ -6,7 +6,7 @@ import { Icon } from 'native-base';
 import home from '../container/home';
 import goods from '../container/goods';
 import carts from '../container/carts';
-import mine from '../container/mine';
+import mine from '../container/my';
 import { Mcolor } from '../utils';
 
 const styles = StyleSheet.create({

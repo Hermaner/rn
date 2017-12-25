@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableHighlight, TouchableOpacity,  Image, View } from 'react-native';
-import { Container, Content, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { ScrollableTab } from '../../components';
+import { ScrollableTab, Header } from '../../components';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import myInfoBase from './base';
 import styles from './styles';
@@ -22,31 +22,11 @@ class MyInfo extends myInfoBase {
   goRoute = (key) => {
     this.props.push(key);
   }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>名字</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon style={{ color: '#5DA942', marginRight: 15 }} name="arrow-back" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pop}>
-            <Icon style={{ color: '#5DA942' }} name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
-  }
   _renderBody() {
     const { push } = this.props;
-    const Tab1 = () => this._rendContent();
-    const Tab2 = () => this._rendContent();
+    const { items } = this.state;
+    const Tab1 = () => this._rendContent1();
+    const Tab2 = () => this._rendContent2();
     return (
       <View style={styles.pagebody}>
         <View style={styles.topPart}>
@@ -79,20 +59,18 @@ class MyInfo extends myInfoBase {
           <Icon style={styles.RightPart} name="arrow-back" />
         </View>
         <View style={styles.myBusiness}>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>主营</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>所在地</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>注册时间</Text>
-            <Text style={styles.flexOneTextRight}>2017-12-3</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <Text style={styles.flexOneTextLeft}>备注</Text>
-            <Icon style={styles.flexOneTextRight} name="arrow-back" />
-          </View>
+          {
+            items.map((item, index) => (
+              <View style={styles.flexBox} key={index}>
+                <Text style={styles.flexOneTextLeft}>{item.title}</Text>
+                <Text style={styles.flexOneTextRight}>{item.label}</Text>
+                {
+                  item.isIcn &&
+                  <Icon style={styles.flexOneTextRight} name="arrow-back" />
+                }
+              </View>
+            ))
+          }
         </View>
         <View style={styles.type}>
           <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
@@ -103,15 +81,21 @@ class MyInfo extends myInfoBase {
       </View>
     )
   }
-  _rendContent() {
+  _rendContent1() {
     return (
       <Text>ddddd</Text>
     )
   }
+  _rendContent2() {
+    return (
+      <Text>eeee</Text>
+    )
+  }
   render() {
+    const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="名字" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderBody()}
         </Content>

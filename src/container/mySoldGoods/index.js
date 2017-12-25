@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Header, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
+import { Container, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
-import { ScrollableTab } from '../../components';
+import { ScrollableTab, Header } from '../../components';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import mySoldGoodsBase from './base';
 import styles from './styles';
@@ -18,27 +18,6 @@ class MySoldGoods extends mySoldGoodsBase {
     };
   }
   componentDidMount() {
-  }
-  _readerHeader() {
-    const { pop, push } = this.props;
-    return (
-      <Header style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-        <Text style={{ width: '50%', flexDirection: 'row', alignItems: 'center', textAlign: 'center' }}>已卖出的货品</Text>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <TouchableOpacity onPress={pop}>
-            <Icon style={{ color: '#5DA942', marginRight: 15 }} name="arrow-back" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={pop}>
-            <Icon style={{ color: '#5DA942' }} name="arrow-back" />
-          </TouchableOpacity>
-        </View>
-      </Header>
-    );
   }
   _randerBody() {
     const { pop } = this.props;
@@ -58,8 +37,9 @@ class MySoldGoods extends mySoldGoodsBase {
     )
   }
   _rendContent() {
+    const { push } = this.props;
     return (
-      <View style={styles.goodsitem}>
+      <TouchableOpacity style={styles.goodsitem} onPress={() => { push({ key: 'GoodDetail' }); }}>
         <View style={styles.goodsDetail}>
           <View style={{ flex: 1 }}>
             <View style={styles.goodsPrice}>
@@ -91,7 +71,7 @@ class MySoldGoods extends mySoldGoodsBase {
             <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
   render() {
@@ -99,7 +79,7 @@ class MySoldGoods extends mySoldGoodsBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        {this._readerHeader()}
+        <Header back={pop} title="已卖出的货品" />
         <Content style={{ backgroundColor: '#fff' }}>
           {this._randerBody()}
         </Content>
