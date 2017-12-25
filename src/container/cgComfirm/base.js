@@ -2,6 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import ImagePicker from 'react-native-image-crop-picker';
+import { Global } from '../../utils';
 
 class CgCategoryBase extends React.Component {
   constructor(props) {
@@ -13,12 +14,14 @@ class CgCategoryBase extends React.Component {
         must: true,
         last: true,
         label: '水果',
+        page: 'MainSearch',
       }, {
         id: '1',
         title: '规格要求',
         must: false,
         last: false,
         label: '不限',
+        page: 'cgSkus',
       }, {
         id: '1',
         title: '需求量',
@@ -58,6 +61,31 @@ class CgCategoryBase extends React.Component {
       isImageDateShow: false,
       imageViewData: [],
     };
+  }
+  getData = () => {
+    const { items } = this.state;
+    const skus = Global.skus;
+    const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
+    const typeName = main.name;
+    let brandName = '';
+    if (Global.thirdIndex) {
+      brandName = main.brands[Global.thirdIndex].brandName;
+    }
+    items[0].label = `${typeName}${brandName}`;
+    const skuString = [];
+    skus.forEach((item) => {
+      if (item.itemIndex !== undefined) {
+        skuString.push(item.specs[item.itemIndex].specName);
+      }
+    });
+    items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
+    this.setState({
+      items,
+    });
+  }
+  goPage = (index) => {
+    const { items } = this.state;
+    this.props.push({ key: items[index].page, params: { type: '3' } });
   }
   goAsheet = (index) => {
     switch (index) {

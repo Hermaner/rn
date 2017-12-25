@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { Global } from '../../utils';
 
 class CgCategoryBase extends React.Component {
   constructor(props) {
@@ -23,21 +24,22 @@ class CgCategoryBase extends React.Component {
     };
   }
   goNextWidthOut = () => {
-    const { title, itemIndex, items } = this.state;
+    const { itemIndex, items } = this.state;
     const { push } = this.props;
-    push({ key: 'CgSkus', params: { title } });
+    push({ key: 'CgSkus' });
     if (itemIndex !== null) {
       items[itemIndex].cur = false;
     }
+    Global.thirdIndex = null;
     this.setState({
       items,
       itemIndex: null,
     });
   }
   goNext = (index) => {
-    const { title, items, itemIndex } = this.state;
+    const { items, itemIndex } = this.state;
     const { push } = this.props;
-    push({ key: 'CgSkus', params: { item: items[index], title } });
+    push({ key: 'CgSkus' });
     if (itemIndex === index) {
       return;
     }
@@ -45,6 +47,7 @@ class CgCategoryBase extends React.Component {
       items[itemIndex].cur = false;
     }
     items[index].cur = true;
+    Global.thirdIndex = index;
     this.setState({
       items,
       itemIndex: index,

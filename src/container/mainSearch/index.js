@@ -15,7 +15,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
-    // this.GetLedeCategoryService();
+    this.GetAppCategoryService();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -69,7 +69,7 @@ class MainScreen extends base {
           <View style={styles.rightContentView}>
             {
               childItems.map((item, index) => (
-                <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'MainList' }); }}>
+                <TouchableWithoutFeedback key={index} onPress={() => this.goPage(index)}>
                   <View style={styles.contetnTabView}>
                     <Text
                       style={styles.mainText}

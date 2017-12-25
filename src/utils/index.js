@@ -8,7 +8,9 @@ const deviceWpx = deviceW / basePx;
 export function px(e) {
   return e * deviceWpx;
 }
-
+export const Global = {
+  items: [],
+};
 export const Mcolor = '#8bce21';
 export const Mred = '#f18334';
 export const Fred = '#ff0000';

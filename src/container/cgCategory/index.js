@@ -6,15 +6,17 @@ import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, TFeedback } from '../../components';
 import base from './base';
+import { Global } from '../../utils';
 import styles from './styles';
 
 class CgCategory extends base {
   constructor(props) {
     super(props);
-    const { title } = props.navigation.state.params;
+    const items = Global.items[Global.firstIndex].childs[Global.secondIndex];
     this.state = {
       ...this.state,
-      title,
+      items: items.brands,
+      title: items.name,
     };
   }
   componentDidMount() {
@@ -30,7 +32,7 @@ class CgCategory extends base {
               content={
                 <View style={[styles.contetnTabView, item.cur && styles.tabCur]}>
                   <Text style={[styles.mainText, item.cur && styles.tabCurText]}>
-                    {item.label}
+                    {item.brandName}
                   </Text>
                 </View>}
               onPress={() => this.goNext(index)}
