@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, TextInput, Image } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../../components';
@@ -95,13 +94,10 @@ class AdjectiveInfo extends adjectiveInfoBase {
           </View>
         </View>
       </View>
-
-
-
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="完善信息" />
@@ -111,7 +107,9 @@ class AdjectiveInfo extends adjectiveInfoBase {
             <Text style={styles.buttonText}>提交</Text>
           </TouchableOpacity>
           <View style={styles.prompt}>
-            <Text style={styles.promptInfo}>确定后,您可以在“我的>个人设置”页面重新选择您的身份</Text>
+            <Text style={styles.promptInfo}>
+              确定后,您可以在“我的＆gt个人设置”页面重新选择您的身份
+            </Text>
           </View>
         </Content>
       </Container>

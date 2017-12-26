@@ -68,6 +68,7 @@ import KeywordReturn from '../container/keywordReturn';
 import ValidatePhone from '../container/validatePhone';
 import HuinongConsult from '../container/huinongConsult';
 import HuinongConsultDetail from '../container/huinongConsultDetail';
+import Comment from '../container/comment';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -134,6 +135,7 @@ export const AppNavigator = StackNavigator({
   ValidatePhone: { screen: ValidatePhone },
   HuinongConsult: { screen: HuinongConsult },
   HuinongConsultDetail: { screen: HuinongConsultDetail },
+  Comment: { screen: Comment },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

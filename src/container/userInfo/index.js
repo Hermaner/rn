@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Text, Input, Label } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -42,10 +40,10 @@ class UserInfo extends userInfoBase {
           <Input placeholderTextColor="#999" style={styles.inputs} placeholder="请输入详细地址，不超过30个字" />
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="个人信息" />

@@ -3,7 +3,6 @@ import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'r
 import PropTypes from 'prop-types';
 import { Header, Container, Icon, Tab, Tabs, TabHeading } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
 import payrollBase from './base';
 import styles from './styles';
@@ -18,7 +17,6 @@ class Payroll extends payrollBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop } = this.props;
     return (
       <Container style={styles.Body}>
         <View style={styles.bodyHeader}>
@@ -70,10 +68,9 @@ class Payroll extends payrollBase {
           </Tab>
         </Tabs>
       </Container>
-    )
+    );
   }
   _randerGoodsList() {
-    const { pop } = this.props;
     return (
       <View style={styles.goodsList}>
         <View style={styles.goodsItem}>
@@ -101,7 +98,7 @@ class Payroll extends payrollBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   _randerHeader() {
     const { pop, push } = this.props;

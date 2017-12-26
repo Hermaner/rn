@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Icon, Text, Input, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -24,7 +22,6 @@ class AddAddress extends addAddressBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.rowBox}>
@@ -34,26 +31,26 @@ class AddAddress extends addAddressBase {
             <Icon style={{ marginLeft: 10 }} name="arrow-back" />
           </View>
         </View>
-        <View style={[styles.rowBox,styles.rowBoxMargin]}>
+        <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Input multiline placeholder="详细地址" style={styles.inputTextArea} />
         </View>
-        <View style={[styles.rowBox,styles.rowBoxMargin]}>
+        <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>收货人姓名:</Text>
           <Input multiline placeholder="请填写收货人姓名" style={styles.inputs} />
         </View>
-        <View style={[styles.rowBox,styles.rowBoxMargin]}>
+        <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>电话号码:</Text>
           <Input multiline placeholder="请填写手机号码" style={styles.inputs} />
         </View>
-        <View style={[styles.rowBox,styles.rowBoxMargin]}>
+        <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>邮编:</Text>
           <Input multiline style={styles.inputs} />
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="新增收货地址" />

@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image, Text } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Switch, Icon } from 'native-base';
+import { TouchableOpacity, View, Image, Text } from 'react-native';
+import { Container, Content, Icon } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -24,7 +22,7 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.titleBox}>
@@ -76,22 +74,37 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
           <View style={styles.relatedNewsBox}>
             <Text style={styles.relatedNews}>热门评论</Text>
           </View>
-          <View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.normalThreeText}>12月22日畜牧行情：猪价保持平稳，鸡蛋，牛奶，面包，西瓜</Text>
-              <Text style={styles.normalNineText}>12-22</Text>
+          <View style={styles.commentItems}>
+            <View style={styles.commentItem}>
+              <Image
+                style={styles.userImg}
+                source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
+              />
+              <View style={styles.flexOne}>
+                <View style={styles.flexRow}>
+                  <Text style={styles.userName}>游客5Injnkl</Text>
+                  <View style={[styles.flexRow, styles.rightPart]}>
+                    <TouchableOpacity onPress={() => { push({ key: 'Comment' }); }}>
+                      <Icon style={{ fontSize: 12, color: '#666' }} name="arrow-back" />
+                    </TouchableOpacity>
+                    <View style={[styles.flexRow, styles.upvote]}>
+                      <Icon style={{ fontSize: 12, color: '#666' }} name="arrow-back" />
+                      <Text>1</Text>
+                    </View>
+                  </View>
+                </View>
+                <Text style={styles.commentTime}>2017-10-22</Text>
+                <Text style={styles.normalThreeText}>年底了猪肉会涨价吗</Text>
+              </View>
             </View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.normalThreeText}>2018年养殖业的路该怎么走？</Text>
-              <Text style={styles.normalNineText}>12-22</Text>
-            </View>
+            <Text style={styles.readAll}>查看全部3条评论</Text>
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="2017年坎坎坷坷扩扩扩" />

@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, Image } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -20,7 +19,7 @@ class SelfSet extends selfSetBase {
   componentDidMount() {
   }
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.detailInfo}>
@@ -89,10 +88,10 @@ class SelfSet extends selfSetBase {
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="个人设置" />

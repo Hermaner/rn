@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
-import revisePhoneBase from './base';
+import commentBase from './base';
 import styles from './styles';
 
-class RevisePhone extends revisePhoneBase {
+class Comment extends commentBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,20 +24,8 @@ class RevisePhone extends revisePhoneBase {
   _renderBody() {
     return (
       <View style={styles.pagebody}>
-        <View style={styles.rowBox}>
-          <Text style={{ marginRight: 15, color: '#333' }}>+86</Text>
-          <Input placeholderTextColor="#999" style={styles.inputs} placeholder="请输入手机号码" />
-        </View>
-        <View style={styles.rowBox}>
-          <Input
-            placeholderTextColor="#999"
-            style={styles.inputs}
-            placeholder="请输入收到的验证码"
-          />
-          <View style={styles.getBox}>
-            <Text style={styles.get}>获取验证码</Text>
-          </View>
-        </View>
+        <Input placeholderTextColor="#999" style={styles.inputs} placeholder="我来说两句" multiline />
+        <Text style={styles.textCount}>0/100</Text>
       </View>
     );
   }
@@ -45,11 +33,11 @@ class RevisePhone extends revisePhoneBase {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="修改手机号码" />
+        <Header back={pop} title="发表评论" />
         <Content style={{ backgroundColor: '#fff' }}>
           {this._renderBody()}
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>立即绑定</Text>
+            <Text style={styles.buttonText}>我写好了</Text>
           </TouchableOpacity>
         </Content>
       </Container>
@@ -57,8 +45,8 @@ class RevisePhone extends revisePhoneBase {
   }
 }
 
-RevisePhone.propTypes = {
+Comment.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(RevisePhone);
+export default connect(null, { pop: popRoute, push: pushRoute })(Comment);

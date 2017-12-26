@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
+import { Container, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
 import { Header } from '../../components';
 import myVisitorBase from './base';
@@ -19,7 +18,7 @@ class MyVisitor extends myVisitorBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.visitData}>
@@ -81,11 +80,10 @@ class MyVisitor extends myVisitorBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="我的访客" />

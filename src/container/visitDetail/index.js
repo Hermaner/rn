@@ -1,11 +1,11 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity,  Image, View } from 'react-native';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { View } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
 import { ScrollableTab, Header } from '../../components';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import visitDetailBase from './base';
 import styles from './styles';
 
@@ -23,7 +23,6 @@ class VisitDetail extends visitDetailBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { push } = this.props;
     const Tab1 = () => this._rendContent();
     const Tab2 = () => this._rendContent();
     return (
@@ -46,15 +45,15 @@ class VisitDetail extends visitDetailBase {
           <Tab2 tabLabel="近期浏览详情" />
         </ScrollableTabView>
       </View>
-    )
+    );
   }
   _rendContent() {
     return (
       <Text>ddddd</Text>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="访问详情" />

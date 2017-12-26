@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { st } from '../../utils';
-
+const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   pagebody: {
     flex: 1,
@@ -82,6 +82,89 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 14,
+  },
+  wrapper: {
+    borderWidth: 1,
+  },
+
+  slide: {
+    height: 200,
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  image: {
+    width,
+    height: 200,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    resizeMode: 'stretch',
+  },
+
+  loadingView: {
+    position: 'absolute',
+    top: 70,
+    left: (width / 2) - 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  loadingImage: {
+    width: 60,
+    height: 60,
+  },
+  newsList: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+  },
+  newsItem: {
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  newsImg: {
+    width: 120,
+    height: 80,
+    marginLeft: 10,
+  },
+  NewsTextBox: {
+    flex: 1,
+  },
+  newsTitle: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 25,
+  },
+  normalText: {
+    fontSize: 12,
+    color: '#666',
+  },
+  newsTime: {
+    marginRight: 20,
+  },
+  newsInfoBox: {
+    width,
+    position: 'absolute',
+    bottom: 0,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  newsInfoText: {
+    color: '#fff',
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  newsInfoSmallText: {
+    color: '#fff',
+    fontSize: 12,
+  },
+  newsInfoTime: {
+    marginRight: 20,
   },
 });
 export default styles;

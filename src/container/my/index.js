@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Header, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, Image } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -22,7 +21,7 @@ class My extends myBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     const { items } = this.state;
     return (
       <View style={styles.pagebody}>
@@ -58,7 +57,7 @@ class My extends myBase {
                     <View style={styles.infoBox}>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Icon style={{ marginRight: 20, color: '#5DA942' }} name="arrow-back" />
-                        <Text style={{ color: '#666', fontSize: 16 }}>{item2.title}</Text>
+                        <Text style={{ color: '#666', fontSize: 14 }}>{item2.title}</Text>
                       </View>
                       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                         <Text style={{ color: '#999', fontSize: 14 }}>{item2.label}</Text>
@@ -75,7 +74,6 @@ class My extends myBase {
     );
   }
   render() {
-    const { pop, push } = this.props;
     return (
       <Container>
         <Content>

@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content, ActionSheet } from 'native-base';
+import { Container, Content } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
 import { popRoute, pushRoute } from '../../actions';
-import { ScrollableTab, Header } from '../../components';
+import { Header } from '../../components';
 import notificationSystemDetailBase from './base';
 import styles from './styles';
 
@@ -19,7 +18,6 @@ class NotificationSystemDetail extends notificationSystemDetailBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.titleBox}>
@@ -32,11 +30,10 @@ class NotificationSystemDetail extends notificationSystemDetailBase {
           <Text style={styles.time}>19:12:12</Text>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="系统通知" />

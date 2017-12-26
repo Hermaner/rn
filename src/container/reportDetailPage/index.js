@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, Switch, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, TextInput } from 'react-native';
+import { Container, Content, Right, Switch, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -20,22 +19,21 @@ class ReportDetailPage extends reportDetailPagebase {
   componentDidMount() {
   }
   _renderBody() {
-    const { pop, push } = this.props;
     return (
       <View style={styles.pagebody}>
         <Text style={styles.whyReport}>详细描述</Text>
         <View style={styles.infoBox}>
           <TextInput
-            style = {styles.inputs}
+            style={styles.inputs}
             multiline
-            returnKeyType = "search"
-            placeholder= "详细描述被举报人的恶意行为(必填,最少输入20个字)"
+            returnKeyType="search"
+            placeholder="详细描述被举报人的恶意行为(必填,最少输入20个字)"
           />
           <Text style={{ textAlign: 'right', color: '#666' }}>0/200</Text>
         </View>
         <Text style={styles.addPz}>上传举报凭证</Text>
         <View style={styles.infoBox2}>
-          <View style={{ width: 80, height: 80 }}></View>
+          <View style={{ width: 80, height: 80 }} />
           <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>点击上传举报凭证,增加可信度,最多可上传9张图片</Text>
         </View>
         <View style={styles.shieldThePeople}>
@@ -45,10 +43,10 @@ class ReportDetailPage extends reportDetailPagebase {
           </Right>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="举报-详细" />

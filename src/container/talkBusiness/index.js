@@ -1,11 +1,10 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity,  Image, View } from 'react-native';
-import { Container, Content, Input, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { View } from 'react-native';
+import { Container, Content, Input, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { ScrollableTab, Header } from '../../components';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { Header } from '../../components';
 import talkBusinessBase from './base';
 import styles from './styles';
 
@@ -23,7 +22,6 @@ class TalkBusiness extends talkBusinessBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.isConcern}>
@@ -31,7 +29,7 @@ class TalkBusiness extends talkBusinessBase {
           <Text style={styles.isConcernRight}>立即联系</Text>
         </View>
       </View>
-    )
+    );
   }
   _rendFooter() {
     return (
@@ -69,10 +67,10 @@ class TalkBusiness extends talkBusinessBase {
           </View>
         }
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="姓名" />

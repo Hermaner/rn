@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Icon, Text, Input, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -24,7 +22,6 @@ class Authentication extends authenticationBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={{ paddingLeft: 10, paddingRight: 10, paddingTop: 10, paddingBottom: 10 }}>
@@ -42,10 +39,10 @@ class Authentication extends authenticationBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="验证身份" />

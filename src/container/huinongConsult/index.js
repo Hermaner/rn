@@ -1,14 +1,14 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
+import { TouchableOpacity, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Text, Switch } from 'native-base';
+import { Container, Content, Tabs, Tab, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header } from '../../components';
+import { Header, ScrollableTab } from '../../components';
 import huinongConsultBase from './base';
 import styles from './styles';
+
 
 class HuinongConsult extends huinongConsultBase {
   constructor(props) {
@@ -24,47 +24,94 @@ class HuinongConsult extends huinongConsultBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
     return (
       <View style={styles.pagebody}>
-        <View style={styles.topBox}>
-          <Text style={styles.topText}>提示：推送关键词来源于您发布的供应信息，系统将向您推送以下几类商机</Text>
-        </View>
-        <View style={styles.box}>
-          <Text style={styles.goodsName}>八月瓜</Text>
-          <View style={styles.flexOne}>
-            <Text style={styles.goodsText}>品种：哈哈</Text>
-            <Text style={styles.goodsText}>产地：河北省</Text>
-          </View>
-          <Text style={styles.goodsText}>供货范围：全国</Text>
-        </View>
-        <View style={[styles.box, styles.flex, styles.minHeight]}>
-          <Text style={{ color: '#666', fontSize: 14 }}>推送要求：</Text>
-          <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>城市地产弄虚作假年级课</Text>
-        </View>
-        <View style={[styles.btnList, styles.flexOne]}>
-          <Switch style={{ flex: 1 }} value={false} />
-          <TouchableOpacity onPress={() => { push({ key: 'KeywordReturn' }); }}>
-            <View style={styles.btnBox}>
-              <Text style={styles.btnText}>修改</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <Tabs renderTabBar={() => <ScrollableTab />}>
+          <Tab heading="全部">
+            {this._renderSwiper()}
+            {this._renderNewsList()}
+          </Tab>
+          <Tab heading="水果蔬菜">
+            <Text>rrrrrrrrr</Text>
+          </Tab>
+          <Tab heading="畜牧水产">
+            <Text>vvvvvvvvvv</Text>
+          </Tab>
+          <Tab heading="农副加工">
+            <Text>vvvvvvvvvv</Text>
+          </Tab>
+          <Tab heading="苗木花草">
+            <Text>vvvvvvvvvv</Text>
+          </Tab>
+          <Tab heading="农资农机">
+            <Text>vvvvvvvvvv</Text>
+          </Tab>
+          <Tab heading="粮油米面">
+            <Text>vvvvvvvvvv</Text>
+          </Tab>
+        </Tabs>
       </View>
-    )
+    );
+  }
+  _renderSwiper() {
+    const { imgList } = this.state;
+    return (
+      <View style={{ height: 200 }}>
+        <Swiper
+          style={styles.wrapper}
+          height={200}
+          autoplay
+          paginationStyle={{ justifyContent: 'flex-end', paddingRight: 10, bottom: 18 }}
+        >
+          {
+            imgList.map((item, i) => (
+              <View key={i} style={styles.slide}>
+                <Image style={styles.image} source={{ uri: item.img }} />
+                <View style={styles.newsInfoBox}>
+                  <Text style={styles.newsInfoText} numberOfLines={1}>{item.title}</Text>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={[styles.newsInfoSmallText, styles.newsInfoTime]}>12-25</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Icon style={{ marginRight: 10 }} name="arrow-back" />
+                      <Text style={styles.newsInfoSmallText}>555</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            ))
+          }
+        </Swiper>
+      </View>
+    );
+  }
+  _renderNewsList() {
+    const { push } = this.props;
+    return (
+      <View style={styles.newsList}>
+        <TouchableOpacity style={styles.newsItem} onPress={() => { push({ key: 'HuinongConsultDetail' }); }}>
+          <View style={styles.NewsTextBox}>
+            <Text style={styles.newsTitle} numberOfLines={2} >12月25日全国辣椒生产区价格行情【全国】</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={[styles.normalText, styles.newsTime]}>12-25</Text>
+              <Text style={styles.normalText}>水果蔬菜</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' }}>
+                <Icon style={{ marginRight: 4, fontSize: 14 }} name="arrow-back" />
+                <Text style={styles.normalText}>88</Text>
+              </View>
+            </View>
+          </View>
+          <Image style={styles.newsImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+        </TouchableOpacity>
+      </View>
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="关键词" />
+        <Header back={pop} title="农产品市场行情新闻资讯" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderBody()}
-          <TouchableOpacity style={styles.button}>
-            <View style={styles.buttonBox}>
-              <Text style={styles.buttonText}>发供应</Text>
-            </View>
-          </TouchableOpacity>
         </Content>
       </Container>
     );

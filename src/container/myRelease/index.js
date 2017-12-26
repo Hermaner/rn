@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content, ActionSheet } from 'native-base';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
@@ -31,7 +30,6 @@ class MyRelease extends React.Component {
     );
   }
 }
-
 MyRelease.propTypes = {
   pop: PropTypes.func,
 };

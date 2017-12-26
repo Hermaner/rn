@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, Image } from 'react-native';
+import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -20,7 +19,7 @@ class Certification extends certificationBase {
   componentDidMount() {
   }
   _renderIndividual() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View>
         <View style={styles.individual}>
@@ -56,10 +55,10 @@ class Certification extends certificationBase {
           </View>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   _renderCollective() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={{ flex: 1, marginTop: 10, backgroundColor: '#fff' }}>
         <View style={styles.individual}>
@@ -102,14 +101,15 @@ class Certification extends certificationBase {
             <Text style={styles.individualBtnText}>点击马上认证</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>实名认证常见问题 ></Text>
+        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>实名认证常见问题</Text>
+          <Icon style={{ marginLeft: 4 }} name="arrow-back" />
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="实名认证" />

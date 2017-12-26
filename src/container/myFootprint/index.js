@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content } from 'native-base';
+import { Container, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
 import { ScrollableTab, Header } from '../../components';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import myReleaseBase from './base';
 import styles from './styles';
 
@@ -20,7 +19,6 @@ class MyRelease extends myReleaseBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop } = this.props;
     const Tab1 = () => this._renderRelease();
     const Tab2 = () => this._renderSupply();
     const Tab3 = () => this._renderShop();
@@ -32,12 +30,13 @@ class MyRelease extends myReleaseBase {
           <Tab3 tabLabel="店铺" />
         </ScrollableTabView>
       </View>
-    )
+    );
   }
   _renderRelease() {
+    const { push } = this.props;
     return (
       <View style={styles.goodsList}>
-        <View style={styles.goodsitem}>
+        <TouchableOpacity style={styles.goodsitem} onPress={() => { push({ key: 'PurchaseDetail' }); }}>
           <View style={styles.buyTime}>
             <Text style={styles.buyTimeText}>12月20日</Text>
           </View>
@@ -70,14 +69,15 @@ class MyRelease extends myReleaseBase {
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
   _renderSupply() {
+    const { push } = this.props;
     return (
       <View style={styles.goodsList}>
-        <View style={styles.goodsitem}>
+        <TouchableOpacity style={styles.goodsitem} onPress={() => { push({ key: 'GoodDetail' }); }}>
           <View style={styles.buyTime}>
             <Text style={styles.buyTimeText}>12月20日</Text>
           </View>
@@ -95,14 +95,15 @@ class MyRelease extends myReleaseBase {
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
   _renderShop() {
+    const { push } = this.props;
     return (
       <View style={styles.goodsList}>
-        <View style={styles.goodsitem}>
+        <TouchableOpacity style={styles.goodsitem} onPress={() => { push({ key: 'MyInfo' }); }}>
           <View style={styles.buyTime}>
             <Text style={styles.buyTimeText}>12月20日</Text>
           </View>
@@ -117,13 +118,12 @@ class MyRelease extends myReleaseBase {
               </View>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
   render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="采购管理" />

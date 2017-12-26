@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -20,7 +19,7 @@ class ReportPage extends reportPageBase {
   componentDidMount() {
   }
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <Text style={styles.whyReport}>您为什么要举报该账号？</Text>
@@ -95,10 +94,10 @@ class ReportPage extends reportPageBase {
           </View>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="举报-理由" />
