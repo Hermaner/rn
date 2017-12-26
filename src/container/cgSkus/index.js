@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button } from 'native-base';
 import { connect } from 'react-redux';
@@ -13,9 +13,19 @@ class CgSkus extends base {
   constructor(props) {
     super(props);
     const data = Global.items[Global.firstIndex].childs[Global.secondIndex];
+    const items = data.specTypes || [];
+    let isBtnGray = false;
+    if (Global.skuType === '3') {
+      items.forEach((item) => {
+        if (item.itemIndex === undefined) {
+          isBtnGray = true;
+        }
+      });
+    }
     this.state = {
       ...this.state,
-      items: data.specTypes || [],
+      isBtnGray,
+      items,
     };
   }
   componentDidMount() {
@@ -53,9 +63,11 @@ class CgSkus extends base {
     );
   }
   _renderButton() {
+    const { isBtnGray } = this.state;
+    console.log(isBtnGray)
     return (
       <View style={{ padding: 10, backgroundColor: '#fff' }}>
-        <Button onPress={this.goCgComfirm} full light style={styles.btn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
+        <Button onPress={this.goCgComfirm} full light style={[styles.btn, isBtnGray && styles.grayBtn]}><Text style={{ color: '#fff' }}>选好了</Text></Button>
       </View>
     );
   }

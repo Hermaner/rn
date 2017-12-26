@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     backgroundColor: Mcolor,
     borderRadius: 3,
   },
+  grayBtn: {
+    backgroundColor: '#666',
+  },
   tabCur: {
     backgroundColor: Mcolor,
     borderColor: Mcolor,

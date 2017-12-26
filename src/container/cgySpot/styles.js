@@ -3,115 +3,86 @@ import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
-  list: {
-    ...st.fr,
-    paddingRight: 10,
+  btnView: {
     backgroundColor: '#fff',
-    height: 45,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingTop: 15,
+  },
+  tabList: {
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 8,
     ...st.jacenter,
+    ...st.fr,
   },
-  lastList: {
-    marginBottom: 8,
-    borderBottomColor: '#fff',
+  tabListCur: {
+    borderColor: Mcolor,
   },
-  listTitle: {
-    paddingLeft: 15,
+  checkView: {
+    marginRight: 20,
   },
-  listTitleText: {
-    fontSize: 14,
-    color: '#333',
-  },
-  listLabel: {
+  tabCon: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end',
   },
-  listLabelText: {
-    fontSize: 14,
+  tabTitle: {
+    color: '#444',
+    fontSize: 15,
+    lineHeight: 18,
+  },
+  tabTitleCur: {
     color: Mcolor,
   },
-  listIcon: {
-    fontSize: 18,
-    marginLeft: 10,
-    color: '#888',
+  tabLabel: {
+    color: '#999',
+    fontSize: 14,
+    lineHeight: 18,
   },
-  memoView: {
-    marginBottom: 8,
+  tabLabelCur: {
+    color: Mcolor,
+  },
+  twoView: {
+    paddingLeft: 10,
     backgroundColor: '#fff',
-    padding: 10,
-  },
-  memoTitle: {
-  },
-  memoTitleText: {
-    color: '#333',
-    lineHeight: 20,
-    fontSize: 14,
-  },
-  memoMain: {
-  },
-  memoMainInput: {
-    lineHeight: 20,
-    fontSize: 12,
-    color: '#666',
-    height: 60,
-    padding: 0,
-  },
-  upView: {
-    ...st.fr,
-    ...st.jacenter,
     marginTop: 10,
   },
-  imagesView: {
+  twoViewList: {
     ...st.fr,
-    flexWrap: 'wrap',
-  },
-  imageListView: {
-    position: 'relative',
-  },
-  imageDel: {
-    width: 20,
-    height: 20,
-    backgroundColor: 'rgba(0,0,0,0.6)',
     ...st.jacenter,
-    position: 'absolute',
-    right: 10,
-    top: 10,
-  },
-  selectType: {
-    width: 0,
-    height: 0,
-    overflow: 'hidden',
-  },
-  imageDelIcon: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  imageList: {
-    marginTop: 10,
-    marginRight: 10,
-    width: 80,
-    height: 80,
-  },
-  upViewImg: {
-    width: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
     height: 50,
-    marginRight: 10,
+    paddingRight: 10,
   },
-  upViewText: {
-    flex: 1,
-    fontSize: 13,
-    color: '#888',
-  },
-  btn: {
-    backgroundColor: Mcolor,
-    borderRadius: 3,
-  },
-  phoneInput: {
+  twoTitle: {
+    color: '#444',
     fontSize: 14,
-    color: '#666',
+    marginRight: 20,
+  },
+  twoRight: {
     flex: 1,
+    ...st.fr,
+    ...st.jacenter,
+  },
+  twoLabel: {
+    color: '#888',
+    fontSize: 14,
+    flex: 1,
+  },
+  twoIcon: {
+    color: '#666',
+    fontSize: 18,
+  },
+  twoBtn: {
+    backgroundColor: Mcolor,
+    borderRadius: 4,
+    marginTop: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  grayBtn: {
+    backgroundColor: '#666',
   },
 });
 export default styles;

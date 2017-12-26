@@ -10,7 +10,7 @@
  },
  "dependencies": {
   "ac-qrcode": "^1.0.1",
-  "dateformat": "^2.0.0",
+  "dateformat": "^3.0.2",
   "expo": "^23.0.4",
   "i": "^0.3.5",
   "jcore-react-native": "^1.1.8-beta2",
@@ -32,6 +32,7 @@
   "react-native-image-crop-picker": "^0.18.1",
   "react-native-image-zoom-viewer": "^2.0.16",
   "react-native-keyboard-manager": "^4.0.13-4",
+  "react-native-modal-datetime-picker": "^4.13.0",
   "react-native-picker": "^4.2.0",
   "react-native-qiniu": "^0.3.0",
   "react-native-scrollable-tab-view": "^0.8.0",

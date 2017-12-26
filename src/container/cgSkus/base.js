@@ -1,5 +1,4 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { Global } from '../../utils';
@@ -22,11 +21,24 @@ class CgSkusBase extends React.Component {
     }
     items[index].specs[i].cur = true;
     items[index].itemIndex = i;
+    let isBtnGray = false;
+    if (Global.skuType === '3') {
+      items.forEach((item) => {
+        if (item.itemIndex === undefined) {
+          isBtnGray = true;
+        }
+      });
+    }
     this.setState({
       items,
+      isBtnGray,
     });
   }
   goCgComfirm = () => {
+    const { isBtnGray } = this.state;
+    if (isBtnGray) {
+      return;
+    }
     Global.skus = Global.items[Global.firstIndex].childs[Global.secondIndex].specTypes;
     const { push, resetTo, pop } = this.props;
     switch (Global.skuType) {

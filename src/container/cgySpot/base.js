@@ -1,80 +1,110 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
+import Dateformat from 'dateformat';
 import PropTypes from 'prop-types';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      frequency: [{
-        label: '每日',
+      items: [{
+        cur: true,
+        title: '现货',
+        label: '手头有货',
       }, {
-        label: '每周',
-      }, {
-        label: '每月',
-      }, {
-        label: '不限',
+        cur: false,
+        title: '预售',
+        label: '暂时无货',
       }],
-      frIndex: null,
-      wantStarPrice: '',
-      wantEndPrice: '',
-      demand: '',
-      optionType: '斤',
-      options: [{ value: '斤', label: '斤' },
-      { value: '公斤', label: '公斤' },
-      { value: '吨', label: '吨' },
-      { value: '箱', label: '箱' }],
+      tabIndex: 0,
+      isDateShow: false,
+      dateIndex: 0,
+      startDate: '',
+      endDate: '',
     };
   }
-  tabFrBtn = (index) => {
-    const { frequency, frIndex } = this.state;
-    if (index === frIndex) {
+  tabBtn = (index) => {
+    const { items, tabIndex } = this.state;
+    if (index === tabIndex) {
       return;
     }
-    if (frIndex !== null) {
-      frequency[frIndex].cur = false;
-    }
-    frequency[index].cur = true;
+    items[tabIndex].cur = false;
+    items[index].cur = true;
     this.setState({
-      frequency,
-      frIndex: index,
+      items,
+      tabIndex: index,
     });
+  }
+  toggleDate = () => {
+    this.setState({
+      isDateShow: !this.state.isDateShow,
+    });
+  }
+  dateConfirm = (c) => {
+    const { dateIndex, startDate, endDate } = this.state;
+    const date = Dateformat(c, 'yyyy-mm-dd');
+    if (dateIndex === 0) {
+      if (endDate) {
+        const startDateTime = new Date(date);
+        const endDateTime = new Date(endDate);
+        if (startDateTime > endDateTime) {
+          Toast.show('供货时间不能大于下架时间');
+          return;
+        }
+      }
+      this.setState({
+        startDate: date,
+      });
+    } else {
+      if (startDate) {
+        const startDateTime = new Date(startDate);
+        const endDateTime = new Date(date);
+        if (startDateTime > endDateTime) {
+          Toast.show('供货时间不能大于下架时间');
+          return;
+        }
+      }
+      this.setState({
+        endDate: date,
+      });
+    }
+    this.toggleDate();
+  }
+  dateCancel = () => {
+    this.toggleDate();
+  }
+  pickDate = (dateIndex) => {
+    const { startDate, tabIndex } = this.state;
+    if (dateIndex === 1 && !startDate && tabIndex === 1) {
+      Toast.show('请先选择供货时间');
+      return;
+    }
+    this.setState({
+      dateIndex,
+    });
+    this.toggleDate();
   }
   saveData = () => {
     const {
-      demand,
-      wantStarPrice,
-      wantEndPrice,
-      optionType,
-      frIndex,
-      frequency,
+      tabIndex,
+      startDate,
+      endDate,
     } = this.state;
-    const reg = /^[1-9]*[1-9][0-9]*$/;
-    if (!reg.test(demand)) {
-      Toast.show('需求量输入错误');
+    if (tabIndex === 1 && !startDate) {
+      Toast.show('请先选择供货时间');
       return;
     }
-    if (wantStarPrice && !reg.test(wantStarPrice)) {
-      Toast.show('起始价输入错误');
-      return;
-    }
-    if (wantEndPrice && !reg.test(wantEndPrice)) {
-      Toast.show('结束价输入错误');
-      return;
-    }
-    if (wantStarPrice && wantEndPrice && wantStarPrice > wantEndPrice) {
-      Toast.show('起始价不能大于结束价');
+    if (!endDate) {
+      Toast.show('请先选择下架时间');
       return;
     }
     const data = {
-      demand,
-      wantStarPrice,
-      wantEndPrice,
-      optionType,
-      frequency: frIndex === null ? '' : frequency[frIndex].label,
+      isSpotGoods: tabIndex === 0 ? '1' : '0',
+      startDate,
+      endDate,
     };
-    DeviceEventEmitter.emit('getDemand', data);
+    DeviceEventEmitter.emit('getSpot', data);
     this.props.pop();
   }
 }

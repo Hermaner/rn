@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#fff',
   },
   listTitle: {
-    paddingLeft: 15,
+    ...st.jacenter,
+    width: 90,
   },
   listTitleText: {
     fontSize: 14,
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
   listLabel: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
   },
   listLabelText: {
     fontSize: 14,

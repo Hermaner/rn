@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback, TouchableOpacity, Modal } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button, Icon, Input, ActionSheet } from 'native-base';
+import { Container, Content, Text, Button, CheckBox, Icon } from 'native-base';
 import { connect } from 'react-redux';
-import ImageViewer from 'react-native-image-zoom-viewer';
-import SelectInput from 'react-native-select-input-ios';
-import { popRoute, pushRoute } from '../../actions';
+import DateTimePicker from 'react-native-modal-datetime-picker';
+import { popRoute } from '../../actions';
 import { Header, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
+import { Mcolor } from '../../utils';
 
-class CgyCategory extends base {
+class cgySpot extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,211 +18,92 @@ class CgyCategory extends base {
     };
   }
   componentDidMount() {
-    this.getData();
-    this.initData();
   }
   componentWillUnmount() {
-    this.deleteData();
   }
-  _renderList() {
+  _renderOne() {
     const { items } = this.state;
     return (
-      <View>
+      <View style={styles.btnView}>
         {
-          items.map((item, index) => (
-            <TFeedback
-              key={index}
-              content={
-                <View style={[styles.list, item.last && styles.lastList]} key={index}>
-                  <View style={styles.listTitle}>
-                    <Text style={styles.listTitleText}>{item.title}</Text>
-                  </View>
-                  <View style={styles.listLabel}>
-                    <Text style={styles.listLabelText}>{item.label}</Text>
-                  </View>
-                  <Icon name="md-arrow-dropright" style={styles.listIcon} />
-                </View>}
-              onPress={() => { this.goPage(index); }}
-            />
-          ))
-        }
-      </View>
-    );
-  }
-  _renderUserInfo() {
-    const { items2 } = this.state;
-    return (
-      <View>
-        {
-          items2.map((item, index) => (
-            <TFeedback
-              key={index}
-              content={
-                <View style={[styles.list, item.last && styles.lastList]} key={index}>
-                  <View style={styles.listTitle}>
-                    <Text style={styles.listTitleText}>{item.title}</Text>
-                  </View>
-                  <View style={styles.listLabel}>
-                    <Text style={styles.listLabelText}>{item.label}</Text>
-                  </View>
-                  <Icon name="md-arrow-dropright" style={styles.listIcon} />
-                </View>}
-              onPress={() => { this.goPage(index, 'cga'); }}
-            />
-          ))
-        }
-      </View>
-    );
-  }
-  _renderPhone() {
-    const { phone } = this.state;
-    return (
-      <View>
-        <View style={styles.list}>
-          <View style={styles.listTitle}>
-            <Text style={styles.listTitleText}>联系电话</Text>
-          </View>
-          <View style={styles.listLabel}>
-            <Input
-              style={styles.phoneInput}
-              onChangeText={text => this.setState({ phone: text })}
-              value={phone}
-            />
-          </View>
-          <Icon name="md-arrow-dropright" style={styles.listIcon} />
-        </View>
-      </View>
-    );
-  }
-  _renderImageUpload() {
-    const {
-      upImg,
-      images,
-      imageCount,
-      imageDateIndex,
-      isImageDateShow,
-      imageViewData,
-    } = this.state;
-    const buttons = [
-      { text: '拍照' },
-      { text: '从相册选择' },
-      { text: '取消' },
-    ];
-    return (
-      <View>
-        <View style={styles.imagesView}>
-          {
-            images.map((item, index) => (
-              <TouchableWithoutFeedback
+            items.map((item, index) => (
+              <TFeedback
                 key={index}
-                onPress={() => this.showImageDate(index)}
-              >
-                <View style={styles.imageListView}>
-                  <Image source={{ uri: item.uri }} style={styles.imageList} />
-                  <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
-                    <Icon name="ios-close-outline" style={styles.imageDelIcon} />
-                  </TouchableOpacity>
-                </View>
-              </TouchableWithoutFeedback>
+                content={<View key={index} style={[styles.tabList, item.cur && styles.tabListCur]}>
+                  <CheckBox style={styles.checkView} color={Mcolor} checked={item.cur} />
+                  <View style={styles.tabCon}>
+                    <Text
+                      style={[styles.tabTitle, item.cur && styles.tabTitleCur]}
+                    >
+                      {item.title}</Text>
+                    <Text
+                      style={[styles.tabLabel, item.cur && styles.tabLabelCur]}
+                    >{item.label}</Text>
+                  </View>
+                </View>}
+                onPress={() => this.tabBtn(index)}
+              />
             ))
-          }
-        </View>
-        {
-          images.length < 4 &&
-          <View style={styles.upView}>
-            <TouchableWithoutFeedback
-              onPress={() =>
-               ActionSheet.show(
-                 {
-                   options: buttons,
-                   cancelButtonIndex: 2,
-                 },
-                 buttonIndex => this.goAsheet(buttonIndex),
-               )}
-            >
-              <Image source={upImg} style={styles.upViewImg} />
-            </TouchableWithoutFeedback>
-            <Text style={styles.upViewText}>（选填）最多上传{imageCount}张照片</Text>
-          </View>
         }
-        <Modal
-          visible={isImageDateShow}
-          transparent
-        >
-          <ImageViewer
-            imageUrls={imageViewData}
-            index={imageDateIndex}
-            onClick={() => this.setState({ isImageDateShow: false })}
-          />
-        </Modal>
       </View>
     );
   }
-  _renderMemo() {
-    const { memo } = this.state;
+  _renderTwo() {
+    const { tabIndex, startDate, endDate } = this.state;
     return (
-      <View style={styles.memoView}>
-        <View style={styles.memoTitle}>
-          <Text style={styles.memoTitleText}>补充说明</Text>
-        </View>
-        <View style={styles.memoMain}>
-          <Input
-            style={styles.memoMainInput}
-            multiline
-            placeholderTextColor="#aaa"
-            placeholder="详细的描述采购要求，可以收到更满意的报价哦"
-            onChangeText={text => this.setState({ memo: text })}
-            value={memo}
+      <View style={styles.twoView}>
+        {
+          tabIndex === 1 &&
+          <TFeedback
+            content={<View style={styles.twoViewList}>
+              <Text style={styles.twoTitle}>供货时间</Text>
+              <View style={styles.twoRight}>
+                <Text style={styles.twoLabel}>{startDate || '点击选择供货时间'}</Text>
+                <Icon name="md-arrow-dropdown" style={styles.twoIcon} />
+              </View>
+            </View>}
+            onPress={() => this.pickDate(0)}
           />
-        </View>
-        {this._renderImageUpload()}
-      </View>
-    );
-  }
-  _renderSelect() {
-    const { optionType, options } = this.state;
-    return (
-      <SelectInput
-        value={optionType}
-        options={options}
-        ref={(c) => { this.SelectInput = c; }}
-        submitKeyText="确认"
-        cancelKeyText="取消"
-        onCancelEditing={() => console.log('onCancel')}
-        onSubmitEditing={value => this.setSelect(value)}
-        style={styles.selectType}
-        labelStyle={{ fontSize: 12, color: '#666' }}
-      />
-    );
-  }
-  _renderButton() {
-    return (
-      <View style={{ padding: 10, backgroundColor: '#fff' }}>
-        <Button onPress={this.goCgComfirm} full light style={styles.btn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
+        }
+        <TFeedback
+          content={<View style={styles.twoViewList}>
+            <Text style={styles.twoTitle}>下架时间</Text>
+            <View style={styles.twoRight}>
+              <Text style={styles.twoLabel}>{endDate || '点击选择下架时间'}</Text>
+              <Icon name="md-arrow-dropdown" style={styles.twoIcon} />
+            </View>
+          </View>}
+          onPress={() => this.pickDate(1)}
+        />
+        <Button onPress={this.saveData} full light style={styles.twoBtn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
       </View>
     );
   }
   render() {
     const { pop } = this.props;
+    const { isDateShow } = this.state;
     return (
       <Container>
-        <Header back={pop} title="发布供应" />
+        <Header back={pop} title="是否现货" />
         <Content>
-          {this._renderList()}
-          {this._renderMemo()}
-          {this._renderUserInfo()}
-          {this._renderPhone()}
-          {this._renderSelect()}
+          {this._renderOne()}
+          {this._renderTwo()}
+          <DateTimePicker
+            titleIOS="选择时间"
+            confirmTextIOS="确定"
+            cancelTextIOS="取消"
+            is24Hour
+            isVisible={isDateShow}
+            onConfirm={this.dateConfirm}
+            onCancel={this.dateCancel}
+          />
         </Content>
-        {this._renderButton()}
       </Container>
     );
   }
 }
 
-CgyCategory.propTypes = {
+cgySpot.propTypes = {
   pop: PropTypes.func,
-  navigation: PropTypes.object,
-  push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(CgyCategory);
+export default connect(null, { pop: popRoute })(cgySpot);
