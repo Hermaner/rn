@@ -29,9 +29,9 @@ class HomeScreen extends base {
         <Content padder>
           <Button
             onPress={() =>
-              this.goRoute({ key: 'User' })}
+              this.goRoute({ key: 'CgDemand' })}
           >
-            <Text>user</Text>
+            <Text>CgDemand</Text>
           </Button>
           <Button
             onPress={() =>

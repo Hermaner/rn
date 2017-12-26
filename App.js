@@ -62,7 +62,7 @@ class App extends React.Component {
     applyMiddleware(
       thunk,
     ),
-  ), autoRehydrate());
+  ));
   render() {
     return (
       <Provider store={this.store}>

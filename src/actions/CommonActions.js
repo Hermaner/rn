@@ -16,9 +16,20 @@ export const popRoute = () => (
     type: 'pop',
   }
 );
+export const resetHome = () => (
+  {
+    type: 'resetHome',
+  }
+);
 export const resetTwo = () => (
   {
     type: 'resetTwo',
+  }
+);
+export const resetTo = routes => (
+  {
+    type: 'resetTo',
+    routes,
   }
 );
 export const pushRoute = routes => (

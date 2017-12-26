@@ -10,7 +10,7 @@ import { Header } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class UserPage extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,148 +21,77 @@ class MainScreen extends base {
   }
   render() {
     const { phone, code, sec } = this.state;
+    console.log(phone)
     const { pop, push } = this.props;
     return (
       <Container>
         <Header back={pop} title="注册登陆" />
-        <Swiper
-          style={styles.wrapper}
-          Stack
-          swiperThreshold={10}
-          stackOffsetY={0}
-          stackDepth={0}
-          scaleOthers={false}
-          ref={(swiper) => {
-            this.swiper = swiper;
-          }}
-          swiper={false}
-          showPagination={false}
-        >
-          <View style={styles.slide1}>
-            <Content padder contentContainerStyle={{ flex: 1 }}>
-              <View style={styles.form}>
-                <View style={styles.accountView}>
-                  <Input
-                    style={styles.account}
-                    placeholderTextColor="#999"
-                    placeholder="输入您的手机号"
-                    clearButtonMode="while-editing"
-                    value={phone}
-                    onChangeText={value => this.onChangeText(value, 0)}
-                    onSubmitEditing={this.login}
-                  />
-                </View>
-                <View style={styles.formBom}>
-                  <Input
-                    style={styles.password}
-                    placeholderTextColor="#999"
-                    placeholder="输入验证码"
-                    clearButtonMode="while-editing"
-                    value={code}
-                    onChangeText={value => this.onChangeText(value, 0)}
-                    onSubmitEditing={this.login}
-                  />
-                  <View>
-                    <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
-                      <Text style={[styles.sendBtnText, { color: this.isSend ? '#fff' : '#888' }]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
-                    </Button>
-                  </View>
-                </View>
+        <Content padder contentContainerStyle={{ flex: 1 }}>
+          <View style={styles.form}>
+            <View style={styles.accountView}>
+              <Input
+                style={styles.account}
+                placeholderTextColor="#999"
+                placeholder="输入您的手机号"
+                clearButtonMode="while-editing"
+                value={phone}
+                onChangeText={value => this.onChangeText(value, 0)}
+                onSubmitEditing={this.login}
+              />
+            </View>
+            <View style={styles.formBom}>
+              <Input
+                style={styles.password}
+                placeholderTextColor="#999"
+                placeholder="输入验证码"
+                clearButtonMode="while-editing"
+                value={code}
+                onChangeText={value => this.onChangeText(value, 0)}
+                onSubmitEditing={this.login}
+              />
+              <View>
+                <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
+                  <Text style={[styles.sendBtnText, { color: this.isSend ? '#fff' : '#888' }]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
+                </Button>
               </View>
-              <Button full style={styles.submitBtn} onPress={this.login}>
-                <Text style={styles.submitBtnText}>登陆</Text>
-              </Button>
-              <View style={styles.switchView}>
-                <Text style={styles.switchLabel}>或者</Text>
-                <View>
-                  <Button style={styles.switchBtn} onPress={() => this.swiper.forceRightSwipe()}>
-                    <Text style={styles.switchBtnText}>切换至账户密码登陆</Text>
-                  </Button>
-                </View>
-              </View>
-              <View style={styles.switchView}>
-                <Text style={styles.switchLabel}>第三方账号登陆</Text>
-              </View>
-              <View style={styles.bottomView}>
-                <View style={styles.agreementView}>
-                  <Text style={styles.agreementLabel}>登陆即表示同意</Text>
-                  <TouchableOpacity onPress={() => push({ key: 'Agreement' })}>
-                    <Text style={styles.agreementText}>《服务协议》</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.bottomTipsView}>
-                  <Text style={styles.bottomTipsLabel}>如有疑问，请联系客服：</Text>
-                  <TouchableOpacity onPress={() => Communications.phonecall('400322322', true)}>
-                    <Text style={styles.bottomTipsText}>400-000-000</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </Content>
+            </View>
           </View>
-          <View style={styles.slide1}>
-            <Content padder contentContainerStyle={{ flex: 1 }}>
-              <View style={styles.form}>
-                <View style={styles.accountView}>
-                  <Input
-                    style={styles.account}
-                    placeholderTextColor="#999"
-                    placeholder="输入您的手机号"
-                    clearButtonMode="while-editing"
-                    value={phone}
-                    onChangeText={value => this.onChangeText(value, 0)}
-                    onSubmitEditing={this.login}
-                  />
-                </View>
-                <View style={styles.accountView}>
-                  <Input
-                    style={styles.account}
-                    placeholderTextColor="#999"
-                    placeholder="输入您的密码"
-                    clearButtonMode="while-editing"
-                    value={phone}
-                    onChangeText={value => this.onChangeText(value, 0)}
-                    onSubmitEditing={this.login}
-                  />
-                </View>
-              </View>
-              <Button full style={styles.submitBtn} onPress={this.login}>
-                <Text style={styles.submitBtnText}>登陆</Text>
+          <Button full style={styles.submitBtn} onPress={this.login}>
+            <Text style={styles.submitBtnText}>登陆</Text>
+          </Button>
+          <View style={styles.switchView}>
+            <Text style={styles.switchLabel}>或者</Text>
+            <View>
+              <Button style={styles.switchBtn} onPress={() => this.swiper.forceRightSwipe()}>
+                <Text style={styles.switchBtnText}>切换至账户密码登陆</Text>
               </Button>
-              <View style={styles.switchView}>
-                <Text style={styles.switchLabel}>或者</Text>
-                <View>
-                  <Button style={styles.switchBtn} onPress={() => this.swiper.forceLeftSwipe()}>
-                    <Text style={styles.switchBtnText}>切换至账户密码登陆</Text>
-                  </Button>
-                </View>
-              </View>
-              <View style={styles.switchView}>
-                <Text style={styles.switchLabel}>第三方账号登陆</Text>
-              </View>
-              <View style={styles.bottomView}>
-                <View style={styles.agreementView}>
-                  <Text style={styles.agreementLabel}>登陆即表示同意</Text>
-                  <TouchableOpacity onPress={() => push({ key: 'Agreement' })}>
-                    <Text style={styles.agreementText}>《服务协议》</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.bottomTipsView}>
-                  <Text style={styles.bottomTipsLabel}>如有疑问，请联系客服：</Text>
-                  <TouchableOpacity onPress={() => Communications.phonecall('400322322', true)}>
-                    <Text style={styles.bottomTipsText}>400-000-000</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </Content>
+            </View>
           </View>
-        </Swiper>
+          <View style={styles.switchView}>
+            <Text style={styles.switchLabel}>第三方账号登陆</Text>
+          </View>
+          <View style={styles.bottomView}>
+            <View style={styles.agreementView}>
+              <Text style={styles.agreementLabel}>登陆即表示同意</Text>
+              <TouchableOpacity onPress={() => push({ key: 'Agreement' })}>
+                <Text style={styles.agreementText}>《服务协议》</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomTipsView}>
+              <Text style={styles.bottomTipsLabel}>如有疑问，请联系客服：</Text>
+              <TouchableOpacity onPress={() => Communications.phonecall('400322322', true)}>
+                <Text style={styles.bottomTipsText}>400-000-000</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Content>
       </Container>
     );
   }
 }
 
-MainScreen.propTypes = {
+UserPage.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(UserPage);

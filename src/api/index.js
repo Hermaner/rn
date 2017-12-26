@@ -73,6 +73,12 @@ export function DeepClone(obj) {
   }
   return result;
 }
-export function GetLedeCategoryService(data) {
-  return get('GetLedeCategoryService', data);
+export function GetAppCategoryService(data) {
+  return get('GetAppCategoryService', data);
+}
+export function GetCityService() {
+  return get('GetCityService');
+}
+export function CreatePurchaseService(data) {
+  return post('CreatePurchaseService', data);
 }

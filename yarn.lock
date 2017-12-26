@@ -4530,6 +4530,10 @@ react-native-scrollable-tab-view@^0.8.0:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
+react-native-select-input-ios@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-select-input-ios/-/react-native-select-input-ios-1.1.4.tgz#2c0389f3ef039e45910f90aceaa4d281946a8909"
+
 react-native-simple-toast@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-simple-toast/-/react-native-simple-toast-0.0.6.tgz#f1ddb2c07c192cf2b75b860d283028a0769b2f72"

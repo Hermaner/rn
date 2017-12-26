@@ -1,74 +1,51 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
+import PropTypes from 'prop-types';
+import { Global } from '../../utils';
 
 class CgSkusBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: [{
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }, {
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }, {
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }],
     };
   }
   tabView = (index, i) => {
-    const { lists } = this.state;
-    const itemIndex = lists[index].itemIndex;
-    lists[index].items[i].cur = true;
+    const { items } = this.state;
+    const itemIndex = items[index].itemIndex;
+    items[index].specs[i].cur = true;
     if (itemIndex === i) {
       return;
     }
     if (itemIndex !== undefined) {
-      lists[index].items[itemIndex].cur = false;
+      items[index].specs[itemIndex].cur = false;
     }
-    lists[index].items[i].cur = true;
-    lists[index].itemIndex = i;
+    items[index].specs[i].cur = true;
+    items[index].itemIndex = i;
     this.setState({
-      lists,
+      items,
     });
   }
+  goCgComfirm = () => {
+    Global.skus = Global.items[Global.firstIndex].childs[Global.secondIndex].specTypes;
+    const { push, resetTo, pop } = this.props;
+    switch (Global.cgType) {
+      case '1':
+        resetTo({ num: 3 });
+        break;
+      case '2':
+        DeviceEventEmitter.emit('getSku');
+        pop();
+        break;
+      default:
+        push({ key: 'CgComfirm' });
+        break;
+    }
+  }
 }
-
+CgSkusBase.propTypes = {
+  push: PropTypes.func,
+  pop: PropTypes.func,
+  resetTo: PropTypes.func,
+};
 export default CgSkusBase;
