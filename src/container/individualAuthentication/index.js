@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, Image } from 'react-native';
+import { Container, Content, Input, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -29,8 +28,10 @@ class IndividualAuthentication extends individualAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>姓名</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
+                value={this.state.userName}
+                onChangeText={text => this.saveUserName(text)}
                 placeholder="请与身份证姓名保持一致"
               />
             </View>
@@ -40,8 +41,10 @@ class IndividualAuthentication extends individualAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>身份证号码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
+                value={this.state.userCredentials}
+                onChangeText={text => this.saveUserCredentials(text)}
                 placeholder="请与身份证号码保持一致"
               />
             </View>
@@ -66,16 +69,16 @@ class IndividualAuthentication extends individualAuthenticationBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="个人实名认证" />
         <Content>
           {this._renderBody()}
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => { this.submit(); }}>
             <Text style={styles.buttonText}>提交</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ marginTop: 10 }}>

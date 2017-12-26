@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, TextInput } from 'react-native';
+import { Container, Content, Picker, Item, Icon, Text, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../../components';
@@ -111,10 +110,10 @@ class AddAccount extends addAccountBase {
           <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>设为默认收款账号</Text>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="添加对公账号" />

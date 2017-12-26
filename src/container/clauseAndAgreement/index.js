@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Icon, Text, Input, CheckBox } from 'native-base';
+import { View } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -24,7 +22,6 @@ class ClauseAndAgreement extends clauseAndAgreementBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
     return (
       <View style={styles.pagebody}>
         <Text style={styles.title}>惠农网服务与条款</Text>
@@ -54,10 +51,10 @@ class ClauseAndAgreement extends clauseAndAgreementBase {
           </Text>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="系统设置" />

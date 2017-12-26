@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Mgreen, st } from '../../utils';
 
 const styles = StyleSheet.create({
   topPart: {
@@ -70,8 +69,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
@@ -101,6 +100,125 @@ const styles = StyleSheet.create({
   },
   type: {
     marginTop: 10,
+  },
+  goodsItem: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+  },
+  goodsImg: {
+    width: 130,
+    height: 130,
+    marginRight: 10,
+  },
+  goodsName: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 6,
+  },
+  goodsPlace: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 4,
+  },
+  chooseBtn: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    fontSize: 12,
+    color: '#666',
+    borderWidth: 1,
+    borderColor: '#FC8521',
+    marginBottom: 50,
+  },
+  goodsPriceInfo: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  price: {
+    fontSize: 16,
+    color: '#FC8521',
+    marginRight: 4,
+  },
+  yuan: {
+    fontSize: 12,
+    color: '#FC8521',
+  },
+  howLongBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  howLong: {
+    fontSize: 9,
+    color: '#666',
+  },
+  buyGoodsItem: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  buyGoodsName: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 4,
+  },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flexRight: {
+    flex: 1,
+    textAlign: 'right',
+    color: '#FC8521',
+    fontSize: 14,
+  },
+  buyGoodsVariety: {
+    fontSize: 14,
+    color: '#666',
+  },
+  buyGoodsPlace: {
+    marginTop: 4,
+    color: '#666',
+    fontSize: 14,
+  },
+  goBuyBtnBox: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#FC8521',
+    borderRadius: 5,
+  },
+  goBuyBtn: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  hiddenBox: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  ycBox: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    borderWidth: 3,
+  },
+  hiddenHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
 export default styles;

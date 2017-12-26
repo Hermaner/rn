@@ -3,59 +3,31 @@ import * as WeChat from 'react-native-wechat';
 import Alipay from 'react-native-yunpeng-alipay';
 
 class HuinongConsultBase extends React.Component {
-  wxLogin = () => {
-    WeChat.sendAuthRequest('snsapi_userinfo', 'App')
-    .then(res => console.log(res));
+  constructor(props) {
+    super(props);
+    this.state = {
+      imgList: [{
+        img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
+        title: '2017年12月25日鸡蛋价格行情',
+      }, {
+        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
+        title: '今日朝鲜人名军正式跟美军宣布开战',
+      }, {
+        img: 'https://gitlab.pro/yuji/demo/uploads/4421f77012d43a0b4e7cfbe1144aac7c/XFVzKhq.jpg',
+        title: '好吃不如饺子，好玩不如筛子',
+      }, {
+        img: 'https://gitlab.pro/yuji/demo/uploads/576ef91941b0bda5761dde6914dae9f0/kD3eeHe.jpg',
+        title: '噫吁嚱，金戈铁马，气吞万里如虎',
+      }],
+      loadQueue: [0, 0, 0, 0],
+    };
   }
-  async goWXpay() {
-    const orderID = '1';
-    React.WxUnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      console.log(lists);
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        try {
-          WeChat.pay(
-            {
-              partnerId: result.mch_id,
-              prepayId: result.prepay_id,
-              nonceStr: result.nonce_str,
-              timeStamp: result.timeStamp,
-              package: 'Sign=WXPay',
-              sign: '140822CCE34FD5B2303956105E49CA7C',
-            },
-          );
-        } catch (error) {
-          console.log('Pay for failure!');
-        }
-      }
-    }).catch(err => console.log(err));
-  }
-  goAlipay() {
-    const orderID = '1';
-    React.UnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        Alipay.pay(result).then((json) => {
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
-          } else {
-            console.log('其他失败原因');
-          }
-        }).catch(err => console.log(err));
-      }
-    }).catch(err => console.log(err));
-  }
-  common() {
-    this.name = 'herman';
+  loadHandle = (i) => {
+    const loadQueue = this.state.loadQueue;
+    loadQueue[i] = 1;
+    this.setState({
+      loadQueue,
+    });
   }
 }
 export default HuinongConsultBase;

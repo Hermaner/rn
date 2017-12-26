@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content, ActionSheet } from 'native-base';
+import { Container, Content, ActionSheet } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
 import { ScrollableTab, Header } from '../../components';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import myReleaseBase from './base';
 import styles from './styles';
 
@@ -20,7 +19,6 @@ class MyRelease extends myReleaseBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop } = this.props;
     const Tab1 = () => this._rendContent();
     const Tab2 = () => this._rendContent();
     const Tab3 = () => this._rendContent();
@@ -32,10 +30,10 @@ class MyRelease extends myReleaseBase {
           <Tab3 tabLabel="被驳回" />
         </ScrollableTabView>
       </View>
-    )
+    );
   }
   _rendContent() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     const { BUTTONS, DESTRUCTIVE_INDEX, CANCEL_INDEX } = this.state;
     return (
       <TouchableOpacity onPress={() => { push({ key: 'PurchaseDetail' }); }}>
@@ -72,11 +70,11 @@ class MyRelease extends myReleaseBase {
                     options: BUTTONS,
                     cancelButtonIndex: CANCEL_INDEX,
                     destructiveButtonIndex: DESTRUCTIVE_INDEX,
-                    title: '是否停止采购?'
+                    title: '是否停止采购?',
                   },
-                  buttonIndex => {
+                  (buttonIndex) => {
                     this.setState({ clicked: BUTTONS[buttonIndex] });
-                  }
+                  },
                 )}
             >
               <Text style={styles.btnText}>停止采购</Text>
@@ -87,11 +85,10 @@ class MyRelease extends myReleaseBase {
           </View>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
   render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="采购管理" />

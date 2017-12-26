@@ -1,12 +1,10 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { ScrollableTab, Header } from '../../components';
+import { Header } from '../../components';
 import systemSetBase from './base';
 import styles from './styles';
 
@@ -25,7 +23,7 @@ class SystemSet extends systemSetBase {
   }
 
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={[styles.rowBox, styles.marginTopBottom]}>
@@ -54,10 +52,10 @@ class SystemSet extends systemSetBase {
           </View>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="系统设置" />

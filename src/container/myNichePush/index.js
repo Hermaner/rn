@@ -38,8 +38,8 @@ class MyNichePush extends myNichePushBase {
     );
   }
   _readerMasker() {
-    const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow } = this.state;
-    const { push, pop } = this.props;
+    const { isVarietiesShow, isCategoryShow } = this.state;
+    const { pop } = this.props;
     return (
       <View style={styles.masker}>
         <View style={styles.maskerContent}>
@@ -141,7 +141,9 @@ class MyNichePush extends myNichePushBase {
             <Content>
               {
                 leftLists.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
+                  <TouchableWithoutFeedback
+                    key={index} onPress={() => { this.changeLeftTab(index); }}
+                  >
                     <View style={[styles.addressLeftList, item.cur && styles.addressLeftListCur]}>
                       <Text
                         style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
@@ -196,7 +198,7 @@ class MyNichePush extends myNichePushBase {
           <Text style={styles.maskerBtnTextCur}>设置关键词</Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   _renderContent() {
     const { noData, dataSource, nomore, loading, refresh } = this.state;
@@ -234,7 +236,7 @@ class MyNichePush extends myNichePushBase {
   }
   render() {
     const { isMaskerShow } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>

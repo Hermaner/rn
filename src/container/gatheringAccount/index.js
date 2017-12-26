@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity, View, TextInput } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { View } from 'react-native';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -30,10 +29,10 @@ class GatheringAccount extends gatheringAccountBase {
           <Text style={{ textAlign: 'center', color: '#666', fontSize: 18 }}>添加新账号</Text>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="收款账号" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
+import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
@@ -57,7 +57,8 @@ class PurchaseHome extends purchaseHomebase {
     );
   }
   _readerMasker() {
-    const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow, isAddressShow } = this.state;
+    const {
+      leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow, isAddressShow } = this.state;
     const { push } = this.props;
     return (
       <View style={styles.masker}>
@@ -228,7 +229,10 @@ class PurchaseHome extends purchaseHomebase {
             <Content>
               {
                 leftLists.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
+                  <TouchableWithoutFeedback
+                    key={index}
+                    onPress={() => { this.changeLeftTab(index); }}
+                  >
                     <View style={[styles.addressLeftList, item.cur && styles.addressLeftListCur]}>
                       <Text
                         style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
@@ -273,8 +277,7 @@ class PurchaseHome extends purchaseHomebase {
     </View>
   )
   _renderContent() {
-    const { noData, dataSource, nomore, loading, refresh } = this.state;
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.listContent}>
         <View style={styles.goodsDetailList}>

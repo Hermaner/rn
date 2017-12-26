@@ -83,9 +83,9 @@ class HomeScreen extends base {
           </Button>
           <Button
             onPress={() =>
-              this.goRoute({ key: 'HuinongConsultDetail' })}
+              this.goRoute({ key: 'HuinongConsult' })}
           >
-            <Text>HuinongConsultDetail</Text>
+            <Text>HuinongConsult</Text>
           </Button>
         </Content>
       </Container>

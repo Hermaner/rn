@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableHighlight, Image, View } from 'react-native';
-import { Container, Content, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -38,9 +38,9 @@ class WhyChoose extends whyChooseBase {
           </View>
         </View>
         <View style={styles.orBox}>
-          <View style={{ width: 100, height: 1, borderWidth: 1, borderColor: '#eee', marginRight: 40 }}></View>
+          <View style={{ width: 100, height: 1, borderWidth: 1, borderColor: '#eee', marginRight: 40 }} />
           <Text style={{ color: '#666' }}>或</Text>
-          <View style={{ width: 100, height: 1, borderWidth: 1, borderColor: '#eee', marginLeft: 40 }}></View>
+          <View style={{ width: 100, height: 1, borderWidth: 1, borderColor: '#eee', marginLeft: 40 }} />
         </View>
         <View>
           <View>
@@ -53,10 +53,10 @@ class WhyChoose extends whyChooseBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="目的选择" />

@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Icon, Tab, Tabs, TabHeading, Content, ActionSheet } from 'native-base';
+import { Container, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
-import Communications from 'react-native-communications';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
 import { ScrollableTab, Header } from '../../components';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import notificationSystemBase from './base';
 import styles from './styles';
 
@@ -20,7 +19,6 @@ class NotificationSystem extends notificationSystemBase {
   componentDidMount() {
   }
   _randerBody() {
-    const { pop } = this.props;
     const Tab1 = () => this._rendContent();
     const Tab2 = () => this._rendContent();
     const Tab3 = () => this._rendContent();
@@ -34,10 +32,10 @@ class NotificationSystem extends notificationSystemBase {
           <Tab4 tabLabel="交易" />
         </ScrollableTabView>
       </View>
-    )
+    );
   }
   _rendContent() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View>
         <TouchableOpacity style={styles.newsItem} onPress={() => { push({ key: 'NotificationSystemDetail' }); }}>
@@ -53,11 +51,10 @@ class NotificationSystem extends notificationSystemBase {
           <Text style={styles.newsTime}>2017年12月19日</Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="系统通知" />

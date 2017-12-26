@@ -1,9 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Text, Input, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Text, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header } from '../../components';
@@ -24,7 +22,7 @@ class ShippingAddress extends shippingAddressBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { pop, push } = this.props;
+    const { push } = this.props;
     return (
       <View style={styles.pagebody}>
         <View style={styles.adressItem}>
@@ -148,7 +146,7 @@ class ShippingAddress extends shippingAddressBase {
           </View>
         </View>
       </View>
-    )
+    );
   }
   render() {
     const { pop, push } = this.props;

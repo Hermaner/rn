@@ -1,7 +1,6 @@
 import React from 'react';
-import { TouchableHighlight, TouchableOpacity, View, TextInput, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
-import { Container, Content, Picker, Item, Footer, Title, FooterTab, Button, Left, Right, Card, CardItem, Body, Icon, Text, ActionSheet, Badge, ListItem, CheckBox } from 'native-base';
+import { TouchableOpacity, View, Image } from 'react-native';
+import { Container, Content, Input, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
@@ -30,8 +29,10 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>企业名称</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
+                value={this.state.businessName}
+                onChangeText={text => this.saveBusinessName(text)}
                 placeholder="请与证件公司名称保持一致"
               />
             </View>
@@ -41,8 +42,10 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>法人代表</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
+                value={this.state.representative}
+                onChangeText={text => this.saveRepresentative(text)}
                 placeholder="请与证件法人姓名保持一致"
               />
             </View>
@@ -52,8 +55,10 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>统一社会信用代码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
+                value={this.state.creditCode}
+                onChangeText={text => this.saveCreditCode(text)}
                 placeholder="请与证件代码保持一致"
               />
             </View>
@@ -66,6 +71,12 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
             <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>点击上传执照照片(公司名称,有效期及证件号码必须清晰可辩)</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.button} onPress={() => { this.submit(); }}>
+          <Text style={styles.buttonText}>提交</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ marginTop: 10 }}>
+          <Text style={{ color: '#65C12E', textAlign: 'center', fontSize: 14 }}>审核须知</Text>
+        </TouchableOpacity>
       </View>
     );
     const Tab2 = () => (
@@ -74,7 +85,7 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>企业名称</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
                 placeholder="请与证件公司名称保持一致"
               />
@@ -85,7 +96,7 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>法人代表</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
                 placeholder="请与证件法人姓名保持一致"
               />
@@ -96,7 +107,7 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>营业执照号码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
                 placeholder="请与执照号码保持一致"
               />
@@ -111,7 +122,7 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>组织机构代码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={styles.inputText}
                 placeholder="请与执照号码保持一致"
               />
@@ -122,6 +133,12 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
             <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>点击上传图片(需要能看清机构名称,号码,地址等信息)</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>提交</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ marginTop: 10 }}>
+          <Text style={{ color: '#65C12E', textAlign: 'center', fontSize: 14 }}>审核须知</Text>
+        </TouchableOpacity>
       </View>
     );
     return (
@@ -131,21 +148,15 @@ class CollectiveAuthentication extends collectiveAuthenticationBase {
           <Tab2 tabLabel="营业执照" />
         </ScrollableTabView>
       </View>
-    )
+    );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     return (
       <Container>
         <Header back={pop} title="企业认证" />
         <Content>
           {this._renderBody()}
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>提交</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{ marginTop: 10 }}>
-            <Text style={{ color: '#65C12E', textAlign: 'center', fontSize: 14 }}>审核须知</Text>
-          </TouchableOpacity>
         </Content>
       </Container>
     );
