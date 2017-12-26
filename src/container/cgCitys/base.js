@@ -2,32 +2,16 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter } from 'react-native';
-import { GetCityService } from '../../api';
+import citys from './citys.json';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    citys[0].cur = true;
     this.state = {
-      citys: [],
+      citys,
       leftIndex: 0,
     };
-  }
-  GetCityService = () => {
-    GetCityService()
-    .then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        const citys = res.data;
-        citys[0].cur = true;
-        this.setState({
-          citys,
-        });
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      Toast.show(err);
-    });
   }
   selectCity = (index) => {
     const { citys, leftIndex } = this.state;

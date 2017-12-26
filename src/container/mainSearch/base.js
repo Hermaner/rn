@@ -23,12 +23,13 @@ class Base extends React.Component {
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        res.data[0].cur = true;
-        Global.items = res.data;
+        const items = res.data;
+        items[0].cur = true;
+        Global.items = items;
         Global.firstIndex = 0;
         this.setState({
           items: res.data,
-          childItems: res.data[0].childs,
+          childItems: items[0].childs,
         });
       } else {
         Toast.show(res.msg);
@@ -52,13 +53,19 @@ class Base extends React.Component {
     });
   }
   goPage = (index) => {
-    // type 1: main 2: 发采购
+    // type 1: main 2: 发采购 2: 发供应
     const { type } = this.props.navigation.state.params;
     switch (type) {
       case '1':
         this.props.push({ key: 'MainList' });
         break;
       case '2':
+        Global.skuType = '0';
+        Global.secondIndex = index;
+        this.props.push({ key: 'CgCategory' });
+        break;
+      case '3':
+        Global.skuType = '3';
         Global.secondIndex = index;
         this.props.push({ key: 'CgCategory' });
         break;

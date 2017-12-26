@@ -17,7 +17,6 @@ class CgCitys extends base {
     };
   }
   componentDidMount() {
-    this.GetCityService();
   }
   _renderAddressContent() {
     const { citys, leftIndex } = this.state;

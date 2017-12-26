@@ -1,14 +1,14 @@
 import * as ActionsTypes from './types';
 
-export const SleekShow = () => (
+export const showSleek = () => (
   {
-    type: ActionsTypes.LOADING_SLEEK_SHOW,
+    type: 'showSleek',
   }
 );
 
-export const SleekHide = () => (
+export const closeSleek = () => (
   {
-    type: ActionsTypes.LOADING_SLEEK_HIDE,
+    type: 'closeSleek',
   }
 );
 export const popRoute = () => (

@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 6,
   },
+  goodsitem: {
+    backgroundColor: '#fff',
+  },
   readPeople: {
     flexDirection: 'row',
     alignItems: 'center',

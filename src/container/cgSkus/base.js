@@ -29,13 +29,19 @@ class CgSkusBase extends React.Component {
   goCgComfirm = () => {
     Global.skus = Global.items[Global.firstIndex].childs[Global.secondIndex].specTypes;
     const { push, resetTo, pop } = this.props;
-    switch (Global.cgType) {
+    switch (Global.skuType) {
+      case '0':
+        push({ key: 'CgComfirm' });
+        break;
       case '1':
         resetTo({ num: 3 });
         break;
       case '2':
         DeviceEventEmitter.emit('getSku');
         pop();
+        break;
+      case '3':
+        push({ key: 'CgyComfirm' });
         break;
       default:
         push({ key: 'CgComfirm' });

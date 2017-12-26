@@ -111,8 +111,7 @@ const styles = StyleSheet.create({
   phoneInput: {
     fontSize: 14,
     color: '#666',
-    textAlign: 'right',
-    width: 200,
+    flex: 1,
   },
 });
 export default styles;

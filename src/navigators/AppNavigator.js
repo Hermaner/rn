@@ -12,6 +12,10 @@ import CgSkus from '../container/cgSkus';
 import CgCitys from '../container/cgCitys';
 import CgDemand from '../container/cgDemand';
 import CgComfirm from '../container/cgComfirm';
+import CgyComfirm from '../container/cgyComfirm';
+import CgySpot from '../container/cgySpot';
+import CgyPrice from '../container/cgyPrice';
+import CgyDesc from '../container/cgyDesc';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
 import GoodsScreen from '../container/goodsScreen';
@@ -73,6 +77,10 @@ export const AppNavigator = StackNavigator({
   CgCitys: { screen: CgCitys },
   CgDemand: { screen: CgDemand },
   CgComfirm: { screen: CgComfirm },
+  CgyComfirm: { screen: CgyComfirm },
+  CgySpot: { screen: CgySpot },
+  CgyPrice: { screen: CgyPrice },
+  CgyDesc: { screen: CgyDesc },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
   GoodsScreen: { screen: GoodsScreen },

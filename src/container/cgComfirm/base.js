@@ -3,8 +3,10 @@ import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import ImagePicker from 'react-native-image-crop-picker';
+import { Rpc } from 'react-native-qiniu';
+// import Qiniu from 'qiniu';
 import { Global } from '../../utils';
-import { CreatePurchaseService } from '../../api';
+import { CreatePurchaseService, GetUploadTokenService } from '../../api';
 
 class CgCategoryBase extends React.Component {
   constructor(props) {
@@ -60,22 +62,24 @@ class CgCategoryBase extends React.Component {
       isImageDateShow: false,
       imageViewData: [],
       optionType: '7天',
-      phone: '15666666666',
+      phone: '',
       options: [{ value: '7天', label: '7天' },
       { value: '3个月', label: '3个月' },
       { value: '6个月', label: '6个月' }],
+      uptoken: '',
       categoryId: '',
-      brandId: '0',
+      brandId: '',
       demand: '',
-      frequency: '0',
+      frequency: '',
       wantStarPrice: '',
-      wantEndPrice: '0',
+      wantEndPrice: '',
       wantProvinceCode: '',
-      wantCityCode: '0',
+      wantCityCode: '',
       purchaseTime: '',
-      receiveProvinceCode: '0',
+      receiveProvinceCode: '',
       receiveCityCode: '',
-      memo: '0',
+      memo: '',
+      unit: '',
       purchaseItems: [],
     };
   }
@@ -88,7 +92,7 @@ class CgCategoryBase extends React.Component {
     let brandId = '';
     if (Global.thirdIndex === 0 || Global.thirdIndex) {
       brandName = main.brands[Global.thirdIndex].brandName;
-      brandId = main.brands[Global.thirdIndex].brandId;
+      brandId = main.brands[Global.thirdIndex].brandId.toString();
     }
     items[0].label = `${typeName}${brandName}`;
     const skuString = [];
@@ -97,15 +101,16 @@ class CgCategoryBase extends React.Component {
       if (item.itemIndex !== undefined) {
         skuString.push(item.specs[item.itemIndex].specName);
         purchaseItems.push({
-          specTypeId: item.specTypeId,
-          specId: item.specs[item.itemIndex].specId,
+          specTypeId: item.specTypeId.toString(),
+          specId: item.specs[item.itemIndex].specId.toString(),
         });
       }
     });
     items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
     this.setState({
       items,
-      categoryId: main.categoryId,
+      purchaseItems,
+      categoryId: main.categoryId.toString(),
       brandId,
     });
   }
@@ -148,6 +153,10 @@ class CgCategoryBase extends React.Component {
     });
   }
   initData = () => {
+    this.GetUploadTokenService();
+    this.setState({
+      phone: '15666666666',
+    });
     this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
       this.getData();
     });
@@ -175,7 +184,7 @@ class CgCategoryBase extends React.Component {
           this.SelectInput.focus();
           return;
         }
-        Global.cgType = '1';
+        Global.skuType = '1';
         this.props.push({ key: items[index].page, params: { type: '2' } });
         return;
       case 1:
@@ -183,7 +192,7 @@ class CgCategoryBase extends React.Component {
           this.props.push({ key: items2[index].page, params: { type: 'cga' } });
           return;
         }
-        Global.cgType = '2';
+        Global.skuType = '2';
         break;
       case 3:
         this.props.push({ key: items[index].page, params: { type: 'cgb' } });
@@ -224,17 +233,16 @@ class CgCategoryBase extends React.Component {
   openCamera = () => {
     const { images, imageCount } = this.state;
     ImagePicker.openCamera({
-      includeBase64: true,
       includeExif: true,
     }).then((image) => {
-      images.push({ uri: `data:${image.mime};base64,${image.data}`, width: image.width, height: image.height });
+      images.push({ uri: image.path, width: image.width, height: image.height });
       if (images.length > imageCount) {
         images.length = imageCount;
       }
       this.setState({
         images,
-      });
-    }).catch(e => alert(e));
+      }, () => this.startUpload());
+    }).catch(e => Toast.show(e));
   }
   pickMultiple = () => {
     const { images, imageCount } = this.state;
@@ -251,8 +259,49 @@ class CgCategoryBase extends React.Component {
       }
       this.setState({
         images,
-      });
-    }).catch(e => alert(e));
+      }, () => this.startUpload());
+    }).catch(e => Toast.show(e));
+  }
+  startUpload = () => {
+    const { images } = this.state;
+    images.forEach((item, index) => {
+      if (!item.key) {
+        this.upLoadImage(item.uri, index);
+      }
+    });
+  }
+  upLoadImage = (source, index) => {
+    const { uptoken, images } = this.state;
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+    let ran = parseInt(Math.random() * 888, 10);
+    ran += 100;
+    const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
+    images[index].key = key;
+    this.setState({
+      images,
+    });
+    Rpc.uploadFile(source, uptoken, { key, name: key });
+  }
+  GetUploadTokenService = () => {
+    GetUploadTokenService()
+    .then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        this.setState({
+          uptoken: res.data,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
   }
   goCgComfirm = () => {
     const {
@@ -264,49 +313,59 @@ class CgCategoryBase extends React.Component {
       wantEndPrice,
       wantProvinceCode,
       wantCityCode,
-      purchaseTime,
+      optionType,
+      unit,
+      phone,
+      memberId,
       receiveProvinceCode,
       receiveCityCode,
       memo,
       purchaseItems,
       images,
     } = this.state;
-    console.log(
-      categoryId,
-    brandId,
-    demand,
-    frequency,
-    wantStarPrice,
-    wantEndPrice,
-    wantProvinceCode,
-    wantCityCode,
-    purchaseTime,
-    receiveProvinceCode,
-    receiveCityCode,
-    memo,
-    JSON.stringify(purchaseItems),
-    images.map(item => item.uri).join(','),
-  );
-    CreatePurchaseService({
+    // if (!memberId) {
+    //   Toast.show('请先登录');
+    //   return;
+    // }
+    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+    if (telReg) {
+      Toast.show('手机号格式不对');
+      return;
+    }
+    if (!demand) {
+      Toast.show('请输入需求量');
+      return;
+    }
+    if (!receiveProvinceCode) {
+      Toast.show('请选择收货地址');
+      return;
+    }
+    const purchase = {
       categoryId,
       brandId,
       demand,
+      unit,
+      phone,
+      memberId,
       frequency,
       wantStarPrice,
       wantEndPrice,
       wantProvinceCode,
       wantCityCode,
-      purchaseTime,
+      purchaseTime: optionType,
       receiveProvinceCode,
       receiveCityCode,
       memo,
+    };
+    CreatePurchaseService({
+      purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),
-      purchaseImages: images.map(item => item.uri).join(','),
+      purchaseImages: images.map(item => item.key).join(','),
     })
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        console.log(res);
+        Toast.show('发布成功');
       } else {
         Toast.show(res.msg);
       }
