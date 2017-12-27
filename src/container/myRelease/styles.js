@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 6,
   },
+  goodsitem: {
+    backgroundColor: '#fff',
+    marginBottom: 5,
+  },
   readPeople: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -38,8 +42,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
   },
   btnBox: {
     paddingLeft: 8,

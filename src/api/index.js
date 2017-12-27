@@ -79,6 +79,21 @@ export function GetAppCategoryService(data) {
 export function GetCityService() {
   return get('GetCityService');
 }
+export function GetDistrictService() {
+  return get('GetDistrictService');
+}
 export function CreatePurchaseService(data) {
   return post('CreatePurchaseService', data);
+}
+export function GetUploadTokenService() {
+  return get('GetUploadTokenService');
+}
+export function GetPurchaseService(data) {
+  return get('GetPurchaseService', data);
+}
+export function StopPurchaseService(data) {
+  return get('StopPurchaseService', data);
+}
+export function CreateSupplyService(data) {
+  return post('CreateSupplyService', data);
 }

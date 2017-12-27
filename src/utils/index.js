@@ -9,7 +9,8 @@ export function px(e) {
   return e * deviceWpx;
 }
 export const Global = {
-  items: [],
+  items: [], // 商品大全
+  skuType: '0', // 0:默认采购进入 1：采购重新选择商品，返回3page 2： 采供选择规格返回1page 3：默认供应进入 4：供应重新选择商品，返回3page
 };
 export const Mcolor = '#8bce21';
 export const Mred = '#f18334';

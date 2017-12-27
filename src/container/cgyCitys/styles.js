@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
   ...st,
   maskerContentView: {
     backgroundColor: '#fff',
+    flex: 1,
   },
   maskerTitle: {
     backgroundColor: '#eee',
@@ -31,19 +32,42 @@ const styles = StyleSheet.create({
     ...st.jacenter,
     width: `${100 / 3}%`,
   },
-  btn: {
-    backgroundColor: Mcolor,
-    borderRadius: 3,
+  usedCityView: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    minHeight: 40,
   },
-  grayBtn: {
-    backgroundColor: '#666',
+  nousedCity: {
+    lineHeight: 40,
+    paddingLeft: 10,
+    color: '#888',
+    fontSize: 14,
   },
-  tabCur: {
-    backgroundColor: Mcolor,
-    borderColor: Mcolor,
+  addressLeftList: {
+    height: 45,
+    ...st.jcenter,
+    borderLeftWidth: 3,
+    paddingLeft: 20,
+    borderLeftColor: '#f2f2f2',
   },
-  tabCurText: {
-    color: '#fff',
+  addressLeftListCur: {
+    borderLeftColor: Mcolor,
+    backgroundColor: '#f9f9f9',
+  },
+  addressRightList: {
+    height: 45,
+    paddingLeft: 20,
+    ...st.jcenter,
+  },
+  addressRightListCur: {
+    backgroundColor: '#fff',
+  },
+  leftNavText: {
+    color: '#555',
+    fontSize: 14,
+  },
+  leftNavTextCur: {
+    color: Mcolor,
   },
 });
 export default styles;

@@ -1,10 +1,9 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { Global } from '../../utils';
 
-class CgSkusBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,14 +21,30 @@ class CgSkusBase extends React.Component {
     }
     items[index].specs[i].cur = true;
     items[index].itemIndex = i;
+    let isBtnGray = false;
+    if (Global.skuType === '3' || Global.skuType === '4') {
+      items.forEach((item) => {
+        if (item.itemIndex === undefined) {
+          isBtnGray = true;
+        }
+      });
+    }
     this.setState({
       items,
+      isBtnGray,
     });
   }
   goCgComfirm = () => {
+    const { isBtnGray } = this.state;
+    if (isBtnGray) {
+      return;
+    }
     Global.skus = Global.items[Global.firstIndex].childs[Global.secondIndex].specTypes;
     const { push, resetTo, pop } = this.props;
-    switch (Global.cgType) {
+    switch (Global.skuType) {
+      case '0':
+        push({ key: 'CgComfirm' });
+        break;
       case '1':
         resetTo({ num: 3 });
         break;
@@ -37,15 +52,21 @@ class CgSkusBase extends React.Component {
         DeviceEventEmitter.emit('getSku');
         pop();
         break;
+      case '3':
+        push({ key: 'CgyComfirm' });
+        break;
+      case '4':
+        resetTo({ num: 3 });
+        break;
       default:
         push({ key: 'CgComfirm' });
         break;
     }
   }
 }
-CgSkusBase.propTypes = {
+Base.propTypes = {
   push: PropTypes.func,
   pop: PropTypes.func,
   resetTo: PropTypes.func,
 };
-export default CgSkusBase;
+export default Base;

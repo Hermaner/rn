@@ -63,7 +63,7 @@ class Base extends React.Component {
       Toast.show('结束价输入错误');
       return;
     }
-    if (wantStarPrice && wantEndPrice && wantStarPrice > wantEndPrice) {
+    if (wantStarPrice && wantEndPrice && parseInt(wantStarPrice, 10) > parseInt(wantEndPrice, 10)) {
       Toast.show('起始价不能大于结束价');
       return;
     }

@@ -1,12 +1,11 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import ImagePicker from 'react-native-image-crop-picker';
 import { Global } from '../../utils';
 import { CreatePurchaseService } from '../../api';
 
-class CgCategoryBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,29 +52,32 @@ class CgCategoryBase extends React.Component {
         label: '请选择',
         page: 'CgCitys',
       }],
+      isSleekShow: false,
       upImg: require('../../assets/img/addAc.png'),
-      images: [],
+      upImages: [],
       imageCount: 4,
       imageDateIndex: 0,
       isImageDateShow: false,
       imageViewData: [],
-      optionType: '7天',
-      phone: '15666666666',
-      options: [{ value: '7天', label: '7天' },
-      { value: '3个月', label: '3个月' },
-      { value: '6个月', label: '6个月' }],
+      optionType: '7',
+      phone: '',
+      options: [{ value: '7', label: '7天' },
+      { value: '90', label: '3个月' },
+      { value: '180', label: '6个月' }],
+      uptoken: '',
       categoryId: '',
-      brandId: '0',
+      brandId: '',
       demand: '',
-      frequency: '0',
+      frequency: '',
       wantStarPrice: '',
-      wantEndPrice: '0',
+      wantEndPrice: '',
       wantProvinceCode: '',
-      wantCityCode: '0',
+      wantCityCode: '',
       purchaseTime: '',
-      receiveProvinceCode: '0',
+      receiveProvinceCode: '',
       receiveCityCode: '',
-      memo: '0',
+      memo: '',
+      unit: '',
       purchaseItems: [],
     };
   }
@@ -88,7 +90,7 @@ class CgCategoryBase extends React.Component {
     let brandId = '';
     if (Global.thirdIndex === 0 || Global.thirdIndex) {
       brandName = main.brands[Global.thirdIndex].brandName;
-      brandId = main.brands[Global.thirdIndex].brandId;
+      brandId = main.brands[Global.thirdIndex].brandId.toString();
     }
     items[0].label = `${typeName}${brandName}`;
     const skuString = [];
@@ -97,16 +99,22 @@ class CgCategoryBase extends React.Component {
       if (item.itemIndex !== undefined) {
         skuString.push(item.specs[item.itemIndex].specName);
         purchaseItems.push({
-          specTypeId: item.specTypeId,
-          specId: item.specs[item.itemIndex].specId,
+          specTypeId: item.specTypeId.toString(),
+          specId: item.specs[item.itemIndex].specId.toString(),
         });
       }
     });
     items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
     this.setState({
       items,
-      categoryId: main.categoryId,
+      purchaseItems,
+      categoryId: main.categoryId.toString(),
       brandId,
+    });
+  }
+  getImages = (upImages) => {
+    this.setState({
+      upImages,
     });
   }
   getDemand = (data) => {
@@ -140,14 +148,36 @@ class CgCategoryBase extends React.Component {
     });
   }
   setSelect = (optionType) => {
-    const { items2 } = this.state;
-    items2[0].label = optionType;
+    const { items2, options } = this.state;
+    options.forEach((item) => {
+      if (item.value === optionType) {
+        items2[0].label = item.label;
+      }
+    });
     this.setState({
       items2,
       optionType,
     });
   }
+  toggleSleek = () => {
+    this.setState({
+      isSleekShow: !this.state.isSleekShow,
+    });
+  }
+  backToHome = () => {
+    Alert.alert(
+      '温馨提示',
+      '是否退出发布？',
+      [
+        { text: '继续退出', onPress: this.props.resetHome },
+        { text: '取消' },
+      ],
+    );
+  }
   initData = () => {
+    this.setState({
+      phone: '15666666666',
+    });
     this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
       this.getData();
     });
@@ -175,7 +205,7 @@ class CgCategoryBase extends React.Component {
           this.SelectInput.focus();
           return;
         }
-        Global.cgType = '1';
+        Global.skuType = '1';
         this.props.push({ key: items[index].page, params: { type: '2' } });
         return;
       case 1:
@@ -183,7 +213,7 @@ class CgCategoryBase extends React.Component {
           this.props.push({ key: items2[index].page, params: { type: 'cga' } });
           return;
         }
-        Global.cgType = '2';
+        Global.skuType = '2';
         break;
       case 3:
         this.props.push({ key: items[index].page, params: { type: 'cgb' } });
@@ -192,67 +222,6 @@ class CgCategoryBase extends React.Component {
         break;
     }
     this.props.push({ key: items[index].page });
-  }
-  goAsheet = (index) => {
-    switch (index) {
-      case 0:
-        this.openCamera();
-        break;
-      case 1:
-        this.pickMultiple();
-        break;
-      default:
-    }
-  }
-  showImageDate = (imageDateIndex) => {
-    const { images } = this.state;
-    const imageViewData = [];
-    images.forEach(item => imageViewData.push({ url: item.uri }));
-    this.setState({
-      imageDateIndex,
-      isImageDateShow: true,
-      imageViewData,
-    });
-  }
-  imageDel = (index) => {
-    const { images } = this.state;
-    images.splice(index, 1);
-    this.setState({
-      images,
-    });
-  }
-  openCamera = () => {
-    const { images, imageCount } = this.state;
-    ImagePicker.openCamera({
-      includeBase64: true,
-      includeExif: true,
-    }).then((image) => {
-      images.push({ uri: `data:${image.mime};base64,${image.data}`, width: image.width, height: image.height });
-      if (images.length > imageCount) {
-        images.length = imageCount;
-      }
-      this.setState({
-        images,
-      });
-    }).catch(e => alert(e));
-  }
-  pickMultiple = () => {
-    const { images, imageCount } = this.state;
-    ImagePicker.openPicker({
-      multiple: true,
-      waitAnimationEnd: false,
-      includeExif: true,
-    }).then((image) => {
-      image.forEach((item) => {
-        images.push({ uri: item.path, width: item.width, height: item.height, mime: item.mime });
-      });
-      if (images.length > imageCount) {
-        images.length = imageCount;
-      }
-      this.setState({
-        images,
-      });
-    }).catch(e => alert(e));
   }
   goCgComfirm = () => {
     const {
@@ -264,49 +233,59 @@ class CgCategoryBase extends React.Component {
       wantEndPrice,
       wantProvinceCode,
       wantCityCode,
-      purchaseTime,
+      optionType,
+      unit,
+      phone,
+      memberId,
       receiveProvinceCode,
       receiveCityCode,
       memo,
       purchaseItems,
-      images,
+      upImages,
     } = this.state;
-    console.log(
-      categoryId,
-    brandId,
-    demand,
-    frequency,
-    wantStarPrice,
-    wantEndPrice,
-    wantProvinceCode,
-    wantCityCode,
-    purchaseTime,
-    receiveProvinceCode,
-    receiveCityCode,
-    memo,
-    JSON.stringify(purchaseItems),
-    images.map(item => item.uri).join(','),
-  );
-    CreatePurchaseService({
+    // if (!memberId) {
+    //   Toast.show('请先登录');
+    //   return;
+    // }
+    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+    if (telReg) {
+      Toast.show('手机号格式不对');
+      return;
+    }
+    if (!demand) {
+      Toast.show('请输入需求量');
+      return;
+    }
+    if (!receiveProvinceCode) {
+      Toast.show('请选择收货地址');
+      return;
+    }
+    const purchase = {
       categoryId,
       brandId,
       demand,
+      unit,
+      phone,
+      memberId,
       frequency,
       wantStarPrice,
       wantEndPrice,
       wantProvinceCode,
       wantCityCode,
-      purchaseTime,
+      purchaseTime: optionType,
       receiveProvinceCode,
       receiveCityCode,
       memo,
+    };
+    CreatePurchaseService({
+      purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),
-      purchaseImages: images.map(item => item.uri).join(','),
+      purchaseImages: upImages.map(item => item.key).join(','),
     })
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        console.log(res);
+        Toast.show('发布成功');
       } else {
         Toast.show(res.msg);
       }
@@ -316,7 +295,8 @@ class CgCategoryBase extends React.Component {
   }
 }
 
-CgCategoryBase.propTypes = {
+Base.propTypes = {
   push: PropTypes.func,
+  resetHome: PropTypes.func,
 };
-export default CgCategoryBase;
+export default Base;

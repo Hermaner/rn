@@ -15,6 +15,7 @@ class CgCategory extends base {
     const items = Global.items[Global.firstIndex].childs[Global.secondIndex];
     this.state = {
       ...this.state,
+      showBtn: Global.skuType !== '3' && Global.skuType !== '4',
       items: items.brands || [],
       title: items.name,
     };
@@ -51,14 +52,14 @@ class CgCategory extends base {
   }
   render() {
     const { pop } = this.props;
-    const { title } = this.state;
+    const { title, showBtn } = this.state;
     return (
       <Container>
         <Header back={pop} title={title} />
         <Content style={{ backgroundColor: '#fff' }}>
           {this._renderContent()}
         </Content>
-        {this._renderButton()}
+        {showBtn && this._renderButton()}
       </Container>
     );
   }

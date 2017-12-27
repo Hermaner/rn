@@ -5,6 +5,7 @@ import { AppNavigator } from '../navigators/AppNavigator';
 
 const initialNavState = {
   index: 0,
+  isSleekShow: false,
   routes: [
     { key: 'Main', routeName: 'Main' },
   ],
@@ -37,9 +38,18 @@ function nav(state = initialNavState, action) {
       break;
     case 'resetHome':
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.reset(initialNavState)
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Main' }),
+          ],
+        })
       , state);
       break;
+    case 'showSleek':
+      return { ...state, isSleekShow: true };
+    case 'closeSleek':
+      return { ...state, isSleekShow: false };
     default:
       nextState = AppNavigator.router.getStateForAction(action, state);
       break;

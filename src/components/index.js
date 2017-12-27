@@ -8,6 +8,7 @@ import NoData from './NoData';
 import ModalView from './ModalView';
 import ScrollableTab from './ScrollableTab';
 import InputNumber from './InputNumber';
+import UploadFile from './UploadFile';
 
 export {
   TLight,
@@ -17,6 +18,7 @@ export {
   ModalView,
   InputNumber,
   NoData,
+  UploadFile,
   GoodhList,
   Header,
   ScrollableTab,

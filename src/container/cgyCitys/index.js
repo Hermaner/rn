@@ -19,7 +19,7 @@ class CgCitys extends base {
   componentDidMount() {
   }
   _renderAddressContent() {
-    const { citys, leftIndex } = this.state;
+    const { citys, leftIndex, midIndex } = this.state;
     const { push } = this.props;
     return (
       <View style={styles.maskerContentView}>
@@ -56,7 +56,7 @@ class CgCitys extends base {
           {
             citys.length > 0 &&
             <View style={[styles.f1, styles.fr]}>
-              <View style={[styles.f1, { backgroundColor: '#f2f2f2' }]}>
+              <View style={[{ flex: 5 }, { backgroundColor: '#f2f2f2' }]}>
                 <Content>
                   {
                     citys.map((item, index) => (
@@ -77,10 +77,31 @@ class CgCitys extends base {
                   }
                 </Content>
               </View>
-              <View style={[styles.f1, { backgroundColor: '#f9f9f9' }]}>
+              <View style={[{ flex: 4 }, { backgroundColor: '#f9f9f9' }]}>
                 <Content>
                   {
                     citys[leftIndex].citys.map((item, index) => (
+                      <TFeedback
+                        key={index}
+                        content={
+                          <View style={[styles.addressRightList, item.cur && styles.addressRightListCur]}>
+                            <Text
+                              style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
+                              numberOfLines={1}
+                            >
+                              {item.name}
+                            </Text>
+                          </View>}
+                        onPress={() => { this.selectCity(index); }}
+                      />
+                    ))
+                  }
+                </Content>
+              </View>
+              <View style={{ flex: 5 }}>
+                <Content>
+                  {
+                    citys[leftIndex].citys[midIndex].districts.map((item, index) => (
                       <TFeedback
                         key={index}
                         content={
@@ -92,7 +113,7 @@ class CgCitys extends base {
                               {item.name}
                             </Text>
                           </View>}
-                        onPress={() => { this.selectCity(index); }}
+                        onPress={() => { this.selectDistrict(index); }}
                       />
                     ))
                   }
