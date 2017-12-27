@@ -1,61 +1,56 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
+import Toast from 'react-native-simple-toast';
 
 class ValidatePhoneBase extends React.Component {
-  wxLogin = () => {
-    WeChat.sendAuthRequest('snsapi_userinfo', 'App')
-    .then(res => console.log(res));
+  constructor(props) {
+    super(props);
+    this.isSend = false;
+    this.state = {
+      phone: '',
+      sec: 60,
+      password: '',
+      code: '',
+    };
   }
-  async goWXpay() {
-    const orderID = '1';
-    React.WxUnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      console.log(lists);
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        try {
-          WeChat.pay(
-            {
-              partnerId: result.mch_id,
-              prepayId: result.prepay_id,
-              nonceStr: result.nonce_str,
-              timeStamp: result.timeStamp,
-              package: 'Sign=WXPay',
-              sign: '140822CCE34FD5B2303956105E49CA7C',
-            },
-          );
-        } catch (error) {
-          console.log('Pay for failure!');
-        }
+  savePhone = (value) => {
+    this.setState({
+      phone: value,
+    });
+  }
+  sendCode = () => {
+    const { phone, code } = this.state;
+    if (!phone) {
+      Toast.show('请输入手机号');
+      return;
+    }
+    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+    if (telReg) {
+      Toast.show('手机号格式不对');
+      return;
+    }
+    if (this.isSend) {
+      return;
+    }
+    this.isSend = true;
+    const actionMethod = () => {
+      const { sec } = this.state;
+      if (sec <= 0) {
+        clearInterval(this.timer);
+        this.isSend = false;
+        this.setState({
+          sec,
+        });
+      } else {
+        this.setState({
+          sec: sec - 1,
+        });
       }
-    }).catch(err => console.log(err));
-  }
-  goAlipay() {
-    const orderID = '1';
-    React.UnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        Alipay.pay(result).then((json) => {
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
-          } else {
-            console.log('其他失败原因');
-          }
-        }).catch(err => console.log(err));
-      }
-    }).catch(err => console.log(err));
-  }
-  common() {
-    this.name = 'herman';
+    };
+    actionMethod();
+    this.timer = setInterval(
+      () => {
+        actionMethod();
+      }, 1000);
   }
 }
 export default ValidatePhoneBase;

@@ -23,16 +23,16 @@ class AccountCenter extends AccountCenterBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const { items } = this.state;
+    const { items, backGround1, isValidate } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerImgBox}>
-          <Image style={styles.headerImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+          <Image style={styles.headerImg} source={backGround1} />
         </View>
         <View style={{ height: 150 }}>
           <View style={styles.accountMoney}>
             <Text style={styles.textBackground}>账户资金</Text>
-            <TouchableOpacity style={styles.rightBtn} onPress={() => { push({ key: 'ValidatePhone' }); }}>
+            <TouchableOpacity style={styles.rightBtn} onPress={() => { push({ key: isValidate ? 'ValidatePhone' : 'ChooseGatheringAccountNumbers' }); }}>
               <Text style={styles.textBackground}>提现</Text>
             </TouchableOpacity>
           </View>
@@ -49,7 +49,7 @@ class AccountCenter extends AccountCenterBase {
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                     <Text style={{ color: '#999', fontSize: 14 }}>{item.label}</Text>
-                    <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                    <Icon style={{ marginLeft: 10, fontSize: 20, color: '#666' }} name="play" />
                   </View>
                 </View>
               </TouchableOpacity>

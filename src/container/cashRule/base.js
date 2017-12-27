@@ -1,13 +1,9 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 
-class AddAccountBase extends React.Component {
+class CashRuleBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected1: '',
-      selected2: '',
     };
   }
   chooseBank = (value) => {
@@ -21,4 +17,4 @@ class AddAccountBase extends React.Component {
     });
   }
 }
-export default AddAccountBase;
+export default CashRuleBase;

@@ -18,15 +18,26 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: '#fff',
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   rowBoxLeft: {
-    width: 100,
+    marginRight: 10,
     color: '#333',
+    fontSize: 14,
+  },
+  normalThree: {
+    color: '#333',
+    fontSize: 14,
+  },
+  normalNine: {
+    color: '#999',
+    fontSize: 14,
   },
   rowBoxRight: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   chooseAccount: {
     flex: 1,
@@ -36,8 +47,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   button: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginTop: 30,
     paddingTop: 15,
     paddingBottom: 15,
     backgroundColor: '#64C42C',
@@ -47,6 +57,30 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 14,
+  },
+  rightText: {
+    fontSize: 12,
+    color: '#65C12E',
+    textAlign: 'right',
+  },
+  second: {
+    marginTop: 10,
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  money: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  inputs: {
+    fontSize: 32,
+    color: '#333',
+    fontWeight: 'bold',
   },
 });
 export default styles;

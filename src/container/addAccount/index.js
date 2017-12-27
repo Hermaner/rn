@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, View, TextInput } from 'react-native';
-import { Container, Content, Picker, Item, Icon, Text, CheckBox } from 'native-base';
+import { TouchableOpacity, View } from 'react-native';
+import { Container, Content, Picker, Item, Icon, Text, CheckBox, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from '../../components';
@@ -66,7 +66,7 @@ class AddAccount extends addAccountBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>账户名</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
                 placeholder="请输入公司账户名称"
               />
@@ -75,7 +75,7 @@ class AddAccount extends addAccountBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>账号</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
                 placeholder="请输入公司账号"
               />
@@ -86,7 +86,7 @@ class AddAccount extends addAccountBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>手机号码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
                 placeholder="请输入手机号码"
               />
@@ -96,7 +96,7 @@ class AddAccount extends addAccountBase {
           <View style={styles.rowBox}>
             <Text style={styles.rowBoxLeft}>验证码</Text>
             <View style={styles.rowBoxRight}>
-              <TextInput
+              <Input
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
                 placeholder="请输入验证码"
               />

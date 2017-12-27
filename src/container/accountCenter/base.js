@@ -25,6 +25,8 @@ class AccountCenterBase extends React.Component {
         leftIcn: 'arrow-back',
         push: 'GatheringAccount',
       }],
+      backGround1: require('../../assets/img/2.png'),
+      isValidate: false, // 是否验证
     };
   }
 }

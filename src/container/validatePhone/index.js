@@ -33,10 +33,11 @@ class ValidatePhone extends validatePhoneBase {
             placeholderTextColor="#999"
             style={styles.inputs}
             placeholder="请输入收到的验证码"
+            onChangeText={value => this.savePhone(value)}
           />
-          <View style={styles.getBox}>
+          <TouchableOpacity style={styles.getBox} onPress={this.sendCode}>
             <Text style={styles.get}>获取验证码</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     );

@@ -28,7 +28,6 @@ import ReportDetailPage from '../container/reportDetailPage';
 import AddAccount from '../container/addAccount';
 import GatheringAccount from '../container/gatheringAccount';
 import AccountCenter from '../container/accountCenter';
-import ChooseAccountType from '../container/chooseAccountType';
 import My from '../container/my';
 import SelfSet from '../container/selfSet';
 import EvalList from '../container/evalList';
@@ -65,6 +64,11 @@ import ValidatePhone from '../container/validatePhone';
 import HuinongConsult from '../container/huinongConsult';
 import HuinongConsultDetail from '../container/huinongConsultDetail';
 import Comment from '../container/comment';
+import AccountNumberType from '../container/accountNumberType';
+import AddPersonalAccount from '../container/addPersonalAccount';
+import ChooseGatheringAccountNumbers from '../container/chooseGatheringAccountNumbers';
+import Cash from '../container/cash';
+import CashRule from '../container/cashRule';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -92,7 +96,6 @@ export const AppNavigator = StackNavigator({
   AddAccount: { screen: AddAccount },
   GatheringAccount: { screen: GatheringAccount },
   AccountCenter: { screen: AccountCenter },
-  ChooseAccountType: { screen: ChooseAccountType },
   Certification: { screen: Certification },
   My: { screen: My },
   SelfSet: { screen: SelfSet },
@@ -128,6 +131,11 @@ export const AppNavigator = StackNavigator({
   HuinongConsult: { screen: HuinongConsult },
   HuinongConsultDetail: { screen: HuinongConsultDetail },
   Comment: { screen: Comment },
+  AccountNumberType: { screen: AccountNumberType },
+  AddPersonalAccount: { screen: AddPersonalAccount },
+  ChooseGatheringAccountNumbers: { screen: ChooseGatheringAccountNumbers },
+  Cash: { screen: Cash },
+  CashRule: { screen: CashRule },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({
