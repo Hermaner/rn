@@ -38,7 +38,12 @@ function nav(state = initialNavState, action) {
       break;
     case 'resetHome':
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.reset(initialNavState)
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Main' }),
+          ],
+        })
       , state);
       break;
     case 'showSleek':

@@ -15,7 +15,7 @@ class CgSkus extends base {
     const data = Global.items[Global.firstIndex].childs[Global.secondIndex];
     const items = data.specTypes || [];
     let isBtnGray = false;
-    if (Global.skuType === '3') {
+    if (Global.skuType === '3' || Global.skuType === '4') {
       items.forEach((item) => {
         if (item.itemIndex === undefined) {
           isBtnGray = true;

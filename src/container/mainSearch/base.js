@@ -53,8 +53,9 @@ class Base extends React.Component {
     });
   }
   goPage = (index) => {
-    // type 1: main 2: 发采购 2: 发供应
+    // type 1: main 2: 发采购 3: 发供应
     const { type } = this.props.navigation.state.params;
+    console.log(type)
     switch (type) {
       case '1':
         this.props.push({ key: 'MainList' });
@@ -64,8 +65,13 @@ class Base extends React.Component {
         Global.secondIndex = index;
         this.props.push({ key: 'CgCategory' });
         break;
-      case '3':
+      case '3': // 供应默认进入
         Global.skuType = '3';
+        Global.secondIndex = index;
+        this.props.push({ key: 'CgCategory' });
+        break;
+      case '4': // 供应再次进入
+        Global.skuType = '4';
         Global.secondIndex = index;
         this.props.push({ key: 'CgCategory' });
         break;

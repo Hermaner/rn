@@ -15,7 +15,7 @@ class CgCategory extends base {
     const items = Global.items[Global.firstIndex].childs[Global.secondIndex];
     this.state = {
       ...this.state,
-      showBtn: Global.skuType !== '3',
+      showBtn: Global.skuType !== '3' && Global.skuType !== '4',
       items: items.brands || [],
       title: items.name,
     };

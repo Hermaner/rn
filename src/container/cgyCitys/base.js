@@ -10,26 +10,35 @@ class Base extends React.Component {
     super(props);
     const cloneCitys = DeepClone(citysJson);
     cloneCitys[0].cur = true;
+    cloneCitys[0].citys[0].cur = true;
     this.state = {
       citys: cloneCitys,
       leftIndex: 0,
+      midIndex: 0,
     };
   }
   selectCity = (index) => {
-    const { citys, leftIndex } = this.state;
+    const { citys, leftIndex, midIndex } = this.state;
+    citys[leftIndex].citys[midIndex].cur = false;
+    citys[leftIndex].citys[index].cur = true;
+    this.setState({
+      citys,
+      midIndex: index,
+    });
+  }
+  selectDistrict = (index) => {
+    const { citys, leftIndex, midIndex } = this.state;
     const data = {
-      text: `${citys[leftIndex].name}${citys[leftIndex].citys[index].name}`,
-      ProvinceCode: citys[leftIndex].adcode,
-      CityCode: citys[leftIndex].citys[index].adcode,
+      text: `${citys[leftIndex].name}${citys[leftIndex].citys[midIndex].name}${citys[leftIndex].citys[midIndex].districts[index].name}`,
+      sendProvinceCode: citys[leftIndex].adcode,
+      sendCityCode: citys[leftIndex].citys[midIndex].adcode,
+      sendDistrictCode: citys[leftIndex].citys[midIndex].districts[index].adcode,
     };
     const { type } = this.props.navigation.state.params;
     let emit;
     switch (type) {
-      case 'cga':
-        emit = 'getACity';
-        break;
-      case 'cgb':
-        emit = 'getCity';
+      case 'cityCgyGet':
+        emit = 'cityCgyGet';
         break;
       default:
     }
@@ -37,14 +46,17 @@ class Base extends React.Component {
     this.props.pop();
   }
   changeLeftTab = (index) => {
-    const { citys, leftIndex } = this.state;
+    const { citys, leftIndex, midIndex } = this.state;
     if (leftIndex === index) {
       return;
     }
     citys[index].cur = true;
     citys[leftIndex].cur = false;
+    citys[leftIndex].citys[midIndex].cur = false;
+    citys[index].citys[0].cur = true;
     this.setState({
       citys,
+      midIndex: 0,
       leftIndex: index,
     });
   }

@@ -3,7 +3,7 @@ import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { Global } from '../../utils';
 
-class CgSkusBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class CgSkusBase extends React.Component {
     items[index].specs[i].cur = true;
     items[index].itemIndex = i;
     let isBtnGray = false;
-    if (Global.skuType === '3') {
+    if (Global.skuType === '3' || Global.skuType === '4') {
       items.forEach((item) => {
         if (item.itemIndex === undefined) {
           isBtnGray = true;
@@ -55,15 +55,18 @@ class CgSkusBase extends React.Component {
       case '3':
         push({ key: 'CgyComfirm' });
         break;
+      case '4':
+        resetTo({ num: 3 });
+        break;
       default:
         push({ key: 'CgComfirm' });
         break;
     }
   }
 }
-CgSkusBase.propTypes = {
+Base.propTypes = {
   push: PropTypes.func,
   pop: PropTypes.func,
   resetTo: PropTypes.func,
 };
-export default CgSkusBase;
+export default Base;

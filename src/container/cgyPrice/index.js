@@ -12,8 +12,12 @@ import styles from './styles';
 class cgyPrice extends base {
   constructor(props) {
     super(props);
+    const { wholesalePrice, wholesaleCount, unit } = this.props.navigation.state.params;
     this.state = {
       ...this.state,
+      wholesalePrice,
+      wholesaleCount,
+      optionType: unit || '斤',
     };
   }
   componentDidMount() {

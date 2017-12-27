@@ -1,14 +1,11 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Alert } from 'react-native';
 import PropTypes from 'prop-types';
-import ImagePicker from 'react-native-image-crop-picker';
-import { Rpc } from 'react-native-qiniu';
-// import Qiniu from 'qiniu';
 import { Global } from '../../utils';
-import { CreatePurchaseService, GetUploadTokenService } from '../../api';
+import { CreatePurchaseService } from '../../api';
 
-class CgCategoryBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,17 +52,18 @@ class CgCategoryBase extends React.Component {
         label: '请选择',
         page: 'CgCitys',
       }],
+      isSleekShow: false,
       upImg: require('../../assets/img/addAc.png'),
-      images: [],
+      upImages: [],
       imageCount: 4,
       imageDateIndex: 0,
       isImageDateShow: false,
       imageViewData: [],
-      optionType: '7天',
+      optionType: '7',
       phone: '',
-      options: [{ value: '7天', label: '7天' },
-      { value: '3个月', label: '3个月' },
-      { value: '6个月', label: '6个月' }],
+      options: [{ value: '7', label: '7天' },
+      { value: '90', label: '3个月' },
+      { value: '180', label: '6个月' }],
       uptoken: '',
       categoryId: '',
       brandId: '',
@@ -114,6 +112,11 @@ class CgCategoryBase extends React.Component {
       brandId,
     });
   }
+  getImages = (upImages) => {
+    this.setState({
+      upImages,
+    });
+  }
   getDemand = (data) => {
     const { items } = this.state;
     items[2].label = `${data.demand}${data.optionType}`;
@@ -145,15 +148,33 @@ class CgCategoryBase extends React.Component {
     });
   }
   setSelect = (optionType) => {
-    const { items2 } = this.state;
-    items2[0].label = optionType;
+    const { items2, options } = this.state;
+    options.forEach((item) => {
+      if (item.value === optionType) {
+        items2[0].label = item.label;
+      }
+    });
     this.setState({
       items2,
       optionType,
     });
   }
+  toggleSleek = () => {
+    this.setState({
+      isSleekShow: !this.state.isSleekShow,
+    });
+  }
+  backToHome = () => {
+    Alert.alert(
+      '温馨提示',
+      '是否退出发布？',
+      [
+        { text: '继续退出', onPress: this.props.resetHome },
+        { text: '取消' },
+      ],
+    );
+  }
   initData = () => {
-    this.GetUploadTokenService();
     this.setState({
       phone: '15666666666',
     });
@@ -202,107 +223,6 @@ class CgCategoryBase extends React.Component {
     }
     this.props.push({ key: items[index].page });
   }
-  goAsheet = (index) => {
-    switch (index) {
-      case 0:
-        this.openCamera();
-        break;
-      case 1:
-        this.pickMultiple();
-        break;
-      default:
-    }
-  }
-  showImageDate = (imageDateIndex) => {
-    const { images } = this.state;
-    const imageViewData = [];
-    images.forEach(item => imageViewData.push({ url: item.uri }));
-    this.setState({
-      imageDateIndex,
-      isImageDateShow: true,
-      imageViewData,
-    });
-  }
-  imageDel = (index) => {
-    const { images } = this.state;
-    images.splice(index, 1);
-    this.setState({
-      images,
-    });
-  }
-  openCamera = () => {
-    const { images, imageCount } = this.state;
-    ImagePicker.openCamera({
-      includeExif: true,
-    }).then((image) => {
-      images.push({ uri: image.path, width: image.width, height: image.height });
-      if (images.length > imageCount) {
-        images.length = imageCount;
-      }
-      this.setState({
-        images,
-      }, () => this.startUpload());
-    }).catch(e => Toast.show(e));
-  }
-  pickMultiple = () => {
-    const { images, imageCount } = this.state;
-    ImagePicker.openPicker({
-      multiple: true,
-      waitAnimationEnd: false,
-      includeExif: true,
-    }).then((image) => {
-      image.forEach((item) => {
-        images.push({ uri: item.path, width: item.width, height: item.height, mime: item.mime });
-      });
-      if (images.length > imageCount) {
-        images.length = imageCount;
-      }
-      this.setState({
-        images,
-      }, () => this.startUpload());
-    }).catch(e => Toast.show(e));
-  }
-  startUpload = () => {
-    const { images } = this.state;
-    images.forEach((item, index) => {
-      if (!item.key) {
-        this.upLoadImage(item.uri, index);
-      }
-    });
-  }
-  upLoadImage = (source, index) => {
-    const { uptoken, images } = this.state;
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
-    let ran = parseInt(Math.random() * 888, 10);
-    ran += 100;
-    const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
-    images[index].key = key;
-    this.setState({
-      images,
-    });
-    Rpc.uploadFile(source, uptoken, { key, name: key });
-  }
-  GetUploadTokenService = () => {
-    GetUploadTokenService()
-    .then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        this.setState({
-          uptoken: res.data,
-        });
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      Toast.show(err);
-    });
-  }
   goCgComfirm = () => {
     const {
       categoryId,
@@ -321,7 +241,7 @@ class CgCategoryBase extends React.Component {
       receiveCityCode,
       memo,
       purchaseItems,
-      images,
+      upImages,
     } = this.state;
     // if (!memberId) {
     //   Toast.show('请先登录');
@@ -360,7 +280,7 @@ class CgCategoryBase extends React.Component {
     CreatePurchaseService({
       purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),
-      purchaseImages: images.map(item => item.key).join(','),
+      purchaseImages: upImages.map(item => item.key).join(','),
     })
     .then((res) => {
       console.log(res);
@@ -375,7 +295,8 @@ class CgCategoryBase extends React.Component {
   }
 }
 
-CgCategoryBase.propTypes = {
+Base.propTypes = {
   push: PropTypes.func,
+  resetHome: PropTypes.func,
 };
-export default CgCategoryBase;
+export default Base;

@@ -94,3 +94,6 @@ export function GetPurchaseService(data) {
 export function StopPurchaseService(data) {
   return get('StopPurchaseService', data);
 }
+export function CreateSupplyService(data) {
+  return post('CreateSupplyService', data);
+}

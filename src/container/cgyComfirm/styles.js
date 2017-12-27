@@ -61,48 +61,8 @@ const styles = StyleSheet.create({
   upView: {
     ...st.fr,
     ...st.jacenter,
-    marginTop: 10,
-  },
-  imagesView: {
-    ...st.fr,
-    flexWrap: 'wrap',
-  },
-  imageListView: {
-    position: 'relative',
-  },
-  imageDel: {
-    width: 20,
-    height: 20,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    ...st.jacenter,
-    position: 'absolute',
-    right: 10,
-    top: 10,
-  },
-  selectType: {
-    width: 0,
-    height: 0,
-    overflow: 'hidden',
-  },
-  imageDelIcon: {
-    fontSize: 20,
-    color: '#fff',
-  },
-  imageList: {
-    marginTop: 10,
-    marginRight: 10,
-    width: 80,
-    height: 80,
-  },
-  upViewImg: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-  },
-  upViewText: {
-    flex: 1,
-    fontSize: 13,
-    color: '#888',
+    backgroundColor: '#fff',
+    paddingBottom: 8,
   },
   btn: {
     backgroundColor: Mcolor,
