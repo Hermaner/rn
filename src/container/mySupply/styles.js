@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Mgreen, st } from '../../utils';
+// import { Mgreen, st } from '../../utils';
 
 const styles = StyleSheet.create({
   goodsDetail: {
@@ -7,19 +7,16 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    // alignItems: 'center',
-  },
-  goodsImg: {
-    width: 70,
-    height: 70,
-    marginRight: 10,
   },
   goodsPrice: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 6,
+  },
+  goodsitem: {
+    backgroundColor: '#fff',
+    marginBottom: 5,
   },
   readPeople: {
     flexDirection: 'row',
@@ -45,8 +42,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
   },
   btnBox: {
     paddingLeft: 8,
@@ -63,7 +58,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   btnChoose: {
-    backgroundColor: '#57BA24',
+    backgroundColor: '#FC8521',
   },
   btnTextChoose: {
     color: '#fff',
