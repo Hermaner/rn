@@ -3,9 +3,8 @@ import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button, Icon, Input, CheckBox } from 'native-base';
 import { connect } from 'react-redux';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TOpacity, TFeedback } from '../../components';
+import { Header, TOpacity, TFeedback, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -142,7 +141,6 @@ class cgyPrice extends base {
   }
   render() {
     const { pop } = this.props;
-    const { isSleekShow } = this.state;
     return (
       <Container>
         <Header back={pop} title="货品价格" />
@@ -154,7 +152,7 @@ class cgyPrice extends base {
           {this._renderMemo()}
           {this._renderButton()}
         </Content>
-        <SleekLoadingIndicator loading={isSleekShow} />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

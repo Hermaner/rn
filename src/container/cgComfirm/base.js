@@ -52,7 +52,6 @@ class Base extends React.Component {
         label: '请选择',
         page: 'CgCitys',
       }],
-      isSleekShow: false,
       upImg: require('../../assets/img/addAc.png'),
       upImages: [],
       imageCount: 4,
@@ -157,11 +156,6 @@ class Base extends React.Component {
     this.setState({
       items2,
       optionType,
-    });
-  }
-  toggleSleek = () => {
-    this.setState({
-      isSleekShow: !this.state.isSleekShow,
     });
   }
   backToHome = () => {
@@ -284,14 +278,14 @@ class Base extends React.Component {
     })
     .then((res) => {
       console.log(res);
-      this.toggleSleek();
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
       } else {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }

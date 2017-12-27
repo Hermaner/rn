@@ -32,7 +32,7 @@ class HomeScreen extends base {
               <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
             </View>
           }
-          onPress={() => push({ key: 'MainSearch', params: { type: '2' } })}
+          onPress={() => push({ key: 'WhyChoose', params: { type: '2' } })}
         />
         <TOpacity
           style={styles.flexOne}

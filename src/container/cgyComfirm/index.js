@@ -5,7 +5,7 @@ import { Container, Content, Text, Button, Icon } from 'native-base';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
 import { resetHome, pushRoute } from '../../actions';
-import { Header, TFeedback, UploadFile } from '../../components';
+import { Header, TFeedback, UploadFile, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -72,7 +72,6 @@ class CgyCategory extends base {
     );
   }
   render() {
-    const { isSleekShow } = this.state;
     return (
       <Container>
         <Header back={this.backToHome} title="发布供应" />
@@ -81,7 +80,7 @@ class CgyCategory extends base {
           {this._renderUpload()}
         </Content>
         {this._renderButton()}
-        <SleekLoadingIndicator loading={isSleekShow} />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

@@ -9,11 +9,13 @@ import ModalView from './ModalView';
 import ScrollableTab from './ScrollableTab';
 import InputNumber from './InputNumber';
 import UploadFile from './UploadFile';
+import Loading from './Loading';
 
 export {
   TLight,
   TOpacity,
   GoodList,
+  Loading,
   TFeedback,
   ModalView,
   InputNumber,

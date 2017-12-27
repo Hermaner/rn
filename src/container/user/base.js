@@ -7,7 +7,6 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      isSleekShow: false,
       phone: '',
       sec: 60,
       password: '',
@@ -24,11 +23,6 @@ class UserBase extends React.Component {
         break;
       default:
     }
-  }
-  toggleSleek = () => {
-    this.setState({
-      isSleekShow: !this.state.isSleekShow,
-    });
   }
   sendCode = () => {
     const { phone } = this.state;
@@ -59,12 +53,12 @@ class UserBase extends React.Component {
         });
       }
     };
-    this.toggleSleek();
+    this.sleek.toggle();
     GetCodeService({
       phone,
     }).then((res) => {
       console.log(res);
-      this.toggleSleek();
+      this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
           codeVal: res.data,
@@ -76,7 +70,7 @@ class UserBase extends React.Component {
           }, 1000);
       }
     }).catch(() => {
-      this.toggleSleek();
+      this.sleek.toggle();
     });
   }
   login = () => {
@@ -93,17 +87,17 @@ class UserBase extends React.Component {
       Toast.show('验证码错误');
       return;
     }
-    this.toggleSleek();
+    this.sleek.toggle();
     RegisterMemberService({
       phone,
     }).then((res) => {
       console.log(res);
-      this.toggleSleek();
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('登陆成功');
       }
     }).catch(() => {
-      this.toggleSleek();
+      this.sleek.toggle();
     });
   }
 }
