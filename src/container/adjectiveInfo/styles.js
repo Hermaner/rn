@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st } from '../../utils';
+import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     paddingTop: 15,
     paddingBottom: 15,
-    backgroundColor: '#8BCE21',
+    backgroundColor: Mcolor,
     borderRadius: 6,
   },
   buttonText: {
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   typeChoose: {
-    backgroundColor: '#8BCE21',
-    color: '#fff',
+    backgroundColor: Mcolor,
+    borderColor: Mcolor,
   },
   identity: {
     flex: 1,
@@ -133,10 +133,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   isChooseBackground: {
-    backgroundColor: '#8BCE21',
+    backgroundColor: Mcolor,
+    borderColor: Mcolor,
   },
   isChooseText: {
-    color: '#8BCE21',
+    color: '#fff',
   },
   identityText: {
     color: '#666',

@@ -3,10 +3,9 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button, Icon, Input } from 'native-base';
 import { connect } from 'react-redux';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import SelectInput from 'react-native-select-input-ios';
 import { pushRoute, resetHome } from '../../actions';
-import { Header, TFeedback, UploadFile } from '../../components';
+import { Header, TFeedback, UploadFile, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -143,7 +142,6 @@ class CgCategory extends base {
     );
   }
   render() {
-    const { isSleekShow } = this.state;
     return (
       <Container>
         <Header back={this.backToHome} title="发布求购" />
@@ -155,7 +153,7 @@ class CgCategory extends base {
           {this._renderSelect()}
         </Content>
         {this._renderButton()}
-        <SleekLoadingIndicator loading={isSleekShow} />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

@@ -39,7 +39,6 @@ class Base extends React.Component {
         label: '请选择',
         page: 'CgyServices',
       }],
-      isSleekShow: false,
       upImg: require('../../assets/img/addAc.png'),
       upImages: [],
       isSpotGoods: '',
@@ -170,11 +169,6 @@ class Base extends React.Component {
       this.sendCfyService(data);
     });
   }
-  toggleSleek = () => {
-    this.setState({
-      isSleekShow: !this.state.isSleekShow,
-    });
-  }
   deleteData = () => {
     this.emitGetSpot.remove();
     this.emitGetCgyPrice.remove();
@@ -273,7 +267,7 @@ class Base extends React.Component {
     };
     console.log(supply)
     console.log(purchaseItems)
-    this.toggleSleek();
+    this.sleek.toggle();
     CreateSupplyService({
       supply: JSON.stringify(supply),
       supplyItems: JSON.stringify(purchaseItems),
@@ -281,14 +275,14 @@ class Base extends React.Component {
     })
     .then((res) => {
       console.log(res);
-      this.toggleSleek();
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
       } else {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }

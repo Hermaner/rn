@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function GetIdentityService(data) {
+  return get('GetIdentityService', data);
+}
 export function GetCodeService(data) {
   return get('GetCodeService', data);
 }

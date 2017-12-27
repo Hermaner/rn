@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { popRoute, pushRoute } from '../../actions';
-import { Header } from '../../components';
+import { Header, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -20,7 +19,7 @@ class UserPage extends base {
   componentDidMount() {
   }
   render() {
-    const { phone, code, sec, isSleekShow } = this.state;
+    const { phone, code, sec } = this.state;
     const { pop, push } = this.props;
     return (
       <Container>
@@ -84,7 +83,7 @@ class UserPage extends base {
             </View>
           </View>
         </Content>
-        <SleekLoadingIndicator loading={isSleekShow} />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

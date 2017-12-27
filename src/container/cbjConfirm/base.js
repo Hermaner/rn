@@ -14,7 +14,6 @@ class Base extends React.Component {
       supplCount: '',
       unit: '颗',
       cityArea: '',
-      isSleekShow: false,
       supplyProvinceCode: '',
       supplyCityCode: '',
       memo: '',
@@ -43,11 +42,6 @@ class Base extends React.Component {
       cityArea: data.text,
       supplyProvinceCode: data.ProvinceCode,
       supplyCityCode: data.CityCode,
-    });
-  }
-  toggleSleek = () => {
-    this.setState({
-      isSleekShow: !this.state.isSleekShow,
     });
   }
   initData = () => {
@@ -106,7 +100,7 @@ class Base extends React.Component {
     supplyProvinceCode,
     supplyCityCode,
     memo);
-    this.toggleSleek();
+    this.sleek.toggle();
     const purchaseQuote = {
       memberId,
       purchaseId,
@@ -122,7 +116,7 @@ class Base extends React.Component {
     })
     .then((res) => {
       console.log(res);
-      this.toggleSleek();
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
       } else {
