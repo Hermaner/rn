@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
-import Swiper from 'react-native-swiper-animated';
+import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { popRoute, pushRoute } from '../../actions';
 import { Header } from '../../components';
 import base from './base';
@@ -20,8 +20,7 @@ class UserPage extends base {
   componentDidMount() {
   }
   render() {
-    const { phone, code, sec } = this.state;
-    console.log(phone)
+    const { phone, code, sec, isSleekShow } = this.state;
     const { pop, push } = this.props;
     return (
       <Container>
@@ -35,7 +34,7 @@ class UserPage extends base {
                 placeholder="输入您的手机号"
                 clearButtonMode="while-editing"
                 value={phone}
-                onChangeText={value => this.onChangeText(value, 0)}
+                onChangeText={value => this.setState({ phone: value })}
                 onSubmitEditing={this.login}
               />
             </View>
@@ -46,12 +45,12 @@ class UserPage extends base {
                 placeholder="输入验证码"
                 clearButtonMode="while-editing"
                 value={code}
-                onChangeText={value => this.onChangeText(value, 0)}
+                onChangeText={value => this.setState({ code: value })}
                 onSubmitEditing={this.login}
               />
               <View>
                 <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
-                  <Text style={[styles.sendBtnText, { color: this.isSend ? '#fff' : '#888' }]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
+                  <Text style={[styles.sendBtnText, { color: this.isSend ? '#fff' : '#fff' }]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
                 </Button>
               </View>
             </View>
@@ -62,7 +61,7 @@ class UserPage extends base {
           <View style={styles.switchView}>
             <Text style={styles.switchLabel}>或者</Text>
             <View>
-              <Button style={styles.switchBtn} onPress={() => this.swiper.forceRightSwipe()}>
+              <Button style={styles.switchBtn}>
                 <Text style={styles.switchBtnText}>切换至账户密码登陆</Text>
               </Button>
             </View>
@@ -85,6 +84,7 @@ class UserPage extends base {
             </View>
           </View>
         </Content>
+        <SleekLoadingIndicator loading={isSleekShow} />
       </Container>
     );
   }

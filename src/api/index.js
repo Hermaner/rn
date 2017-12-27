@@ -73,6 +73,13 @@ export function DeepClone(obj) {
   }
   return result;
 }
+
+export function GetCodeService(data) {
+  return get('GetCodeService', data);
+}
+export function RegisterMemberService(data) {
+  return post('RegisterMemberService', data);
+}
 export function GetAppCategoryService(data) {
   return get('GetAppCategoryService', data);
 }
@@ -81,6 +88,9 @@ export function GetCityService() {
 }
 export function GetDistrictService() {
   return get('GetDistrictService');
+}
+export function CreatePurchaseQuoteService(data) {
+  return post('CreatePurchaseQuoteService', data);
 }
 export function CreatePurchaseService(data) {
   return post('CreatePurchaseService', data);

@@ -1,12 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { Mgreen, Mcolor } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
-  wrapper: {
-  },
-  slide1: {
-    flex: 1,
-  },
   text: {
     color: '#fff',
     fontSize: 30,
@@ -36,15 +31,17 @@ const styles = StyleSheet.create({
   },
   sendBtn: {
     height: 30,
+    width: 100,
+    padding: 0,
+    ...st.jacenter,
     marginRight: 10,
+    backgroundColor: Mcolor,
   },
   sendBtnText: {
     color: '#888', fontSize: 12,
   },
   submitBtn: {
     backgroundColor: Mcolor,
-    // marginLeft: 10,
-    // marginRight: 10,
     marginTop: 15,
     height: 45,
     borderRadius: 5,

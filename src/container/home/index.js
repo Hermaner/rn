@@ -1,12 +1,12 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, ListView, RefreshControl } from 'react-native';
+import { TouchableOpacity, Image, View, ListView } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodList } from '../../components';
+import { Header, ScrollableTab, GoodList, TOpacity, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -24,22 +24,42 @@ class HomeScreen extends base {
     const { push } = this.props;
     return (
       <View style={[styles.flexRow, styles.headerNavigation]}>
-        <View style={styles.flexOne}>
-          <Icon style={[styles.textCenter, styles.gong, styles.publicIcn]} name="analytics" />
-          <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
-        </View>
-        <View style={styles.flexOne}>
-          <Icon style={[styles.textCenter, styles.hang, styles.publicIcn]} name="analytics" />
-          <Text style={[styles.headerNavigationText, styles.textCenter]}>行情大厅</Text>
-        </View>
-        <View style={styles.flexOne}>
-          <Icon style={[styles.textCenter, styles.hui, styles.publicIcn]} name="analytics" />
-          <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农咨询</Text>
-        </View>
-        <TouchableOpacity style={styles.flexOne} onPress={() => { push({ key: 'User' }); }}>
-          <Icon style={[styles.textCenter, styles.my, styles.publicIcn]} name="analytics" />
-          <Text style={[styles.headerNavigationText, styles.textCenter]}>我的采购</Text>
-        </TouchableOpacity>
+        <TOpacity
+          style={styles.flexOne}
+          content={
+            <View style={styles.flexOne}>
+              <Icon style={[styles.textCenter, styles.gong, styles.publicIcn]} name="analytics" />
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
+            </View>
+          }
+          onPress={() => push({ key: 'MainSearch', params: { type: '2' } })}
+        />
+        <TOpacity
+          style={styles.flexOne}
+          content={
+            <View style={styles.flexOne}>
+              <Icon style={[styles.textCenter, styles.hang, styles.publicIcn]} name="analytics" />
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>行情大厅</Text>
+            </View>
+          }
+          onPress={() => push({ key: 'MainSearch', params: { type: '3' } })}
+        />
+        <TFeedback
+          content={
+            <View style={styles.flexOne}>
+              <Icon style={[styles.textCenter, styles.hui, styles.publicIcn]} name="analytics" />
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农咨询</Text>
+            </View>}
+          onPress={() => { push({ key: 'User' }); }}
+        />
+        <TFeedback
+          content={
+            <View style={styles.flexOne}>
+              <Icon style={[styles.textCenter, styles.my, styles.publicIcn]} name="analytics" />
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>我的采购</Text>
+            </View>}
+          onPress={() => { push({ key: 'CbjConfirm' }); }}
+        />
       </View>
     );
   }
@@ -142,7 +162,7 @@ class HomeScreen extends base {
     );
   }
   _renderGoods() {
-    const { dataSource, nomore, loading, refresh } = this.state;
+    const { dataSource } = this.state;
     return (
       <View>
         <ListView
@@ -152,14 +172,6 @@ class HomeScreen extends base {
           enableEmptySections
           onEndReachedThreshold={10}
           contentContainerStyle={styles.listViewStyle}
-          renderFooter={() => <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-            {nomore ? '没有更多数据了' : loading ? '数据加载中...' : '加载完毕'}
-          </Text>}
-          // refreshControl={
-          //   <RefreshControl
-          //     refreshing={refresh}
-          //     onRefresh={this._onRefresh}
-          //   />}
         />
       </View>
     );

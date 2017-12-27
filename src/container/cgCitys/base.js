@@ -5,13 +5,12 @@ import { DeviceEventEmitter } from 'react-native';
 import citysJson from './citys.json';
 import { DeepClone } from '../../api';
 
+citysJson[0].cur = true;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const cloneCitys = DeepClone(citysJson);
-    cloneCitys[0].cur = true;
     this.state = {
-      citys: cloneCitys,
+      citys: DeepClone(citysJson),
       leftIndex: 0,
     };
   }
@@ -25,6 +24,9 @@ class Base extends React.Component {
     const { type } = this.props.navigation.state.params;
     let emit;
     switch (type) {
+      case 'cbj':
+        emit = 'getBjCity';
+        break;
       case 'cga':
         emit = 'getACity';
         break;
