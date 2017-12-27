@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     marginTop: 6,
-    textAlign: 'right',
   },
   slide: {
     height: 120,

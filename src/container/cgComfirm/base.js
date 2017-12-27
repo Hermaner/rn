@@ -284,12 +284,14 @@ class Base extends React.Component {
     })
     .then((res) => {
       console.log(res);
+      this.toggleSleek();
       if (res.isSuccess) {
         Toast.show('发布成功');
       } else {
         Toast.show(res.msg);
       }
     }).catch((err) => {
+      this.toggleSleek();
       Toast.show(err);
     });
   }

@@ -113,6 +113,7 @@ class Base extends React.Component {
     this.setState({
       upImages,
     });
+    console.log(upImages)
   }
   cityCgyGet = (data) => {
     const { items } = this.state;
@@ -270,6 +271,8 @@ class Base extends React.Component {
       logisticsMode,
       renderServices,
     };
+    console.log(supply)
+    console.log(purchaseItems)
     this.toggleSleek();
     CreateSupplyService({
       supply: JSON.stringify(supply),
