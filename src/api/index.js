@@ -110,3 +110,6 @@ export function CreateSupplyService(data) {
 export function GetSupplyService(data) {
   return get('GetSupplyService', data);
 }
+export function RefreshSupplyService(data) {
+  return get('RefreshSupplyService', data);
+}
