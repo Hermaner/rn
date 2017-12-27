@@ -3,6 +3,10 @@ import { st } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
+  pagebody: {
+    backgroundColor: '#fff',
+    paddingBottom: 20,
+  },
   endTime: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -39,6 +43,12 @@ const styles = StyleSheet.create({
   },
   needGoodsDetail: {
     backgroundColor: '#fff',
+    marginLeft: 10,
+    marginRight: 10,
+    borderLeftWidth: 1,
+    borderLeftColor: '#ddd',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   rowBox: {
     flexDirection: 'row',
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
   },
   footerBtn: {
     width: '100%',
-    backgroundColor: '#FC8521',
+    backgroundColor: '#FE8822',
     position: 'absolute',
     bottom: 0,
     paddingTop: 15,
@@ -118,18 +128,17 @@ const styles = StyleSheet.create({
   },
   btnListOne: {
     flex: 1,
-    backgroundColor: '#FC8521',
+    backgroundColor: '#FE8822',
     paddingTop: 15,
     paddingBottom: 15,
   },
   leftBtn: {
-    backgroundColor: '#57B924',
+    backgroundColor: '#FE8822',
   },
   rightBtn: {
     backgroundColor: '#16B6F6',
   },
   userInfo: {
-    justifyContent: 'flex-end',
   },
   userName: {
     color: '#333',

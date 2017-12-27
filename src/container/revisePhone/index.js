@@ -26,7 +26,11 @@ class RevisePhone extends revisePhoneBase {
       <View style={styles.pagebody}>
         <View style={styles.rowBox}>
           <Text style={{ marginRight: 15, color: '#333' }}>+86</Text>
-          <Input placeholderTextColor="#999" style={styles.inputs} placeholder="请输入手机号码" />
+          <Input
+            onChangeText={text => this.savePhone(text)}
+            placeholderTextColor="#999"
+            style={styles.inputs} placeholder="请输入手机号码"
+          />
         </View>
         <View style={styles.rowBox}>
           <Input
