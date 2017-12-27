@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   goodsDetail: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginLeft: 10,
     marginRight: 10,
     paddingTop: 10,
@@ -62,6 +64,11 @@ const styles = StyleSheet.create({
   },
   btnTextChoose: {
     color: '#fff',
+  },
+  goodsImg: {
+    width: 70,
+    height: 70,
+    marginRight: 10,
   },
 });
 export default styles;

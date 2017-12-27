@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
+import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
@@ -23,37 +23,35 @@ class Child extends Base {
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
         <View style={styles.goodsitem}>
           <View style={styles.goodsDetail}>
+            <Image style={styles.goodsImg} source={{ uri: item.supplyImages[0].imgUrl }} />
             <View style={{ flex: 1 }}>
               <View style={styles.goodsPrice}>
-                <Text style={{ flex: 1, fontSize: 14, color: '#666' }}>{item.categoryName}</Text>
+                <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>{item.brandName} {item.categoryName}</Text>
                 <View style={{}}>
-                  <Text style={{ fontSize: 16, color: '#FC8521' }}>面议</Text>
+                  <Text style={{ fontSize: 16, color: '#FC8521' }}>{item.wholesalePrice}/{item.unit}</Text>
                 </View>
               </View>
-              <View style={{ marginBottom: 6 }}>
-                <Text style={{ fontSize: 12, color: '#666' }}>品种:{item.brandName}</Text>
-              </View>
               <View>
-                <Text style={{ fontSize: 12, color: '#666' }}>浏览次数:4次</Text>
+                <Text style={{ fontSize: 14, color: '#666' }}>90-100g,野生,红色</Text>
               </View>
             </View>
           </View>
           <View style={styles.readPeople}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: '#FC8521', fontSize: 14 }}>{item.purchaseQuotes.length}</Text>
-              <Text style={{ color: '#666', fontSize: 14 }}>人报价</Text>
+              <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
+              <Text style={{ color: '#666', fontSize: 14 }}>人查看</Text>
             </View>
-            <Text style={styles.renovateTime}>距截止{item.purchaseTime}天</Text>
+            <Text style={styles.renovateTime}>2017-12-19 13:13:10 刷新</Text>
           </View>
           <View style={styles.btnList}>
-            <TouchableOpacity
-              style={styles.btnBox}
-              onPress={() => this.StopPurchaseService(item.purchaseId)}
-            >
-              <Text style={styles.btnText}>停止采购</Text>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>下架</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
-              <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>修改</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.btnBox}>
+              <Text style={styles.btnText}>刷新</Text>
             </TouchableOpacity>
           </View>
         </View>
