@@ -12,28 +12,12 @@ class Base extends React.Component {
       purchaseId: '',
       price: '',
       supplCount: '',
-      unit: '颗',
+      unit: '',
       cityArea: '',
       supplyProvinceCode: '',
       supplyCityCode: '',
       memo: '',
-      items: [{
-        name: '三角枫',
-        imgUrl: 'http://dcloud.io/hellomui/images/yuantiao.jpg',
-        cur: true,
-      }, {
-        name: '三角枫',
-        imgUrl: 'http://dcloud.io/hellomui/images/yuantiao.jpg',
-      }, {
-        name: '三角枫',
-        imgUrl: 'http://dcloud.io/hellomui/images/yuantiao.jpg',
-      }, {
-        name: '三角枫',
-        imgUrl: 'http://dcloud.io/hellomui/images/yuantiao.jpg',
-      }, {
-        name: '三角枫',
-        imgUrl: 'http://dcloud.io/hellomui/images/yuantiao.jpg',
-      }],
+      items: null,
       itemIndex: 0,
     };
   }
@@ -49,6 +33,13 @@ class Base extends React.Component {
       this.getBjCity(data);
     });
     global.storage.load({ key: 'userData' }).then(res => this.setState({ memberId: res.memberId }));
+    const { purchaseId, unit, items } = this.props.navigation.state.params;
+    items[0].cur = true;
+    this.setState({
+      purchaseId,
+      unit,
+      items,
+    });
   }
   deleteData = () => {
     this.emitBjCity.remove();
@@ -75,6 +66,8 @@ class Base extends React.Component {
       supplyProvinceCode,
       supplyCityCode,
       memo,
+      items,
+      itemIndex,
     } = this.state;
     const reg = /^[1-9]*[1-9][0-9]*$/;
     if (!reg.test(price)) {
@@ -96,14 +89,16 @@ class Base extends React.Component {
     this.sleek.toggle();
     const purchaseQuote = {
       memberId,
-      purchaseId,
+      purchaseId: purchaseId.toString(),
       price,
       supplCount,
       unit,
       supplyProvinceCode,
       supplyCityCode,
       memo,
+      supplyId: items[itemIndex].supplyId.toString(),
     };
+    console.log(purchaseQuote);
     CreatePurchaseQuoteService({
       purchaseQuote: JSON.stringify(purchaseQuote),
     })
@@ -111,7 +106,9 @@ class Base extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        Toast.show('发布成功');
+        Toast.show('报价成功');
+        DeviceEventEmitter.emit('cbjStatus');
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }
@@ -122,6 +119,7 @@ class Base extends React.Component {
   }
 }
 Base.propTypes = {
+  navigation: PropTypes.object,
   pop: PropTypes.func,
 };
 export default Base;

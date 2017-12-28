@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Mcolor,
     paddingLeft: 5,
+    textAlign: 'right',
     flex: 1,
   },
   mainText: {
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   },
   listLabelText: {
     fontSize: 14,
-    color: '#888',
+    color: Mcolor,
   },
   listIcon: {
     fontSize: 18,

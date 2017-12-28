@@ -34,9 +34,9 @@ class cgyPrice extends base {
                 key={index}
                 content={
                   <View style={styles.itemView} >
-                    <Image source={{ uri: item.imgUrl }} style={styles.itemImage} />
-                    <Text style={styles.itemName}>三角枫</Text>
-                    <Text style={styles.itemLabel}>11.00元/颗</Text>
+                    <Image source={{ uri: item.supplyImages[0].imgUrl }} style={styles.itemImage} />
+                    <Text style={styles.itemName}>{item.categoryName}</Text>
+                    <Text style={styles.itemLabel}>{item.wholesalePrice}元/{item.unit}</Text>
                     {
                       item.cur &&
                       <CheckBox style={styles.checkBox} checked />
@@ -141,11 +141,12 @@ class cgyPrice extends base {
   }
   render() {
     const { pop } = this.props;
+    const { items } = this.state;
     return (
       <Container>
         <Header back={pop} title="货品价格" />
         <Content>
-          {this._renderItems()}
+          {items && this._renderItems()}
           {this._renderOne()}
           {this._renderTwo()}
           {this._renderThree()}
