@@ -8,7 +8,7 @@ import { GoodList, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MainScreen extends base {
+class MainList extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +16,10 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
+    this.getInit();
+  }
+  componentWillUnmount() {
+    this.getDelInit();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -204,7 +208,7 @@ class MainScreen extends base {
     );
   }
   _renderAddressContent() {
-    const { leftLists } = this.state;
+    const { citys, cityIndex } = this.state;
     const { push } = this.props;
     return (
       <View style={{ flex: 1 }}>
@@ -219,14 +223,14 @@ class MainScreen extends base {
         </View>
         <View style={styles.usedCityView}>
           {
-            leftLists.length === 0 ?
-            leftLists.map((item, index) => (
+            citys.length === 0 ?
+            citys.map((item, index) => (
               <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
                 <View style={styles.contetnTabView}>
                   <Text
                     style={styles.mainText}
                   >
-                    {item.label}
+                    {item.name}
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
@@ -241,13 +245,13 @@ class MainScreen extends base {
           <View style={[styles.f1, { backgroundColor: '#f2f2f2' }]}>
             <Content>
               {
-                leftLists.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
+                citys.map((item, index) => (
+                  <TouchableWithoutFeedback key={index} onPress={() => { this.changeCityTab(index); }}>
                     <View style={[styles.addressLeftList, item.cur && styles.addressLeftListCur]}>
                       <Text
                         style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
                       >
-                        {item.label}
+                        {item.name}
                       </Text>
                     </View>
                   </TouchableWithoutFeedback>
@@ -258,13 +262,13 @@ class MainScreen extends base {
           <View style={[styles.f1, { backgroundColor: '#f9f9f9' }]}>
             <Content>
               {
-                leftLists.map((item, index) => (
+                citys[cityIndex].citys.map((item, index) => (
                   <TouchableWithoutFeedback key={index} onPress={() => { this.selectCity(index); }}>
                     <View style={styles.addressRightList}>
                       <Text
                         style={styles.leftNavText}
                       >
-                        {item.label}
+                        {item.name}
                       </Text>
                     </View>
                   </TouchableWithoutFeedback>
@@ -338,8 +342,8 @@ class MainScreen extends base {
   }
 }
 
-MainScreen.propTypes = {
+MainList.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(MainList);

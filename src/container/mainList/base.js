@@ -1,8 +1,12 @@
 import React from 'react';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { GetHistoryOrderList } from '../../api';
+import PropTypes from 'prop-types';
+import { DeepClone, GetSupplyService, GetAppCategoryService } from '../../api';
+import citysJson from '../../api/citys.json';
 
+citysJson[0].cur = true;
+citysJson[0].citys[0].cur = true;
 let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
@@ -11,6 +15,8 @@ class Base extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
+      citys: DeepClone(citysJson),
+      cityIndex: 0,
       leftLists: [{
         id: '1',
         label: '水果',
@@ -71,6 +77,8 @@ class Base extends React.Component {
         }],
         cur: true,
       }],
+      items: [],
+      childItems: [],
       leftIndex: 0,
       isMaskerShow: false,
       isSkuShow: false,
@@ -87,41 +95,53 @@ class Base extends React.Component {
       noData: false,
     };
   }
+  getInit = () => {
+    global.storage.load({ key: 'userData' })
+    .then(res => this.setState({ memberId: res.memberId }));
+    this.GetAppCategoryService();
+  }
+  getDelInit = () => {
+  }
   getData = () => {
-    const { id, pageSize, rowdata, ds, refresh, dataSource } = this.state;
-    GetHistoryOrderList({
-      id,
+    const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
+    this.sleek.toggle();
+    GetSupplyService({
+      currentPage,
       pageSize,
-    }).then((lists) => {
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        if (result.length === 0 && rowdata.length === 0) {
-          this.setState({
-            noData: true,
-          });
-          return;
-        }
-        if (refresh) {
-          this.setState({
-            rowdata: result,
-            dataSource: ds.cloneWithRows(result),
-            id: result[result.length - 1].orderID,
-            refresh: false,
-            nomore: false,
-          });
-        } else {
-          if (result.length === 0) {
+      type: '0',
+      memberId: '1',
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          if (items.length === 0) {
+            this.setState({
+              noData: true,
+            });
+          } else {
             this.setState({
               nomore: true,
               loading: false,
             });
-            return;
           }
-          const newresult = rowdata.concat(result);
+          return;
+        }
+        if (refresh) {
           this.setState({
-            rowdata: newresult,
-            dataSource: dataSource.cloneWithRows(newresult),
-            id: result[result.length - 1].orderID,
+            items: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = items.concat(result);
+          this.setState({
+            items: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
             loading: false,
           });
         }
@@ -135,7 +155,45 @@ class Base extends React.Component {
       } else {
         Toast.show('温馨提示');
       }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
     });
+  }
+  GetAppCategoryService = () => {
+    GetAppCategoryService()
+    .then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const items = res.data;
+        items[0].cur = true;
+        this.setState({
+          items: res.data,
+          childItems: items[0].childs,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+  }
+  changeCityTab = (index) => {
+    const { citys, cityIndex } = this.state;
+    if (cityIndex === index) {
+      return;
+    }
+    citys[index].cur = true;
+    citys[cityIndex].cur = false;
+    this.setState({
+      citys,
+      cityIndex: index,
+    });
+  }
+  selectCity = (index) => {
+    this.hideMasker();
+    const { citys, cityIndex } = this.state;
+    console.log(citys[cityIndex].citys[index].name);
   }
   showAction = (index) => {
     const { isSkuShow, isVarietiesShow, isCategoryShow, isAddressShow } = this.state;
@@ -179,10 +237,6 @@ class Base extends React.Component {
   saveMasker = () => {
     this.hideMasker();
   }
-  selectCity = (index) => {
-    this.hideMasker();
-    console.log(index);
-  }
   changeLeftTab = (index) => {
     const { leftLists, leftIndex } = this.state;
     if (leftIndex === index) {
@@ -196,7 +250,7 @@ class Base extends React.Component {
     });
   }
   goGoodDetail(item) {
-    this.props.push()
+    this.props.push(item);
   }
   _onRefresh = () => {
     this.setState({
@@ -211,5 +265,7 @@ class Base extends React.Component {
     }
   }
 }
-
+Base.propTypes = {
+  push: PropTypes.func,
+};
 export default Base;

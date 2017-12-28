@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute } from '../../actions';
 import { Header, TFeedback } from '../../components';
 import base from './base';
-import { Global } from '../../utils';
 import styles from './styles';
 
 class CgCitys extends base {
