@@ -3,6 +3,7 @@ import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, Refre
 import PropTypes from 'prop-types';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
+import { TFeedback } from '../../components';
 import { pushRoute } from '../../actions';
 import Base from './base';
 import styles from './styles';
@@ -52,9 +53,13 @@ class Child extends Base {
             >
               <Text style={styles.btnText}>停止采购</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
-              <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
-            </TouchableOpacity>
+            <TFeedback
+              content={
+                <View style={[styles.btnBox, styles.btnChoose]}>
+                  <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
+                </View>}
+              onPress={() => { push({ key: 'SeePrice' }); }}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>
