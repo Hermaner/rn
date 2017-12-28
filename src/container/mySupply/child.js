@@ -21,6 +21,7 @@ class Child extends Base {
   }
   _renderRow = (item) => {
     const { push } = this.props;
+    const { type1, type2, type3 } = this.state;
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
         <View style={styles.goodsitem}>
@@ -53,19 +54,59 @@ class Child extends Base {
             <Text style={styles.renovateTime}>{item.modiDate}刷新</Text>
           </View>
           <View style={styles.btnList}>
-            <TFeedback
-              content={
-                <View style={styles.btnBox}>
-                  <Text style={styles.btnText}>下架</Text>
-                </View>}
-              onPress={() => this.renovate(item.supplyId)}
-            />
-            <TouchableOpacity style={styles.btnBox}>
-              <Text style={styles.btnText}>修改</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnBox} onPress={() => this.renovate(item.supplyId)}>
-              <Text style={styles.btnText}>刷新</Text>
-            </TouchableOpacity>
+            {
+              this.props.type === '0' &&
+                type1.map((btnType, index) => (
+                  <TFeedback
+                    key={index}
+                    content={
+                      <View style={[styles.btnBox, btnType.isBtn && styles.btnChoose]}>
+                        <Text
+                          style={[styles.btnText, btnType.isBtn && styles.btnTextChoose]}
+                        >
+                          {btnType.title}
+                        </Text>
+                      </View>}
+                    // onPress={() => this.undercarriage(item.supplyId)}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                  />
+                ))
+            }
+            {
+              this.props.type === '1' &&
+                type2.map((btnType, index) => (
+                  <TFeedback
+                    key={index}
+                    content={
+                      <View style={[styles.btnBox, btnType.isBtn && styles.btnChoose]}>
+                        <Text
+                          style={[styles.btnText, btnType.isBtn && styles.btnTextChoose]}
+                        >
+                          {btnType.title}
+                        </Text>
+                      </View>}
+                    // onPress={() => this.undercarriage(item.supplyId)}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                  />
+                ))
+            }
+            {
+              this.props.type === '2' &&
+                type3.map((btnType, index) => (
+                  <TFeedback
+                    key={index}
+                    content={
+                      <View style={[styles.btnBox, btnType.isBtn && styles.btnChoose]}>
+                        <Text
+                          style={[styles.btnText, btnType.isBtn && styles.btnTextChoose]}
+                        >
+                          {btnType.title}
+                        </Text>
+                      </View>}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                  />
+                ))
+            }
           </View>
         </View>
       </TouchableWithoutFeedback>

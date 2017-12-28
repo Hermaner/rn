@@ -3,7 +3,7 @@ import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { ActionSheet } from 'native-base';
 import PropTypes from 'prop-types';
-import { RefreshSupplyService, StopPurchaseService, GetSupplyService } from '../../api';
+import { RefreshSupplyService, StopPurchaseService, GetSupplyService, StopSupplyService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -23,6 +23,41 @@ class Base extends React.Component {
       loading: true, // 是否加载中
       nomore: false, // 是否没有更多
       noData: false, // 是否没有数据
+      type1: [{
+        id: 1,
+        title: '下架',
+        isBtn: false,
+      }, {
+        id: 1,
+        title: '修改',
+        isBtn: false,
+      }, {
+        id: 1,
+        title: '刷新',
+        isBtn: true,
+      }],
+      type2: [{
+        id: 1,
+        title: '删除',
+        isBtn: false,
+      }, {
+        id: 1,
+        title: '修改',
+        isBtn: false,
+      }, {
+        id: 1,
+        title: '上架',
+        isBtn: true,
+      }],
+      type3: [{
+        id: 1,
+        title: '删除',
+        isBtn: false,
+      }, {
+        id: 1,
+        title: '修改',
+        isBtn: true,
+      }],
     };
   }
   getData = () => {
@@ -85,9 +120,11 @@ class Base extends React.Component {
     });
   }
   renovate = (supplyId) => {
+    this.sleek.toggle();
     RefreshSupplyService({
       supplyId,
     }).then((res) => {
+      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         this._onRefresh();
@@ -98,6 +135,46 @@ class Base extends React.Component {
       this.toggleSleek();
       Toast.show(err);
     });
+  }
+  undercarriage = (supplyId) => {
+    this.sleek.toggle();
+    StopSupplyService({
+      supplyId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        this._onRefresh();
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
+  btnChange = (btnName, supplyId) => {
+    switch (btnName) {
+      case '下架':
+        this.undercarriage(supplyId);
+        console.log('下架');
+        break;
+      case '修改':
+        console.log('修改没做');
+        break;
+      case '刷新':
+        this.renovate(supplyId);
+        console.log('刷新');
+        break;
+      case '上架':
+        console.log('上架没做');
+        break;
+      case '删除':
+        console.log('删除没做');
+        break;
+      default:
+        break;
+    }
   }
   toggleSleek = () => {
     this.setState({
