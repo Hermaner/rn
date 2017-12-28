@@ -18,6 +18,7 @@ class Base extends React.Component {
         id: 1,
         icn: 'analytics',
         title: '蔬菜',
+        page: 'User',
         color: '#1CC127',
       }, {
         id: 1,

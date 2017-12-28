@@ -272,6 +272,7 @@ class Base extends React.Component {
       receiveCityCode,
       memo,
     };
+    this.sleek.toggle();
     CreatePurchaseService({
       purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),

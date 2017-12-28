@@ -67,7 +67,10 @@ class AdjectiveInfoBase extends React.Component {
       if (res.isSuccess) {
         global.storage.save({
           key: 'userData',
-          data: res.data,
+          data: {
+            ...res.data,
+            memberId: res.data.memberId.toString(),
+          },
           expires: null,
         });
         Toast.show('保存成功');
