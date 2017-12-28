@@ -15,7 +15,7 @@ class Child extends Base {
     };
   }
   componentDidMount() {
-    this._onRefresh();
+    this.getInit();
   }
   _renderRow = (item) => {
     const { push } = this.props;

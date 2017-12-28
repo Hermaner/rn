@@ -51,7 +51,7 @@ class Base extends React.Component {
       sendCityCode: '',
       sendDistrictCode: '',
       memo: '',
-      memberId: '1',
+      memberId: '',
       supplyMode: '',
       logisticsMode: '',
       renderServices: '',
@@ -153,6 +153,7 @@ class Base extends React.Component {
     );
   }
   initData = () => {
+    global.storage.load({ key: 'userData' }).then(res => this.setState({ memberId: res.memberId }));
     this.emitGetSpot = DeviceEventEmitter.addListener('getSpot', (data) => {
       this.getSpot(data);
     });
@@ -223,10 +224,6 @@ class Base extends React.Component {
       purchaseItems,
       upImages,
     } = this.state;
-    // if (!memberId) {
-    //   Toast.show('请先登录');
-    //   return;
-    // }
     if (!endDate) {
       Toast.show('请选择是否现货');
       return;
@@ -265,8 +262,6 @@ class Base extends React.Component {
       logisticsMode,
       renderServices,
     };
-    console.log(supply)
-    console.log(purchaseItems)
     this.sleek.toggle();
     CreateSupplyService({
       supply: JSON.stringify(supply),

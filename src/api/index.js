@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function SaveMemberRoleService(data) {
+  return get('SaveMemberRoleService', data);
+}
 export function GetIdentityService(data) {
   return get('GetIdentityService', data);
 }

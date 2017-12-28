@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { GetIdentityService } from '../../api';
+import { GetIdentityService, SaveMemberRoleService } from '../../api';
 
 class AdjectiveInfoBase extends React.Component {
   constructor(props) {
@@ -9,12 +9,24 @@ class AdjectiveInfoBase extends React.Component {
       items: [],
       typeIndex: null,
       type: 0,
+      memberId: '',
     };
+  }
+  getInit = () => {
+    this.GetIdentityService();
+    global.storage.load({
+      key: 'userData',
+    }).then((ret) => {
+      this.setState({
+        memberId: ret.memberId,
+      });
+    }).catch(() => {
+      console.log('没有用户数据');
+    });
   }
   GetIdentityService = () => {
     GetIdentityService()
     .then((res) => {
-      console.log(res);
       this.setState({
         items: res.data,
       });
@@ -40,13 +52,32 @@ class AdjectiveInfoBase extends React.Component {
     });
   }
   submitData = () => {
-    this.sleek.toggle();
-    const { items, typeIndex, type } = this.state;
+    const { items, typeIndex, type, memberId } = this.state;
     if (typeIndex === null) {
       Toast.show('请选择身份');
       return;
     }
-    console.log(items[typeIndex].identityId, type);
+    this.sleek.toggle();
+    SaveMemberRoleService({
+      memberId,
+      role: type,
+      identityId: items[typeIndex].identityId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        global.storage.save({
+          key: 'userData',
+          data: res.data,
+          expires: null,
+        });
+        Toast.show('保存成功');
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
+    });
   }
 }
 export default AdjectiveInfoBase;

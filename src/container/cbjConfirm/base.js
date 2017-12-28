@@ -8,7 +8,7 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      memberId: '1',
+      memberId: '',
       purchaseId: '',
       price: '',
       supplCount: '',
@@ -48,6 +48,7 @@ class Base extends React.Component {
     this.emitBjCity = DeviceEventEmitter.addListener('getBjCity', (data) => {
       this.getBjCity(data);
     });
+    global.storage.load({ key: 'userData' }).then(res => this.setState({ memberId: res.memberId }));
   }
   deleteData = () => {
     this.emitBjCity.remove();
@@ -92,14 +93,6 @@ class Base extends React.Component {
       Toast.show('请输入备注');
       return;
     }
-    console.log(memberId,
-    purchaseId,
-    price,
-    supplCount,
-    unit,
-    supplyProvinceCode,
-    supplyCityCode,
-    memo);
     this.sleek.toggle();
     const purchaseQuote = {
       memberId,

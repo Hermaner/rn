@@ -1,7 +1,5 @@
 import React from 'react';
 import { ListView } from 'react-native';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 
 class Base extends React.Component {
   constructor(props) {
@@ -14,6 +12,7 @@ class Base extends React.Component {
         id: 1,
         icn: 'analytics',
         title: '水果',
+        page: 'MainList',
         color: '#1CC127',
       }, {
         id: 1,

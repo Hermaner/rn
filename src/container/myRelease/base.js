@@ -18,6 +18,7 @@ class Base extends React.Component {
       items: [],
       currentPage: 1,
       pageSize: '5',
+      memberId: '',
       isSleekShow: false,
       refresh: false, // 是否是刷新
       loading: true, // 是否加载中
@@ -25,14 +26,18 @@ class Base extends React.Component {
       noData: false, // 是否没有数据
     };
   }
+  getInit = () => {
+    global.storage.load({ key: 'userData' })
+    .then(res => this.setState({ memberId: res.memberId }, this._onRefresh));
+  }
   getData = () => {
-    const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
+    const { currentPage, pageSize, items, ds, refresh, dataSource, memberId } = this.state;
     const { type } = this.props;
     GetPurchaseService({
       currentPage,
       pageSize,
       type,
-      memberId: '0',
+      memberId,
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data.pageData;

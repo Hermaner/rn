@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 import { GetCodeService, RegisterMemberService } from '../../api';
 
 class UserBase extends React.Component {
@@ -101,12 +102,25 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        global.storage.save({
+          key: 'userData',
+          data: res.data,
+          expires: null,
+        });
         Toast.show('登陆成功');
+        if (res.data.role) {
+          this.props.resetHome();
+        } else {
+          this.props.push({ key: 'WhyChoose' });
+        }
       }
     }).catch(() => {
       this.sleek.toggle();
     });
   }
 }
-
+UserBase.propTypes = {
+  push: PropTypes.func,
+  resetHome: PropTypes.func,
+};
 export default UserBase;

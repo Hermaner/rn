@@ -10,6 +10,7 @@ import {
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
+import Storage from 'react-native-storage';
 
 import AppReducer from './src/reducers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
@@ -54,6 +55,12 @@ class App extends React.Component {
     JPushModule.getRegistrationID((registrationId) => {
       console.log(registrationId);
       this.setState({ cid: registrationId });
+    });
+    global.storage = new Storage({
+      size: 1000,
+      storageBackend: AsyncStorage,
+      defaultExpires: 1000 * 3600 * 24,
+      enableCache: true,
     });
   }
   store = createStore(

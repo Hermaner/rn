@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header, TFeedback, Loading } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
-import adjectiveInfoBase from './base';
+import Base from './base';
 import styles from './styles';
 
-class AdjectiveInfo extends adjectiveInfoBase {
+class AdjectiveInfo extends Base {
   constructor(props) {
     super(props);
     const { type } = this.props.navigation.state.params;
@@ -19,7 +19,7 @@ class AdjectiveInfo extends adjectiveInfoBase {
     };
   }
   componentDidMount() {
-    this.GetIdentityService();
+    this.getInit();
   }
   goRoute = (key) => {
     this.props.push(key);

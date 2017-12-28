@@ -64,6 +64,7 @@ class Base extends React.Component {
       { value: '90', label: '3个月' },
       { value: '180', label: '6个月' }],
       uptoken: '',
+      memberId: '',
       categoryId: '',
       brandId: '',
       demand: '',
@@ -169,8 +170,12 @@ class Base extends React.Component {
     );
   }
   initData = () => {
-    this.setState({
-      phone: '15666666666',
+    global.storage.load({ key: 'userData' })
+    .then((res) => {
+      this.setState({
+        memberId: res.memberId,
+        phone: res.phone,
+      });
     });
     this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
       this.getData();
@@ -237,10 +242,6 @@ class Base extends React.Component {
       purchaseItems,
       upImages,
     } = this.state;
-    // if (!memberId) {
-    //   Toast.show('请先登录');
-    //   return;
-    // }
     const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
     if (telReg) {
       Toast.show('手机号格式不对');
