@@ -2,9 +2,8 @@ import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TFeedback } from '../../components';
+import { TFeedback, Loading } from '../../components';
 import { pushRoute } from '../../actions';
-import { Loading } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -66,7 +65,7 @@ class Child extends Base {
     );
   }
   render() {
-    const { noData, dataSource, nomore, refresh, isSleekShow } = this.state;
+    const { noData, dataSource, nomore, refresh } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {
