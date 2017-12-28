@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppRegistry, AsyncStorage, Platform, DeviceEventEmitter, NativeAppEventEmitter } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import * as WeChat from 'react-native-wechat';
 import JPushModule from 'jpush-react-native';
@@ -62,6 +63,7 @@ class App extends React.Component {
       defaultExpires: 1000 * 3600 * 24,
       enableCache: true,
     });
+    global.Toast = Toast;
   }
   store = createStore(
     AppReducer,
@@ -69,7 +71,7 @@ class App extends React.Component {
     applyMiddleware(
       thunk,
     ),
-  ), autoRehydrate());
+  ));
   render() {
     return (
       <Provider store={this.store}>

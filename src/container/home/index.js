@@ -32,7 +32,7 @@ class HomeScreen extends base {
               <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
             </View>
           }
-          onPress={() => push({ key: 'WhyChoose', params: { type: '2' } })}
+          onPress={() => push({ key: 'MainList' })}
         />
         <TOpacity
           style={styles.flexOne}
@@ -50,7 +50,7 @@ class HomeScreen extends base {
               <Icon style={[styles.textCenter, styles.hui, styles.publicIcn]} name="analytics" />
               <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农咨询</Text>
             </View>}
-          onPress={() => { push({ key: 'User' }); }}
+          onPress={() => { push({ key: 'HuinongConsult' }); }}
         />
         <TFeedback
           content={
@@ -209,11 +209,15 @@ class HomeScreen extends base {
           {this.renderSwiper()}
           {this.renderForYou()}
         </Content>
-        <View style={styles.bomFixedView}>
-          <View style={styles.bomFixedBtn}>
-            <Text style={styles.bomFixedText}>去采购</Text>
-          </View>
-        </View>
+        <TOpacity
+          style={styles.bomFixedView}
+          content={
+            <View style={styles.bomFixedBtn}>
+              <Text style={styles.bomFixedText}>去采购</Text>
+            </View>
+          }
+          onPress={() => this.props.push({ key: 'MainSearch', params: { type: '2' } })}
+        />
       </Container>
     );
   }

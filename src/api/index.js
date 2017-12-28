@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function GetSameCategoryPurchaseService(data) {
+  return get('GetSameCategoryPurchaseService', data);
+}
 export function SaveMemberRoleService(data) {
   return get('SaveMemberRoleService', data);
 }

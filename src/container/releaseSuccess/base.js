@@ -1,23 +1,31 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
+import PropTypes from 'prop-types';
+import { GetSameCategoryPurchaseService } from '../../api';
 
 class PurchaseDetailBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected1: '',
-      selected2: '',
+      memberId: '',
     };
   }
-  chooseBank = (value) => {
-    this.setState({
-      selected1: value,
-    });
+  getInit = () => {
+    global.storage.load({ key: 'userData' })
+    .then(res => this.setState({ memberId: res.memberId }, this.getData));
   }
-  choosePlace = (value) => {
-    this.setState({
-      selected2: value,
+  getData = () => {
+    const { memberId } = this.state;
+    GetSameCategoryPurchaseService({
+      memberId,
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        this.setState({
+          items: res.data,
+        });
+      } else {
+        global.Toast.show(res.msg);
+      }
     });
   }
 }
