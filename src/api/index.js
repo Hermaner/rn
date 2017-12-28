@@ -125,3 +125,6 @@ export function GetSupplyService(data) {
 export function RefreshSupplyService(data) {
   return get('RefreshSupplyService', data);
 }
+export function StopSupplyService(data) {
+  return get('StopSupplyService', data);
+}

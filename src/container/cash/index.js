@@ -62,7 +62,7 @@ class Cash extends cashBase {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="添加对公账号" />
+        <Header back={pop} title="取现" />
         <Content>
           {this._renderBody()}
         </Content>

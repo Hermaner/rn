@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   btnChoose: {
-    backgroundColor: '#FC8521',
+    backgroundColor: '#65C12E',
   },
   btnTextChoose: {
     color: '#fff',
