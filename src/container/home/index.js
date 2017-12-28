@@ -65,16 +65,22 @@ class HomeScreen extends base {
   }
   renderGoodsType() {
     const { goodsTypeList } = this.state;
+    const { push } = this.props;
     return (
       <View style={styles.goodsType}>
         <Text style={styles.goodsTypeTitle}>货品分类</Text>
         <View style={styles.flexRow}>
           {
             goodsTypeList.map((item, index) => (
-              <TouchableOpacity key={index} style={styles.goodsTypeOne}>
-                <Icon style={[styles.goodsTypeIcn, { color: item.color }]} name={item.icn} />
-                <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.title}</Text>
-              </TouchableOpacity>
+              <TFeedback
+                key={index}
+                content={
+                  <View style={styles.goodsTypeOne}>
+                    <Icon style={[styles.goodsTypeIcn, { color: item.color }]} name={item.icn} />
+                    <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.title}</Text>
+                  </View>}
+                onPress={() => { push({ key: item.page }); }}
+              />
             ))
           }
         </View>

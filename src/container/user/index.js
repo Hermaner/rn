@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
-import { popRoute, pushRoute } from '../../actions';
+import { popRoute, pushRoute, resetHome } from '../../actions';
 import { Header, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
@@ -93,4 +93,4 @@ UserPage.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(UserPage);
+export default connect(null, { pop: popRoute, push: pushRoute, resetHome })(UserPage);

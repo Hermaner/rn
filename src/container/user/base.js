@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 import { GetCodeService, RegisterMemberService } from '../../api';
 
 class UserBase extends React.Component {
@@ -8,6 +9,7 @@ class UserBase extends React.Component {
     this.isSend = false;
     this.state = {
       phone: '',
+      sendPhone: '',
       sec: 60,
       password: '',
       code: '',
@@ -62,6 +64,7 @@ class UserBase extends React.Component {
       if (res.isSuccess) {
         this.setState({
           codeVal: res.data,
+          sendPhone: phone,
         });
         actionMethod();
         this.timer = setInterval(
@@ -78,7 +81,12 @@ class UserBase extends React.Component {
       phone,
       code,
       codeVal,
+      sendPhone,
     } = this.state;
+    if (phone !== sendPhone) {
+      Toast.show('手机号与发送短信的手机号不一致');
+      return;
+    }
     if (!code) {
       Toast.show('请输入验证码');
       return;
@@ -94,12 +102,25 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        global.storage.save({
+          key: 'userData',
+          data: res.data,
+          expires: null,
+        });
         Toast.show('登陆成功');
+        if (res.data.role) {
+          this.props.resetHome();
+        } else {
+          this.props.push({ key: 'WhyChoose' });
+        }
       }
     }).catch(() => {
       this.sleek.toggle();
     });
   }
 }
-
+UserBase.propTypes = {
+  push: PropTypes.func,
+  resetHome: PropTypes.func,
+};
 export default UserBase;
