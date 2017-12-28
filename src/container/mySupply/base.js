@@ -3,7 +3,7 @@ import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { ActionSheet } from 'native-base';
 import PropTypes from 'prop-types';
-import { GetPurchaseService, StopPurchaseService, GetSupplyService } from '../../api';
+import { RefreshSupplyService, StopPurchaseService, GetSupplyService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -35,7 +35,7 @@ class Base extends React.Component {
       memberId: '1',
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res.data);
+        console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (items.length === 0) {
@@ -74,6 +74,21 @@ class Base extends React.Component {
             nomore: true,
           });
         }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
+  renovate = (supplyId) => {
+    RefreshSupplyService({
+      supplyId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log(res);
+        this._onRefresh();
       } else {
         Toast.show('温馨提示');
       }

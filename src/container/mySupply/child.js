@@ -26,22 +26,29 @@ class Child extends Base {
             <Image style={styles.goodsImg} source={{ uri: item.supplyImages[0].imgUrl }} />
             <View style={{ flex: 1 }}>
               <View style={styles.goodsPrice}>
-                <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>{item.brandName} {item.categoryName}</Text>
-                <View style={{}}>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                  <Text style={{ fontSize: 16, color: '#333' }}>{item.brandName} {item.categoryName}</Text>
+                  {
+                    item.supplyItems.map((item2, index2) => (
+                      <Text key={index2} style={{ fontSize: 16, color: '#333' }}> {item2.specName} </Text>
+                    ))
+                  }
+                </View>
+                <View>
                   <Text style={{ fontSize: 16, color: '#FC8521' }}>{item.wholesalePrice}/{item.unit}</Text>
                 </View>
               </View>
               <View>
-                <Text style={{ fontSize: 14, color: '#666' }}>90-100g,野生,红色</Text>
+                <Text style={{ fontSize: 14, color: '#666' }}>{item.specName}</Text>
               </View>
             </View>
           </View>
           <View style={styles.readPeople}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: '#FC8521', fontSize: 14 }}>11</Text>
+              <Text style={{ color: '#FC8521', fontSize: 14 }}>{item.lookCount}</Text>
               <Text style={{ color: '#666', fontSize: 14 }}>人查看</Text>
             </View>
-            <Text style={styles.renovateTime}>2017-12-19 13:13:10 刷新</Text>
+            <Text style={styles.renovateTime}>{item.modiDate}刷新</Text>
           </View>
           <View style={styles.btnList}>
             <TouchableOpacity style={styles.btnBox}>
@@ -50,7 +57,7 @@ class Child extends Base {
             <TouchableOpacity style={styles.btnBox}>
               <Text style={styles.btnText}>修改</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnBox}>
+            <TouchableOpacity style={styles.btnBox} onPress={() => this.renovate(item.supplyId)}>
               <Text style={styles.btnText}>刷新</Text>
             </TouchableOpacity>
           </View>
