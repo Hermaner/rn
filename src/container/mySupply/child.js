@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
+import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { Loading } from '../../components';
+import { Loading, TFeedback } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -52,9 +53,13 @@ class Child extends Base {
             <Text style={styles.renovateTime}>{item.modiDate}刷新</Text>
           </View>
           <View style={styles.btnList}>
-            <TouchableOpacity style={styles.btnBox}>
-              <Text style={styles.btnText}>下架</Text>
-            </TouchableOpacity>
+            <TFeedback
+              content={
+                <View style={styles.btnBox}>
+                  <Text style={styles.btnText}>下架</Text>
+                </View>}
+              onPress={() => this.renovate(item.supplyId)}
+            />
             <TouchableOpacity style={styles.btnBox}>
               <Text style={styles.btnText}>修改</Text>
             </TouchableOpacity>
