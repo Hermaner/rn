@@ -209,6 +209,11 @@ class HomeScreen extends base {
           {this.renderSwiper()}
           {this.renderForYou()}
         </Content>
+        <View style={styles.bomFixedView}>
+          <View style={styles.bomFixedBtn}>
+            <Text style={styles.bomFixedText}>去采购</Text>
+          </View>
+        </View>
       </Container>
     );
   }

@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { Mgreen, Mcolor } from '../../utils';
-const { width } = Dimensions.get('window');
+import { st, Mcolor } from '../../utils';
 
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   headerNavigation: {
     paddingTop: 10,
@@ -161,6 +161,25 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 10,
     textAlign: 'center',
+  },
+  bomFixedView: {
+    height: 0,
+    position: 'relative',
+  },
+  bomFixedBtn: {
+    width: 50,
+    height: 50,
+    overflow: 'hidden',
+    backgroundColor: Mcolor,
+    position: 'absolute',
+    right: 10,
+    bottom: 40,
+    borderRadius: 25,
+    ...st.jacenter,
+  },
+  bomFixedText: {
+    fontSize: 14,
+    color: '#fff',
   },
 });
 export default styles;
