@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { TFeedback } from '../../components';
 import { pushRoute } from '../../actions';
 import { Loading } from '../../components';
 import Base from './base';
@@ -52,9 +53,13 @@ class Child extends Base {
             >
               <Text style={styles.btnText}>停止采购</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.btnBox, styles.btnChoose]}>
-              <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
-            </TouchableOpacity>
+            <TFeedback
+              content={
+                <View style={[styles.btnBox, styles.btnChoose]}>
+                  <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
+                </View>}
+              onPress={() => { push({ key: 'SeePrice' }); }}
+            />
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -79,6 +79,7 @@ import CashRule from '../container/cashRule';
 import ReleaseSuccess from '../container/releaseSuccess';
 import ReviseSuccess from '../container/reviseSuccess';
 import SeePrice from '../container/seePrice';
+import PriceDetail from '../container/priceDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -156,6 +157,7 @@ export const AppNavigator = StackNavigator({
   ReleaseSuccess: { screen: ReleaseSuccess },
   ReviseSuccess: { screen: ReviseSuccess },
   SeePrice: { screen: SeePrice },
+  PriceDetail: { screen: PriceDetail },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

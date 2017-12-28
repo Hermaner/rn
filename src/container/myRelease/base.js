@@ -38,6 +38,7 @@ class Base extends React.Component {
       type,
       memberId,
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
