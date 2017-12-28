@@ -8,6 +8,7 @@ class UserBase extends React.Component {
     this.isSend = false;
     this.state = {
       phone: '',
+      sendPhone: '',
       sec: 60,
       password: '',
       code: '',
@@ -62,6 +63,7 @@ class UserBase extends React.Component {
       if (res.isSuccess) {
         this.setState({
           codeVal: res.data,
+          sendPhone: phone,
         });
         actionMethod();
         this.timer = setInterval(
@@ -78,7 +80,12 @@ class UserBase extends React.Component {
       phone,
       code,
       codeVal,
+      sendPhone,
     } = this.state;
+    if (phone !== sendPhone) {
+      Toast.show('手机号与发送短信的手机号不一致');
+      return;
+    }
     if (!code) {
       Toast.show('请输入验证码');
       return;
