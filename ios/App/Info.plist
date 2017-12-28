@@ -62,6 +62,8 @@
 	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string/>
 	<key>UIAppFonts</key>
