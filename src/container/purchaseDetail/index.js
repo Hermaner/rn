@@ -98,20 +98,11 @@ class PurchaseDetail extends purchaseDetailBase {
         <Content>
           {this._renderBody()}
         </Content>
-        {
-          false &&
-          <TouchableOpacity style={styles.footerBtn}>
+        <View style={styles.btnList}>
+          <TouchableOpacity style={[styles.btnListOne, styles.leftBtn]}>
             <Text style={styles.footerBtnText}>立即报价</Text>
           </TouchableOpacity>
-        }
-        {
-          true &&
-          <View style={styles.btnList}>
-            <TouchableOpacity style={[styles.btnListOne, styles.leftBtn]}>
-              <Text style={styles.footerBtnText}>立即报价</Text>
-            </TouchableOpacity>
-          </View>
-        }
+        </View>
       </Container>
     );
   }

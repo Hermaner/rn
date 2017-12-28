@@ -28,12 +28,14 @@ class Base extends React.Component {
   getData = () => {
     const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
     const { type } = this.props;
+    this.sleek.toggle();
     GetSupplyService({
       currentPage,
       pageSize,
       type,
       memberId: '1',
     }).then((res) => {
+      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.pageData;

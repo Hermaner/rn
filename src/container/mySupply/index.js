@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
-import { ScrollableTab, Header } from '../../components';
+import { ScrollableTab, Header, Loading } from '../../components';
 
 import Child from './child';
 
@@ -26,6 +26,7 @@ class MyRelease extends React.Component {
           <Child tabLabel="已下架" type="1" />
           <Child tabLabel="被驳回" type="2" />
         </ScrollableTabView>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

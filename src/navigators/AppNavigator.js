@@ -76,6 +76,8 @@ import AddPersonalAccount from '../container/addPersonalAccount';
 import ChooseGatheringAccountNumbers from '../container/chooseGatheringAccountNumbers';
 import Cash from '../container/cash';
 import CashRule from '../container/cashRule';
+import ReleaseSuccess from '../container/releaseSuccess';
+import ReviseSuccess from '../container/reviseSuccess';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -150,6 +152,8 @@ export const AppNavigator = StackNavigator({
   ChooseGatheringAccountNumbers: { screen: ChooseGatheringAccountNumbers },
   Cash: { screen: Cash },
   CashRule: { screen: CashRule },
+  ReleaseSuccess: { screen: ReleaseSuccess },
+  ReviseSuccess: { screen: ReviseSuccess },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

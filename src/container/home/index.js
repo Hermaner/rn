@@ -82,22 +82,27 @@ class HomeScreen extends base {
     );
   }
   renderSampleCenter() {
+    const { push } = this.props;
     return (
       <View style={styles.SampleCenter}>
         <View style={styles.flexRow}>
-          <View style={styles.flexTwo}>
+          <TouchableOpacity style={styles.flexTwo} onPress={() => { push({ key: 'ReleaseSuccess' }); }}>
             <Text style={styles.headerNavigationText}>一件代发</Text>
             <Text style={styles.normalNineText}>微商首选 平台保障</Text>
             <View style={styles.flexRow}>
               <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
               <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
             </View>
-          </View>
-          <View style={[styles.flexOne, styles.SampleCenterBorder]}>
-            <Text style={styles.SampleCenterTitle}>样品中心</Text>
-            <Text style={styles.SampleCenterLabel}>进货先拿样</Text>
-            <Icon style={styles.SampleCenterIcn} name="analytics" />
-          </View>
+          </TouchableOpacity>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, styles.SampleCenterBorder]}>
+                <Text style={styles.SampleCenterTitle}>样品中心</Text>
+                <Text style={styles.SampleCenterLabel}>进货先拿样</Text>
+                <Icon style={styles.SampleCenterIcn} name="analytics" />
+              </View>}
+            onPress={() => { push({ key: 'ReviseSuccess' }); }}
+          />
           <View style={[styles.flexOne, styles.SampleCenterBorder]}>
             <Text style={styles.SampleCenterTitle}>认证货源</Text>
             <Text style={styles.SampleCenterLabel}>服务有保障</Text>
