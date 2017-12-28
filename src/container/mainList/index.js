@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Content, Text, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { GoodList } from '../../components';
+import { GoodList, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -332,6 +332,7 @@ class MainScreen extends base {
           {this._renderContent()}
           {isMaskerShow && this._readerMasker()}
         </View>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

@@ -19,7 +19,6 @@ class Base extends React.Component {
       currentPage: 1,
       pageSize: '5',
       memberId: '',
-      isSleekShow: false,
       refresh: false, // 是否是刷新
       loading: true, // 是否加载中
       nomore: false, // 是否没有更多
@@ -82,13 +81,8 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
-    });
-  }
-  toggleSleek = () => {
-    this.setState({
-      isSleekShow: !this.state.isSleekShow,
     });
   }
   _onRefresh = () => {
@@ -116,12 +110,12 @@ class Base extends React.Component {
       },
       (buttonIndex) => {
         if (buttonIndex === 0) {
-          this.toggleSleek();
+          this.sleek.toggle();
           StopPurchaseService({
             purchaseId,
           }).then((res) => {
             console.log(res);
-            this.toggleSleek();
+            this.sleek.toggle();
             if (res.isSuccess) {
               Toast.show('操作成功');
               this._onRefresh();
@@ -129,7 +123,7 @@ class Base extends React.Component {
               Toast.show(res.msg);
             }
           }).catch((err) => {
-            this.toggleSleek();
+            this.sleek.toggle();
             Toast.show(err);
           });
         }
