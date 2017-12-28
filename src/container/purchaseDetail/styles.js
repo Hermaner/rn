@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     backgroundColor: '#FCEDA9',
     alignSelf: 'flex-start',
   },
@@ -53,10 +53,6 @@ const styles = StyleSheet.create({
   rowBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-    borderRightWidth: 1,
-    borderRightColor: '#eee',
   },
   flexOne: {
     flex: 1,

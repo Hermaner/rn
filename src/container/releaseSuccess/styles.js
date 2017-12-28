@@ -110,9 +110,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   btnList: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
     flexDirection: 'row',
   },
   leftBtn: {

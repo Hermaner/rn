@@ -2,16 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { GetSameCategoryPurchaseService } from '../../api';
 
-class PurchaseDetailBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       memberId: '',
+      items: [],
+      role: null,
     };
   }
   getInit = () => {
     global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId }, this.getData));
+    .then(res => this.setState({ memberId: res.memberId, role: res.role }, this.getData));
   }
   getData = () => {
     const { memberId } = this.state;
@@ -29,4 +31,8 @@ class PurchaseDetailBase extends React.Component {
     });
   }
 }
-export default PurchaseDetailBase;
+
+Base.propTypes = {
+  push: PropTypes.func,
+};
+export default Base;

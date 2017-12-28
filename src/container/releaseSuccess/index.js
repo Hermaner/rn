@@ -3,12 +3,12 @@ import { TouchableOpacity, View } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { pushRoute, popRoute } from '../../actions';
-import { TFeedback } from '../../components';
-import purchaseDetailBase from './base';
+import { pushRoute, popRoute, resetHome } from '../../actions';
+import { TFeedback, TOpacity } from '../../components';
+import Base from './base';
 import styles from './styles';
 
-class PurchaseDetail extends purchaseDetailBase {
+class PurchaseDetail extends Base {
   constructor(props) {
     super(props);
     this.state = {
@@ -54,60 +54,88 @@ class PurchaseDetail extends purchaseDetailBase {
   }
   _renderList() {
     const { push } = this.props;
+    const { items } = this.state;
     return (
       <View style={styles.buyGoodsItems}>
         <Text style={styles.titleText}>相关采购推荐</Text>
-        <View style={styles.buyGoodsItem}>
-          <Text style={styles.buyGoodsName}>八月瓜</Text>
-          <View style={styles.flexRow}>
-            <Text style={styles.buyGoodsVariety}>品种: 八月瓜</Text>
-            <Text style={styles.flexRight}>100斤</Text>
-          </View>
-          <Text style={styles.buyGoodsPlace}>
-            所在地: 河北省邢台市
-          </Text>
-          <View style={[styles.flexRow, styles.margin]}>
-            <View style={{ flex: 1 }}>
+        {
+          items.map((item, index) => (
+            <View style={styles.buyGoodsItem} key={index}>
+              <Text style={styles.buyGoodsName}>{item.categoryName}</Text>
               <View style={styles.flexRow}>
-                <Text style={styles.label}>批发商</Text>
-                <View style={{ flex: 1 }} />
+                <Text style={styles.buyGoodsVariety}>品种: {item.brandName}</Text>
+                <Text style={styles.flexRight}>{item.demand}{item.unit}</Text>
               </View>
-              <View style={styles.flexRow}>
-                <Text style={styles.promptText}>距截止</Text>
-                <Text style={styles.promptDay}>6</Text>
-                <Text style={styles.promptText}>天</Text>
+              <Text style={styles.buyGoodsPlace}>
+                所在地: {item.receiveProvinceName}{item.receiveCityName}
+              </Text>
+              <View style={[styles.flexRow, styles.margin]}>
+                <View style={{ flex: 1 }}>
+                  <View style={styles.flexRow}>
+                    <Text style={styles.label}>{item.member.identityName}</Text>
+                    <View style={{ flex: 1 }} />
+                  </View>
+                  <View style={styles.flexRow}>
+                    <Text style={styles.promptText}>距截止</Text>
+                    <Text style={styles.promptDay}>{item.keepEnd}</Text>
+                    <Text style={styles.promptText}>天</Text>
+                  </View>
+                </View>
+                <TOpacity
+                  style={styles.goBuyBtnBox}
+                  content={
+                    <View>
+                      <Text style={styles.goBuyBtn}>去报价</Text>
+                    </View>
+                  }
+                  onPress={() => { push({ key: 'PurchaseDetail', params: { item: items[index] } }); }}
+                />
               </View>
             </View>
-            <TouchableOpacity style={styles.goBuyBtnBox} onPress={() => { push({ key: 'PurchaseDetail' }); }}>
-              <Text style={styles.goBuyBtn}>去报价</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+          ))
+        }
       </View>
     );
   }
   render() {
-    const { push } = this.props;
+    const { push, reset } = this.props;
+    const { role } = this.state;
     return (
       <Container>
-        <Content style={{ marginBottom: 60 }}>
+        <Content>
           {this._renderBody()}
-          {this._renderGoRelease()}
+          {!role && this._renderGoRelease()}
           {this._renderList()}
         </Content>
         <View style={styles.btnList}>
-          <TouchableOpacity style={styles.leftBtn}>
-            <View>
-              <Icon style={[styles.homeIcn, styles.textCenter]} name="home" />
-              <Text style={[styles.leftBtnText, styles.textCenter]}>返回首页</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.centerBtn}>
-            <Text style={[styles.centerBtnText, styles.textCenter]}>我的供应</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.rightBtn}>
-            <Text style={[styles.rightBtnText, styles.textCenter]}>再发一条</Text>
-          </TouchableOpacity>
+          <TOpacity
+            style={styles.leftBtn}
+            content={
+              <View>
+                <Icon style={[styles.homeIcn, styles.textCenter]} name="home" />
+                <Text style={[styles.leftBtnText, styles.textCenter]}>返回首页</Text>
+              </View>
+            }
+            onPress={reset}
+          />
+          <TOpacity
+            style={styles.centerBtn}
+            content={
+              <View>
+                <Text style={[styles.centerBtnText, styles.textCenter]}>我的供应</Text>
+              </View>
+            }
+            onPress={() => push({ key: 'MainList' })}
+          />
+          <TOpacity
+            style={styles.rightBtn}
+            content={
+              <View>
+                <Text style={[styles.rightBtnText, styles.textCenter]}>再发一条</Text>
+              </View>
+            }
+            onPress={() => push({ key: 'MainList' })}
+          />
         </View>
       </Container>
     );
@@ -117,5 +145,6 @@ class PurchaseDetail extends purchaseDetailBase {
 PurchaseDetail.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
+  reset: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(PurchaseDetail);
+export default connect(null, { pop: popRoute, push: pushRoute, reset: resetHome })(PurchaseDetail);
