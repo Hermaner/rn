@@ -10,6 +10,8 @@ target 'App' do
   pod 'RSKImageCropper'
   pod 'QBImagePickerController'
 
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+
 end
 
 target 'App-tvOS' do

@@ -4546,6 +4546,10 @@ react-native-modal@3.1.0:
     prop-types "15.5.10"
     react-native-animatable "^1.2.3"
 
+react-native-permissions@^1.0.6:
+  version "1.0.6"
+  resolved "http://registry.npm.taobao.org/react-native-permissions/download/react-native-permissions-1.0.6.tgz#504f01728191431ad4b82895c4a349981fb5802b"
+
 react-native-picker@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-native-picker/-/react-native-picker-4.3.0.tgz#df4011723f30dd9f622739aae1afe9aabd293573"
