@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     paddingLeft: 4,
     paddingRight: 4,
+    color: '#666',
+    fontSize: 14,
   },
   leftBtn: {
     flex: 1,

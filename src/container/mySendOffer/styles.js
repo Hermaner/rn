@@ -68,6 +68,11 @@ const styles = StyleSheet.create({
   textRight: {
     flex: 1,
     textAlign: 'right',
+    color: '#FC8521',
+  },
+  normalText: {
+    color: '#333',
+    fontSize: 14,
   },
   leftBtn: {
     backgroundColor: '#249538',
@@ -86,6 +91,9 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: 14,
     color: '#eee',
+  },
+  alreadyChooseColor: {
+    color: '#24B838',
   },
 });
 export default styles;

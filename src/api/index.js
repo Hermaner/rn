@@ -128,3 +128,15 @@ export function RefreshSupplyService(data) {
 export function StopSupplyService(data) {
   return get('StopSupplyService', data);
 }
+export function GetQuoteService(data) {
+  return get('GetQuoteService', data);
+}
+export function ShelfSupplyService(data) {
+  return get('ShelfSupplyService', data);
+}
+export function DeleteSupplyService(data) {
+  return get('DeleteSupplyService', data);
+}
+export function UpdateSupplyService(data) {
+  return post('UpdateSupplyService', data);
+}
