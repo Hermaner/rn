@@ -189,12 +189,12 @@ class HomeScreen extends base {
   }
   _renderRow = (rowData, sectionID, rowID) => (
     <View>
-      <GoodList
+      {/* <GoodList
         data={rowData}
         rowID={rowID}
         key={rowID}
         onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
-      />
+      /> */}
     </View>
   )
   render() {

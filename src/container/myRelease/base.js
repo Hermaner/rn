@@ -17,7 +17,7 @@ class Base extends React.Component {
       dataSource: ds.cloneWithRows([]),
       items: [],
       currentPage: 1,
-      pageSize: '5',
+      pageSize: '15',
       memberId: '',
       refresh: false, // 是否是刷新
       loading: true, // 是否加载中

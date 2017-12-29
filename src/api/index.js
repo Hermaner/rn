@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function GetSupplyInfoService(data) {
+  return get('GetSupplyInfoService', data);
+}
 export function ValidateIsQuoteService(data) {
   return get('ValidateIsQuoteService', data);
 }

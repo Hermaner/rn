@@ -1,11 +1,12 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeepClone } from '../../api';
+import { GetSupplyInfoService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.resetData = {
+      detail: null,
       items: [{
         title: '支持在线交易',
         id: '1',
@@ -46,29 +47,27 @@ class Base extends React.Component {
       skuCount: 1,
     };
   }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          minPrice: txt,
-        });
-        break;
-      case 1:
-        this.setState({
-          maxPrice: txt,
-        });
-        break;
-      case 2:
-        this.setState({
-          count: txt,
-        });
-        break;
-      default:
-    }
+  getInit = () => {
+    this.GetSupplyInfoService();
   }
-  resetState = () => {
-    this.setState({
-      ...DeepClone(this.resetData),
+  GetSupplyInfoService = () => {
+    const { supplyId } = this.state;
+    this.sleek.toggle();
+    GetSupplyInfoService({
+      supplyId,
+    }).then((res) => {
+      console.log(res);
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.setState({
+          detail: res.data,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
     });
   }
   changeItem = (index) => {

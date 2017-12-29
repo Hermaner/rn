@@ -240,6 +240,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 10,
   },
+  noIdView: {
+    backgroundColor: '#f6f6f6',
+    height: 45,
+    ...st.jacenter,
+  },
+  noIdText: {
+    color: Mcolor,
+    fontSize: 10,
+  },
   fotBtn1: {
     flex: 1,
     ...st.fr,

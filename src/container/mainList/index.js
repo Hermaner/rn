@@ -75,22 +75,28 @@ class MainList extends base {
     );
   }
   _readerMasker() {
-    const { leftLists, isVarietiesShow, skuLists, isSkuShow, isCategoryShow, isAddressShow } = this.state;
-    const { push } = this.props;
+    const {
+      brands,
+      specTypes,
+      isBrandsShow,
+      isSpecTypesShow,
+      isCategoryShow,
+      isAddressShow,
+    } = this.state;
     return (
       <View style={styles.masker}>
         <View style={styles.maskerContent}>
           {
-            isVarietiesShow &&
+            isBrandsShow &&
             <View style={styles.maskerContentView}>
               {
-                leftLists.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
+                brands.map((item, index) => (
+                  <TouchableWithoutFeedback key={index} onPress={() => this.brandTab(index)}>
                     <View style={styles.contetnTabView}>
                       <Text
                         style={styles.mainText}
                       >
-                        {item.label}
+                        {item.brandName}
                       </Text>
                     </View>
                   </TouchableWithoutFeedback>
@@ -99,23 +105,23 @@ class MainList extends base {
             </View>
           }
           {
-            isSkuShow &&
+            isSpecTypesShow &&
             <View style={styles.f1}>
               {
-                skuLists.map((items, index) => (
+                specTypes.map((items, index) => (
                   <View key={index}>
                     <View style={styles.maskerTitle}>
-                      <Text style={styles.maskerTitleText}>{items.title}</Text>
+                      <Text style={styles.maskerTitleText}>{items.specTypeName}</Text>
                     </View>
                     <View style={[styles.fr, { flexWrap: 'wrap' }]}>
                       {
-                        items.items.map((item, i) => (
-                          <TouchableWithoutFeedback key={i} onPress={() => { push({ key: 'User' }); }}>
+                        items.specs.map((item, i) => (
+                          <TouchableWithoutFeedback key={i} onPress={() => this.specsTab(index, i)}>
                             <View style={styles.contetnTabView}>
                               <Text
                                 style={styles.mainText}
                               >
-                                {item.label}
+                                {item.specName}
                               </Text>
                             </View>
                           </TouchableWithoutFeedback>
@@ -141,7 +147,7 @@ class MainList extends base {
             </View>
           }
           {
-            (isVarietiesShow || isSkuShow) &&
+            (isBrandsShow || isSpecTypesShow) &&
             <View style={styles.maskerBtns}>
               <TouchableOpacity style={styles.maskerCancelBtn} onPress={this.hideMasker}>
                 <Text style={styles.maskerBtnText}>取消</Text>
@@ -156,18 +162,21 @@ class MainList extends base {
     );
   }
   _renderCategoryLeft() {
-    const { leftLists } = this.state;
+    const { goods } = this.state;
     return (
       <View style={styles.leftNav}>
         <Content>
           {
-            leftLists.map((item, index) => (
-              <TouchableWithoutFeedback key={index} onPress={() => { this.changeLeftTab(index); }}>
+            goods.map((item, index) => (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() => { this.changeLeftGoods(index); }}
+              >
                 <View style={[styles.leftNavList, item.cur && styles.leftNavListCur]}>
                   <Text
                     style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
                   >
-                    {item.label}
+                    {item.name}
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
@@ -178,25 +187,22 @@ class MainList extends base {
     );
   }
   _renderCategoryContent() {
-    const { leftLists } = this.state;
-    const { push } = this.props;
+    const { childgoods } = this.state;
     return (
       <View style={styles.rightContent}>
         <Content>
-          <TouchableOpacity onPress={() => { push({ key: 'User' }); }}>
-            <View style={styles.rightAll}>
-              <Text style={styles.mainText}>全部</Text>
-            </View>
-          </TouchableOpacity>
           <View style={styles.rightContentView}>
             {
-              leftLists.map((item, index) => (
-                <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
+              childgoods.map((item, index) => (
+                <TouchableWithoutFeedback
+                  key={index}
+                  onPress={() => { this.changeRightGoods(index); }}
+                >
                   <View style={styles.contetnTabView}>
                     <Text
                       style={styles.mainText}
                     >
-                      {item.label}
+                      {item.name}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>
@@ -280,46 +286,48 @@ class MainList extends base {
       </View>
     );
   }
-  _renderRow = (rowData, sectionID, rowID) => (
+  _renderRow = (item, sectionID, index) => (
     <View>
       <GoodList
-        data={rowData}
-        rowID={rowID}
-        key={rowID}
-        onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
+        data={item}
+        rowID={index}
+        key={index}
+        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
       />
     </View>
   )
   _renderContent() {
-    const { noData, dataSource, nomore, loading, refresh } = this.state;
+    const { noData, dataSource, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
-          !noData &&
-          <ListView
-            dataSource={dataSource}
-            renderRow={this._renderRow}
-            onEndReached={this._reachEnd}
-            enableEmptySections
-            onEndReachedThreshold={10}
-            contentContainerStyle={styles.listViewStyle}
-            renderFooter={() => <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-              {nomore ? '没有更多数据了' : loading ? '数据加载中...' : '加载完毕'}
-            </Text>}
-            refreshControl={
-              <RefreshControl
-                refreshing={refresh}
-                onRefresh={this._onRefresh}
-              />}
-          />
-        }
-        {
-          noData &&
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-              没有相关数据
-            </Text>
-          </View>
+          !noData ?
+            <ListView
+              dataSource={dataSource}
+              renderRow={this._renderRow}
+              onEndReached={this._reachEnd}
+              enableEmptySections
+              onEndReachedThreshold={10}
+              contentContainerStyle={styles.listViewStyle}
+              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
+                {nomore ? '没有更多数据了' : '数据加载中...'}
+              </Text>}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refresh}
+                  onRefresh={this._onRefresh}
+                />}
+            />
+            :
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <TouchableWithoutFeedback onPress={this._onRefresh}>
+                <View>
+                  <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
+                    没有相关数据,点击刷新
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
         }
       </View>
     );
