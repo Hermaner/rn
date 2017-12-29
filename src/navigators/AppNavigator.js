@@ -80,6 +80,7 @@ import ReleaseSuccess from '../container/releaseSuccess';
 import ReviseSuccess from '../container/reviseSuccess';
 import SeePrice from '../container/seePrice';
 import PriceDetail from '../container/priceDetail';
+import PriceInfo from '../container/priceInfo';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -158,6 +159,7 @@ export const AppNavigator = StackNavigator({
   ReviseSuccess: { screen: ReviseSuccess },
   SeePrice: { screen: SeePrice },
   PriceDetail: { screen: PriceDetail },
+  PriceInfo: { screen: PriceInfo },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

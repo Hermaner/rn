@@ -39,7 +39,34 @@ class MySendOffer extends mySendOfferBase {
   _rendContent() {
     return (
       <View style={styles.goodsitem}>
-        <Text>没有内容</Text>
+        <View style={styles.listItem}>
+          <View style={styles.rowBox}>
+            <Text>八月瓜</Text>
+            <Text style={styles.textRight}>未读</Text>
+          </View>
+          <View style={styles.rowBox}>
+            <Text>采购人：吴涛</Text>
+          </View>
+          <View style={styles.rowBox}>
+            <Text>报价时间：2017-12-28</Text>
+          </View>
+          <View style={[styles.rowBox, { justifyContent: 'flex-end' }]}>
+            <TFeedback
+              content={
+                <View style={[styles.leftBtn, styles.btnTotal]}>
+                  <Text style={styles.btnText}>查看详情</Text>
+                </View>}
+              onPress={() => { push({ key: 'User' }); }}
+            />
+            <TFeedback
+              content={
+                <View style={[styles.rightBtn, styles.btnTotal]}>
+                  <Text style={styles.btnText}>在线咨询</Text>
+                </View>}
+              onPress={() => { push({ key: 'User' }); }}
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -48,7 +75,7 @@ class MySendOffer extends mySendOfferBase {
     return (
       <Container>
         <Header back={pop} title="发出报价" />
-        <Content style={{ backgroundColor: '#fff' }}>
+        <Content>
           {this._randerBody()}
         </Content>
       </Container>

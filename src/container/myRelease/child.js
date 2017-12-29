@@ -57,7 +57,8 @@ class Child extends Base {
                 <View style={[styles.btnBox, styles.btnChoose]}>
                   <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
                 </View>}
-              onPress={() => { push({ key: 'SeePrice' }); }}
+              // onPress={() => { push({ key: 'SeePrice' }); }}
+              onPress={() => this.pushSeePrice(item.purchaseQuotes)}
             />
           </View>
         </View>

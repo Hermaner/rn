@@ -51,15 +51,41 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginLeft: 8,
   },
-  btnText: {
-    fontSize: 14,
-    color: '#333',
+  listItem: {
+    backgroundColor: '#fff',
+    marginTop: 10,
   },
-  btnChoose: {
+  rowBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  textRight: {
+    flex: 1,
+    textAlign: 'right',
+  },
+  leftBtn: {
+    backgroundColor: '#249538',
+  },
+  rightBtn: {
     backgroundColor: '#FC8521',
   },
-  btnTextChoose: {
-    color: '#fff',
+  btnTotal: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 12,
+    paddingRight: 12,
+    borderRadius: 5,
+    marginLeft: 10,
+  },
+  btnText: {
+    fontSize: 14,
+    color: '#eee',
   },
 });
 export default styles;
