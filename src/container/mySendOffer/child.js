@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
+import { View, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
+import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
-import { TFeedback, Loading } from '../../components';
 import { pushRoute } from '../../actions';
+import { Loading, TFeedback } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -15,50 +16,37 @@ class Child extends Base {
     };
   }
   componentDidMount() {
-    this.getInit();
+    this._onRefresh();
   }
   _renderRow = (item) => {
     const { push } = this.props;
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
-        <View style={styles.goodsitem}>
-          <View style={styles.goodsDetail}>
-            <View style={{ flex: 1 }}>
-              <View style={styles.goodsPrice}>
-                <Text style={{ flex: 1, fontSize: 14, color: '#666' }}>{item.categoryName}</Text>
-                <View style={{}}>
-                  <Text style={{ fontSize: 16, color: '#FC8521' }}>面议</Text>
-                </View>
-              </View>
-              <View style={{ marginBottom: 6 }}>
-                <Text style={{ fontSize: 12, color: '#666' }}>品种:{item.brandName}</Text>
-              </View>
-              <View>
-                <Text style={{ fontSize: 12, color: '#666' }}>浏览次数:4次</Text>
-              </View>
-            </View>
+        <View style={styles.listItem}>
+          <View style={styles.rowBox}>
+            <Text style={styles.normalText}>{item.brandName}</Text>
+            <Text style={[styles.textRight, item.isRead && styles.alreadyChooseColor]}>{item.isRead ? '已读' : '未读'}</Text>
           </View>
-          <View style={styles.readPeople}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ color: '#FC8521', fontSize: 14 }}>{item.purchaseQuotes.length}</Text>
-              <Text style={{ color: '#666', fontSize: 14 }}>人报价</Text>
-            </View>
-            <Text style={styles.renovateTime}>距截止{item.purchaseTime}天</Text>
+          <View style={styles.rowBox}>
+            <Text style={styles.normalText}>采购人：{item.purchase.nickName}</Text>
           </View>
-          <View style={styles.btnList}>
-            <TouchableOpacity
-              style={styles.btnBox}
-              onPress={() => this.StopPurchaseService(item.purchaseId)}
-            >
-              <Text style={styles.btnText}>停止采购</Text>
-            </TouchableOpacity>
+          <View style={styles.rowBox}>
+            <Text style={styles.normalText}>报价时间：{item.modiDate}</Text>
+          </View>
+          <View style={[styles.rowBox, { justifyContent: 'flex-end' }]}>
             <TFeedback
               content={
-                <View style={[styles.btnBox, styles.btnChoose]}>
-                  <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
+                <View style={[styles.leftBtn, styles.btnTotal]}>
+                  <Text style={styles.btnText}>查看详情</Text>
                 </View>}
-              // onPress={() => { push({ key: 'SeePrice' }); }}
-              onPress={() => this.pushSeePrice(item.purchaseQuotes)}
+              onPress={() => this.pushPriceInfo(item)}
+            />
+            <TFeedback
+              content={
+                <View style={[styles.rightBtn, styles.btnTotal]}>
+                  <Text style={styles.btnText}>在线咨询</Text>
+                </View>}
+              onPress={() => { push({ key: 'User' }); }}
             />
           </View>
         </View>
@@ -66,7 +54,7 @@ class Child extends Base {
     );
   }
   render() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, dataSource, nomore, refresh, isSleekShow } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {
@@ -98,6 +86,7 @@ class Child extends Base {
               </TouchableWithoutFeedback>
             </View>
         }
+        <SleekLoadingIndicator loading={isSleekShow} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );

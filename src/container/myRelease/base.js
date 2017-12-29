@@ -99,6 +99,14 @@ class Base extends React.Component {
       this.setState({ loading: true }, () => this.getData());
     }
   }
+  pushSeePrice = (value) => {
+    const { push } = this.props;
+    if (value.length === 0) {
+      Toast.show('当前没有人报价');
+      return;
+    }
+    push({ key: 'SeePrice' });
+  }
   StopPurchaseService = (purchaseId) => {
     ActionSheet.show(
       {
@@ -134,5 +142,7 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   type: PropTypes.string,
+  push: PropTypes.func,
 };
+
 export default Base;

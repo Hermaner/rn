@@ -45,10 +45,10 @@ class ChooseGatheringAccountNumbers extends chooseGatheringAccountNumbersBase {
         <Header back={pop} title="取现" />
         <Content>
           {this._renderBody()}
-          <TouchableOpacity style={styles.button} onPress={() => { push({ key: 'AccountNumberType' }); }}>
-            <Text style={styles.buttonText}>添加新的收款账号</Text>
-          </TouchableOpacity>
         </Content>
+        <TouchableOpacity style={styles.button} onPress={() => { push({ key: 'AccountNumberType' }); }}>
+          <Text style={styles.buttonText}>添加新的收款账号</Text>
+        </TouchableOpacity>
       </Container>
     );
   }

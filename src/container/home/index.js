@@ -109,11 +109,15 @@ class HomeScreen extends base {
               </View>}
             onPress={() => { push({ key: 'ReviseSuccess' }); }}
           />
-          <View style={[styles.flexOne, styles.SampleCenterBorder]}>
-            <Text style={styles.SampleCenterTitle}>认证货源</Text>
-            <Text style={styles.SampleCenterLabel}>服务有保障</Text>
-            <Icon style={styles.SampleCenterIcn} name="analytics" />
-          </View>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, styles.SampleCenterBorder]}>
+                <Text style={styles.SampleCenterTitle}>认证货源</Text>
+                <Text style={styles.SampleCenterLabel}>服务有保障</Text>
+                <Icon style={styles.SampleCenterIcn} name="analytics" />
+              </View>}
+            onPress={() => { push({ key: 'PriceInfo' }); }}
+          />
         </View>
       </View>
     );

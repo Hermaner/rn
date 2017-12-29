@@ -3,7 +3,7 @@ import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { ActionSheet } from 'native-base';
 import PropTypes from 'prop-types';
-import { RefreshSupplyService, StopPurchaseService, GetSupplyService, StopSupplyService } from '../../api';
+import { RefreshSupplyService, StopPurchaseService, GetSupplyService, StopSupplyService, ShelfSupplyService, DeleteSupplyService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -153,6 +153,40 @@ class Base extends React.Component {
       Toast.show(err);
     });
   }
+  ShelfSupplyService = (supplyId) => {
+    this.sleek.toggle();
+    ShelfSupplyService({
+      supplyId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        this._onRefresh();
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
+  DeleteSupplyService = (supplyId) => {
+    this.sleek.toggle();
+    DeleteSupplyService({
+      supplyId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        this._onRefresh();
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
   btnChange = (btnName, supplyId) => {
     switch (btnName) {
       case '下架':
@@ -167,10 +201,10 @@ class Base extends React.Component {
         console.log('刷新');
         break;
       case '上架':
-        console.log('上架没做');
+        this.ShelfSupplyService(supplyId);
         break;
       case '删除':
-        console.log('删除没做');
+        this.DeleteSupplyService(supplyId);
         break;
       default:
         break;
