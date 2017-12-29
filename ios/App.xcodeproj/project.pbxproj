@@ -97,6 +97,7 @@
 		DF39BEED1FD12DE000877EF2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */; };
 		DF39BEEF1FD12DF100877EF2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEE1FD12DF100877EF2 /* libc++.tbd */; };
 		DF39BEF01FD137C100877EF2 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BED31FD12D9800877EF2 /* libRCTWeChat.a */; };
+		DFA375B31FF5CF6B009B1874 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */; };
 		DFE0E9FF1FD4D97B00910057 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFE0E9FE1FD4D97B00910057 /* bundle */; };
 		E15D08402A2AE4CD276B8982 /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9277B5617F6B9B16D971EE2A /* libPods-App.a */; };
 		E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1A1610579242DF82AF1C4E /* libRCTBEEPickerManager.a */; };
@@ -484,6 +485,13 @@
 			remoteGlobalIDString = 10D6D7A41F160C250066F0F3;
 			remoteInfo = RCTWeChatTests;
 		};
+		DFA375AA1FF5CF5C009B1874 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9D23B34F1C767B80008B4819;
+			remoteInfo = ReactNativePermissions;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -599,6 +607,7 @@
 		DF39BE4F1FD1232A00877EF2 /* RSKImageCropper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = "<group>"; };
 		DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		DF39BEEE1FD12DF100877EF2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		DFE0E9FE1FD4D97B00910057 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		E48D69E7C48B4737AA63EE14 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		E7FBEFFF606A435A84860122 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/native-base/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -624,6 +633,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFA375B31FF5CF6B009B1874 /* libReactNativePermissions.a in Frameworks */,
 				DF39BEF01FD137C100877EF2 /* libRCTWeChat.a in Frameworks */,
 				2DB6DBD42DAF441A83D31D8B /* libz.tbd in Frameworks */,
 				DF39BEEF1FD12DF100877EF2 /* libc++.tbd in Frameworks */,
@@ -871,6 +881,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -1136,6 +1147,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DFA3757A1FF5CF5C009B1874 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1340,6 +1359,10 @@
 				{
 					ProductGroup = DF39BCD81FD107D700877EF2 /* Products */;
 					ProjectRef = 6889ADE33509422BADD4E73E /* ReactNativeKeyboardManager.xcodeproj */;
+				},
+				{
+					ProductGroup = DFA3757A1FF5CF5C009B1874 /* Products */;
+					ProjectRef = DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */;
 				},
 				{
 					ProductGroup = DF39BCD41FD107D700877EF2 /* Products */;
@@ -1735,6 +1758,13 @@
 			fileType = wrapper.cfbundle;
 			path = RCTWeChatTests.xctest;
 			remoteRef = DF39BED41FD12D9800877EF2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativePermissions.a;
+			remoteRef = DFA375AA1FF5CF5C009B1874 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

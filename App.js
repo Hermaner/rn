@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform, DeviceEventEmitter, NativeAppEventEmitter } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, AppState } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
+import Permissions from 'react-native-permissions'
 import * as WeChat from 'react-native-wechat';
 import JPushModule from 'jpush-react-native';
 import {
@@ -22,14 +23,14 @@ class App extends React.Component {
     WeChat.registerApp('wx26b5853e6e77d138');
     persistStore(this.store, { storage: AsyncStorage });
     if (Platform.OS === 'android') {
-      JPushModule.notifyJSDidLoad((resultCode) => {
-        console.log(resultCode);
+      JPushModule.notifyJSDidLoad(() => {
+        // console.log(resultCode);
       });
-      JPushModule.addReceiveNotificationListener((map) => {
-        console.log(map);
+      JPushModule.addReceiveNotificationListener(() => {
+        // console.log(map);
       });
-      JPushModule.addReceiveOpenNotificationListener((map) => {
-        console.log(map);
+      JPushModule.addReceiveOpenNotificationListener(() => {
+        // console.log(map);
       });
       JPushModule.getInfo((map) => {
         this.setState({
@@ -38,25 +39,27 @@ class App extends React.Component {
       });
     } else {
       JPushModule.setLocalNotification(234341234242424243, '2342342342342432423', 5, 'dfsa', 'dfaas', null, null);
-      NativeAppEventEmitter.addListener('networkDidSetup', (token) => {
-        console.log(token);
+      NativeAppEventEmitter.addListener('networkDidSetup', () => {
+        // console.log(token);
       });
-      NativeAppEventEmitter.addListener('networkDidClose', (token) => {
-        console.log(token);
+      NativeAppEventEmitter.addListener('networkDidClose', () => {
+        // console.log(token);
       });
-      NativeAppEventEmitter.addListener('networkDidRegister', (token) => {
-        console.log(token);
+      NativeAppEventEmitter.addListener('networkDidRegister', () => {
+        // console.log(token);
       });
-      NativeAppEventEmitter.addListener('networkDidLogin', (token) => {
-        console.log(token);
+      NativeAppEventEmitter.addListener('networkDidLogin', () => {
+        // console.log(token);
       });
-      NativeAppEventEmitter.addListener('ReceiveNotification',
-        notification => console.log(notification));
+      NativeAppEventEmitter.addListener('ReceiveNotification', () => {
+        // console.log(notification)
+      });
     }
     JPushModule.getRegistrationID((registrationId) => {
-      console.log(registrationId);
+      // console.log(registrationId);
       this.setState({ cid: registrationId });
     });
+    this.premInit();
     global.storage = new Storage({
       size: 1000,
       storageBackend: AsyncStorage,
@@ -65,6 +68,25 @@ class App extends React.Component {
     });
     global.Toast = Toast;
   }
+  premInit = () => {
+    const types = Permissions.getTypes();
+    const canOpenSettings = Permissions.canOpenSettings();
+    this.setState({ types, canOpenSettings });
+    Permissions.request('location', 'always').then((response) => {
+      global.reqLocation = response;
+    });
+    Permissions.request('notification').then((response) => {
+      global.reqNotification = response;
+    });
+    Permissions.request('camera').then((response) => {
+      global.reqCamera = response;
+    });
+    Permissions.request('photo').then((response) => {
+      global.reqPhoto = response;
+    });
+    // this._openSettings();
+  }
+  _openSettings = () => Permissions.openSettings().then(() => alert('back to app!!'))
   store = createStore(
     AppReducer,
     compose(

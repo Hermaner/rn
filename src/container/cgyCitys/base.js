@@ -1,8 +1,7 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter } from 'react-native';
-import citysJson from './citys.json';
+import citysJson from '../../api/citys.json';
 import { DeepClone } from '../../api';
 
 citysJson[0].cur = true;
