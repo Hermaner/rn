@@ -1,8 +1,8 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, AppState } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
-import Permissions from 'react-native-permissions'
+import Permissions from 'react-native-permissions';
 import * as WeChat from 'react-native-wechat';
 import JPushModule from 'jpush-react-native';
 import {
@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import Storage from 'react-native-storage';
 
+import { Loading } from './src/components';
 import AppReducer from './src/reducers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 
@@ -66,6 +67,7 @@ class App extends React.Component {
       defaultExpires: 1000 * 3600 * 24,
       enableCache: true,
     });
+    global.storage.load({ key: 'userData' }).then((res) => { global.memberId = res.memberId; });
     global.Toast = Toast;
   }
   premInit = () => {
@@ -86,7 +88,7 @@ class App extends React.Component {
     });
     // this._openSettings();
   }
-  _openSettings = () => Permissions.openSettings().then(() => alert('back to app!!'))
+  _openSettings = () => Permissions.openSettings().then(() => {})
   store = createStore(
     AppReducer,
     compose(

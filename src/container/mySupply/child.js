@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
-import { Icon } from 'native-base';
+import { View, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
@@ -19,14 +18,14 @@ class Child extends Base {
   componentDidMount() {
     this._onRefresh();
   }
-  _renderRow = (item) => {
+  _renderRow = (item, sid, rid) => {
     const { push } = this.props;
     const { type1, type2, type3 } = this.state;
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
         <View style={styles.goodsitem}>
           <View style={styles.goodsDetail}>
-            <Image style={styles.goodsImg} source={{ uri: item.supplyImages[0].imgUrl }} />
+            {/* <Image style={styles.goodsImg} source={{ uri: item.supplyImages[0].imgUrl }} /> */}
             <View style={{ flex: 1 }}>
               <View style={styles.goodsPrice}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
@@ -68,7 +67,7 @@ class Child extends Base {
                         </Text>
                       </View>}
                     // onPress={() => this.undercarriage(item.supplyId)}
-                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId, rid)}
                   />
                 ))
             }
@@ -86,7 +85,7 @@ class Child extends Base {
                         </Text>
                       </View>}
                     // onPress={() => this.undercarriage(item.supplyId)}
-                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId, rid)}
                   />
                 ))
             }
@@ -103,7 +102,7 @@ class Child extends Base {
                           {btnType.title}
                         </Text>
                       </View>}
-                    onPress={() => this.btnChange(btnType.title, item.supplyId)}
+                    onPress={() => this.btnChange(btnType.title, item.supplyId, rid)}
                   />
                 ))
             }

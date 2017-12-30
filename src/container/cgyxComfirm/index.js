@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button, Icon } from 'native-base';
 import { connect } from 'react-redux';
-import { resetHome, pushRoute } from '../../actions';
+import { pushRoute, popRoute } from '../../actions';
 import { Header, TFeedback, UploadFile, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class CgyCategory extends base {
+class CgyxComfirm extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,9 +36,11 @@ class CgyCategory extends base {
                     <Text style={styles.listTitleText}>{item.title}</Text>
                   </View>
                   <View style={styles.listLabel}>
-                    <Text style={styles.listLabelText} numberOfLines={1}>{item.label}</Text>
+                    <Text style={[styles.listLabelText, index === 0 && { color: '#666' }]} numberOfLines={1}>{item.label}</Text>
                   </View>
-                  <Icon name="md-arrow-dropright" style={styles.listIcon} />
+                  {
+                    index !== 0 && <Icon name="md-arrow-dropright" style={styles.listIcon} />
+                  }
                 </View>}
               onPress={() => { this.goPage(index); }}
             />
@@ -48,17 +50,22 @@ class CgyCategory extends base {
     );
   }
   _renderUpload() {
+    const { initImages } = this.state;
     return (
       <View style={styles.upView}>
         <View style={styles.listTitle}>
           <Text style={styles.listTitleText}>货品图片</Text>
         </View>
         <View style={styles.listLabel}>
-          <UploadFile
-            getImages={this.getImages}
-            label="(选填)最多上传10张照片"
-            imageCount={10}
-          />
+          {
+            initImages &&
+            <UploadFile
+              initImages={initImages}
+              getImages={this.getImages}
+              label="(选填)最多上传10张照片"
+              imageCount={10}
+            />
+          }
         </View>
       </View>
     );
@@ -73,7 +80,7 @@ class CgyCategory extends base {
   render() {
     return (
       <Container>
-        <Header back={this.backToHome} title="发布供应" />
+        <Header back={this.backToList} title="发布供应" />
         <Content>
           {this._renderList()}
           {this._renderUpload()}
@@ -85,8 +92,7 @@ class CgyCategory extends base {
   }
 }
 
-CgyCategory.propTypes = {
-  resetHome: PropTypes.func,
+CgyxComfirm.propTypes = {
   push: PropTypes.func,
 };
-export default connect(null, { resetHome, push: pushRoute })(CgyCategory);
+export default connect(null, { pop: popRoute, push: pushRoute })(CgyxComfirm);

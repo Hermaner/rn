@@ -1,9 +1,8 @@
 import React from 'react';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { ActionSheet } from 'native-base';
 import PropTypes from 'prop-types';
-import { RefreshSupplyService, StopPurchaseService, GetSupplyService, StopSupplyService, ShelfSupplyService, DeleteSupplyService } from '../../api';
+import { RefreshSupplyService, GetSupplyService, StopSupplyService, ShelfSupplyService, DeleteSupplyService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -187,18 +186,18 @@ class Base extends React.Component {
       Toast.show(err);
     });
   }
-  btnChange = (btnName, supplyId) => {
+  btnChange = (btnName, supplyId, index) => {
+    const { items } = this.state;
     switch (btnName) {
       case '下架':
         this.undercarriage(supplyId);
-        console.log('下架');
         break;
       case '修改':
-        console.log('修改没做');
+        console.log(items[index]);
+        this.props.push({ key: 'CgyxComfirm', params: { item: items[index] } });
         break;
       case '刷新':
         this.renovate(supplyId);
-        console.log('刷新');
         break;
       case '上架':
         this.ShelfSupplyService(supplyId);
@@ -228,40 +227,9 @@ class Base extends React.Component {
       this.setState({ loading: true }, () => this.getData());
     }
   }
-  StopPurchaseService = (purchaseId) => {
-    ActionSheet.show(
-      {
-        options: [
-          { text: '停止采购' },
-          { text: 'Cancel' },
-        ],
-        cancelButtonIndex: 1,
-        title: '是否停止采购?',
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 0) {
-          this.toggleSleek();
-          StopPurchaseService({
-            purchaseId,
-          }).then((res) => {
-            console.log(res);
-            this.toggleSleek();
-            if (res.isSuccess) {
-              Toast.show('操作成功');
-              this._onRefresh();
-            } else {
-              Toast.show(res.msg);
-            }
-          }).catch((err) => {
-            this.toggleSleek();
-            Toast.show(err);
-          });
-        }
-      },
-    );
-  }
 }
 Base.propTypes = {
   type: PropTypes.string,
+  push: PropTypes.func,
 };
 export default Base;

@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function GetSpecService(data) {
+  return get('GetSpecService', data);
+}
 export function GetSupplyInfoService(data) {
   return get('GetSupplyInfoService', data);
 }
