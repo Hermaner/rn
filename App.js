@@ -74,16 +74,22 @@ class App extends React.Component {
     const types = Permissions.getTypes();
     const canOpenSettings = Permissions.canOpenSettings();
     this.setState({ types, canOpenSettings });
-    Permissions.request('location', 'always').then((response) => {
+    Permissions.request('location').then((response) => {
+      console.log(response)
       global.reqLocation = response;
     });
-    Permissions.request('notification').then((response) => {
-      global.reqNotification = response;
-    });
+    if (types.join('').indexOf('notification') > -1) {
+      Permissions.request('notification').then((response) => {
+        console.log(response)
+        global.reqNotification = response;
+      });
+    }
     Permissions.request('camera').then((response) => {
+      console.log(response)
       global.reqCamera = response;
     });
     Permissions.request('photo').then((response) => {
+      console.log(response)
       global.reqPhoto = response;
     });
     // this._openSettings();

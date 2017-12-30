@@ -5,6 +5,9 @@ import { Header, Icon } from 'native-base';
 import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#f8f8f8',
+  },
   left: {
     position: 'absolute',
     left: 10,
@@ -36,11 +39,15 @@ const styles = StyleSheet.create({
     color: Mcolor,
     fontSize: 14,
   },
+  backIcon: {
+    fontSize: 22,
+    color: '#666',
+  },
 });
 const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
-  <Header>
+  <Header style={styles.header}>
     <TouchableOpacity onPress={back} style={styles.left}>
-      <Icon name="arrow-back" />
+      <Icon name="arrow-back" style={styles.backIcon} />
     </TouchableOpacity>
     <View style={styles.title}>
       <Text style={styles.titleText}>{title}</Text>

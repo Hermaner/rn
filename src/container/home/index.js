@@ -1,9 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, ListView } from 'react-native';
+import { TouchableOpacity, Image, View, ListView, NativeAppEventEmitter } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import AMapLocation from 'react-native-smart-amap-location'
+import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance'
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute } from '../../actions';
 import { Header, ScrollableTab, GoodList, TOpacity, TFeedback } from '../../components';
@@ -19,6 +21,19 @@ class HomeScreen extends base {
     };
   }
   componentDidMount() {
+    this.addAppEventListener(
+        NativeAppEventEmitter.addListener('amap.location.onLocationResult', this._onLocationResult),
+    );
+    AMapLocation.init(null);
+    AMapLocation.setOptions({
+      pausesLocationUpdatesAutomatically: false,
+      allowsBackgroundLocationUpdates: true,
+    });
+    // AMapLocation.startUpdatingLocation();
+    AMapLocation.startUpdatingLocation();
+  }
+  _onLocationResult = (result) => {
+    console.log(result);
   }
   renderHeaderNavigation() {
     const { push } = this.props;
@@ -230,4 +245,4 @@ class HomeScreen extends base {
 HomeScreen.propTypes = {
   push: PropTypes.func,
 };
-export default connect(null, { push: pushRoute })(HomeScreen);
+export default connect(null, { push: pushRoute })(AppEventListenerEnhance(HomeScreen));

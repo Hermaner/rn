@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.reactnativecomponent.amaplocation.RCTAMapLocationPackage;
 import com.horcrux.svg.SvgPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -39,6 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new RCTAMapLocationPackage(),
             new AlipayPackage(),
             new WeChatPackage(),
             new PickerPackage(),
