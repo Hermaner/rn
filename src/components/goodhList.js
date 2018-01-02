@@ -35,10 +35,10 @@ const GoodList = ({ onPress, data, count }) => {
     >
       <View style={styles.list}>
         <View>
-          <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={[styles.img, { width: height, height }]} />
+          <Image source={{ uri: data.supplyImages[0].imgUrl }} style={[styles.img, { width: height, height }]} />
           <View style={styles.bom}>
-            <Text style={styles.name} numberOfLines={1}>{data.name}</Text>
-            <Text style={styles.label}>啊啊啊</Text>
+            <Text style={styles.name} numberOfLines={1}>{data.categoryName}{data.brandName}{data.supplyItems.map((item => item.specName)).join(' ')}</Text>
+            <Text style={styles.label}>{data.wholesalePrice}元/{data.unit}</Text>
           </View>
         </View>
       </View>

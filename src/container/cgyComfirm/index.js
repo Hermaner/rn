@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button, Icon } from 'native-base';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
 import { resetHome, pushRoute } from '../../actions';
 import { Header, TFeedback, UploadFile, Loading } from '../../components';

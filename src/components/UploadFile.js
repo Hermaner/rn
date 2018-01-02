@@ -69,13 +69,21 @@ export default class Prompt extends React.Component {
   static propTypes = {
     getImages: PropTypes.func,
     label: PropTypes.string,
+    initImages: PropTypes.array,
     imageCount: PropTypes.number,
   };
   constructor(props) {
     super(props);
+    const images = [];
+    if (props.initImages && props.initImages.length > 0) {
+      props.initImages.forEach((item) => {
+        images.push({ uri: item, key: item.slice(-21) });
+      });
+      this.props.getImages(props.initImages);
+    }
     this.state = {
       upImg: require('../assets/img/addAc.png'),
-      images: [],
+      images,
       imageDateIndex: 0,
       isImageDateShow: false,
       imageViewData: [],

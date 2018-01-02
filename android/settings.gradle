@@ -1,4 +1,6 @@
 rootProject.name = 'App'
+include ':react-native-smart-amap-location'
+project(':react-native-smart-amap-location').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-smart-amap-location/android')
 include ':react-native-yunpeng-alipay'
 project(':react-native-yunpeng-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-yunpeng-alipay/android')
 include ':react-native-wechat'

@@ -55,7 +55,6 @@ class Base extends React.Component {
   goPage = (index) => {
     // type 1: main 2: 发采购 3: 发供应
     const { type } = this.props.navigation.state.params;
-    console.log(type)
     switch (type) {
       case '1':
         this.props.push({ key: 'MainList' });

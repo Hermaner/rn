@@ -17,101 +17,41 @@ class Base extends React.Component {
     this.state = {
       citys: DeepClone(citysJson),
       cityIndex: 0,
-      leftLists: [{
-        id: '1',
-        label: '水果',
-        cur: true,
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }, {
-        id: '1',
-        label: '水果',
-      }],
-      skuLists: [{
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }, {
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }, {
-        id: '1',
-        title: '单果重',
-        items: [{
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }, {
-          id: '1',
-          label: '水果',
-        }],
-        cur: true,
-      }],
+      goods: [],
+      goodsLeftIndex: 0,
+      goodsRightIndex: null,
+      brands: [],
+      specTypes: [],
       items: [],
-      childItems: [],
       leftIndex: 0,
       isMaskerShow: false,
-      isSkuShow: false,
+      isSpecTypesShow: false,
       isCategoryShow: false,
       isAddressShow: false,
       ds,
-      dataSource: ds.cloneWithRows([{ name: '石榴真好吃啊真好吃啊真好使' }, { name: '石榴真好吃啊真好吃啊真好使' }, { name: '石榴真好吃啊真好吃啊真好使' }, { name: '石榴真好吃啊真好吃啊真好使' }]),
-      rowdata: [],
-      id: null,
-      pageSize: 8,
+      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
       noData: false,
+      pageSize: '15',
+      memberId: '',
     };
   }
   getInit = () => {
-    global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId }));
+    this.setState({ memberId: global.memberId || '1' }, this._onRefresh);
     this.GetAppCategoryService();
   }
   getDelInit = () => {
   }
   getData = () => {
-    const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
-    this.sleek.toggle();
+    const { memberId, currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
     GetSupplyService({
       currentPage,
       pageSize,
       type: '0',
-      memberId: '1',
+      memberId,
     }).then((res) => {
-      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.pageData;
@@ -156,7 +96,6 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
       Toast.show(err);
     });
   }
@@ -165,11 +104,12 @@ class Base extends React.Component {
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        const items = res.data;
-        items[0].cur = true;
+        const goods = res.data;
+        goods[0].cur = true;
         this.setState({
-          items: res.data,
-          childItems: items[0].childs,
+          goodsLeftIndex: 0,
+          goods: res.data,
+          childgoods: goods[0].childs,
         });
       } else {
         Toast.show(res.msg);
@@ -196,17 +136,17 @@ class Base extends React.Component {
     console.log(citys[cityIndex].citys[index].name);
   }
   showAction = (index) => {
-    const { isSkuShow, isVarietiesShow, isCategoryShow, isAddressShow } = this.state;
+    const { isSpecTypesShow, isBrandsShow, isCategoryShow, isAddressShow } = this.state;
     let target = '';
     switch (index) {
       case 0:
         target = isCategoryShow;
         break;
       case 1:
-        target = isVarietiesShow;
+        target = isBrandsShow;
         break;
       case 2:
-        target = isSkuShow;
+        target = isSpecTypesShow;
         break;
       case 3:
         target = isAddressShow;
@@ -219,35 +159,63 @@ class Base extends React.Component {
     }
     this.setState({
       isCategoryShow: index === 0,
-      isVarietiesShow: index === 1,
-      isSkuShow: index === 2,
+      isBrandsShow: index === 1,
+      isSpecTypesShow: index === 2,
       isAddressShow: index === 3,
       isMaskerShow: true,
     });
   }
   hideMasker = () => {
     this.setState({
-      isSkuShow: false,
+      isSpecTypesShow: false,
       isCategoryShow: false,
       isAddressShow: false,
       isMaskerShow: false,
-      isVarietiesShow: false,
+      isBrandsShow: false,
     });
   }
   saveMasker = () => {
     this.hideMasker();
   }
-  changeLeftTab = (index) => {
-    const { leftLists, leftIndex } = this.state;
-    if (leftIndex === index) {
+  changeLeftGoods = (index) => {
+    const { goods, goodsLeftIndex } = this.state;
+    if (goodsLeftIndex === index) {
       return;
     }
-    leftLists[index].cur = true;
-    leftLists[leftIndex].cur = false;
+    goods[index].cur = true;
+    goods[goodsLeftIndex].cur = false;
     this.setState({
-      leftLists,
-      leftIndex: index,
+      goods,
+      childgoods: goods[index].childs,
+      goodsLeftIndex: index,
     });
+  }
+  changeRightGoods = (index) => {
+    const { childgoods, goodsRightIndex } = this.state;
+    this.hideMasker();
+    if (goodsRightIndex === index) {
+      return;
+    }
+    childgoods[index].cur = true;
+    if (goodsRightIndex !== null) {
+      childgoods[goodsRightIndex].cur = false;
+    }
+    this.setState({
+      childgoods,
+      brands: childgoods[index].brands || [],
+      specTypes: childgoods[index].specTypes || [],
+      goodsRightIndex: index,
+    });
+  }
+  brandTab = (index) => {
+    const { brands } = this.state;
+    console.log(brands[index]);
+    this.hideMasker();
+  }
+  specsTab = (index, i) => {
+    const { specTypes } = this.state;
+    console.log(specTypes[index].specs[i]);
+    this.hideMasker();
   }
   goGoodDetail(item) {
     this.props.push(item);
@@ -255,11 +223,12 @@ class Base extends React.Component {
   _onRefresh = () => {
     this.setState({
       refresh: true,
-      id: null,
-    });
+      currentPage: 1,
+    }, () => this.getData());
   }
   _reachEnd = () => {
-    if (canEnd && !this.state.nomore) {
+    const { nomore } = this.state;
+    if (canEnd && !nomore) {
       canEnd = false;
       this.setState({ loading: true }, () => this.getData());
     }

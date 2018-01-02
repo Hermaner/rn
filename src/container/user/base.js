@@ -110,6 +110,7 @@ class UserBase extends React.Component {
           },
           expires: null,
         });
+        global.memberId = res.data.memberId.toString();
         Toast.show('登陆成功');
         if (res.data.role) {
           this.props.resetHome();

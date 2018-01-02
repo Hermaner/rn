@@ -93,27 +93,29 @@ const GoodList = ({ onPress, data }) => (
     onPress={onPress}
   >
     <View style={styles.list}>
-      <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.img} />
+      <Image source={{ uri: data.supplyImages[0].imgUrl }} style={styles.img} />
       <View style={styles.right}>
-        <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.label}>啊啊啊</Text>
+        <Text style={styles.name} numberOfLines={1}>{data.categoryName}{data.brandName}{data.supplyItems.map((item => item.specName)).join(' ')}</Text>
+        <Text style={styles.label}>
+          {data.sendProvinceName}{data.sendCityName}{data.sendDistrictName}
+        </Text>
         <View style={styles.iconView}>
           <View style={[styles.icon, styles.icon1]}>
-            <Text style={[styles.iconText, styles.iconText1]}>啊啊啊</Text>
+            <Text style={[styles.iconText, styles.iconText1]}>{data.member.identityName}</Text>
           </View>
           <View style={[styles.icon, styles.icon2]}>
-            <Text style={[styles.iconText, styles.iconText2]}>啊啊啊</Text>
+            <Text style={[styles.iconText, styles.iconText2]}>买家保障</Text>
           </View>
           <View style={[styles.icon, styles.icon3]}>
-            <Text style={[styles.iconText, styles.iconText3]}>啊啊啊</Text>
+            <Text style={[styles.iconText, styles.iconText3]}>实名</Text>
           </View>
         </View>
         <View style={styles.priceView}>
           <View style={styles.priceLeftView}>
-            <Text style={styles.priceText}>38.00</Text>
-            <Text style={styles.priceLabel}>元/斤</Text>
+            <Text style={styles.priceText}>{data.wholesalePrice}</Text>
+            <Text style={styles.priceLabel}>元/{data.unit}</Text>
           </View>
-          <Text style={styles.priceRightText}>1小时前</Text>
+          <Text style={styles.priceRightText}>{data.beforeTime || data.postDate}</Text>
         </View>
       </View>
     </View>

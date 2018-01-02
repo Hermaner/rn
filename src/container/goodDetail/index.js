@@ -7,8 +7,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList, ModalView, InputNumber } from '../../components';
-import { DeepClone } from '../../api';
+import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading } from '../../components';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -16,55 +15,60 @@ import styles from './styles';
 class MainScreen extends base {
   constructor(props) {
     super(props);
+    const { supplyId } = this.props.navigation.state.params;
     this.state = {
-      ...DeepClone(this.resetData),
+      ...this.resetData,
+      supplyId,
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   _renderTop() {
+    const { detail } = this.state;
     return (
       <View style={styles.topView}>
-        <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.mainImg} />
+        <Image source={{ uri: detail.supplyImages[0].imgUrl }} style={styles.mainImg} />
         <View style={styles.topOne}>
-          <Text style={styles.topText}>6小时前</Text>
+          <Text style={styles.topText}>{detail.beforeTime || detail.postDate}</Text>
         </View>
         <View style={styles.topTwo}>
-          <Text style={styles.topText}>1111人查看</Text>
+          <Text style={styles.topText}>{detail.lookCount}人查看</Text>
         </View>
       </View>
     );
   }
   _renderNameAP() {
+    const { detail } = this.state;
     return (
       <View style={styles.nameAPView}>
         <View style={styles.nameOneView}>
           <View style={styles.nameTextView}>
             <Text style={styles.nameText} numberOfLines={2}>
-              赣南脐橙双11秒杀价按时大大打算多赣南脐橙双11秒杀价按时大大打算多
+              {detail.categoryName}{detail.brandName}{detail.supplyItems.map((item => item.specName)).join(' ')}
             </Text>
           </View>
           <View style={styles.nameIconView}>
-            <Icon name="arrow-back" style={styles.jcIcon} />
+            <Icon name="ios-trophy" style={styles.jcIcon} />
             <Text style={styles.grayText}>举报</Text>
           </View>
         </View>
         <View style={styles.nameAddressView}>
-          <Text style={styles.grayText}>江西省赣州市宁都县</Text>
+          <Text style={styles.grayText}>{detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}</Text>
         </View>
         <View style={styles.priceView}>
-          <Text style={styles.priceText}>3.5</Text>
-          <Text style={styles.pricelabel}>元/斤</Text>
+          <Text style={styles.priceText}>{detail.wholesalePrice}</Text>
+          <Text style={styles.pricelabel}>元/{detail.unit}</Text>
           <View style={styles.priceLabelView}>
-            <Text style={styles.priceLabelText}>10斤起批</Text>
+            <Text style={styles.priceLabelText}>{detail.wholesaleCount}{detail.unit}起批</Text>
           </View>
-          <Icon name="arrow-back" style={styles.ptsIcon} />
+          <Icon name="ios-help-circle-outline" style={styles.ptsIcon} />
         </View>
         <View style={styles.nameTipsView}>
-          <Icon name="arrow-back" style={styles.nameTipsicon} />
+          <Icon name="md-volume-down" style={styles.nameTipsicon} />
           <View>
             <Text style={styles.grayText}>
-              10斤起批10斤起批10起批10斤起批10斤起批10斤起批10斤批10斤起批10斤起批
+              私自打款有风险啊有风险私自打款有风险啊有风险私自打款有风险啊有风险私自打款有风险啊有风险私自打款有风险啊有风险私自打款有风险啊有风险
               <Text style={styles.nameColorText}>了解</Text>
             </Text>
           </View>
@@ -73,35 +77,22 @@ class MainScreen extends base {
     );
   }
   _renderProvideTypes() {
+    const { detail: { logisticsMode, renderServices, supplyMode } } = this.state;
+    let ptems = [];
+    ptems = ptems.concat(logisticsMode.split(',') : [], renderServices.split(',') : [], supplyMode.split(',') : []);
     return (
       <View style={styles.provideTypes}>
         <View style={styles.provideTypesLeft}>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
+          {
+            ptems.map((item, index) => (
+              <View style={styles.ptlList} key={index}>
+                <Icon name="ios-checkmark-circle-outline" style={styles.ptlIcon} />
+                <Text style={styles.ptlText}>{item}</Text>
+              </View>
+            ))
+          }
         </View>
-        <Icon name="arrow-back" style={styles.ptrIcon} />
+        <Icon name="md-arrow-dropright" style={styles.ptrIcon} />
       </View>
     );
   }
@@ -144,60 +135,50 @@ class MainScreen extends base {
     );
   }
   _renderSkuTable() {
+    const { detail: { supplyItems } } = this.state;
+    const skusLabel = [];
+    supplyItems.forEach((item) => {
+      skusLabel.push(item.specTypeName);
+      skusLabel.push(item.specName);
+    });
     return (
       <View style={styles.skuTable}>
         <View style={styles.skuTableTitle}>
           <Text style={styles.skuTableTitleText}>货品规格</Text>
         </View>
         <View style={styles.stTabelView}>
-          <View style={styles.stLabelView}>
-            <Text style={styles.skuTableText}>品种名</Text>
-          </View>
-          <View style={styles.stTextView}>
-            <Text style={styles.skuTableText}>紫色一号月瓜</Text>
-          </View>
-          <View style={styles.stLabelView}>
-            <Text style={styles.skuTableText}>单果重</Text>
-          </View>
-          <View style={styles.stTextView}>
-            <Text style={styles.skuTableText}>90-100g</Text>
-          </View>
-          <View style={styles.stLabelView}>
-            <Text style={styles.skuTableText}>种植方式</Text>
-          </View>
-          <View style={styles.stTextView}>
-            <Text style={styles.skuTableText}>野生</Text>
-          </View>
-          <View style={styles.stLabelView}>
-            <Text style={styles.skuTableText}>外皮颜色</Text>
-          </View>
-          <View style={styles.stTextView}>
-            <Text style={styles.skuTableText}>紫色</Text>
-          </View>
+          {
+            skusLabel.map((item, index) => (
+              <View key={index} style={index % 2 === 0 ? styles.stLabelView : styles.stTextView}>
+                <Text style={styles.skuTableText}>{item}</Text>
+              </View>
+            ))
+          }
         </View>
       </View>
     );
   }
   _renderStore() {
     const { push } = this.props;
+    const { detail } = this.state;
     return (
       <View style={styles.storeView}>
         <TouchableWithoutFeedback onPress={() => { push({ key: 'StoreDetail' }); }}>
           <View style={styles.storeViewTop}>
             <View style={styles.storeLeft}>
-              <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.storeImg} />
+              <Image source={{ uri: detail.member.imgUrl || '' }} style={styles.storeImg} />
               <View style={styles.storeLeftView}>
-                <Text style={styles.storeImgText}>行情官</Text>
+                <Text style={styles.storeImgText}>{detail.member.identityName}</Text>
               </View>
             </View>
             <View style={styles.storeMid}>
               <View style={styles.storeMidName}>
-                <Icon name="arrow-back" style={styles.storeMidIcon} />
-                <Text style={styles.storeMidNameText}>行情官</Text>
+                <Icon name="ios-ribbon" style={styles.storeMidIcon} />
+                <Text style={styles.storeMidNameText}>{detail.member.nickName}</Text>
               </View>
               <View style={[{ justifyContent: 'space-between' }, styles.fr]}>
                 <View style={styles.storeMidLabel}>
-                  <Text style={styles.storeMidLabelText}>行情官/行情官</Text>
+                  <Text style={styles.storeMidLabelText}>{detail.member.identityName}</Text>
                 </View>
                 <View />
               </View>
@@ -207,23 +188,32 @@ class MainScreen extends base {
             </View>
           </View>
         </TouchableWithoutFeedback>
-        <View style={styles.storeViewBottom}>
-          <View style={styles.provideTypesLeft}>
-            <View style={styles.ptlList}>
-              <Icon name="arrow-back" style={styles.ptlIcon} />
-              <Text style={styles.ptlText}>基地直供</Text>
+        {
+          !detail.member.authenticate ?
+            <View style={styles.noIdView}>
+              <Text style={styles.noIdText}>
+                该卖家未实名认证，交易风险较高，请谨慎交易
+              </Text>
             </View>
-            <View style={styles.ptlList}>
-              <Icon name="arrow-back" style={styles.ptlIcon} />
-              <Text style={styles.ptlText}>基地直供</Text>
+            :
+            <View style={styles.storeViewBottom}>
+              <View style={styles.provideTypesLeft}>
+                <View style={styles.ptlList}>
+                  <Icon name="arrow-back" style={styles.ptlIcon} />
+                  <Text style={styles.ptlText}>基地直供</Text>
+                </View>
+                <View style={styles.ptlList}>
+                  <Icon name="arrow-back" style={styles.ptlIcon} />
+                  <Text style={styles.ptlText}>基地直供</Text>
+                </View>
+                <View style={styles.ptlList}>
+                  <Icon name="arrow-back" style={styles.ptlIcon} />
+                  <Text style={styles.ptlText}>基地直供</Text>
+                </View>
+              </View>
+              <Icon name="arrow-back" style={styles.ptrIcon} />
             </View>
-            <View style={styles.ptlList}>
-              <Icon name="arrow-back" style={styles.ptlIcon} />
-              <Text style={styles.ptlText}>基地直供</Text>
-            </View>
-          </View>
-          <Icon name="arrow-back" style={styles.ptrIcon} />
-        </View>
+        }
         <View style={styles.storeRight}>
           <Text style={styles.storeRightText}>进店铺</Text>
         </View>
@@ -231,12 +221,12 @@ class MainScreen extends base {
     );
   }
   _renderTabs() {
-    const { images, otherItems } = this.state;
+    const { detail } = this.state;
     const Tab1 = () => (
       <View style={styles.detialView}>
-        <Text style={styles.detialLabel}>131313</Text>
+        <Text style={styles.detialLabel}>{detail.memo}</Text>
         {
-          images.map((item, index) => (
+          detail.supplyImages.map((item, index) => (
             <View key={index} style={styles.detialImg}>
               <AutoHeightImage
                 width={deviceW - 20}
@@ -245,17 +235,18 @@ class MainScreen extends base {
             </View>
           ))
         }
+        <Text style={styles.detialLabel}>发布时间：{detail.postDate}</Text>
       </View>
     );
     const Tab2 = () => (
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         {
-          otherItems.map((item, index) => (
+          detail.otherSupplys.map((item, index) => (
             <GoodhList
               count={2}
               data={item}
               key={index}
-              onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
+              onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
             />
           ))
         }
@@ -334,26 +325,28 @@ class MainScreen extends base {
   }
   render() {
     const { pop } = this.props;
+    const { detail } = this.state;
     return (
       <Container>
         <Header
           back={pop}
           title="供应详情"
-          showRight
-          rightText="更多"
-          rightPress={this.resetState}
         />
-        <Content>
-          {this._renderTop()}
-          {this._renderNameAP()}
-          {this._renderProvideTypes()}
-          {this._renderStore()}
-          {this._renderEval()}
-          {this._renderSkuTable()}
-          {this._renderTabs()}
-          {this._renderModalView()}
-        </Content>
-        {this._renderFooter()}
+        {
+          detail &&
+          <Content>
+            {this._renderTop()}
+            {this._renderNameAP()}
+            {this._renderProvideTypes()}
+            {this._renderStore()}
+            {this._renderEval()}
+            {detail.supplyItems && this._renderSkuTable()}
+            {this._renderTabs()}
+            {this._renderModalView()}
+          </Content>
+        }
+        {detail && this._renderFooter()}
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
@@ -361,6 +354,7 @@ class MainScreen extends base {
 
 MainScreen.propTypes = {
   pop: PropTypes.func,
+  navigation: PropTypes.object,
   push: PropTypes.func,
 };
 export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);

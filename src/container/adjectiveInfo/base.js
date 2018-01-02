@@ -73,6 +73,7 @@ class AdjectiveInfoBase extends React.Component {
           },
           expires: null,
         });
+        global.memberId = res.data.memberId.toString();
         Toast.show('保存成功');
       } else {
         Toast.show(res.msg);
