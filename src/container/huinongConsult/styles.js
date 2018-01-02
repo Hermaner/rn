@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   wrapper: {
-    borderWidth: 1,
   },
 
   slide: {
@@ -96,7 +95,6 @@ const styles = StyleSheet.create({
     width,
     height: 200,
     backgroundColor: 'transparent',
-    borderWidth: 1,
     resizeMode: 'stretch',
   },
 

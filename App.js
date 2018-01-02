@@ -66,6 +66,14 @@ class App extends React.Component {
       defaultExpires: 1000 * 3600 * 24,
       enableCache: true,
     });
+    global.storage.load({
+      key: 'userData',
+    }).then((ret) => {
+      console.log(ret);
+      global.memberId = ret.memberId;
+    }).catch(() => {
+      console.log('没有用户数据');
+    });
     global.Toast = Toast;
   }
   premInit = () => {

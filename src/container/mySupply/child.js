@@ -17,6 +17,7 @@ class Child extends Base {
     };
   }
   componentDidMount() {
+    this.getInit();
     this._onRefresh();
   }
   _renderRow = (item) => {

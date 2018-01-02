@@ -50,10 +50,11 @@ class AddAddress extends addAddressBase {
     );
   }
   render() {
+    const { title } = this.props.navigation.state.params;
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="新增收货地址" />
+        <Header back={pop} title={title} />
         <Content>
           {this._renderBody()}
           <TouchableOpacity style={styles.footerButton}>

@@ -60,6 +60,9 @@ class Base extends React.Component {
       }],
     };
   }
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
+  }
   getData = () => {
     const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
     const { type } = this.props;

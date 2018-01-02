@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 import { Container, Content, Tabs, Tab, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
 import { Header, ScrollableTab } from '../../components';
 import huinongConsultBase from './base';
@@ -24,32 +25,32 @@ class HuinongConsult extends huinongConsultBase {
     this.props.push(key);
   }
   _renderBody() {
+    const Tab1 = () => this._renderAll();
+    const Tab2 = () => this._renderAll();
+    const Tab3 = () => this._renderAll();
+    const Tab4 = () => this._renderAll();
+    const Tab5 = () => this._renderAll();
+    const Tab6 = () => this._renderAll();
+    const Tab7 = () => this._renderAll();
     return (
       <View style={styles.pagebody}>
-        <Tabs renderTabBar={() => <ScrollableTab />}>
-          <Tab heading="全部">
-            {this._renderSwiper()}
-            {this._renderNewsList()}
-          </Tab>
-          <Tab heading="水果蔬菜">
-            <Text>rrrrrrrrr</Text>
-          </Tab>
-          <Tab heading="畜牧水产">
-            <Text>vvvvvvvvvv</Text>
-          </Tab>
-          <Tab heading="农副加工">
-            <Text>vvvvvvvvvv</Text>
-          </Tab>
-          <Tab heading="苗木花草">
-            <Text>vvvvvvvvvv</Text>
-          </Tab>
-          <Tab heading="农资农机">
-            <Text>vvvvvvvvvv</Text>
-          </Tab>
-          <Tab heading="粮油米面">
-            <Text>vvvvvvvvvv</Text>
-          </Tab>
-        </Tabs>
+        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+          <Tab1 tabLabel="全部" type="0" />
+          <Tab2 tabLabel="水果蔬菜" type="1" />
+          <Tab3 tabLabel="畜牧水产" type="2" />
+          <Tab4 tabLabel="农副加工" type="3" />
+          <Tab5 tabLabel="苗木花草" type="4" />
+          <Tab6 tabLabel="农资农机" type="5" />
+          <Tab7 tabLabel="粮油米面" type="6" />
+        </ScrollableTabView>
+      </View>
+    );
+  }
+  _renderAll() {
+    return (
+      <View>
+        {this._renderSwiper()}
+        {this._renderNewsList()}
       </View>
     );
   }
