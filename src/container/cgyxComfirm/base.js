@@ -302,6 +302,7 @@ class Base extends React.Component {
     };
     console.log(supply);
     this.sleek.toggle();
+    console.log(upImages.map(item => item.key).join(','))
     UpdateSupplyService({
       supply: JSON.stringify(supply),
       supplyItems: JSON.stringify(purchaseItems),
@@ -312,6 +313,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('修改成功');
+        DeviceEventEmitter.emit('supplyRefresh');
         this.props.pop();
       } else {
         Toast.show(res.msg);

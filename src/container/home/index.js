@@ -221,7 +221,6 @@ class HomeScreen extends base {
       <Container>
         <Header back={this.props.push} />
         <Content>
-          <Image source={{ uri: 'http://www.btbtt.co/upload/attach/004/210/8cd23f1a54b56644f95110059072e5cf.jpg' }} style={{ width: 100, height: 100 }} />
           {this.renderHeaderNavigation()}
           {this.renderGoodsType()}
           {this.renderSampleCenter()}

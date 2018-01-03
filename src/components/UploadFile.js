@@ -71,6 +71,7 @@ export default class Prompt extends React.Component {
     label: PropTypes.string,
     initImages: PropTypes.array,
     imageCount: PropTypes.number,
+    isTextHide: PropTypes.bool,
   };
   constructor(props) {
     super(props);
@@ -78,7 +79,7 @@ export default class Prompt extends React.Component {
     console.log(props.initImages)
     if (props.initImages && props.initImages.length > 0) {
       props.initImages.forEach((item) => {
-        images.push({ uri: item, key: item.slice(-21) });
+        images.push({ uri: `${item}?imageMogr2/thumbnail/700x`, key: item.slice(-19) });
       });
       this.props.getImages(props.initImages);
     }
@@ -203,7 +204,7 @@ export default class Prompt extends React.Component {
       isImageDateShow,
       imageViewData,
     } = this.state;
-    const { imageCount } = this.props;
+    const { imageCount, isTextHide } = this.props;
     const buttons = [
       { text: '拍照' },
       { text: '从相册选择' },
@@ -219,8 +220,7 @@ export default class Prompt extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <Text>{item.uri}</Text>
-                  <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg' }} style={styles.imageList} />
+                  <Image source={{ uri: item.uri }} style={styles.imageList} />
                   <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
                     <Icon name="ios-close-outline" style={styles.imageDelIcon} />
                   </TouchableOpacity>
@@ -244,7 +244,9 @@ export default class Prompt extends React.Component {
             >
               <Image source={upImg} style={styles.upViewImg} />
             </TouchableWithoutFeedback>
-            <Text style={styles.upViewText}>{this.props.label}</Text>
+            {
+              !isTextHide && <Text style={styles.upViewText}>{this.props.label}</Text>
+            }
           </View>
         }
         <Modal

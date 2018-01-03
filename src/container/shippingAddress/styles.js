@@ -4,6 +4,8 @@ import { st } from '../../utils';
 const styles = StyleSheet.create({
   pagebody: {
     flex: 1,
+    // maxHeight: 800,
+    // overflow: 'auto',
   },
   adressItem: {
     backgroundColor: '#fff',
@@ -87,6 +89,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 14,
+  },
+  footer: {
+    paddingTop: 6,
+    paddingBottom: 6,
+    backgroundColor: '#fff',
   },
 });
 export default styles;

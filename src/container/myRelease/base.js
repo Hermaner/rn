@@ -26,12 +26,12 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId }, this._onRefresh));
+    this.setState({ memberId: global.memberId }, this._onRefresh);
   }
   getData = () => {
     const { currentPage, pageSize, items, ds, refresh, dataSource, memberId } = this.state;
     const { type } = this.props;
+    console.log('rrrrrrrrr', memberId);
     GetPurchaseService({
       currentPage,
       pageSize,
