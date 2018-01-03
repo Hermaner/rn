@@ -71,7 +71,7 @@ class Goods extends base {
           <View style={styles.imgBox}>
             <Image
               style={styles.BigIcnImg}
-              source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
+              source={{ uri: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x' }}
             />
           </View>
         </View>
@@ -80,14 +80,14 @@ class Goods extends base {
             <Text style={styles.bigThreeText}>优质采购商</Text>
             <Text style={styles.normalSixText}>邀你来报价</Text>
             <View style={styles.imgBox}>
-              <Image style={styles.icnImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+              <Image style={styles.icnImg} source={{ uri: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x' }} />
             </View>
           </View>
           <View style={styles.bottomBorder}>
             <Text style={styles.bigThreeText}>优质采购商</Text>
             <Text style={styles.normalSixText}>邀你来报价</Text>
             <View style={styles.imgBox}>
-              <Image style={styles.icnImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+              <Image style={styles.icnImg} source={{ uri: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x' }} />
             </View>
           </View>
         </View>
@@ -96,14 +96,14 @@ class Goods extends base {
             <Text style={styles.bigThreeText}>优质采购商</Text>
             <Text style={styles.normalSixText}>邀你来报价</Text>
             <View style={styles.imgBox}>
-              <Image style={styles.icnImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+              <Image style={styles.icnImg} source={{ uri: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x' }} />
             </View>
           </View>
           <View style={styles.bottomBorder}>
             <Text style={styles.bigThreeText}>优质采购商</Text>
             <Text style={styles.normalSixText}>邀你来报价</Text>
             <View style={styles.imgBox}>
-              <Image style={styles.icnImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+              <Image style={styles.icnImg} source={{ uri: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x' }} />
             </View>
           </View>
         </View>

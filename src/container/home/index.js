@@ -4,8 +4,8 @@ import Swiper from 'react-native-swiper';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AMapLocation from 'react-native-smart-amap-location'
-import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance'
+import AMapLocation from 'react-native-smart-amap-location';
+import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute } from '../../actions';
 import { Header, ScrollableTab, GoodList, TOpacity, TFeedback } from '../../components';
@@ -30,7 +30,7 @@ class HomeScreen extends base {
       allowsBackgroundLocationUpdates: true,
     });
     // AMapLocation.startUpdatingLocation();
-    AMapLocation.startUpdatingLocation();
+    AMapLocation.getReGeocode();
   }
   _onLocationResult = (result) => {
     console.log(result);

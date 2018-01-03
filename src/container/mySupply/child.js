@@ -19,6 +19,9 @@ class Child extends Base {
     this.getInit();
     this._onRefresh();
   }
+  componentWillUnmount() {
+    this.getDelete();
+  }
   _renderRow = (item, sid, rid) => {
     const { push } = this.props;
     const { type1, type2, type3 } = this.state;

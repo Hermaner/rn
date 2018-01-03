@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { RefreshSupplyService, GetSupplyService, StopSupplyService, ShelfSupplyService, DeleteSupplyService } from '../../api';
@@ -61,18 +61,22 @@ class Base extends React.Component {
   }
   getInit = () => {
     this.setState({ memberId: global.memberId }, this._onRefresh);
+    this.supplyRefresh = DeviceEventEmitter.addListener('supplyRefresh', () => {
+      this._onRefresh();
+    });
+  }
+  getDelete = () => {
+    this.supplyRefresh.remove();
   }
   getData = () => {
     const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
     const { type } = this.props;
-    this.sleek.toggle();
     GetSupplyService({
       currentPage,
       pageSize,
       type,
       memberId: '1',
     }).then((res) => {
-      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.pageData;
@@ -117,7 +121,6 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
       Toast.show(err);
     });
   }
@@ -134,7 +137,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }
@@ -151,7 +154,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }
@@ -168,7 +171,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }
@@ -185,7 +188,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      this.toggleSleek();
+      this.sleek.toggle();
       Toast.show(err);
     });
   }

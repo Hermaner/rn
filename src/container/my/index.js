@@ -44,17 +44,15 @@ class My extends myBase {
               onPress={() => { push({ key: 'SystemSet' }); }}
             />
           </View>
-          <TFeedback
-            content={
-              <View style={{ flexDirection: 'row' }}>
-                <Image style={styles.userImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
-                <View>
-                  <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
-                  <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
-                </View>
-              </View>}
-            onPress={() => { push({ key: 'SelfSet' }); }}
-          />
+          <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
+            <View style={{ flexDirection: 'row' }}>
+              <Image style={styles.userImg} source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} />
+              <View>
+                <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
+                <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </View>
         {
           items.map((item, index) => (

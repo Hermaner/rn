@@ -36,7 +36,7 @@ class AdjectiveInfo extends Base {
             <View style={[styles.identityOne, type === '1' && styles.isChooseBackground]}>
               <Image
                 style={styles.headerImg}
-                source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
+                source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }}
               />
               <Text
                 style={[styles.identityText, type === '1' && styles.isChooseText]}
@@ -49,7 +49,7 @@ class AdjectiveInfo extends Base {
             <View style={[styles.identityOne, type === '2' && styles.isChooseBackground]}>
               <Image
                 style={styles.headerImg}
-                source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
+                source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }}
               />
               <Text
                 style={[styles.identityText, type === '2' && styles.isChooseText]}

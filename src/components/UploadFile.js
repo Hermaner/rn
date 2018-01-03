@@ -11,7 +11,7 @@ import {
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon, ActionSheet } from 'native-base';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { Rpc } from 'react-native-qiniu';
+import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
@@ -71,13 +71,15 @@ export default class Prompt extends React.Component {
     label: PropTypes.string,
     initImages: PropTypes.array,
     imageCount: PropTypes.number,
+    isTextHide: PropTypes.bool,
   };
   constructor(props) {
     super(props);
     const images = [];
+    console.log(props.initImages)
     if (props.initImages && props.initImages.length > 0) {
       props.initImages.forEach((item) => {
-        images.push({ uri: item, key: item.slice(-21) });
+        images.push({ uri: `${item}?imageMogr2/thumbnail/700x`, key: item.slice(-19) });
       });
       this.props.getImages(props.initImages);
     }
@@ -202,7 +204,7 @@ export default class Prompt extends React.Component {
       isImageDateShow,
       imageViewData,
     } = this.state;
-    const { imageCount } = this.props;
+    const { imageCount, isTextHide } = this.props;
     const buttons = [
       { text: '拍照' },
       { text: '从相册选择' },
@@ -242,7 +244,9 @@ export default class Prompt extends React.Component {
             >
               <Image source={upImg} style={styles.upViewImg} />
             </TouchableWithoutFeedback>
-            <Text style={styles.upViewText}>{this.props.label}</Text>
+            {
+              !isTextHide && <Text style={styles.upViewText}>{this.props.label}</Text>
+            }
           </View>
         }
         <Modal

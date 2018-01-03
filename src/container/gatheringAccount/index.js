@@ -33,7 +33,7 @@ class GatheringAccount extends gatheringAccountBase {
               style={[styles.accountBox, { backgroundColor: item.title === '支付宝账号' ? '#52C3F7' : item.title === '微信账号' ? '#6CC05C' : '#F38260' }]}
             >
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={styles.accountImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+                <Image style={styles.accountImg} source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} />
                 <Text style={{ fontSize: 14, color: '#fff' }}>{item.title}</Text>
               </View>
               <View style={{ flex: 1, marginTop: 10 }}>

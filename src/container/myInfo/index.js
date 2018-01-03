@@ -83,7 +83,7 @@ class MyInfo extends myInfoBase {
         <TouchableOpacity style={styles.goodsItem} onPress={() => { push({ key: 'GoodDetail' }); }}>
           <Image
             style={styles.goodsImg}
-            source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }}
+            source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }}
           />
           <View style={{ flex: 1 }}>
             <Text style={styles.goodsName}>哈哈 野生90-100</Text>

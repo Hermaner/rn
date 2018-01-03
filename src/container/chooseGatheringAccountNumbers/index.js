@@ -26,7 +26,7 @@ class ChooseGatheringAccountNumbers extends chooseGatheringAccountNumbersBase {
     return (
       <View style={styles.pagebody}>
         <TouchableOpacity style={styles.flexRow} onPress={() => { push({ key: 'Cash', params: { name: '支付宝账号(**虫)' } }); }}>
-          <Image style={styles.typeImg} source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} />
+          <Image style={styles.typeImg} source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} />
           <View>
             <Text style={styles.accoutTitle}>支付宝账号(**虫)</Text>
             <Text style={styles.accoutLabel}>今日还可提现：2000</Text>

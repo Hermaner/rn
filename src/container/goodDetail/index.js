@@ -283,7 +283,7 @@ class MainScreen extends base {
       <View style={styles.maskerContent}>
         <View style={styles.maskerTop}>
           <View style={styles.maskerLeft}>
-            <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.maskerImg} />
+            <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.maskerImg} />
           </View>
           <View style={styles.maskerLabel}>
             <View style={styles.maskerTitle}>
@@ -304,7 +304,7 @@ class MainScreen extends base {
           <Text style={styles.maskerNumText}>斤</Text>
         </View>
         <View style={styles.maskerLink}>
-          <Image source={{ uri: 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2495803215,2562259820&fm=173&s=DA383EC754026CEE0E2E89200300704B&w=218&h=146&img.JPEG' }} style={styles.maskerLinkImg} />
+          <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.maskerLinkImg} />
         </View>
         <View style={styles.maskerBom}>
           <Text style={styles.maskerBomPrice}>50.00元</Text>
