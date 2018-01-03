@@ -1,10 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Container, Content, Text, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, TFeedback } from '../../components';
+import { Header, TFeedback, Loading } from '../../components';
 import shippingAddressBase from './base';
 import styles from './styles';
 
@@ -17,142 +17,70 @@ class ShippingAddress extends shippingAddressBase {
     };
   }
   componentDidMount() {
+    this.getInit();
+    this._onRefresh();
   }
   goRoute = (key) => {
     this.props.push(key);
   }
   _renderBody() {
     const { push } = this.props;
+    const { items } = this.state;
     return (
       <ScrollView style={styles.pagebody}>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
+        {
+          items.map((item, index) => (
+            <View style={styles.adressItem} key={index}>
+              <View style={styles.myAdressInfo}>
+                <Text style={styles.name}>{item.name} {item.phone}</Text>
+                <Text style={styles.adress}>
+                  收货地址:{item.receiveProvinceName}{item.receiveCityName}{item.receiveDistrictName}
+                </Text>
+              </View>
+              <View style={styles.setAdress}>
+                <View style={styles.flexRow}>
+                  <TFeedback
+                    content={
+                      <CheckBox
+                        style={styles.checkBox}
+                        checked={item.isDefault === '1'}
+                      />}
+                    onPress={() => this.defaultAdress(item.receiveAddressId)}
+                  />
+                  <Text style={styles.defaultAdress}>默认收货地址</Text>
+                </View>
+                <View style={[styles.flexRow, styles.flexRight]}>
+                  <TFeedback
+                    content={
+                      <View style={styles.button}>
+                        <Text style={styles.btnText}>删除</Text>
+                      </View>}
+                    onPress={() => this.deleteAdress(item.receiveAddressId)}
+                  />
+                  <TFeedback
+                    content={
+                      <View style={[styles.button, styles.btnRight]}>
+                        <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
+                      </View>}
+                    onPress={() => {
+                      push({
+                        key: 'AddAddress',
+                        params: {
+                          title: '1',
+                          getAdressId: item.receiveAddressId,
+                          adress:
+                          item.receiveProvinceName +
+                          item.receiveCityName +
+                          item.receiveDistrictName,
+                        },
+                      });
+                    }}
+                  />
+                </View>
+              </View>
             </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TFeedback
-                content={
-                  <View style={styles.button}>
-                    <Text style={styles.btnText}>删除</Text>
-                  </View>}
-                onPress={() => { push({ key: 'AddAddress' }); }}
-              />
-              <TFeedback
-                content={
-                  <View style={[styles.button, styles.btnRight]}>
-                    <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-                  </View>}
-                onPress={() => { push({ key: 'AddAddress', params: { title: '修改收货地址' } }); }}
-              />
-            </View>
-          </View>
-        </View>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
-            </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>删除</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.btnRight]}>
-                <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
-            </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>删除</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.btnRight]}>
-                <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
-            </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>删除</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.btnRight]}>
-                <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
-            </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>删除</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.btnRight]}>
-                <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.adressItem}>
-          <View style={styles.myAdressInfo}>
-            <Text style={styles.name}>张三 1509083849</Text>
-            <Text style={styles.adress}>收货地址:河北省石家庄都会自己不想进出口</Text>
-          </View>
-          <View style={styles.setAdress}>
-            <View style={styles.flexRow}>
-              <CheckBox style={styles.checkBox} checked />
-              <Text style={styles.defaultAdress}>默认收货地址</Text>
-            </View>
-            <View style={[styles.flexRow, styles.flexRight]}>
-              <TouchableOpacity style={styles.button}>
-                <Text style={styles.btnText}>删除</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.button, styles.btnRight]}>
-                <Text style={[styles.btnText, styles.btnRightText]}>编辑</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+          ))
+        }
       </ScrollView>
     );
   }
@@ -172,8 +100,9 @@ class ShippingAddress extends shippingAddressBase {
               </View>
             </View>
             }
-          onPress={() => { push({ key: 'AddAddress', params: { title: '新增收货地址' } }); }}
+          onPress={() => { push({ key: 'AddAddress', params: { title: '0', getAdressId: '', adress: '' } }); }}
         />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

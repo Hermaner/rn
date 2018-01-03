@@ -35,8 +35,14 @@ class Base extends React.Component {
     const { type } = this.props.navigation.state.params;
     let emit;
     switch (type) {
+      case 'getAddressEmit':
+        emit = 'getAddressEmit';
+        break;
       case 'cityCgyGet':
         emit = 'cityCgyGet';
+        break;
+      case 'userInfoEmit':
+        emit = 'userInfoEmit';
         break;
       default:
     }

@@ -146,3 +146,18 @@ export function DeleteSupplyService(data) {
 export function UpdateSupplyService(data) {
   return post('UpdateSupplyService', data);
 }
+export function GetMemberInfoService(data) {
+  return get('GetMemberInfoService', data);
+}
+export function AddOrUpdateReceiveAddressService(data) {
+  return post('AddOrUpdateReceiveAddressService', data);
+}
+export function DeleteReceiveAddressService(data) {
+  return get('DeleteReceiveAddressService', data);
+}
+export function UpdateMemberInfoService(data) {
+  return post('UpdateMemberInfoService', data);
+}
+export function SetDefaultService(data) {
+  return get('SetDefaultService', data);
+}

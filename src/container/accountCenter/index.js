@@ -4,7 +4,7 @@ import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header } from '../../components';
+import { Header, TFeedback } from '../../components';
 import AccountCenterBase from './base';
 import styles from './styles';
 
@@ -32,9 +32,13 @@ class AccountCenter extends AccountCenterBase {
         <View style={{ height: 150 }}>
           <View style={styles.accountMoney}>
             <Text style={styles.textBackground}>账户资金</Text>
-            <TouchableOpacity style={styles.rightBtn} onPress={() => { push({ key: isValidate ? 'ValidatePhone' : 'ChooseGatheringAccountNumbers' }); }}>
-              <Text style={styles.textBackground}>提现</Text>
-            </TouchableOpacity>
+            <TFeedback
+              content={
+                <View style={styles.rightBtn}>
+                  <Text style={styles.textBackground}>提现</Text>
+                </View>}
+              onPress={() => { push({ key: isValidate ? 'ValidatePhone' : 'ChooseGatheringAccountNumbers' }); }}
+            />
           </View>
           <Text style={[styles.textBackground, styles.textMoney]}>￥0.00</Text>
         </View>

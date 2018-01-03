@@ -1,61 +1,129 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
+import { ListView } from 'react-native';
+import Toast from 'react-native-simple-toast';
+import { GetMemberInfoService, DeleteReceiveAddressService, SetDefaultService } from '../../api';
 
+let canEnd = false;
 class ShippingAddressBase extends React.Component {
-  wxLogin = () => {
-    WeChat.sendAuthRequest('snsapi_userinfo', 'App')
-    .then(res => console.log(res));
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+    this.state = {
+      ds,
+      dataSource: ds.cloneWithRows([]),
+      items: [],
+      info: '',
+      currentPage: 1,
+      pageSize: '15',
+      memberId: '',
+      refresh: false, // 是否是刷新
+      loading: true, // 是否加载中
+      nomore: false, // 是否没有更多
+      noData: false, // 是否没有数据
+    };
   }
-  async goWXpay() {
-    const orderID = '1';
-    React.WxUnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      console.log(lists);
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        try {
-          WeChat.pay(
-            {
-              partnerId: result.mch_id,
-              prepayId: result.prepay_id,
-              nonceStr: result.nonce_str,
-              timeStamp: result.timeStamp,
-              package: 'Sign=WXPay',
-              sign: '140822CCE34FD5B2303956105E49CA7C',
-            },
-          );
-        } catch (error) {
-          console.log('Pay for failure!');
-        }
-      }
-    }).catch(err => console.log(err));
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
   }
-  goAlipay() {
-    const orderID = '1';
-    React.UnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        Alipay.pay(result).then((json) => {
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
+  getData = () => {
+    const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
+    this.sleek.toggle();
+    GetMemberInfoService({
+      memberId: '1',
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.receiveAddresss;
+        if (result.length === 0) {
+          if (items.length === 0) {
+            this.setState({
+              noData: true,
+            });
           } else {
-            console.log('其他失败原因');
+            this.setState({
+              nomore: true,
+              loading: false,
+            });
           }
-        }).catch(err => console.log(err));
+          return;
+        }
+        if (refresh) {
+          this.setState({
+            items: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = items.concat(result);
+          this.setState({
+            items: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
+            loading: false,
+          });
+        }
+        setTimeout(() => { canEnd = true; }, 0);
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
       }
-    }).catch(err => console.log(err));
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
   }
-  common() {
-    this.name = 'herman';
+  deleteAdress = (receiveAddressId) => {
+    this.sleek.toggle();
+    DeleteReceiveAddressService({
+      receiveAddressId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this._onRefresh();
+        console.log(res);
+        setTimeout(() => { canEnd = true; }, 0);
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
+  defaultAdress = (receiveAddressId) => {
+    const { memberId } = this.state;
+    SetDefaultService({
+      receiveAddressId,
+      memberId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this._onRefresh();
+        console.log(res);
+        setTimeout(() => { canEnd = true; }, 0);
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.toggleSleek();
+      Toast.show(err);
+    });
+  }
+  _onRefresh = () => {
+    this.setState({
+      refresh: true,
+      currentPage: 1,
+    }, () => this.getData());
   }
 }
 export default ShippingAddressBase;

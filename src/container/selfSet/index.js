@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -72,7 +72,7 @@ class SelfSet extends selfSetBase {
                   </View>
                 </View>
               </View>}
-            onPress={() => { push({ key: 'AdjectiveInfo' }); }}
+            onPress={() => { push({ key: 'AdjectiveInfo', params: { type: identityName } }); }}
           />
           <TFeedback
             content={

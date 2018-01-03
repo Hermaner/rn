@@ -1,14 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header } from '../../components';
-import addAddressBase from './base';
+import { Header, TFeedback, Loading } from '../../components';
+import base from './base';
 import styles from './styles';
 
-class AddAddress extends addAddressBase {
+class AddAddress extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,34 +17,62 @@ class AddAddress extends addAddressBase {
     };
   }
   componentDidMount() {
+    this.initData();
   }
-  goRoute = (key) => {
-    this.props.push(key);
+  componentWillUnmount() {
+    this.deleteData();
   }
   _renderBody() {
+    const { push } = this.props;
+    const { name, fullAddress, myAdress } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.rowBox}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>所在地区:</Text>
-          <View style={[styles.flexOne, styles.flexRight]}>
-            <Text style={{ fontSize: 14, color: '#666' }} numberOfLines={1}>河北省石家庄充不上电就看不出空中小姐创造性健康才能看那就选择困难健康才能看那就选择困</Text>
-            <Icon style={{ marginLeft: 10 }} name="arrow-back" />
-          </View>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, styles.flexRight]}>
+                <Text style={{ fontSize: 14, color: '#666' }} numberOfLines={1}>{myAdress}</Text>
+                <Icon style={{ marginLeft: 10, color: '#666', fontSize: 20 }} name="play" />
+              </View>}
+            onPress={() => { push({ key: 'CgyCitys', params: { type: 'getAddressEmit' } }); }}
+          />
         </View>
         <View style={[styles.rowBox, styles.rowBoxMargin]}>
-          <Input multiline placeholder="详细地址" style={styles.inputTextArea} />
+          <Input
+            multiline
+            placeholder="详细地址"
+            style={styles.inputTextArea}
+            value={fullAddress}
+            onChangeText={text => this.saveFullAddress(text)}
+          />
         </View>
         <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>收货人姓名:</Text>
-          <Input multiline placeholder="请填写收货人姓名" style={styles.inputs} />
+          <Input
+            multiline
+            placeholder="请填写收货人姓名"
+            style={styles.inputs}
+            value={name}
+            onChangeText={text => this.saveName(text)}
+          />
         </View>
         <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>电话号码:</Text>
-          <Input multiline placeholder="请填写手机号码" style={styles.inputs} />
+          <Input
+            multiline
+            placeholder="请填写手机号码"
+            style={styles.inputs}
+            onChangeText={text => this.savePhone(text)}
+          />
         </View>
         <View style={[styles.rowBox, styles.rowBoxMargin]}>
           <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>邮编:</Text>
-          <Input multiline style={styles.inputs} />
+          <Input
+            multiline
+            style={styles.inputs}
+            onChangeText={text => this.savePostalCode(text)}
+          />
         </View>
       </View>
     );
@@ -54,13 +82,18 @@ class AddAddress extends addAddressBase {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title={title} />
+        <Header back={pop} title={title === '1' ? '修改收货地址' : '新增收货地址'} />
         <Content>
           {this._renderBody()}
-          <TouchableOpacity style={styles.footerButton}>
-            <Text style={styles.footerButtonText}>保存</Text>
-          </TouchableOpacity>
+          <TFeedback
+            content={
+              <View style={styles.footerButton}>
+                <Text style={styles.footerButtonText}>保存</Text>
+              </View>}
+            onPress={() => this.addAdress()}
+          />
         </Content>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

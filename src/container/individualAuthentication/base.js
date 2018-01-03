@@ -1,6 +1,4 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 import { Alert } from 'react-native';
 
 class Base extends React.Component {
