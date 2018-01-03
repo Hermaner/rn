@@ -11,7 +11,7 @@ import {
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon, ActionSheet } from 'native-base';
 import ImageViewer from 'react-native-image-zoom-viewer';
-import { Rpc } from 'react-native-qiniu';
+import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
@@ -75,6 +75,7 @@ export default class Prompt extends React.Component {
   constructor(props) {
     super(props);
     const images = [];
+    console.log(props.initImages)
     if (props.initImages && props.initImages.length > 0) {
       props.initImages.forEach((item) => {
         images.push({ uri: item, key: item.slice(-21) });
@@ -218,7 +219,8 @@ export default class Prompt extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <Image source={{ uri: item.uri }} style={styles.imageList} />
+                  <Text>{item.uri}</Text>
+                  <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg' }} style={styles.imageList} />
                   <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
                     <Icon name="ios-close-outline" style={styles.imageDelIcon} />
                   </TouchableOpacity>

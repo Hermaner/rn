@@ -4554,6 +4554,14 @@ react-native-picker@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-native-picker/-/react-native-picker-4.3.0.tgz#df4011723f30dd9f622739aae1afe9aabd293573"
 
+react-native-qiniu-hm@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-qiniu-hm/-/react-native-qiniu-hm-0.0.2.tgz#965d657b20977c67f335996d1092bacf730db28e"
+  dependencies:
+    base-64 "^0.1.0"
+    crypto-js "^3.1.6"
+    url-parse "^1.1.1"
+
 react-native-qiniu@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/react-native-qiniu/-/react-native-qiniu-0.3.0.tgz#9d5b5b79689f3e6e58972daf2a74d51663568c56"

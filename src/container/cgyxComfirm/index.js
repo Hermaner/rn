@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Button, Icon } from 'native-base';
 import { connect } from 'react-redux';
@@ -55,6 +55,7 @@ class CgyxComfirm extends base {
       <View style={styles.upView}>
         <View style={styles.listTitle}>
           <Text style={styles.listTitleText}>货品图片</Text>
+          <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={{width: 50,height:50}} />
         </View>
         <View style={styles.listLabel}>
           {
