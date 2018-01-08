@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Image, Text } from 'react-native';
 import TOpacity from './TOpacity';
 
@@ -14,7 +15,7 @@ const NoData = ({ onPress, label }) => (
 
 );
 NoData.propTypes = {
-  label: React.PropTypes.string,
-  onPress: React.PropTypes.func,
+  label: PropTypes.string,
+  onPress: PropTypes.func,
 };
 export default NoData;

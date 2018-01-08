@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { Loading, TFeedback } from '../../components';
@@ -148,7 +147,6 @@ class Child extends Base {
               </TouchableWithoutFeedback>
             </View>
         }
-        <SleekLoadingIndicator loading={isSleekShow} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
