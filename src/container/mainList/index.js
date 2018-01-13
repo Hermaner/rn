@@ -252,7 +252,10 @@ class MainList extends base {
             <Content>
               {
                 citys.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { this.changeCityTab(index); }}>
+                  <TouchableWithoutFeedback
+                    key={index}
+                    onPress={() => { this.changeCityTab(index); }}
+                  >
                     <View style={[styles.addressLeftList, item.cur && styles.addressLeftListCur]}>
                       <Text
                         style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
@@ -286,13 +289,13 @@ class MainList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index) => (
+  _renderRow = (item, sectionID, index, memberId) => (
     <View>
       <GoodList
         data={item}
         rowID={index}
         key={index}
-        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
+        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
       />
     </View>
   )

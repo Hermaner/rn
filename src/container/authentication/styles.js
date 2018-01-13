@@ -71,5 +71,32 @@ const styles = StyleSheet.create({
     color: '#8ECD24',
     fontSize: 14,
   },
+  formBom: {
+    backgroundColor: '#fff',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 4,
+  },
+  password: {
+    color: '#666', fontSize: 14, height: 40,
+  },
+  sendBtn: {
+    height: 30,
+    width: 100,
+    padding: 0,
+    ...st.jacenter,
+    marginRight: 10,
+    backgroundColor: '#ddd',
+  },
+  sendBtnText: {
+    color: '#888', fontSize: 12,
+  },
 });
 export default styles;

@@ -1,12 +1,28 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
+import { ListView, DeviceEventEmitter } from 'react-native';
+import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
+import { GetNewsService } from '../../api';
 
-class HuinongConsultBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
     this.state = {
-      imgList: [{
+      ds,
+      dataSource: ds.cloneWithRows([]),
+      items: [],
+      currentPage: 1,
+      pageSize: '5',
+      isSleekShow: false,
+      refresh: false, // 是否是刷新
+      loading: true, // 是否加载中
+      nomore: false, // 是否没有更多
+      noData: false, // 是否没有数据
+      title: '',
+      imgLists: [{
         img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
         title: '2017年12月25日鸡蛋价格行情',
       }, {
@@ -19,15 +35,47 @@ class HuinongConsultBase extends React.Component {
         img: 'https://gitlab.pro/yuji/demo/uploads/576ef91941b0bda5761dde6914dae9f0/kD3eeHe.jpg',
         title: '噫吁嚱，金戈铁马，气吞万里如虎',
       }],
-      loadQueue: [0, 0, 0, 0],
     };
   }
-  loadHandle = (i) => {
-    const loadQueue = this.state.loadQueue;
-    loadQueue[i] = 1;
-    this.setState({
-      loadQueue,
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
+  }
+  getDelete = () => {
+    this.supplyRefresh.remove();
+  }
+  getData = () => {
+    const { ds, title } = this.state;
+    const { type } = this.props;
+    GetNewsService({
+      type,
+      title,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log('ZZZZZZZZZZZz', res);
+        const result = res.data;
+        const imgList = [];
+        const swiperLength = result.length > 3 ? 3 : result.length;
+        for (let i = 0; i < swiperLength; i += 1) {
+          imgList.push(result[i]);
+        }
+        this.setState({
+          dataSource: ds.cloneWithRows(result),
+          imgLists: imgList,
+        });
+        console.log('JJJJJJJJJj');
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
     });
   }
+  _onRefresh = () => {
+    this.getData();
+  }
 }
-export default HuinongConsultBase;
+Base.propTypes = {
+  type: PropTypes.string,
+  // push: PropTypes.func,
+};
+export default Base;

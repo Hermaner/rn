@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   midMainView: {
-    backgroundColor: '#fff',
   },
   nameOneView: {
     paddingLeft: 10,
+    backgroundColor: '#fff',
   },
   nameTextView: {
     ...st.fr,
@@ -95,14 +95,17 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   midMainCredit: {
+    backgroundColor: '#fff',
     ...st.fr,
     padding: 10,
     ...st.acenter,
+    marginTop: 10,
   },
   creditImg: {
-    width: 50,
-    height: 50,
+    width: 18,
+    height: 18,
     marginRight: 10,
+    marginTop: 4,
   },
   creditView: {
     flex: 1,
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   ptlIcon: {
-    fontSize: 16,
+    fontSize: 20,
     color: Mcolor,
     marginRight: 6,
   },
@@ -270,6 +273,38 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
     lineHeight: 20,
+  },
+  maskerContent: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  row: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
+  circle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#4BBE28',
+    marginRight: 10,
+    marginTop: 4,
+  },
+  listTitle: {
+    fontSize: 18,
+    color: '#333',
+    marginBottom: 4,
+  },
+  listLabel: {
+    fontSize: 14,
+    color: '#666',
+  },
+  listLabelRight: {
+    fontSize: 14,
+    color: '#8ECD24',
+    marginLeft: 2,
   },
 });
 export default styles;

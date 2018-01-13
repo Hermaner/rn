@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { st } from '../../utils';
-const { width } = Dimensions.get('window')
+
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   pagebody: {
     flex: 1,
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   newsTitle: {
+    minHeight: 36,
     fontSize: 16,
     color: '#333',
     marginBottom: 25,

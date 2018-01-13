@@ -141,7 +141,7 @@ class Base extends React.Component {
     this.setState({
       upImages,
     });
-    console.log(upImages)
+    console.log(upImages);
   }
   cityCgyGet = (data) => {
     const { items } = this.state;

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st } from '../../utils';
+import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
   rowBox: {
@@ -40,6 +40,43 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 14,
+  },
+  accountView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 50,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+    paddingLeft: 10,
+  },
+  account: {
+    color: '#666',
+    fontSize: 14,
+    borderBottomColor: '#eee',
+    paddingLeft: 0,
+  },
+  formBom: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  password: {
+    color: '#666', fontSize: 14, height: 40,
+  },
+  sendBtn: {
+    height: 30,
+    width: 100,
+    padding: 0,
+    ...st.jacenter,
+    marginRight: 10,
+    backgroundColor: '#ddd',
+  },
+  sendBtnText: {
+    color: '#888', fontSize: 12,
   },
 });
 export default styles;

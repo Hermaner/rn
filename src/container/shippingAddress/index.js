@@ -43,9 +43,9 @@ class ShippingAddress extends shippingAddressBase {
                     content={
                       <CheckBox
                         style={styles.checkBox}
+                        onPress={() => this.defaultAdress(item.receiveAddressId)}
                         checked={item.isDefault === '1'}
                       />}
-                    onPress={() => this.defaultAdress(item.receiveAddressId)}
                   />
                   <Text style={styles.defaultAdress}>默认收货地址</Text>
                 </View>

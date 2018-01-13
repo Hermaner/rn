@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, Text, ListView, RefreshControl, Image } from 'react-native';
+import { View, TouchableWithoutFeedback, Text, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
 import { connect } from 'react-redux';
@@ -41,7 +41,7 @@ class Child extends Base {
                   }
                 </View>
                 <View>
-                  <Text style={{ fontSize: 16, color: '#FC8521' }}>{item.wholesalePrice}/{item.unit}</Text>
+                  <Text style={{ fontSize: 16, color: '#FC8521' }}>{item.wholesalePrice}元/{item.unit}</Text>
                 </View>
               </View>
               <View>

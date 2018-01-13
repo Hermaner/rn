@@ -83,6 +83,10 @@ import ReviseSuccess from '../container/reviseSuccess';
 import SeePrice from '../container/seePrice';
 import PriceDetail from '../container/priceDetail';
 import PriceInfo from '../container/priceInfo';
+import SetPassword from '../container/setPassword';
+import EnlistBusiness from '../container/enlistBusiness';
+import OtherInfo from '../container/otherInfo';
+import GoodBusinessDetail from '../container/goodBusinessDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -164,6 +168,10 @@ export const AppNavigator = StackNavigator({
   SeePrice: { screen: SeePrice },
   PriceDetail: { screen: PriceDetail },
   PriceInfo: { screen: PriceInfo },
+  SetPassword: { screen: SetPassword },
+  EnlistBusiness: { screen: EnlistBusiness },
+  OtherInfo: { screen: OtherInfo },
+  GoodBusinessDetail: { screen: GoodBusinessDetail },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

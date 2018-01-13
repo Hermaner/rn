@@ -1,7 +1,5 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
-import { Image, ListView } from 'react-native';
-import { deviceW } from '../../utils';
+import PropTypes from 'prop-types';
 import { DeepClone } from '../../api';
 
 class Base extends React.Component {
@@ -44,6 +42,11 @@ class Base extends React.Component {
       certifIndex: 0,
       isCertifShow: false,
       imageViewData: [],
+      goodsImg: require('../../assets/img/no.png'),
+      bao: require('../../assets/img/bb.png'),
+      infos: '',
+      memoText: '',
+      isHidden: false,
     };
   }
   onChangeText = (txt, index) => {
@@ -65,6 +68,35 @@ class Base extends React.Component {
         break;
       default:
     }
+  }
+  getData = () => {
+    const { info } = this.props.navigation.state.params;
+    this.setState({
+      infos: info,
+    }, this.setMemo);
+  }
+  setMemo = () => {
+    const { infos } = this.state;
+    if (infos) {
+      for (let i = 0; i < infos.memberVerifs.length; i += 1) {
+        if (infos.memberVerifs[i].verifFieldName === '买家保障') {
+          console.log('UUUUUUUU');
+          infos.memoText = infos.memberVerifs[i].memo;
+          break;
+        }
+        infos.memoText = '未缴纳买家保证金';
+      }
+    }
+  }
+  listPush = () => {
+    this.ModalView.closeModal();
+  }
+  rzDetail = () => {
+    this.setState({
+      isHidden: true,
+    });
+    this.ModalView.showModal();
+    console.log('$%%%%%%%%%$$$$$$$%%%%%');
   }
   resetState = () => {
     this.setState({
@@ -92,5 +124,7 @@ class Base extends React.Component {
     callback();
   }
 }
-
+Base.propTypes = {
+  navigation: PropTypes.object,
+};
 export default Base;

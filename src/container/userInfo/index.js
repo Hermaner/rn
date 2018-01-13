@@ -24,7 +24,8 @@ class UserInfo extends userInfoBase {
     this.props.push(key);
   }
   _renderBody() {
-    const { userName, phone, fullAddress, myAdress, name } = this.state;
+    const { phone, fullAddress, myAdress, name } = this.state;
+    const { info, set } = this.props.navigation.state.params;
     const { push } = this.props;
     return (
       <View style={styles.pagebody}>
@@ -35,7 +36,7 @@ class UserInfo extends userInfoBase {
             onChangeText={text => this.saveName(text)}
             placeholderTextColor="#999"
             style={styles.inputs}
-            placeholder={userName}
+            placeholder={info.nickName}
           />
         </View>
         <View style={styles.rowBox}>
@@ -52,7 +53,14 @@ class UserInfo extends userInfoBase {
           content={
             <View style={styles.rowBox}>
               <Text style={styles.leftText}>联系地址</Text>
-              <Text style={styles.chooseAdress}>{myAdress === '' ? '点击选择您的地址' : myAdress}</Text>
+              {
+                set ?
+                  <Text style={styles.chooseAdress}>
+                    {myAdress === '' ? info.provinceName + info.cityName + info.districtName : myAdress}
+                  </Text>
+                :
+                  <Text style={styles.chooseAdress}>{myAdress === '' ? '点击选择您的地址' : myAdress}</Text>
+              }
             </View>}
           onPress={() => { push({ key: 'CgyCitys', params: { type: 'userInfoEmit' } }); }}
         />
@@ -62,7 +70,7 @@ class UserInfo extends userInfoBase {
             onChangeText={text => this.saveFullAddress(text)}
             placeholderTextColor="#999"
             style={styles.inputs}
-            placeholder="请输入详细地址，不超过30个字"
+            placeholder={set ? info.address : '请输入详细地址，不超过30个字'}
           />
         </View>
       </View>

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodList } from '../../components';
+import { Header, ScrollableTab, GoodList, TFeedback, MyModalView } from '../../components';
 import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
@@ -19,13 +19,21 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
+    this.getData();
   }
   _renderTop() {
+    const { goodsImg, infos } = this.state;
+    console.log(infos);
     return (
       <View style={styles.topView}>
-        <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.mainImg} />
+        {
+          infos.supplys.length > 0 ?
+            <Image source={{ uri: infos.supplys[0].imgUrl }} style={styles.mainImg} />
+          :
+            <Image source={goodsImg} style={styles.mainImg} />
+        }
         <View style={styles.toplogo}>
-          <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.mainLogo} />
+          <Image source={{ uri: infos.imgUrl }} style={styles.mainLogo} />
         </View>
         <View style={styles.topBtn}>
           <Icon name="arrow-back" style={styles.topIcon} />
@@ -35,73 +43,55 @@ class MainScreen extends base {
     );
   }
   _renderNameAP() {
+    const { bao, infos } = this.state;
     return (
       <View style={styles.midMainView}>
         <View style={styles.nameOneView}>
           <View style={styles.nameTextView}>
             <Icon name="arrow-back" style={styles.nameIcon} />
             <Icon name="arrow-back" style={styles.nameIcon} />
-            <Text style={styles.nameText}>吴涛</Text>
+            <Text style={styles.nameText}>{infos.nickName}</Text>
           </View>
           <View style={styles.nameLabelView}>
-            <Text style={styles.grayText}>基地直供基地直供</Text>
+            <Text style={styles.grayText}>{infos.identityName}</Text>
           </View>
         </View>
-        <View style={styles.midMainCount}>
-          <View style={styles.mmcList}>
-            <Text style={styles.mmcText}>3424</Text>
-            <Text style={styles.mmmLabel}>店铺访客</Text>
-          </View>
-          <View style={styles.mmcList}>
-            <Text style={styles.mmcText}>3</Text>
-            <Text style={styles.mmmLabel}>店铺访客</Text>
-          </View>
-          <View style={styles.mmcList}>
-            <Text style={styles.mmcText}>24</Text>
-            <Text style={styles.mmmLabel}>店铺访客</Text>
-          </View>
-          <View style={styles.mmcList}>
-            <Text style={styles.mmcText}>1</Text>
-            <Text style={styles.mmmLabel}>店铺访客</Text>
-          </View>
-        </View>
-        <View style={styles.midMainCredit}>
-          <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.creditImg} />
-          <View style={styles.creditView}>
-            <Text style={styles.creditText}>江西定都县</Text>
-            <Text style={styles.creditLabel}>已缴纳保证金5000元</Text>
-          </View>
-          <View style={styles.creditRight}>
-            <Text style={styles.creditRightText}>了解服务</Text>
-            <Icon name="arrow-back" style={styles.creditRightIcon} />
-          </View>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.midMainCredit}>
+              <Image source={bao} style={styles.creditImg} />
+              <View style={styles.creditView}>
+                <Text style={styles.creditLabel}>{infos.memoText}</Text>
+              </View>
+              <View style={styles.creditRight}>
+                <Icon name="arrow-back" style={styles.creditRightIcon} />
+              </View>
+            </View>}
+          onPress={() => this.rzDetail()}
+        />
       </View>
     );
   }
   _renderProvideTypes() {
+    const { infos } = this.state;
     return (
-      <View style={styles.provideTypes}>
-        <View style={styles.provideTypesLeft}>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-          <View style={styles.ptlList}>
-            <Icon name="arrow-back" style={styles.ptlIcon} />
-            <Text style={styles.ptlText}>基地直供</Text>
-          </View>
-        </View>
-        <Icon name="arrow-back" style={styles.ptrIcon} />
-      </View>
+      <TFeedback
+        content={
+          <View style={styles.provideTypes}>
+            <View style={styles.provideTypesLeft}>
+              {
+                infos.memberVerifs.map((item, index) => (
+                  <View style={styles.ptlList} key={index}>
+                    <Icon name="checkmark" style={styles.ptlIcon} />
+                    <Text style={styles.ptlText}>{item.verifFieldName}</Text>
+                  </View>
+                ))
+              }
+            </View>
+            <Icon name="play" style={styles.ptrIcon} />
+          </View>}
+        onPress={() => this.rzDetail()}
+      />
     );
   }
   _renderSkuTable() {
@@ -185,6 +175,38 @@ class MainScreen extends base {
       </View>
     );
   }
+  _renderModalView() {
+    const content = (
+      <View style={styles.maskerContent}>
+        <View style={styles.row}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={styles.circle} />
+            <View>
+              <Text style={styles.listTitle}>服务说明</Text>
+              <View style={styles.flexRow}>
+                <Text style={styles.listLabel}>保证金</Text>
+                <TFeedback
+                  content={
+                    <Text style={styles.listLabelRight}>
+                      商家交付给平台，用来保证诚信交易,不欺骗买家的押金。
+                    </Text>}
+                  onPress={() => this.listPush()}
+                />
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+    return (
+      <MyModalView
+        ref={(o) => { this.ModalView = o; }}
+        title={'服务说明'}
+        content={content}
+        onConfirm={() => console.log(111)}
+      />
+    );
+  }
   _renderFooter() {
     return (
       <Footer>
@@ -203,21 +225,28 @@ class MainScreen extends base {
   }
   render() {
     const { pop } = this.props;
+    const { infos } = this.state;
     return (
       <Container>
         <Header
           back={pop}
-          title="供应详情"
+          title="店铺详情"
           showRight
           rightText="更多"
           rightPress={this.resetState}
         />
         <Content>
-          {this._renderTop()}
+          {
+            infos &&
+            this._renderTop()
+          }
           {this._renderNameAP()}
-          {this._renderProvideTypes()}
+          {
+            infos &&
+            this._renderProvideTypes()
+          }
           {this._renderSkuTable()}
-          {this._renderTabs()}
+          {/* {this._renderTabs()} */}
         </Content>
         {this._renderFooter()}
       </Container>

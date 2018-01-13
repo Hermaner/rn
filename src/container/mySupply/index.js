@@ -8,7 +8,7 @@ import { ScrollableTab, Header, Loading } from '../../components';
 
 import Child from './child';
 
-class MyRelease extends React.Component {
+class MySupply extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ class MyRelease extends React.Component {
     );
   }
 }
-MyRelease.propTypes = {
+MySupply.propTypes = {
   pop: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyRelease);
+export default connect(null, { pop: popRoute, push: pushRoute })(MySupply);

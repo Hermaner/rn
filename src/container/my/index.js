@@ -17,13 +17,11 @@ class My extends myBase {
     };
   }
   componentDidMount() {
-  }
-  goRoute = (key) => {
-    this.props.push(key);
+    this.getInit();
   }
   _renderBody() {
     const { push } = this.props;
-    const { items, backGround1 } = this.state;
+    const { list, backGround1, userInfo } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerImgBox}>
@@ -46,16 +44,18 @@ class My extends myBase {
           </View>
           <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
             <View style={{ flexDirection: 'row' }}>
-              <Image style={styles.userImg} source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} />
+              <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
               <View>
-                <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>三生三世</Text>
-                <Text style={[styles.textBackground, styles.textSmall]}>其他行业</Text>
+                <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>{userInfo.nickName}</Text>
+                <Text style={[styles.textBackground, styles.textSmall]}>
+                  {userInfo.identityName}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
         {
-          items.map((item, index) => (
+          list.map((item, index) => (
             <View style={styles.detailInfo} key={index}>
               <Text style={styles.myIdentity}>{item[0]}</Text>
               {
@@ -74,7 +74,10 @@ class My extends myBase {
                           </View>
                         </View>
                       </View>}
-                    onPress={() => { push({ key: item2.push }); }}
+                    onPress={() => {
+                      push({
+                        key: item2.push, params: { info: userInfo, name: userInfo.nickName } });
+                    }}
                   />
                 ))
               }
@@ -90,6 +93,7 @@ class My extends myBase {
         <Content>
           {this._renderBody()}
         </Content>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

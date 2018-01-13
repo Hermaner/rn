@@ -20,7 +20,7 @@ class Base extends React.Component {
     GetSameCategoryPurchaseService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      console.log('??????????????', res.data);
       if (res.isSuccess) {
         this.setState({
           items: res.data,
