@@ -101,6 +101,7 @@ class ShippingAddressBase extends React.Component {
     });
   }
   defaultAdress = (receiveAddressId) => {
+    this.sleek.toggle();
     const { memberId } = this.state;
     SetDefaultService({
       receiveAddressId,

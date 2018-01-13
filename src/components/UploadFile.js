@@ -76,7 +76,7 @@ export default class Prompt extends React.Component {
   constructor(props) {
     super(props);
     const images = [];
-    console.log(props.initImages)
+    console.log(props.initImages);
     if (props.initImages && props.initImages.length > 0) {
       props.initImages.forEach((item) => {
         images.push({ uri: `${item}?imageMogr2/thumbnail/700x`, key: item.slice(-19) });

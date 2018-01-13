@@ -1,10 +1,12 @@
 import React from 'react';
+import Toast from 'react-native-simple-toast';
+import { GetMemberInfoService } from '../../api';
 
 class MyBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
+      list: [
         ['我是买家', [{
           id: '1',
           title: '我发布的采购',
@@ -102,7 +104,7 @@ class MyBase extends React.Component {
           last: true,
           icnColor: '#FC8521',
           label: '',
-          push: '',
+          push: 'StoreDetail',
         }, {
           id: '1',
           title: '联系客服',
@@ -122,7 +124,37 @@ class MyBase extends React.Component {
         title: '其他',
       }],
       backGround1: require('../../assets/img/1.png'),
+      userInfo: '',
     };
+  }
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
+  }
+  getData = () => {
+    const { memberId } = this.state;
+    console.log('rrrrrrrrr', memberId);
+    GetMemberInfoService({
+      memberId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        const result = res.data;
+        console.log('^^^^^^', result);
+        this.setState({
+          userInfo: result,
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
+    });
+  }
+  _onRefresh = () => {
+    this.setState({
+      refresh: true,
+      currentPage: 1,
+    }, () => this.getData());
   }
 }
 export default MyBase;

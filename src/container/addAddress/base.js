@@ -141,32 +141,9 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
-        const result = res.data.pageData;
-        if (refresh) {
-          this.setState({
-            items: result,
-            dataSource: ds.cloneWithRows(result),
-            refresh: false,
-            nomore: false,
-          });
-        } else {
-          const newItems = items.concat(result);
-          this.setState({
-            items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
-            loading: false,
-          });
-        }
-        setTimeout(() => { canEnd = true; }, 0);
-        if (result.length < pageSize) {
-          this.setState({
-            loading: false,
-            nomore: true,
-          });
-        }
+        push({ key: 'ShippingAddress' });
       } else {
         Toast.show('温馨提示');
-        push({ key: 'ShippingAddress' });
       }
     }).catch((err) => {
       this.toggleSleek();

@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 import { GetSupplyInfoService } from '../../api';
 
 class Base extends React.Component {
@@ -45,16 +46,23 @@ class Base extends React.Component {
       maxPrice: '',
       count: '',
       skuCount: 1,
+      memberId: '',
     };
   }
   getInit = () => {
-    this.GetSupplyInfoService();
+    const { supplyId } = this.props.navigation.state.params;
+    this.setState({
+      supplyId,
+      memberId: global.memberId,
+    }, this.GetSupplyInfoService);
+    console.log('@@@@@@@', this.state.supplyId);
   }
   GetSupplyInfoService = () => {
-    const { supplyId } = this.state;
+    const { supplyId, memberId } = this.state;
     this.sleek.toggle();
     GetSupplyInfoService({
       supplyId,
+      memberId,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
@@ -92,5 +100,7 @@ class Base extends React.Component {
     this.ModalView.showModal();
   }
 }
-
+Base.propTypes = {
+  navigation: PropTypes.object,
+};
 export default Base;

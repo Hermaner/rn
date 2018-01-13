@@ -204,7 +204,7 @@ class MyNichePush extends myNichePushBase {
     const { noData, dataSource, nomore, loading, refresh } = this.state;
     return (
       <View style={styles.listContent}>
-        {
+        {/* {
           !noData &&
           <ListView
             dataSource={dataSource}
@@ -222,7 +222,7 @@ class MyNichePush extends myNichePushBase {
                 onRefresh={this._onRefresh}
               />}
           />
-        }
+        } */}
         {
           noData &&
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

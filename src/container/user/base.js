@@ -59,7 +59,7 @@ class UserBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      console.log('eeeeeeeeeeeeeeeee', res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({

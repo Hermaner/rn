@@ -161,3 +161,21 @@ export function UpdateMemberInfoService(data) {
 export function SetDefaultService(data) {
   return get('SetDefaultService', data);
 }
+export function PersonVerifService(data) {
+  return post('PersonVerifService', data);
+}
+export function EntVerifService(data) {
+  return post('EntVerifService', data);
+}
+export function GetFootPrint(data) {
+  return get('GetFootPrint', data);
+}
+export function GetOrgProductInfo(data) {
+  return get('GetOrgProductInfo', data);
+}
+export function GetNewsService(data) {
+  return get('GetNewsService', data);
+}
+export function GetNewsInfoService(data) {
+  return get('GetNewsInfoService', data);
+}

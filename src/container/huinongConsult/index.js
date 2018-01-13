@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Tabs, Tab, Text, Icon } from 'native-base';
+import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -10,6 +10,7 @@ import { Header, ScrollableTab } from '../../components';
 import huinongConsultBase from './base';
 import styles from './styles';
 
+import Child from './child';
 
 class HuinongConsult extends huinongConsultBase {
   constructor(props) {
@@ -25,23 +26,16 @@ class HuinongConsult extends huinongConsultBase {
     this.props.push(key);
   }
   _renderBody() {
-    const Tab1 = () => this._renderAll();
-    const Tab2 = () => this._renderAll();
-    const Tab3 = () => this._renderAll();
-    const Tab4 = () => this._renderAll();
-    const Tab5 = () => this._renderAll();
-    const Tab6 = () => this._renderAll();
-    const Tab7 = () => this._renderAll();
     return (
       <View style={styles.pagebody}>
         <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="全部" type="0" />
-          <Tab2 tabLabel="水果蔬菜" type="1" />
-          <Tab3 tabLabel="畜牧水产" type="2" />
-          <Tab4 tabLabel="农副加工" type="3" />
-          <Tab5 tabLabel="苗木花草" type="4" />
-          <Tab6 tabLabel="农资农机" type="5" />
-          <Tab7 tabLabel="粮油米面" type="6" />
+          <Child tabLabel="全部" type="" />
+          <Child tabLabel="水果蔬菜" type="" />
+          <Child tabLabel="畜牧水产" type="" />
+          <Child tabLabel="农副加工" type="" />
+          <Child tabLabel="苗木花草" type="" />
+          <Child tabLabel="农资农机" type="" />
+          <Child tabLabel="粮油米面" type="" />
         </ScrollableTabView>
       </View>
     );
@@ -49,7 +43,6 @@ class HuinongConsult extends huinongConsultBase {
   _renderAll() {
     return (
       <View>
-        {this._renderSwiper()}
         {this._renderNewsList()}
       </View>
     );
@@ -112,6 +105,7 @@ class HuinongConsult extends huinongConsultBase {
       <Container>
         <Header back={pop} title="农产品市场行情新闻资讯" />
         <Content contentContainerStyle={{ flex: 1 }}>
+          {/* {this._renderSwiper()} */}
           {this._renderBody()}
         </Content>
       </Container>

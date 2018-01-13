@@ -1,34 +1,48 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
-import { GetIdentityService } from '../../api';
+import Toast from 'react-native-simple-toast';
+import { GetMemberInfoService } from '../../api';
 
 class SelfSetBase extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: '',
+      isSet: false,
+    };
+  }
   getInit = () => {
-    this.GetIdentityService();
-    global.storage.load({
-      key: 'userData',
-    }).then((ret) => {
-      console.log(ret);
-      global.memberId = ret.memberId;
-      console.log(global.memberId)
-      this.setState({
-        memberId: ret.memberId,
-        imgUrl: ret.imgUrl,
-        phone: ret.phone,
-        identityName: ret.identityName,
-      });
-    }).catch(() => {
-      console.log('没有用户数据');
+    this.setState({ memberId: global.memberId }, this._onRefresh);
+  }
+  getData = () => {
+    const { memberId } = this.state;
+    console.log('rrrrrrrrr', memberId);
+    GetMemberInfoService({
+      memberId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        const result = res.data;
+        console.log('^^^^^^', result);
+        const province = result.provinceCode;
+        const city = result.cityCode;
+        const district = result.districtCode;
+        const isHave = province && city && district ? 'true' : 'false';
+        this.setState({
+          userInfo: result,
+          isSet: isHave,
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
     });
   }
-  GetIdentityService = () => {
-    GetIdentityService()
-    .then((res) => {
-      this.setState({
-        items: res.data,
-      });
-    });
+  _onRefresh = () => {
+    this.setState({
+      refresh: true,
+      currentPage: 1,
+    }, () => this.getData());
   }
 }
 export default SelfSetBase;

@@ -9,6 +9,18 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
+    backgroundColor: '#fff',
+  },
+  goodsDetail2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
   },
   goodsPrice: {
     flexDirection: 'row',
@@ -196,6 +208,53 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  exampleImg: {
+    width: 120,
+    height: 120,
+    marginRight: 10,
+  },
+  gyTitle: {
+    fontSize: 18,
+    color: '#333',
+    alignSelf: 'flex-start',
+    // marginBottom: 15,
+  },
+  gyPrice: {
+    fontSize: 20,
+    color: '#FC8521',
+    marginBottom: 4,
+  },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  aa: {
+    color: '#666',
+    fontSize: 14,
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    borderWidth: 1,
+    borderColor: '#FC8521',
+    marginRight: 4,
+    marginBottom: 2,
+  },
+  name: {
+    flex: 1,
+    fontSize: 18,
+    color: '#333',
+  },
+  UserYw: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
+  },
+  logoImg: {
+    width: 18,
+    height: 18,
+    marginRight: 4,
   },
 });
 export default styles;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image, View, ListView, NativeAppEventEmitter } from 'react-native';
+import { Image, View, ListView, NativeAppEventEmitter } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
@@ -107,14 +107,18 @@ class HomeScreen extends base {
     return (
       <View style={styles.SampleCenter}>
         <View style={styles.flexRow}>
-          <TouchableOpacity style={styles.flexTwo} onPress={() => { push({ key: 'ReleaseSuccess' }); }}>
-            <Text style={styles.headerNavigationText}>一件代发</Text>
-            <Text style={styles.normalNineText}>微商首选 平台保障</Text>
-            <View style={styles.flexRow}>
-              <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
-              <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
-            </View>
-          </TouchableOpacity>
+          <TFeedback
+            content={
+              <View style={styles.flexTwo}>
+                <Text style={styles.headerNavigationText}>一件代发</Text>
+                <Text style={styles.normalNineText}>微商首选 平台保障</Text>
+                <View style={styles.flexRow}>
+                  <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
+                  <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
+                </View>
+              </View>}
+            onPress={() => { push({ key: 'ReleaseSuccess' }); }}
+          />
           <TFeedback
             content={
               <View style={[styles.flexOne, styles.SampleCenterBorder]}>
@@ -195,25 +199,25 @@ class HomeScreen extends base {
     const { dataSource } = this.state;
     return (
       <View>
-        <ListView
+        {/* <ListView
           dataSource={dataSource}
           renderRow={this._renderRow}
           onEndReached={this._reachEnd}
           enableEmptySections
           onEndReachedThreshold={10}
           contentContainerStyle={styles.listViewStyle}
-        />
+        /> */}
       </View>
     );
   }
   _renderRow = (rowData, sectionID, rowID) => (
     <View>
-      {/* <GoodList
+      <GoodList
         data={rowData}
         rowID={rowID}
         key={rowID}
         onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
-      /> */}
+      />
     </View>
   )
   render() {

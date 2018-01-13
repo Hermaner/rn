@@ -21,7 +21,7 @@ class SelfSet extends selfSetBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const { imgUrl, phone, identityName } = this.state;
+    const { userInfo, isSet } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.detailInfo}>
@@ -30,7 +30,7 @@ class SelfSet extends selfSetBase {
               <Text style={{ color: '#666', fontSize: 16 }}>我的头像</Text>
             </View>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Image style={styles.lookForImg} source={{ uri: imgUrl }} />
+              <Image style={styles.lookForImg} source={{ uri: userInfo.imgUrl }} />
             </View>
           </View>
           <TFeedback
@@ -40,7 +40,7 @@ class SelfSet extends selfSetBase {
                   <Text style={{ color: '#666', fontSize: 16 }}>绑定手机号</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <Text style={{ color: '#999', fontSize: 14 }}>{phone}</Text>
+                  <Text style={{ color: '#999', fontSize: 14 }}>{userInfo.phone}</Text>
                   <Icon style={{ marginLeft: 10 }} name="arrow-back" />
                 </View>
               </View>}
@@ -53,11 +53,11 @@ class SelfSet extends selfSetBase {
                   <Text style={{ color: '#666', fontSize: 16 }}>个人信息</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <Text style={{ color: '#999', fontSize: 14 }}>未设置</Text>
+                  <Text style={{ color: '#999', fontSize: 14 }}>{isSet ? '' : '未设置'}</Text>
                   <Icon style={{ marginLeft: 10 }} name="arrow-back" />
                 </View>
               </View>}
-            onPress={() => { push({ key: 'UserInfo' }); }}
+            onPress={() => { push({ key: 'UserInfo', params: { info: userInfo, set: isSet } }); }}
           />
           <TFeedback
             content={
@@ -67,12 +67,12 @@ class SelfSet extends selfSetBase {
                     <Text style={{ color: '#666', fontSize: 16 }}>我的身份</Text>
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                    <Text style={{ color: '#999', fontSize: 14 }}>{identityName}</Text>
+                    <Text style={{ color: '#999', fontSize: 14 }}>{userInfo.identityName}</Text>
                     <Icon style={{ marginLeft: 10 }} name="arrow-back" />
                   </View>
                 </View>
               </View>}
-            onPress={() => { push({ key: 'AdjectiveInfo', params: { type: identityName } }); }}
+            onPress={() => { push({ key: 'AdjectiveInfo', params: { type: userInfo.identityName } }); }}
           />
           <TFeedback
             content={
@@ -102,7 +102,7 @@ class SelfSet extends selfSetBase {
                   </View>
                 </View>
               </View>}
-            onPress={() => { push({ key: 'Authentication' }); }}
+            onPress={() => { push({ key: 'Authentication', params: { phone: userInfo.phone } }); }}
           />
         </View>
       </View>
