@@ -8,7 +8,7 @@ import AMapLocation from 'react-native-smart-amap-location';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodList, TOpacity, TFeedback } from '../../components';
+import { Header, ScrollableTab, Iconfont, GoodList, TOpacity, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -227,6 +227,7 @@ class HomeScreen extends base {
           {this.renderSeasonalGoods()}
           {this.renderSwiper()}
           {this.renderForYou()}
+          <Iconfont name="icon-ziti" color="#ff0000" />
         </Content>
         <TOpacity
           style={styles.bomFixedView}

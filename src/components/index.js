@@ -10,11 +10,13 @@ import ScrollableTab from './ScrollableTab';
 import InputNumber from './InputNumber';
 import UploadFile from './UploadFile';
 import Loading from './Loading';
+import Iconfont from './Iconfont';
 
 export {
   TLight,
   TOpacity,
   GoodList,
+  Iconfont,
   Loading,
   TFeedback,
   ModalView,
