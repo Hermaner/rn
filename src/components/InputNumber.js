@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 import { Mred, px } from '../utils';
 
 const styles = StyleSheet.create({

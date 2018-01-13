@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   Animated,
 } from 'react-native';
-import SleekLoadingIndicator from 'react-native-sleek-loading-indicator';
+import PropTypes from 'prop-types';
 import IconI from 'react-native-vector-icons/Ionicons';
 import { Mred } from '../utils';
 
@@ -72,8 +72,8 @@ const styles = StyleSheet.create({
 const time = 200;
 export default class Prompt extends React.Component {
   static propTypes = {
-    title: React.PropTypes.string,
-    content: React.PropTypes.element,
+    title: PropTypes.string,
+    content: PropTypes.element,
   };
   constructor(props) {
     super(props);
@@ -126,7 +126,7 @@ export default class Prompt extends React.Component {
   }
   render() {
     const { title, content } = this.props;
-    const { modalVisible, loadingSleek } = this.state;
+    const { modalVisible } = this.state;
     return (
       <Modal
         animationType={'none'}
@@ -153,7 +153,6 @@ export default class Prompt extends React.Component {
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
-        <SleekLoadingIndicator loading={loadingSleek} />
       </Modal>
     );
   }
