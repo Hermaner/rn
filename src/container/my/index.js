@@ -61,6 +61,7 @@ class My extends myBase {
               {
                 item[1].map((item2, index2) => (
                   <TFeedback
+                    key={index2}
                     content={
                       <View key={index2}>
                         <View style={styles.infoBox}>

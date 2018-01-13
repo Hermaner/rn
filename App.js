@@ -5,6 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
 import * as WeChat from 'react-native-wechat';
 import JPushModule from 'jpush-react-native';
+import { observer } from 'mobx-react/native';
 import {
   persistStore,
   autoRehydrate,
@@ -14,10 +15,10 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import Storage from 'react-native-storage';
 
-import { Loading } from './src/components';
 import AppReducer from './src/reducers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 
+@observer
 class App extends React.Component {
   componentDidMount() {
     SplashScreen.hide();
@@ -67,7 +68,11 @@ class App extends React.Component {
       defaultExpires: 1000 * 3600 * 24,
       enableCache: true,
     });
-    global.storage.load({ key: 'userData' }).then((res) => { global.memberId = res.memberId; });
+    global.storage.load({
+      key: 'userData',
+    }).then((res) => {
+      global.memberId = res.memberId;
+    }).catch(() => {});
     global.Toast = Toast;
   }
   premInit = () => {
