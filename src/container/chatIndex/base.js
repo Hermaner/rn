@@ -20,9 +20,7 @@ class AdjectiveInfoBase extends React.Component {
       this.setState({
         memberId: ret.memberId,
       });
-    }).catch(() => {
-      console.log('没有用户数据');
-    });
+    }).catch(() => {});
   }
   GetIdentityService = () => {
     GetIdentityService()
@@ -72,7 +70,7 @@ class AdjectiveInfoBase extends React.Component {
             memberId: res.data.memberId.toString(),
           },
           expires: null,
-        });
+        }).catch(() => {});
         global.memberId = res.data.memberId.toString();
         Toast.show('保存成功');
       } else {

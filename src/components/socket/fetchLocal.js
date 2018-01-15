@@ -8,8 +8,15 @@
  *
  * 网络层封装
  */
-export default async function fetchLocal(input: string, init?: Object): Object {
-  const result = await fetch(input, init);
-  const resultJson = await result.json();
-  return resultJson;
+
+
+import {
+    Alert
+} from 'react-native';
+
+export default async function fetchLocal (input: string, init?: Object): Object {
+  let result = await fetch(input, init);
+  let resultJson = await result.json();
+  console.log(result)
+  return resultJson
 }

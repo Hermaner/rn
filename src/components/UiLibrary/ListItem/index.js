@@ -9,10 +9,10 @@
  * ListItem 常用条目
  */
 
-import ListItemHeader from './ListItemHeader.js';
-import ListItemSeparator from './ListItemSeparator.js';
-import ListItemLabel from './ListItemLabel.js';
-import ListItemArrow from './ListItemArrow.js';
+import ListItemHeader from './ListItemHeader';
+import ListItemSeparator from './ListItemSeparator';
+import ListItemLabel from './ListItemLabel';
+import ListItemArrow from './ListItemArrow';
 
 export default class ListItem {
     static Header = ListItemHeader;

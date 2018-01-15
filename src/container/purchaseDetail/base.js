@@ -22,7 +22,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId }, this.ValidateIsQuoteService));
+    .then(res => this.setState({ memberId: res.memberId }, this.ValidateIsQuoteService)).catch(() => {});
     const { item } = this.props.navigation.state.params;
     this.setState({
       item,

@@ -27,12 +27,12 @@ import {
     FontSize,
     Color,
     Button,
-} from '../UiLibrary';
+} from '../../components/UiLibrary';
 
 import {
     socketStore,
     profileStore,
-} from './storeSingleton';
+} from '../../components/socket/storeSingleton';
 
 const styles = StyleSheet.create({
   container: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 class ChatRoom extends Component {
   constructor(props: Object) {
     super(props);
-    this.toInfo = props.toInfo;
+    this.toInfo = props.navigation.state.params.toInfo;
     this.firstEnter = 0;
     this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.uuid !== r2.uuid,
@@ -129,7 +129,7 @@ class ChatRoom extends Component {
   _userHasBeenInputed: boolean = false;
   _userAtPage = 0;
   _userReachEnd = true;
-  _scrollToBottom() {
+  _scrollToBottom = () => {
     const scrollProperties = this.chatListView.scrollProperties;
     // 如果组件没有挂载完全，则不进行内容偏移
     if (!scrollProperties.visibleLength) { return; }
@@ -174,6 +174,7 @@ class ChatRoom extends Component {
     };
     this.setState({ inputValue: '' });
     // 远程发送
+    console.log(payload)
     socketStore.socket.emit('message', [payload]);
     // 本地会话列表更新
     socketStore.pushLocalePayload(Object.assign({
@@ -205,6 +206,8 @@ class ChatRoom extends Component {
     });
   }
   render() {
+    console.log(socketStore.currentChatRoomHistory)
+    console.log(socketStore.currentChatRoomHistory.slice())
     const content = (
       <View style={styles.container}>
         <ListView

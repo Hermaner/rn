@@ -47,7 +47,7 @@ class HomeScreen extends base {
               <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
             </View>
           }
-          onPress={() => push({ key: 'MainList' })}
+          onPress={() => push({ key: 'ChatIndex' })}
         />
         <TOpacity
           style={styles.flexOne}

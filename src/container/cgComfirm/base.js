@@ -176,7 +176,7 @@ class Base extends React.Component {
         memberId: res.memberId,
         phone: res.phone,
       });
-    });
+    }).catch(() => {});
     this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
       this.getData();
     });

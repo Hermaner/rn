@@ -19,7 +19,7 @@ import {
 
 import Color from '../Color';
 import FontSize from '../FontSize';
-import ListItemArrow from './ListItemArrow.js';
+import ListItemArrow from './ListItemArrow';
 
 export default class Label extends React.Component {
     static propTypes = {

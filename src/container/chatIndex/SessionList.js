@@ -19,20 +19,21 @@ import {
     Text,
     View,
 } from 'react-native';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { pushRoute } from '../../actions';
 import {
     FontSize,
     Swipeout,
     Color,
     Badge,
     ListItem,
-} from '../UiLibrary';
+} from '../../components/UiLibrary';
 
 import {
     socketStore,
-} from './storeSingleton';
+} from '../../components/socket/storeSingleton';
 
-import ChatRoom from './ChatRoom';
 
 const styles = StyleSheet.create({
   container: {
@@ -122,18 +123,16 @@ class SessionList extends React.Component {
         latestTime={row.latestTime}
         latestMessage={row.latestMessage}
         onPress={() => {
-          this.props.navigator.push(
-            ChatRoom,
-            row.name,
-            {
+          this.props.push({ key: 'ChatRoom',
+            params: {
               toInfo: row.toInfo,
             },
-          );
+          });
         }}
       />
     </Swipeout>
   )
-  _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
+  _renderSeparator(sectionID: number, rowID: number) {
     return (
       <ListItem.Separator
         paddingLeft={10}
@@ -198,4 +197,8 @@ const ConversationCell = ({
     </View>
   </TouchableHighlight>
 );
-export default SessionList;
+
+SessionList.propTypes = {
+  push: PropTypes.func,
+};
+export default connect(null, { push: pushRoute })(SessionList);
