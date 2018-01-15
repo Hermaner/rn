@@ -1,14 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, View, Image, Text } from 'react-native';
-import { Container, Content, Icon } from 'native-base';
+import { TouchableOpacity, View, Image, Text, Modal, TouchableWithoutFeedback } from 'react-native';
+import { Container, Content, Icon, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header } from '../../components';
-import huinongConsultDetailBase from './base';
+import { Header, TFeedback, Loading } from '../../components';
+import base from './base';
 import styles from './styles';
 
-class HuinongConsultDetail extends huinongConsultDetailBase {
+class HuinongConsultDetail extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +17,14 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   goRoute = (key) => {
     this.props.push(key);
   }
   _renderBody() {
     const { push } = this.props;
+    const { newsInfo } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.titleBox}>
@@ -30,16 +32,20 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
         </View>
         <View style={[styles.flexRow, styles.rowBox]}>
           <View style={styles.flexRow}>
-            <Text style={[styles.time, styles.normalNineText]}>2017-09-10 13:22:54</Text>
+            <Text style={[styles.time, styles.normalNineText]}>{newsInfo.postDate}</Text>
             <Text style={[styles.normalNineText, styles.zixun]}>行情咨询</Text>
           </View>
-          <View style={[styles.flexRow, styles.flexRight]}>
-            <Icon style={styles.icn} name="arrow-back" />
-            <Text style={styles.normalNineText}>听语音</Text>
-          </View>
+          <TFeedback
+            content={
+              <View style={[styles.flexRow, styles.flexRight]}>
+                <Icon style={styles.icn} name="arrow-back" />
+                <Text style={styles.normalNineText}>听语音</Text>
+              </View>}
+            onPress={() => { push({ key: 'User' }); }}
+          />
         </View>
         <View style={[styles.flexRow, styles.rowBox]}>
-          <Text style={[styles.normalNineText, styles.marginR]}>惠农网小丸子</Text>
+          <Text style={[styles.normalNineText, styles.marginR]}>{newsInfo.author}</Text>
           <Text style={[styles.normalNineText, styles.marginR]}>来源：惠农网</Text>
           <Text style={[styles.normalNineText, styles.marginR]}>阅读：1226</Text>
         </View>
@@ -50,7 +56,7 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
           </Text>
         </View>
         <View style={styles.content}>
-          <Text>那就留着女性从空心菜vkl</Text>
+          <Text>{newsInfo.content}</Text>
         </View>
         <View style={styles.rowBox}>
           <Text style={{ color: '#EC2539' }}>备注：以上所有信息来自惠农行情中心，如需了解更多，点击进入行情大厅。</Text>
@@ -70,7 +76,14 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
             </View>
           </View>
         </View>
-        <View style={styles.allNews}>
+      </View>
+    );
+  }
+  renderNews() {
+    const { push } = this.props;
+    return (
+      <View style={styles.allNews}>
+        <View>
           <View style={styles.relatedNewsBox}>
             <Text style={styles.relatedNews}>热门评论</Text>
           </View>
@@ -98,6 +111,86 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
               </View>
             </View>
             <Text style={styles.readAll}>查看全部3条评论</Text>
+            <TouchableOpacity style={styles.button}>
+              <View style={styles.buttonBox}>
+                <Text style={styles.buttonText}>发供应</Text>
+                {/* <Button title='显示Modal' onPress={()=>{this.setState({visible:true})}}/> */}
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
+  renderModal() {
+    const { label } = this.state;
+    return (
+      <View>
+        <Modal
+          visible={this.state.visible}
+          transparent={this.state.transparent}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+          }}
+        >
+          <TouchableWithoutFeedback onPress={() => { this.setState({ visible: false }); }}>
+            <View
+              style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+            >
+              <TouchableWithoutFeedback>
+                <View style={styles.modalBox}>
+                  <View style={styles.modalTitleBox}>
+                    <Text style={styles.modalTitleText}>发表评论</Text>
+                    <TFeedback
+                      content={
+                        <Icon style={{ fontSize: 34, color: '#333', flex: 1, textAlign: 'right' }} name="close" />}
+                      onPress={() => { this.setState({ visible: false }); }}
+                    />
+                  </View>
+                  <View>
+                    <Input
+                      style={styles.inputText}
+                      value={label}
+                      onChangeText={text => this.saveLabel(text)}
+                      multiline
+                      placeholder="我来说两句"
+                      placeholderTextColor="#000"
+                    />
+                    <Text style={{ textAlign: 'right', color: '#666', fontSize: 14 }}>0/100</Text>
+                  </View>
+                  <TFeedback
+                    content={
+                      <View style={styles.submitBox}>
+                        <Text style={styles.submitText}>我写好了</Text>
+                      </View>}
+                    onPress={() => this.CreateNewsCommentService()}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+      </View>
+    );
+  }
+  renderFooter() {
+    return (
+      <View style={[styles.flexBox, styles.footerBox]}>
+        <TFeedback
+          content={
+            <View style={styles.plBox}>
+              <Text style={styles.footerText}>写评论...</Text>
+            </View>}
+          onPress={() => { this.setState({ visible: true }); }}
+        />
+        <View style={[styles.flexBox, { flex: 1, justifyContent: 'flex-end' }]}>
+          <View style={styles.flexBox}>
+            <Icon style={{ fontSize: 18, color: '#666', marginRight: 4 }} name="chatboxes" />
+            <Text style={styles.footerText}>2</Text>
+          </View>
+          <View style={[styles.flexBox, { marginLeft: 10 }]}>
+            <Icon style={{ fontSize: 18, color: '#666', marginRight: 4 }} name="thumbs-up" />
+            <Text style={styles.footerText}>2</Text>
           </View>
         </View>
       </View>
@@ -105,17 +198,19 @@ class HuinongConsultDetail extends huinongConsultDetailBase {
   }
   render() {
     const { pop } = this.props;
+    const { newsInfo } = this.state;
     return (
       <Container>
-        <Header back={pop} title="2017年坎坎坷坷扩扩扩" />
+        <Header back={pop} title={newsInfo.title} />
         <Content contentContainerStyle={{ flex: 1 }} style={{ backgroundColor: '#fff' }}>
           {this._renderBody()}
-          <TouchableOpacity style={styles.button}>
-            <View style={styles.buttonBox}>
-              <Text style={styles.buttonText}>发供应</Text>
-            </View>
-          </TouchableOpacity>
+          {this.renderNews()}
+          {
+            this.renderModal()
+          }
         </Content>
+        {this.renderFooter()}
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

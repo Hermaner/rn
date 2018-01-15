@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ListView } from 'react-native';
 import { DeepClone } from '../../api';
 
 class Base extends React.Component {
@@ -47,27 +48,8 @@ class Base extends React.Component {
       infos: '',
       memoText: '',
       isHidden: false,
+      supplyInfo: '',
     };
-  }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          minPrice: txt,
-        });
-        break;
-      case 1:
-        this.setState({
-          maxPrice: txt,
-        });
-        break;
-      case 2:
-        this.setState({
-          count: txt,
-        });
-        break;
-      default:
-    }
   }
   getData = () => {
     const { info } = this.props.navigation.state.params;
@@ -78,9 +60,12 @@ class Base extends React.Component {
   setMemo = () => {
     const { infos } = this.state;
     if (infos) {
+      this.setState({
+        supplyInfo: infos.supplys,
+      });
+      console.log('??????????', infos.supplys)
       for (let i = 0; i < infos.memberVerifs.length; i += 1) {
         if (infos.memberVerifs[i].verifFieldName === '买家保障') {
-          console.log('UUUUUUUU');
           infos.memoText = infos.memberVerifs[i].memo;
           break;
         }
@@ -96,7 +81,7 @@ class Base extends React.Component {
       isHidden: true,
     });
     this.ModalView.showModal();
-    console.log('$%%%%%%%%%$$$$$$$%%%%%');
+    console.log('"""""""""""""', this.ModalView);
   }
   resetState = () => {
     this.setState({

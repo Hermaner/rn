@@ -306,5 +306,72 @@ const styles = StyleSheet.create({
     color: '#8ECD24',
     marginLeft: 2,
   },
+  goodsItem: {
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+  },
+  goodsImg: {
+    width: 120,
+    height: 120,
+    marginRight: 10,
+  },
+  goodsName: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 6,
+  },
+  goodsPlace: {
+    fontSize: 12,
+    color: '#666',
+    marginBottom: 4,
+  },
+  chooseBtn: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    fontSize: 12,
+    color: '#666',
+    borderWidth: 1,
+    borderColor: '#FC8521',
+    marginBottom: 50,
+  },
+  goodsPriceInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  price: {
+    fontSize: 16,
+    color: '#FC8521',
+    marginRight: 4,
+  },
+  howLongBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  howLong: {
+    fontSize: 9,
+    color: '#666',
+  },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  aa: {
+    color: '#666',
+    fontSize: 14,
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    borderWidth: 1,
+    borderColor: '#FC8521',
+    marginRight: 4,
+    marginBottom: 2,
+  },
 });
 export default styles;

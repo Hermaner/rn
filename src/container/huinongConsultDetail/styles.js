@@ -1,9 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { st } from '../../utils';
 
 const styles = StyleSheet.create({
   pagebody: {
-    flex: 1,
   },
   flexOne: {
     flex: 1,
@@ -135,6 +133,74 @@ const styles = StyleSheet.create({
     borderColor: '#55B723',
     borderRadius: 4,
     marginTop: 10,
+  },
+  flexBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  plBox: {
+    flex: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 10,
+    backgroundColor: '#f2f2f2',
+  },
+  footerBox: {
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  footerText: {
+    color: '#666',
+    fontSize: 14,
+  },
+  modalTitleBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalBox: {
+    height: 200,
+    width: 275,
+    backgroundColor: 'white',
+    borderRadius: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  modalTitleText: {
+    flex: 2,
+    color: '#666',
+    fontSize: 18,
+    textAlign: 'right',
+  },
+  inputText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
+    paddingLeft: 10,
+    paddingBottom: 50,
+    borderWidth: 1,
+    borderColor: '#eee',
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  submitBox: {
+    backgroundColor: '#57B924',
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 4,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 export default styles;

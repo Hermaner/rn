@@ -87,6 +87,7 @@ import SetPassword from '../container/setPassword';
 import EnlistBusiness from '../container/enlistBusiness';
 import OtherInfo from '../container/otherInfo';
 import GoodBusinessDetail from '../container/goodBusinessDetail';
+import HuinongGoodsMotif from '../container/huinongGoodsMotif';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -172,6 +173,7 @@ export const AppNavigator = StackNavigator({
   EnlistBusiness: { screen: EnlistBusiness },
   OtherInfo: { screen: OtherInfo },
   GoodBusinessDetail: { screen: GoodBusinessDetail },
+  HuinongGoodsMotif: { screen: HuinongGoodsMotif },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

@@ -51,42 +51,9 @@ class Child extends Base {
     );
   }
   render() {
-    const { dataSource, imgLists } = this.state;
-    const { push } = this.props;
+    const { dataSource } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
-        <View style={{ height: 200 }}>
-          <Swiper
-            style={styles.wrapper}
-            height={200}
-            autoplay
-            paginationStyle={{ justifyContent: 'flex-end', paddingRight: 10, bottom: 18 }}
-          >
-            {
-              imgLists.map((item1, i) => (
-                <TFeedback
-                  content={
-                    <View key={i} style={styles.slide}>
-                      <Image style={styles.image} source={{ uri: item1.img }} />
-                      <View style={styles.newsInfoBox}>
-                        <Text style={styles.newsInfoText} numberOfLines={1}>{item1.title}</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                          <Text style={[styles.newsInfoSmallText, styles.newsInfoTime]}>
-                            {item1.time}
-                          </Text>
-                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Icon style={{ marginRight: 10, fontSize: 16, color: '#666' }} name="heart" />
-                            <Text style={styles.newsInfoSmallText}>{item1.lookCount}</Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>}
-                  onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item1.newsId } }); }}
-                />
-              ))
-            }
-          </Swiper>
-        </View>
         <ListView
           dataSource={dataSource}
           renderRow={this._renderRow}

@@ -24,16 +24,39 @@ class Base extends React.Component {
       title: '',
       imgLists: [{
         img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
-        title: '2017年12月25日鸡蛋价格行情',
+        goodsName: '四川脐橙 4-8两',
+        price: '3.2',
+        tj: '10.0斤起批',
+        name: '刘德华',
+        place: '湖北省武汉市',
       }, {
         img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-        title: '今日朝鲜人名军正式跟美军宣布开战',
+        goodsName: '四川脐橙 4-8两',
+        price: '3.2',
+        tj: '10.0斤起批',
+        name: '刘德华',
+        place: '湖北省武汉市',
       }, {
         img: 'https://gitlab.pro/yuji/demo/uploads/4421f77012d43a0b4e7cfbe1144aac7c/XFVzKhq.jpg',
-        title: '好吃不如饺子，好玩不如筛子',
+        goodsName: '四川脐橙 4-8两',
+        price: '3.2',
+        tj: '10.0斤起批',
+        name: '刘德华',
+        place: '湖北省武汉市',
       }, {
         img: 'https://gitlab.pro/yuji/demo/uploads/576ef91941b0bda5761dde6914dae9f0/kD3eeHe.jpg',
-        title: '噫吁嚱，金戈铁马，气吞万里如虎',
+        goodsName: '四川脐橙 4-8两',
+        price: '3.2',
+        tj: '10.0斤起批',
+        name: '刘德华',
+        place: '湖北省武汉市',
+      }, {
+        img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
+        goodsName: '四川脐橙 4-8两',
+        price: '3.2',
+        tj: '10.0斤起批',
+        name: '刘德华',
+        place: '湖北省武汉市',
       }],
     };
   }
