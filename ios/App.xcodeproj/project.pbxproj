@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -96,6 +95,7 @@
 		DF39BEED1FD12DE000877EF2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */; };
 		DF39BEEF1FD12DF100877EF2 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BEEE1FD12DF100877EF2 /* libc++.tbd */; };
 		DF39BEF01FD137C100877EF2 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BED31FD12D9800877EF2 /* libRCTWeChat.a */; };
+		DF62C1822009164100F0AD2F /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF62C14B2009164100F0AD2F /* iconfont.ttf */; };
 		DFA375B31FF5CF6B009B1874 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */; };
 		DFB58AE41FF73133006CFC1E /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB58AE21FF73133006CFC1E /* AMapFoundationKit.framework */; };
 		DFB58AE51FF73133006CFC1E /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB58AE31FF73133006CFC1E /* AMapLocationKit.framework */; };
@@ -617,6 +617,7 @@
 		DF39BE4F1FD1232A00877EF2 /* RSKImageCropper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = "<group>"; };
 		DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		DF39BEEE1FD12DF100877EF2 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		DF62C14B2009164100F0AD2F /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		DFB58AA61FF730BF006CFC1E /* RCTAMapLocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAMapLocation.xcodeproj; path = "../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation.xcodeproj"; sourceTree = "<group>"; };
 		DFB58AE21FF73133006CFC1E /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
@@ -862,6 +863,7 @@
 				29DB579156AA4A2E859A763F /* MaterialIcons.ttf */,
 				CC08B0D2D2AE4713A65354F8 /* Octicons.ttf */,
 				1D7002291A6C4340B81E604C /* SimpleLineIcons.ttf */,
+				DF62C14B2009164100F0AD2F /* iconfont.ttf */,
 				AC5AEE75A85648E1ADC886AF /* Zocial.ttf */,
 				9E87E179752A473F94E3785F /* Entypo.ttf */,
 				E7FBEFFF606A435A84860122 /* EvilIcons.ttf */,
@@ -1852,6 +1854,7 @@
 				C86CEB65F8E74450AEB895CA /* Foundation.ttf in Resources */,
 				88659327D5CE4850A6B19970 /* Ionicons.ttf in Resources */,
 				AACC3811739A4260958B3C33 /* MaterialIcons.ttf in Resources */,
+				DF62C1822009164100F0AD2F /* iconfont.ttf in Resources */,
 				2F18005491B04DCAAB7DFB39 /* Octicons.ttf in Resources */,
 				78198DB97AE546A88C16B201 /* Roboto_medium.ttf in Resources */,
 				4E63BB4C46EC499BBAAA9904 /* Roboto.ttf in Resources */,
@@ -1900,7 +1903,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-App/Pods-App-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePicker.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePicker.bundle,
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";

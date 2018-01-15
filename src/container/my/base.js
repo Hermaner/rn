@@ -128,6 +128,9 @@ class MyBase extends React.Component {
     };
   }
   getInit = () => {
+    if (!global.memberId) {
+      return;
+    }
     this.setState({ memberId: global.memberId }, this._onRefresh);
   }
   getData = () => {

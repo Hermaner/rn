@@ -30,9 +30,7 @@ class UserInfoBase extends React.Component {
         nickName: ret.nickName,
         phone: ret.phone,
       });
-    }).catch(() => {
-      console.log('没有用户数据');
-    });
+    }).catch(() => {});
   }
   userInfoEmit = (data) => {
     console.log(data);

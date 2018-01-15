@@ -21,6 +21,8 @@ import CgyPrice from '../container/cgyPrice';
 import CgyDesc from '../container/cgyDesc';
 import CgyServices from '../container/cgyServices';
 import CbjConfirm from '../container/cbjConfirm';
+import ChatIndex from '../container/chatIndex';
+import ChatRoom from '../container/chatRoom';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
 import GoodsScreen from '../container/goodsScreen';
@@ -106,6 +108,8 @@ export const AppNavigator = StackNavigator({
   CgyDesc: { screen: CgyDesc },
   CgyServices: { screen: CgyServices },
   CbjConfirm: { screen: CbjConfirm },
+  ChatIndex: { screen: ChatIndex },
+  ChatRoom: { screen: ChatRoom },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
   GoodsScreen: { screen: GoodsScreen },

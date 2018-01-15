@@ -13,7 +13,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId, role: res.role }, this.getData));
+    .then(res => this.setState({ memberId: res.memberId, role: res.role }, this.getData)).catch(() => {});
   }
   getData = () => {
     const { memberId } = this.state;
