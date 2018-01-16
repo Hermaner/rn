@@ -54,11 +54,17 @@ class Child extends Base {
             </TouchableOpacity>
             <TFeedback
               content={
-                <View style={[styles.btnBox, styles.btnChoose]}>
-                  <Text style={[styles.btnText, styles.btnTextChoose]}>查看报价</Text>
+                <View style={[styles.btnBox]}>
+                  <Text style={[styles.btnText]}>查看报价</Text>
                 </View>}
-              // onPress={() => { push({ key: 'SeePrice' }); }}
               onPress={() => this.pushSeePrice(item.purchaseQuotes)}
+            />
+            <TFeedback
+              content={
+                <View style={[styles.btnBox, styles.btnChoose]}>
+                  <Text style={[styles.btnText, styles.btnTextChoose]}>重发</Text>
+                </View>}
+              onPress={() => this.props.push({ key: 'CgxComfirm', params: { item } })}
             />
           </View>
         </View>

@@ -51,6 +51,7 @@ class CgyxComfirm extends base {
   }
   _renderUpload() {
     const { initImages } = this.state;
+    console.log(initImages)
     return (
       <View style={styles.upView}>
         <View style={styles.listTitle}>

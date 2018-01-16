@@ -7,6 +7,16 @@ const styles = StyleSheet.create({
   //   flex: 1,
   //   borderWidth: 20,
   // },
+  userView: {
+    flex: 1,
+    paddingTop: 30,
+    paddingLeft: 20,
+    ...st.jcenter,
+  },
+  userText: {
+    fontSize: 18,
+    color: '#fff',
+  },
   headerImgBox: {
     flex: 1,
     height: 150,

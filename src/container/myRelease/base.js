@@ -31,7 +31,6 @@ class Base extends React.Component {
   getData = () => {
     const { currentPage, pageSize, items, ds, refresh, dataSource, memberId } = this.state;
     const { type } = this.props;
-    console.log('rrrrrrrrr', memberId);
     GetPurchaseService({
       currentPage,
       pageSize,

@@ -13,6 +13,7 @@ import CgxSkus from '../container/cgxSkus';
 import CgCitys from '../container/cgCitys';
 import CgDemand from '../container/cgDemand';
 import CgComfirm from '../container/cgComfirm';
+import CgxComfirm from '../container/cgxComfirm';
 import CgyComfirm from '../container/cgyComfirm';
 import CgyxComfirm from '../container/cgyxComfirm';
 import CgyCitys from '../container/cgyCitys';
@@ -100,6 +101,7 @@ export const AppNavigator = StackNavigator({
   CgCitys: { screen: CgCitys },
   CgDemand: { screen: CgDemand },
   CgComfirm: { screen: CgComfirm },
+  CgxComfirm: { screen: CgxComfirm },
   CgyComfirm: { screen: CgyComfirm },
   CgyxComfirm: { screen: CgyxComfirm },
   CgyCitys: { screen: CgyCitys },

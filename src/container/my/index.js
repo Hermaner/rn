@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Image } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TFeedback, Loading } from '../../components';
+import { TFeedback, Loading, TOpacity } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
@@ -21,7 +21,7 @@ class My extends myBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const { list, backGround1, userInfo } = this.state;
+    const { list, backGround1, userInfo, memberId } = this.state;
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerImgBox}>
@@ -42,17 +42,29 @@ class My extends myBase {
               onPress={() => { push({ key: 'SystemSet' }); }}
             />
           </View>
-          <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
-            <View style={{ flexDirection: 'row' }}>
-              <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
-              <View>
-                <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>{userInfo.nickName}</Text>
-                <Text style={[styles.textBackground, styles.textSmall]}>
-                  {userInfo.identityName}
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          {
+            memberId ?
+              <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
+                <View style={{ flexDirection: 'row' }}>
+                  <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
+                  <View>
+                    <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>{userInfo.nickName}</Text>
+                    <Text style={[styles.textBackground, styles.textSmall]}>
+                      {userInfo.identityName}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              :
+              <TOpacity
+                content={
+                  <View style={styles.userView}>
+                    <Text style={styles.userText}>立即登录</Text>
+                  </View>
+                }
+                onPress={() => push({ key: 'User' })}
+              />
+          }
         </View>
         {
           list.map((item, index) => (

@@ -34,7 +34,7 @@ class Base extends React.Component {
       isBtnGray,
     });
   }
-  goCgComfirm = () => {
+  goCgComfirm = async () => {
     const { isBtnGray } = this.state;
     if (isBtnGray) {
       return;
@@ -57,6 +57,10 @@ class Base extends React.Component {
         break;
       case '4':
         resetTo({ num: 3 });
+        break;
+      case '5':
+        await resetTo({ num: 3 });
+        DeviceEventEmitter.emit('getSku');
         break;
       default:
         push({ key: 'CgComfirm' });

@@ -64,7 +64,6 @@ class CgSkus extends base {
   }
   _renderButton() {
     const { isBtnGray } = this.state;
-    console.log(isBtnGray)
     return (
       <View style={{ padding: 10, backgroundColor: '#fff' }}>
         <Button onPress={this.goCgComfirm} full light style={[styles.btn, isBtnGray && styles.grayBtn]}><Text style={{ color: '#fff' }}>选好了</Text></Button>
