@@ -1,6 +1,6 @@
 
-// const httpurl = 'http://192.168.50.61:8084/api/lede/';
-const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'https://lede.sunhousm.cn/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -181,4 +181,10 @@ export function GetNewsInfoService(data) {
 }
 export function CreateNewsCommentService(data) {
   return get('CreateNewsCommentService', data);
+}
+export function CreateCommentPraiseService(data) {
+  return get('CreateCommentPraiseService', data);
+}
+export function CreateNewsPraiseService(data) {
+  return get('CreateNewsPraiseService', data);
 }

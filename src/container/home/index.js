@@ -42,8 +42,15 @@ class HomeScreen extends base {
         <TOpacity
           style={styles.flexOne}
           content={
-            <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.gong, styles.publicIcn]} name="analytics" />
+            <View style={[styles.flexOne, { justifyContent: 'center' }]}>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={styles.fristBox}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.gong} name="icon-dating" />
+                  </View>
+                  {/* <View style={{ flex: 1 }} /> */}
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
             </View>
           }
@@ -91,7 +98,15 @@ class HomeScreen extends base {
                 key={index}
                 content={
                   <View style={styles.goodsTypeOne}>
-                    <Icon style={[styles.goodsTypeIcn, { color: item.color }]} name={item.icn} />
+                    {
+                      item.isIcn ?
+                        <Text style={{ fontSize: 24, textAlign: 'center', marginBottom: 6, color: item.color }}>{item.text}</Text>
+                      :
+                        <Iconfont
+                          style={[styles.goodsTypeIcn, { color: item.color }]}
+                          name={item.icn}
+                        />
+                    }
                     <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.title}</Text>
                   </View>}
                 onPress={() => { push({ key: item.page }); }}
@@ -236,7 +251,6 @@ class HomeScreen extends base {
           {this.renderSeasonalGoods()}
           {this.renderSwiper()}
           {this.renderForYou()}
-          <Iconfont name="icon-ziti" color="#ff0000" />
         </Content>
         <TOpacity
           style={styles.bomFixedView}

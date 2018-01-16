@@ -244,16 +244,16 @@ class Goods extends base {
     );
   }
   render() {
-    const { pop } = this.props;
+    // const { pop } = this.props;
     return (
       <Container>
-        <Header
+        {/* <Header
           back={pop}
           title="供应详情"
           showRight
           rightText="更多"
           rightPress={this.resetState}
-        />
+        /> */}
         <Content>
           {this.renderHeaderNavigation()}
           {this.renderSeller()}

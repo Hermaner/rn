@@ -28,7 +28,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   gong: {
-    color: '#53E0B5',
+    fontSize: 40,
+    // marginLeft: 13,
+    // marginBottom: 12,
+    color: '#fff',
+    textAlign: 'center',
   },
   hang: {
     color: '#FAC342',
@@ -38,10 +42,6 @@ const styles = StyleSheet.create({
   },
   my: {
     color: '#82B4FD',
-  },
-  publicIcn: {
-    marginBottom: 6,
-    fontSize: 60,
   },
   normalThressText: {
     color: '#333',
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   goodsTypeIcn: {
-    fontSize: 40,
+    fontSize: 30,
     textAlign: 'center',
     marginBottom: 4,
   },
@@ -180,6 +180,16 @@ const styles = StyleSheet.create({
   bomFixedText: {
     fontSize: 14,
     color: '#fff',
+  },
+  fristBox: {
+    width: 60,
+    height: 60,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    marginBottom: 6,
+    borderRadius: 30,
+    // borderWidth: 1,
+    backgroundColor: '#53E0B5',
   },
 });
 export default styles;

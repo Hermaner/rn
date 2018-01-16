@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
   },
   icn: {
     marginRight: 10,
+    fontSize: 24,
+    color: '#999',
   },
   zixun: {
     color: '#1E6DC5',
