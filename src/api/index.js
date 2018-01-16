@@ -1,6 +1,6 @@
 
-// const httpurl = 'http://192.168.50.61:8084/api/lede/';
-const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'https://lede.sunhousm.cn/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -74,6 +74,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function RepeatPurchaseService(data) {
+  return post('RepeatPurchaseService', data);
+}
 export function GetSpecService(data) {
   return get('GetSpecService', data);
 }

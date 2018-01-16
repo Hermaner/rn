@@ -135,13 +135,12 @@ class MyBase extends React.Component {
   }
   getData = () => {
     const { memberId } = this.state;
-    console.log('rrrrrrrrr', memberId);
     GetMemberInfoService({
       memberId,
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
-        console.log('^^^^^^', result);
         this.setState({
           userInfo: result,
         });

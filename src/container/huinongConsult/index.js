@@ -1,16 +1,17 @@
 import React from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, ScrollableTab } from '../../components';
+import { Header } from '../../components';
 import huinongConsultBase from './base';
 import styles from './styles';
-
 import Child from './child';
+
+const ScreenWidth = Dimensions.get('window').width;
 
 class HuinongConsult extends huinongConsultBase {
   constructor(props) {
@@ -28,7 +29,15 @@ class HuinongConsult extends huinongConsultBase {
   _renderBody() {
     return (
       <View style={styles.pagebody}>
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+        <ScrollableTabView
+          style={{ flex: 1 }}
+          tabBarInactiveTextColor="#666"
+          tabBarActiveTextColor="#8bce21"
+          tabBarBackgroundColor="#f5f5f5"
+          tabBarTextStyle={{ fontSize: 15 }}
+          tabBarUnderlineStyle={{ width: ScreenWidth / 4, height: 2, backgroundColor: '#8bce21' }}
+          renderTabBar={() => <ScrollableTabBar />}
+        >
           <Child tabLabel="全部" type="" />
           <Child tabLabel="水果蔬菜" type="" />
           <Child tabLabel="畜牧水产" type="" />

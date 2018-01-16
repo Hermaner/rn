@@ -48,7 +48,7 @@ class Base extends React.Component {
     Global.firstIndex = index;
     this.setState({
       items,
-      childItems: items[index].childs,
+      childItems: items[index].childs || [],
       leftIndex: index,
     });
   }
@@ -71,6 +71,11 @@ class Base extends React.Component {
         break;
       case '4': // 供应再次进入
         Global.skuType = '4';
+        Global.secondIndex = index;
+        this.props.push({ key: 'CgCategory' });
+        break;
+      case '5': // 重发采购
+        Global.skuType = '5';
         Global.secondIndex = index;
         this.props.push({ key: 'CgCategory' });
         break;

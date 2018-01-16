@@ -59,7 +59,7 @@ class Base extends React.Component {
   }
   getData = () => {
     const { items } = this.state;
-    const skus = Global.skus;
+    const skus = Global.skus || [];
     const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
     const typeName = main.name;
     let brandName = '';

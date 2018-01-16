@@ -77,10 +77,17 @@ class Base extends React.Component {
     items[4].label = `${item.sendProvinceName}${item.sendCityName}${item.sendDistrictName}`;
     items[5].label = `${item.memo}`;
     items[6].label = `${item.supplyMode}${item.logisticsMode}${item.renderServices}`;
+    const initImages = [];
+    item.purchaseImages.forEach((img) => {
+      initImages.push({
+        imgUrl: img.imgUrl,
+        key: img.imgKey,
+      });
+    });
     this.setState({
       supplyId: item.supplyId.toString(),
       purchaseItems,
-      initImages: item.supplyImages.map(sig => sig.imgUrl),
+      initImages,
       categoryId: item.categoryId.toString(),
       brandId: item.categoryId.toString(),
       isSpotGoods: item.isSpotGoods.toString(),
