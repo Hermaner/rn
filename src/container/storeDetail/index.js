@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodList, TFeedback, MyModalView } from '../../components';
+import { Header, ScrollableTab, TFeedback, MyModalView } from '../../components';
 import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
@@ -23,7 +23,6 @@ class MainScreen extends base {
   }
   _renderTop() {
     const { goodsImg, infos } = this.state;
-    console.log(infos);
     return (
       <View style={styles.topView}>
         {
@@ -132,7 +131,7 @@ class MainScreen extends base {
                 onPress={() => this.showCertifImage(index, imageData)}
               >
                 <View style={styles.certifList}>
-                  <Image source={{ uri: item.imgUrl }} style={styles.certifImg} />
+                  <Image source={{ uri: 'https://img.static.sunhousm.cn/avatar_female.png' }} style={styles.certifImg} />
                   <Text style={styles.certifText}>{item.name}</Text>
                 </View>
               </TouchableWithoutFeedback>
@@ -153,16 +152,61 @@ class MainScreen extends base {
     );
   }
   _renderTabs() {
-    const { otherItems } = this.state;
+    const { infos } = this.state;
+    const { push } = this.props;
     const Tab = () => (
       <View>
         {
-          otherItems.map((item, index) => (
-            <GoodList
-              data={item}
-              key={index}
-              onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
-            />
+          infos.supplys.map((item, index) => (
+            <View key={index}>
+              <TFeedback
+                content={
+                  <View style={styles.goodsItem}>
+                    <Image
+                      style={styles.goodsImg}
+                      source={{ uri: item.supplyImages[0].imgUrl }}
+                    />
+                    <View style={{ flex: 1 }}>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.goodsName}>{item.brandName} {item.categoryName}</Text>
+                        <Text style={styles.goodsPlace}>
+                          {item.sendProvinceName}{item.sendCityName}{item.sendDistrictName}
+                        </Text>
+                        <View style={[styles.flexRow, { flexWrap: 'wrap', maxHeight: 50 }]}>
+                          {
+                            item.logisticsMode !== '' &&
+                            item.logisticsMode.split(',').map((item3, index3) => (
+                              <Text style={styles.aa} key={index3}>{item3}</Text>
+                            ))
+                          }
+                          {
+                            item.supplyMode !== '' &&
+                            item.supplyMode.split(',').map((item4, index4) => (
+                              <Text style={styles.aa} key={index4}>{item4}</Text>
+                            ))
+                          }
+                          {
+                            item.renderServices !== '' &&
+                            item.renderServices.split(',').map((item5, index5) => (
+                              <Text style={styles.aa} key={index5}>{item5}</Text>
+                            ))
+                          }
+                        </View>
+                      </View>
+                      <View style={styles.goodsPriceInfo}>
+                        <View>
+                          <Text style={styles.price}>{item.wholesalePrice}元/{item.unit}</Text>
+                        </View>
+                        <View style={styles.howLongBox}>
+                          <Text style={styles.howLong}>{item.beforeTime == null ? '1天前' : item.beforeTime}</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                }
+                onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
+              />
+            </View>
           ))
         }
       </View>
@@ -246,7 +290,10 @@ class MainScreen extends base {
             this._renderProvideTypes()
           }
           {this._renderSkuTable()}
-          {/* {this._renderTabs()} */}
+          {
+            infos &&
+            this._renderTabs()
+          }
         </Content>
         {this._renderFooter()}
       </Container>

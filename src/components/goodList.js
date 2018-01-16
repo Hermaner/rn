@@ -101,7 +101,7 @@ const GoodList = ({ onPress, data }) => (
         </Text>
         <View style={styles.iconView}>
           <View style={[styles.icon, styles.icon1]}>
-            <Text style={[styles.iconText, styles.iconText1]}>{data.member.identityName}</Text>
+            <Text style={[styles.iconText, styles.iconText1]}>lllll</Text>
           </View>
           <View style={[styles.icon, styles.icon2]}>
             <Text style={[styles.iconText, styles.iconText2]}>买家保障</Text>

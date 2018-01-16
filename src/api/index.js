@@ -182,3 +182,6 @@ export function GetNewsService(data) {
 export function GetNewsInfoService(data) {
   return get('GetNewsInfoService', data);
 }
+export function CreateNewsCommentService(data) {
+  return get('CreateNewsCommentService', data);
+}

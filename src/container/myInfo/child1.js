@@ -25,10 +25,18 @@ class Child1 extends Base {
         <TFeedback
           content={
             <View style={styles.goodsItem}>
-              <Image
-                style={styles.goodsImg}
-                source={{ uri: item.supplyImages[0].imgUrl }}
-              />
+              {
+                item.supplyImages.length === 0 ?
+                  <Image
+                    style={styles.goodsImg}
+                    source={{ uri: item.imgUrl }}
+                  />
+                :
+                  <Image
+                    style={styles.goodsImg}
+                    source={{ uri: item.supplyImages[0].imgUrl }}
+                  />
+              }
               <View style={{ flex: 1 }}>
                 <Text style={styles.goodsName}>{item.brandName} {item.categoryName}</Text>
                 <Text style={styles.goodsPlace}>

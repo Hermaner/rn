@@ -203,6 +203,7 @@ class Base extends React.Component {
       isHidden: true,
     });
     this.ModalView.showModal();
+    console.log('"""""""""""""', this.ModalView);
   }
   listPush = (index) => {
     const { push } = this.props;

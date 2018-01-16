@@ -143,19 +143,24 @@ class HomeScreen extends base {
   }
   renderSeasonalGoods() {
     const { seasonalGoodsList } = this.state;
+    const { push } = this.props;
     return (
       <View style={styles.seasonalGoods}>
         <Text style={styles.goodsTypeTitle}>应季好货</Text>
         <View style={styles.seasonalGoodsBox}>
           {
             seasonalGoodsList.map((item, index) => (
-              <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]} key={index}>
-                <Text style={styles.headerNavigationText}>{item.title}</Text>
-                <Text style={styles.seasonalGoodsLabel}>{item.label}</Text>
-                <View style={styles.imageBox}>
-                  <Image style={styles.image} source={{ uri: item.img }} />
-                </View>
-              </View>
+              <TFeedback
+                content={
+                  <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]} key={index}>
+                    <Text style={styles.headerNavigationText}>{item.title}</Text>
+                    <Text style={styles.seasonalGoodsLabel}>{item.label}</Text>
+                    <View style={styles.imageBox}>
+                      <Image style={styles.image} source={{ uri: item.img }} />
+                    </View>
+                  </View>}
+                onPress={() => { push({ key: 'HuinongGoodsMotif' }); }}
+              />
             ))
           }
         </View>

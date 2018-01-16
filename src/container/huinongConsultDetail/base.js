@@ -1,61 +1,76 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
+import PropTypes from 'prop-types';
+import Toast from 'react-native-simple-toast';
+import { GetNewsInfoService, CreateNewsCommentService } from '../../api';
 
-class HuinongConsultDetailBase extends React.Component {
-  wxLogin = () => {
-    WeChat.sendAuthRequest('snsapi_userinfo', 'App')
-    .then(res => console.log(res));
+class Base extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      newsInfo: '',
+      animationType: 'none', // none slide fade
+      visible: false, // 模态场景是否可见
+      transparent: true, // 是否透明显示
+    };
   }
-  async goWXpay() {
-    const orderID = '1';
-    React.WxUnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      console.log(lists);
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        try {
-          WeChat.pay(
-            {
-              partnerId: result.mch_id,
-              prepayId: result.prepay_id,
-              nonceStr: result.nonce_str,
-              timeStamp: result.timeStamp,
-              package: 'Sign=WXPay',
-              sign: '140822CCE34FD5B2303956105E49CA7C',
-            },
-          );
-        } catch (error) {
-          console.log('Pay for failure!');
-        }
+  getInit = () => {
+    const { newsId } = this.props.navigation.state.params;
+    this.setState({
+      memberId: global.memberId,
+      newsId,
+    }, this.getData);
+  }
+  getData = () => {
+    const { newsId } = this.state;
+    GetNewsInfoService({
+      newsId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        const result = res.data;
+        console.log('DDDDDDDDDD', result);
+        this.setState({
+          newsInfo: result,
+        });
+      } else {
+        Toast.show('温馨提示');
       }
-    }).catch(err => console.log(err));
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
+    });
   }
-  goAlipay() {
-    const orderID = '1';
-    React.UnifiedOrder({
-      order_id: orderID,
-    }).then((lists) => {
-      if (lists.data.is_success) {
-        const result = lists.data.result;
-        Alipay.pay(result).then((json) => {
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
-          } else {
-            console.log('其他失败原因');
-          }
-        }).catch(err => console.log(err));
+  saveLabel = (label) => {
+    this.setState({
+      label,
+    });
+  }
+  CreateNewsCommentService= () => {
+    const { label, newsId, memberId } = this.state;
+    this.sleek.toggle();
+    CreateNewsCommentService({
+      newsId,
+      memberId,
+      label,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        const result = res.data;
+        console.log('NEWNEWNEWNEWNENWENWNENWEN', result);
+        this.setState({
+          newsInfo: result,
+        });
+      } else {
+        Toast.show('温馨提示');
       }
-    }).catch(err => console.log(err));
-  }
-  common() {
-    this.name = 'herman';
+    }).catch((err) => {
+      this.sleek.toggle();
+      Toast.show(err);
+    });
+    this.setState({ visible: false });
   }
 }
-export default HuinongConsultDetailBase;
+Base.propTypes = {
+  navigation: PropTypes.object,
+};
+export default Base;
