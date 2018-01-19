@@ -29,19 +29,25 @@ const styles = StyleSheet.create({
   },
   gong: {
     fontSize: 40,
-    // marginLeft: 13,
-    // marginBottom: 12,
     color: '#fff',
     textAlign: 'center',
   },
   hang: {
-    color: '#FAC342',
+    fontSize: 40,
+    color: '#fff',
+    textAlign: 'center',
   },
   hui: {
-    color: '#9ED63C',
+    fontSize: 36,
+    marginLeft: 5,
+    textAlign: 'center',
+    color: '#fff',
   },
   my: {
-    color: '#82B4FD',
+    fontSize: 40,
+    marginTop: 2,
+    textAlign: 'center',
+    color: '#fff',
   },
   normalThressText: {
     color: '#333',
@@ -184,12 +190,10 @@ const styles = StyleSheet.create({
   fristBox: {
     width: 60,
     height: 60,
-    // flexDirection: 'row',
-    // alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 6,
     borderRadius: 30,
-    // borderWidth: 1,
-    backgroundColor: '#53E0B5',
   },
 });
 export default styles;

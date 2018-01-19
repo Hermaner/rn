@@ -1,5 +1,6 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
+import PropTypes from 'prop-types';
 import { DeepClone } from '../../api';
 
 class Base extends React.Component {
@@ -27,6 +28,9 @@ class Base extends React.Component {
       minPrice: '',
       maxPrice: '',
       count: '',
+      EntVerif: '',
+      PersonVerif: '',
+      SpotGoods: '',
     };
   }
   onChangeText = (txt, index) => {
@@ -49,6 +53,9 @@ class Base extends React.Component {
       default:
     }
   }
+  getInit = () => {
+    this.setState({ memberId: global.memberId });
+  }
   resetState = () => {
     this.setState({
       ...DeepClone(this.resetData),
@@ -60,11 +67,80 @@ class Base extends React.Component {
     this.setState({
       items,
     });
+    for (let i = 0; i < this.state.items.length; i += 1) {
+      if (i === 1) {
+        if (this.state.items[0].cur) {
+          this.setState({
+            EntVerif: '1',
+          });
+        } else {
+          this.setState({
+            EntVerif: '0',
+          });
+        }
+      }
+      if (i === 2) {
+        if (this.state.items[0].cur) {
+          this.setState({
+            PersonVerif: '1',
+          });
+        } else {
+          this.setState({
+            PersonVerif: '0',
+          });
+        }
+      }
+      if (i === 3) {
+        if (this.state.items[0].cur) {
+          this.setState({
+            SpotGoods: '1',
+          });
+        } else {
+          this.setState({
+            SpotGoods: '0',
+          });
+        }
+      }
+    }
   }
-  save = (callback) => {
-    console.log(111);
-    callback();
+  selectDistrict = () => {
+    const { EntVerif,
+      PersonVerif,
+      SpotGoods,
+      distance,
+      minPrice,
+      maxPrice,
+      count,
+      memberId } = this.state;
+    const data = {
+      EntVerif,
+      PersonVerif,
+      SpotGoods,
+      distance: distance * 1000,
+      minPrice,
+      maxPrice,
+      count,
+      memberId,
+    };
+    if (!memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    const { type } = this.props.navigation.state.params;
+    let emit;
+    switch (type) {
+      case 'getMainList':
+        emit = 'getMainList';
+        break;
+      default:
+    }
+    DeviceEventEmitter.emit(emit, data);
+    this.props.pop();
   }
 }
-
+Base.propTypes = {
+  push: PropTypes.func,
+  pop: PropTypes.func,
+  navigation: PropTypes.object,
+};
 export default Base;

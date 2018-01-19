@@ -1,5 +1,6 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
+import PropTypes from 'prop-types';
 
 class Base extends React.Component {
   constructor(props) {
@@ -46,6 +47,25 @@ class Base extends React.Component {
       leftIndex: index,
     });
   }
+  login = () => {
+    const { searchVal } = this.state;
+    const data = {
+      name: searchVal,
+    };
+    const { type } = this.props.navigation.state.params;
+    let emit;
+    switch (type) {
+      case 'getMainListName':
+        emit = 'getMainListName';
+        break;
+      default:
+    }
+    DeviceEventEmitter.emit(emit, data);
+    this.props.pop();
+  }
 }
-
+Base.propTypes = {
+  pop: PropTypes.func,
+  navigation: PropTypes.object,
+};
 export default Base;

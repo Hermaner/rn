@@ -1,16 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, View, Image, ScrollView } from 'react-native';
+import { TouchableOpacity, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, ScrollableTab, TFeedback } from '../../components';
+import { Header, ScrollableTab, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
-// import Child from './child';
+import Child from './child';
 
 class HuinongGoodsMotif extends base {
   constructor(props) {
@@ -21,58 +21,24 @@ class HuinongGoodsMotif extends base {
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   _renderBody() {
-    const { imgLists } = this.state;
-    const { push } = this.props;
-    const Child = () => (
-      <View style={styles.goods}>
-        <View style={styles.goodsTitle}>
-          <Text style={styles.goodsTitleText}>四川脐橙</Text>
-        </View>
-        <ScrollView style={{ marginBottom: 20 }}>
-          {
-            imgLists.map((item, index) => (
-              <View style={styles.goodsItem} key={index}>
-                <Image style={styles.goodsImage} resizeMode="stretch" source={{ uri: item.img }} />
-                <View style={{ flex: 1 }}>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.goodsName}>{item.goodsName}</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-                      <Text style={{ color: '#F0B527', fontSize: 20 }}>{item.price}</Text>
-                      <Text style={{ color: '#F0B527', fontSize: 14, marginRight: 4 }}>元/斤</Text>
-                      <Text style={{ color: '#F0B527', fontSize: 12 }}>{item.tj}</Text>
-                    </View>
-                    <Text style={styles.userName}>{item.name}</Text>
-                    <Text style={styles.userName}>产地: {item.place}</Text>
-                  </View>
-                  <View style={styles.btnBox}>
-                    <View style={{ flex: 1 }} />
-                    <TFeedback
-                      content={
-                        <View style={styles.btnB}>
-                          <Text style={styles.btnText}>聊生意</Text>
-                        </View>}
-                      onPress={() => { push({ key: 'User' }); }}
-                    />
-                  </View>
-                </View>
-              </View>
-            ))
-          }
-        </ScrollView>
-      </View>
-    );
+    const { brands } = this.state;
+    const { name } = this.props.navigation.state.params;
     return (
       <View style={styles.pagebody}>
         <Image style={styles.image} source={{ uri: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=9316bf1010d5ad6eaaf964e2b1f038db/0b55b319ebc4b74502a433c2c4fc1e178a821535.jpg' }} />
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-          <Child tabLabel="四川脐橙" type="" />
-          <Child tabLabel="浙江脐橙" type="" />
-          <Child tabLabel="海南脐橙" type="" />
-          <Child tabLabel="哈尔滨脐橙" type="" />
-          <Child tabLabel="新疆脐橙" type="" />
-        </ScrollableTabView>
+        {
+          brands &&
+          <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+            {
+              brands.map((item, index) => (
+                <Child tabLabel={item.brandName} name={name} brandId={item.brandId} key={index} />
+              ))
+            }
+          </ScrollableTabView>
+        }
       </View>
     );
   }
@@ -144,6 +110,7 @@ class HuinongGoodsMotif extends base {
           {/* {this._renderSwiper()} */}
           {this._renderBody()}
         </Content>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

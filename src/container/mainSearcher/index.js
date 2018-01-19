@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Input, Text, Header, Icon } from 'native-base';
+import { Container, Input, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import base from './base';

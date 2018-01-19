@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Image } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TFeedback, Loading, TOpacity } from '../../components';
+import { TFeedback, Loading, TOpacity, Iconfont } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
@@ -78,7 +78,10 @@ class My extends myBase {
                       <View key={index2}>
                         <View style={styles.infoBox}>
                           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Icon style={{ marginRight: 20, fontSize: 20, color: item2.icnColor }} name="arrow-back" />
+                            <Iconfont
+                              style={{ marginRight: 20, fontSize: 20, color: item2.icnColor }}
+                              name={item2.icn}
+                            />
                             <Text style={{ color: '#666', fontSize: 14 }}>{item2.title}</Text>
                           </View>
                           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -89,7 +92,7 @@ class My extends myBase {
                       </View>}
                     onPress={() => {
                       push({
-                        key: item2.push, params: { info: userInfo, name: userInfo.nickName } });
+                        key: memberId ? item2.push : 'User', params: { info: userInfo, name: userInfo.nickName } });
                     }}
                   />
                 ))

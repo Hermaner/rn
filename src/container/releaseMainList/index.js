@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Container, Content, Text, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { GoodList, Loading } from '../../components';
+import { Loading, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MainList extends base {
+class ReleaseMainList extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,17 +16,10 @@ class MainList extends base {
     };
   }
   componentDidMount() {
-    global.storage.load({
-      key: 'position',
-    }).then((res) => {
-      console.log(res);
-      global.longitude = res.longitude;
-      global.latitude = res.latitude;
-    }).catch(() => {});
     this.getInit();
   }
   componentWillUnmount() {
-    this.getDelete();
+    this.getDelInit();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -35,13 +28,13 @@ class MainList extends base {
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
           <Icon name="arrow-back" />
         </TouchableOpacity>
-        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher', params: { type: 'getMainListName' } }); }}>
+        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher' }); }}>
           <View style={styles.HeaderMain}>
             <Icon name="ios-search-outline" style={styles.HeaderIcon} />
             <Text style={styles.HeaderMainText}>输入货品名称</Text>
           </View>
         </TouchableWithoutFeedback>
-        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen', params: { type: 'getMainList' } }); }}>
+        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen' }); }}>
           <Text style={styles.HeaderRightText}>筛选</Text>
         </TouchableOpacity>
       </Header>
@@ -52,28 +45,14 @@ class MainList extends base {
       <View style={styles.conditions}>
         <TouchableWithoutFeedback onPress={() => { this.showAction(0); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>分类不限</Text>
-            <Icon name="ios-arrow-down" style={styles.cddown} />
-            <View style={styles.rightLine} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => { this.showAction(1); }}>
-          <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>品种不限</Text>
-            <Icon name="ios-arrow-down" style={styles.cddown} />
-            <View style={styles.rightLine} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => { this.showAction(2); }}>
-          <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>规格不限</Text>
+            <Text style={styles.cdsListText}>八目瓜</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(3); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>全国不限</Text>
+            <Text style={styles.cdsListText}>全国</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
@@ -297,13 +276,47 @@ class MainList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index, memberId) => (
+  _renderRow = (item, sectionID, index) => (
     <View>
-      <GoodList
-        data={item}
-        rowID={index}
+      <TFeedback
         key={index}
-        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+        content={
+          <View style={styles.buyGoodsItems}>
+            <View style={styles.buyGoodsItem}>
+              <Text style={styles.buyGoodsName}>{item.categoryName}</Text>
+              <View style={styles.flexRow}>
+                <Text style={styles.buyGoodsVariety}>
+                  品种: {item.brandName}{item.categoryName}
+                </Text>
+                <Text style={styles.flexRight}>{item.demand}{item.unit}</Text>
+              </View>
+              <Text style={styles.buyGoodsPlace}>
+                所在地: {item.receiveProvinceName}{item.receiveCityName}
+              </Text>
+              <View style={styles.flexRow}>
+                <View style={{ flex: 1, marginTop: 6 }}>
+                  <View style={styles.userDoBigBox}>
+                    <View style={styles.userDoBox}>
+                      <Text style={styles.userDo}>{item.member.identityName}</Text>
+                    </View>
+                    <View style={{ flex: 1 }} />
+                  </View>
+                  <View style={[styles.flexRow, { marginTop: 6 }]}>
+                    <Text style={styles.everyWeek}>{item.frequency}</Text>
+                    <View style={styles.flexRow}>
+                      <Text style={styles.howLong}>距截止</Text>
+                      <Text style={styles.howLongDay}>{item.purchaseTime}</Text>
+                      <Text style={styles.howLong}>天</Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.goBuyBtnBox}>
+                  <Text style={styles.goBuyBtn}>去报价</Text>
+                </View>
+              </View>
+            </View>
+          </View>}
+        onPress={() => { this.props.push({ key: 'PurchaseDetail', params: { item } }); }}
       />
     </View>
   )
@@ -361,8 +374,8 @@ class MainList extends base {
   }
 }
 
-MainList.propTypes = {
+ReleaseMainList.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainList);
+export default connect(null, { pop: popRoute, push: pushRoute })(ReleaseMainList);

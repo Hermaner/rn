@@ -67,7 +67,6 @@ class Base extends React.Component {
         this.setState({
           newsList,
         });
-        console.log('JJJJJJJJJj', this.state.newsList);
       } else {
         Toast.show('温馨提示');
       }
@@ -91,7 +90,6 @@ class Base extends React.Component {
     this.setState({
       isReadAll: !this.state.isReadAll,
     });
-    console.log('&&&&&&&&&&');
   }
   CreateNewsCommentService= () => {
     const { label, newsId, memberId } = this.state;
@@ -103,11 +101,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        const result = res.data;
-        console.log('NEWNEWNEWNEWNENWENWNENWEN', result);
-        this.setState({
-          newsInfo: result,
-        });
+        this.getInit();
       } else {
         Toast.show('温馨提示');
       }

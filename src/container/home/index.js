@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, ListView, NativeAppEventEmitter } from 'react-native';
+import { Image, View, NativeAppEventEmitter } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
@@ -11,6 +11,9 @@ import { pushRoute } from '../../actions';
 import { Header, ScrollableTab, Iconfont, GoodList, TOpacity, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
+
+import Child1 from './child1';
+import Child2 from './child2';
 
 class HomeScreen extends base {
   constructor(props) {
@@ -29,14 +32,21 @@ class HomeScreen extends base {
       pausesLocationUpdatesAutomatically: false,
       allowsBackgroundLocationUpdates: true,
     });
-    // AMapLocation.startUpdatingLocation();
-    AMapLocation.getReGeocode();
+    AMapLocation.startUpdatingLocation();
+    // AMapLocation.getReGeocode();
+    this.getInit();
   }
   _onLocationResult = (result) => {
     console.log(result);
+    global.storage.save({
+      key: 'position',
+      data: result.coordinate,
+      expires: null,
+    });
   }
   renderHeaderNavigation() {
     const { push } = this.props;
+    console.log('YYYYYYYYYYYYYYYYY', global.position)
     return (
       <View style={[styles.flexRow, styles.headerNavigation]}>
         <TOpacity
@@ -44,23 +54,28 @@ class HomeScreen extends base {
           content={
             <View style={[styles.flexOne, { justifyContent: 'center' }]}>
               <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <View style={styles.fristBox}>
+                <View style={[styles.fristBox, { backgroundColor: '#53E0B5' }]}>
                   <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
                     <Iconfont style={styles.gong} name="icon-dating" />
                   </View>
-                  {/* <View style={{ flex: 1 }} /> */}
                 </View>
               </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
             </View>
           }
-          onPress={() => push({ key: 'ChatIndex' })}
+          onPress={() => push({ key: 'MainList' })}
         />
         <TOpacity
           style={styles.flexOne}
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.hang, styles.publicIcn]} name="analytics" />
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#FAC342' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.hang} name="icon-1" />
+                  </View>
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>行情大厅</Text>
             </View>
           }
@@ -69,7 +84,13 @@ class HomeScreen extends base {
         <TFeedback
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.hui, styles.publicIcn]} name="analytics" />
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#9ED63C' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.hui} name="icon-zixun" />
+                  </View>
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农咨询</Text>
             </View>}
           onPress={() => { push({ key: 'HuinongConsult' }); }}
@@ -77,10 +98,16 @@ class HomeScreen extends base {
         <TFeedback
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.my, styles.publicIcn]} name="analytics" />
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#82B4FD' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.my} name="icon-caigou-xianxing" />
+                  </View>
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>我的采购</Text>
             </View>}
-          onPress={() => { push({ key: 'CbjConfirm' }); }}
+          onPress={() => { push({ key: 'MyRelease' }); }}
         />
       </View>
     );
@@ -107,9 +134,9 @@ class HomeScreen extends base {
                           name={item.icn}
                         />
                     }
-                    <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.title}</Text>
+                    <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
                   </View>}
-                onPress={() => { push({ key: item.page }); }}
+                onPress={() => { push({ key: index === 3 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: item.name } }); }} // MainSearch MainSearcher MainList
               />
             ))
           }
@@ -157,24 +184,24 @@ class HomeScreen extends base {
     );
   }
   renderSeasonalGoods() {
-    const { seasonalGoodsList } = this.state;
+    const { goodGoodsList } = this.state;
     const { push } = this.props;
     return (
       <View style={styles.seasonalGoods}>
         <Text style={styles.goodsTypeTitle}>应季好货</Text>
         <View style={styles.seasonalGoodsBox}>
           {
-            seasonalGoodsList.map((item, index) => (
+            goodGoodsList.map((item, index) => (
               <TFeedback
+                key={index}
                 content={
-                  <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]} key={index}>
-                    <Text style={styles.headerNavigationText}>{item.title}</Text>
-                    <Text style={styles.seasonalGoodsLabel}>{item.label}</Text>
+                  <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]}>
+                    <Text style={styles.headerNavigationText}>{item.name}</Text>
                     <View style={styles.imageBox}>
-                      <Image style={styles.image} source={{ uri: item.img }} />
+                      <Image style={styles.image} source={{ uri: item.imgUrl }} />
                     </View>
                   </View>}
-                onPress={() => { push({ key: 'HuinongGoodsMotif' }); }}
+                onPress={() => { push({ key: 'HuinongGoodsMotif', params: { categoryId: item.categoryId, brands: item.brands, name: item.name } }); }}
               />
             ))
           }
@@ -190,6 +217,7 @@ class HomeScreen extends base {
           style={styles.wrapper}
           height={200}
           autoplay
+          paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
             imgList.map((item, i) => (
@@ -203,30 +231,13 @@ class HomeScreen extends base {
     );
   }
   renderForYou() {
-    const Tab1 = () => this._renderGoods();
-    const Tab2 = () => this._renderGoods();
     return (
       <View style={styles.forYou}>
         <Text style={styles.forYouTitle}>为你推荐</Text>
-        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="推荐货品" />
-          <Tab2 tabLabel="优质商家" />
+        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+          <Child1 tabLabel="推荐货品" type="1" />
+          <Child2 tabLabel="优质商家" type="2" />
         </ScrollableTabView>
-      </View>
-    );
-  }
-  _renderGoods() {
-    const { dataSource } = this.state;
-    return (
-      <View>
-        {/* <ListView
-          dataSource={dataSource}
-          renderRow={this._renderRow}
-          onEndReached={this._reachEnd}
-          enableEmptySections
-          onEndReachedThreshold={10}
-          contentContainerStyle={styles.listViewStyle}
-        /> */}
       </View>
     );
   }
@@ -241,14 +252,21 @@ class HomeScreen extends base {
     </View>
   )
   render() {
+    const { goodGoodsList, goodsTypeList, memberId } = this.state;
     return (
       <Container>
         <Header back={this.props.push} />
         <Content>
           {this.renderHeaderNavigation()}
-          {this.renderGoodsType()}
+          {
+            goodsTypeList &&
+            this.renderGoodsType()
+          }
           {this.renderSampleCenter()}
-          {this.renderSeasonalGoods()}
+          {
+            goodGoodsList &&
+            this.renderSeasonalGoods()
+          }
           {this.renderSwiper()}
           {this.renderForYou()}
         </Content>
@@ -256,10 +274,10 @@ class HomeScreen extends base {
           style={styles.bomFixedView}
           content={
             <View style={styles.bomFixedBtn}>
-              <Text style={styles.bomFixedText}>去采购</Text>
+              <Text style={styles.bomFixedText}>发采购</Text>
             </View>
           }
-          onPress={() => this.props.push({ key: 'MainSearch', params: { type: '2' } })}
+          onPress={() => this.props.push({ key: memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
         />
       </Container>
     );

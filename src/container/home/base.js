@@ -1,6 +1,9 @@
 import React from 'react';
+import Toast from 'react-native-simple-toast';
 import { ListView } from 'react-native';
+import { GetVerifSupplyService, GetGoodBusinesService, GetAppCategoryService, GetHomeCategoryService } from '../../api';
 
+let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -8,12 +11,12 @@ class Base extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
-      goodsTypeList: [{
+      typeList: [{
         id: 1,
         icn: 'icon-shuiguo',
         isIcn: false,
         text: '',
-        title: '水果',
+        name: '水果',
         page: 'MainList',
         color: '#1CC127',
       }, {
@@ -21,7 +24,7 @@ class Base extends React.Component {
         icn: 'icon-shucai',
         isIcn: false,
         text: '',
-        title: '蔬菜',
+        name: '蔬菜',
         page: 'User',
         color: '#1CC127',
       }, {
@@ -29,84 +32,43 @@ class Base extends React.Component {
         icn: 'icon-px_pangxie',
         isIcn: false,
         text: '',
-        title: '畜牧水产',
+        name: '畜牧水产',
         color: '#1CC127',
       }, {
         id: 1,
         icn: 'icon-ziyuan',
         isIcn: false,
         text: '',
-        title: '全部分类',
+        name: '全部分类',
         color: '#FF4F51',
       }, {
         id: 1,
         icn: '',
         isIcn: true,
-        text: '八',
-        title: '八月瓜',
+        text: '辅',
+        name: '八月瓜',
         color: '#1CC127',
       }, {
         id: 1,
         icn: '',
         isIcn: true,
-        text: '羊',
-        title: '羊',
+        text: '箱',
+        name: '羊',
         color: '#1CC127',
       }, {
         id: 1,
         icn: '',
         isIcn: true,
-        text: '苹',
-        title: '苹果',
+        text: '灯',
+        name: '苹果',
         color: '#FD6300',
       }, {
         id: 1,
         icn: '',
         isIcn: true,
-        text: '柑',
-        title: '柑橘',
+        text: '玻',
+        name: '柑橘',
         color: '#FD6300',
-      }],
-      seasonalGoodsList: [{
-        id: 1,
-        title: '橙子',
-        label: '量大质优',
-        img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
-      }, {
-        id: 1,
-        title: '种苗',
-        label: '品种优良',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '苹果',
-        label: '货源充足',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '水果种苗',
-        label: '存活率高',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '红薯',
-        label: '1件起批',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '红枣',
-        label: '肉厚核小',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '辣椒',
-        label: '质优价好',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
-      }, {
-        id: 1,
-        title: '核桃',
-        label: '肉厚饱满',
-        img: 'https://gitlab.pro/yuji/demo/uploads/2d5122a2504e5cbdf01f4fcf85f2594b/Mwb8VWH.jpg',
       }],
       imgList: [{
         img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
@@ -119,15 +81,142 @@ class Base extends React.Component {
       }],
       loadQueue: [0, 0, 0, 0],
       ds,
-      dataSource: ds.cloneWithRows([
-        { name: '石榴真好吃啊真好吃啊真好使' },
-        { name: '石榴真好吃啊真好吃啊真好使' },
-        { name: '石榴真好吃啊真好吃啊真好使' },
-        { name: '石榴真好吃啊真好吃啊真好使' }]),
-      loading: true,
-      nomore: false,
-      refresh: false,
+      dataSource: ds.cloneWithRows([]),
+      currentPage: 1,
+      refresh: false, // 是否是刷新
+      loading: true, // 是否加载中
+      nomore: false, // 是否没有更多
+      noData: false, // 是否没有数据
+      pageSize: '5',
+      items: [],
+      goodsTypeList: [], // 应季好货
     };
+  }
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
+  }
+  getData = () => {
+    const { currentPage, pageSize, items, ds, refresh, dataSource, typeList } = this.state;
+    GetVerifSupplyService({
+      pageSize,
+      currentPage,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log('HHHHHHHHHHH', res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          if (items.length === 0) {
+            this.setState({
+              noData: true,
+            });
+          } else {
+            this.setState({
+              nomore: true,
+              loading: false,
+            });
+          }
+          return;
+        }
+        if (refresh) {
+          this.setState({
+            items: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = items.concat(result);
+          this.setState({
+            items: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
+            loading: false,
+          });
+        }
+        setTimeout(() => { canEnd = true; }, 0);
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+
+    GetAppCategoryService({
+    }).then((res) => {
+      if (res.isSuccess) {
+        const result = res.data[0].childs;
+        result.length = 8;
+        this.setState({
+          goodGoodsList: result,
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+
+    GetHomeCategoryService({
+    }).then((res) => {
+      if (res.isSuccess) {
+        const result = res.data;
+        console.log('@@@@@@@@@@2', result);
+        for (let i = 0; i < result.length; i += 1) {
+          result[i].isIcn = typeList[i].isIcn;
+          result[i].text = typeList[i].text;
+          result[i].icn = typeList[i].icn;
+          result[i].color = typeList[i].color;
+          if (i === 3) {
+            result.splice(3, 0, typeList[3]);
+          }
+        }
+        this.setState({
+          goodsTypeList: result,
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+  }
+  business = () => {
+    const { ds } = this.state;
+    GetGoodBusinesService({
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log('rrrrrrrrrr', res);
+        const result = res.data;
+        for (let i = 0; i < result.length; i += 1) {
+          if (result[i].supplys.length > 0) {
+            result[i].sell = result[i].supplys[0].categoryName;
+          } else {
+            result[i].sell = '暂无';
+          }
+        }
+        this.setState({
+          items: result,
+          dataSource: ds.cloneWithRows(result),
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+  }
+  _onRefresh = () => {
+    this.setState({
+      refresh: true,
+      currentPage: 1,
+    }, () => this.getData());
   }
 }
 export default Base;

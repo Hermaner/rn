@@ -91,6 +91,8 @@ import EnlistBusiness from '../container/enlistBusiness';
 import OtherInfo from '../container/otherInfo';
 import GoodBusinessDetail from '../container/goodBusinessDetail';
 import HuinongGoodsMotif from '../container/huinongGoodsMotif';
+import HomeMainList from '../container/homeMainList';
+import ReleaseMainList from '../container/releaseMainList';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -180,6 +182,8 @@ export const AppNavigator = StackNavigator({
   OtherInfo: { screen: OtherInfo },
   GoodBusinessDetail: { screen: GoodBusinessDetail },
   HuinongGoodsMotif: { screen: HuinongGoodsMotif },
+  HomeMainList: { screen: HomeMainList },
+  ReleaseMainList: { screen: ReleaseMainList },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, Image, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Text, Icon, Footer } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import StarRating from 'react-native-star-rating';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TFeedback, ScrollableTab } from '../../components';
+import { Header, TFeedback, TOpacity, Iconfont } from '../../components';
 import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
+import Child from './child';
+
+const ScreenWidth = Dimensions.get('window').width;
 
 class Goods extends base {
   constructor(props) {
@@ -20,6 +22,7 @@ class Goods extends base {
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   renderHeaderNavigation() {
     const { push } = this.props;
@@ -28,36 +31,62 @@ class Goods extends base {
         <TFeedback
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.gong, styles.publicIcn]} name="analytics" />
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#82B4FD' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.my} name="icon-caigou-xianxing" />
+                  </View>
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>采购大厅</Text>
-            </View>
-          }
-          onPress={() => push({ key: 'MainList' })}
+            </View>}
+          onPress={() => { push({ key: 'ReleaseMainList' }); }}
         />
-        <TFeedback
+        <TOpacity
+          style={styles.flexOne}
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.hang, styles.publicIcn]} name="analytics" />
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>实地认证</Text>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#FAC342' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.hang} name="icon-1" />
+                  </View>
+                </View>
+              </View>
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>行情大厅</Text>
             </View>
           }
           onPress={() => push({ key: 'MainSearch', params: { type: '3' } })}
         />
-        <TFeedback
+        <TOpacity
+          style={styles.flexOne}
           content={
-            <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.hui, styles.publicIcn]} name="analytics" />
+            <View style={[styles.flexOne, { justifyContent: 'center' }]}>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#53E0B5' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.gong} name="icon-dating" />
+                  </View>
+                </View>
+              </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>我的供应</Text>
-            </View>}
-          onPress={() => { push({ key: 'HuinongConsult' }); }}
+            </View>
+          }
+          onPress={() => { push({ key: 'MySupply' }); }}
         />
         <TFeedback
           content={
             <View style={styles.flexOne}>
-              <Icon style={[styles.textCenter, styles.my, styles.publicIcn]} name="analytics" />
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农学堂</Text>
+              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={[styles.fristBox, { backgroundColor: '#F99851' }]}>
+                  <View style={{ width: 60, flexDirection: 'row', justifyContent: 'center' }}>
+                    <Iconfont style={styles.hui} name="icon-zixun" />
+                  </View>
+                </View>
+              </View>
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>我的订单</Text>
             </View>}
-          onPress={() => { push({ key: 'CbjConfirm' }); }}
+          onPress={() => { push({ key: 'MySoldGoods' }); }}
         />
       </View>
     );
@@ -159,6 +188,7 @@ class Goods extends base {
           style={styles.wrapper}
           height={200}
           autoplay
+          paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
             imgList.map((item, i) => (
@@ -176,92 +206,56 @@ class Goods extends base {
     );
   }
   renderAllGoods() {
-    const Tab1 = () => this._renderGoodsInfo();
-    const Tab2 = () => this._renderGoodsInfo();
-    const Tab3 = () => this._renderGoodsInfo();
-    const Tab4 = () => this._renderGoodsInfo();
-    const Tab5 = () => this._renderGoodsInfo();
-    const Tab6 = () => this._renderGoodsInfo();
-    const Tab7 = () => this._renderGoodsInfo();
-    const Tab8 = () => this._renderGoodsInfo();
-    const Tab9 = () => this._renderGoodsInfo();
+    const { goodGoodsList } = this.state;
     return (
       <View style={styles.allGoods}>
-        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="全部采购" />
-          <Tab2 tabLabel="柑橘" />
-          <Tab3 tabLabel="鸡" />
-          <Tab4 tabLabel="土豆" />
-          <Tab5 tabLabel="核桃" />
-          <Tab6 tabLabel="国槐" />
-          <Tab7 tabLabel="导弹" />
-          <Tab8 tabLabel="飞毛腿" />
-          <Tab9 tabLabel="改品类" />
+        <ScrollableTabView
+          style={{ flex: 1 }}
+          tabBarInactiveTextColor="#666"
+          tabBarActiveTextColor="#8bce21"
+          tabBarBackgroundColor="#f5f5f5"
+          tabBarTextStyle={{ fontSize: 15 }}
+          tabBarUnderlineStyle={{ width: ScreenWidth / 4, height: 2, backgroundColor: '#8bce21' }}
+          renderTabBar={() => <ScrollableTabBar />}
+        >
+          {
+            goodGoodsList.map((item, index) => (
+              <Child tabLabel={item.name} key={index} categoryId={item.categoryId} />
+            ))
+          }
         </ScrollableTabView>
       </View>
     );
   }
-  _renderGoodsInfo() {
-    const { push } = this.props;
-    return (
-      <View style={styles.buyGoodsItems}>
-        <View style={styles.buyGoodsItem}>
-          <Text style={styles.buyGoodsName}>八月瓜</Text>
-          <View style={styles.flexRow}>
-            <Text style={styles.buyGoodsVariety}>品种: 八月瓜</Text>
-            <Text style={styles.flexRight}>100斤</Text>
-          </View>
-          <Text style={styles.buyGoodsPlace}>
-            所在地: 河北省邢台市
-          </Text>
-          <View style={styles.flexRow}>
-            <View style={{ flex: 1, marginTop: 6 }}>
-              <View style={styles.userDoBigBox}>
-                <View style={styles.userDoBox}>
-                  <Text style={styles.userDo}>养殖户/养殖企业</Text>
-                </View>
-                <View style={{ flex: 1 }} />
-              </View>
-              <View style={[styles.flexRow, { marginTop: 6 }]}>
-                <Text style={styles.everyWeek}>每周</Text>
-                <View style={styles.flexRow}>
-                  <Text style={styles.howLong}>距截止</Text>
-                  <Text style={styles.howLongDay}>6</Text>
-                  <Text style={styles.howLong}>天</Text>
-                </View>
-              </View>
-            </View>
-            <TFeedback
-              content={
-                <View style={styles.goBuyBtnBox}>
-                  <Text style={styles.goBuyBtn}>去报价</Text>
-                </View>}
-              onPress={() => { push({ key: 'PurchaseDetail' }); }}
-            />
-          </View>
-        </View>
-      </View>
-    );
-  }
   render() {
-    // const { pop } = this.props;
+    const { pop } = this.props;
+    const { memberId } = this.state;
     return (
       <Container>
-        {/* <Header
+        <Header
           back={pop}
-          title="供应详情"
+          title="我要卖"
           showRight
           rightText="更多"
-          rightPress={this.resetState}
-        /> */}
+          // rightPress={this.resetState}
+        />
         <Content>
           {this.renderHeaderNavigation()}
           {this.renderSeller()}
           {this.renderNews()}
           {this.renderHuiNongStudy()}
           {this.renderSwiper()}
-          {this.renderAllGoods()}
+          {this.state.goodGoodsList.length > 0 && this.renderAllGoods()}
         </Content>
+        <TOpacity
+          style={styles.bomFixedView}
+          content={
+            <View style={styles.bomFixedBtn}>
+              <Text style={styles.bomFixedText}>发供应</Text>
+            </View>
+          }
+          onPress={() => this.props.push({ key: memberId ? 'ReleaseMainList' : 'User', params: { type: '3' } })}
+        />
       </Container>
     );
   }

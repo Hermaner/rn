@@ -2,7 +2,7 @@ import React from 'react';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetNewsService } from '../../api';
+import { GetGotSupplyService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -58,40 +58,37 @@ class Base extends React.Component {
         name: '刘德华',
         place: '湖北省武汉市',
       }],
+      categoryId: '',
+      brands: '',
+      name: '',
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this._onRefresh);
-  }
-  getDelete = () => {
-    this.supplyRefresh.remove();
+    const { categoryId, brands, name } = this.props.navigation.state.params;
+    this.setState({
+      memberId: global.memberId,
+      categoryId,
+      brands,
+      name,
+    }, this.getData);
   }
   getData = () => {
-    const { ds, title } = this.state;
-    const { type } = this.props;
-    GetNewsService({
-      type,
-      title,
+    const { ds, categoryId, name } = this.state;
+    console.log('PPPPPPPPPPPPP', name);
+    let { brandId } = this.props;
+    brandId = brandId || '';
+    GetGotSupplyService({
+      categoryId,
+      brandId,
     }).then((res) => {
       if (res.isSuccess) {
         console.log('ZZZZZZZZZZZz', res);
         const result = res.data;
-        const imgList = [];
-        const swiperLength = result.length > 3 ? 3 : result.length;
-        for (let i = 0; i < swiperLength; i += 1) {
-          imgList.push({
-            img: result[i].newsImages[0].imgUrl,
-            title: result[i].title,
-            time: result[i].postDate.substring(0, 10),
-            lookCount: result[i].lookCount,
-            newsId: result[i].newsId,
-          });
-        }
+        console.log('%%%%%%%%%', result);
         this.setState({
           dataSource: ds.cloneWithRows(result),
-          imgLists: imgList,
         });
-        console.log('JJJJJJJJJj');
+        console.log('DADADADADADADAD', this.state.dataSource);
       } else {
         Toast.show('温馨提示');
       }
@@ -99,12 +96,9 @@ class Base extends React.Component {
       Toast.show(err);
     });
   }
-  _onRefresh = () => {
-    this.getData();
-  }
 }
 Base.propTypes = {
-  type: PropTypes.string,
-  // push: PropTypes.func,
+  brandId: PropTypes.string,
+  navigation: PropTypes.object,
 };
 export default Base;

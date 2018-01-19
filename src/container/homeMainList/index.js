@@ -8,7 +8,7 @@ import { GoodList, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MainList extends base {
+class HomeMainList extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,17 +16,10 @@ class MainList extends base {
     };
   }
   componentDidMount() {
-    global.storage.load({
-      key: 'position',
-    }).then((res) => {
-      console.log(res);
-      global.longitude = res.longitude;
-      global.latitude = res.latitude;
-    }).catch(() => {});
     this.getInit();
   }
   componentWillUnmount() {
-    this.getDelete();
+    this.getDelInit();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -35,45 +28,32 @@ class MainList extends base {
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
           <Icon name="arrow-back" />
         </TouchableOpacity>
-        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher', params: { type: 'getMainListName' } }); }}>
+        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher' }); }}>
           <View style={styles.HeaderMain}>
             <Icon name="ios-search-outline" style={styles.HeaderIcon} />
             <Text style={styles.HeaderMainText}>输入货品名称</Text>
           </View>
         </TouchableWithoutFeedback>
-        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen', params: { type: 'getMainList' } }); }}>
+        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen' }); }}>
           <Text style={styles.HeaderRightText}>筛选</Text>
         </TouchableOpacity>
       </Header>
     );
   }
   _readerConditions() {
+    const { name } = this.props.navigation.state.params;
     return (
       <View style={styles.conditions}>
         <TouchableWithoutFeedback onPress={() => { this.showAction(0); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>分类不限</Text>
-            <Icon name="ios-arrow-down" style={styles.cddown} />
-            <View style={styles.rightLine} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => { this.showAction(1); }}>
-          <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>品种不限</Text>
-            <Icon name="ios-arrow-down" style={styles.cddown} />
-            <View style={styles.rightLine} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => { this.showAction(2); }}>
-          <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>规格不限</Text>
+            <Text style={styles.cdsListText}>{name}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(3); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>全国不限</Text>
+            <Text style={styles.cdsListText}>全国</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
@@ -361,8 +341,8 @@ class MainList extends base {
   }
 }
 
-MainList.propTypes = {
+HomeMainList.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MainList);
+export default connect(null, { pop: popRoute, push: pushRoute })(HomeMainList);

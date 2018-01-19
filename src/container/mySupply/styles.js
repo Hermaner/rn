@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-// import { Mgreen, st } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   goodsDetail: {
@@ -69,6 +69,25 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     marginRight: 10,
+  },
+  bomFixedView: {
+    height: 0,
+    position: 'relative',
+  },
+  bomFixedBtn: {
+    width: 50,
+    height: 50,
+    overflow: 'hidden',
+    backgroundColor: Mcolor,
+    position: 'absolute',
+    right: 10,
+    bottom: 40,
+    borderRadius: 25,
+    ...st.jacenter,
+  },
+  bomFixedText: {
+    fontSize: 14,
+    color: '#fff',
   },
 });
 export default styles;

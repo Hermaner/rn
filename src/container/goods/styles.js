@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { st, Mcolor } from '../../utils';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -27,16 +28,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   gong: {
-    color: '#53E0B5',
+    fontSize: 40,
+    color: '#fff',
+    textAlign: 'center',
   },
   hang: {
-    color: '#FAC342',
+    fontSize: 40,
+    color: '#fff',
+    textAlign: 'center',
   },
   hui: {
-    color: '#9ED63C',
+    fontSize: 36,
+    marginLeft: 5,
+    textAlign: 'center',
+    color: '#fff',
   },
   my: {
-    color: '#82B4FD',
+    fontSize: 40,
+    marginTop: 2,
+    textAlign: 'center',
+    color: '#fff',
   },
   publicIcn: {
     marginBottom: 6,
@@ -161,13 +172,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   slide: {
-    height: 120,
+    height: 200,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
     width,
-    height: 120,
+    height: 200,
     backgroundColor: 'transparent',
     resizeMode: 'stretch',
   },
@@ -258,6 +269,33 @@ const styles = StyleSheet.create({
   howLongDay: {
     fontSize: 10,
     color: '#FC8521',
+  },
+  bomFixedView: {
+    height: 0,
+    position: 'relative',
+  },
+  bomFixedBtn: {
+    width: 50,
+    height: 50,
+    overflow: 'hidden',
+    backgroundColor: Mcolor,
+    position: 'absolute',
+    right: 10,
+    bottom: 40,
+    borderRadius: 25,
+    ...st.jacenter,
+  },
+  bomFixedText: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  fristBox: {
+    width: 60,
+    height: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+    borderRadius: 30,
   },
 });
 export default styles;

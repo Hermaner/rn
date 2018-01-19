@@ -74,8 +74,10 @@ class Base extends React.Component {
     }, this._onRefresh);
   }
   getInit = () => {
+    const { categoryId } = this.props.navigation.state.params;
     this.setState({
       memberId: '',
+      categoryId,
       longitude: JSON.stringify(global.longitude),
       latitude: JSON.stringify(global.latitude),
     }, this._onRefresh);
@@ -201,16 +203,24 @@ class Base extends React.Component {
     });
   }
   GetAppCategoryService = () => {
+    const { categoryId } = this.props.navigation.state.params;
     GetAppCategoryService()
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
-        goods[0].cur = true;
+        for (let i = 0; i < goods.length; i += 1) {
+          if (goods[i].categoryId === categoryId) {
+            goods[i].cur = true;
+            this.setState({
+              firstChoose: i,
+            });
+          }
+        }
         this.setState({
-          goodsLeftIndex: 0,
+          goodsLeftIndex: this.state.firstChoose,
           goods: res.data,
-          childgoods: goods[0].childs,
+          childgoods: goods[this.state.firstChoose].childs,
         });
       } else {
         Toast.show(res.msg);
@@ -283,7 +293,7 @@ class Base extends React.Component {
   }
   changeLeftGoods = (index) => {
     const { goods, goodsLeftIndex } = this.state;
-    console.log('PPPPPOOOOOOUUUUUUU', goods);
+    console.log(goods);
     if (goodsLeftIndex === index) {
       return;
     }
@@ -350,5 +360,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   push: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default Base;

@@ -115,7 +115,7 @@ class Child extends Base {
     );
   }
   render() {
-    const { noData, dataSource, nomore, refresh, isSleekShow } = this.state;
+    const { noData, dataSource, nomore, refresh } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {

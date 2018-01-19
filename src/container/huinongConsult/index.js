@@ -23,9 +23,6 @@ class HuinongConsult extends huinongConsultBase {
   }
   componentDidMount() {
   }
-  goRoute = (key) => {
-    this.props.push(key);
-  }
   _renderBody() {
     return (
       <View style={styles.pagebody}>
@@ -56,37 +53,6 @@ class HuinongConsult extends huinongConsultBase {
       </View>
     );
   }
-  _renderSwiper() {
-    const { imgList } = this.state;
-    return (
-      <View style={{ height: 200 }}>
-        <Swiper
-          style={styles.wrapper}
-          height={200}
-          autoplay
-          paginationStyle={{ justifyContent: 'flex-end', paddingRight: 10, bottom: 18 }}
-        >
-          {
-            imgList.map((item, i) => (
-              <View key={i} style={styles.slide}>
-                <Image style={styles.image} source={{ uri: item.img }} />
-                <View style={styles.newsInfoBox}>
-                  <Text style={styles.newsInfoText} numberOfLines={1}>{item.title}</Text>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={[styles.newsInfoSmallText, styles.newsInfoTime]}>12-25</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Icon style={{ marginRight: 10 }} name="arrow-back" />
-                      <Text style={styles.newsInfoSmallText}>555</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            ))
-          }
-        </Swiper>
-      </View>
-    );
-  }
   _renderNewsList() {
     const { push } = this.props;
     return (
@@ -114,7 +80,6 @@ class HuinongConsult extends huinongConsultBase {
       <Container>
         <Header back={pop} title="农产品市场行情新闻资讯" />
         <Content contentContainerStyle={{ flex: 1 }}>
-          {/* {this._renderSwiper()} */}
           {this._renderBody()}
         </Content>
       </Container>

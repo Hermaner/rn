@@ -3,7 +3,7 @@ import { View, Slider, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, CheckBox, Text, Input, Button } from 'native-base';
 import { connect } from 'react-redux';
-import { popRoute } from '../../actions';
+import { popRoute, pushRoute } from '../../actions';
 import { Header } from '../../components';
 import { Mcolor } from '../../utils';
 import { DeepClone } from '../../api';
@@ -18,6 +18,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   _renderContent() {
     const { items } = this.state;
@@ -109,7 +110,7 @@ class MainScreen extends base {
           />
           <Text style={styles.utilsText}>以下起订</Text>
         </View>
-        <Button full rounded style={styles.saveBtn} onPress={() => { this.save(pop); }}>
+        <Button full rounded style={styles.saveBtn} onPress={() => { this.selectDistrict(pop); }}>
           <Text>填好了</Text>
         </Button>
       </View>
@@ -138,5 +139,6 @@ class MainScreen extends base {
 
 MainScreen.propTypes = {
   pop: PropTypes.func,
+  push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute })(MainScreen);
+export default connect(null, { pop: popRoute, push: pushRoute })(MainScreen);

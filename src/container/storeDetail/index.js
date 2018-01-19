@@ -26,6 +26,7 @@ class MainScreen extends base {
     return (
       <View style={styles.topView}>
         {
+          infos.supplys &&
           infos.supplys.length > 0 ?
             <Image source={{ uri: infos.supplys[0].imgUrl }} style={styles.mainImg} />
           :
@@ -79,6 +80,7 @@ class MainScreen extends base {
           <View style={styles.provideTypes}>
             <View style={styles.provideTypesLeft}>
               {
+                infos.memberVerifs &&
                 infos.memberVerifs.map((item, index) => (
                   <View style={styles.ptlList} key={index}>
                     <Icon name="checkmark" style={styles.ptlIcon} />
@@ -255,7 +257,7 @@ class MainScreen extends base {
     return (
       <Footer>
         <View style={styles.fotBtn1}>
-          <Icon name="arrow-back" style={styles.fotChatIcon} />
+          <Icon name="heart" style={styles.fotChatIcon} />
           <Text style={styles.fotChatText}>关注</Text>
         </View>
         <View style={styles.fotBtn2}>
@@ -286,7 +288,7 @@ class MainScreen extends base {
           }
           {this._renderNameAP()}
           {
-            infos &&
+            infos.memberVerifs &&
             this._renderProvideTypes()
           }
           {this._renderSkuTable()}

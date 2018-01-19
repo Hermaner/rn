@@ -13,6 +13,7 @@ import UploadFile from './UploadFile';
 import PeopleUploadFile from './PeopleUploadFile';
 import Loading from './Loading';
 import Iconfont from './Iconfont';
+import BusinessList from './businessList';
 
 export {
   TLight,
@@ -30,4 +31,5 @@ export {
   GoodhList,
   Header,
   ScrollableTab,
+  BusinessList,
 };

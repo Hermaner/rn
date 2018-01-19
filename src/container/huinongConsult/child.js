@@ -65,8 +65,9 @@ class Child extends Base {
             {
               imgLists.map((item1, i) => (
                 <TFeedback
+                  key={i}
                   content={
-                    <View key={i} style={styles.slide}>
+                    <View style={styles.slide}>
                       <Image style={styles.image} source={{ uri: item1.img }} />
                       <View style={styles.newsInfoBox}>
                         <Text style={styles.newsInfoText} numberOfLines={1}>{item1.title}</Text>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListView } from 'react-native';
 import { DeepClone } from '../../api';
 
 class Base extends React.Component {
@@ -63,12 +62,15 @@ class Base extends React.Component {
       this.setState({
         supplyInfo: infos.supplys,
       });
-      console.log('??????????', infos.supplys)
-      for (let i = 0; i < infos.memberVerifs.length; i += 1) {
-        if (infos.memberVerifs[i].verifFieldName === '买家保障') {
-          infos.memoText = infos.memberVerifs[i].memo;
-          break;
+      if (infos.memberVerifs) {
+        for (let i = 0; i < infos.memberVerifs.length; i += 1) {
+          if (infos.memberVerifs[i].verifFieldName === '买家保障') {
+            infos.memoText = infos.memberVerifs[i].memo;
+            break;
+          }
+          infos.memoText = '未缴纳买家保证金';
         }
+      } else {
         infos.memoText = '未缴纳买家保证金';
       }
     }

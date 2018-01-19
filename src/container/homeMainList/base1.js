@@ -1,8 +1,8 @@
 import React from 'react';
-import { ListView, DeviceEventEmitter } from 'react-native';
+import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeepClone, GetAppCategoryService, GetSupplyByFiltersService } from '../../api';
+import { DeepClone, GetSupplyService, GetAppCategoryService } from '../../api';
 import citysJson from '../../api/citys.json';
 
 citysJson[0].cur = true;
@@ -36,120 +36,30 @@ class Base extends React.Component {
       noData: false,
       pageSize: '15',
       memberId: '',
-      name: '', // 供应单名称（搜索）
-      isSpotGoods: '', // 是否现货
-      categoryId: '', // 类目ID
-      brandId: '', // 品牌ID
-      provinceCode: '', // 省
-      cityCode: '', // 市
-      isEntVerif: '', // 是否企业认证 1y 2 n
-      isPersonVerif: '', // 是否个人认证 1y 2n
-      wholesaleCount: '', // 起订量
-      startPrice: '', // 开始价格
-      endPrice: '', // 结束价格
-      specTypeId: '', // 规格种类ID
-      specId: '', // 规格ID
-      longitude: '', // 经度
-      latitude: '', // 纬度
-      isFlushDistance: '', // 是否刷新（1是0否)
-      currentPage: 1,
-      setDistance: '', // 距离
+      categoryId: '',
+      hiddenTwo: false,
+      firstChoose: '',
     };
-  }
-  getMainList = (data) => {
-    this.setState({
-      isEntVerif: data.EntVerif,
-      isPersonVerif: data.PersonVerif,
-      isSpotGoods: data.SpotGoods,
-      setDistance: JSON.stringify(data.distance),
-      startPrice: data.minPrice,
-      endPrice: data.maxPrice,
-      wholesaleCount: data.count,
-      memberId: data.memberId,
-    }, this._onRefresh);
-  }
-  getMainListName = (data) => {
-    this.setState({
-      name: data.name,
-    }, this._onRefresh);
   }
   getInit = () => {
+    const { categoryId, hidden } = this.props.navigation.state.params;
     this.setState({
-      memberId: '',
-      longitude: JSON.stringify(global.longitude),
-      latitude: JSON.stringify(global.latitude),
+      memberId: global.memberId || '1',
+      categoryId,
+      hiddenTwo: hidden,
     }, this._onRefresh);
-    this.EmitMainList = DeviceEventEmitter.addListener('getMainList', (data) => {
-      this.getMainList(data);
-    });
-    this.EmitMainListName = DeviceEventEmitter.addListener('getMainListName', (data) => {
-      this.getMainListName(data);
-    });
     this.GetAppCategoryService();
-    console.log(global.position);
   }
-  getDelete = () => {
-    this.EmitMainList.remove();
-  }
-  getDelete = () => {
-    this.EmitMainListName.remove();
+  getDelInit = () => {
   }
   getData = () => {
-    const {
-      memberId,
+    const { memberId, currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
+    GetSupplyService({
       currentPage,
       pageSize,
-      items,
-      ds,
-      refresh,
-      dataSource,
-      name,
-      isSpotGoods,
-      categoryId,
-      brandId,
-      provinceCode,
-      cityCode,
-      isEntVerif,
-      isPersonVerif,
-      wholesaleCount,
-      startPrice,
-      endPrice,
-      specTypeId,
-      specId,
-      longitude,
-      latitude,
-      isFlushDistance,
-      setDistance,
-    } = this.state;
-
-    const filters = {
+      type: '0',
       memberId,
-      name,
-      isSpotGoods,
-      categoryId,
-      brandId,
-      provinceCode,
-      cityCode,
-      isEntVerif,
-      isPersonVerif,
-      wholesaleCount,
-      startPrice,
-      endPrice,
-      specTypeId,
-      specId,
-      longitude,
-      latitude,
-      isFlushDistance,
-      currentPage: JSON.stringify(currentPage),
-      pageSize,
-      setDistance,
-    };
-    console.log(JSON.stringify(filters));
-    this.sleek.toggle();
-    GetSupplyByFiltersService({
-      filters: JSON.stringify(filters),
     }).then((res) => {
-      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.pageData;
@@ -162,7 +72,6 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
-              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -174,7 +83,6 @@ class Base extends React.Component {
             currentPage: currentPage + 1,
             refresh: false,
             nomore: false,
-            isFlushDistance: '0',
           });
         } else {
           const newItems = items.concat(result);
@@ -183,7 +91,6 @@ class Base extends React.Component {
             dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
-            isFlushDistance: '0',
           });
         }
         setTimeout(() => { canEnd = true; }, 0);
@@ -194,23 +101,31 @@ class Base extends React.Component {
           });
         }
       } else {
-        Toast.show('温馨提示55');
+        Toast.show('温馨提示');
       }
     }).catch((err) => {
       Toast.show(err);
     });
   }
   GetAppCategoryService = () => {
+    const { categoryId } = this.props.navigation.state.params;
     GetAppCategoryService()
     .then((res) => {
       console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
-        goods[0].cur = true;
+        for (let i = 0; i < goods.length; i += 1) {
+          if (goods[i].categoryId === categoryId) {
+            goods[i].cur = true;
+            this.setState({
+              firstChoose: i,
+            });
+          }
+        }
         this.setState({
-          goodsLeftIndex: 0,
+          goodsLeftIndex: this.state.firstChoose,
           goods: res.data,
-          childgoods: goods[0].childs,
+          childgoods: goods[this.state.firstChoose].childs,
         });
       } else {
         Toast.show(res.msg);
@@ -234,10 +149,7 @@ class Base extends React.Component {
   selectCity = (index) => {
     this.hideMasker();
     const { citys, cityIndex } = this.state;
-    this.setState({
-      provinceCode: citys[cityIndex].citys[index].parentCode,
-      cityCode: citys[cityIndex].citys[index].adcode,
-    }, this._onRefresh);
+    console.log(citys[cityIndex].citys[index].name);
   }
   showAction = (index) => {
     const { isSpecTypesShow, isBrandsShow, isCategoryShow, isAddressShow } = this.state;
@@ -283,7 +195,6 @@ class Base extends React.Component {
   }
   changeLeftGoods = (index) => {
     const { goods, goodsLeftIndex } = this.state;
-    console.log('PPPPPOOOOOOUUUUUUU', goods);
     if (goodsLeftIndex === index) {
       return;
     }
@@ -310,24 +221,16 @@ class Base extends React.Component {
       brands: childgoods[index].brands || [],
       specTypes: childgoods[index].specTypes || [],
       goodsRightIndex: index,
-      categoryId: childgoods[index].categoryId,
-    }, this._onRefresh);
+    });
   }
   brandTab = (index) => {
     const { brands } = this.state;
     console.log(brands[index]);
-    this.setState({
-      brandId: brands[index].brandId,
-    }, this._onRefresh);
     this.hideMasker();
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;
     console.log(specTypes[index].specs[i]);
-    this.setState({
-      specTypeId: specTypes[index].specs[i].specTypeId,
-      specId: specTypes[index].specs[i].specId,
-    }, this._onRefresh);
     this.hideMasker();
   }
   goGoodDetail(item) {
@@ -337,7 +240,6 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
       currentPage: 1,
-      isFlushDistance: '1',
     }, () => this.getData());
   }
   _reachEnd = () => {
@@ -350,5 +252,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   push: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default Base;

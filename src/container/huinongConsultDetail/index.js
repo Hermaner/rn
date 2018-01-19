@@ -35,14 +35,6 @@ class HuinongConsultDetail extends base {
             <Text style={[styles.time, styles.normalNineText]}>{newsInfo.postDate}</Text>
             <Text style={[styles.normalNineText, styles.zixun]}>行情咨询</Text>
           </View>
-          <TFeedback
-            content={
-              <View style={[styles.flexRow, styles.flexRight]}>
-                <Icon style={styles.icn} name="volume-up" />
-                <Text style={styles.normalNineText}>听语音</Text>
-              </View>}
-            onPress={() => { push({ key: 'User' }); }}
-          />
         </View>
         <View style={[styles.flexRow, styles.rowBox]}>
           <Text style={[styles.normalNineText, styles.marginR]}>{newsInfo.author}</Text>
@@ -61,7 +53,9 @@ class HuinongConsultDetail extends base {
           <Text style={{ fontSize: 14, color: '#EC2539' }}>备注：以上所有信息来自惠农行情中心，如需了解更多，</Text>
           <TFeedback
             content={
-              <Text style={{ fontSize: 12, color: '#EC2539', marginTop: 4 }}>点击进入行情大厅。</Text>
+              <View>
+                <Text style={{ fontSize: 12, color: '#EC2539', marginTop: 4 }}>点击进入行情大厅。</Text>
+              </View>
               }
             onPress={() => { push({ key: 'Home' }); }}
           />
@@ -74,10 +68,15 @@ class HuinongConsultDetail extends base {
             {
               newsList &&
               newsList.map((item, index) => (
-                <View style={{ marginBottom: 10 }} key={index}>
-                  <Text style={styles.normalThreeText}>{item.title}</Text>
-                  <Text style={styles.normalNineText}>{item.postDate.substring(5, 10)}</Text>
-                </View>
+                <TFeedback
+                  key={index}
+                  content={
+                    <View style={{ marginBottom: 10 }}>
+                      <Text style={styles.normalThreeText}>{item.title}</Text>
+                      <Text style={styles.normalNineText}>{item.postDate.substring(5, 10)}</Text>
+                    </View>}
+                  onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item.newsId } }); }}
+                />
               ))
             }
           </View>

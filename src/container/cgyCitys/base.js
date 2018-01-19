@@ -38,6 +38,9 @@ class Base extends React.Component {
       case 'getAddressEmit':
         emit = 'getAddressEmit';
         break;
+      case 'getMainListAdress':
+        emit = 'getMainListAdress';
+        break;
       case 'cityCgyGet':
         emit = 'cityCgyGet';
         break;

@@ -24,9 +24,11 @@ class CgyCategory extends base {
   }
   _renderList() {
     const { items } = this.state;
+    console.log('9999999900000000000', items)
     return (
       <View>
         {
+          items &&
           items.map((item, index) => (
             <TFeedback
               key={index}
