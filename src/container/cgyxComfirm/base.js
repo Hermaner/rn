@@ -78,7 +78,7 @@ class Base extends React.Component {
     items[5].label = `${item.memo}`;
     items[6].label = `${item.supplyMode}${item.logisticsMode}${item.renderServices}`;
     const initImages = [];
-    item.purchaseImages.forEach((img) => {
+    item.supplyImages.forEach((img) => {
       initImages.push({
         imgUrl: img.imgUrl,
         key: img.imgKey,

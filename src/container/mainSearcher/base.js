@@ -58,6 +58,9 @@ class Base extends React.Component {
       case 'getMainListName':
         emit = 'getMainListName';
         break;
+      case 'getReleaseMainListName':
+        emit = 'getReleaseMainListName';
+        break;
       default:
     }
     DeviceEventEmitter.emit(emit, data);

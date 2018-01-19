@@ -8,7 +8,7 @@ import { GoodList, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class HomeMainList extends base {
+class MainList extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +16,17 @@ class HomeMainList extends base {
     };
   }
   componentDidMount() {
+    global.storage.load({
+      key: 'position',
+    }).then((res) => {
+      console.log(res);
+      global.longitude = res.longitude;
+      global.latitude = res.latitude;
+    }).catch(() => {});
     this.getInit();
   }
   componentWillUnmount() {
-    this.getDelInit();
+    this.getDelete();
   }
   _readerHeader() {
     const { pop, push } = this.props;
@@ -28,13 +35,13 @@ class HomeMainList extends base {
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
           <Icon name="arrow-back" />
         </TouchableOpacity>
-        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher' }); }}>
+        <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher', params: { type: 'getMainListName' } }); }}>
           <View style={styles.HeaderMain}>
             <Icon name="ios-search-outline" style={styles.HeaderIcon} />
             <Text style={styles.HeaderMainText}>输入货品名称</Text>
           </View>
         </TouchableWithoutFeedback>
-        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen' }); }}>
+        <TouchableOpacity onPress={() => { push({ key: 'GoodsScreen', params: { type: 'getMainList' } }); }}>
           <Text style={styles.HeaderRightText}>筛选</Text>
         </TouchableOpacity>
       </Header>
@@ -341,8 +348,8 @@ class HomeMainList extends base {
   }
 }
 
-HomeMainList.propTypes = {
+MainList.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(HomeMainList);
+export default connect(null, { pop: popRoute, push: pushRoute })(MainList);

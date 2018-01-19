@@ -201,7 +201,7 @@ class ReleaseMainList extends base {
     );
   }
   _renderAddressContent() {
-    const { citys, cityIndex } = this.state;
+    const { citys } = this.state;
     const { push } = this.props;
     return (
       <View style={{ flex: 1 }}>
@@ -246,23 +246,6 @@ class ReleaseMainList extends base {
                     <View style={[styles.addressLeftList, item.cur && styles.addressLeftListCur]}>
                       <Text
                         style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
-                      >
-                        {item.name}
-                      </Text>
-                    </View>
-                  </TouchableWithoutFeedback>
-                ))
-              }
-            </Content>
-          </View>
-          <View style={[styles.f1, { backgroundColor: '#f9f9f9' }]}>
-            <Content>
-              {
-                citys[cityIndex].citys.map((item, index) => (
-                  <TouchableWithoutFeedback key={index} onPress={() => { this.selectCity(index); }}>
-                    <View style={styles.addressRightList}>
-                      <Text
-                        style={styles.leftNavText}
                       >
                         {item.name}
                       </Text>

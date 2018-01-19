@@ -1,8 +1,8 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeepClone, GetPurchaseService, GetAppCategoryService } from '../../api';
+import { DeepClone, GetAppCategoryService, FilterPurchaseService } from '../../api';
 import citysJson from '../../api/citys.json';
 
 citysJson[0].cur = true;
@@ -36,25 +36,52 @@ class Base extends React.Component {
       noData: false,
       pageSize: '15',
       memberId: '',
+      name: '', // 供应单名称（搜索）
+      currentPage: 1,
+      categoryId: '',
+      provinceCode: '',
     };
   }
+  getReleaseMainListName = (data) => {
+    this.setState({
+      name: data.name,
+    }, this._onRefresh);
+  }
   getInit = () => {
-    this.setState({ memberId: '' }, this._onRefresh);
+    this.setState({
+      memberId: '',
+    }, this._onRefresh);
+    this.EmitReleaseMainListName = DeviceEventEmitter.addListener('getReleaseMainListName', (data) => {
+      this.getReleaseMainListName(data);
+    });
     this.GetAppCategoryService();
+  }
+  getDelete = () => {
+    this.EmitReleaseMainListName.remove();
   }
   getDelInit = () => {
   }
   getData = () => {
-    const { memberId, currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
-    GetPurchaseService({
+    const {
+      name,
+      categoryId,
+      provinceCode,
+      items,
+      ds,
+      refresh,
       currentPage,
-      pageSize,
-      type: '0',
-      memberId,
+      dataSource,
+      pageSize } = this.state;
+    this.sleek.toggle();
+    FilterPurchaseService({
+      name,
+      categoryId,
+      provinceCode,
     }).then((res) => {
+      this.sleek.toggle();
       if (res.isSuccess) {
-        console.log('%%%%%%%%%%%%%%%%*************', res);
-        const result = res.data.pageData;
+        console.log(res);
+        const result = res.data;
         if (result.length === 0) {
           if (items.length === 0) {
             this.setState({
@@ -93,7 +120,7 @@ class Base extends React.Component {
           });
         }
       } else {
-        Toast.show('温馨提示');
+        Toast.show('温馨提示55');
       }
     }).catch((err) => {
       Toast.show(err);
@@ -120,6 +147,7 @@ class Base extends React.Component {
   }
   changeCityTab = (index) => {
     const { citys, cityIndex } = this.state;
+    this.hideMasker();
     if (cityIndex === index) {
       return;
     }
@@ -128,12 +156,8 @@ class Base extends React.Component {
     this.setState({
       citys,
       cityIndex: index,
+      provinceCode: citys[index].adcode,
     });
-  }
-  selectCity = (index) => {
-    this.hideMasker();
-    const { citys, cityIndex } = this.state;
-    console.log(citys[cityIndex].citys[index].name);
   }
   showAction = (index) => {
     const { isSpecTypesShow, isBrandsShow, isCategoryShow, isAddressShow } = this.state;
@@ -179,7 +203,7 @@ class Base extends React.Component {
   }
   changeLeftGoods = (index) => {
     const { goods, goodsLeftIndex } = this.state;
-    console.log('yyyyyyyyyyyyy', goods)
+    console.log(goods);
     if (goodsLeftIndex === index) {
       return;
     }
@@ -206,16 +230,24 @@ class Base extends React.Component {
       brands: childgoods[index].brands || [],
       specTypes: childgoods[index].specTypes || [],
       goodsRightIndex: index,
-    });
+      categoryId: childgoods[index].categoryId,
+    }, this._onRefresh);
   }
   brandTab = (index) => {
     const { brands } = this.state;
     console.log(brands[index]);
+    this.setState({
+      brandId: brands[index].brandId,
+    }, this._onRefresh);
     this.hideMasker();
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;
     console.log(specTypes[index].specs[i]);
+    this.setState({
+      specTypeId: specTypes[index].specs[i].specTypeId,
+      specId: specTypes[index].specs[i].specId,
+    }, this._onRefresh);
     this.hideMasker();
   }
   goGoodDetail(item) {
@@ -225,6 +257,7 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
       currentPage: 1,
+      isFlushDistance: '1',
     }, () => this.getData());
   }
   _reachEnd = () => {

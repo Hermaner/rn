@@ -155,7 +155,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        console.log('77777777777777777', res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (items.length === 0) {

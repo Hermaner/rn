@@ -71,19 +71,15 @@ class Base extends React.Component {
     items[0].label = `${typeName}${brandName}`;
     const skuString = [];
     const purchaseItems = [];
-    console.log('^^^^^^^^^^^^^^^^', skus)
-    return
-    if (skus.constructor === Array) {
-      skus.forEach((item) => {
-        if (item.itemIndex !== undefined) {
-          skuString.push(item.specs[item.itemIndex].specName);
-          purchaseItems.push({
-            specTypeId: item.specTypeId.toString(),
-            specId: item.specs[item.itemIndex].specId.toString(),
-          });
-        }
-      });
-    }
+    skus.forEach((item) => {
+      if (item.itemIndex !== undefined) {
+        skuString.push(item.specs[item.itemIndex].specName);
+        purchaseItems.push({
+          specTypeId: item.specTypeId.toString(),
+          specId: item.specs[item.itemIndex].specId.toString(),
+        });
+      }
+    });
     items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
     this.setState({
       items,
@@ -116,6 +112,7 @@ class Base extends React.Component {
     this.setState({
       upImages,
     });
+    console.log(upImages)
   }
   cityCgyGet = (data) => {
     const { items } = this.state;

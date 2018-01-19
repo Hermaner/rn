@@ -210,3 +210,6 @@ export function GetPurchaseByCategoryService(data) {
 export function GetSupplyByFiltersService(data) {
   return post('GetSupplyByFiltersService', data);
 }
+export function FilterPurchaseService(data) {
+  return get('FilterPurchaseService', data);
+}
