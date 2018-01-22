@@ -55,7 +55,6 @@ class Base extends React.Component {
       supplyId,
       memberId: global.memberId,
     }, this.GetSupplyInfoService);
-    console.log('@@@@@@@', this.state.supplyId);
   }
   GetSupplyInfoService = () => {
     const { supplyId, memberId } = this.state;

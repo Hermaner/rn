@@ -22,7 +22,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
-    // this.getInit();
+    this.getInit();
   }
   _renderTop() {
     const { detail } = this.state;
@@ -163,7 +163,6 @@ class MainScreen extends base {
   _renderStore() {
     const { push } = this.props;
     const { detail, memberId } = this.state;
-    console.log('KKKKKKKKKKKKKK', memberId)
     return (
       <View style={styles.storeView}>
         <TouchableWithoutFeedback onPress={() => { push({ key: memberId ? 'StoreDetail' : 'User', params: { memberId } }); }}>

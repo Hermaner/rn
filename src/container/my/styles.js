@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, px } from '../../utils';
+import { st, px, spx } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   userText: {
-    fontSize: 18,
+    fontSize: px(18),
     color: '#fff',
   },
   headerImgBox: {
     flex: 1,
-    height: px(150),
+    height: spx(150),
     flexDirection: 'row',
     position: 'absolute',
     top: 0,
@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   textSmall: {
-    fontSize: 14,
+    fontSize: px(14),
   },
   textMoney: {
-    fontSize: 22,
+    fontSize: px(22),
   },
   rightBtn: {
     position: 'absolute',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     flex: 1,
-    height: px(50),
+    height: spx(50),
     flexDirection: 'row',
     borderTopWidth: 1,
     borderTopColor: '#ddd',
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
   },
   userImg: {
-    width: px(60),
-    height: px(60),
+    width: spx(60),
+    height: spx(60),
     borderRadius: 35,
     marginRight: 15,
   },
