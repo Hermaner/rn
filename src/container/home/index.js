@@ -245,7 +245,7 @@ class HomeScreen extends base {
     return (
       <View style={styles.forYou}>
         <Text style={styles.forYouTitle}>为你推荐</Text>
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
           <Child1 tabLabel="推荐货品" type="1" />
           <Child2 tabLabel="优质商家" type="2" />
         </ScrollableTabView>

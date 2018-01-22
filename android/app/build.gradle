@@ -151,6 +151,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-smart-amap-location')
     compile project(':react-native-yunpeng-alipay')
     compile project(':react-native-wechat')

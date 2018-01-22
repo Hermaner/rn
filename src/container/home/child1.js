@@ -38,7 +38,7 @@ class Child1 extends Base1 {
   }
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+      <View style={{ backgroundColor: '#f6f6f6' }}>
         {this._renderRow()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </View>

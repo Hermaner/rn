@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
@@ -84,10 +84,24 @@ class HuinongGoodsMotif extends base {
     return (
       <Container>
         <Header back={pop} title="惠农好货专场" />
-        <Content contentContainerStyle={{ flex: 1 }}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this._onRefresh}
+              tintColor="#ff0000"
+              title="加载中..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
           {this._renderSwiper()}
           {brands !== null && this._renderBody()}
-        </Content>
+        </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
