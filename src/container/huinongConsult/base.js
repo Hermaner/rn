@@ -40,9 +40,6 @@ class Base extends React.Component {
   getInit = () => {
     this.setState({ memberId: global.memberId }, this._onRefresh);
   }
-  getDelete = () => {
-    this.supplyRefresh.remove();
-  }
   getData = () => {
     const { ds, title } = this.state;
     const { type } = this.props;
@@ -51,7 +48,7 @@ class Base extends React.Component {
       title,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log('ZZZZZZZZZZZz', res);
+        console.log(res);
         const result = res.data;
         const imgList = [];
         const swiperLength = result.length > 3 ? 3 : result.length;
@@ -68,7 +65,6 @@ class Base extends React.Component {
           dataSource: ds.cloneWithRows(result),
           imgLists: imgList,
         });
-        console.log('JJJJJJJJJj');
       } else {
         Toast.show('温馨提示');
       }
@@ -82,6 +78,5 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   type: PropTypes.string,
-  // push: PropTypes.func,
 };
 export default Base;

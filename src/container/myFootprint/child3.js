@@ -21,6 +21,7 @@ class Child3 extends Base {
   }
   _renderRow = (item) => {
     const { push } = this.props;
+    const { memberId } = this.state;
     return (
       <View>
         <View style={styles.buyTime}>
@@ -52,7 +53,7 @@ class Child3 extends Base {
                     <Text style={{ fontSize: 14, color: '#666' }}>地址: {item1.address}</Text>
                   </View>
                 </View>}
-              onPress={() => { push({ key: item1.isNot ? 'StoreDetail' : 'OtherInfo', params: { info: item1, name: item1.contact } }); }}
+              onPress={() => { push({ key: item1.isNot ? 'StoreDetail' : 'OtherInfo', params: { memberId, name: item1.contact } }); }}
             />
           ))
         }

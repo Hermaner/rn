@@ -41,18 +41,19 @@ class ReleaseMainList extends base {
     );
   }
   _readerConditions() {
+    const { childgoodsName, citysName } = this.state;
     return (
       <View style={styles.conditions}>
         <TouchableWithoutFeedback onPress={() => { this.showAction(0); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>八目瓜</Text>
+            <Text style={styles.cdsListText}>{childgoodsName || '八目瓜'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(3); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>全国</Text>
+            <Text style={styles.cdsListText}>{citysName || '全国'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>

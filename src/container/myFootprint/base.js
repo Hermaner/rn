@@ -60,7 +60,6 @@ class Base extends React.Component {
             }
           }
         }
-        console.log('JJJJJJJJJJ', timeList);
         for (let j = 0; j < timeList.length; j += 1) {
           if (timeList[j] !== timeList[j + 1]) {
             newTimeList.push(result.slice(n, j + 1));

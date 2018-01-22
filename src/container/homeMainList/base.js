@@ -54,6 +54,8 @@ class Base extends React.Component {
       isFlushDistance: '', // 是否刷新（1是0否)
       currentPage: 1,
       setDistance: '', // 距离
+      cityName: '', // 城市名称
+      childgoodsName: '',
     };
   }
   getMainList = (data) => {
@@ -155,12 +157,13 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log('77777777777777777', res);
+        console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (items.length === 0) {
             this.setState({
               noData: true,
+              dataSource: ds.cloneWithRows(result),
             });
           } else {
             this.setState({
@@ -249,6 +252,7 @@ class Base extends React.Component {
     this.setState({
       provinceCode: citys[cityIndex].citys[index].parentCode,
       cityCode: citys[cityIndex].citys[index].adcode,
+      cityName: citys[cityIndex].citys[index].name,
     }, this._onRefresh);
   }
   showAction = (index) => {
@@ -313,12 +317,14 @@ class Base extends React.Component {
     if (goodsRightIndex === index) {
       return;
     }
+    console.log('55555555555', childgoods[index].name);
     childgoods[index].cur = true;
     if (goodsRightIndex !== null) {
       childgoods[goodsRightIndex].cur = false;
     }
     this.setState({
       childgoods,
+      childgoodsName: childgoods[index].name,
       brands: childgoods[index].brands || [],
       specTypes: childgoods[index].specTypes || [],
       goodsRightIndex: index,

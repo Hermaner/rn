@@ -73,8 +73,7 @@ class Base extends React.Component {
     }, this.getData);
   }
   getData = () => {
-    const { ds, categoryId, name } = this.state;
-    console.log('PPPPPPPPPPPPP', name);
+    const { ds, categoryId } = this.state;
     let { brandId } = this.props;
     brandId = brandId || '';
     GetGotSupplyService({
@@ -82,13 +81,11 @@ class Base extends React.Component {
       brandId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log('ZZZZZZZZZZZz', res);
+        console.log(res);
         const result = res.data;
-        console.log('%%%%%%%%%', result);
         this.setState({
           dataSource: ds.cloneWithRows(result),
         });
-        console.log('DADADADADADADAD', this.state.dataSource);
       } else {
         Toast.show('温馨提示');
       }

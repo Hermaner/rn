@@ -195,5 +195,11 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     borderRadius: 30,
   },
+  myImage: {
+    flex: 1,
+    height: 80,
+    borderRadius: 40,
+    marginTop: 10,
+  },
 });
 export default styles;

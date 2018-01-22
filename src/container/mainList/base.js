@@ -54,6 +54,10 @@ class Base extends React.Component {
       isFlushDistance: '', // 是否刷新（1是0否)
       currentPage: 1,
       setDistance: '', // 距离
+      cityName: '', // 地区名称
+      specName: '', // 规格1
+      brandName: '', // 品牌名
+      firstName: '', // 一级类目名
     };
   }
   getMainList = (data) => {
@@ -237,6 +241,7 @@ class Base extends React.Component {
     this.setState({
       provinceCode: citys[cityIndex].citys[index].parentCode,
       cityCode: citys[cityIndex].citys[index].adcode,
+      cityName: citys[cityIndex].citys[index].name,
     }, this._onRefresh);
   }
   showAction = (index) => {
@@ -283,7 +288,6 @@ class Base extends React.Component {
   }
   changeLeftGoods = (index) => {
     const { goods, goodsLeftIndex } = this.state;
-    console.log('PPPPPOOOOOOUUUUUUU', goods);
     if (goodsLeftIndex === index) {
       return;
     }
@@ -293,6 +297,7 @@ class Base extends React.Component {
       goods,
       childgoods: goods[index].childs,
       goodsLeftIndex: index,
+      firstName: goods[index].name,
     });
   }
   changeRightGoods = (index) => {
@@ -318,6 +323,7 @@ class Base extends React.Component {
     console.log(brands[index]);
     this.setState({
       brandId: brands[index].brandId,
+      brandName: brands[index].brandName,
     }, this._onRefresh);
     this.hideMasker();
   }
@@ -327,8 +333,8 @@ class Base extends React.Component {
     this.setState({
       specTypeId: specTypes[index].specs[i].specTypeId,
       specId: specTypes[index].specs[i].specId,
+      specName: specTypes[index].specs[i].specName,
     }, this._onRefresh);
-    this.hideMasker();
   }
   goGoodDetail(item) {
     this.props.push(item);

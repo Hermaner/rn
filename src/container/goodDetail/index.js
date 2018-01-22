@@ -22,7 +22,7 @@ class MainScreen extends base {
     };
   }
   componentDidMount() {
-    this.getInit();
+    // this.getInit();
   }
   _renderTop() {
     const { detail } = this.state;
@@ -54,7 +54,9 @@ class MainScreen extends base {
           </View>
         </View>
         <View style={styles.nameAddressView}>
-          <Text style={styles.grayText}>{detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}</Text>
+          <Text style={styles.grayText}>
+            {detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}
+          </Text>
         </View>
         <View style={styles.priceView}>
           <Text style={styles.priceText}>{detail.wholesalePrice}</Text>
@@ -160,10 +162,11 @@ class MainScreen extends base {
   }
   _renderStore() {
     const { push } = this.props;
-    const { detail } = this.state;
+    const { detail, memberId } = this.state;
+    console.log('KKKKKKKKKKKKKK', memberId)
     return (
       <View style={styles.storeView}>
-        <TouchableWithoutFeedback onPress={() => { push({ key: 'StoreDetail' }); }}>
+        <TouchableWithoutFeedback onPress={() => { push({ key: memberId ? 'StoreDetail' : 'User', params: { memberId } }); }}>
           <View style={styles.storeViewTop}>
             <View style={styles.storeLeft}>
               <Image source={{ uri: detail.member.imgUrl || '' }} style={styles.storeImg} />

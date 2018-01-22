@@ -6,34 +6,36 @@ import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, TFeedback, MyModalView } from '../../components';
-import { DeepClone } from '../../api';
+import { Header, ScrollableTab, TFeedback, MyModalView, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
+
+import Child from './child';
 
 class MainScreen extends base {
   constructor(props) {
     super(props);
     this.state = {
-      ...DeepClone(this.resetData),
+      ...this.state,
     };
   }
   componentDidMount() {
-    this.getData();
+    this.getInit();
   }
   _renderTop() {
-    const { goodsImg, infos } = this.state;
+    const { goodsImg, userInfo, goodsItems } = this.state;
+    console.log('LLLLLLLLLLLLLLLL', goodsItems);
     return (
       <View style={styles.topView}>
         {
-          infos.supplys &&
-          infos.supplys.length > 0 ?
-            <Image source={{ uri: infos.supplys[0].imgUrl }} style={styles.mainImg} />
-          :
+          goodsItems &&
+          // goodsItems[0].supplyImages.length > 0 ?
+          //   <Image source={{ uri: goodsItems[0].supplyImages[0].imgUrl }} style={styles.mainImg} />
+          // :
             <Image source={goodsImg} style={styles.mainImg} />
         }
         <View style={styles.toplogo}>
-          <Image source={{ uri: infos.imgUrl }} style={styles.mainLogo} />
+          <Image source={{ uri: userInfo.imgUrl }} style={styles.mainLogo} />
         </View>
         <View style={styles.topBtn}>
           <Icon name="arrow-back" style={styles.topIcon} />
@@ -43,17 +45,21 @@ class MainScreen extends base {
     );
   }
   _renderNameAP() {
-    const { bao, infos } = this.state;
+    const { bao, userInfo } = this.state;
     return (
       <View style={styles.midMainView}>
         <View style={styles.nameOneView}>
           <View style={styles.nameTextView}>
-            <Icon name="arrow-back" style={styles.nameIcon} />
-            <Icon name="arrow-back" style={styles.nameIcon} />
-            <Text style={styles.nameText}>{infos.nickName}</Text>
+            {
+              userInfo.memberVerifs > 0 &&
+              userInfo.memberVerifs.map((item, index) => (
+                <Icon key={index} name={item.verifFieldLogo} style={styles.nameIcon} />
+              ))
+            }
+            <Text style={styles.nameText}>{userInfo.nickName}</Text>
           </View>
           <View style={styles.nameLabelView}>
-            <Text style={styles.grayText}>{infos.identityName}</Text>
+            <Text style={styles.grayText}>{userInfo.identityName}</Text>
           </View>
         </View>
         <TFeedback
@@ -61,10 +67,10 @@ class MainScreen extends base {
             <View style={styles.midMainCredit}>
               <Image source={bao} style={styles.creditImg} />
               <View style={styles.creditView}>
-                <Text style={styles.creditLabel}>{infos.memoText}</Text>
+                <Text style={styles.creditLabel}>{userInfo.memoText}</Text>
               </View>
               <View style={styles.creditRight}>
-                <Icon name="arrow-back" style={styles.creditRightIcon} />
+                <Icon name="play" style={styles.creditRightIcon} />
               </View>
             </View>}
           onPress={() => this.rzDetail()}
@@ -73,15 +79,15 @@ class MainScreen extends base {
     );
   }
   _renderProvideTypes() {
-    const { infos } = this.state;
+    const { userInfo } = this.state;
     return (
       <TFeedback
         content={
           <View style={styles.provideTypes}>
             <View style={styles.provideTypesLeft}>
               {
-                infos.memberVerifs &&
-                infos.memberVerifs.map((item, index) => (
+                userInfo.memberVerifs &&
+                userInfo.memberVerifs.map((item, index) => (
                   <View style={styles.ptlList} key={index}>
                     <Icon name="checkmark" style={styles.ptlIcon} />
                     <Text style={styles.ptlText}>{item.verifFieldName}</Text>
@@ -154,69 +160,11 @@ class MainScreen extends base {
     );
   }
   _renderTabs() {
-    const { infos } = this.state;
-    const { push } = this.props;
-    const Tab = () => (
-      <View>
-        {
-          infos.supplys.map((item, index) => (
-            <View key={index}>
-              <TFeedback
-                content={
-                  <View style={styles.goodsItem}>
-                    <Image
-                      style={styles.goodsImg}
-                      source={{ uri: item.supplyImages[0].imgUrl }}
-                    />
-                    <View style={{ flex: 1 }}>
-                      <View style={{ flex: 1 }}>
-                        <Text style={styles.goodsName}>{item.brandName} {item.categoryName}</Text>
-                        <Text style={styles.goodsPlace}>
-                          {item.sendProvinceName}{item.sendCityName}{item.sendDistrictName}
-                        </Text>
-                        <View style={[styles.flexRow, { flexWrap: 'wrap', maxHeight: 50 }]}>
-                          {
-                            item.logisticsMode !== '' &&
-                            item.logisticsMode.split(',').map((item3, index3) => (
-                              <Text style={styles.aa} key={index3}>{item3}</Text>
-                            ))
-                          }
-                          {
-                            item.supplyMode !== '' &&
-                            item.supplyMode.split(',').map((item4, index4) => (
-                              <Text style={styles.aa} key={index4}>{item4}</Text>
-                            ))
-                          }
-                          {
-                            item.renderServices !== '' &&
-                            item.renderServices.split(',').map((item5, index5) => (
-                              <Text style={styles.aa} key={index5}>{item5}</Text>
-                            ))
-                          }
-                        </View>
-                      </View>
-                      <View style={styles.goodsPriceInfo}>
-                        <View>
-                          <Text style={styles.price}>{item.wholesalePrice}元/{item.unit}</Text>
-                        </View>
-                        <View style={styles.howLongBox}>
-                          <Text style={styles.howLong}>{item.beforeTime == null ? '1天前' : item.beforeTime}</Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                }
-                onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
-              />
-            </View>
-          ))
-        }
-      </View>
-    );
+    const { memberId } = this.props.navigation.state.params;
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
         <ScrollableTabView locked renderTabBar={() => <ScrollableTab />}>
-          <Tab tabLabel="供应" />
+          <Child tabLabel="供应" member={memberId} />
         </ScrollableTabView>
       </View>
     );
@@ -271,7 +219,7 @@ class MainScreen extends base {
   }
   render() {
     const { pop } = this.props;
-    const { infos } = this.state;
+    const { userInfo, goodsItems } = this.state;
     return (
       <Container>
         <Header
@@ -282,22 +230,20 @@ class MainScreen extends base {
           rightPress={this.resetState}
         />
         <Content>
-          {
-            infos &&
-            this._renderTop()
-          }
+          {this._renderTop()}
           {this._renderNameAP()}
           {
-            infos.memberVerifs &&
+            userInfo.memberVerifs &&
             this._renderProvideTypes()
           }
           {this._renderSkuTable()}
-          {
-            infos &&
-            this._renderTabs()
-          }
+          {this._renderTabs()}
         </Content>
-        {this._renderFooter()}
+        {
+          goodsItems &&
+          this._renderFooter()
+        }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

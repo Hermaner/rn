@@ -66,7 +66,6 @@ class Child extends Base {
   render() {
     const { dataSource } = this.state;
     const { name } = this.props;
-    console.log('UUUUUUUUUUUUUUUUUU', dataSource);
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         <View style={styles.goods}>

@@ -40,7 +40,6 @@ class Base extends React.Component {
         result.length = result.newsComments.length;
         result.allLength = result.newsComments.length;
         result.startLength = result.newsPraises.length;
-        console.log('%%%%%%%%@@@@@@@@@@', result);
         this.setState({
           newsInfo: result,
         });
