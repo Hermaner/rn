@@ -40,6 +40,8 @@ class Base extends React.Component {
       currentPage: 1,
       categoryId: '',
       provinceCode: '',
+      childgoodsName: '',
+      citysName: '',
     };
   }
   getReleaseMainListName = (data) => {
@@ -91,6 +93,7 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
+              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -155,9 +158,10 @@ class Base extends React.Component {
     citys[cityIndex].cur = false;
     this.setState({
       citys,
+      citysName: citys[index].name,
       cityIndex: index,
       provinceCode: citys[index].adcode,
-    });
+    }, this._onRefresh);
   }
   showAction = (index) => {
     const { isSpecTypesShow, isBrandsShow, isCategoryShow, isAddressShow } = this.state;
@@ -227,6 +231,7 @@ class Base extends React.Component {
     }
     this.setState({
       childgoods,
+      childgoodsName: childgoods[index].name,
       brands: childgoods[index].brands || [],
       specTypes: childgoods[index].specTypes || [],
       goodsRightIndex: index,

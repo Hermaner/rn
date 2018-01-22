@@ -49,18 +49,19 @@ class MainList extends base {
   }
   _readerConditions() {
     const { name } = this.props.navigation.state.params;
+    const { cityName, childgoodsName } = this.state;
     return (
       <View style={styles.conditions}>
         <TouchableWithoutFeedback onPress={() => { this.showAction(0); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>{name}</Text>
+            <Text style={styles.cdsListText}>{childgoodsName || name}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(3); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>全国</Text>
+            <Text style={styles.cdsListText}>{cityName || '全国'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>

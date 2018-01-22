@@ -35,7 +35,6 @@ class Child extends Base {
                     <Text style={[styles.normalText, styles.newsTime]}>
                       {item.postDate.substring(0, 10)}
                     </Text>
-                    {/* <Text style={styles.normalText}>水果蔬菜</Text> */}
                     <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' }}>
                       <Icon style={{ marginRight: 4, fontSize: 14 }} name="heart" />
                       <Text style={styles.normalText}>{item.lookCount}</Text>

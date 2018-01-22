@@ -48,32 +48,33 @@ class MainList extends base {
     );
   }
   _readerConditions() {
+    const { cityName, specName, brandName, firstName } = this.state;
     return (
       <View style={styles.conditions}>
         <TouchableWithoutFeedback onPress={() => { this.showAction(0); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>分类不限</Text>
+            <Text style={styles.cdsListText}>{firstName || '分类不限'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(1); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>品种不限</Text>
+            <Text style={styles.cdsListText}>{brandName || '品牌不限'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(2); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>规格不限</Text>
+            <Text style={styles.cdsListText}>{specName || '规格不限'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => { this.showAction(3); }}>
           <View style={styles.cdsList}>
-            <Text style={styles.cdsListText}>全国不限</Text>
+            <Text style={styles.cdsListText}>{cityName || '全国不限'}</Text>
             <Icon name="ios-arrow-down" style={styles.cddown} />
             <View style={styles.rightLine} />
           </View>

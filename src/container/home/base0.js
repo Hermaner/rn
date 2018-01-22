@@ -145,7 +145,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      console.log(err);
+      Toast.show(err);
     });
 
     GetAppCategoryService({
@@ -160,7 +160,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      console.log(err);
+      Toast.show(err);
     });
 
     GetHomeCategoryService({
@@ -184,7 +184,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      console.log(err);
+      Toast.show(err);
     });
   }
   _onRefresh = () => {

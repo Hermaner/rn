@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View, NativeAppEventEmitter } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Icon, Text } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
@@ -48,7 +48,6 @@ class HomeScreen extends base {
   }
   renderHeaderNavigation() {
     const { push } = this.props;
-    console.log('YYYYYYYYYYYYYYYYY', global.position)
     return (
       <View style={[styles.flexRow, styles.headerNavigation]}>
         <TOpacity
@@ -157,8 +156,14 @@ class HomeScreen extends base {
                 <Text style={styles.headerNavigationText}>一件代发</Text>
                 <Text style={styles.normalNineText}>微商首选 平台保障</Text>
                 <View style={styles.flexRow}>
-                  <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
-                  <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
+                  <View style={{ flex: 1, paddingLeft: 5, paddingRight: 10 }}>
+                    <Image style={styles.myImage} source={{ uri: 'https://img.dev.sunhousm.cn/Fu70sJb09411LY3gmJ4_TkuQX--G' }} />
+                  </View>
+                  <View style={{ flex: 1, paddingLeft: 5, paddingRight: 10 }}>
+                    <Image style={styles.myImage} source={{ uri: 'https://img.dev.sunhousm.cn/Fu70sJb09411LY3gmJ4_TkuQX--G' }} />
+                  </View>
+                  {/* <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" />
+                  <Icon style={[styles.SampleCenterIcn, styles.flexOne]} name="analytics" /> */}
                 </View>
               </View>}
             onPress={() => { push({ key: 'ReleaseSuccess' }); }}
@@ -168,7 +173,10 @@ class HomeScreen extends base {
               <View style={[styles.flexOne, styles.SampleCenterBorder]}>
                 <Text style={styles.SampleCenterTitle}>样品中心</Text>
                 <Text style={styles.SampleCenterLabel}>进货先拿样</Text>
-                <Icon style={styles.SampleCenterIcn} name="analytics" />
+                {/* <Icon style={styles.SampleCenterIcn} name="analytics" /> */}
+                <View style={{ flex: 1, paddingLeft: 5, paddingRight: 10 }}>
+                  <Image style={styles.myImage} source={{ uri: 'https://img.dev.sunhousm.cn/Fu70sJb09411LY3gmJ4_TkuQX--G' }} />
+                </View>
               </View>}
             onPress={() => { push({ key: 'ReviseSuccess' }); }}
           />
@@ -177,7 +185,9 @@ class HomeScreen extends base {
               <View style={[styles.flexOne, styles.SampleCenterBorder]}>
                 <Text style={styles.SampleCenterTitle}>认证货源</Text>
                 <Text style={styles.SampleCenterLabel}>服务有保障</Text>
-                <Icon style={styles.SampleCenterIcn} name="analytics" />
+                <View style={{ flex: 1, paddingLeft: 5, paddingRight: 10 }}>
+                  <Image style={styles.myImage} source={{ uri: 'https://img.dev.sunhousm.cn/Fu70sJb09411LY3gmJ4_TkuQX--G' }} />
+                </View>
               </View>}
             onPress={() => { push({ key: 'PriceInfo' }); }}
           />

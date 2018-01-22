@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { TFeedback } from '../../components';
-import Base from './base';
+import Base1 from './base1';
 import styles from './styles';
 
-class Child extends Base {
+class Child extends Base1 {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class Child extends Base {
     };
   }
   componentDidMount() {
-    this.getData();
+    this.getInit();
   }
   componentWillUnmount() {
   }
@@ -75,12 +75,10 @@ class Child extends Base {
     const { allGoods } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
-        <ScrollView>
-          {
-            allGoods &&
-            this._renderRow()
-          }
-        </ScrollView>
+        {
+          allGoods &&
+          this._renderRow()
+        }
       </View>
     );
   }
