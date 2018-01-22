@@ -68,7 +68,8 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this._onRefresh);
+    const { memberId } = this.props.navigation.state.params;
+    this.setState({ memberId }, this._onRefresh);
   }
   getData = () => {
     const {
@@ -92,7 +93,7 @@ class Base extends React.Component {
       }).then((res) => {
         this.sleek.toggle();
         if (res.isSuccess) {
-          console.log('77777', res);
+          console.log(res);
           const result = res.data.pageData;
           if (result.length === 0) {
             if (supplyGoodsList.length === 0) {
@@ -115,7 +116,6 @@ class Base extends React.Component {
               refresh: false,
               nomore: false,
             });
-            console.log('##################', this.state.supplyGoodsList);
           } else {
             const newItems = supplyGoodsList.concat(result);
             this.setState({
@@ -172,7 +172,6 @@ class Base extends React.Component {
               refresh: false,
               nomore: false,
             });
-            console.log('0000000', this.state.releaseGoodsList);
           } else {
             const newItems = releaseGoodsList.concat(result);
             this.setState({
@@ -203,7 +202,6 @@ class Base extends React.Component {
       isHidden: true,
     });
     this.ModalView.showModal();
-    console.log('"""""""""""""', this.ModalView);
   }
   listPush = (index) => {
     const { push } = this.props;
@@ -241,5 +239,6 @@ class Base extends React.Component {
 Base.propTypes = {
   push: PropTypes.func,
   keyIndex: PropTypes.string,
+  navigation: PropTypes.object,
 };
 export default Base;

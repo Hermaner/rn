@@ -242,13 +242,30 @@ class HomeScreen extends base {
     );
   }
   renderForYou() {
+    const { push } = this.props;
     return (
       <View style={styles.forYou}>
         <Text style={styles.forYouTitle}>为你推荐</Text>
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+        {/* <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
           <Child1 tabLabel="推荐货品" type="1" />
           <Child2 tabLabel="优质商家" type="2" />
-        </ScrollableTabView>
+        </ScrollableTabView> */}
+        <View>
+          <TFeedback
+            content={
+              <View>
+                <Text>推荐货品</Text>
+              </View>}
+            onPress={() => { push({ key: 'User' }); }}
+          />
+          <TFeedback
+            content={
+              <View>
+                <Text>优质商家</Text>
+              </View>}
+            onPress={() => { push({ key: 'User' }); }}
+          />
+        </View>
       </View>
     );
   }

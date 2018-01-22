@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TFeedback, Loading } from '../../components';
 import { pushRoute } from '../../actions';
-import Base from './base';
+import ChildBase from './childBase';
 import styles from './styles';
 
-class Child extends Base {
+class Child extends ChildBase {
   constructor(props) {
     super(props);
     this.state = {

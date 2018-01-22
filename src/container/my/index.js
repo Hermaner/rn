@@ -94,7 +94,7 @@ class My extends myBase {
                       </View>}
                     onPress={() => {
                       push({
-                        key: memberId ? item2.push : 'User', params: { info: userInfo, name: userInfo.nickName } });
+                        key: memberId ? item2.push : 'User', params: { info: userInfo, name: userInfo.nickName, memberId } });
                     }}
                   />
                 ))

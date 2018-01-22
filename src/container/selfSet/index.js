@@ -41,7 +41,7 @@ class SelfSet extends selfSetBase {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                   <Text style={{ color: '#999', fontSize: 14 }}>{userInfo.phone}</Text>
-                  <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                  <Icon style={{ marginLeft: 10 }} name="play" />
                 </View>
               </View>}
             onPress={() => { push({ key: 'RevisePhone' }); }}
@@ -54,7 +54,7 @@ class SelfSet extends selfSetBase {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                   <Text style={{ color: '#999', fontSize: 14 }}>{isSet ? '' : '未设置'}</Text>
-                  <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                  <Icon style={{ marginLeft: 10 }} name="play" />
                 </View>
               </View>}
             onPress={() => { push({ key: 'UserInfo', params: { info: userInfo, set: isSet } }); }}
@@ -68,7 +68,7 @@ class SelfSet extends selfSetBase {
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                     <Text style={{ color: '#999', fontSize: 14 }}>{userInfo.identityName}</Text>
-                    <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                    <Icon style={{ marginLeft: 10 }} name="play" />
                   </View>
                 </View>
               </View>}
@@ -82,7 +82,7 @@ class SelfSet extends selfSetBase {
                     <Text style={{ color: '#666', fontSize: 16 }}>收货地址</Text>
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                    <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                    <Icon style={{ marginLeft: 10 }} name="play" />
                   </View>
                 </View>
               </View>}
@@ -98,7 +98,7 @@ class SelfSet extends selfSetBase {
                     <Text style={{ color: '#666', fontSize: 16 }}>修改登录密码</Text>
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                    <Icon style={{ marginLeft: 10 }} name="arrow-back" />
+                    <Icon style={{ marginLeft: 10 }} name="play" />
                   </View>
                 </View>
               </View>}

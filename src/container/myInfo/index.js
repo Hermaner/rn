@@ -78,11 +78,12 @@ class MyInfo extends base {
     );
   }
   _renderType() {
+    const { memberId } = this.props.navigation.state.params;
     return (
       <View style={styles.type}>
         <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Child1 tabLabel="供应" keyIndex="1" />
-          <Child2 tabLabel="采购" keyIndex="2" />
+          <Child1 tabLabel="供应" keyIndex="1" memberId={memberId} />
+          <Child2 tabLabel="采购" keyIndex="2" memberId={memberId} />
         </ScrollableTabView>
       </View>
     );
