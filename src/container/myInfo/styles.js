@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 14,
   },
+  flexOne: {
+    flex: 1,
+  },
   flexOneTextRight: {
     flex: 1,
     color: '#666',
@@ -254,6 +257,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#8ECD24',
     marginLeft: 2,
+  },
+  textBorder: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#8BCE21',
+  },
+  tabText: {
+    color: '#666',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  tabTextChoose: {
+    color: '#8BCE21',
   },
 });
 export default styles;

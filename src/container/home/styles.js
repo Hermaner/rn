@@ -201,5 +201,17 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     marginTop: 10,
   },
+  textBorder: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#8BCE21',
+  },
+  tabText: {
+    color: '#666',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  tabTextChoose: {
+    color: '#8BCE21',
+  },
 });
 export default styles;

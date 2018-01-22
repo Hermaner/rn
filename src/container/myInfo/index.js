@@ -79,12 +79,33 @@ class MyInfo extends base {
   }
   _renderType() {
     const { memberId } = this.props.navigation.state.params;
+    const { isTabOne } = this.state;
     return (
       <View style={styles.type}>
-        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Child1 tabLabel="供应" keyIndex="1" memberId={memberId} />
-          <Child2 tabLabel="采购" keyIndex="2" memberId={memberId} />
-        </ScrollableTabView>
+        <View style={[styles.flexRow, styles.flexOne, { borderBottomWidth: 1, borderBottomColor: '#eee' }]}>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne === 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>推荐货品</Text>
+              </View>}
+            onPress={() => this.tabChangeOne()}
+          />
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne !== 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>优质商家</Text>
+              </View>}
+            onPress={() => this.tabChangeTwo()}
+          />
+        </View>
+        <View>
+          {
+            isTabOne === 1 ?
+              <Child1 tabLabel="供应" keyIndex="1" memberId={memberId} />
+            :
+              <Child2 tabLabel="采购" keyIndex="2" memberId={memberId} />
+          }
+        </View>
       </View>
     );
   }

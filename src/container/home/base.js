@@ -78,6 +78,7 @@ class Base extends React.Component {
       pageSize: '5',
       items: [],
       goodsTypeList: [], // 应季好货
+      isTabOne: 1,
     };
   }
   getInit = () => {
@@ -123,6 +124,16 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       console.log(err);
+    });
+  }
+  tabChangeOne = () => {
+    this.setState({
+      isTabOne: 1,
+    });
+  }
+  tabChangeTwo = () => {
+    this.setState({
+      isTabOne: -1,
     });
   }
   _onRefresh = () => {

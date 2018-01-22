@@ -373,5 +373,16 @@ const styles = StyleSheet.create({
     marginRight: 4,
     marginBottom: 2,
   },
+  textBorder: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: '#8BCE21',
+  },
+  tabText: {
+    color: '#8BCE21',
+    fontSize: 14,
+    textAlign: 'center',
+  },
 });
 export default styles;

@@ -3,10 +3,9 @@ import { View, Image, TouchableWithoutFeedback, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, TFeedback, MyModalView, Loading } from '../../components';
+import { Header, TFeedback, MyModalView, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -24,13 +23,15 @@ class MainScreen extends base {
   }
   _renderTop() {
     const { goodsImg, userInfo, goodsItems } = this.state;
-    console.log('LLLLLLLLLLLLLLLL', goodsItems);
     return (
       <View style={styles.topView}>
         {
           goodsItems &&
           // goodsItems[0].supplyImages.length > 0 ?
-          //   <Image source={{ uri: goodsItems[0].supplyImages[0].imgUrl }} style={styles.mainImg} />
+            // <Image
+            //   source={{ uri: goodsItems[0].supplyImages[0].imgUrl }}
+            //   style={styles.mainImg}
+            // />
           // :
             <Image source={goodsImg} style={styles.mainImg} />
         }
@@ -163,9 +164,12 @@ class MainScreen extends base {
     const { memberId } = this.props.navigation.state.params;
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
-        <ScrollableTabView locked renderTabBar={() => <ScrollableTab />}>
-          <Child tabLabel="供应" member={memberId} />
-        </ScrollableTabView>
+        <View style={styles.flexOne}>
+          <View style={[styles.flexOne, styles.textBorder]}>
+            <Text style={styles.tabText}>优质商家</Text>
+          </View>
+        </View>
+        <Child member={memberId} />
       </View>
     );
   }
