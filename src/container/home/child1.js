@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { Loading, GoodList } from '../../components';
-import Base from './base';
+import Base1 from './base1';
 
-class Child1 extends Base {
+class Child1 extends Base1 {
   constructor(props) {
     super(props);
     this.state = {
