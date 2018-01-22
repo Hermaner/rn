@@ -31,8 +31,9 @@ class Child2 extends Base {
         {
           item.map((item1, index) => (
             <TFeedback
+              key={index}
               content={
-                <View style={styles.goodsDetail2} key={index}>
+                <View style={styles.goodsDetail2}>
                   <Image style={styles.exampleImg} source={{ uri: item1.imgUrl }} />
                   <View style={{ flex: 1 }}>
                     <View style={{ flex: 1 }}>

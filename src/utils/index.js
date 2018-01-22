@@ -14,8 +14,7 @@ export function px(size) {
   return size / defaultPixel;
 }
 export function spx(size) {
-  size = Math.round(size * scale + 0.5);
-  return size / defaultPixel;
+  return size * deviceW / 375;
 }
 export const Global = {
   items: [], // 商品大全
@@ -65,21 +64,21 @@ export const st = {
     flex: 1,
   },
   font12: {
-    fontSize: px(12),
+    fontSize: 12,
   },
   font14: {
-    fontSize: px(14),
+    fontSize: 14,
   },
   font16: {
-    fontSize: px(16),
+    fontSize: 16,
   },
   font18: {
-    fontSize: px(18),
+    fontSize: 18,
   },
   font20: {
-    fontSize: px(20),
+    fontSize: 20,
   },
   font24: {
-    fontSize: px(24),
+    fontSize: 24,
   },
 };

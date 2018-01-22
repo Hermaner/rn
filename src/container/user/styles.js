@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, px, spx } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   text: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', borderRadius: 8,
   },
   accountView: {
-    height: px(50),
+    height: 50,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
   },
@@ -21,17 +21,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#eee',
   },
   password: {
-    color: '#666', ...st.font14, height: px(40),
+    color: '#666', ...st.font14, height: 40,
   },
   formBom: {
-    height: px(50),
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   sendBtn: {
-    height: px(40),
-    width: spx(120),
+    height: 40,
+    width: 120,
     padding: 0,
     ...st.jacenter,
     marginRight: 10,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     backgroundColor: Mcolor,
     marginTop: 15,
-    height: px(45),
+    height: 45,
     borderRadius: 5,
   },
   submitBtnText: {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   switchBtn: {
     backgroundColor: '#fff',
-    height: px(30),
+    height: 30,
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 4,

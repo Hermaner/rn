@@ -33,11 +33,9 @@ class Base extends React.Component {
       type,
       memberId,
     }).then((res) => {
-      console.log('@@@@@@@', res);
+      console.log(res);
       if (res.isSuccess) {
-        console.log('SSSSSSSSSSSSSSSs');
         const result = res.data;
-        console.log('RRRRRRRRRRRR', result);
         const timeList = [];
         const newTimeList = [];
         let n = 0;
@@ -45,7 +43,6 @@ class Base extends React.Component {
         result.sort((a, b) => b.postDate.substring(0, 11).replace(/-/g, '') - a.postDate.substring(0, 11).replace(/-/g, ''));
         for (let i = 0; i < result.length; i += 1) {
           timeList.push(result[i].postDate.substring(0, 11));
-          console.log('TTTTTTTTT', timeList);
           const allTime =
           ((result[i].purchaseTime) * 86400000) + (new Date(result[i].postDate)).getTime();
           const surplusTime = Math.floor((allTime - myDate) / 1000 / 60 / 60 / 24);
@@ -66,12 +63,10 @@ class Base extends React.Component {
             n = j + 1;
           }
         }
-        console.log('KKKKKKKKKKK', newTimeList);
         this.setState({
           items: newTimeList,
           dataSource: ds.cloneWithRows(newTimeList),
         });
-        console.log('BBBBBBBBBBBB', this.state.items);
       } else {
         Toast.show('温馨提示');
       }
@@ -82,6 +77,5 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   type: PropTypes.string,
-  // push: PropTypes.func,
 };
 export default Base;

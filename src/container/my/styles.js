@@ -9,16 +9,17 @@ const styles = StyleSheet.create({
   // },
   userView: {
     flex: 1,
-    paddingTop: 15,
     paddingLeft: 20,
+    paddingBottom: 20,
+    ...st.jcenter,
   },
   userText: {
-    fontSize: px(18),
+    fontSize: 18,
     color: '#fff',
   },
   headerImgBox: {
     flex: 1,
-    height: spx(150),
+    height: spx(180),
     flexDirection: 'row',
     position: 'absolute',
     top: 0,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
   },
   infoBox: {
     flex: 1,
-    height: spx(50),
+    height: spx(40),
     flexDirection: 'row',
     borderTopWidth: 1,
     borderTopColor: '#ddd',

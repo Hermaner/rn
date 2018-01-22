@@ -80,14 +80,14 @@ class HuinongGoodsMotif extends base {
   }
   render() {
     const { pop } = this.props;
-    const { brands } = this.state;
+    const { brands, isRefreshing } = this.state;
     return (
       <Container>
         <Header back={pop} title="惠农好货专场" />
         <ScrollView
           refreshControl={
             <RefreshControl
-              refreshing={this.state.isRefreshing}
+              refreshing={isRefreshing}
               onRefresh={this._onRefresh}
               tintColor="#ff0000"
               title="加载中..."

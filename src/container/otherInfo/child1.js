@@ -37,10 +37,6 @@ class Child1 extends Base {
                     <Text style={styles.goodsPlace}>
                       {info.address}
                     </Text>
-                    {/* <View style={{ flexDirection: 'row' }}>
-                      <Text style={styles.chooseBtn}>{item.supplyMode}</Text>
-                      <View />
-                    </View> */}
                     <View style={styles.goodsPriceInfo}>
                       <View>
                         <Text style={styles.price}>{item.salesPrice}元/{item.unit}</Text>

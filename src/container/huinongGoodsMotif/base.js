@@ -17,8 +17,9 @@ class Base extends React.Component {
       currentPage: 1,
       pageSize: '5',
       isSleekShow: false,
-      refresh: false, // 是否是刷新
+      isRefreshing: false, // 是否是刷新
       loading: true, // 是否加载中
+      loadMore: false,
       nomore: false, // 是否没有更多
       noData: false, // 是否没有数据
       title: '',
@@ -92,6 +93,24 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  _onRefresh = () => {
+    this.setState({
+      isRefreshing: true,
+    });
+  }
+  _onScroll = (event) => {
+    if (this.state.loadMore) {
+      return;
+    }
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    if (y + height >= contentHeight - 20) {
+      this.setState({
+        loadMore: true,
+      });
+    }
   }
 }
 Base.propTypes = {
