@@ -35,7 +35,7 @@ class Base extends React.Component {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   changeLeftTab = (index) => {

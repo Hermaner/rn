@@ -1,12 +1,21 @@
 
-import { Dimensions } from 'react-native';
+import { Dimensions, PixelRatio } from 'react-native';
 
 export const deviceW = Dimensions.get('window').width;
 export const deviceH = Dimensions.get('window').height;
-const basePx = 375;
-const deviceWpx = deviceW / basePx;
-export function px(e) {
-  return e * deviceWpx;
+const fontScale = PixelRatio.getFontScale();
+const pixelRatio = PixelRatio.get();
+const defaultPixel = 2;
+const w2 = 750 / defaultPixel;
+const h2 = 1334 / defaultPixel;
+const scale = Math.min(deviceH / h2, deviceW / w2);
+export function px(size) {
+  size = Math.round((size * scale + 0.5) * pixelRatio / fontScale);
+  return size / defaultPixel;
+}
+export function spx(size) {
+  size = Math.round(size * scale + 0.5);
+  return size / defaultPixel;
 }
 export const Global = {
   items: [], // 商品大全
@@ -54,5 +63,23 @@ export const st = {
   maskerContent: {
     backgroundColor: '#fff',
     flex: 1,
+  },
+  font12: {
+    fontSize: px(12),
+  },
+  font14: {
+    fontSize: px(14),
+  },
+  font16: {
+    fontSize: px(16),
+  },
+  font18: {
+    fontSize: px(18),
+  },
+  font20: {
+    fontSize: px(20),
+  },
+  font24: {
+    fontSize: px(24),
   },
 };

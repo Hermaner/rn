@@ -309,6 +309,7 @@ class MainList extends base {
   )
   _renderContent() {
     const { noData, dataSource, nomore, refresh } = this.state;
+    console.log(noData)
     return (
       <View style={styles.listContent}>
         {

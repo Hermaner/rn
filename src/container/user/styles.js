@@ -1,53 +1,53 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st } from '../../utils';
+import { Mcolor, st, px, spx } from '../../utils';
 
 const styles = StyleSheet.create({
   text: {
     color: '#fff',
-    fontSize: 30,
+    ...st.font24,
     fontWeight: 'bold',
   },
   form: {
     backgroundColor: '#fff', borderRadius: 8,
   },
   accountView: {
-    height: 50,
+    height: px(50),
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
   },
   account: {
     color: '#666',
-    fontSize: 14,
+    ...st.font14,
     borderBottomColor: '#eee',
   },
   password: {
-    color: '#666', fontSize: 14, height: 40,
+    color: '#666', ...st.font14, height: px(40),
   },
   formBom: {
-    height: 50,
+    height: px(50),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   sendBtn: {
-    height: 30,
-    width: 100,
+    height: px(40),
+    width: spx(120),
     padding: 0,
     ...st.jacenter,
     marginRight: 10,
     backgroundColor: Mcolor,
   },
   sendBtnText: {
-    color: '#888', fontSize: 12,
+    color: '#888', ...st.font14,
   },
   submitBtn: {
     backgroundColor: Mcolor,
     marginTop: 15,
-    height: 45,
+    height: px(45),
     borderRadius: 5,
   },
   submitBtnText: {
-    color: '#fff', fontSize: 16,
+    color: '#fff', ...st.font16,
   },
   switchView: {
     flex: 1,
@@ -55,19 +55,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   switchLabel: {
-    fontSize: 12,
+    ...st.font14,
     color: '#444',
   },
   switchBtn: {
     backgroundColor: '#fff',
-    height: 30,
+    height: px(30),
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 4,
     marginTop: 14,
   },
   switchBtnText: {
-    fontSize: 14,
+    ...st.font14,
     color: Mcolor,
   },
   bottomView: {
@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   agreementLabel: {
-    color: '#888', fontSize: 10,
+    color: '#888', ...st.font12,
   },
   agreementText: {
-    color: Mcolor, fontSize: 10,
+    color: Mcolor, ...st.font12,
   },
   bottomTipsView: {
     flexDirection: 'row',
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   bottomTipsLabel: {
-    color: '#666', fontSize: 12,
+    color: '#666', ...st.font12,
   },
   bottomTipsText: {
-    color: Mcolor, fontSize: 12,
+    color: Mcolor, ...st.font12,
   },
 });
 export default styles;

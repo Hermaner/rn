@@ -145,7 +145,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
 
     GetAppCategoryService({
@@ -160,7 +160,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
 
     GetHomeCategoryService({
@@ -184,7 +184,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   business = () => {
@@ -209,7 +209,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   _onRefresh = () => {

@@ -59,7 +59,7 @@ class Base extends React.Component {
         place: '湖北省武汉市',
       }],
       categoryId: '',
-      brands: '',
+      brands: null,
       name: '',
     };
   }
@@ -81,8 +81,8 @@ class Base extends React.Component {
       categoryId,
       brandId,
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
-        console.log('ZZZZZZZZZZZz', res);
         const result = res.data;
         console.log('%%%%%%%%%', result);
         this.setState({
@@ -93,7 +93,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
 }

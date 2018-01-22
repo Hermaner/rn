@@ -74,7 +74,7 @@ class Base extends React.Component {
         Toast.show('温馨提示22');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
 
     GetPurchaseByCategoryService({
@@ -91,7 +91,7 @@ class Base extends React.Component {
         Toast.show('温馨提示33');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   // resetState = () => {

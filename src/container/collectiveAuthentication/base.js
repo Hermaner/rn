@@ -44,7 +44,7 @@ class CollectiveAuthenticationBase extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   getImages1 = (upImages) => {
@@ -202,7 +202,7 @@ class CollectiveAuthenticationBase extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   _onRefresh = () => {

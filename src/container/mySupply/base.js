@@ -121,7 +121,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   renovate = (supplyId) => {
@@ -138,7 +138,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   undercarriage = (supplyId) => {
@@ -155,7 +155,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   ShelfSupplyService = (supplyId) => {
@@ -172,7 +172,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   DeleteSupplyService = (supplyId) => {
@@ -189,7 +189,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   btnChange = (btnName, supplyId, index) => {

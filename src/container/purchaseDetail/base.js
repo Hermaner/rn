@@ -55,7 +55,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      global.Toast.show(err);
+      global.console.log(err);
     });
   }
   goCbjPage = () => {
@@ -85,7 +85,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      global.Toast.show(err);
+      global.console.log(err);
     });
   }
 }

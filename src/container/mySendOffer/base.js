@@ -81,7 +81,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
   pushPriceInfo = (item) => {
@@ -132,7 +132,7 @@ class Base extends React.Component {
             }
           }).catch((err) => {
             this.toggleSleek();
-            Toast.show(err);
+            console.log(err);
           });
         }
       },

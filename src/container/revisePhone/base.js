@@ -98,7 +98,7 @@ class RevisePhoneBase extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
 }

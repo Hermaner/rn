@@ -32,17 +32,19 @@ class HomeScreen extends base {
       pausesLocationUpdatesAutomatically: false,
       allowsBackgroundLocationUpdates: true,
     });
-    AMapLocation.startUpdatingLocation();
-    // AMapLocation.getReGeocode();
+    // AMapLocation.startUpdatingLocation();
+    AMapLocation.getReGeocode();
     this.getInit();
   }
   _onLocationResult = (result) => {
     console.log(result);
-    global.storage.save({
-      key: 'position',
-      data: result.coordinate,
-      expires: null,
-    });
+    if (result.coordinate) {
+      global.storage.save({
+        key: 'position',
+        data: result.coordinate,
+        expires: null,
+      });
+    }
   }
   renderHeaderNavigation() {
     const { push } = this.props;
@@ -216,7 +218,6 @@ class HomeScreen extends base {
         <Swiper
           style={styles.wrapper}
           height={200}
-          autoplay
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
@@ -253,6 +254,7 @@ class HomeScreen extends base {
   )
   render() {
     const { goodGoodsList, goodsTypeList, memberId } = this.state;
+    console.log(goodGoodsList)
     return (
       <Container>
         <Header back={this.props.push} />

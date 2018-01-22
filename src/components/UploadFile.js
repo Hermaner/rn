@@ -192,7 +192,7 @@ export default class Prompt extends React.Component {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   _renderImageUpload() {

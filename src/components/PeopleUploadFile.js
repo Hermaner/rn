@@ -193,7 +193,7 @@ export default class PeopleUploadFile extends React.Component {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   _renderImageUpload() {

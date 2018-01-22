@@ -201,7 +201,7 @@ class Base extends React.Component {
         Toast.show('温馨提示55');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   GetAppCategoryService = () => {
@@ -228,7 +228,7 @@ class Base extends React.Component {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   changeCityTab = (index) => {

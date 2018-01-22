@@ -49,7 +49,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
 
     GetNewsService({
@@ -71,7 +71,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   saveLabel = (label) => {
@@ -107,7 +107,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
     this.setState({ visible: false });
   }
@@ -143,7 +143,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
   CreateNewsPraiseService = (newsId) => {
@@ -174,7 +174,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
 }

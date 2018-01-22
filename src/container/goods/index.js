@@ -187,7 +187,6 @@ class Goods extends base {
         <Swiper
           style={styles.wrapper}
           height={200}
-          autoplay
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {

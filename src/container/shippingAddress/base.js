@@ -79,7 +79,7 @@ class ShippingAddressBase extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
   deleteAdress = (receiveAddressId) => {
@@ -97,7 +97,7 @@ class ShippingAddressBase extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
   defaultAdress = (receiveAddressId) => {
@@ -117,7 +117,7 @@ class ShippingAddressBase extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
   _onRefresh = () => {

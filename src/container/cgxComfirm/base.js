@@ -397,7 +397,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.sleek.toggle();
-      Toast.show(err);
+      console.log(err);
     });
   }
 }

@@ -7,6 +7,7 @@ import { TFeedback, Loading, TOpacity, Iconfont } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
+import { px } from '../../utils';
 
 class My extends myBase {
   constructor(props) {
@@ -27,11 +28,11 @@ class My extends myBase {
         <View style={styles.headerImgBox}>
           <Image style={styles.headerImg} source={backGround1} />
         </View>
-        <View style={{ height: 150, paddingLeft: 10, paddingRight: 10 }}>
+        <View style={{ height: px(150), paddingLeft: 10, paddingRight: 10 }}>
           <View style={styles.accountMoney}>
             <TFeedback
               content={
-                <Text style={styles.textBackground}>消息</Text>}
+                <Text style={styles.textBackground}>{px(150)}消息</Text>}
               onPress={() => { push({ key: 'NotificationSystem' }); }}
             />
             <TFeedback
@@ -57,6 +58,7 @@ class My extends myBase {
               </TouchableOpacity>
               :
               <TOpacity
+                style={{ flex: 1 }}
                 content={
                   <View style={styles.userView}>
                     <Text style={styles.userText}>立即登录</Text>

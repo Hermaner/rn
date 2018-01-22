@@ -136,7 +136,7 @@ class Base extends React.Component {
           Toast.show('温馨提示');
         }
       }).catch((err) => {
-        Toast.show(err);
+        console.log(err);
       });
     }
     if (keyIndex === '2') {
@@ -194,7 +194,7 @@ class Base extends React.Component {
         }
       }).catch((err) => {
         this.sleek.toggle();
-        Toast.show(err);
+        console.log(err);
       });
     }
   }

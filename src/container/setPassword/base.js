@@ -44,7 +44,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       this.toggleSleek();
-      Toast.show(err);
+      console.log(err);
     });
   }
 }

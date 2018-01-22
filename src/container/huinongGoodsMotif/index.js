@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper';
 import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
 import { Header, ScrollableTab, Loading } from '../../components';
 import base from './base';
@@ -25,42 +25,40 @@ class HuinongGoodsMotif extends base {
   }
   _renderBody() {
     const { brands } = this.state;
+    console.log(brands)
     const { name } = this.props.navigation.state.params;
     return (
       <View style={styles.pagebody}>
         <Image style={styles.image} source={{ uri: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=9316bf1010d5ad6eaaf964e2b1f038db/0b55b319ebc4b74502a433c2c4fc1e178a821535.jpg' }} />
-        {
-          brands &&
-          <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-            {
-              brands.map((item, index) => (
-                <Child tabLabel={item.brandName} name={name} brandId={item.brandId} key={index} />
-              ))
-            }
-          </ScrollableTabView>
-        }
-      </View>
-    );
-  }
-  _renderAll() {
-    return (
-      <View>
-        {this._renderNewsList()}
+        <ScrollableTabView
+          style={{ flex: 1 }}
+          tabBarInactiveTextColor="#666"
+          tabBarActiveTextColor="#8bce21"
+          tabBarBackgroundColor="#f5f5f5"
+          tabBarTextStyle={{ fontSize: 15 }}
+          tabBarUnderlineStyle={{ height: 2, backgroundColor: '#8bce21' }}
+          renderTabBar={() => <ScrollableTabBar />}
+        >
+          {
+            brands.map((item, index) => (
+              <Child tabLabel={item.brandName} name={name} brandId={item.brandId} key={index} />
+            ))
+          }
+        </ScrollableTabView>
       </View>
     );
   }
   _renderSwiper() {
-    const { imgList } = this.state;
+    const { imgLists } = this.state;
     return (
       <View style={{ height: 200 }}>
         <Swiper
           style={styles.wrapper}
           height={200}
-          autoplay
           paginationStyle={{ justifyContent: 'flex-end', paddingRight: 10, bottom: 18 }}
         >
           {
-            imgList.map((item, i) => (
+            imgLists.map((item, i) => (
               <View key={i} style={styles.slide}>
                 <Image style={styles.image} source={{ uri: item.img }} />
                 <View style={styles.newsInfoBox}>
@@ -80,38 +78,18 @@ class HuinongGoodsMotif extends base {
       </View>
     );
   }
-  _renderNewsList() {
-    const { push } = this.props;
-    return (
-      <View style={styles.newsList}>
-        <TouchableOpacity style={styles.newsItem} onPress={() => { push({ key: 'HuinongConsultDetail' }); }}>
-          <View style={styles.NewsTextBox}>
-            <Text style={styles.newsTitle} numberOfLines={2} >12月25日全国辣椒生产区价格行情【全国】</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={[styles.normalText, styles.newsTime]}>12-25</Text>
-              <Text style={styles.normalText}>水果蔬菜</Text>
-              <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'flex-end' }}>
-                <Icon style={{ marginRight: 4, fontSize: 14 }} name="arrow-back" />
-                <Text style={styles.normalText}>88</Text>
-              </View>
-            </View>
-          </View>
-          <Image style={styles.newsImg} source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} />
-        </TouchableOpacity>
-      </View>
-    );
-  }
   render() {
     const { pop } = this.props;
+    const { brands } = this.state;
     return (
-      <Container>
+      <View>
         <Header back={pop} title="惠农好货专场" />
-        <Content contentContainerStyle={{ flex: 1 }}>
-          {/* {this._renderSwiper()} */}
-          {this._renderBody()}
-        </Content>
+        <View>
+          {this._renderSwiper()}
+          {brands !== null && this._renderBody()}
+        </View>
         <Loading ref={(c) => { this.sleek = c; }} />
-      </Container>
+      </View>
     );
   }
 }
