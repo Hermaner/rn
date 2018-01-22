@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { Loading } from '../../components';
-import Base from './base';
+import ChildBase from './childBase';
 import styles from './styles';
 
-class Child extends Base {
+class Child extends ChildBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class Child extends Base {
   _renderRow = (item) => {
     const { push } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
+      <TouchableWithoutFeedback onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}>
         <View style={styles.goodsItem}>
           <Image
             style={styles.goodsImg}

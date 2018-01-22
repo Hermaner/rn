@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute } from '../../actions';
-import { Header, ScrollableTab, Iconfont, GoodList, TOpacity, TFeedback } from '../../components';
+import { Header, Iconfont, GoodList, TOpacity, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -242,29 +241,33 @@ class HomeScreen extends base {
     );
   }
   renderForYou() {
-    const { push } = this.props;
+    const { isTabOne } = this.state;
     return (
       <View style={styles.forYou}>
         <Text style={styles.forYouTitle}>为你推荐</Text>
-        {/* <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-          <Child1 tabLabel="推荐货品" type="1" />
-          <Child2 tabLabel="优质商家" type="2" />
-        </ScrollableTabView> */}
+        <View style={[styles.flexRow, { borderBottomWidth: 1, borderBottomColor: '#eee' }]}>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne === 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>推荐货品</Text>
+              </View>}
+            onPress={() => this.tabChangeOne()}
+          />
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne !== 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>优质商家</Text>
+              </View>}
+            onPress={() => this.tabChangeTwo()}
+          />
+        </View>
         <View>
-          <TFeedback
-            content={
-              <View>
-                <Text>推荐货品</Text>
-              </View>}
-            onPress={() => { push({ key: 'User' }); }}
-          />
-          <TFeedback
-            content={
-              <View>
-                <Text>优质商家</Text>
-              </View>}
-            onPress={() => { push({ key: 'User' }); }}
-          />
+          {
+            isTabOne === 1 ?
+              <Child1 type="1" />
+            :
+              <Child2 type="2" />
+          }
         </View>
       </View>
     );
@@ -281,7 +284,6 @@ class HomeScreen extends base {
   )
   render() {
     const { goodGoodsList, goodsTypeList, memberId } = this.state;
-    console.log(goodGoodsList)
     return (
       <Container>
         <Header back={this.props.push} />

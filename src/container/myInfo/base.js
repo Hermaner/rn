@@ -222,6 +222,16 @@ class Base extends React.Component {
     }
     this.ModalView.closeModal();
   }
+  tabChangeOne = () => {
+    this.setState({
+      isTabOne: 1,
+    });
+  }
+  tabChangeTwo = () => {
+    this.setState({
+      isTabOne: -1,
+    });
+  }
   _onRefresh = () => {
     this.setState({
       refresh: true,
