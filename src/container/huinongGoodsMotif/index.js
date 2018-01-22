@@ -82,14 +82,14 @@ class HuinongGoodsMotif extends base {
     const { pop } = this.props;
     const { brands } = this.state;
     return (
-      <View>
+      <Container>
         <Header back={pop} title="惠农好货专场" />
-        <View>
+        <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderSwiper()}
           {brands !== null && this._renderBody()}
-        </View>
+        </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
-      </View>
+      </Container>
     );
   }
 }
