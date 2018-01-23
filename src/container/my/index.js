@@ -7,7 +7,6 @@ import { TFeedback, Loading, TOpacity, Iconfont } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
-import { px, spx } from '../../utils';
 
 class My extends myBase {
   constructor(props) {
@@ -18,7 +17,7 @@ class My extends myBase {
     };
   }
   componentDidMount() {
-    this.getInit();
+    this.initData();
   }
   _renderBody() {
     const { push } = this.props;
@@ -28,7 +27,7 @@ class My extends myBase {
         <View style={styles.headerImgBox}>
           <Image style={styles.headerImg} source={backGround1} />
         </View>
-        <View style={{ height: spx(180), paddingLeft: 10, paddingRight: 10 }}>
+        <View style={{ height: 180, paddingLeft: 10, paddingRight: 10 }}>
           <View style={styles.accountMoney}>
             <TFeedback
               content={

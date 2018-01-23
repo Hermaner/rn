@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
 import { GetMemberInfoService } from '../../api';
 
 class MyBase extends React.Component {
@@ -142,12 +143,6 @@ class MyBase extends React.Component {
       userInfo: '',
     };
   }
-  getInit = () => {
-    if (!global.memberId) {
-      return;
-    }
-    this.setState({ memberId: global.memberId }, this._onRefresh);
-  }
   getData = () => {
     const { memberId } = this.state;
     GetMemberInfoService({
@@ -162,16 +157,20 @@ class MyBase extends React.Component {
       } else {
         Toast.show('温馨提示');
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
-  _onRefresh = () => {
-    this.setState({
-      refresh: true,
-      currentPage: 1,
-    }, () => this.getData());
+  initData = () => {
+    this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
+      this.emitUser();
+    });
+  }
+  emitUser = () => {
+    if (!global.memberId) {
+      return;
+    }
+    this.setState({ memberId: global.memberId }, this.getData);
   }
 }
 export default MyBase;

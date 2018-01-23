@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { GetAppCategoryService, GetHomeCategoryService } from '../../api';
+import { GetAppCategoryService, GetHomeCategoryService, GetVerifSupplyService, GetGoodBusinesService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -75,14 +75,24 @@ class Base extends React.Component {
         img: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=b549acddf6faaf5184e381b7bc6f95ee/4034970a304e251fee98e003ac86c9177e3e53d9.jpg',
       }],
       loadQueue: [0, 0, 0, 0],
-      pageSize: '5',
+      isRefreshing: false,
+      loadMore: false,
+      scurrentPage: 1,
+      bcurrentPage: 1,
+      refresh: false, // 是否是刷新
+      loading: false, // 是否加载中
+      nomore: false, // 是否没有更多
+      noData: false, // 是否没有数据
+      pageSize: '15',
       items: [],
+      supplys: [],
+      business: [],
       goodsTypeList: [], // 应季好货
       isTabOne: 1,
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this._onRefresh);
+    this.setState({ memberId: global.memberId }, this.getData);
   }
   getData = () => {
     const { typeList } = this.state;
@@ -101,7 +111,6 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
-
     GetHomeCategoryService({
     }).then((res) => {
       console.log(res);
@@ -125,22 +134,129 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+    this._onRefreshSupply();
+    this._onRefreshBusines();
   }
-  tabChangeOne = () => {
-    this.setState({
-      isTabOne: 1,
+  GetVerifSupplyService = () => {
+    const { scurrentPage, pageSize, supplys, refresh } = this.state;
+    GetVerifSupplyService({
+      pageSize,
+      currentPage: scurrentPage,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          this.setState({
+            nomore: true,
+            loading: false,
+          });
+          return;
+        }
+        if (refresh) {
+          this.setState({
+            supplys: result,
+            scurrentPage: scurrentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = supplys.concat(result);
+          this.setState({
+            supplys: newItems,
+            scurrentPage: scurrentPage + 1,
+            loading: false,
+          });
+        }
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      Toast.show(err);
     });
   }
-  tabChangeTwo = () => {
-    this.setState({
-      isTabOne: -1,
+  GetGoodBusinesService = () => {
+    const { bcurrentPage, pageSize, business, refresh } = this.state;
+    GetGoodBusinesService({
+      pageSize,
+      currentPage: bcurrentPage,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          this.setState({
+            nomore: true,
+            loading: false,
+          });
+          return;
+        }
+        console.log()
+        if (refresh) {
+          this.setState({
+            business: result,
+            bcurrentPage: bcurrentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = business.concat(result);
+          this.setState({
+            business: newItems,
+            bcurrentPage: bcurrentPage + 1,
+            loading: false,
+          });
+        }
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      console.log(err);
     });
   }
-  _onRefresh = () => {
+  tabChange = (isTabOne) => {
+    this.setState({
+      isTabOne,
+      nomore: false,
+    });
+  }
+  _onRefreshSupply = () => {
     this.setState({
       refresh: true,
-      currentPage: 1,
-    }, () => this.getData());
+      scurrentPage: 1,
+    }, () => this.GetVerifSupplyService());
+  }
+  _onRefreshBusines = () => {
+    this.setState({
+      refresh: true,
+      bcurrentPage: 1,
+    }, () => this.GetGoodBusinesService());
+  }
+  _onScroll = (event) => {
+    const { isTabOne, loading } = this.state;
+    if (loading) {
+      return;
+    }
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    if (y + height >= contentHeight - 20) {
+      this.setState({
+        loading: true,
+      }, isTabOne === 1 ? this.GetVerifSupplyService : this.GetGoodBusinesService);
+    }
   }
 }
 export default Base;

@@ -14,10 +14,14 @@ import PeopleUploadFile from './PeopleUploadFile';
 import Loading from './Loading';
 import Iconfont from './Iconfont';
 import BusinessList from './businessList';
+import LoadMore from './loadMore';
+import LoadNoMore from './loadNoMore';
 
 export {
   TLight,
   TOpacity,
+  LoadMore,
+  LoadNoMore,
   GoodList,
   Iconfont,
   Loading,

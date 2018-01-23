@@ -85,6 +85,8 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
+          isRefreshing: false,
+          loadMore: false,
           dataSource: ds.cloneWithRows(result),
         });
       } else {
@@ -97,7 +99,7 @@ class Base extends React.Component {
   _onRefresh = () => {
     this.setState({
       isRefreshing: true,
-    });
+    }, this.getData);
   }
   _onScroll = (event) => {
     if (this.state.loadMore) {
@@ -109,8 +111,11 @@ class Base extends React.Component {
     if (y + height >= contentHeight - 20) {
       this.setState({
         loadMore: true,
-      });
+      }, this._reachEnd);
     }
+  }
+  _reachEnd = () => {
+    this.getData();
   }
 }
 Base.propTypes = {
