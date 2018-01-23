@@ -245,8 +245,8 @@ class Base extends React.Component {
     }, () => this.GetGoodBusinesService());
   }
   _onScroll = (event) => {
-    const { isTabOne, loading } = this.state;
-    if (loading) {
+    const { isTabOne, loading, nomore } = this.state;
+    if (loading || nomore) {
       return;
     }
     const y = event.nativeEvent.contentOffset.y;
