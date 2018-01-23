@@ -189,7 +189,7 @@ class Base extends React.Component {
     );
   }
   initData = () => {
-    this.setState({ memberId: global.memberId });
+    this.setState({ memberId: global.memberId || ''});
     this.emitgetCgyxSku = DeviceEventEmitter.addListener('getCgyxSku', (data) => {
       this.getCgyxSku(data);
     });

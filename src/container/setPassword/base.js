@@ -12,7 +12,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this._onRefresh);
+    this.setState({ memberId: global.memberId || '' }, this._onRefresh);
   }
   reviseUserInfo = () => {
     const { memberId, password, confirmPassword } = this.state;

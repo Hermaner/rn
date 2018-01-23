@@ -37,11 +37,8 @@ class HomeScreen extends base {
   }
   _onLocationResult = (result) => {
     if (result.coordinate) {
-      global.storage.save({
-        key: 'position',
-        data: result.coordinate,
-        expires: null,
-      });
+      global.longitude = result.coordinate.longitude;
+      global.latitude = result.coordinate.latitude;
     }
   }
   renderHeaderNavigation() {
@@ -104,9 +101,9 @@ class HomeScreen extends base {
                   </View>
                 </View>
               </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>我的采购</Text>
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>发采购</Text>
             </View>}
-          onPress={() => { push({ key: 'MyRelease' }); }}
+          onPress={() => this.props.push({ key: global.memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
         />
       </View>
     );
@@ -325,15 +322,6 @@ class HomeScreen extends base {
           {loading && <LoadMore />}
           {nomore && <LoadNoMore />}
         </ScrollView>
-        <TOpacity
-          style={styles.bomFixedView}
-          content={
-            <View style={styles.bomFixedBtn}>
-              <Text style={styles.bomFixedText}>发采购</Text>
-            </View>
-          }
-          onPress={() => this.props.push({ key: memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
-        />
       </Container>
     );
   }

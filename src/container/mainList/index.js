@@ -16,13 +16,6 @@ class MainList extends base {
     };
   }
   componentDidMount() {
-    global.storage.load({
-      key: 'position',
-    }).then((res) => {
-      console.log(res);
-      global.longitude = res.longitude;
-      global.latitude = res.latitude;
-    }).catch(() => {});
     this.getInit();
   }
   componentWillUnmount() {

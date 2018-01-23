@@ -11,7 +11,7 @@ class SelfSetBase extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this._onRefresh);
+    this.setState({ memberId: global.memberId || '' }, this._onRefresh);
   }
   getData = () => {
     const { memberId } = this.state;

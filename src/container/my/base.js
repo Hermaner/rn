@@ -170,7 +170,7 @@ class MyBase extends React.Component {
     if (!global.memberId) {
       return;
     }
-    this.setState({ memberId: global.memberId }, this.getData);
+    this.setState({ memberId: global.memberId || '' }, this.getData);
   }
 }
 export default MyBase;

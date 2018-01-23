@@ -114,8 +114,12 @@ android {
         ]
     }
     signingConfigs {
-        release {
-        }
+      release {
+          storeFile file(MYAPP_HONGPLUS_FILE)
+          storePassword MYAPP_HONGPLUS_STORE_PASSWORD
+          keyAlias MYAPP_HONGPLUS_ALIAS
+          keyPassword MYAPP_HONGPLUS_KEY_PASSWORD
+      }
     }
     splits {
         abi {

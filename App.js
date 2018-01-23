@@ -13,7 +13,6 @@ import {
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
-import Storage from 'react-native-storage';
 
 import AppReducer from './src/reducers';
 import AppWithNavigationState from './src/navigators/AppNavigator';
@@ -62,17 +61,13 @@ class App extends React.Component {
       this.setState({ cid: registrationId });
     });
     this.premInit();
-    global.storage = new Storage({
-      size: 1000,
-      storageBackend: AsyncStorage,
-      defaultExpires: 1000 * 3600 * 24,
-      enableCache: true,
+    AsyncStorage.getItem('userData', (error, res) => {
+      if (res) {
+        global.userData = JSON.parse(res);
+        global.memberId = JSON.parse(res).memberId;
+        console.log(global.userData);
+      }
     });
-    global.storage.load({
-      key: 'userData',
-    }).then((res) => {
-      global.memberId = res.memberId;
-    }).catch(() => {});
     global.Toast = Toast;
   }
   premInit = () => {

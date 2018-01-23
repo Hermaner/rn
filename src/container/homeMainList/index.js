@@ -16,13 +16,6 @@ class MainList extends base {
     };
   }
   componentDidMount() {
-    global.storage.load({
-      key: 'position',
-    }).then((res) => {
-      console.log(res);
-      global.longitude = res.longitude;
-      global.latitude = res.latitude;
-    }).catch(() => {});
     this.getInit();
   }
   componentWillUnmount() {
@@ -31,9 +24,9 @@ class MainList extends base {
   _readerHeader() {
     const { pop, push } = this.props;
     return (
-      <Header style={{ alignItems: 'center' }}>
+      <Header style={{ alignItems: 'center', backgroundColor: '#fff' }}>
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
-          <Icon name="arrow-back" />
+          <Icon name="arrow-back" style={{ fontSize: 22, color: '#666' }} />
         </TouchableOpacity>
         <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher', params: { type: 'getMainListName' } }); }}>
           <View style={styles.HeaderMain}>

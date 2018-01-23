@@ -153,7 +153,9 @@ class Base extends React.Component {
     );
   }
   initData = () => {
-    global.storage.load({ key: 'userData' }).then(res => this.setState({ memberId: res.memberId })).catch(() => {});
+    this.setState({
+      memberId: global.memberId || '',
+    });
     this.emitGetSpot = DeviceEventEmitter.addListener('getSpot', (data) => {
       this.getSpot(data);
     });

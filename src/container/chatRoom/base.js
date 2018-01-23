@@ -14,13 +14,9 @@ class AdjectiveInfoBase extends React.Component {
   }
   getInit = () => {
     this.GetIdentityService();
-    global.storage.load({
-      key: 'userData',
-    }).then((ret) => {
-      this.setState({
-        memberId: ret.memberId,
-      });
-    }).catch(() => {});
+    this.setState({
+      memberId: global.memberId || '',
+    });
   }
   GetIdentityService = () => {
     GetIdentityService()
@@ -63,15 +59,6 @@ class AdjectiveInfoBase extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        global.storage.save({
-          key: 'userData',
-          data: {
-            ...res.data,
-            memberId: res.data.memberId.toString(),
-          },
-          expires: null,
-        }).catch(() => {});
-        global.memberId = res.data.memberId.toString();
         Toast.show('保存成功');
       } else {
         Toast.show(res.msg);
