@@ -195,8 +195,8 @@ export function CreateNewsPraiseService(data) {
 export function GetVerifSupplyService(data) {
   return get('GetVerifSupplyService', data);
 }
-export function GetGoodBusinesService() {
-  return get('GetGoodBusinesService');
+export function GetGoodBusinesService(data) {
+  return get('GetGoodBusinesService', data);
 }
 export function GetGotSupplyService(data) {
   return get('GetGotSupplyService', data);

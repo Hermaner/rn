@@ -31,9 +31,9 @@ class MainList extends base {
   _readerHeader() {
     const { pop, push } = this.props;
     return (
-      <Header style={{ alignItems: 'center' }}>
+      <Header style={{ alignItems: 'center', backgroundColor: '#f8f8f8' }}>
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
-          <Icon name="arrow-back" />
+          <Icon name="arrow-back" style={{ fontSize: 22, color: '#666' }} />
         </TouchableOpacity>
         <TouchableWithoutFeedback onPress={() => { push({ key: 'MainSearcher', params: { type: 'getMainListName' } }); }}>
           <View style={styles.HeaderMain}>

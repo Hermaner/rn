@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
+import { TouchableOpacity, View, Image, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Content, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
@@ -28,6 +28,7 @@ class HuinongGoodsMotif extends base {
     return (
       <View style={styles.pagebody}>
         <Image style={styles.image} source={{ uri: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=9316bf1010d5ad6eaaf964e2b1f038db/0b55b319ebc4b74502a433c2c4fc1e178a821535.jpg' }} />
+<<<<<<< HEAD
         <ScrollableTabView
           style={{ flex: 1 }}
           tabBarInactiveTextColor="#666"
@@ -49,20 +50,47 @@ class HuinongGoodsMotif extends base {
             ))
           }
         </ScrollableTabView>
+=======
+        {
+          brands.map((item, index) => (
+            <Child tabLabel={item.brandName} name={name} brandId={item.brandId} key={index} />
+          ))
+        }
+>>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
       </View>
     );
   }
   render() {
     const { pop } = this.props;
-    const { brands } = this.state;
+    const { brands, isRefreshing } = this.state;
     return (
-      <View>
+      <Container>
         <Header back={pop} title="惠农好货专场" />
+<<<<<<< HEAD
         <View>
+=======
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={this._onRefresh}
+              tintColor="#ff0000"
+              title="加载中..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
+          {this._renderSwiper()}
+>>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
           {brands !== null && this._renderBody()}
-        </View>
+        </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
-      </View>
+      </Container>
     );
   }
 }

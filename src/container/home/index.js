@@ -1,13 +1,13 @@
 import React from 'react';
-import { Image, View, NativeAppEventEmitter } from 'react-native';
+import { Image, View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Content, Text } from 'native-base';
+import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import { pushRoute } from '../../actions';
-import { Header, Iconfont, GoodList, TOpacity, TFeedback } from '../../components';
+import { Header, Iconfont, GoodList, TOpacity, TFeedback, LoadMore, LoadNoMore } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -240,7 +240,7 @@ class HomeScreen extends base {
     );
   }
   renderForYou() {
-    const { isTabOne } = this.state;
+    const { isTabOne, supplys, business } = this.state;
     return (
       <View style={styles.forYou}>
         <Text style={styles.forYouTitle}>为你推荐</Text>
@@ -250,22 +250,22 @@ class HomeScreen extends base {
               <View style={[styles.flexOne, isTabOne === 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
                 <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>推荐货品</Text>
               </View>}
-            onPress={() => this.tabChangeOne()}
+            onPress={() => this.tabChange(1)}
           />
           <TFeedback
             content={
               <View style={[styles.flexOne, isTabOne !== 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
                 <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>优质商家</Text>
               </View>}
-            onPress={() => this.tabChangeTwo()}
+            onPress={() => this.tabChange(2)}
           />
         </View>
         <View>
           {
             isTabOne === 1 ?
-              <Child1 type="1" />
+              <Child1 type="1" data={supplys} />
             :
-              <Child2 type="2" />
+              <Child2 type="2" data={business} />
           }
         </View>
       </View>
@@ -282,11 +282,34 @@ class HomeScreen extends base {
     </View>
   )
   render() {
-    const { goodGoodsList, goodsTypeList, memberId } = this.state;
+    const {
+      goodGoodsList,
+      goodsTypeList,
+      memberId,
+      refresh,
+      isTabOne,
+      loading,
+      nomore,
+    } = this.state;
     return (
       <Container>
         <Header back={this.props.push} />
-        <Content>
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={isTabOne === 1 ? this._onRefreshSupply : this._onRefreshBusines}
+              tintColor="#ff0000"
+              title="加载中..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
           {this.renderHeaderNavigation()}
           {
             goodsTypeList &&
@@ -299,7 +322,9 @@ class HomeScreen extends base {
           }
           {/* {this.renderSwiper()} */}
           {this.renderForYou()}
-        </Content>
+          {loading && <LoadMore />}
+          {nomore && <LoadNoMore />}
+        </ScrollView>
         <TOpacity
           style={styles.bomFixedView}
           content={

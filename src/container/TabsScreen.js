@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import home from '../container/home';
 import goods from '../container/goods';
@@ -76,6 +76,9 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         }
         if (index === 2) {
           console.log('判断是否登陆');
+        }
+        if (index === 3) {
+          DeviceEventEmitter.emit('emitUser');
         }
         jumpToIndex(index);
       },

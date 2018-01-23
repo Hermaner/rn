@@ -3,6 +3,7 @@ package com.afanti.monkeydoor;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.yunpeng.alipay.AlipayPackage;
 import com.theweflex.react.WeChatPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -40,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
           new RCTAMapLocationPackage(),
             new AlipayPackage(),
             new WeChatPackage(),

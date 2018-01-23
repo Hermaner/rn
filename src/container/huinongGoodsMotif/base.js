@@ -17,8 +17,9 @@ class Base extends React.Component {
       currentPage: 1,
       pageSize: '5',
       isSleekShow: false,
-      refresh: false, // 是否是刷新
+      isRefreshing: false, // 是否是刷新
       loading: true, // 是否加载中
+      loadMore: false,
       nomore: false, // 是否没有更多
       noData: false, // 是否没有数据
       title: '',
@@ -68,7 +69,54 @@ class Base extends React.Component {
       memberId: global.memberId,
       brands,
       name,
+<<<<<<< HEAD
+=======
+    }, this.getData);
+  }
+  getData = () => {
+    const { ds, categoryId } = this.state;
+    let { brandId } = this.props;
+    brandId = brandId || '';
+    GetGotSupplyService({
+      categoryId,
+      brandId,
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const result = res.data;
+        this.setState({
+          isRefreshing: false,
+          loadMore: false,
+          dataSource: ds.cloneWithRows(result),
+        });
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      console.log(err);
+>>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
     });
+  }
+  _onRefresh = () => {
+    this.setState({
+      isRefreshing: true,
+    }, this.getData);
+  }
+  _onScroll = (event) => {
+    if (this.state.loadMore) {
+      return;
+    }
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    if (y + height >= contentHeight - 20) {
+      this.setState({
+        loadMore: true,
+      }, this._reachEnd);
+    }
+  }
+  _reachEnd = () => {
+    this.getData();
   }
 }
 Base.propTypes = {

@@ -68,8 +68,13 @@ class Child extends ChildBase {
     console.log('6666666666666666666666666666666', dataSource)
     const { name } = this.props;
     return (
+<<<<<<< HEAD
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {/* <View style={styles.goods}>
+=======
+      <View style={{ backgroundColor: '#f6f6f6' }}>
+        <View style={styles.goods}>
+>>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
           <View style={styles.goodsTitle}>
             <Text style={styles.goodsTitleText}>{name}</Text>
           </View>
