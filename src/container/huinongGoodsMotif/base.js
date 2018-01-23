@@ -20,6 +20,7 @@ class Base extends React.Component {
       isRefreshing: false, // 是否是刷新
       loading: true, // 是否加载中
       loadMore: false,
+      refresh: false,
       nomore: false, // 是否没有更多
       noData: false, // 是否没有数据
       title: '',
@@ -61,16 +62,15 @@ class Base extends React.Component {
       }],
       brands: null,
       name: '',
+      isTabOne: 0,
+      categoryId: '',
     };
   }
   getInit = () => {
-    const { brands, name } = this.props.navigation.state.params;
+    const { brands, categoryId } = this.props.navigation.state.params;
     this.setState({
-      memberId: global.memberId,
       brands,
-      name,
-<<<<<<< HEAD
-=======
+      categoryId,
     }, this.getData);
   }
   getData = () => {
@@ -85,25 +85,30 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
-          isRefreshing: false,
-          loadMore: false,
+          goodsItems: result,
           dataSource: ds.cloneWithRows(result),
         });
       } else {
-        Toast.show('温馨提示');
+        Toast.show('温馨提示ww');
       }
     }).catch((err) => {
       console.log(err);
->>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
     });
   }
-  _onRefresh = () => {
+  _onGetGotSupplyService = () => {
     this.setState({
-      isRefreshing: true,
-    }, this.getData);
+      refresh: true,
+    }, () => this.getData());
+  }
+  tabChange = (isTabOne) => {
+    this.setState({
+      isTabOne,
+      nomore: false,
+    });
   }
   _onScroll = (event) => {
-    if (this.state.loadMore) {
+    const { isTabOne, loading, nomore } = this.state;
+    if (loading || nomore) {
       return;
     }
     const y = event.nativeEvent.contentOffset.y;
@@ -111,15 +116,14 @@ class Base extends React.Component {
     const contentHeight = event.nativeEvent.contentSize.height;
     if (y + height >= contentHeight - 20) {
       this.setState({
-        loadMore: true,
-      }, this._reachEnd);
+        loading: true,
+      }, isTabOne === 1 ? this.GetVerifSupplyService : this.GetGoodBusinesService);
     }
-  }
-  _reachEnd = () => {
-    this.getData();
   }
 }
 Base.propTypes = {
   navigation: PropTypes.object,
+  categoryId: PropTypes.string,
+  brandId: PropTypes.string,
 };
 export default Base;

@@ -25,13 +25,13 @@ class Base extends React.Component {
       categoryId: '',
       brands: null,
       name: '',
+      goodsItems: [],
     };
   }
   getData = () => {
     const { ds } = this.state;
     let { brandId } = this.props;
     const { categoryId } = this.props;
-    console.log('ooppooppooppooppoopp', categoryId)
     brandId = brandId || '';
     GetGotSupplyService({
       categoryId,
@@ -41,9 +41,9 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
+          goodsItems: result,
           dataSource: ds.cloneWithRows(result),
         });
-        console.log('{{{{{{{{}}}}}}}}', this.state.dataSource)
       } else {
         Toast.show('温馨提示ww');
       }

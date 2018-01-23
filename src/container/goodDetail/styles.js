@@ -10,6 +10,26 @@ const styles = StyleSheet.create({
     height: px(200),
     width: '100%',
   },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+  flexOne: {
+    flex: 1,
+  },
+  textBorder: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#8BCE21',
+  },
+  tabText: {
+    color: '#666',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  tabTextChoose: {
+    color: '#8BCE21',
+  },
   topOne: {
     position: 'absolute',
     left: 5,

@@ -53,7 +53,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
             name = '我要卖';
             break;
           case 'Carts':
-            iconName = 'icon-7';
+            iconName = 'icon-kefu';
             name = '聊生意';
             break;
           case 'Mine':

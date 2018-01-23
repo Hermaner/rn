@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, ScrollableTab, Loading } from '../../components';
+import { Header, TFeedback, Loading, LoadMore, LoadNoMore } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -24,12 +24,13 @@ class HuinongGoodsMotif extends base {
     this.getInit();
   }
   _renderBody() {
-    const { name, categoryId, brands } = this.props.navigation.state.params;
+    const { isTabOne, brands, goodsItems } = this.state;
+    console.log('uuuuuuuuuuuuuu', brands);
+    const { name } = this.props.navigation.state.params;
     return (
       <View style={styles.pagebody}>
         <Image style={styles.image} source={{ uri: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=9316bf1010d5ad6eaaf964e2b1f038db/0b55b319ebc4b74502a433c2c4fc1e178a821535.jpg' }} />
-<<<<<<< HEAD
-        <ScrollableTabView
+        {/* <ScrollableTabView
           style={{ flex: 1 }}
           tabBarInactiveTextColor="#666"
           tabBarActiveTextColor="#8bce21"
@@ -49,32 +50,43 @@ class HuinongGoodsMotif extends base {
               />
             ))
           }
-        </ScrollableTabView>
-=======
-        {
-          brands.map((item, index) => (
-            <Child tabLabel={item.brandName} name={name} brandId={item.brandId} key={index} />
-          ))
-        }
->>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
+        </ScrollableTabView> */}
+        <View style={[styles.flexRow, { borderBottomWidth: 1, borderBottomColor: '#eee' }]}>
+          {
+            brands.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={[styles.flexOne, isTabOne === index ? styles.textBorder : '', { paddingBottom: 10, paddingTop: 10 }]}>
+                    <Text style={[styles.tabText, isTabOne === index ? styles.tabTextChoose : '']}>{item.brandName}</Text>
+                  </View>}
+                onPress={() => this.tabChange(index)}
+              />
+            ))
+          }
+        </View>
+        <View>
+          <Child
+            name={name}
+            brandId={brands[isTabOne].brandId}
+            data={goodsItems}
+          />
+        </View>
       </View>
     );
   }
   render() {
     const { pop } = this.props;
-    const { brands, isRefreshing } = this.state;
+    const { brands, refresh, loading, nomore } = this.state;
     return (
       <Container>
         <Header back={pop} title="惠农好货专场" />
-<<<<<<< HEAD
-        <View>
-=======
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={
             <RefreshControl
-              refreshing={isRefreshing}
-              onRefresh={this._onRefresh}
+              refreshing={refresh}
+              onRefresh={this._onGetGotSupplyService}
               tintColor="#ff0000"
               title="加载中..."
               titleColor="#00ff00"
@@ -85,9 +97,9 @@ class HuinongGoodsMotif extends base {
           onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
-          {this._renderSwiper()}
->>>>>>> 524725efc84f9bf3d2a5a7c5776eefe761a51a76
           {brands !== null && this._renderBody()}
+          {loading && <LoadMore />}
+          {nomore && <LoadNoMore />}
         </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

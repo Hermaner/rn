@@ -47,13 +47,15 @@ class Base extends React.Component {
       count: '',
       skuCount: 1,
       memberId: '',
+      isTabOne: 1,
+      refresh: false, // 是否刷新
     };
   }
   getInit = () => {
     const { supplyId } = this.props.navigation.state.params;
     this.setState({
       supplyId,
-      memberId: global.memberId,
+      memberId: global.memberId || '',
     }, this.GetSupplyInfoService);
   }
   GetSupplyInfoService = () => {
@@ -77,6 +79,11 @@ class Base extends React.Component {
       console.log(err);
     });
   }
+  _onGetSupplyInfoService = () => {
+    this.setState({
+      refresh: true,
+    }, () => this.GetSupplyInfoService());
+  }
   changeItem = (index) => {
     const { items } = this.state;
     items[index].cur = !items[index].cur;
@@ -84,8 +91,11 @@ class Base extends React.Component {
       items,
     });
   }
-  save = (callback) => {
-    callback();
+  tabChange = (isTabOne) => {
+    this.setState({
+      isTabOne,
+      nomore: false,
+    });
   }
   InputNumberChange(skuCount) {
     this.setState({

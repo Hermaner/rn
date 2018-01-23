@@ -31,5 +31,6 @@ const iconfont = {
   'icon-mai': parseInt('e601', 16),
   'icon-wode': parseInt('e655', 16),
   'icon-7': parseInt('e6ca', 16),
+  'icon-waimai': parseInt('e6a5', 16),
 };
 export default iconfont;

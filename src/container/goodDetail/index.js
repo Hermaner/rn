@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, TouchableOpacity, RefreshControl, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Icon, Footer } from 'native-base';
+import { Container, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
@@ -228,7 +228,7 @@ class MainScreen extends base {
     );
   }
   _renderTabs() {
-    const { detail } = this.state;
+    const { detail, isTabOne } = this.state;
     const Tab1 = () => (
       <View style={styles.detialView}>
         <Text style={styles.detialLabel}>{detail.memo}</Text>
@@ -261,10 +261,30 @@ class MainScreen extends base {
     );
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
-        <ScrollableTabView renderTabBar={() => <ScrollableTab />}>
-          <Tab1 tabLabel="图文详情" />
-          <Tab2 tabLabel="他还供应" />
-        </ScrollableTabView>
+        <View style={[styles.flexRow, { borderBottomWidth: 1, borderBottomColor: '#eee', paddingTop: 10 }]}>
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne === 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>图文详情</Text>
+              </View>}
+            onPress={() => this.tabChange(1)}
+          />
+          <TFeedback
+            content={
+              <View style={[styles.flexOne, isTabOne !== 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
+                <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>他还供应</Text>
+              </View>}
+            onPress={() => this.tabChange(2)}
+          />
+        </View>
+        <View>
+          {
+            isTabOne === 1 ?
+              <Tab1 type="1" />
+            :
+              <Tab2 type="2" />
+          }
+        </View>
       </View>
     );
   }
@@ -332,7 +352,7 @@ class MainScreen extends base {
   }
   render() {
     const { pop } = this.props;
-    const { detail } = this.state;
+    const { detail, refresh } = this.state;
     return (
       <Container>
         <Header
@@ -341,7 +361,22 @@ class MainScreen extends base {
         />
         {
           detail &&
-          <Content>
+          <ScrollView
+            style={{ flex: 1 }}
+            refreshControl={
+              <RefreshControl
+                refreshing={refresh}
+                onRefresh={this._onGetSupplyInfoService}
+                tintColor="#ff0000"
+                title="加载中..."
+                titleColor="#00ff00"
+                colors={['#ff0000', '#00ff00', '#0000ff']}
+                progressBackgroundColor="#ffffff"
+              />
+            }
+            onScroll={this._onScroll}
+            scrollEventThrottle={50}
+          >
             {this._renderTop()}
             {this._renderNameAP()}
             {this._renderProvideTypes()}
@@ -350,7 +385,7 @@ class MainScreen extends base {
             {detail.supplyItems && this._renderSkuTable()}
             {this._renderTabs()}
             {this._renderModalView()}
-          </Content>
+          </ScrollView>
         }
         {detail && this._renderFooter()}
         <Loading ref={(c) => { this.sleek = c; }} />

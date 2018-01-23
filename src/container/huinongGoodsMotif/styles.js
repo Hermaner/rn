@@ -9,6 +9,26 @@ const styles = StyleSheet.create({
     width,
     height: 160,
   },
+  flexOne: {
+    flex: 1,
+  },
+  textBorder: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#8BCE21',
+  },
+  tabText: {
+    color: '#666',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  tabTextChoose: {
+    color: '#8BCE21',
+  },
+  flexRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
   goods: {
     marginTop: 10,
     marginBottom: 20,

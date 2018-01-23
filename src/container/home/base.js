@@ -16,7 +16,7 @@ class Base extends React.Component {
         color: '#1CC127',
       }, {
         id: 1,
-        icn: 'icon-maichu',
+        icn: 'icon-shucai',
         isIcn: false,
         text: '',
         name: '蔬菜',

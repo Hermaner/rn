@@ -32,5 +32,10 @@ const styles = StyleSheet.create({
   last: {
     borderWidth: 0,
   },
+  icn: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: '#666',
+  },
 });
 export default styles;
