@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { TFeedback } from '../../components';
-import Base from './base';
+import ChildBase from './childBase';
 import styles from './styles';
 
-class Child extends Base {
+class Child extends ChildBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,10 +65,11 @@ class Child extends Base {
   }
   render() {
     const { dataSource } = this.state;
+    console.log('6666666666666666666666666666666', dataSource)
     const { name } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
-        <View style={styles.goods}>
+        {/* <View style={styles.goods}>
           <View style={styles.goodsTitle}>
             <Text style={styles.goodsTitleText}>{name}</Text>
           </View>
@@ -79,7 +80,8 @@ class Child extends Base {
             onEndReachedThreshold={10}
             contentContainerStyle={styles.listViewStyle}
           />
-        </View>
+        </View> */}
+        <Text>vvv</Text>
       </View>
     );
   }

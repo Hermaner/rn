@@ -58,44 +58,20 @@ class Base extends React.Component {
         name: '刘德华',
         place: '湖北省武汉市',
       }],
-      categoryId: '',
       brands: null,
       name: '',
     };
   }
   getInit = () => {
-    const { categoryId, brands, name } = this.props.navigation.state.params;
+    const { brands, name } = this.props.navigation.state.params;
     this.setState({
       memberId: global.memberId,
-      categoryId,
       brands,
       name,
-    }, this.getData);
-  }
-  getData = () => {
-    const { ds, categoryId } = this.state;
-    let { brandId } = this.props;
-    brandId = brandId || '';
-    GetGotSupplyService({
-      categoryId,
-      brandId,
-    }).then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        const result = res.data;
-        this.setState({
-          dataSource: ds.cloneWithRows(result),
-        });
-      } else {
-        Toast.show('温馨提示');
-      }
-    }).catch((err) => {
-      console.log(err);
     });
   }
 }
 Base.propTypes = {
-  brandId: PropTypes.string,
   navigation: PropTypes.object,
 };
 export default Base;

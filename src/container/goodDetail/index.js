@@ -7,7 +7,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading } from '../../components';
+import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading, TFeedback } from '../../components';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -40,6 +40,7 @@ class MainScreen extends base {
   }
   _renderNameAP() {
     const { detail } = this.state;
+    const { push } = this.props;
     return (
       <View style={styles.nameAPView}>
         <View style={styles.nameOneView}>
@@ -48,10 +49,14 @@ class MainScreen extends base {
               {detail.categoryName}{detail.brandName}{detail.supplyItems.map((item => item.specName)).join(' ')}
             </Text>
           </View>
-          <View style={styles.nameIconView}>
-            <Icon name="ios-trophy" style={styles.jcIcon} />
-            <Text style={styles.grayText}>举报</Text>
-          </View>
+          <TFeedback
+            content={
+              <View style={styles.nameIconView}>
+                <Icon name="ios-trophy" style={styles.jcIcon} />
+                <Text style={styles.grayText}>举报</Text>
+              </View>}
+            onPress={() => { push({ key: 'ReportPage' }); }}
+          />
         </View>
         <View style={styles.nameAddressView}>
           <Text style={styles.grayText}>
@@ -267,7 +272,7 @@ class MainScreen extends base {
     return (
       <Footer>
         <View style={styles.fotBtn1}>
-          <Icon name="arrow-back" style={styles.fotChatIcon} />
+          <Icon name="chatboxes" style={styles.fotChatIcon} />
           <Text style={styles.fotChatText}>聊生意</Text>
         </View>
         <View style={styles.fotBtn2}>

@@ -28,5 +28,8 @@ const iconfont = {
   'icon-renzheng-tianchong': parseInt('e630', 16),
   'icon-shangpin-tianchong': parseInt('e634', 16),
   'icon-zhanghu': parseInt('e60e', 16),
+  'icon-mai': parseInt('e601', 16),
+  'icon-wode': parseInt('e655', 16),
+  'icon-7': parseInt('e6ca', 16),
 };
 export default iconfont;

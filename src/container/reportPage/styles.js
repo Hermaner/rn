@@ -61,5 +61,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: '#53BB21',
   },
+  icn: {
+    fontSize: 18,
+    color: '#666',
+  },
 });
 export default styles;

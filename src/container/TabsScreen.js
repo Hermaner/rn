@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import { Icon } from 'native-base';
 import home from '../container/home';
 import goods from '../container/goods';
 import carts from '../container/carts';
 import mine from '../container/my';
 import { Mcolor } from '../utils';
+import { Iconfont } from '../components';
 
 const styles = StyleSheet.create({
   tabView: {
@@ -45,19 +45,19 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         let name;
         switch (routeName) {
           case 'Home':
-            iconName = 'home';
+            iconName = 'icon-caigou-xianxing';
             name = '我要买';
             break;
           case 'Goods':
-            iconName = 'pint';
+            iconName = 'icon-maichu';
             name = '我要卖';
             break;
           case 'Carts':
-            iconName = 'eye';
+            iconName = 'icon-7';
             name = '聊生意';
             break;
           case 'Mine':
-            iconName = 'eye';
+            iconName = 'icon-wode';
             name = '我的';
             break;
           default:
@@ -65,7 +65,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         }
         return (
           <View style={styles.tabView}>
-            <Icon style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
+            <Iconfont style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
             <Text style={[styles.tabViewText, { color: focused ? Mcolor : '#666' }]}>{name}</Text>
           </View>
         );

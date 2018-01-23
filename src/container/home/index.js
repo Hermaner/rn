@@ -36,7 +36,6 @@ class HomeScreen extends base {
     this.getInit();
   }
   _onLocationResult = (result) => {
-    console.log(result);
     if (result.coordinate) {
       global.storage.save({
         key: 'position',
@@ -298,7 +297,7 @@ class HomeScreen extends base {
             goodGoodsList &&
             this.renderSeasonalGoods()
           }
-          {this.renderSwiper()}
+          {/* {this.renderSwiper()} */}
           {this.renderForYou()}
         </Content>
         <TOpacity
