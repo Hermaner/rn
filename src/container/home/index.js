@@ -36,11 +36,8 @@ class HomeScreen extends base {
   }
   _onLocationResult = (result) => {
     if (result.coordinate) {
-      global.storage.save({
-        key: 'position',
-        data: result.coordinate,
-        expires: null,
-      });
+      global.longitude = result.coordinate.longitude;
+      global.latitude = result.coordinate.latitude;
     }
   }
   renderHeader() {
@@ -68,7 +65,6 @@ class HomeScreen extends base {
   }
   renderHeaderNavigation() {
     const { push } = this.props;
-    const { memberId } = this.state;
     return (
       <View style={[styles.flexRow, styles.headerNavigation]}>
         <TOpacity
@@ -113,7 +109,7 @@ class HomeScreen extends base {
               </View>
               <Text style={[styles.headerNavigationText, styles.textCenter]}>发采购</Text>
             </View>}
-          onPress={() => push({ key: memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
+          onPress={() => this.props.push({ key: global.memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
         />
       </View>
     );

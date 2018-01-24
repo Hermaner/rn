@@ -149,6 +149,7 @@ class MainScreen extends base {
         </View>
         <Modal
           visible={isCertifShow}
+          onRequestClose={() => { console.log('关闭'); }}
           transparent
         >
           <ImageViewer

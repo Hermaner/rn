@@ -1,4 +1,5 @@
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { GetIdentityService, SaveMemberRoleService } from '../../api';
 
@@ -14,13 +15,9 @@ class AdjectiveInfoBase extends React.Component {
   }
   getInit = () => {
     this.GetIdentityService();
-    global.storage.load({
-      key: 'userData',
-    }).then((ret) => {
-      this.setState({
-        memberId: ret.memberId,
-      });
-    }).catch(() => {});
+    this.setState({
+      memberId: global.memberId || '',
+    });
   }
   GetIdentityService = () => {
     GetIdentityService()
@@ -63,14 +60,7 @@ class AdjectiveInfoBase extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        global.storage.save({
-          key: 'userData',
-          data: {
-            ...res.data,
-            memberId: res.data.memberId.toString(),
-          },
-          expires: null,
-        }).catch(() => {});
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.memberId = res.data.memberId.toString();
         Toast.show('保存成功');
       } else {

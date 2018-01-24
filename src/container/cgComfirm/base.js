@@ -170,13 +170,10 @@ class Base extends React.Component {
     );
   }
   initData = () => {
-    global.storage.load({ key: 'userData' })
-    .then((res) => {
-      this.setState({
-        memberId: res.memberId,
-        phone: res.phone,
-      });
-    }).catch(() => {});
+    this.setState({
+      memberId: global.userData.memberId,
+      phone: global.userData.phone,
+    });
     this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
       this.getData();
     });

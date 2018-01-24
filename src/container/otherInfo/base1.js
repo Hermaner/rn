@@ -68,7 +68,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId });
+    this.setState({ memberId: global.memberId || '' });
   }
   rzDetail = () => {
     this.setState({

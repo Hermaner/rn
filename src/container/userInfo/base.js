@@ -20,17 +20,11 @@ class UserInfoBase extends React.Component {
   }
   getInit = () => {
     this.GetIdentityService();
-    global.storage.load({
-      key: 'userData',
-    }).then((ret) => {
-      console.log(ret);
-      global.memberId = ret.memberId;
-      this.setState({
-        memberId: ret.memberId,
-        nickName: ret.nickName,
-        phone: ret.phone,
-      });
-    }).catch(() => {});
+    this.setState({
+      memberId: global.userData.memberId,
+      nickName: global.userData.nickName,
+      phone: global.userData.phone,
+    });
   }
   userInfoEmit = (data) => {
     console.log(data);

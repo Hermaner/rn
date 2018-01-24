@@ -18,7 +18,7 @@ class Base extends React.Component {
   getInit = () => {
     const { newsId } = this.props.navigation.state.params;
     this.setState({
-      memberId: global.memberId,
+      memberId: global.memberId || '',
       newsId,
     }, this.getData);
   }

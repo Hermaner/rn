@@ -32,7 +32,7 @@ class Base extends React.Component {
     this.emitBjCity = DeviceEventEmitter.addListener('getBjCity', (data) => {
       this.getBjCity(data);
     });
-    global.storage.load({ key: 'userData' }).then(res => this.setState({ memberId: res.memberId })).catch(() => {});
+    this.setState({ memberId: global.memberId || '' });
     const { purchaseId, unit, items } = this.props.navigation.state.params;
     items[0].cur = true;
     this.setState({

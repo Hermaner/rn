@@ -12,8 +12,10 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    global.storage.load({ key: 'userData' })
-    .then(res => this.setState({ memberId: res.memberId, role: res.role }, this.getData)).catch(() => {});
+    this.setState({
+      memberId: global.userData.memberId,
+      role: global.userData.role,
+    }, this.ValidateIsQuoteService);
   }
   getData = () => {
     const { memberId } = this.state;

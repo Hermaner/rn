@@ -114,7 +114,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId }, this.getData);
+    this.setState({ memberId: global.memberId || '' }, this.getData);
   }
   getData = () => {
     const { typeList } = this.state;
@@ -201,7 +201,7 @@ class Base extends React.Component {
         Toast.show('温馨提示');
       }
     }).catch((err) => {
-      Toast.show(err);
+      console.log(err);
     });
   }
   GetGoodBusinesService = () => {

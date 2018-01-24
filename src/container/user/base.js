@@ -1,4 +1,5 @@
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetCodeService, RegisterMemberService } from '../../api';
@@ -102,14 +103,7 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        global.storage.save({
-          key: 'userData',
-          data: {
-            ...res.data,
-            memberId: res.data.memberId.toString(),
-          },
-          expires: null,
-        });
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.memberId = res.data.memberId.toString();
         Toast.show('登陆成功');
         if (res.data.role) {

@@ -269,12 +269,9 @@ class Base extends React.Component {
     );
   }
   initData = () => {
-    global.storage.load({ key: 'userData' })
-    .then((res) => {
-      this.setState({
-        memberId: res.memberId,
-      });
-    }).catch(() => {});
+    this.setState({
+      memberId: global.memberId || '',
+    });
     this.emitgetCgyxSku = DeviceEventEmitter.addListener('getCgyxSku', (data) => {
       this.getCgyxSku(data);
     });

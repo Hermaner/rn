@@ -84,9 +84,9 @@ class Goods extends base {
                   </View>
                 </View>
               </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>我的订单</Text>
+              <Text style={[styles.headerNavigationText, styles.textCenter]}>发供应</Text>
             </View>}
-          onPress={() => { push({ key: 'MySoldGoods' }); }}
+          onPress={() => this.props.push({ key: global.memberId ? 'MainSearch' : 'User', params: { type: '3' } })}
         />
       </View>
     );
@@ -246,15 +246,6 @@ class Goods extends base {
           {this.renderSwiper()}
           {this.state.goodGoodsList.length > 0 && this.renderAllGoods()}
         </Content>
-        <TOpacity
-          style={styles.bomFixedView}
-          content={
-            <View style={styles.bomFixedBtn}>
-              <Text style={styles.bomFixedText}>发供应</Text>
-            </View>
-          }
-          onPress={() => this.props.push({ key: memberId ? 'ReleaseMainList' : 'User', params: { type: '3' } })}
-        />
       </Container>
     );
   }
