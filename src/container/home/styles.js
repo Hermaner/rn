@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st, spx, Mcolor } from '../../utils';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
   },
   headerNavigationText: {
     fontSize: 16,
+    color: '#333',
+  },
+  SampleCenterText: {
+    fontSize: 14,
     color: '#333',
   },
   flexRow: {
@@ -28,26 +32,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   gong: {
-    fontSize: 40,
-    color: '#fff',
+    fontSize: 30,
+    color: '#53E0B5',
     textAlign: 'center',
   },
   hang: {
-    fontSize: 40,
-    color: '#fff',
+    fontSize: 30,
+    color: '#FAC342',
     textAlign: 'center',
   },
   hui: {
-    fontSize: 36,
+    fontSize: 30,
     marginLeft: 5,
     textAlign: 'center',
-    color: '#fff',
+    color: '#9ED63C',
   },
   my: {
-    fontSize: 40,
+    fontSize: 30,
     marginTop: 2,
     textAlign: 'center',
-    color: '#fff',
+    color: '#82B4FD',
   },
   normalThressText: {
     color: '#333',
@@ -85,6 +89,21 @@ const styles = StyleSheet.create({
   },
   goodsTypeOne: {
     width: '25%',
+  },
+  icnBoxOne: {
+    width: 40,
+    height: 40,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  icnBoxTwo: {
+    width: 40,
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
   },
   SampleCenter: {
     marginTop: 10,
@@ -125,7 +144,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#eee',
     borderRightWidth: 1,
     borderRightColor: '#eee',
-    paddingTop: 10,
+    paddingTop: 4,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 5,
@@ -137,12 +156,13 @@ const styles = StyleSheet.create({
   imageBox: {
     // flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    marginBottom: 8,
   },
   image: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     marginTop: 6,
   },
   slide: {
@@ -212,6 +232,45 @@ const styles = StyleSheet.create({
   },
   tabTextChoose: {
     color: '#8BCE21',
+  },
+  headerImgBox: {
+    flex: 1,
+    height: spx(180),
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  headerImg: {
+    flex: 1,
+    height: '100%',
+    resizeMode: 'stretch',
+  },
+  boxStyle: {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 4,
+  },
+  headerText: {
+    textAlign: 'center',
+    backgroundColor: 'transparent',
+    marginTop: 80,
+    fontSize: 18,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  inputText: {
+    height: 40,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  headerIcn: {
+    fontSize: 18,
+    color: '#666',
   },
 });
 export default styles;
