@@ -363,17 +363,17 @@ class MainScreen extends base {
           detail &&
           <ScrollView
             style={{ flex: 1 }}
-            refreshControl={
-              <RefreshControl
-                refreshing={refresh}
-                onRefresh={this._onGetSupplyInfoService}
-                tintColor="#ff0000"
-                title="加载中..."
-                titleColor="#00ff00"
-                colors={['#ff0000', '#00ff00', '#0000ff']}
-                progressBackgroundColor="#ffffff"
-              />
-            }
+            // refreshControl={
+            //   <RefreshControl
+            //     refreshing={refresh}
+            //     onRefresh={this._onGetSupplyInfoService}
+            //     tintColor="#ff0000"
+            //     title="加载中..."
+            //     titleColor="#00ff00"
+            //     colors={['#ff0000', '#00ff00', '#0000ff']}
+            //     progressBackgroundColor="#ffffff"
+            //   />
+            // }
             onScroll={this._onScroll}
             scrollEventThrottle={50}
           >

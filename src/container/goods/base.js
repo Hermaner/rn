@@ -42,6 +42,7 @@ class Base extends React.Component {
   getData = () => {
     GetAppCategoryService({
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         const result = res.data[0].childs;
         result.length = 5;
