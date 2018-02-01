@@ -52,10 +52,10 @@ export default class InputNumber extends React.Component {
     downStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     onChange: PropTypes.func,
-    max: PropTypes.number,
-    min: PropTypes.number,
+    max: PropTypes.any,
+    min: PropTypes.any,
     disabled: PropTypes.bool,
-    value: PropTypes.number,
+    value: PropTypes.any,
     readOnly: PropTypes.bool,
   };
   static defaultProps = {

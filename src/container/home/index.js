@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Text, Input } from 'native-base';
+import { Container, Text, Input, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
@@ -50,12 +50,11 @@ class HomeScreen extends base {
         <View style={{ height: 180, paddingLeft: 10, paddingRight: 10 }}>
           <Text style={styles.headerText}>找专业的人  做专业的事</Text>
           <View style={[styles.flexRow, styles.boxStyle]}>
-            <Iconfont style={styles.headerIcn} name="icon-caigou-xianxing" />
+            <Icon style={styles.headerIcn} name="search" />
             <Input
               style={styles.inputText}
               value={this.state.businessName}
               placeholderTextColor={{ color: '#666', fontSize: 14 }}
-              // onChangeText={text => this.saveBusinessName(text)}
               placeholder="请输入关键字"
             />
           </View>
@@ -236,16 +235,6 @@ class HomeScreen extends base {
       </View>
     );
   }
-  _renderRow = (rowData, sectionID, rowID) => (
-    <View>
-      <GoodList
-        data={rowData}
-        rowID={rowID}
-        key={rowID}
-        onPress={() => { this.props.push({ key: 'GoodDetail' }); }}
-      />
-    </View>
-  )
   render() {
     const {
       goodGoodsList,

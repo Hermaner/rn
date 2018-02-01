@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
 import { Header, TFeedback, Loading } from '../../components';
-import shippingAddressBase from './base';
+import base from './base';
 import styles from './styles';
 
-class ShippingAddress extends shippingAddressBase {
+class ShippingAddress extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,7 +88,7 @@ class ShippingAddress extends shippingAddressBase {
     const { pop, push } = this.props;
     return (
       <Container>
-        <Header back={pop} title="管理收货地址" />
+        <Header back={() => { this.back(); }} title="管理收货地址" />
         <Content contentContainerStyle={{ flex: 1 }}>
           {this._renderBody()}
         </Content>

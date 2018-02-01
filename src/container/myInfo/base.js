@@ -68,10 +68,14 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    const { memberId } = this.props.navigation.state.params;
-    this.setState({ memberId }, this._onRefresh);
+    this.setState({ memberId: global.memberId }, this._onRefresh);
   }
   getData = () => {
+    // const { keyIndex } = this.props;
+    this._onRefreshSupply();
+    this._onRefreshPurchase();
+  }
+  GetSupplyService = () => {
     const {
       currentPage,
       pageSize,
@@ -79,123 +83,140 @@ class Base extends React.Component {
       memberId,
       supplyGoodsList,
       ds,
+      dataSource,
+      refresh } = this.state;
+    this.sleek.toggle();
+    GetSupplyService({
+      currentPage,
+      pageSize,
+      type,
+      memberId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          if (supplyGoodsList.length === 0) {
+            this.setState({
+              noData: true,
+            });
+          } else {
+            this.setState({
+              nomore: true,
+              loading: false,
+            });
+          }
+          return;
+        }
+        if (refresh) {
+          this.setState({
+            supplyGoodsList: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = supplyGoodsList.concat(result);
+          this.setState({
+            supplyGoodsList: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
+            loading: false,
+          });
+        }
+        setTimeout(() => { canEnd = true; }, 0);
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  GetPurchaseService = () => {
+    const {
+      currentPage,
+      pageSize,
+      type,
+      memberId,
+      ds,
       releaseGoodsList,
       dataSource,
       refresh } = this.state;
-    const { keyIndex } = this.props;
-    if (keyIndex === '1') {
+    this.sleek.toggle();
+    GetPurchaseService({
+      currentPage,
+      pageSize,
+      type,
+      memberId,
+    }).then((res) => {
       this.sleek.toggle();
-      GetSupplyService({
-        currentPage,
-        pageSize,
-        type,
-        memberId,
-      }).then((res) => {
-        this.sleek.toggle();
-        if (res.isSuccess) {
-          console.log(res);
-          const result = res.data.pageData;
-          if (result.length === 0) {
-            if (supplyGoodsList.length === 0) {
-              this.setState({
-                noData: true,
-              });
-            } else {
-              this.setState({
-                nomore: true,
-                loading: false,
-              });
-            }
-            return;
-          }
-          if (refresh) {
+      console.log(res);
+      if (res.isSuccess) {
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          if (releaseGoodsList.length === 0) {
             this.setState({
-              supplyGoodsList: result,
-              dataSource: ds.cloneWithRows(result),
-              currentPage: currentPage + 1,
-              refresh: false,
-              nomore: false,
+              noData: true,
             });
           } else {
-            const newItems = supplyGoodsList.concat(result);
             this.setState({
-              supplyGoodsList: newItems,
-              dataSource: dataSource.cloneWithRows(newItems),
-              currentPage: currentPage + 1,
-              loading: false,
-            });
-          }
-          setTimeout(() => { canEnd = true; }, 0);
-          if (result.length < pageSize) {
-            this.setState({
-              loading: false,
               nomore: true,
+              loading: false,
             });
           }
-        } else {
-          Toast.show('温馨提示');
+          return;
         }
-      }).catch((err) => {
-        console.log(err);
-      });
-    }
-    if (keyIndex === '2') {
+        if (refresh) {
+          this.setState({
+            releaseGoodsList: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = releaseGoodsList.concat(result);
+          this.setState({
+            releaseGoodsList: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
+            loading: false,
+          });
+        }
+        setTimeout(() => { canEnd = true; }, 0);
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
       this.sleek.toggle();
-      GetPurchaseService({
-        currentPage,
-        pageSize,
-        type,
-        memberId,
-      }).then((res) => {
-        this.sleek.toggle();
-        console.log(res);
-        if (res.isSuccess) {
-          const result = res.data.pageData;
-          if (result.length === 0) {
-            if (releaseGoodsList.length === 0) {
-              this.setState({
-                noData: true,
-              });
-            } else {
-              this.setState({
-                nomore: true,
-                loading: false,
-              });
-            }
-            return;
-          }
-          if (refresh) {
-            this.setState({
-              releaseGoodsList: result,
-              dataSource: ds.cloneWithRows(result),
-              currentPage: currentPage + 1,
-              refresh: false,
-              nomore: false,
-            });
-          } else {
-            const newItems = releaseGoodsList.concat(result);
-            this.setState({
-              releaseGoodsList: newItems,
-              dataSource: dataSource.cloneWithRows(newItems),
-              currentPage: currentPage + 1,
-              loading: false,
-            });
-          }
-          setTimeout(() => { canEnd = true; }, 0);
-          if (result.length < pageSize) {
-            this.setState({
-              loading: false,
-              nomore: true,
-            });
-          }
-        } else {
-          Toast.show('温馨提示');
-        }
-      }).catch((err) => {
-        this.sleek.toggle();
-        console.log(err);
-      });
-    }
+      console.log(err);
+    });
+  }
+  _onRefreshSupply = () => {
+    this.setState({
+      refresh: true,
+      scurrentPage: 1,
+    }, () => this.GetSupplyService());
+  }
+  _onRefreshPurchase = () => {
+    this.setState({
+      refresh: true,
+      bcurrentPage: 1,
+    }, () => this.GetPurchaseService());
   }
   rzDetail = () => {
     this.setState({
@@ -245,10 +266,22 @@ class Base extends React.Component {
       this.setState({ loading: true }, () => this.getData());
     }
   }
+  _onScroll = (event) => {
+    const { isTabOne, loading, nomore } = this.state;
+    if (loading || nomore) {
+      return;
+    }
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    if (y + height >= contentHeight - 20) {
+      this.setState({
+        loading: true,
+      }, isTabOne === 1 ? this.GetVerifSupplyService : this.GetGoodBusinesService);
+    }
+  }
 }
 Base.propTypes = {
   push: PropTypes.func,
-  keyIndex: PropTypes.string,
-  navigation: PropTypes.object,
 };
 export default Base;

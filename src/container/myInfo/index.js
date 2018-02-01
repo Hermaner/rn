@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Image, Animated } from 'react-native';
-import { Container, Content, Icon, Text } from 'native-base';
+import { View, Image, Animated, ScrollView, RefreshControl } from 'react-native';
+import { Container, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { pushRoute, popRoute } from '../../actions';
-import { ScrollableTab, Header, MyModalView, TFeedback, Loading } from '../../components';
+import { Header, MyModalView, TFeedback, Loading, LoadMore, LoadNoMore } from '../../components';
 import base from './base';
 import styles from './styles';
 import Child1 from './child1';
@@ -31,7 +30,6 @@ class MyInfo extends base {
   _renderBody() {
     const { items } = this.state;
     const { info } = this.props.navigation.state.params;
-    console.log(info);
     return (
       <View style={styles.pagebody}>
         <View style={styles.topPart}>
@@ -150,15 +148,33 @@ class MyInfo extends base {
   }
   render() {
     const { pop } = this.props;
+    const { loading, refresh, isTabOne, nomore } = this.state;
     const { name } = this.props.navigation.state.params;
     return (
       <Container>
         <Header back={pop} title={name} />
-        <Content>
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={isTabOne === 1 ? this._onRefreshSupply : this._onRefreshPurchase}
+              tintColor="#ff0000"
+              title="加载中..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
           {this._renderBody()}
           {this._renderType()}
           {this._renderModalView()}
-        </Content>
+          {loading && <LoadMore />}
+          {nomore && <LoadNoMore />}
+        </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

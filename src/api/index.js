@@ -1,7 +1,7 @@
 
-// const httpurl = 'http://192.168.50.61:8084/api/lede/';
+const httpurl = 'http://192.168.50.61:8084/api/lede/';
 // const httpurl = 'http://192.168.10.22:8084/api/lede/';
-const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+// const httpurl = 'https://lede.sunhousm.cn/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -212,4 +212,16 @@ export function GetSupplyByFiltersService(data) {
 }
 export function FilterPurchaseService(data) {
   return get('FilterPurchaseService', data);
+}
+export function CreateSalesOrderService(data) {
+  return get('CreateSalesOrderService', data);
+}
+export function UpdateOrderService(data) {
+  return get('UpdateOrderService', data);
+}
+export function GetMemberBuyOrderService(data) {
+  return get('GetMemberBuyOrderService', data);
+}
+export function DeleteOrderService(data) {
+  return get('DeleteOrderService', data);
 }

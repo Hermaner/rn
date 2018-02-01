@@ -16,6 +16,8 @@ import Iconfont from './Iconfont';
 import BusinessList from './businessList';
 import LoadMore from './loadMore';
 import LoadNoMore from './loadNoMore';
+import SampleGoodList from './SampleGoodList';
+import EnsureGoodList from './EnsureGoodList';
 
 export {
   TLight,
@@ -36,4 +38,6 @@ export {
   Header,
   ScrollableTab,
   BusinessList,
+  SampleGoodList,
+  EnsureGoodList,
 };

@@ -32,5 +32,8 @@ const iconfont = {
   'icon-wode': parseInt('e655', 16),
   'icon-7': parseInt('e6ca', 16),
   'icon-waimai': parseInt('e6a5', 16),
+  'icon-zuixinhuoyuan': parseInt('e683', 16),
+  'icon-yewuzhongxin': parseInt('e645', 16),
+  'icon-tuijianshangjia': parseInt('e61c', 16),
 };
 export default iconfont;

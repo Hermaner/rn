@@ -39,6 +39,7 @@ class Base extends React.Component {
     const { adress } = this.props.navigation.state.params;
     this.setState({
       myAdress: adress,
+      memberId: global.memberId || '',
     });
   }
   deleteData = () => {
@@ -75,11 +76,8 @@ class Base extends React.Component {
       receiveProvinceCode,
       receiveCityCode,
       receiveDistrictCode,
-      refresh,
-      ds,
-      pageSize,
-      dataSource,
-      items } = this.state;
+      memberId,
+     } = this.state;
     if (!receiveCityCode) {
       Alert.alert(
         '提交失败',
@@ -124,16 +122,16 @@ class Base extends React.Component {
       return;
     }
     const receiveAddress = {
-      'memberId': '1',
-      'receiveAddressId': getAdressId,
-      'receiveProvinceCode': receiveProvinceCode,
-      'receiveCityCode': receiveCityCode,
-      'receiveDistrictCode': receiveDistrictCode,
-      'fullAddress': fullAddress,
-      'name': name,
-      'phone': phone,
-      'postalCode': postalCode,
-    }
+      memberId,
+      receiveAddressId: getAdressId,
+      receiveProvinceCode,
+      receiveCityCode,
+      receiveDistrictCode,
+      fullAddress,
+      name,
+      phone,
+      postalCode,
+    };
     this.sleek.toggle();
     AddOrUpdateReceiveAddressService({
       receiveAddress: JSON.stringify(receiveAddress),

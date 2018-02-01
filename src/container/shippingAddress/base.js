@@ -1,10 +1,11 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, DeviceEventEmitter } from 'react-native';
+import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetMemberInfoService, DeleteReceiveAddressService, SetDefaultService } from '../../api';
 
 let canEnd = false;
-class ShippingAddressBase extends React.Component {
+class Base extends React.Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({
@@ -22,21 +23,42 @@ class ShippingAddressBase extends React.Component {
       loading: true, // 是否加载中
       nomore: false, // 是否没有更多
       noData: false, // 是否没有数据
+      name: '',
+      phone: '',
+      adressId: '',
+      Province: '',
+      City: '',
+      District: '',
     };
   }
   getInit = () => {
     this.setState({ memberId: global.memberId || '' }, this._onRefresh);
   }
   getData = () => {
-    const { currentPage, pageSize, items, ds, refresh, dataSource } = this.state;
+    const {
+      currentPage,
+      pageSize,
+      items,
+      ds,
+      refresh,
+      dataSource,
+      memberId } = this.state;
     this.sleek.toggle();
     GetMemberInfoService({
-      memberId: '1',
+      memberId,
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.receiveAddresss;
+        this.setState({
+          name: result[0].name,
+          phone: result[0].phone,
+          adressId: result[0].receiveAddressId,
+          Province: result[0].receiveProvinceName,
+          City: result[0].receiveCityName,
+          District: result[0].receiveDistrictName,
+        });
         if (result.length === 0) {
           if (items.length === 0) {
             this.setState({
@@ -126,5 +148,23 @@ class ShippingAddressBase extends React.Component {
       currentPage: 1,
     }, () => this.getData());
   }
+  back = () => {
+    const { name, phone, adressId, Province, City, District } = this.state;
+    const data = { name, phone, adressId, Province, City, District };
+    const { type } = this.props.navigation.state.params;
+    let emit;
+    switch (type) {
+      case 'getOrderDetail':
+        emit = 'getOrderDetail';
+        break;
+      default:
+    }
+    DeviceEventEmitter.emit(emit, data);
+    this.props.pop();
+  }
 }
-export default ShippingAddressBase;
+Base.propTypes = {
+  navigation: PropTypes.object,
+  pop: PropTypes.func,
+};
+export default Base;

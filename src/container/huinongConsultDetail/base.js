@@ -56,7 +56,7 @@ class Base extends React.Component {
       title,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log('ZZZZZZZZZZZz', res);
+        console.log(res);
         const result1 = res.data;
         const newsList = [];
         const newsLength = result1.length > 5 ? 5 : result1.length;
@@ -78,7 +78,7 @@ class Base extends React.Component {
       label,
       labelLength: label.length,
     });
-    if (label.length > 100) {
+    if (label.length >= 100) {
       Toast.show('字数请控制在100字以内');
       this.setState({
         label: label.substring(0, 99),
@@ -133,7 +133,7 @@ class Base extends React.Component {
       this.getData();
       if (res.isSuccess) {
         const result = res.data;
-        console.log('JIEJIEJIEJIEJIEJIEJIE', res);
+        console.log(res);
         this.setState({
           newsInfo: result,
         });
@@ -164,7 +164,7 @@ class Base extends React.Component {
       this.getData();
       if (res.isSuccess) {
         const result = res.data;
-        console.log('JIEJIEJIEJIEJIEJIEJIE', res);
+        console.log(res);
         this.setState({
           newsInfo: result,
         });
