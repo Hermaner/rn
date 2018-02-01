@@ -29,13 +29,29 @@ const styles = StyleSheet.create({
     borderColor: '#eee',
     backgroundColor: '#fff',
   },
-  CheckBox: {
-    flex: 1,
+  checkChoose: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  checkBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 10,
+    marginBottom: 8,
   },
   check: {
     marginRight: 15,
+  },
+  imgBox: {
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
 export default styles;

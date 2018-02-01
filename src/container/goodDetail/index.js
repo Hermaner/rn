@@ -113,7 +113,7 @@ class MainScreen extends base {
               <Text style={styles.evalTopText}>
                 查看<Text style={styles.evalTopColor}>4</Text>条评价
               </Text>
-              <Icon name="arrow-back" style={styles.evalTopIcon} />
+              <Icon name="play" style={styles.evalTopIcon} />
             </View>
           </View>
           <View style={styles.evalViewBom}>

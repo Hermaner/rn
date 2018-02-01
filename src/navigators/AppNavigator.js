@@ -99,6 +99,8 @@ import SampleCenter from '../container/sampleCenter';
 import EnsureMainList from '../container/ensureMainList';
 import OrderDetail from '../container/orderDetail';
 import OrderInfo from '../container/orderInfo';
+import OrderInfoSeller from '../container/orderInfoSeller';
+import OrderPay from '../container/orderPay';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -196,6 +198,8 @@ export const AppNavigator = StackNavigator({
   EnsureMainList: { screen: EnsureMainList },
   OrderDetail: { screen: OrderDetail },
   OrderInfo: { screen: OrderInfo },
+  OrderInfoSeller: { screen: OrderInfoSeller },
+  OrderPay: { screen: OrderPay },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

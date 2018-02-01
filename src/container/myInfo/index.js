@@ -77,21 +77,21 @@ class MyInfo extends base {
   }
   _renderType() {
     const { memberId } = this.props.navigation.state.params;
-    const { isTabOne } = this.state;
+    const { isTabOne, supplys, purchase } = this.state;
     return (
       <View style={styles.type}>
         <View style={[styles.flexRow, styles.flexOne, { borderBottomWidth: 1, borderBottomColor: '#eee' }]}>
           <TFeedback
             content={
               <View style={[styles.flexOne, isTabOne === 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
-                <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>推荐货品</Text>
+                <Text style={[styles.tabText, isTabOne === 1 ? styles.tabTextChoose : '']}>供应</Text>
               </View>}
             onPress={() => this.tabChangeOne()}
           />
           <TFeedback
             content={
               <View style={[styles.flexOne, isTabOne !== 1 ? styles.textBorder : '', { paddingBottom: 10 }]}>
-                <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>优质商家</Text>
+                <Text style={[styles.tabText, isTabOne !== 1 ? styles.tabTextChoose : '']}>采购</Text>
               </View>}
             onPress={() => this.tabChangeTwo()}
           />
@@ -99,9 +99,9 @@ class MyInfo extends base {
         <View>
           {
             isTabOne === 1 ?
-              <Child1 tabLabel="供应" keyIndex="1" memberId={memberId} />
+              <Child1 tabLabel="供应" keyIndex="1" memberId={memberId} data={supplys} />
             :
-              <Child2 tabLabel="采购" keyIndex="2" memberId={memberId} />
+              <Child2 tabLabel="采购" keyIndex="2" memberId={memberId} data={purchase} />
           }
         </View>
       </View>
@@ -175,7 +175,6 @@ class MyInfo extends base {
           {loading && <LoadMore />}
           {nomore && <LoadNoMore />}
         </ScrollView>
-        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

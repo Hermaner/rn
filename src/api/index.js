@@ -225,3 +225,6 @@ export function GetMemberBuyOrderService(data) {
 export function DeleteOrderService(data) {
   return get('DeleteOrderService', data);
 }
+export function GetMemberSellOrderService(data) {
+  return get('GetMemberSellOrderService', data);
+}

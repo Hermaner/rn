@@ -63,8 +63,13 @@ class Base extends React.Component {
       releaseGoodsList: [],
       type: 0, // 0采购中，1已停止，2已驳回
       refresh: false, // 是否是刷新
-      currentPage: 1,
+      scurrentPage: 1,
+      pcurrentPage: 1,
       pageSize: '5',
+      loading: false, // 是否加载中
+      nomore: false, // 是否没有更多
+      supplys: [],
+      purchase: [],
     };
   }
   getInit = () => {
@@ -77,52 +82,40 @@ class Base extends React.Component {
   }
   GetSupplyService = () => {
     const {
-      currentPage,
+      scurrentPage,
       pageSize,
       type,
+      supplys,
       memberId,
-      supplyGoodsList,
-      ds,
-      dataSource,
       refresh } = this.state;
-    this.sleek.toggle();
     GetSupplyService({
-      currentPage,
+      currentPage: scurrentPage,
       pageSize,
       type,
       memberId,
     }).then((res) => {
-      this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
-          if (supplyGoodsList.length === 0) {
-            this.setState({
-              noData: true,
-            });
-          } else {
-            this.setState({
-              nomore: true,
-              loading: false,
-            });
-          }
+          this.setState({
+            nomore: true,
+            loading: false,
+          });
           return;
         }
         if (refresh) {
           this.setState({
-            supplyGoodsList: result,
-            dataSource: ds.cloneWithRows(result),
-            currentPage: currentPage + 1,
+            supplys: result,
+            scurrentPage: scurrentPage + 1,
             refresh: false,
             nomore: false,
           });
         } else {
-          const newItems = supplyGoodsList.concat(result);
+          const newItems = supplys.concat(result);
           this.setState({
-            supplyGoodsList: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
-            currentPage: currentPage + 1,
+            supplys: newItems,
+            scurrentPage: scurrentPage + 1,
             loading: false,
           });
         }
@@ -142,52 +135,40 @@ class Base extends React.Component {
   }
   GetPurchaseService = () => {
     const {
-      currentPage,
+      pcurrentPage,
       pageSize,
       type,
       memberId,
-      ds,
-      releaseGoodsList,
-      dataSource,
+      purchase,
       refresh } = this.state;
-    this.sleek.toggle();
     GetPurchaseService({
-      currentPage,
+      currentPage: pcurrentPage,
       pageSize,
       type,
       memberId,
     }).then((res) => {
-      this.sleek.toggle();
       console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
-          if (releaseGoodsList.length === 0) {
-            this.setState({
-              noData: true,
-            });
-          } else {
-            this.setState({
-              nomore: true,
-              loading: false,
-            });
-          }
+          this.setState({
+            nomore: true,
+            loading: false,
+          });
           return;
         }
         if (refresh) {
           this.setState({
-            releaseGoodsList: result,
-            dataSource: ds.cloneWithRows(result),
-            currentPage: currentPage + 1,
+            purchase: result,
+            pcurrentPage: pcurrentPage + 1,
             refresh: false,
             nomore: false,
           });
         } else {
-          const newItems = releaseGoodsList.concat(result);
+          const newItems = purchase.concat(result);
           this.setState({
-            releaseGoodsList: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
-            currentPage: currentPage + 1,
+            purchase: newItems,
+            pcurrentPage: pcurrentPage + 1,
             loading: false,
           });
         }
@@ -215,7 +196,7 @@ class Base extends React.Component {
   _onRefreshPurchase = () => {
     this.setState({
       refresh: true,
-      bcurrentPage: 1,
+      pcurrentPage: 1,
     }, () => this.GetPurchaseService());
   }
   rzDetail = () => {

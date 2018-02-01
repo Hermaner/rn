@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { Container, Input, Text, CheckBox } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header } from '../../components';
+import { Loading, Header, PeopleUploadFile } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
@@ -19,7 +19,6 @@ class SampleCenter extends myBase {
   componentDidMount() {
   }
   _renderBody() {
-    const { push } = this.props;
     const { identity } = this.state;
     return (
       <View style={styles.pagebody}>
@@ -34,10 +33,10 @@ class SampleCenter extends myBase {
             />
           </View>
           <Text style={styles.title}>您的采购身份</Text>
-          <View style={styles.CheckBox}>
+          <View style={styles.checkChoose}>
             {
               identity.map((item, index) => (
-                <View key={index} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View key={index} style={styles.checkBox}>
                   <CheckBox
                     style={styles.check}
                     // onPress={() => this.defaultAdress(item.receiveAddressId)}
@@ -52,6 +51,25 @@ class SampleCenter extends myBase {
       </View>
     );
   }
+  _renderUserImg() {
+    return (
+      <View style={styles.pagebody}>
+        <View>
+          <Text style={styles.title}>您的身份示意图</Text>
+          <View style={styles.imgBox}>
+            <Text style={{ fontSize: 14, color: '#666' }}>注：可上传营业执照，门店照片，名片，工牌等上传文件(最多四张且需小于4M)</Text>
+            <View>
+              <PeopleUploadFile
+                getImages={this.getImages1}
+                label=""
+                imageCount={1}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  }
   render() {
     const { pop } = this.props;
     return (
@@ -59,6 +77,7 @@ class SampleCenter extends myBase {
         <Header back={pop} title="样品中心" />
         <View>
           {this._renderBody()}
+          {this._renderUserImg()}
         </View>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
