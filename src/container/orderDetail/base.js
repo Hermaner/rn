@@ -1,23 +1,17 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { ListView, DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import { GetMemberInfoService, CreateSalesOrderService } from '../../api';
 
-let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       tu: require('../../assets/img/no.png'),
       skuCount: '',
       label: '',
       labelLength: 0,
-      ds,
-      dataSource: ds.cloneWithRows([]),
       items: [],
       info: '',
       currentPage: 1,
@@ -25,7 +19,7 @@ class Base extends React.Component {
       memberId: '',
       adress: '',
       peopleInfo: '',
-      supplyInfo: '',
+      supplyInfo: null,
       name: '',
       receiveAddressId: '',
       Province: '',

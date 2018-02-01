@@ -30,7 +30,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -42,7 +42,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -54,7 +54,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -66,7 +66,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -78,7 +78,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -90,7 +90,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}
@@ -102,7 +102,7 @@ class ReportPage extends reportPageBase {
               <View
                 style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}
               >
-                <Icon style={styles.icn} name="play" />
+                <Icon style={styles.icn} name="md-arrow-dropright" />
               </View>
             </View>}
           onPress={() => { push({ key: 'ReportDetailPage' }); }}

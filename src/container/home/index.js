@@ -54,7 +54,7 @@ class HomeScreen extends base {
             <Input
               style={styles.inputText}
               value={this.state.businessName}
-              placeholderTextColor={{ color: '#666', fontSize: 14 }}
+              placeholderTextColor="#666"
               placeholder="请输入关键字"
             />
           </View>
@@ -64,52 +64,26 @@ class HomeScreen extends base {
   }
   renderHeaderNavigation() {
     const { push } = this.props;
+    const { mainIcons } = this.state;
     return (
       <View style={[styles.flexRow, styles.headerNavigation]}>
-        <TOpacity
-          style={styles.flexOne}
-          content={
-            <View style={[styles.flexOne, { justifyContent: 'center' }]}>
-              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Iconfont style={styles.gong} name="icon-dating" />
-              </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>供应大厅</Text>
-            </View>
-          }
-          onPress={() => push({ key: 'MainList' })}
-        />
-        <TOpacity
-          style={styles.flexOne}
-          content={
-            <View style={styles.flexOne}>
-              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Iconfont style={styles.hang} name="icon-1" />
-              </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>行情大厅</Text>
-            </View>
-          }
-          onPress={() => push({ key: 'MainSearch', params: { type: '3' } })}
-        />
-        <TFeedback
-          content={
-            <View style={styles.flexOne}>
-              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Iconfont style={styles.hui} name="icon-zixun" />
-              </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>惠农咨询</Text>
-            </View>}
-          onPress={() => { push({ key: 'HuinongConsult' }); }}
-        />
-        <TFeedback
-          content={
-            <View style={styles.flexOne}>
-              <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Iconfont style={styles.my} name="icon-caigou-xianxing" />
-              </View>
-              <Text style={[styles.headerNavigationText, styles.textCenter]}>发采购</Text>
-            </View>}
-          onPress={() => this.props.push({ key: global.memberId ? 'MainSearch' : 'User', params: { type: '2' } })}
-        />
+        {
+          mainIcons.map((item, index) => (
+            <TOpacity
+              style={styles.flexOne}
+              key={index}
+              content={
+                <View style={[styles.flexOne, styles.jacenter]}>
+                  <View style={[styles.mainIcon, { backgroundColor: item.color }]}>
+                    <Iconfont style={styles.mainIconFont} name={item.icon} />
+                  </View>
+                  <Text style={[styles.headerNavigationText, styles.textCenter]}>{item.label}</Text>
+                </View>
+              }
+              onPress={() => push(item.page)}
+            />
+          ))
+        }
       </View>
     );
   }

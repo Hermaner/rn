@@ -24,7 +24,7 @@ class ReleaseMainList extends base {
   _readerHeader() {
     const { pop, push } = this.props;
     return (
-      <Header style={{ alignItems: 'center' }}>
+      <Header style={{ alignItems: 'center', backgroundColor: '#f8f8f8' }}>
         <TouchableOpacity onPress={pop} style={styles.Headerleft}>
           <Icon name="arrow-back" />
         </TouchableOpacity>
@@ -212,26 +212,6 @@ class ReleaseMainList extends base {
         <TouchableOpacity style={styles.usedCityView}>
           <Text style={styles.nousedCity}>您的地址：上海</Text>
         </TouchableOpacity>
-        <View style={styles.maskerTitle}>
-          <Text style={styles.maskerTitleText}>常用城市</Text>
-        </View>
-        <View style={styles.usedCityView}>
-          {
-            citys.length === 0 ?
-            citys.map((item, index) => (
-              <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
-                <View style={styles.contetnTabView}>
-                  <Text
-                    style={styles.mainText}
-                  >
-                    {item.name}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            )) :
-            <Text style={styles.nousedCity}>暂无</Text>
-          }
-        </View>
         <View style={styles.maskerTitle}>
           <Text style={styles.maskerTitleText}>省、市</Text>
         </View>

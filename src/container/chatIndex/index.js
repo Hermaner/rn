@@ -22,7 +22,7 @@ class MySupply extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <Header back={pop} title="聊天" />
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+        <ScrollableTabView style={{ flex: 1 }} locked renderTabBar={() => <ScrollableTab />}>
           <SessionList tabLabel="聊天" type="1" />
           <FriendList tabLabel="好友" type="1" />
         </ScrollableTabView>

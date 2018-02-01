@@ -51,7 +51,7 @@ class OrderInfo extends base {
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                   <Text style={{ fontSize: 14, color: '#666', marginRight: 10 }}>卖家: {supplyInfo.nickName}</Text>
                 </View>
-                <Icon style={{ color: '#666', fontSize: 20 }} name="play" />
+                <Icon style={{ color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
               </View>}
             onPress={() => { push({ key: 'StoreDetail', params: { memberId: supplyInfo.memberId } }); }}
           />
@@ -76,11 +76,11 @@ class OrderInfo extends base {
           <View style={styles.infoBox}>
             <View style={[styles.flexRow, { marginBottom: 10 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>购买数量</Text>
-              <Text style={styles.sixText}>{orderInfo.buyCount}</Text>
+              <Text style={styles.sixText}>x{orderInfo.buyCount}</Text>
             </View>
             <View style={[styles.flexRow, { marginBottom: 10 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>运费</Text>
-              <Text style={styles.sixText}>1</Text>
+              <Text style={styles.sixText}>￥1</Text>
             </View>
             <View style={[styles.flexRow, { marginBottom: 10 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>优惠</Text>

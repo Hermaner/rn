@@ -4,7 +4,6 @@ import { Mcolor, st } from '../../utils';
 const styles = StyleSheet.create({
   ...st,
   fixTop: {
-    height: Platform.OS === 'ios' ? 130 : 110,
   },
   Headerleft: {
     height: 48,
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   conditions: {
-    height: 50,
+    height: 40,
     borderBottomColor: '#ddd',
     borderBottomWidth: 1,
     backgroundColor: '#fff',
@@ -47,8 +46,8 @@ const styles = StyleSheet.create({
   rightLine: {
     position: 'absolute',
     right: 0,
-    top: 17,
-    height: 15,
+    top: 12,
+    height: 16,
     width: 0.7,
     backgroundColor: '#ccc',
   },

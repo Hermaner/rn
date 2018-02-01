@@ -60,7 +60,7 @@ class UserBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log('eeeeeeeeeeeeeeeee', res);
+      console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -84,6 +84,7 @@ class UserBase extends React.Component {
       codeVal,
       sendPhone,
     } = this.state;
+    console.log(phone, sendPhone)
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信的手机号不一致');
       return;

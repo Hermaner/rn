@@ -103,7 +103,7 @@ class Certification extends certificationBase {
         </TouchableOpacity>
         <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>实名认证常见问题</Text>
-          <Icon style={{ marginLeft: 4, color: '#666', fontSize: 20 }} name="play" />
+          <Icon style={{ marginLeft: 4, color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
         </TouchableOpacity>
       </View>
     );

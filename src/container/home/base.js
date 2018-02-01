@@ -6,6 +6,27 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      mainIcons: [{
+        icon: 'icon-dating',
+        label: '供应大厅',
+        color: '#51cd73',
+        page: { key: 'MainList' },
+      }, {
+        icon: 'icon-1',
+        label: '行情大厅',
+        color: '#6098f9',
+        page: { key: 'MainSearch', params: { type: '3' } },
+      }, {
+        icon: 'icon-zixun',
+        label: '行情咨询',
+        color: '#f85554',
+        page: { key: 'HuinongConsult' },
+      }, {
+        icon: 'icon-caigou-xianxing',
+        label: '发采购',
+        color: '#f4bc22',
+        page: { key: global.memberId ? 'MainSearch' : 'User', params: { type: '2' } },
+      }],
       typeList: [{
         id: 1,
         icn: 'icon-shuiguo',

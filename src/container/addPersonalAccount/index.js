@@ -33,7 +33,7 @@ class AddPersonalAccount extends addPersonalAccountBase {
                 onChangeText={text => this.saveName(text)}
                 value={name}
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
-                placeholderTextColor={{ color: '#999' }}
+                placeholderTextColor="#999"
                 placeholder="请输入账户名"
               />
             </View>
@@ -43,7 +43,7 @@ class AddPersonalAccount extends addPersonalAccountBase {
             <View style={styles.rowBoxRight}>
               <Input
                 onChangeText={text => this.saveNumber(text)}
-                placeholderTextColor={{ color: '#999' }}
+                placeholderTextColor="#999"
                 value={number}
                 style={{ marginLeft: 15, fontSize: 16, paddingTop: 15, paddingBottom: 15 }}
                 keyboardType="numeric"

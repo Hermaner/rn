@@ -38,7 +38,7 @@ class PriceDetail extends base {
                   <View style={{ flex: 1 }} />
                 </View>
               </View>
-              <Icon name="play" />
+              <Icon name="md-arrow-dropright" />
             </View>}
           onPress={() => { push({ key: 'User' }); }}
         />
@@ -55,7 +55,7 @@ class PriceDetail extends base {
                   ))
                 }
               </View>
-              <Icon style={styles.RightPart} name="play" />
+              <Icon style={styles.RightPart} name="md-arrow-dropright" />
             </View>}
           onPress={() => { push({ key: 'User' }); }}
         />

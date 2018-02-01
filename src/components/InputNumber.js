@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: 'hidden',
     justifyContent: 'center',
+    height: 34,
   },
   input: {
     flex: 1,
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   stepWrap: {
-    width: 28,
-    height: 28,
+    width: 32,
+    height: 32,
     backgroundColor: Mred,
   },
   stepText: {
