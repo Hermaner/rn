@@ -38,14 +38,14 @@ export default class SocketStore {
     this.socket = io(config.server, {
       transports: ['websocket'],
     });
-
     this.socket.on('connect', () => {
       this.socketId = this.socket.id;
     });
-
+    this.socket.on('event', (data) => { console.log(data); });
     // 远程消息入口，可能会有队列堆积，所以此处是个 Array
     this.socket.on('message', (payloads: Array<Object>) => {
       // 取数组最新一条消息，并格式化为
+      console.log(payloads)
       const sessionItem = this._formatPayloadToSessionItem(
         payloads[payloads.length - 1], payloads.length);
       this.sessionListMap.set(String(sessionItem.key), sessionItem);
@@ -183,6 +183,7 @@ export default class SocketStore {
       this._saveDataToLocalStore();
     }
     if (appState === 'active') {
+      console.log(1111)
       this.socket.open();
     }
   }

@@ -206,8 +206,6 @@ class ChatRoom extends Component {
     });
   }
   render() {
-    console.log(socketStore.currentChatRoomHistory)
-    console.log(socketStore.currentChatRoomHistory.slice())
     const content = (
       <View style={styles.container}>
         <ListView

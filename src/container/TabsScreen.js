@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import home from '../container/home';
 import goods from '../container/goods';
-import carts from '../container/carts';
+import chatIndex from '../container/chatIndex';
 import mine from '../container/my';
 import { Mcolor } from '../utils';
 import { Iconfont } from '../components';
@@ -30,7 +30,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
       screen: goods,
     },
     Carts: {
-      screen: carts,
+      screen: chatIndex,
     },
     Mine: {
       screen: mine,
@@ -92,7 +92,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: true,
+    swipeEnabled: false,
   },
 );
 TabsScreen.propTypes = {
