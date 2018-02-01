@@ -49,7 +49,7 @@ class Cash extends cashBase {
               <Text style={styles.normalNine}>到账时间：3个工作日内。</Text>
               <TouchableOpacity onPress={() => { push({ key: 'CashRule' }); }} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
                 <Text style={{ color: '#64C42C', fontSize: 14 }}>查看提现详细规则</Text>
-                <Icon style={{ color: '#64C42C', fontSize: 20 }} name="play" />
+                <Icon style={{ color: '#64C42C', fontSize: 20 }} name="md-arrow-dropright" />
               </TouchableOpacity>
             </View>
           </View>

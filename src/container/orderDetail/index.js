@@ -13,7 +13,6 @@ class OrderDetail extends base {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {
@@ -47,7 +46,7 @@ class OrderDetail extends base {
                 <Text style={styles.sixText}>{adress}</Text>
               </View>
               <View>
-                <Icon name="play" style={styles.rightIcn} />
+                <Icon name="md-arrow-dropright" style={styles.rightIcn} />
               </View>
             </View>}
           onPress={() => { push({ key: 'ShippingAddress', params: { type: 'getOrderDetail' } }); }}
@@ -60,7 +59,7 @@ class OrderDetail extends base {
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                   <Text style={{ fontSize: 14, color: '#666', marginRight: 10 }}>卖家: {supplyInfo.nickName}</Text>
                 </View>
-                <Icon style={{ color: '#666', fontSize: 20 }} name="play" />
+                <Icon style={{ color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
               </View>}
             onPress={() => { push({ key: 'StoreDetail', params: { memberId: supplyInfo.memberId } }); }}
           />
@@ -91,11 +90,13 @@ class OrderDetail extends base {
         <View style={{ marginTop: 10 }}>
           <View style={styles.flexRowInfo}>
             <Text style={styles.titleText}>数量</Text>
-            <InputNumber
-              onChange={count => this.setState({ skuCount: count })}
-              value={skuCount}
-              min={1}
-            />
+            <View style={{ width: 140 }}>
+              <InputNumber
+                onChange={count => this.setState({ skuCount: count })}
+                value={skuCount}
+                min={1}
+              />
+            </View>
           </View>
           <View style={styles.flexRowInfo}>
             <View style={[styles.flexRow, { flex: 1 }]}>
@@ -208,6 +209,7 @@ class OrderDetail extends base {
   render() {
     const { pop } = this.props;
     const { supplyInfo } = this.state;
+    console.log(supplyInfo)
     return (
       <Container>
         <Header
@@ -215,10 +217,12 @@ class OrderDetail extends base {
           title="确认订单"
         />
         <Content>
-          {
-            supplyInfo &&
-            this._renderBody()
-          }
+          <View>
+            {
+              supplyInfo &&
+              this._renderBody()
+            }
+          </View>
         </Content>
         {
           supplyInfo &&

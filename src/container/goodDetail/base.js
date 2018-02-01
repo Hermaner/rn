@@ -103,6 +103,10 @@ class Base extends React.Component {
     });
   }
   openBuyMasker = () => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
     this.ModalView.showModal();
   }
   saveBuyMasker = () => {
@@ -113,6 +117,7 @@ class Base extends React.Component {
     const { memberId, skuCount, detail } = this.state;
     if (!memberId) {
       push({ key: 'User' });
+      return;
     }
     push({ key: 'OrderDetail', params: { count: skuCount, supplyInfo: detail } });
     this.ModalView.closeModal();

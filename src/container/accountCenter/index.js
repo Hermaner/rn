@@ -53,7 +53,7 @@ class AccountCenter extends AccountCenterBase {
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                     <Text style={{ color: '#999', fontSize: 14 }}>{item.label}</Text>
-                    <Icon style={{ marginLeft: 10, fontSize: 20, color: '#666' }} name="play" />
+                    <Icon style={{ marginLeft: 10, fontSize: 20, color: '#666' }} name="md-arrow-dropright" />
                   </View>
                 </View>
               </TouchableOpacity>

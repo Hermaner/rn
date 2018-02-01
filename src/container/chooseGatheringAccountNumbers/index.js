@@ -32,7 +32,7 @@ class ChooseGatheringAccountNumbers extends chooseGatheringAccountNumbersBase {
             <Text style={styles.accoutLabel}>今日还可提现：2000</Text>
           </View>
           <View style={styles.icnBox}>
-            <Icon style={{ textAlign: 'right', color: '#666', fontSize: 20 }} name="play" />
+            <Icon style={{ textAlign: 'right', color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
           </View>
         </TouchableOpacity>
       </View>

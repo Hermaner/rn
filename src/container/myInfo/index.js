@@ -54,7 +54,7 @@ class MyInfo extends base {
                   ))
                 }
               </View>
-              <Icon style={[styles.RightPart, { fontSize: 20, color: '#666' }]} name="play" />
+              <Icon style={[styles.RightPart, { fontSize: 20, color: '#666' }]} name="md-arrow-dropright" />
             </View>}
           onPress={() => this.rzDetail()}
         />
@@ -66,7 +66,7 @@ class MyInfo extends base {
                 <Text style={styles.flexOneTextRight}>{item.label}</Text>
                 {
                   item.isIcn &&
-                  <Icon style={styles.flexOneTextRight} name="play" />
+                  <Icon style={styles.flexOneTextRight} name="md-arrow-dropright" />
                 }
               </View>
             ))

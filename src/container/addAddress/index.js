@@ -33,7 +33,7 @@ class AddAddress extends base {
             content={
               <View style={[styles.flexOne, styles.flexRight]}>
                 <Text style={{ fontSize: 14, color: '#666' }} numberOfLines={1}>{myAdress}</Text>
-                <Icon style={{ marginLeft: 10, color: '#666', fontSize: 20 }} name="play" />
+                <Icon style={{ marginLeft: 10, color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
               </View>}
             onPress={() => { push({ key: 'CgyCitys', params: { type: 'getAddressEmit' } }); }}
           />

@@ -42,7 +42,7 @@ class AccountNumberType extends accountNumberTypeBase {
                   <Text style={styles.recommend}>推荐</Text>
                 }
                 <Text style={styles.normalNineText}>{item.label}</Text>
-                <Icon style={{ marginLeft: 6, fontSize: 20, color: '#666' }} name="play" />
+                <Icon style={{ marginLeft: 6, fontSize: 20, color: '#666' }} name="md-arrow-dropright" />
               </View>
             </TouchableOpacity>
           ))

@@ -68,7 +68,7 @@ class MainScreen extends base {
           <View style={styles.priceLabelView}>
             <Text style={styles.priceLabelText}>{detail.wholesaleCount}{detail.unit}起批</Text>
           </View>
-          <Icon name="ios-help-circle-outline" style={styles.ptsIcon} />
+          {/* <Icon name="ios-help-circle-outline" style={styles.ptsIcon} /> */}
         </View>
         <View style={styles.nameTipsView}>
           <Icon name="md-volume-down" style={styles.nameTipsicon} />
@@ -98,7 +98,7 @@ class MainScreen extends base {
             ))
           }
         </View>
-        <Icon name="md-arrow-dropright" style={styles.ptrIcon} />
+        {/* <Icon name="md-arrow-dropright" style={styles.ptrIcon} /> */}
       </View>
     );
   }
@@ -113,7 +113,7 @@ class MainScreen extends base {
               <Text style={styles.evalTopText}>
                 查看<Text style={styles.evalTopColor}>4</Text>条评价
               </Text>
-              <Icon name="arrow-back" style={styles.evalTopIcon} />
+              {/* <Icon name="arrow-back" style={styles.evalTopIcon} /> */}
             </View>
           </View>
           <View style={styles.evalViewBom}>
@@ -324,7 +324,9 @@ class MainScreen extends base {
           </View>
         </View>
         <View style={styles.maskerNumView}>
-          <Text style={styles.maskerNumText}>购买数量</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.maskerNumText}>购买数量</Text>
+          </View>
           <InputNumber
             onChange={count => this.setState({ skuCount: count })}
             value={skuCount}
@@ -336,7 +338,7 @@ class MainScreen extends base {
           <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.maskerLinkImg} />
         </View>
         <View style={styles.maskerBom}>
-          <Text style={styles.maskerBomPrice}>{skuCount * detail.wholesalePrice}元</Text>
+          <Text style={styles.maskerBomPrice}>合计：{skuCount * detail.wholesalePrice}元</Text>
           <TouchableOpacity style={styles.maskerBomBtn} onPress={() => this.enterOrderDetail()} >
             <Text style={styles.maskerBomText}>立即购买</Text>
           </TouchableOpacity>

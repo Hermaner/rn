@@ -3,14 +3,26 @@ import { st, spx, Mcolor } from '../../utils';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
+  ...st,
   headerNavigation: {
     paddingTop: 10,
     paddingBottom: 10,
     backgroundColor: '#fff',
   },
   headerNavigationText: {
-    fontSize: 16,
-    color: '#333',
+    fontSize: 14,
+    color: '#555',
+  },
+  mainIcon: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    ...st.jacenter,
+    marginBottom: 6,
+  },
+  mainIconFont: {
+    fontSize: 24,
+    color: '#fff',
   },
   SampleCenterText: {
     fontSize: 14,

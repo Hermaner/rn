@@ -455,8 +455,8 @@ const styles = StyleSheet.create({
   },
   maskerNumView: {
     height: 35,
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingRight: 10,
+    marginTop: 20,
     marginBottom: 6,
     ...st.jacenter,
     ...st.fr,
@@ -489,7 +489,7 @@ const styles = StyleSheet.create({
     color: Mred,
   },
   maskerBomBtn: {
-    width: 90,
+    width: 120,
     height: 50,
     ...st.jacenter,
     backgroundColor: Mred,

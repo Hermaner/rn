@@ -71,7 +71,7 @@ class MainScreen extends base {
                 <Text style={styles.creditLabel}>{userInfo.memoText}</Text>
               </View>
               <View style={styles.creditRight}>
-                <Icon name="play" style={styles.creditRightIcon} />
+                <Icon name="md-arrow-dropright" style={styles.creditRightIcon} />
               </View>
             </View>}
           onPress={() => this.rzDetail()}
@@ -96,7 +96,7 @@ class MainScreen extends base {
                 ))
               }
             </View>
-            <Icon name="play" style={styles.ptrIcon} />
+            <Icon name="md-arrow-dropright" style={styles.ptrIcon} />
           </View>}
         onPress={() => this.rzDetail()}
       />
