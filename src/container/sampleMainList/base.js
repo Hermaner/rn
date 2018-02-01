@@ -2,7 +2,7 @@ import React from 'react';
 import { ListView, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeepClone, GetAppCategoryService, GetSupplyByFiltersService } from '../../api';
+import { DeepClone, GetAppCategoryService, GetVerifSupplyService } from '../../api';
 import citysJson from '../../api/citys.json';
 
 citysJson[0].cur = true;
@@ -36,28 +36,11 @@ class Base extends React.Component {
       noData: false,
       pageSize: '15',
       memberId: '',
-      name: '', // 供应单名称（搜索）
-      isSpotGoods: '', // 是否现货
-      categoryId: '', // 类目ID
+      currentPage: 1,
       brandId: '', // 品牌ID
+      categoryId: '', // 类目ID
       provinceCode: '', // 省
       cityCode: '', // 市
-      isEntVerif: '', // 是否企业认证 1y 2 n
-      isPersonVerif: '', // 是否个人认证 1y 2n
-      wholesaleCount: '', // 起订量
-      startPrice: '', // 开始价格
-      endPrice: '', // 结束价格
-      specTypeId: '', // 规格种类ID
-      specId: '', // 规格ID
-      longitude: '', // 经度
-      latitude: '', // 纬度
-      isFlushDistance: '', // 是否刷新（1是0否)
-      currentPage: 1,
-      setDistance: '', // 距离
-      cityName: '', // 地区名称
-      specName: '', // 规格1
-      brandName: '', // 品牌名
-      firstName: '', // 一级类目名
     };
   }
   getMainList = (data) => {
@@ -100,97 +83,52 @@ class Base extends React.Component {
   }
   getData = () => {
     const {
-      memberId,
       currentPage,
       pageSize,
       items,
-      ds,
       refresh,
+      ds,
       dataSource,
-      name,
-      isSpotGoods,
       categoryId,
       brandId,
       provinceCode,
-      cityCode,
-      isEntVerif,
-      isPersonVerif,
-      wholesaleCount,
-      startPrice,
-      endPrice,
-      specTypeId,
-      specId,
-      longitude,
-      latitude,
-      isFlushDistance,
-      setDistance,
-    } = this.state;
-
-    const filters = {
-      memberId,
-      name,
-      isSpotGoods,
-      categoryId,
-      brandId,
-      provinceCode,
-      cityCode,
-      isEntVerif,
-      isPersonVerif,
-      wholesaleCount,
-      startPrice,
-      endPrice,
-      specTypeId,
-      specId,
-      longitude,
-      latitude,
-      isFlushDistance,
-      currentPage: JSON.stringify(currentPage),
+      cityCode } = this.state;
+    GetVerifSupplyService({
       pageSize,
-      setDistance,
-    };
-    console.log(JSON.stringify(filters));
-    this.sleek.toggle();
-    GetSupplyByFiltersService({
-      filters: JSON.stringify(filters),
+      currentPage,
+      categoryId,
+      brandId,
+      provinceCode,
+      cityCode,
     }).then((res) => {
-      this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        console.log('222222222222', res);
         const result = res.data.pageData;
         if (result.length === 0) {
-          if (refresh) {
-            this.setState({
-              noData: true,
-            });
-          } else {
-            this.setState({
-              nomore: true,
-              loading: false,
-              dataSource: ds.cloneWithRows(result),
-            });
-          }
+          this.setState({
+            nomore: true,
+            loading: false,
+            dataSource: ds.cloneWithRows(result),
+          });
           return;
         }
         if (refresh) {
           this.setState({
             items: result,
             dataSource: ds.cloneWithRows(result),
-            currentPage: currentPage + 1,
+            scurrentPage: currentPage + 1,
             refresh: false,
             nomore: false,
-            isFlushDistance: '0',
           });
         } else {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
+            scurrentPage: currentPage + 1,
             dataSource: dataSource.cloneWithRows(newItems),
-            currentPage: currentPage + 1,
             loading: false,
-            isFlushDistance: '0',
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -198,7 +136,7 @@ class Base extends React.Component {
           });
         }
       } else {
-        Toast.show('温馨提示55');
+        Toast.show('温馨提示');
       }
     }).catch((err) => {
       console.log(err);
@@ -320,7 +258,7 @@ class Base extends React.Component {
   }
   brandTab = (index) => {
     const { brands } = this.state;
-    console.log(brands[index]);
+    console.log('uuuuuuuuuuuuu', brands[index]);
     this.setState({
       brandId: brands[index].brandId,
       brandName: brands[index].brandName,

@@ -108,8 +108,18 @@ class Base extends React.Component {
   saveBuyMasker = () => {
     this.ModalView.showModal();
   }
+  enterOrderDetail = () => {
+    const { push } = this.props;
+    const { memberId, skuCount, detail } = this.state;
+    if (!memberId) {
+      push({ key: 'User' });
+    }
+    push({ key: 'OrderDetail', params: { count: skuCount, supplyInfo: detail } });
+    this.ModalView.closeModal();
+  }
 }
 Base.propTypes = {
   navigation: PropTypes.object,
+  push: PropTypes.func,
 };
 export default Base;

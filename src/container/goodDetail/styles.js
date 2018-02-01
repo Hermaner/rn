@@ -444,6 +444,10 @@ const styles = StyleSheet.create({
     color: '#888',
     lineHeight: 20,
   },
+  maskerPrice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   maskerPriceText: {
     fontSize: 14,
     color: Mred,

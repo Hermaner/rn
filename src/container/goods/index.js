@@ -228,7 +228,6 @@ class Goods extends base {
   }
   render() {
     const { pop } = this.props;
-    const { memberId } = this.state;
     return (
       <Container>
         <Header

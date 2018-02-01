@@ -21,34 +21,34 @@ class My extends myBase {
   }
   _renderBody() {
     const { push } = this.props;
-    const { list, backGround1, userInfo, memberId } = this.state;
+    const { list, userInfo, memberId, firstList } = this.state;
     return (
       <View style={styles.pagebody}>
-        <View style={styles.headerImgBox}>
-          <Image style={styles.headerImg} source={backGround1} />
+        <View style={styles.headerBackground} />
+        <View style={styles.accountMoney}>
+          <TFeedback
+            content={
+              <Icon style={[styles.textBackground, { fontSize: 26, color: '#fff', marginRight: 15 }]} name="text" />}
+            onPress={() => { push({ key: 'NotificationSystem' }); }}
+          />
+          <TFeedback
+            content={
+              <View style={styles.rightBtn1}>
+                <Icon style={[styles.textBackground, { fontSize: 26, color: '#fff' }]} name="settings" />
+              </View>}
+            onPress={() => { push({ key: 'SystemSet' }); }}
+          />
         </View>
-        <View style={{ height: 180, paddingLeft: 10, paddingRight: 10 }}>
-          <View style={styles.accountMoney}>
-            <TFeedback
-              content={
-                <Text style={styles.textBackground}>消息</Text>}
-              onPress={() => { push({ key: 'NotificationSystem' }); }}
-            />
-            <TFeedback
-              content={
-                <View style={styles.rightBtn}>
-                  <Text style={styles.textBackground}>设置</Text>
-                </View>}
-              onPress={() => { push({ key: 'SystemSet' }); }}
-            />
-          </View>
+        <View style={styles.firstBox}>
           {
             memberId ?
               <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
-                  <View>
-                    <Text style={{ marginBottom: 25, backgroundColor: 'transparent', color: '#fff', fontSize: 16 }}>{userInfo.nickName}</Text>
+                  <View style={styles.headerImgBox}>
+                    <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
+                  </View>
+                  <View style={{ marginLeft: 90, paddingTop: 10 }}>
+                    <Text style={{ marginBottom: 4, backgroundColor: 'transparent', color: '#333', fontSize: 14 }}>{userInfo.nickName}</Text>
                     <Text style={[styles.textBackground, styles.textSmall]}>
                       {userInfo.identityName}
                     </Text>
@@ -59,45 +59,66 @@ class My extends myBase {
               <TOpacity
                 style={{ flex: 1 }}
                 content={
-                  <View style={styles.userView}>
-                    <Text style={styles.userText}>立即登录</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.headerImgBox}>
+                      <View style={styles.imgBox}>
+                        <Image style={styles.userImg} source={require('../../assets/img/tx1.png')} />
+                      </View>
+                    </View>
+                    <View style={{ marginLeft: 90, paddingTop: 10 }}>
+                      <Text style={styles.userText}>立即登录</Text>
+                    </View>
                   </View>
                 }
                 onPress={() => push({ key: 'User' })}
               />
           }
+          <View style={styles.firstBottom}>
+            {
+              firstList.map((item, index) => (
+                <TFeedback
+                  key={index}
+                  content={
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.firstBottomCount}>{item.count}</Text>
+                      <Text style={styles.firstBottomLabel}>{item.title}</Text>
+                    </View>}
+                  onPress={() => {
+                    push({
+                      key: item.push, params: { info: userInfo, name: userInfo.nickName } });
+                  }}
+                />
+              ))
+            }
+          </View>
         </View>
         {
           list.map((item, index) => (
             <View style={styles.detailInfo} key={index}>
               <Text style={styles.myIdentity}>{item[0]}</Text>
-              {
-                item[1].map((item2, index2) => (
-                  <TFeedback
-                    key={index2}
-                    content={
-                      <View key={index2}>
-                        <View style={styles.infoBox}>
-                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Iconfont
-                              style={{ marginRight: 20, fontSize: 20, color: item2.icnColor }}
-                              name={item2.icn}
-                            />
-                            <Text style={{ color: '#666', fontSize: 14 }}>{item2.title}</Text>
-                          </View>
-                          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                            <Text style={{ color: '#999', fontSize: 14 }}>{item2.label}</Text>
-                            <Icon style={{ marginLeft: 10, fontSize: 20, color: '#666' }} name="md-arrow-dropright" />
-                          </View>
-                        </View>
-                      </View>}
-                    onPress={() => {
-                      push({
-                        key: memberId ? item2.push : 'User', params: { info: userInfo, name: userInfo.nickName, memberId } });
-                    }}
-                  />
-                ))
-              }
+              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
+                {
+                  item[1].map((item2, index2) => (
+                    <TFeedback
+                      key={index2}
+                      content={
+                        <View
+                          style={[item2.isLast ? styles.myWidth : styles.flexOne, styles.infoBox]}
+                        >
+                          <Iconfont
+                            style={{ fontSize: 32, color: item2.icnColor, textAlign: 'center', marginBottom: 4 }}
+                            name={item2.icn}
+                          />
+                          <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item2.title}</Text>
+                        </View>}
+                      onPress={() => {
+                        push({
+                          key: memberId ? item2.push : 'User', params: { info: userInfo, name: userInfo.nickName, memberId } });
+                      }}
+                    />
+                  ))
+                }
+              </View>
             </View>
           ))
         }

@@ -83,17 +83,19 @@ class Base extends React.Component {
         img: 'https://imgsa.baidu.com/forum/w%3D580%3B/sign=b549acddf6faaf5184e381b7bc6f95ee/4034970a304e251fee98e003ac86c9177e3e53d9.jpg',
       }],
       SampleCenterList: [{
-        icn: 'icon-caigou-xianxing',
+        icn: 'icon-yewuzhongxin',
         text: '样品中心',
-        push: 'MyRelease',
+        push: 'SampleMainList',
+        name: '全部分类',
       }, {
-        icn: 'icon-caigou-xianxing',
+        icn: 'icon-zuixinhuoyuan',
         text: '保障货源',
-        push: 'MyRelease',
+        push: 'EnsureMainList',
+        name: '全部分类',
       }, {
-        icn: 'icon-caigou-xianxing',
+        icn: 'icon-tuijianshangjia',
         text: '推荐商家',
-        push: 'MyRelease',
+        push: 'RecommendBusiness',
       }],
       loadQueue: [0, 0, 0, 0],
       isRefreshing: false,
@@ -118,7 +120,6 @@ class Base extends React.Component {
   }
   getData = () => {
     const { typeList } = this.state;
-
     GetAppCategoryService({
     }).then((res) => {
       if (res.isSuccess) {

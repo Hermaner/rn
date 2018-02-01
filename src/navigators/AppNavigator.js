@@ -93,6 +93,12 @@ import GoodBusinessDetail from '../container/goodBusinessDetail';
 import HuinongGoodsMotif from '../container/huinongGoodsMotif';
 import HomeMainList from '../container/homeMainList';
 import ReleaseMainList from '../container/releaseMainList';
+import RecommendBusiness from '../container/recommendBusiness';
+import SampleMainList from '../container/sampleMainList';
+import SampleCenter from '../container/sampleCenter';
+import EnsureMainList from '../container/ensureMainList';
+import OrderDetail from '../container/orderDetail';
+import OrderInfo from '../container/orderInfo';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -184,6 +190,12 @@ export const AppNavigator = StackNavigator({
   HuinongGoodsMotif: { screen: HuinongGoodsMotif },
   HomeMainList: { screen: HomeMainList },
   ReleaseMainList: { screen: ReleaseMainList },
+  RecommendBusiness: { screen: RecommendBusiness },
+  SampleMainList: { screen: SampleMainList },
+  SampleCenter: { screen: SampleCenter },
+  EnsureMainList: { screen: EnsureMainList },
+  OrderDetail: { screen: OrderDetail },
+  OrderInfo: { screen: OrderInfo },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

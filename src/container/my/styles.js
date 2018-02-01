@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, px, spx } from '../../utils';
+import { st, px, spx, Mred } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -15,11 +15,12 @@ const styles = StyleSheet.create({
   },
   userText: {
     fontSize: 18,
-    color: '#fff',
+    color: '#333',
   },
-  headerImgBox: {
+  headerBackground: {
     flex: 1,
     height: spx(180),
+    backgroundColor: Mred,
     flexDirection: 'row',
     position: 'absolute',
     top: 0,
@@ -32,24 +33,57 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'stretch',
   },
+  firstBox: {
+    flex: 1,
+    height: 150,
+    marginTop: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+  },
+  firstBottom: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 20,
+    left: 10,
+    // paddingTop: 10,
+    // borderTopColor: '#eee',
+    // borderTopWidth: 1,
+  },
+  firstBottomCount: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: '#333',
+    marginBottom: 4,
+  },
+  firstBottomLabel: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#666',
+  },
   accountMoney: {
     flexDirection: 'row',
-    marginTop: 30,
+    justifyContent: 'flex-end',
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 50,
     marginBottom: 10,
   },
   textBackground: {
     backgroundColor: 'transparent',
-    color: '#fff',
+    color: '#333',
   },
   textSmall: {
-    fontSize: px(14),
+    fontSize: 14,
   },
   textMoney: {
     fontSize: px(22),
-  },
-  rightBtn: {
-    position: 'absolute',
-    right: 10,
   },
   detailInfo: {
     paddingLeft: 10,
@@ -58,18 +92,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   infoBox: {
-    flex: 1,
-    height: spx(40),
-    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    paddingTop: 6,
-    paddingBottom: 6,
+    borderTopColor: '#eee',
+  },
+  myWidth: {
+    width: '25%',
+    // flex: 1,
+    // borderWidth: 1,
+  },
+  flexOne: {
+    flex: 1,
+  },
+  headerImgBox: {
+    position: 'absolute',
+    top: -26,
+  },
+  imgBox: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#fff',
   },
   userImg: {
-    width: spx(60),
-    height: spx(60),
-    borderRadius: 35,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     marginRight: 15,
   },
   myIdentity: {

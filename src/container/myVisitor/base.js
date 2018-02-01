@@ -26,7 +26,7 @@ class MyVisitorBase extends React.Component {
     this.name = 'herman';
   }
   sendCode = () => {
-    const { phone, code } = this.state;
+    const { phone } = this.state;
     if (!phone) {
       Toast.show('请输入手机号');
       return;
@@ -61,7 +61,7 @@ class MyVisitorBase extends React.Component {
       }, 1000);
   }
   login = () => {
-    console.log('denglu')
+    console.log('denglu');
   }
 }
 

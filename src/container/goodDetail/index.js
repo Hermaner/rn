@@ -3,11 +3,10 @@ import { View, Image, TouchableWithoutFeedback, TouchableOpacity, RefreshControl
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading, TFeedback } from '../../components';
+import { Header, GoodhList, ModalView, InputNumber, Loading, TFeedback } from '../../components';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -305,19 +304,22 @@ class MainScreen extends base {
     );
   }
   _renderModalView() {
-    const { skuCount } = this.state;
+    const { skuCount, detail } = this.state;
     const content = (
       <View style={styles.maskerContent}>
         <View style={styles.maskerTop}>
           <View style={styles.maskerLeft}>
-            <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.maskerImg} />
+            <Image source={{ uri: detail.supplyImages[0].imgUrl }} style={styles.maskerImg} />
           </View>
           <View style={styles.maskerLabel}>
             <View style={styles.maskerTitle}>
-              <Text style={styles.maskerTitleText}>立即购买紫色水果多少钱</Text>
+              <Text style={styles.nameText} numberOfLines={2}>
+                {detail.categoryName}{detail.brandName}
+              </Text>
             </View>
             <View style={styles.maskerPrice}>
-              <Text style={styles.maskerPriceText}>5.00元/斤</Text>
+              <Text style={styles.maskerPriceText}>{detail.wholesalePrice}</Text>
+              <Text style={styles.maskerPriceText}>元/{detail.unit}</Text>
             </View>
           </View>
         </View>
@@ -328,14 +330,14 @@ class MainScreen extends base {
             value={skuCount}
             min={1}
           />
-          <Text style={styles.maskerNumText}>斤</Text>
+          <Text style={styles.maskerNumText}>{detail.unit}</Text>
         </View>
         <View style={styles.maskerLink}>
           <Image source={{ uri: 'http://p11md08oo.bkt.clouddn.com/201812115032101.jpg?imageView2/2/w/600' }} style={styles.maskerLinkImg} />
         </View>
         <View style={styles.maskerBom}>
-          <Text style={styles.maskerBomPrice}>50.00元</Text>
-          <TouchableOpacity style={styles.maskerBomBtn}>
+          <Text style={styles.maskerBomPrice}>{skuCount * detail.wholesalePrice}元</Text>
+          <TouchableOpacity style={styles.maskerBomBtn} onPress={() => this.enterOrderDetail()} >
             <Text style={styles.maskerBomText}>立即购买</Text>
           </TouchableOpacity>
         </View>
