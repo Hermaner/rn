@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import { pushRoute } from '../../actions';
-import { Iconfont, GoodList, TOpacity, TFeedback, LoadMore, LoadNoMore } from '../../components';
+import { Iconfont, TOpacity, TFeedback, LoadMore, LoadNoMore } from '../../components';
 import base from './base';
 import styles from './styles';
 

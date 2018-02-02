@@ -25,11 +25,10 @@ class Child extends ChildBase {
     return (
       <View>
         {
-          orderInfo &&
           orderInfo.map((item, index) => (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply } }); }}
+              onPress={() => { push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply } }); }}
             >
               <View style={{ marginBottom: 10 }}>
                 <View style={styles.flexRowBox}>
@@ -78,9 +77,9 @@ class Child extends ChildBase {
                     <TFeedback
                       content={
                         <View style={styles.btnBox1}>
-                          <Text style={{ color: '#fff', fontSize: 14 }}>去支付</Text>
+                          <Text style={{ color: '#fff', fontSize: 14 }}>修改</Text>
                         </View>}
-                      onPress={() => { this.goAlipay(item.orderId); }}
+                      onPress={() => { push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply } }); }}
                     />
                   </View>
                 }
@@ -104,11 +103,14 @@ class Child extends ChildBase {
     );
   }
   render() {
-    // const {  } = this.state;
+    const { orderInfo } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         <ScrollView>
-          {this._renderRow()}
+          {
+            orderInfo &&
+            this._renderRow()
+          }
         </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
       </View>

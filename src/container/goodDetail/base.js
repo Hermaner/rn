@@ -103,8 +103,12 @@ class Base extends React.Component {
     });
   }
   openBuyMasker = () => {
+    const { memberId, detail } = this.state;
     if (!global.memberId) {
       this.props.push({ key: 'User' });
+    }
+    if (memberId === detail.memberId) {
+      Toast.show('不能购买自己的商品！');
       return;
     }
     this.ModalView.showModal();

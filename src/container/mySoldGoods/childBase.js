@@ -1,8 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import Alipay from 'react-native-yunpeng-alipay';
-import { UpdateOrderService, GetMemberBuyOrderService, DeleteOrderService, PayAliService } from '../../api';
+import { UpdateOrderService, GetMemberSellOrderService, DeleteOrderService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -21,14 +20,14 @@ class Base extends React.Component {
     const { memberId } = this.state;
     const { status } = this.props;
     this.sleek.toggle();
-    GetMemberBuyOrderService({
+    GetMemberSellOrderService({
       memberId,
       status,
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;
-        console.log(result);
+        console.log('77777777777777777777777', result);
         if (result.length > 0) {
           for (let i = 0; i < result.length; i += 1) {
             if (result[i].status === '1') {
@@ -57,28 +56,6 @@ class Base extends React.Component {
       this.sleek.toggle();
       console.log(err);
     });
-  }
-  goAlipay(orderId) {
-    PayAliService({
-      orderId,
-    }).then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        Alipay.pay(res.data).then((json) => {
-          console.log(json);
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
-          } else {
-            console.log('其他失败原因');
-          }
-        }).catch(err => console.log(err));
-      }
-    }).catch(err => console.log(err));
   }
   removeOrder = () => {
     this.sleek.toggle();

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 });
-export default class PeopleUploadFile extends React.Component {
+export default class GoodsUploadFile extends React.Component {
   static propTypes = {
     getImages: PropTypes.func,
     label: PropTypes.string,

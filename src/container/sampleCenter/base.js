@@ -58,6 +58,12 @@ class MyBase extends React.Component {
       this.sleek.toggle();
     });
   }
+  getImages1 = (upImages) => {
+    this.setState({
+      frontImgUrl: upImages,
+    });
+    console.log('^^', upImages);
+  }
   initData = () => {
     this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
       this.emitUser();
