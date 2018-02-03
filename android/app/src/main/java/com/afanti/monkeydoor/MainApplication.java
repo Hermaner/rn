@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.puti.paylib.PayReactPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.theweflex.react.WeChatPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.reactnativecomponent.amaplocation.RCTAMapLocationPackage;
 import com.horcrux.svg.SvgPackage;
@@ -44,7 +43,6 @@ public class MainApplication extends Application implements ReactApplication {
             new PayReactPackage(),
             new RNFetchBlobPackage(),
           new RCTAMapLocationPackage(),
-            new WeChatPackage(),
             new PickerPackage(),
             new SvgPackage(),
             new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
