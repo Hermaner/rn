@@ -1,6 +1,4 @@
 import React from 'react';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 
 class ChooseGatheringAccountNumbersBase extends React.Component {
   constructor(props) {

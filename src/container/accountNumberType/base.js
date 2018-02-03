@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 
 class AccountNumberTypeBase extends React.Component {
   constructor(props) {
@@ -51,8 +49,6 @@ class AccountNumberTypeBase extends React.Component {
       default:
     }
   }
-  Alipay = () => {}
-  WeChatPay = () => {}
   personalAccount = () => {
     const { push } = this.props;
     push({ key: 'AddPersonalAccount' });

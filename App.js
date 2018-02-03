@@ -3,7 +3,6 @@ import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter } from 'reac
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
-import * as WeChat from 'react-native-wechat';
 import JPushModule from 'jpush-react-native';
 import { observer } from 'mobx-react/native';
 import {
@@ -21,7 +20,6 @@ import AppWithNavigationState from './src/navigators/AppNavigator';
 class App extends React.Component {
   componentDidMount() {
     SplashScreen.hide();
-    WeChat.registerApp('wx26b5853e6e77d138');
     persistStore(this.store, { storage: AsyncStorage });
     if (Platform.OS === 'android') {
       JPushModule.notifyJSDidLoad(() => {

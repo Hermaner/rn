@@ -1,9 +1,12 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import Alipay from 'react-native-yunpeng-alipay';
-import { UpdateOrderService, GetMemberBuyOrderService, DeleteOrderService, PayAliService } from '../../api';
+import XPay from 'react-native-puti-pay';
+import { UpdateOrderService, GetMemberBuyOrderService, DeleteOrderService, PayAliService, PayAppWeiXinService } from '../../api';
 
+console.log(XPay)
+XPay.setWxId('wx4d30b0136bad7f7e');
+XPay.setAlipayScheme('alipay');
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -64,19 +67,34 @@ class Base extends React.Component {
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        Alipay.pay(res.data).then((json) => {
-          console.log(json);
-          const payResult = json.split(';');
-          const statusStr = payResult[0];
-          const pattern = new RegExp('\\{(.| )+?\\}', 'igm');
-          const status = statusStr.match(pattern).toString();
-          const resultStatus = status.substring(1, status.length - 1);
-          if (resultStatus === '9000') {
-            this.goRoute('Hireservices');
-          } else {
-            console.log('其他失败原因');
-          }
-        }).catch(err => console.log(err));
+        XPay.alipay(res.data, json => console.log(json)).catch(err => console.log(err));
+      }
+    }).catch(err => console.log(err));
+  }
+  goWXpay(orderId) {
+    PayAppWeiXinService({
+      orderId,
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const parmas = res.data;
+        console.log(parmas)
+        console.log({
+          partnerId: parmas.partnerid,
+          prepayId: parmas.prepayid,
+          packageValue: parmas.package,
+          nonceStr: parmas.nonceStr,
+          timeStamp: parmas.timeStamp,
+          sign: parmas.sign,
+        })
+        XPay.wxPay({
+          partnerId: parmas.partnerid,
+          prepayId: parmas.prepayid,
+          packageValue: parmas.package,
+          nonceStr: parmas.nonceStr,
+          timeStamp: parmas.timeStamp,
+          sign: parmas.sign,
+        }, json => console.log(json))
       }
     }).catch(err => console.log(err));
   }
