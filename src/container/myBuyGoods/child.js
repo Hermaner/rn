@@ -80,7 +80,7 @@ class Child extends ChildBase {
                         <View style={styles.btnBox1}>
                           <Text style={{ color: '#fff', fontSize: 14 }}>去支付</Text>
                         </View>}
-                      onPress={() => { this.goAlipay(item.orderId); }}
+                      onPress={() => { this.goWXpay(item.orderId); }}
                     />
                   </View>
                 }

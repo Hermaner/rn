@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as WeChat from 'react-native-wechat';
-import Alipay from 'react-native-yunpeng-alipay';
 
 class AccountNumberTypeBase extends React.Component {
   constructor(props) {

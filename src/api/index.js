@@ -75,6 +75,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function PayAppWeiXinService(data) {
+  return get('PayAppWeiXinService', data);
+}
 export function PayAliService(data) {
   return get('PayAliService', data);
 }
