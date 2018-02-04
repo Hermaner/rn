@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     height: 150,
   },
   title: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: 'bold',
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 10,
@@ -52,6 +55,30 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  newUpImages: {
+    width: 80,
+    height: 60,
+    resizeMode: 'stretch',
+  },
+  inputFooter: {
+    fontSize: 14,
+    color: '#666',
+    borderColor: '#eee',
+    borderWidth: 1,
+  },
+  btnBigbox: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+  },
+  btnbox: {
+    backgroundColor: '#65C12E',
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 5,
   },
 });
 export default styles;

@@ -258,12 +258,19 @@ class Base extends React.Component {
   }
   brandTab = (index) => {
     const { brands } = this.state;
-    console.log('uuuuuuuuuuuuu', brands[index]);
     this.setState({
       brandId: brands[index].brandId,
       brandName: brands[index].brandName,
     }, this._onRefresh);
     this.hideMasker();
+  }
+  isSampleCenter = (item) => {
+    const memberId = global.memberId;
+    if (!memberId) {
+      this.props.push({ key: 'User' });
+    } else {
+      this.props.push({ key: 'SampleCenter', params: { supplyId: item.supplyId } });
+    }
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;

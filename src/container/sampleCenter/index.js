@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { Container, Input, Text, CheckBox } from 'native-base';
+import { Container, Input, Text, CheckBox, Content } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, PeopleUploadFile } from '../../components';
+import { Loading, Header, UploadFile, TFeedback } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
@@ -17,9 +17,10 @@ class SampleCenter extends myBase {
     };
   }
   componentDidMount() {
+    this.getInit();
   }
   _renderBody() {
-    const { identity } = this.state;
+    const { identityList } = this.state;
     return (
       <View style={styles.pagebody}>
         <Image style={styles.userImg} source={require('../../assets/img/1.png')} />
@@ -35,14 +36,14 @@ class SampleCenter extends myBase {
           <Text style={styles.title}>您的采购身份</Text>
           <View style={styles.checkChoose}>
             {
-              identity.map((item, index) => (
+              identityList.map((item, index) => (
                 <View key={index} style={styles.checkBox}>
                   <CheckBox
                     style={styles.check}
-                    // onPress={() => this.defaultAdress(item.receiveAddressId)}
-                    checked={item.isChoose}
+                    onPress={() => this.chooseType(index)}
+                    checked={item.isChoose === 1}
                   />
-                  <Text>{item.title}</Text>
+                  <Text style={{ fontSize: 14, color: '#666' }}>{item.title}</Text>
                 </View>
               ))
             }
@@ -52,6 +53,7 @@ class SampleCenter extends myBase {
     );
   }
   _renderUserImg() {
+    const { frontImgUrl } = this.state;
     return (
       <View style={styles.pagebody}>
         <View>
@@ -59,13 +61,33 @@ class SampleCenter extends myBase {
           <View style={styles.imgBox}>
             <Text style={{ fontSize: 14, color: '#666' }}>注：可上传营业执照，门店照片，名片，工牌等上传文件(最多四张且需小于4M)</Text>
             <View>
-              <PeopleUploadFile
+              <UploadFile
                 getImages={this.getImages1}
                 label=""
-                imageCount={1}
+                imageCount={4}
               />
+              {
+                frontImgUrl &&
+                <View style={{ flex: 1 }}>
+                  <Image style={styles.exampleImg} source={{ uri: frontImgUrl[0].uri }} />
+                </View>
+              }
             </View>
           </View>
+        </View>
+      </View>
+    );
+  }
+  _renderFooter() {
+    return (
+      <View style={styles.pagebody}>
+        <Text style={styles.title}>还希望采购哪些产品</Text>
+        <View style={styles.inputBox}>
+          <Input
+            style={styles.inputText}
+            value={this.state.businessName}
+            onChangeText={text => this.saveBuyCounts(text)}
+          />
         </View>
       </View>
     );
@@ -75,9 +97,19 @@ class SampleCenter extends myBase {
     return (
       <Container>
         <Header back={pop} title="样品中心" />
-        <View>
+        <Content>
           {this._renderBody()}
           {this._renderUserImg()}
+          {this._renderFooter()}
+        </Content>
+        <View style={styles.btnBigbox}>
+          <TFeedback
+            content={
+              <View style={styles.btnbox}>
+                <Text style={{ fontSize: 14, color: '#fff', textAlign: 'center' }}>提 交</Text>
+              </View>}
+            onPress={() => { this.CreateApplyDemoService(); }}
+          />
         </View>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

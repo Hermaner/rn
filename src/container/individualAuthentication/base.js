@@ -46,19 +46,16 @@ class Base extends React.Component {
     this.setState({
       frontImgUrl: upImages,
     });
-    console.log('^^', upImages);
   }
   getImages2 = (upImages) => {
     this.setState({
       backImgUrl: upImages,
     });
-    console.log('^^', upImages);
   }
   getImages3 = (upImages) => {
     this.setState({
       takeCardImgUrl: upImages,
     });
-    console.log('^^', upImages);
   }
   saveUserName = (value) => {
     this.setState({

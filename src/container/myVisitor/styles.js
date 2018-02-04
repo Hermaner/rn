@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { Mgreen, st } from '../../utils';
 
 const styles = StyleSheet.create({
   visitData: {
@@ -90,6 +89,8 @@ const styles = StyleSheet.create({
   },
   rightIcn: {
     textAlign: 'right',
+    color: '#57B924',
+    fontSize: 24,
   },
   userName: {
     fontSize: 18,
@@ -134,12 +135,10 @@ const styles = StyleSheet.create({
   },
   btnCenter: {
     flex: 3,
-    color: '#fff',
     backgroundColor: '#16B6F6',
   },
   btnRight: {
     flex: 3,
-    color: '#fff',
     backgroundColor: '#57B924',
   },
 });

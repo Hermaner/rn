@@ -21,6 +21,7 @@ class Base extends React.Component {
       loading: true, // 是否加载中
       nomore: true, // 是否没有更多
       noData: false, // 是否没有数据
+      tu: require('../../assets/img/no.png'),
     };
   }
   getInit = () => {
