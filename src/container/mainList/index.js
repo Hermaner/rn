@@ -270,13 +270,13 @@ class MainList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index, memberId) => (
+  _renderRow = (item, sectionID, index) => (
     <View>
       <GoodList
         data={item}
         rowID={index}
         key={index}
-        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
       />
     </View>
   )

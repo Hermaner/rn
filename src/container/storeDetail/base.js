@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { DeepClone, GetMemberInfoService, CreateMemberFollowService } from '../../api';
+import { DeepClone, GetMemberInfoService, CreateMemberFollowService, GetMemberFollowService, DeleteMemberFollowService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -65,10 +65,13 @@ class Base extends React.Component {
       isHidden: false,
       supplyInfo: '',
       userInfo: '',
+      isFollow: '', // 关注列表
+      clickFollow: -1, // 点击关注，再点击取消
     };
   }
   getInit = () => {
     const { memberId } = this.props.navigation.state.params;
+    console.log('bbbbbbbbbbbbbb', memberId)
     this.setState({
       memberId,
     }, this._onRefresh);
@@ -77,13 +80,13 @@ class Base extends React.Component {
     const { memberId } = this.state;
     const { member } = this.props;
     const m = memberId || member;
-    this.sleek.toggle();
+    // this.sleek.toggle();
     GetMemberInfoService({
       memberId: m,
     }).then((res) => {
-      this.sleek.toggle();
+      // this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        console.log('jjjjjjjjjj', res);
         const result = res.data;
         if (result.memberVerifs) {
           for (let i = 0; i < result.memberVerifs.length; i += 1) {
@@ -101,40 +104,91 @@ class Base extends React.Component {
         });
       } else {
         Toast.show('温馨提示55');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+
+    GetMemberFollowService({
+      memberId: global.memberId,
+    }).then((res) => {
+      // this.sleek.toggle();
+      console.log('aaaaaaaaaaaa', res)
+      if (res.isSuccess) {
+        const result = res.data;
+        for (let i = 0; i < result.length; i += 1) {
+          console.log('111111111111')
+          if (result[i].byFollowMemberId === memberId) {
+            console.log('fffffs')
+            this.setState({
+              isFollow: true,
+              clickFollow: 1,
+            });
+          } else {
+            console.log('ccccccc')
+            this.setState({
+              isFollow: false,
+              clickFollow: -1,
+            });
+          }
+        }
+        console.log('2222222222', this.state.isFollow)
+        console.log('3333333333', this.state.clickFollow)
+      } else {
+        Toast.show('温馨提示11');
       }
     }).catch((err) => {
       Toast.show(err);
     });
   }
   CreateMemberFollowService = () => {
+    // const { memberId } = this.state;
+    this.setState({
+      clickFollow: this.state.clickFollow * -1,
+    }, this.aa);
+    console.log('777777777777', this.state.clickFollow)
+  }
+  aa = () => {
+    const { clickFollow, memberId } = this.state;
+    const otherMemeber = parseFloat(memberId);
     this.sleek.toggle();
-    CreateMemberFollowService({
-      memberId: m,
-    }).then((res) => {
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        console.log(res);
-        const result = res.data;
-        if (result.memberVerifs) {
-          for (let i = 0; i < result.memberVerifs.length; i += 1) {
-            if (result.memberVerifs[i].verifFieldName === '买家保障') {
-              result.memoText = result.memberVerifs[i].memo;
-              break;
-            }
-            result.memoText = '未缴纳买家保证金';
-          }
+    if (clickFollow === 1) {
+      CreateMemberFollowService({
+        memberId: global.memberId,
+        byFollowMemberId: otherMemeber,
+      }).then((res) => {
+        this.sleek.toggle();
+        if (res.isSuccess) {
+          this.setState({
+            isFollow: true,
+            clickFollow: 1,
+          });
         } else {
-          result.memoText = '未缴纳买家保证金';
+          Toast.show('温馨提示222');
         }
-        this.setState({
-          userInfo: result,
-        });
-      } else {
-        Toast.show('温馨提示55');
-      }
-    }).catch((err) => {
-      Toast.show(err);
-    });
+      }).catch((err) => {
+        Toast.show(err);
+      });
+      this.getData();
+    } else {
+      DeleteMemberFollowService({
+        memberId: global.memberId,
+        byFollowMemberId: otherMemeber,
+      }).then((res) => {
+        this.sleek.toggle();
+        if (res.isSuccess) {
+          this.setState({
+            isFollow: false,
+            clickFollow: -1,
+          });
+        } else {
+          Toast.show('温馨提示333');
+        }
+      }).catch((err) => {
+        Toast.show(err);
+      });
+      this.getData();
+    }
   }
   listPush = () => {
     this.ModalView.closeModal();

@@ -25,7 +25,7 @@ class Child1 extends React.Component {
               data={item}
               rowID={index}
               key={index}
-              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
+              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
             />
           ))
         }

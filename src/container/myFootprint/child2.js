@@ -22,7 +22,7 @@ class Child2 extends Base {
   }
   _renderRow = (item) => {
     const { push } = this.props;
-    const { memberId, tu } = this.state;
+    const { tu } = this.state;
     return (
       <View>
         <View style={styles.buyTime}>
@@ -85,7 +85,7 @@ class Child2 extends Base {
                     </View>
                   </View>
                 </View>}
-              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item1.supplyId, member: memberId } }); }}
+              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item1.supplyId, memberId: item1.memberId } }); }}
             />
           ))
         }

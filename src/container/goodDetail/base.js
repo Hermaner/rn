@@ -52,10 +52,10 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    const { supplyId } = this.props.navigation.state.params;
+    const { supplyId, memberId } = this.props.navigation.state.params;
     this.setState({
       supplyId,
-      memberId: global.memberId || '',
+      memberId,
     }, this.GetSupplyInfoService);
   }
   GetSupplyInfoService = () => {
@@ -103,12 +103,12 @@ class Base extends React.Component {
     });
   }
   openBuyMasker = () => {
-    const { memberId, detail } = this.state;
+    const { detail } = this.state;
     if (!global.memberId) {
       this.props.push({ key: 'User' });
       return;
     }
-    if (memberId === detail.memberId) {
+    if (global.memberId === detail.memberId) {
       Toast.show('不能购买自己的商品！');
       return;
     }

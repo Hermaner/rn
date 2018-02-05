@@ -22,7 +22,7 @@ class MyVisitor extends myVisitorBase {
     this.getInit();
   }
   _randerBody() {
-    const { option } = this.state;
+    const { option, visitorList } = this.state;
     const { width } = Dimensions.get('window');
     return (
       <View style={styles.pagebody}>
@@ -33,7 +33,10 @@ class MyVisitor extends myVisitorBase {
             </View>
             <Text style={{ flex: 1, textAlign: 'right', fontSize: 16, color: '#17B4EF', fontWeight: 'bold' }}>11</Text>
           </View>
-          <Echarts option={option} height={250} width={width} />
+          {
+            visitorList &&
+            <Echarts option={option} height={250} width={width} />
+          }
         </View>
       </View>
     );

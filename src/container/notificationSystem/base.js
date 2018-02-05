@@ -1,73 +1,102 @@
 import React from 'react';
+import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
+import { GetMessageService } from '../../api';
 
+let canEnd = false;
 class NotificationSystemBase extends React.Component {
   constructor(props) {
     super(props);
-    this.isSend = false;
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
     this.state = {
-      phone: '',
-      sec: 60,
-      password: '',
-      code: '',
-      BUTTONS: [
-        { text: '停止采购', icon: 'trash', iconColor: '#00ff00' },
-        { text: 'Cancel', icon: 'close', iconColor: '#25de5b' },
-      ],
-      DESTRUCTIVE_INDEX: 3,
-      CANCEL_INDEX: 4,
+      ds,
+      dataSource: ds.cloneWithRows([]),
+      items: [],
+      currentPage: 1,
+      pageSize: '5',
+      isSleekShow: false,
+      refresh: false, // 是否是刷新
+      loading: true, // 是否加载中
+      nomore: false, // 是否没有更多
+      noData: false, // 是否没有数据
     };
   }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          phone: txt,
-        });
-        break;
-      default:
-    }
+  getInit = () => {
+    this.setState({ memberId: global.memberId }, this._onRefresh);
   }
-  common() {
-    this.name = 'herman';
-  }
-  sendCode = () => {
-    const { phone, code } = this.state;
-    if (!phone) {
-      Toast.show('请输入手机号');
-      return;
-    }
-    const telReg = !(this.phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
-    if (telReg) {
-      Toast.show('手机号格式不对');
-      return;
-    }
-    if (this.isSend) {
-      return;
-    }
-    this.isSend = true;
-    const actionMethod = () => {
-      const { sec } = this.state;
-      if (sec <= 0) {
-        clearInterval(this.timer);
-        this.isSend = false;
-        this.setState({
-          sec,
-        });
+  getData = () => {
+    const { currentPage, pageSize, items, ds, refresh, dataSource, memberId } = this.state;
+    GetMessageService({
+      currentPage,
+      pageSize,
+      memberId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data.pageData;
+        if (result.length === 0) {
+          if (items.length === 0) {
+            this.setState({
+              noData: true,
+            });
+          } else {
+            this.setState({
+              nomore: true,
+              loading: false,
+            });
+          }
+          return;
+        }
+        if (refresh) {
+          this.setState({
+            items: result,
+            dataSource: ds.cloneWithRows(result),
+            currentPage: currentPage + 1,
+            refresh: false,
+            nomore: false,
+          });
+        } else {
+          const newItems = items.concat(result);
+          this.setState({
+            items: newItems,
+            dataSource: dataSource.cloneWithRows(newItems),
+            currentPage: currentPage + 1,
+            loading: false,
+          });
+        }
+        setTimeout(() => { canEnd = true; }, 0);
+        if (result.length < pageSize) {
+          this.setState({
+            loading: false,
+            nomore: true,
+          });
+        }
       } else {
-        this.setState({
-          sec: sec - 1,
-        });
+        Toast.show('温馨提示');
       }
-    };
-    actionMethod();
-    this.timer = setInterval(
-      () => {
-        actionMethod();
-      }, 1000);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
-  login = () => {
-    console.log('denglu')
+  toggleSleek = () => {
+    this.setState({
+      isSleekShow: !this.state.isSleekShow,
+    });
+  }
+  _onRefresh = () => {
+    this.setState({
+      refresh: true,
+      currentPage: 1,
+    }, () => this.getData());
+  }
+  _reachEnd = () => {
+    const { nomore } = this.state;
+    if (canEnd && !nomore) {
+      canEnd = false;
+      this.setState({ loading: true }, () => this.getData());
+    }
   }
 }
 

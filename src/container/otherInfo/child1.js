@@ -19,7 +19,6 @@ class Child1 extends Base {
   }
   _renderRow = () => {
     const { push } = this.props;
-    const { memberId } = this.state;
     const { info } = this.props.navigation.state.params;
     return (
       <View style={{ marginBottom: 5 }}>
@@ -50,7 +49,7 @@ class Child1 extends Base {
                   </View>
                 </View>
               }
-              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
             />
           ))
         }

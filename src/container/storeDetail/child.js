@@ -22,7 +22,7 @@ class Child extends ChildBase {
   _renderRow = (item) => {
     const { push } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}>
+      <TouchableWithoutFeedback onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}>
         <View style={styles.goodsItem}>
           <Image
             style={styles.goodsImg}
