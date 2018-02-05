@@ -30,26 +30,6 @@ class CgCitys extends base {
           <Text style={styles.nousedCity}>您的地址：上海</Text>
         </TouchableOpacity>
         <View style={styles.maskerTitle}>
-          <Text style={styles.maskerTitleText}>常用城市</Text>
-        </View>
-        <View style={styles.usedCityView}>
-          {
-            citys.length === 0 ?
-            citys.map((item, index) => (
-              <TouchableWithoutFeedback key={index} onPress={() => { push({ key: 'User' }); }}>
-                <View style={styles.contetnTabView}>
-                  <Text
-                    style={styles.mainText}
-                  >
-                    {item.label}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            )) :
-            <Text style={styles.nousedCity}>暂无</Text>
-          }
-        </View>
-        <View style={styles.maskerTitle}>
           <Text style={styles.maskerTitleText}>省、市</Text>
         </View>
         <View style={{ flex: 1 }}>

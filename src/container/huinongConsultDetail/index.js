@@ -38,7 +38,7 @@ class HuinongConsultDetail extends base {
         </View>
         <View style={[styles.flexRow, styles.rowBox]}>
           <Text style={[styles.normalNineText, styles.marginR]}>{newsInfo.author}</Text>
-          <Text style={[styles.normalNineText, styles.marginR]}>来源：惠农网</Text>
+          <Text style={[styles.normalNineText, styles.marginR]}>来源：慧包网</Text>
           <Text style={[styles.normalNineText, styles.marginR]}>阅读：{newsInfo.lookCount}</Text>
         </View>
         <View style={[styles.daodu, styles.rowBox]}>
@@ -50,7 +50,7 @@ class HuinongConsultDetail extends base {
           <Text>{newsInfo.content}</Text>
         </View>
         <View style={[styles.rowBox, { flex: 1, flexDirection: 'row', flexWrap: 'wrap' }]}>
-          <Text style={{ fontSize: 14, color: '#EC2539' }}>备注：以上所有信息来自惠农行情中心，如需了解更多，</Text>
+          <Text style={{ fontSize: 14, color: '#EC2539' }}>备注：以上所有信息来自慧包行情中心，如需了解更多，</Text>
           <TFeedback
             content={
               <View>

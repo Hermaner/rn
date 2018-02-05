@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#eee',
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
   },
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   btnBox1: {
     borderWidth: 1,
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
 });
 export default styles;

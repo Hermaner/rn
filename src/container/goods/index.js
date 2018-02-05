@@ -161,7 +161,7 @@ class Goods extends base {
     return (
       <View style={styles.studyBox}>
         <View style={[styles.studyRow, { marginBottom: 6 }]}>
-          <Text style={styles.leftText}>惠农</Text>
+          <Text style={styles.leftText}>慧包</Text>
           <Text style={styles.centerText}>图文</Text>
           <Text
             style={[styles.normalThreeText, styles.flexOne]}
@@ -199,7 +199,7 @@ class Goods extends base {
         </Swiper>
         <View style={styles.howMuchPeople}>
           <Text style={styles.people}>53651</Text>
-          <Text style={styles.normalSixText}>位买家正在惠农网采购</Text>
+          <Text style={styles.normalSixText}>位买家正在慧包网采购</Text>
         </View>
       </View>
     );

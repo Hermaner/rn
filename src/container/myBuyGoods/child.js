@@ -58,12 +58,10 @@ class Child extends ChildBase {
                 </View>
                 <View style={styles.totalBox}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 12, color: '#666', marginRight: 6 }}>运费:￥0.00 优惠:￥{(item.unitPrice * item.buyCount) - item.amount}</Text>
                     <Text style={{ fontSize: 16, color: '#333' }}>合计：</Text>
                     <Text style={{ fontSize: 16, color: '#FF8711' }}>￥{item.amount}</Text>
                   </View>
-                  <Text style={{ fontSize: 14, color: '#666', marginTop: 6 }}>
-                    (运费：￥0.00 优惠：-￥{(item.unitPrice * item.buyCount) - item.amount})
-                  </Text>
                 </View>
                 {
                   (item.status === '1' || item.status === '2') &&

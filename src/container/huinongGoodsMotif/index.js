@@ -80,7 +80,7 @@ class HuinongGoodsMotif extends base {
     const { brands, refresh, loading, nomore } = this.state;
     return (
       <Container>
-        <Header back={pop} title="惠农好货专场" />
+        <Header back={pop} title="慧包好货专场" />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={

@@ -79,20 +79,12 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const parmas = res.data;
         console.log(parmas)
-        console.log({
-          partnerId: parmas.partnerid,
-          prepayId: parmas.prepayid,
-          packageValue: parmas.package,
-          nonceStr: parmas.nonceStr,
-          timeStamp: parmas.timeStamp,
-          sign: parmas.sign,
-        })
         XPay.wxPay({
           partnerId: parmas.partnerid,
           prepayId: parmas.prepayid,
           packageValue: parmas.package,
-          nonceStr: parmas.nonceStr,
-          timeStamp: parmas.timeStamp,
+          nonceStr: parmas.noncestr,
+          timeStamp: parmas.timestamp,
           sign: parmas.sign,
         }, json => console.log(json))
       }

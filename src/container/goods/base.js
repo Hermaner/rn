@@ -9,17 +9,17 @@ class Base extends React.Component {
     this.resetData = {
       items: [{
         title: '优质农产品一件代发供应商招募优质农产品一件代发供应商招募',
-        label: '入驻惠农优选，百万采购商就等你来',
+        label: '入驻慧包优选，百万采购商就等你来',
         imgUrl: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x',
         id: '1',
       }, {
         title: '优质农产品一件代发供应商招募优质农产品一件代发供应商招募',
-        label: '入驻惠农优选，百万采购商就等你来',
+        label: '入驻慧包优选，百万采购商就等你来',
         imgUrl: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x',
         id: '1',
       }, {
         title: '优质农产品一件代发供应商招募优质农产品一件代发供应商招募',
-        label: '入驻惠农优选，百万采购商就等你来',
+        label: '入驻慧包优选，百万采购商就等你来',
         imgUrl: 'https://img.dev.sunhousm.cn/201813105030862.jpg?imageMogr2/thumbnail/600x',
         id: '1',
       }],

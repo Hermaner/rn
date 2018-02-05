@@ -9,10 +9,11 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingTop: 10,
     paddingBottom: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
+    backgroundColor: '#fff',
+  },
+  pagebody: {
     backgroundColor: '#fff',
   },
   rowBoxMargin: {

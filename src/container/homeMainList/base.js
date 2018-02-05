@@ -163,6 +163,7 @@ class Base extends React.Component {
           if (items.length === 0) {
             this.setState({
               noData: true,
+              refresh: false,
               dataSource: ds.cloneWithRows(result),
             });
           } else {

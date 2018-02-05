@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Container, Content, Icon, Text, Input } from 'native-base';
+import { Container, Content, Icon, Text, Input, Form, Item } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -27,53 +27,46 @@ class AddAddress extends base {
     const { name, fullAddress, myAdress } = this.state;
     return (
       <View style={styles.pagebody}>
-        <View style={styles.rowBox}>
-          <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>所在地区:</Text>
-          <TFeedback
-            content={
-              <View style={[styles.flexOne, styles.flexRight]}>
-                <Text style={{ fontSize: 14, color: '#666' }} numberOfLines={1}>{myAdress}</Text>
-                <Icon style={{ marginLeft: 10, color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
-              </View>}
-            onPress={() => { push({ key: 'CgyCitys', params: { type: 'getAddressEmit' } }); }}
-          />
-        </View>
-        <View style={[styles.rowBox, styles.rowBoxMargin]}>
-          <Input
-            multiline
-            placeholder="详细地址"
-            style={styles.inputTextArea}
-            value={fullAddress}
-            onChangeText={text => this.saveFullAddress(text)}
-          />
-        </View>
-        <View style={[styles.rowBox, styles.rowBoxMargin]}>
-          <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>收货人姓名:</Text>
-          <Input
-            multiline
-            placeholder="请填写收货人姓名"
-            style={styles.inputs}
-            value={name}
-            onChangeText={text => this.saveName(text)}
-          />
-        </View>
-        <View style={[styles.rowBox, styles.rowBoxMargin]}>
-          <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>电话号码:</Text>
-          <Input
-            multiline
-            placeholder="请填写手机号码"
-            style={styles.inputs}
-            onChangeText={text => this.savePhone(text)}
-          />
-        </View>
-        <View style={[styles.rowBox, styles.rowBoxMargin]}>
-          <Text style={{ marginRight: 15, fontSize: 14, color: '#666' }}>邮编:</Text>
-          <Input
-            multiline
-            style={styles.inputs}
-            onChangeText={text => this.savePostalCode(text)}
-          />
-        </View>
+        <Form>
+          <Item>
+            <Input
+              placeholder="收货人姓名"
+              value={name}
+              onChangeText={text => this.saveName(text)}
+            />
+          </Item>
+          <Item>
+            <Input
+              placeholder="电话号码"
+              value={name}
+              onChangeText={text => this.savePhone(text)}
+            />
+          </Item>
+          <Item>
+            <Input
+              placeholder="邮编"
+              onChangeText={text => this.savePostalCode(text)}
+            />
+          </Item>
+          <View style={styles.rowBox}>
+            <Text style={{ marginLeft: 8, paddingLeft: 3, fontSize: 16, color: '#444' }}>所在地区:</Text>
+            <TFeedback
+              content={
+                <View style={[styles.flexOne, styles.flexRight]}>
+                  <Text style={{ fontSize: 14, color: '#666' }} numberOfLines={1}>{myAdress}</Text>
+                  <Icon style={{ marginLeft: 10, color: '#666', fontSize: 20 }} name="md-arrow-dropright" />
+                </View>}
+              onPress={() => { push({ key: 'CgyCitys', params: { type: 'getAddressEmit' } }); }}
+            />
+          </View>
+          <Item>
+            <Input
+              placeholder="详细地址"
+              value={fullAddress}
+              onChangeText={text => this.saveFullAddress(text)}
+            />
+          </Item>
+        </Form>
       </View>
     );
   }
