@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   },
   firstBox: {
     flex: 1,
-    height: 150,
-    marginTop: 30,
+    height: 180,
+    // marginTop: 15,
     marginLeft: 10,
     marginRight: 10,
     paddingLeft: 10,
@@ -52,9 +52,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     left: 10,
-    // paddingTop: 10,
-    // borderTopColor: '#eee',
-    // borderTopWidth: 1,
   },
   firstBottomCount: {
     textAlign: 'center',
@@ -106,8 +103,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerImgBox: {
-    position: 'absolute',
-    top: -26,
+    // position: 'absolute',
+    // top: -26,
+    marginTop: 10,
   },
   imgBox: {
     width: 80,

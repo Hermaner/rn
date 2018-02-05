@@ -43,12 +43,12 @@ class My extends myBase {
           {
             memberId ?
               <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={styles.headerImgBox}>
                     <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
                   </View>
-                  <View style={{ marginLeft: 90, paddingTop: 10 }}>
-                    <Text style={{ marginBottom: 4, backgroundColor: 'transparent', color: '#333', fontSize: 14 }}>{userInfo.nickName}</Text>
+                  <View style={{ marginLeft: 10, paddingTop: 10 }}>
+                    <Text style={{ backgroundColor: 'transparent', color: '#333', fontSize: 14 }}>{userInfo.nickName}</Text>
                     <Text style={[styles.textBackground, styles.textSmall]}>
                       {userInfo.identityName}
                     </Text>

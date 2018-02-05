@@ -144,7 +144,7 @@ class CgCategory extends base {
   render() {
     return (
       <Container>
-        <Header back={this.backToHome} title="发布求购" />
+        <Header back={this.backToHome} title="发布采购" />
         <Content>
           {this._renderList()}
           {this._renderMemo()}

@@ -39,7 +39,7 @@ class MainScreen extends base {
           <Image source={{ uri: userInfo.imgUrl }} style={styles.mainLogo} />
         </View>
         <View style={styles.topBtn}>
-          <Icon name="arrow-back" style={styles.topIcon} />
+          <Icon name="heart" style={styles.topIcon} />
           <Text style={styles.topText}>关注</Text>
         </View>
       </View>
@@ -163,6 +163,7 @@ class MainScreen extends base {
   }
   _renderTabs() {
     const { memberId } = this.props.navigation.state.params;
+    console.log('MMMMMMMMMMMMMMM', memberId);
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
         <View style={styles.flexOne}>

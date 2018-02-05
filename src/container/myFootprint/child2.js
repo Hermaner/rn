@@ -22,7 +22,7 @@ class Child2 extends Base {
   }
   _renderRow = (item) => {
     const { push } = this.props;
-    const { memberId } = this.state;
+    const { memberId, tu } = this.state;
     return (
       <View>
         <View style={styles.buyTime}>
@@ -34,7 +34,18 @@ class Child2 extends Base {
               key={index}
               content={
                 <View style={styles.goodsDetail2}>
-                  <Image style={styles.exampleImg} source={{ uri: item1.imgUrl }} />
+                  {
+                    item1.supplyImages ?
+                      <Image
+                        style={styles.exampleImg}
+                        source={{ uri: item1.supplyImages[0].imgUrl }}
+                      />
+                    :
+                      <Image
+                        style={styles.exampleImg}
+                        source={tu}
+                      />
+                  }
                   <View style={{ flex: 1 }}>
                     <View style={{ flex: 1 }}>
                       <View style={{ flex: 3 }}>

@@ -1,79 +1,116 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeviceEventEmitter } from 'react-native';
-import { GetMemberInfoService } from '../../api';
+import PropTypes from 'prop-types';
+import { CreateApplyDemoService } from '../../api';
 
 class MyBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      identity: [{
+      identityList: [{
         id: '1',
         title: '超市',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '农副加工',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '贸易公司',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '餐饮企业',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '门店老板',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '网店老板',
-        isChoose: false,
+        isChoose: -1,
       }, {
         id: '1',
         title: '电商公司',
-        isChoose: false,
+        isChoose: -1,
       }],
       backGround1: require('../../assets/img/1.png'),
       userInfo: '',
+      needAmount: '',
+      identity: '',
+      supplyId: '',
+      memberId: '',
+      memo: '',
     };
   }
-  getData = () => {
-    const { memberId } = this.state;
-    GetMemberInfoService({
-      memberId,
-    }).then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        const result = res.data;
-        this.setState({
-          userInfo: result,
-        });
-      } else {
-        Toast.show('温馨提示');
-      }
-    }).catch(() => {
-      this.sleek.toggle();
+  getInit = () => {
+    const { supplyId } = this.props.navigation.state.params;
+    this.setState({
+      supplyId,
+      memberId: global.memberId,
     });
   }
   getImages1 = (upImages) => {
     this.setState({
       frontImgUrl: upImages,
     });
-    console.log('^^', upImages);
   }
-  initData = () => {
-    this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
-      this.emitUser();
+  saveBuyCounts = (needAmount) => {
+    this.setState({
+      needAmount,
     });
   }
-  emitUser = () => {
-    if (!global.memberId) {
-      return;
+  saveMemo = (memo) => {
+    this.setState({
+      memo,
+    });
+  }
+  chooseType = (index) => {
+    const { identityList } = this.state;
+    for (let i = 0; i < identityList.length; i += 1) {
+      if (i === index) {
+        identityList[i].isChoose *= -1;
+        this.setState({
+          identityList,
+        });
+      }
     }
-    this.setState({ memberId: global.memberId || '' }, this.getData);
+  }
+  CreateApplyDemoService =() => {
+    const { memberId, supplyId, needAmount, identityList, memo, frontImgUrl } = this.state;
+    const identityArray = [];
+    const imgArray = [];
+    for (let i = 0; i < identityList.length; i += 1) {
+      if (identityList[i].isChoose === 1) {
+        identityArray.push(identityList[i].title);
+      }
+    }
+    for (let i = 0; i < frontImgUrl.length; i += 1) {
+      imgArray.push(frontImgUrl[i].key);
+    }
+    CreateApplyDemoService({
+      memberId,
+      supplyId,
+      needAmount,
+      identity: identityArray.toString(),
+      memo,
+      imgUrls: imgArray.toString(),
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        console.log(res);
+      } else {
+        Toast.show('温馨提示');
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      console.log(err);
+    });
   }
 }
+MyBase.propTypes = {
+  navigation: PropTypes.object,
+};
 export default MyBase;

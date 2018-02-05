@@ -160,7 +160,7 @@ class Base extends React.Component {
     });
   }
   getImages = (upImages) => {
-    console.log(upImages)
+    console.log(upImages);
     this.setState({
       upImages,
     });

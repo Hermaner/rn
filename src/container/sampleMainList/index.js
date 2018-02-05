@@ -241,7 +241,8 @@ class SampleMainList extends base {
         rowID={index}
         key={index}
         onPressTell={() => { this.props.push({ key: 'User' }); }}
-        onPressLastBtn={() => { this.props.push({ key: 'SampleCenter' }); }}
+        // onPressLastBtn={() => { this.props.push({ key: 'SampleCenter' }); }}
+        onPressLastBtn={() => { this.isSampleCenter(item); }}
         onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
       />
     </View>

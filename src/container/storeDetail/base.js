@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { DeepClone, GetMemberInfoService } from '../../api';
+import { DeepClone, GetMemberInfoService, CreateMemberFollowService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -79,6 +79,36 @@ class Base extends React.Component {
     const m = memberId || member;
     this.sleek.toggle();
     GetMemberInfoService({
+      memberId: m,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        const result = res.data;
+        if (result.memberVerifs) {
+          for (let i = 0; i < result.memberVerifs.length; i += 1) {
+            if (result.memberVerifs[i].verifFieldName === '买家保障') {
+              result.memoText = result.memberVerifs[i].memo;
+              break;
+            }
+            result.memoText = '未缴纳买家保证金';
+          }
+        } else {
+          result.memoText = '未缴纳买家保证金';
+        }
+        this.setState({
+          userInfo: result,
+        });
+      } else {
+        Toast.show('温馨提示55');
+      }
+    }).catch((err) => {
+      Toast.show(err);
+    });
+  }
+  CreateMemberFollowService = () => {
+    this.sleek.toggle();
+    CreateMemberFollowService({
       memberId: m,
     }).then((res) => {
       this.sleek.toggle();
