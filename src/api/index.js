@@ -1,5 +1,5 @@
 
-// const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'http://192.168.50.57:8381/api/lede/';
 // const httpurl = 'http://192.168.10.22:8084/api/lede/';
 const httpurl = 'https://lede.sunhousm.cn/api/lede/';
 function parseJSON(response) {

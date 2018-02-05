@@ -106,6 +106,7 @@ class Base extends React.Component {
     const { memberId, detail } = this.state;
     if (!global.memberId) {
       this.props.push({ key: 'User' });
+      return;
     }
     if (memberId === detail.memberId) {
       Toast.show('不能购买自己的商品！');

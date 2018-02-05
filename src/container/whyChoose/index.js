@@ -23,7 +23,7 @@ class WhyChoose extends React.Component {
     const { push } = this.props;
     return (
       <View style={styles.pagebody}>
-        <Text style={styles.noun}>请选择当前您进入惠农的目的</Text>
+        <Text style={styles.noun}>请选择当前您进入慧包的目的</Text>
         <Text style={{ color: '#999', fontSize: 14, textAlign: 'center', marginBottom: 15 }}>方便为您提供精准服务</Text>
         <View style={styles.lookForGoods}>
           <TFeedback

@@ -25,7 +25,7 @@ class NotificationSystemDetail extends notificationSystemDetailBase {
         </View>
         <View style={{ paddingLeft: 10, paddingRight: 10 }}>
           <Text style={styles.content}>
-            您好:您提交的品种名:哈哈暂未通过平台盛和，原因是：品种与分类不服，感谢您对惠农网的支持，感谢您对平台的完善所做的努力！
+            您好:您提交的品种名:哈哈暂未通过平台盛和，原因是：品种与分类不服，感谢您对慧包网的支持，感谢您对平台的完善所做的努力！
           </Text>
           <Text style={styles.time}>19:12:12</Text>
         </View>

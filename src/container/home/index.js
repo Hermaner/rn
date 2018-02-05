@@ -51,11 +51,10 @@ class HomeScreen extends base {
           <Text style={styles.headerText}>找专业的人  做专业的事</Text>
           <View style={[styles.flexRow, styles.boxStyle]}>
             <Icon style={styles.headerIcn} name="search" />
-            <Input
-              style={styles.inputText}
-              value={this.state.businessName}
-              placeholderTextColor="#666"
-              placeholder="请输入关键字"
+            <TFeedback
+              content={
+                <View style={[styles.inputText, styles.jacenter]}><Text style={{ fontSize: 14, color: '#666' }}>请输入关键字</Text></View>}
+              onPress={() => { this.props.push({ key: 'MainSearcher', params: { type: 'home' } }); }}
             />
           </View>
         </View>
@@ -136,9 +135,9 @@ class HomeScreen extends base {
               <TFeedback
                 key={index}
                 content={
-                  <View style={styles.flexOne}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                      <Iconfont style={styles.my} name={item.icn} />
+                  <View style={[styles.flexOne, styles.jacenter]}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', width: 50, height: 50, borderRadius: 25, backgroundColor: '#51cd73', marginBottom: 5 }}>
+                      <Iconfont style={{ color: '#fff', fontSize: 24 }} name={item.icn} />
                     </View>
                     <Text style={[styles.SampleCenterText, styles.textCenter]}>{item.text}</Text>
                   </View>}

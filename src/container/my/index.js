@@ -106,7 +106,7 @@ class My extends myBase {
                           style={[item2.isLast ? styles.myWidth : styles.flexOne, styles.infoBox]}
                         >
                           <Iconfont
-                            style={{ fontSize: 32, color: item2.icnColor, textAlign: 'center', marginBottom: 4 }}
+                            style={{ fontSize: 24, color: item2.icnColor, textAlign: 'center', marginBottom: 4 }}
                             name={item2.icn}
                           />
                           <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item2.title}</Text>

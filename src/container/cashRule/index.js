@@ -26,11 +26,11 @@ class CashRule extends cashRuleBase {
       <View style={styles.pagebody}>
         <View>
           <Text style={styles.title}>一) 提现流程</Text>
-          <Text style={styles.normalText}>1.登录手机惠农APP</Text>
+          <Text style={styles.normalText}>1.登录手机慧包APP</Text>
           <Text style={styles.normalText}>2.进入个人中心-账户中心-点击提现按钮；</Text>
           <Text style={styles.normalText}>3.进入提现界面后，先选择收款账户；</Text>
           <Text style={styles.normalText}>4.填写提现金额，点击确认提交提现申请成功；</Text>
-          <Text style={styles.normalText}>5.提现审核通过后，惠农网将于1-3个工作日打款到指定的收款账号。</Text>
+          <Text style={styles.normalText}>5.提现审核通过后，慧包网将于1-3个工作日打款到指定的收款账号。</Text>
         </View>
         <View>
           <Text style={styles.title}>二) 提现规则</Text>
@@ -50,7 +50,7 @@ class CashRule extends cashRuleBase {
         </View>
         <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
           <Text style={styles.normalText}>
-            如在提现过程中有任何疑问，请致惠农网客服电话：
+            如在提现过程中有任何疑问，请致慧包网客服电话：
           </Text>
           <TouchableOpacity>
             <Text style={{ fontSize: 14, color: '#302CCD' }}>400-008-8688</Text>

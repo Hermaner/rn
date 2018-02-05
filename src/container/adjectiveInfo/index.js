@@ -29,7 +29,7 @@ class AdjectiveInfo extends Base {
     return (
       <View style={styles.pagebody}>
         <View style={styles.pageTitle}>
-          <Text style={{ marginRight: 10, color: '#628524', fontSize: 18 }}>您来惠农的目的是</Text>
+          <Text style={{ marginRight: 10, color: '#628524', fontSize: 18 }}>您来慧包的目的是</Text>
         </View>
         <View style={styles.identity}>
           <TouchableOpacity onPress={() => { this.identityChange('1'); }}>

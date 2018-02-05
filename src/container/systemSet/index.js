@@ -31,7 +31,7 @@ class SystemSet extends systemSetBase {
           <Text style={styles.boxRight}>已开启</Text>
         </View>
         <Text style={{ color: '#666', fontSize: 12, paddingLeft: 10, paddingRight: 14, marginBottom: 10 }}>
-          如果您要关闭或开启手机惠农网的新消息通知,请在iphone的“设置”—“通知”功能中,找到应用程序“手机惠农”更改
+          如果您要关闭或开启手机慧包网的新消息通知,请在iphone的“设置”—“通知”功能中,找到应用程序“手机慧包”更改
         </Text>
         <TouchableOpacity>
           <View style={styles.rowBox}>
