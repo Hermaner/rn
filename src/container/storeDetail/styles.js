@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
   },
+  topIcon1: {
+    color: Mred,
+  },
   topText: {
     fontSize: 12,
     color: '#666',

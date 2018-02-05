@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import XPay from 'react-native-puti-pay';
 import { UpdateOrderService, GetMemberBuyOrderService, DeleteOrderService, PayAliService, PayAppWeiXinService } from '../../api';
 
-console.log(XPay)
-XPay.setWxId('wx4d30b0136bad7f7e');
-XPay.setAlipayScheme('alipay');
+// console.log(XPay)
+// XPay.setWxId('wx4d30b0136bad7f7e');
+// XPay.setAlipayScheme('alipay');
 class Base extends React.Component {
   constructor(props) {
     super(props);

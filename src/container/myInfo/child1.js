@@ -16,7 +16,7 @@ class Child1 extends React.Component {
   componentDidMount() {
   }
   render() {
-    const { data, push, memberId } = this.props;
+    const { data, push } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {
@@ -57,7 +57,7 @@ class Child1 extends React.Component {
                     </View>
                   </View>
                 }
-                onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+                onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
               />
             </View>
           ))

@@ -83,7 +83,7 @@ class OrderDetail extends base {
                   <Text style={{ fontSize: 14, color: '#666', marginTop: 8 }}>{supplyInfo.brandName}{supplyInfo.categoryName}</Text>
                 </View>
               </View>}
-            onPress={() => { push({ key: 'GoodDetail', params: { supplyId: supplyInfo.supplyId } }); }}
+            onPress={() => { push({ key: 'GoodDetail', params: { supplyId: supplyInfo.supplyId, memberId: supplyInfo.memberId } }); }}
           />
         </View>
 

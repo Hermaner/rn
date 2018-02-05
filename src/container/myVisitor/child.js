@@ -4,9 +4,12 @@ import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
+import { TFeedback } from '../../components';
+import myVisitorBase from './base';
 import styles from './styles';
 
-class Child extends React.Component {
+// class Child extends React.Component {
+class Child extends myVisitorBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,13 +28,21 @@ class Child extends React.Component {
             <View style={styles.visitorInfo} key={index}>
               <View style={styles.rowBoxList}>
                 <View style={styles.rowItem}>
-                  <TouchableOpacity>
-                    <View style={styles.rowBox}>
-                      <Text style={styles.flexOneleft}>12-19 10:30</Text>
-                      <Text style={styles.flexOneCenter}>增光</Text>
-                      <Text style={styles.flexOneRight}>新疆烤羊</Text>
-                    </View>
-                  </TouchableOpacity>
+                  <TFeedback
+                    content={
+                      <View style={styles.rowBox}>
+                        <Text style={styles.flexOneleft} numberOfLines={1}>
+                          {item.postDate.substring(5, 16)}
+                        </Text>
+                        <Text style={styles.flexOneCenter} numberOfLines={1}>
+                          {item.member.nickName}
+                        </Text>
+                        <Text style={styles.flexOneRight} numberOfLines={1}>
+                          {item.supply.brandName}{item.supply.categoryName}
+                        </Text>
+                      </View>}
+                    onPress={() => { this.clickHidden(index); }}
+                  />
                   <View style={styles.isHidden}>
                     <View style={styles.userBox}>
                       <View style={styles.leftPart}>

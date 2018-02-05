@@ -246,7 +246,7 @@ class GoodBusinessDetail extends base {
               count={2}
               data={item}
               key={index}
-              onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId } }); }}
+              onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
             />
           ))
         }

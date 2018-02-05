@@ -19,8 +19,6 @@ class Child extends React.Component {
   }
   _renderRow = () => {
     const { data, push } = this.props;
-    const { memberId } = this.state;
-    console.log('iiiiiiipppppppppppp', data)
     return (
       <View>
         {
@@ -60,7 +58,7 @@ class Child extends React.Component {
                     </View>
                   </View>
                 </View>}
-              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
             />
           ))
         }

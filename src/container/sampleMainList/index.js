@@ -234,7 +234,7 @@ class SampleMainList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index, memberId) => (
+  _renderRow = (item, sectionID, index) => (
     <View>
       <SampleGoodList
         data={item}
@@ -243,7 +243,7 @@ class SampleMainList extends base {
         onPressTell={() => { this.props.push({ key: 'User' }); }}
         // onPressLastBtn={() => { this.props.push({ key: 'SampleCenter' }); }}
         onPressLastBtn={() => { this.isSampleCenter(item); }}
-        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, member: memberId } }); }}
+        onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
       />
     </View>
   )

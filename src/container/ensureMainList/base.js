@@ -102,7 +102,7 @@ class Base extends React.Component {
       cityCode,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log('222222222222', res);
+        console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           this.setState({
@@ -258,7 +258,6 @@ class Base extends React.Component {
   }
   brandTab = (index) => {
     const { brands } = this.state;
-    console.log('uuuuuuuuuuuuu', brands[index]);
     this.setState({
       brandId: brands[index].brandId,
       brandName: brands[index].brandName,

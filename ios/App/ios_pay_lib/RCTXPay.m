@@ -53,10 +53,10 @@ RCT_EXPORT_MODULE(PutiPay);
     }
 }
 
-RCT_EXPORT_METHOD(setWxId:(NSString *)wxid){
-    wxOpenId = wxid;
-    [WXApi registerApp:wxid];
-}
+// RCT_EXPORT_METHOD(setWxId:(NSString *)wxid){
+//     wxOpenId = wxid;
+//     [WXApi registerApp:wxid];
+// }
 RCT_EXPORT_METHOD(setAlipayScheme:(NSString *)scheme){
     alipayScheme = scheme;
 }
@@ -64,10 +64,10 @@ RCT_EXPORT_METHOD(alipay:(NSString *)info callback:(RCTResponseSenderBlock)callb
 {
     alipayCallBack = callback;
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+
         [[AlipaySDK defaultService] payOrder:info fromScheme:alipayScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"alipay:callback");
-            
+
             callback([[NSArray alloc] initWithObjects:resultDic, nil]);
         }];
     });
@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(alipay:(NSString *)info callback:(RCTResponseSenderBlock)callb
 
 RCT_EXPORT_METHOD(wxPay:(NSDictionary *)params  callback:(RCTResponseSenderBlock)callback)
 {
-    
+
     NSLog(@"wxPay:%@", params);
     //需要创建这个支付对象
     PayReq *req   = [[PayReq alloc] init];

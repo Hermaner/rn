@@ -66,9 +66,31 @@ class MyVisitorBase extends React.Component {
       currentPage,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log('tttttttttuuuuuuuuuu', res);
-        const result = res.data.pageData;
-        if (result.length === 0) {
+        console.log(res);
+        const result = [];
+        const aaa = [];
+        const time = [];
+        for (const key in res.data) {
+          time.push(key.substring(5, 10));
+          if (res.data[key].length > 0) {
+            aaa.push(res.data[key]);
+          }
+        }
+        for (let i = 0; i < aaa.length; i += 1) {
+          for (let j = 0; j < aaa[i].length; j += 1) {
+            result.push(aaa[i][j]);
+          }
+        }
+        for (let i = 0; i < result.length; i += 1) {
+          result[i].isClick = -1;
+        }
+        this.state.option.xAxis.data = time.reverse();
+        console.log('bbbbbbbbbbb', this.state.option.xAxis.data)
+        this.setState({
+          option: this.state.option,
+        });
+        console.log('uuuuuuuuuuuuu', this.state.option)
+        if (res.data === 0) {
           this.setState({
             nomore: true,
             loading: false,
@@ -102,6 +124,21 @@ class MyVisitorBase extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  clickHidden = (index) => {
+    const { visitorList } = this.state;
+    console.log('0000000000000000000000', index)
+    if (visitorList.length > 0) {
+      for (let i = 0; i < visitorList.length; i += 1) {
+        if (i === index) {
+          visitorList[i].isClick *= -1;
+          this.setState({
+            visitorList,
+          });
+          console.log('mmmmmmmmmm', this.state.visitorList)
+        }
+      }
+    }
   }
   _onRefreshVisitor = () => {
     this.setState({

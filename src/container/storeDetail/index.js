@@ -22,26 +22,41 @@ class MainScreen extends base {
     this.getInit();
   }
   _renderTop() {
-    const { goodsImg, userInfo, goodsItems } = this.state;
+    const { goodsImg, userInfo, goodsItems, isFollow } = this.state;
+    console.log('nnnnnnnnnnnnn', goodsItems);
     return (
       <View style={styles.topView}>
         {
-          goodsItems &&
-          // goodsItems[0].supplyImages.length > 0 ?
-            // <Image
-            //   source={{ uri: goodsItems[0].supplyImages[0].imgUrl }}
-            //   style={styles.mainImg}
-            // />
-          // :
+          userInfo &&
+          userInfo.imgUrl ?
+            <Image
+              source={{ uri: userInfo.imgUrl }}
+              style={styles.mainImg}
+            />
+          :
             <Image source={goodsImg} style={styles.mainImg} />
         }
         <View style={styles.toplogo}>
           <Image source={{ uri: userInfo.imgUrl }} style={styles.mainLogo} />
         </View>
-        <View style={styles.topBtn}>
-          <Icon name="heart" style={styles.topIcon} />
-          <Text style={styles.topText}>关注</Text>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.topBtn}>
+              {
+                isFollow ?
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="heart" style={[styles.topIcon, styles.topIcon1]} />
+                    <Text style={styles.topText}>已关注</Text>
+                  </View>
+                :
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Icon name="heart" style={styles.topIcon} />
+                    <Text style={styles.topText}>关注</Text>
+                  </View>
+              }
+            </View>}
+          onPress={() => { this.CreateMemberFollowService(); }}
+        />
       </View>
     );
   }
@@ -163,12 +178,11 @@ class MainScreen extends base {
   }
   _renderTabs() {
     const { memberId } = this.props.navigation.state.params;
-    console.log('MMMMMMMMMMMMMMM', memberId);
     return (
       <View style={{ backgroundColor: '#fff', marginTop: 10 }}>
         <View style={styles.flexOne}>
           <View style={[styles.flexOne, styles.textBorder]}>
-            <Text style={styles.tabText}>优质商家</Text>
+            <Text style={styles.tabText}>供应</Text>
           </View>
         </View>
         <Child member={memberId} />
@@ -208,12 +222,22 @@ class MainScreen extends base {
     );
   }
   _renderFooter() {
+    const { isFollow } = this.state;
     return (
       <Footer>
-        <View style={styles.fotBtn1}>
-          <Icon name="heart" style={styles.fotChatIcon} />
-          <Text style={styles.fotChatText}>关注</Text>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.fotBtn1}>
+              <Icon name="heart" style={styles.fotChatIcon} />
+              {
+                isFollow ?
+                  <Text style={styles.topText}>已关注</Text>
+                :
+                  <Text style={styles.topText}>关注</Text>
+              }
+            </View>}
+          onPress={() => { this.CreateMemberFollowService(); }}
+        />
         <View style={styles.fotBtn2}>
           <Text style={styles.fotText}>聊生意</Text>
         </View>
