@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Image, View, StyleSheet } from 'react-native';
-import { st, mColor } from '../utils';
+import { mColor } from '../utils';
 
 const styles = StyleSheet.create({
   list: {

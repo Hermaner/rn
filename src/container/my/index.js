@@ -43,15 +43,17 @@ class My extends myBase {
           {
             memberId ?
               <TouchableOpacity onPress={() => { push({ key: 'SelfSet' }); }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 10 }}>
                   <View style={styles.headerImgBox}>
                     <Image style={styles.userImg} source={{ uri: userInfo.imgUrl }} />
                   </View>
                   <View style={{ marginLeft: 10, paddingTop: 10 }}>
-                    <Text style={{ backgroundColor: 'transparent', color: '#333', fontSize: 14 }}>{userInfo.nickName}</Text>
-                    <Text style={[styles.textBackground, styles.textSmall]}>
-                      {userInfo.identityName}
-                    </Text>
+                    <Text style={{ backgroundColor: 'transparent', color: '#333', fontSize: 14, marginBottom: 6 }}>{userInfo.nickName}</Text>
+                    <View style={styles.textBackground}>
+                      <Text style={styles.textSmall}>
+                        {userInfo.identityName}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -59,13 +61,13 @@ class My extends myBase {
               <TOpacity
                 style={{ flex: 1 }}
                 content={
-                  <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                     <View style={styles.headerImgBox}>
                       <View style={styles.imgBox}>
                         <Image style={styles.userImg} source={require('../../assets/img/tx1.png')} />
                       </View>
                     </View>
-                    <View style={{ marginLeft: 90, paddingTop: 10 }}>
+                    <View style={[styles.flexOne, styles.jcenter]}>
                       <Text style={styles.userText}>立即登录</Text>
                     </View>
                   </View>
@@ -96,7 +98,7 @@ class My extends myBase {
           list.map((item, index) => (
             <View style={styles.detailInfo} key={index}>
               <Text style={styles.myIdentity}>{item[0]}</Text>
-              <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
+              <View style={{ borderTopWidth: 1, borderTopColor: '#eee', flex: 1, paddingTop: 10, paddingBottom: 10, flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
                 {
                   item[1].map((item2, index2) => (
                     <TFeedback

@@ -25,11 +25,11 @@ class App extends React.Component {
       JPushModule.notifyJSDidLoad(() => {
         // console.log(resultCode);
       });
-      JPushModule.addReceiveNotificationListener(() => {
-        // console.log(map);
+      JPushModule.addReceiveNotificationListener((map) => {
+        console.log(map);
       });
-      JPushModule.addReceiveOpenNotificationListener(() => {
-        // console.log(map);
+      JPushModule.addReceiveOpenNotificationListener((map) => {
+        console.log(map);
       });
       JPushModule.getInfo((map) => {
         this.setState({
@@ -55,7 +55,7 @@ class App extends React.Component {
       });
     }
     JPushModule.getRegistrationID((registrationId) => {
-      // console.log(registrationId);
+      console.log(registrationId);
       this.setState({ cid: registrationId });
     });
     this.premInit();

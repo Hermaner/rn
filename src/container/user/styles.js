@@ -8,7 +8,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   form: {
-    backgroundColor: '#fff', borderRadius: 8,
+    backgroundColor: '#fff',
+    marginTop: 20,
+    paddingLeft: 15,
   },
   accountView: {
     height: 50,
@@ -42,8 +44,8 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: Mcolor,
-    marginTop: 15,
-    height: 45,
+    margin: 20,
+    height: 50,
     borderRadius: 5,
   },
   submitBtnText: {

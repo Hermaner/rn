@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
   },
   firstBox: {
     flex: 1,
-    height: 180,
-    // marginTop: 15,
+    height: 170,
     marginLeft: 10,
     marginRight: 10,
     paddingLeft: 10,
@@ -73,11 +72,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   textBackground: {
-    backgroundColor: 'transparent',
-    color: '#333',
+    backgroundColor: Mred,
+    padding: 3,
+    borderRadius: 3,
   },
   textSmall: {
     fontSize: 14,
+    color: '#fff',
   },
   textMoney: {
     fontSize: px(22),
@@ -91,21 +92,14 @@ const styles = StyleSheet.create({
   infoBox: {
     paddingTop: 10,
     paddingBottom: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
   },
   myWidth: {
     width: '25%',
-    // flex: 1,
-    // borderWidth: 1,
   },
   flexOne: {
     flex: 1,
   },
   headerImgBox: {
-    // position: 'absolute',
-    // top: -26,
-    marginTop: 10,
   },
   imgBox: {
     width: 80,

@@ -24,7 +24,7 @@ class UserPage extends base {
     return (
       <Container>
         <Header back={pop} title="注册登陆" />
-        <Content padder contentContainerStyle={{ flex: 1 }}>
+        <Content contentContainerStyle={{ flex: 1 }}>
           <View style={styles.form}>
             <View style={styles.accountView}>
               <Input
@@ -57,17 +57,6 @@ class UserPage extends base {
           <Button full style={styles.submitBtn} onPress={this.login}>
             <Text style={styles.submitBtnText}>登陆</Text>
           </Button>
-          <View style={styles.switchView}>
-            <Text style={styles.switchLabel}>或者</Text>
-            <View>
-              <Button style={styles.switchBtn}>
-                <Text style={styles.switchBtnText}>切换至账户密码登陆</Text>
-              </Button>
-            </View>
-          </View>
-          <View style={styles.switchView}>
-            <Text style={styles.switchLabel}>第三方账号登陆</Text>
-          </View>
           <View style={styles.bottomView}>
             <View style={styles.agreementView}>
               <Text style={styles.agreementLabel}>登陆即表示同意</Text>
@@ -75,12 +64,12 @@ class UserPage extends base {
                 <Text style={styles.agreementText}>《服务协议》</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.bottomTipsView}>
+            {/* <View style={styles.bottomTipsView}>
               <Text style={styles.bottomTipsLabel}>如有疑问，请联系客服：</Text>
               <TouchableOpacity onPress={() => Communications.phonecall('400322322', true)}>
                 <Text style={styles.bottomTipsText}>400-000-000</Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
