@@ -1617,7 +1617,7 @@ cryptiles@3.x.x:
   dependencies:
     boom "5.x.x"
 
-crypto-js@3.1.9-1:
+crypto-js@3.1.9-1, crypto-js@^3.1.9-1:
   version "3.1.9-1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
 
@@ -4736,6 +4736,12 @@ react-native-image-zoom-viewer@^2.0.16:
     nt-transmit-transparently "^1.0.7"
     react-native-image-pan-zoom "^2.0.9"
 
+react-native-img-cache@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-img-cache/-/react-native-img-cache-1.5.3.tgz#ccffba86603077d0be4f9dc08aff59e3f551090b"
+  dependencies:
+    crypto-js "^3.1.9-1"
+
 "react-native-keyboard-aware-scroll-view@https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view":
   version "0.2.9"
   resolved "https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view#f4805f254d6cc8e3329f5fb224944401f66655db"
@@ -4779,6 +4785,13 @@ react-native-modal@3.1.0:
   dependencies:
     prop-types "15.5.10"
     react-native-animatable "^1.2.3"
+
+react-native-modalbox@latest:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-modalbox/-/react-native-modalbox-1.4.2.tgz#818c9354c9b13327ec807c6436e8516b3b419478"
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
 
 react-native-permissions@^1.0.6:
   version "1.0.6"
@@ -4833,6 +4846,10 @@ react-native-scrollable-tab-view@^0.8.0:
 react-native-select-input-ios@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-native-select-input-ios/-/react-native-select-input-ios-1.1.4.tgz#2c0389f3ef039e45910f90aceaa4d281946a8909"
+
+react-native-shadow@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-shadow/-/react-native-shadow-1.2.2.tgz#08991cd14b71e32f2fc6363911c139d231949a66"
 
 react-native-simple-toast@0.0.6:
   version "0.0.6"

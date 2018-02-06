@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { Mred, px } from '../utils';
+import { Icon } from 'native-base';
+import { Mred } from '../utils';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: 120,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: 'hidden',
     justifyContent: 'center',
-    height: 34,
+    height: 35,
   },
   input: {
     flex: 1,
@@ -23,8 +24,10 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   stepWrap: {
-    width: 32,
-    height: 32,
+    width: 35,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Mred,
   },
   stepText: {
@@ -215,10 +218,7 @@ export default class InputNumber extends React.Component {
             ref={(component) => { this._stepDown = component; }}
             style={[styles.stepWrap, downDisabledStyle, downStyle]}
           >
-            <Text
-              ref={(component) => { this._stepDownText = component; }}
-              style={[styles.stepText, downDisabledTextStyle]}
-            >-</Text>
+            <Icon ref={(component) => { this._stepDownText = component; }} name="md-remove" style={[styles.stepText, downDisabledTextStyle]} />
           </View>
         </TouchableWithoutFeedback>
         <TextInput
@@ -238,10 +238,7 @@ export default class InputNumber extends React.Component {
             ref={(component) => { this._stepUp = component; }}
             style={[styles.stepWrap, upDisabledStyle, upStyle]}
           >
-            <Text
-              ref={(component) => { this._stepUpText = component; }}
-              style={[styles.stepText, upDisabledTextStyle]}
-            >+</Text>
+            <Icon ref={(component) => { this._stepUpText = component; }} name="md-add" style={[styles.stepText, upDisabledTextStyle]} />
           </View>
         </TouchableWithoutFeedback>
       </View>

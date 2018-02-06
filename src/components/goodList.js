@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 });
 
 
-const GoodList = ({ onPress, data }) => (
+const ServiceItem = ({ onPress, data }) => (
   <TouchableHighlight
     underlayColor="#eee"
     onPress={onPress}
@@ -122,8 +122,8 @@ const GoodList = ({ onPress, data }) => (
   </TouchableHighlight>
 );
 
-GoodList.propTypes = {
+ServiceItem.propTypes = {
   onPress: PropTypes.func,
   data: PropTypes.object,
 };
-export default GoodList;
+export default ServiceItem;

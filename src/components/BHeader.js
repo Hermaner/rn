@@ -6,7 +6,7 @@ import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: Mcolor,
+    backgroundColor: '#fff',
   },
   left: {
     position: 'absolute',
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    color: '#fff',
+    color: '#444',
     fontWeight: 'bold',
   },
   right: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     fontSize: 24,
-    color: '#fff',
+    color: '#444',
   },
 });
 const headerBar = ({ back, title, showRight, rightText, rightPress }) => (

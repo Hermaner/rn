@@ -1,53 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, Image, View, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
-import { Mcolor, st } from '../utils';
+import { mColor } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
     paddingBottom: 5,
     position: 'relative',
-    backgroundColor: '#fff',
+    background: '#fff',
   },
   top: {
-    height: 40,
-    ...st.frcenter,
+    height: 30,
     paddingRight: 10,
-    paddingLeft: 10,
   },
   name: {
     fontSize: 14,
-    flex: 1,
-    color: Mcolor,
-  },
-  priceText: {
-    color: Mcolor,
-    fontSize: 14,
-  },
-  price: {
-    backgroundColor: Mcolor,
-    height: 30,
-    ...st.frcenter,
-    borderRadius: 15,
-    paddingRight: 10,
-    paddingLeft: 10,
-  },
-  priceIcon: {
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 4,
-    marginRight: 3,
-  },
-  priceValue: {
-    color: '#fff',
-    fontSize: 15,
+    color: mColor,
   },
   mid: {
     padding: 5,
-    paddingTop: 0,
   },
   detail: {
+    paddingTop: 6,
     paddingBottom: 6,
   },
   detailText: {
@@ -63,8 +37,32 @@ const styles = StyleSheet.create({
   label: {
   },
   labelText: {
-    color: Mcolor,
+    color: mColor,
     fontSize: 12,
+  },
+  priceText: {
+    color: mColor,
+    fontSize: 12,
+  },
+  price: {
+    position: 'absolute',
+    background: mColor,
+    height: 30,
+    borderRadius: 15,
+    paddingRight: 10,
+    paddingLeft: 10,
+    right: 0,
+    top: 6,
+  },
+  priceIcon: {
+    background: '#fff',
+    borderRadius: 15,
+    padding: 4,
+    marginRight: 3,
+  },
+  priceValue: {
+    color: '#fff',
+    fontSize: 15,
   },
   bom: {
     borderTopWidth: 1,
@@ -104,12 +102,6 @@ const DemanOrderItem = ({ item }) => (
       <Text style={styles.name}>
         {item.demandCategoryName}
       </Text>
-      <View style={styles.price}>
-        <View style={styles.priceIcon}>
-          <Icon name="logo-usd" style={styles.priceText} />
-        </View>
-        <Text style={styles.priceValue}>{item.servicesPrice ? `${item.servicesPrice}元` : '再议'}</Text>
-      </View>
     </View>
     <View style={styles.mid}>
       <View style={styles.detail}><Text style={styles.detailText}>{item.detail}</Text></View>
@@ -118,6 +110,9 @@ const DemanOrderItem = ({ item }) => (
         <View style={styles.label}>
           <Text style={styles.labelText}>{item.modiDate}</Text>
         </View>
+      </View>
+      <View style={styles.price}>
+        <View style={styles.priceIcon}><Text style={styles.priceText}>费用</Text></View><Text style={styles.priceValue}>{item.servicesPrice ? `${item.servicesPrice}元` : '再议'}</Text>
       </View>
     </View>
     <View style={styles.bom}>

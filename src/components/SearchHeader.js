@@ -3,28 +3,36 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Header, Icon } from 'native-base';
 import { Mcolor, st } from '../utils';
+import TFeedback from './TFeedback';
 
 const styles = StyleSheet.create({
   header: {
     backgroundColor: Mcolor,
+    ...st.jacenter,
   },
   left: {
-    position: 'absolute',
-    left: 10,
-    bottom: 0,
-    height: 48,
     width: 20,
     ...st.jacenter,
-    zIndex: 9,
   },
-  title: {
+  HeaderMain: {
     flex: 1,
+    paddingLeft: 8,
+    ...st.fr,
     ...st.jacenter,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    marginLeft: 10,
+    height: 30,
   },
-  titleText: {
-    fontSize: 15,
-    color: '#fff',
-    fontWeight: 'bold',
+  HeaderMainText: {
+    color: '#999',
+    fontSize: 14,
+    flex: 1,
+    marginLeft: 8,
+  },
+  HeaderIcon: {
+    color: '#666',
+    fontSize: 18,
   },
   right: {
     position: 'absolute',
@@ -44,14 +52,20 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
+const headerBar = ({ back, showRight, rightText, rightPress }) => (
   <Header style={styles.header}>
     <TouchableOpacity onPress={back} style={styles.left}>
       <Icon name="arrow-back" style={styles.backIcon} />
     </TouchableOpacity>
-    <View style={styles.title}>
-      <Text style={styles.titleText}>{title}</Text>
-    </View>
+    <TFeedback
+      content={
+        <View style={styles.HeaderMain}>
+          <Icon name="ios-search-outline" style={styles.HeaderIcon} />
+          <Text style={styles.HeaderMainText}>搜索服务</Text>
+        </View>
+      }
+      onPress={() => { }}
+    />
     {
       showRight &&
       <TouchableOpacity onPress={rightPress} style={styles.right}>
@@ -63,7 +77,6 @@ const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
 
 headerBar.propTypes = {
   back: PropTypes.func,
-  title: PropTypes.string,
   rightPress: PropTypes.func,
   rightText: PropTypes.string,
   showRight: PropTypes.bool,

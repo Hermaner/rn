@@ -18,9 +18,25 @@ import LoadMore from './loadMore';
 import LoadNoMore from './loadNoMore';
 import SampleGoodList from './SampleGoodList';
 import EnsureGoodList from './EnsureGoodList';
+import IconItem from './IconItem';
+import CaseItem from './CaseItem';
+import ImageLook from './ImageLook';
+import ServiceItem from './ServiceItem';
+import SearchHeader from './SearchHeader';
+import TitleItem from './TitleItem';
+import BHeader from './BHeader';
+import DemanOrderItem from './DemanOrderItem';
 
 export {
   TLight,
+  DemanOrderItem,
+  BHeader,
+  TitleItem,
+  ImageLook,
+  SearchHeader,
+  ServiceItem,
+  CaseItem,
+  IconItem,
   TOpacity,
   LoadMore,
   LoadNoMore,

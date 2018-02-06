@@ -20,7 +20,7 @@ export const Global = {
   items: [], // 商品大全
   skuType: '0', // 0:默认采购进入 1：采购重新选择商品，返回3page 2： 采供选择规格返回1page 3：默认供应进入 4：供应重新选择商品，返回3page
 };
-export const Mcolor = '#8bce21';
+export const Mcolor = '#f66c03';
 export const Mred = '#f18334';
 export const Fred = '#ff0000';
 export const Mgreen = '#7eda99';
@@ -42,6 +42,11 @@ export const st = {
   },
   fr: {
     flexDirection: 'row',
+  },
+  frcenter: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   utilsText: {
     fontSize: 14,

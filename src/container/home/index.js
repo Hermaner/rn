@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Text, Input, Icon } from 'native-base';
+import { Container, Text, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
