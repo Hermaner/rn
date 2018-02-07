@@ -10,6 +10,7 @@ import ServiceDetail from '../containers/ServiceDetail';
 import MasterDetail from '../containers/MasterDetail';
 import User from '../containers/User';
 import ChatRoom from '../containers/ChatRoom';
+import DemandOrderDetail from '../containers/DemandOrderDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -18,6 +19,7 @@ export const AppNavigator = StackNavigator({
   ServiceDetail: { screen: ServiceDetail },
   MasterDetail: { screen: MasterDetail },
   ChatRoom: { screen: ChatRoom },
+  DemandOrderDetail: { screen: DemandOrderDetail },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

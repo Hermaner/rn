@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
+import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Icon } from 'native-base';
+import { Container, Text, Icon, Content, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, DemanOrderItem, TFeedback, TOpacity, Header } from '../../components';
+import { Loading, TFeedback, TOpacity, Header, ImageLook } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class DemandOrder extends base {
+class DemandOrderDetail extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,87 +17,68 @@ class DemandOrder extends base {
     };
   }
   componentDidMount() {
-    this.getInit();
   }
   componentWillUnmount() {
   }
-  _readerConditions() {
-    const { tabs } = this.state;
+  _renderAddress() {
+    const { item } = this.state;
     return (
-      <View style={styles.conditions}>
-        {
-          tabs.map((item, index) => (
-            <TFeedback
-              key={index}
-              content={
-                <View style={styles.cdsList}>
-                  <Text style={[styles.cdsListText, item.cur && styles.cdsCurText]}>
-                    {item.label}
-                  </Text>
-                  {
-                    index === 3 ?
-                      <Icon name="keypad" style={[styles.cddown, item.cur && styles.cddownCur]} />
-                    :
-                      <Icon name={item.cur ? 'ios-arrow-up' : 'ios-arrow-down'} style={[styles.cddown, item.cur && styles.cddownCur]} />
-                  }
-                  <View style={styles.rightLine} />
-                </View>
-              }
-              onPress={() => { this.changeTab(index); }}
-            />
-          ))
-        }
+      <View style={styles.address}>
+        <Image source={{ uri: item.memberInfo.imgUrl }} style={styles.userImg} />
+        <View style={styles.addressRight}>
+          <Text style={styles.userName}>{decodeURI(item.memberInfo.nickName)}</Text>
+          <Text style={styles.userAddress}>
+            {item.provinceName}{item.cityName}{item.districtName}{item.address}
+          </Text>
+        </View>
       </View>
     );
   }
-  _renderRow = (item, sectionID, index) => (
-    <TFeedback
-      key={index}
-      content={
-        <View>
-          <DemanOrderItem
-            item={item}
-            rowID={index}
-            key={index}
-          />
-        </View>
-      }
-      onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
-    />
-  )
-  _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+  _renderList() {
+    const { item } = this.state;
     return (
-      <View style={styles.listContent}>
-        {
-          !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
-              onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
-            />
-            :
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableWithoutFeedback onPress={this._onRefresh}>
-                <View>
-                  <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                    没有相关数据,点击刷新
-                  </Text>
+      <View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>服务详情</Text>
+          <View style={styles.listRight}>
+            <View style={styles.listType}>
+              <View style={styles.listTypeBg}>
+                <Text style={styles.listTypeName}>
+                  {item.demandCategoryName}
+                </Text>
+              </View>
+              <View style={styles.price}>
+                <View style={styles.priceIcon}>
+                  <Icon name="logo-usd" style={styles.priceText} />
                 </View>
-              </TouchableWithoutFeedback>
+                <Text style={styles.priceValue}>{item.servicesPrice ? `${item.servicesPrice}元` : '再议'}</Text>
+              </View>
             </View>
-        }
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>服务详情</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>{item.detail}</Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>截止时间</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>{item.closingDate.substr(0, 10)}</Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>图片详情</Text>
+          <View style={styles.listRight}>
+            {
+              item.demandOrderImages && item.demandOrderImages.length > 0 ?
+                <ImageLook images={item.demandOrderImages} />
+                :
+                <Text style={styles.listText}>发起人没有上传相关图片</Text>
+            }
+          </View>
+        </View>
       </View>
     );
   }
@@ -184,17 +165,36 @@ class DemandOrder extends base {
       </Modal>
     );
   }
+  _renderFooter() {
+    const { masterId } = this.state;
+    return (
+      <Footer style={styles.footer}>
+        <View style={styles.footTips}>
+          <Text style={styles.footTipsText}>需认证为平台师傅才可接单</Text>
+        </View>
+        <TOpacity
+          style={styles.footBtn}
+          content={
+            <View style={styles.footBtnView}>
+              <Text style={styles.footBtnText}>申请接单</Text>
+            </View>
+          }
+          onPress={this.createService}
+        />
+      </Footer>
+    );
+  }
   render() {
     const { popItems } = this.state;
+    const { pop } = this.props;
     return (
       <Container>
-        <View style={styles.fixTop}>
-          <Header title="可接订单" />
-          {this._readerConditions()}
-        </View>
-        <View style={styles.mainView}>
-          {this._renderContent()}
-        </View>
+        <Header back={pop} title="接单详情" />
+        <Content>
+          {this._renderAddress()}
+          {this._renderList()}
+        </Content>
+        {this._renderFooter()}
         {popItems && this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
@@ -202,8 +202,8 @@ class DemandOrder extends base {
   }
 }
 
-DemandOrder.propTypes = {
+DemandOrderDetail.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(DemandOrder);
+export default connect(null, { pop: popRoute, push: pushRoute })(DemandOrderDetail);
