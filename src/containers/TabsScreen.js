@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import home from './home';
 import goods from './goods';
-import user from './User';
+import ChatIndex from './ChatIndex';
 import mine from './my';
 import { Mcolor } from '../utils';
 import { Iconfont } from '../components';
@@ -29,8 +29,8 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
     Goods: {
       screen: goods,
     },
-    User: {
-      screen: user,
+    ChatIndex: {
+      screen: ChatIndex,
     },
     Mine: {
       screen: mine,
@@ -52,7 +52,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
             iconName = 'icon-caigou-xianxing';
             name = '我要卖';
             break;
-          case 'User':
+          case 'ChatIndex':
             iconName = 'icon-kefu';
             name = '聊生意';
             break;

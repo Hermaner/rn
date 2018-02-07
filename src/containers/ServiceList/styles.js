@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   cdsListText: {
     color: '#444',
-    fontSize: 12,
+    fontSize: 13,
   },
   cdsCurText: {
     color: Mcolor,

@@ -6,12 +6,13 @@ import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
-    paddingBottom: 5,
+    marginBottom: 3,
     position: 'relative',
     backgroundColor: '#fff',
   },
   top: {
-    height: 40,
+    height: 35,
+    paddingTop: 5,
     ...st.frcenter,
     paddingRight: 10,
     paddingLeft: 10,
@@ -20,14 +21,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     color: Mcolor,
+    fontWeight: 'bold',
   },
   priceText: {
     color: Mcolor,
-    fontSize: 14,
+    fontSize: 12,
   },
   price: {
     backgroundColor: Mcolor,
-    height: 30,
+    height: 24,
     ...st.frcenter,
     borderRadius: 15,
     paddingRight: 10,
@@ -44,8 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   mid: {
-    padding: 5,
-    paddingTop: 0,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
   },
   detail: {
     paddingBottom: 6,
@@ -55,22 +58,26 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   close: {
+    ...st.frcenter,
   },
   closeText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#666',
+    flex: 1,
   },
   label: {
   },
   labelText: {
-    color: Mcolor,
-    fontSize: 12,
+    color: '#ff0000',
+    fontSize: 14,
   },
   bom: {
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
+    borderTopColor: '#e2e2e2',
     paddingLeft: 10,
     paddingRight: 10,
+    ...st.frcenter,
+    height: 35,
   },
   img: {
     width: 30,
@@ -80,20 +87,21 @@ const styles = StyleSheet.create({
   },
   nick: {
     paddingRight: 5,
+    flex: 1,
+    ...st.fr,
   },
   nickText: {
     fontSize: 12,
-    color: '#888',
-  },
-  address: {
+    color: '#666',
+    marginRight: 4,
   },
   addressText: {
     fontSize: 12,
-    color: '#888',
+    color: '#666',
   },
   distanceText: {
     fontSize: 12,
-    color: '#888',
+    color: '#666',
   },
 });
 
@@ -114,18 +122,14 @@ const DemanOrderItem = ({ item }) => (
     <View style={styles.mid}>
       <View style={styles.detail}><Text style={styles.detailText}>{item.detail}</Text></View>
       <View style={styles.close}>
-        <View><Text style={styles.closeText}>截止日期：{item.closingDate.substr(0, 10)}</Text></View>
-        <View style={styles.label}>
-          <Text style={styles.labelText}>{item.modiDate}</Text>
-        </View>
+        <Text style={styles.closeText}>截止日期：{item.closingDate.substr(0, 10)}</Text>
+        <Text style={styles.labelText}>{item.modiDate}</Text>
       </View>
     </View>
     <View style={styles.bom}>
       <Image source={{ uri: item.memberInfo.imgUrl }} style={styles.img} />
       <View style={styles.nick}>
         <Text style={styles.nickText}>{decodeURI(item.memberInfo.nickName)}</Text>
-      </View>
-      <View style={styles.address}>
         <Text style={styles.addressText}>{item.provinceName}{item.cityName}</Text>
       </View>
       <Text style={styles.distanceText}>{item.distance > 200 ? `${(item.distance / 1000).toFixed(2)}km` : '小于200m'}</Text>

@@ -28,7 +28,7 @@ class Base extends React.Component {
         label: '智能排序',
         cur: true,
       }, {
-        label: '销量优先',
+        label: '距离排序',
         cur: false,
       }, {
         label: '价格排序',
@@ -67,6 +67,9 @@ class Base extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
+        result.forEach((list) => {
+          list.modiDate = this.computeDate(list.modiDate)
+        });
         if (result.length === 0) {
           if (refresh) {
             this.setState({
@@ -110,6 +113,17 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  computeDate = (time) => {
+    let target = (new Date().getTime() - new Date(time).getTime()) / 1000 / 60;
+    if (target < 60) {
+      target = parseInt(target, 10);
+      return `${target}分钟前`;
+    } else if (target >= 60 && target < (24 * 60)) {
+      target = parseInt(target / 60, 10);
+      return `${target}小时前`;
+    }
+    return time.substr(0, 10);
   }
   changeTab = (index) => {
     const { tabs } = this.state;

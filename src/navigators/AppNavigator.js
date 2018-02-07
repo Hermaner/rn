@@ -9,6 +9,7 @@ import ServiceList from '../containers/ServiceList';
 import ServiceDetail from '../containers/ServiceDetail';
 import MasterDetail from '../containers/MasterDetail';
 import User from '../containers/User';
+import ChatRoom from '../containers/ChatRoom';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -16,6 +17,7 @@ export const AppNavigator = StackNavigator({
   ServiceList: { screen: ServiceList },
   ServiceDetail: { screen: ServiceDetail },
   MasterDetail: { screen: MasterDetail },
+  ChatRoom: { screen: ChatRoom },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({
