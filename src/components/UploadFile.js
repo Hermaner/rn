@@ -5,11 +5,11 @@ import {
   Text,
   Modal,
   StyleSheet,
-  Image,
   TouchableWithoutFeedback,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon, ActionSheet } from 'native-base';
+import { CachedImage } from 'react-native-img-cache';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
@@ -219,7 +219,7 @@ export default class Prompt extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <Image source={{ uri: item.uri }} style={styles.imageList} />
+                  <CachedImage source={{ uri: item.uri }} style={styles.imageList} />
                   <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
                     <Icon name="ios-close-outline" style={styles.imageDelIcon} />
                   </TouchableOpacity>
@@ -241,7 +241,7 @@ export default class Prompt extends React.Component {
                  buttonIndex => this.goAsheet(buttonIndex),
                )}
             >
-              <Image source={upImg} style={styles.upViewImg} />
+              <CachedImage source={upImg} style={styles.upViewImg} />
             </TouchableWithoutFeedback>
             {
               !isTextHide && <Text style={styles.upViewText}>{this.props.label}</Text>

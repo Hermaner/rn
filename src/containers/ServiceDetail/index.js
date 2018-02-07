@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
@@ -130,7 +131,7 @@ class ServiceDetail extends base {
         <Header back={pop} title="服务详情" />
         <Content>
           <View style={styles.topView}>
-            <Image source={{ uri: info.imgUrl.split(',')[0] }} style={styles.topImg} />
+            <CachedImage source={{ uri: info.imgUrl.split(',')[0] }} style={styles.topImg} />
           </View>
           {this._renderMain()}
           {this._renderIntr()}

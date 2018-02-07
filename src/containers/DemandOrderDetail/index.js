@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Content, Footer } from 'native-base';
 import { connect } from 'react-redux';
+import { CachedImage } from 'react-native-img-cache';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
 import { Loading, TFeedback, TOpacity, Header, ImageLook } from '../../components';
@@ -24,7 +25,7 @@ class DemandOrderDetail extends base {
     const { item } = this.state;
     return (
       <View style={styles.address}>
-        <Image source={{ uri: item.memberInfo.imgUrl }} style={styles.userImg} />
+        <CachedImage source={{ uri: item.memberInfo.imgUrl }} style={styles.userImg} />
         <View style={styles.addressRight}>
           <Text style={styles.userName}>{decodeURI(item.memberInfo.nickName)}</Text>
           <Text style={styles.userAddress}>

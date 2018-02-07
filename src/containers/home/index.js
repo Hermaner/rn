@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
+import { View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AMapLocation from 'react-native-smart-amap-location';
+import { CachedImage } from 'react-native-img-cache';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem } from '../../components';
@@ -87,7 +88,7 @@ class Home extends base {
           {
             banners.map((item, i) => (
               <View key={i}>
-                <Image style={styles.swiperImage} source={item.img} />
+                <CachedImage source={item.img} style={styles.swiperImage} />
               </View>
             ))
           }

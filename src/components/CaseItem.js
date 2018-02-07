@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
-import { Text, Image, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { st, Mcolor } from '../utils';
 import ImageLook from './ImageLook';
 
@@ -126,10 +127,7 @@ const styles = StyleSheet.create({
 const CaseItem = ({ item }) => (
   <View style={styles.list}>
     <View style={styles.top}>
-      <Image
-        source={{ uri: item.masterHeadImg }}
-        style={styles.img}
-      />
+      <CachedImage source={{ uri: item.masterHeadImg }} style={styles.img} />
       <View style={styles.info}>
         <View style={styles.infoTop}>
           <Text style={styles.name}>

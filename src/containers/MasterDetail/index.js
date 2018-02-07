@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
+import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
 import { popRoute, pushRoute } from '../../actions';
 import { Loading, TFeedback, Header, ImageLook, TOpacity, TitleItem } from '../../components';
@@ -26,7 +27,7 @@ class MasterDetail extends base {
     return (
       <View style={styles.topView}>
         <View style={styles.topImgView}>
-          <Image source={{ uri: info.imgUrl }} style={styles.topImg} />
+          <CachedImage source={{ uri: info.imgUrl }} style={styles.topImg} />
         </View>
         <View style={styles.topRight}>
           <View style={styles.topName}>

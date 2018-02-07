@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
 import { st, Mcolor } from '../utils';
 
 const styles = StyleSheet.create({
@@ -77,7 +78,7 @@ const ServiceItem = ({ onPress, item }) => (
     onPress={onPress}
   >
     <View style={styles.list}>
-      <Image source={{ uri: item.imgUrl.split(',')[0] }} style={styles.img} />
+      <CachedImage source={{ uri: item.imgUrl.split(',')[0] }} style={styles.img} />
       <View style={styles.right}>
         <View style={styles.top}>
           <Text style={styles.topname}>{item.name}</Text>

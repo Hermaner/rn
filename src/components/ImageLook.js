@@ -3,10 +3,10 @@ import {
   View,
   Modal,
   StyleSheet,
-  Image,
   TouchableWithoutFeedback,
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
+import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { st, deviceW } from '../utils';
 
@@ -72,7 +72,7 @@ export default class ImageLook extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <Image source={{ uri: item.uri }} style={styles.imageList} />
+                  <CachedImage source={{ uri: item.uri }} style={styles.imageList} />
                 </View>
               </TouchableWithoutFeedback>
             ))

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
 import { mColor } from '../utils';
 
 const styles = StyleSheet.create({
@@ -116,7 +117,7 @@ const DemanOrderItem = ({ item }) => (
       </View>
     </View>
     <View style={styles.bom}>
-      <Image source={{ uri: item.memberInfo.imgUrl }} style={styles.img} />
+      <CachedImage source={{ uri: item.memberInfo.imgUrl }} style={styles.img} />
       <View style={styles.nick}>
         <Text style={styles.nickText}>{decodeURI(item.memberInfo.nickName)}</Text>
       </View>
