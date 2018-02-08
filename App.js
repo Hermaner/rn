@@ -60,17 +60,19 @@ class App extends React.Component {
       this.setState({ cid: registrationId });
     });
     this.premInit();
+    global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
-        global.userData = JSON.parse(res);
-        global.memberId = JSON.parse(res).memberId;
-        console.log(global.userData);
+        // global.userData = JSON.parse(res);
+        // global.memberId = JSON.parse(res).memberId;
       }
+      global.socketStore.getConnect();
+      DeviceEventEmitter.emit('emitSession');
     });
     DeviceEventEmitter.addListener('socketConnet', () => {
-      global.socketStore = new SocketStore();
       global.socketStore.getConnect();
     });
+    global.memberId = '102';
     global.userData = {
       memberId: 102,
       userName: '%E4%B8%8A%E6%B5%B7%E7%BB%B4%E4%BF%AE%E7%96%8F%E9%80%9A15900653759',

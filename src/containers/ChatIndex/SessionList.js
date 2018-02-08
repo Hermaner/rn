@@ -15,6 +15,7 @@ import {
     StyleSheet,
     View,
     Text,
+    DeviceEventEmitter,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -78,15 +79,31 @@ class SessionList extends React.Component {
     super(props);
     this.state = {
       items: [],
+      hasLogin: false,
     };
   }
   componentDidMount() {
+    this.init();
   }
-  getd = () => {
-    global.socketStore.socket.emit('messagelist', {
-      user: global.userData,
+  init = () => {
+    if (global.memberId) {
+      this.setState({
+        hasLogin: true,
+      }, () => {
+        global.socketStore.socket.emit('messagelist', {
+          user: global.userData,
+        });
+      });
+    }
+    this.emitSession = DeviceEventEmitter.addListener('emitSession', () => {
+      this.setState({
+        hasLogin: true,
+      }, () => {
+        global.socketStore.socket.emit('messagelist', {
+          user: global.userData,
+        });
+      });
     });
-    console.log(global.socketStore.chatLists)
   }
   _renderRow = (item, index) => (
     <TOpacity
@@ -114,22 +131,15 @@ class SessionList extends React.Component {
     />
   )
   render() {
-    const { items } = this.state;
-    console.log(global.socketStore.chatLists)
+    const { hasLogin } = this.state;
+    if (!hasLogin) {
+      return null;
+    }
+    const items = global.socketStore.chatList;
     return (
       <ScrollView
         style={{ flex: 1 }}
       >
-        <TOpacity
-          style={styles.list}
-          content={
-            <View style={styles.top}>
-              <Text style={styles.name} numberOfLines={1}>sdasdasdad</Text>
-              <Text style={styles.date} numberOfLines={1}>hhghjhg</Text>
-            </View>
-          }
-          onPress={this.getd}
-        />
         {
           items.map((item, index) => (
             <View key={index}>

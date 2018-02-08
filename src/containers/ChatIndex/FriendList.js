@@ -85,6 +85,7 @@ class FriendList extends React.Component {
     GetBindMemberPhoneService({
       pageSize: '10',
     }).then((res) => {
+      console.log(res)
       res.data.forEach((list) => {
         list.modiDate = this.computeDate(list.modiDate)
       });

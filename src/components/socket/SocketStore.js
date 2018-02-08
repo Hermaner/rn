@@ -13,13 +13,8 @@ export default class SocketStore {
   @observable socketId = null;
   @observable sessionLists = [];
   @observable chatLists = [];
-  @observable currentChatRooms = [];
-  @observable price = 0;
-  @observable amount = 1;
   // 非监听对象
   socket: Object;
-  constructor() {
-  }
   getConnect = () => {
     this.socket = io(`${config.server}?memberId=${global.userData.memberId}`, {
       transports: ['websocket'],
@@ -36,25 +31,13 @@ export default class SocketStore {
     this.socket.on('messagelist', (data) => {
       console.log(data);
       this.chatLists = this.chatLists.concat(data);
-      console.log(this.chatLists)
     });
     this.socket.on('notfiymessage', (data) => {
       console.log(data);
       this.sessionLists = this.sessionLists.concat(data);
-      console.log(this.sessionLists)
     });
   }
-  @computed get currentChatRoom(): Array<Object> {
-    console.log(this.currentChatRooms)
-    return this.currentChatRooms.sort(
-      (a, b) => b.postDate - a.postDate)
-      .map((item) => {
-        item.latestTime = moment(item.postDate).startOf('minute').fromNow();
-        return item;
-      });
-  }
   @computed get sessionList(): Array<Object> {
-    console.log(this.sessionLists)
     return this.sessionLists.sort(
       (a, b) => b.postDate - a.postDate)
       .map((item) => {
@@ -62,15 +45,11 @@ export default class SocketStore {
         return item;
       });
   }
-  @computed get total() {
-    return this.price * this.amount;
-  }
   @computed get chatList(): Array<Object> {
-    console.log(this.chatLists)
     return this.chatLists.sort(
-      (a, b) => b.postDate - a.postDate)
+      (a, b) => b.lastMessage.postDate - a.lastMessage.postDate)
       .map((item) => {
-        item.latestTime = moment(item.postDate).startOf('minute').fromNow();
+        item.latestTime = moment(item.lastMessage.postDate).startOf('minute').fromNow();
         return item;
       });
   }

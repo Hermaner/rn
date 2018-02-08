@@ -29,6 +29,9 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
     Goods: {
       screen: goods,
     },
+    ChatIndex: {
+      screen: ChatIndex,
+    },
     Mine: {
       screen: mine,
     },
@@ -71,8 +74,10 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         if (focused) {
           return;
         }
-        if (index === 1) {
-          DeviceEventEmitter.emit('socketConnet');
+        if (index === 2) {
+          if (!global.memberId) {
+            this.props.push({ key: 'User' });
+          }
         }
         if (index === 3) {
           DeviceEventEmitter.emit('emitUser');
