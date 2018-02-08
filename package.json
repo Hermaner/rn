@@ -41,7 +41,7 @@
     "react-native-img-cache": "^1.5.3",
     "react-native-keyboard-manager": "^4.0.13-4",
     "react-native-modal-datetime-picker": "^4.13.0",
-    "react-native-modalbox": "latest",
+    "react-native-modalbox": "^1.4.2",
     "react-native-permissions": "^1.0.6",
     "react-native-picker": "^4.2.0",
     "react-native-puti-pay": "^1.0.2",

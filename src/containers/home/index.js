@@ -52,7 +52,7 @@ class Home extends base {
                 content={
                   <IconItem item={item} big />
                 }
-                onPress={() => { push({ key: item.page }); }}
+                onPress={() => { push({ key: 'ChatIndex' }); }}
               />
             ))
           }

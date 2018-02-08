@@ -29,9 +29,6 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
     Goods: {
       screen: goods,
     },
-    ChatIndex: {
-      screen: ChatIndex,
-    },
     Mine: {
       screen: mine,
     },
@@ -74,8 +71,8 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         if (focused) {
           return;
         }
-        if (index === 2) {
-          console.log('判断是否登陆');
+        if (index === 1) {
+          DeviceEventEmitter.emit('socketConnet');
         }
         if (index === 3) {
           DeviceEventEmitter.emit('emitUser');

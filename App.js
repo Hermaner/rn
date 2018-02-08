@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 
 import AppReducer from './src/reducers';
+import SocketStore from './src/components/socket/SocketStore';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 
 @observer
@@ -66,6 +67,10 @@ class App extends React.Component {
         console.log(global.userData);
       }
     });
+    DeviceEventEmitter.addListener('socketConnet', () => {
+      global.socketStore = new SocketStore();
+      global.socketStore.getConnect();
+    });
     global.userData = {
       memberId: 102,
       userName: '%E4%B8%8A%E6%B5%B7%E7%BB%B4%E4%BF%AE%E7%96%8F%E9%80%9A15900653759',
@@ -105,7 +110,7 @@ class App extends React.Component {
     applyMiddleware(
       thunk,
     ),
-  ), autoRehydrate());
+  ));
   render() {
     return (
       <Provider store={this.store}>

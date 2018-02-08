@@ -9,6 +9,7 @@ import ServiceList from '../containers/ServiceList';
 import ServiceDetail from '../containers/ServiceDetail';
 import MasterDetail from '../containers/MasterDetail';
 import User from '../containers/User';
+import ChatIndex from '../containers/ChatIndex';
 import ChatRoom from '../containers/ChatRoom';
 import DemandOrderDetail from '../containers/DemandOrderDetail';
 
@@ -19,6 +20,7 @@ export const AppNavigator = StackNavigator({
   ServiceDetail: { screen: ServiceDetail },
   MasterDetail: { screen: MasterDetail },
   ChatRoom: { screen: ChatRoom },
+  ChatIndex: { screen: ChatIndex },
   DemandOrderDetail: { screen: DemandOrderDetail },
 }, {
   headerMode: 'screen',

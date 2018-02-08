@@ -14,17 +14,19 @@ import {
     ScrollView,
     StyleSheet,
     View,
-    Image,
     Text,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { Mcolor, st } from '../../utils';
-import SocketStore from '../../components/socket/SocketStore';
+import socketStore from '../../components/socket/SocketStore';
 import { TOpacity } from '../../components';
-import { GetBindMemberPhoneService } from '../../api';
 
+const moment = require('moment');
+
+moment.locale('zh-cn');
 const styles = StyleSheet.create({
   list: {
     paddingLeft: 10,
@@ -79,10 +81,12 @@ class SessionList extends React.Component {
     };
   }
   componentDidMount() {
-    console.log(global.socketStore)
-    if (!global.socketStore) {
-      global.socketStore = new SocketStore();
-    }
+  }
+  getd = () => {
+    global.socketStore.socket.emit('messagelist', {
+      user: global.userData,
+    });
+    console.log(global.socketStore.chatLists)
   }
   _renderRow = (item, index) => (
     <TOpacity
@@ -90,13 +94,13 @@ class SessionList extends React.Component {
       key={index}
       content={
         <View style={[styles.con, index === this.state.items.length - 1 && styles.conLast]}>
-          <Image source={{ uri: item.imgUrl }} style={styles.img} />
+          <CachedImage source={{ uri: item.user.imgUrl }} style={styles.img} />
           <View style={styles.right}>
             <View style={styles.top}>
-              <Text style={styles.name} numberOfLines={1}>{decodeURI(item.nickName)}</Text>
-              <Text style={styles.date} numberOfLines={1}>{item.modiDate}</Text>
+              <Text style={styles.name} numberOfLines={1}>{decodeURI(item.user.userName)}</Text>
+              <Text style={styles.date} numberOfLines={1}>{item.latestTime}</Text>
             </View>
-            <Text style={styles.msg}>{item.openId}</Text>
+            <Text style={styles.msg}>{item.lastMessage.message.message}</Text>
           </View>
         </View>
       }
@@ -111,15 +115,21 @@ class SessionList extends React.Component {
   )
   render() {
     const { items } = this.state;
-    let lists = [];
-    if (global.socketStore) {
-      lists = global.socketStore.sessionChat;
-    }
-    console.log(lists)
+    console.log(global.socketStore.chatLists)
     return (
       <ScrollView
         style={{ flex: 1 }}
       >
+        <TOpacity
+          style={styles.list}
+          content={
+            <View style={styles.top}>
+              <Text style={styles.name} numberOfLines={1}>sdasdasdad</Text>
+              <Text style={styles.date} numberOfLines={1}>hhghjhg</Text>
+            </View>
+          }
+          onPress={this.getd}
+        />
         {
           items.map((item, index) => (
             <View key={index}>

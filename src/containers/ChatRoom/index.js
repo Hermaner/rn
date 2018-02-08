@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import { TOpacity, Header } from '../../components';
-import SocketStore from '../../components/socket/SocketStore';
 import base from './base';
 import styles from './styles';
 
@@ -30,9 +29,6 @@ class ChatRoom extends base {
   }
   // 不要和动画效果抢系统资源
   componentDidMount() {
-    if (!global.socketStore) {
-      global.socketStore = new SocketStore();
-    }
   }
   componentWillUnmount() {
   }
@@ -82,10 +78,8 @@ class ChatRoom extends base {
   render() {
     const { ds, inputValue, textInputHeight, refreshing, toUser } = this.state;
     const { pop } = this.props;
-    let lists = [];
-    if (global.socketStore) {
-      lists = global.socketStore.sessionList;
-    }
+    const lists = global.socketStore.sessionList;
+    console.log(lists);
     const dataSource = ds.cloneWithRows(lists);
     const content = (
       <View style={styles.container}>
