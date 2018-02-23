@@ -35,6 +35,7 @@ export function obj2form(data) {
   return string.substr(1, string.length);
 }
 export function post(path, data) {
+  console.log(`${httpurl}${path}`)
   return request(`${httpurl}${path}`, {
     method: 'POST',
     body: JSON.stringify(systemParam(data)),
@@ -389,4 +390,7 @@ export function CreateWithdrawalsOrderService(data) {
 }
 export function GetWithdrawalsOrderService(data) {
   return get('GetWithdrawalsOrderService', data);
+}
+export function GetUploadTokenService(data) {
+  return get('GetUploadTokenService', data);
 }

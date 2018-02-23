@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   upView: {
     ...st.fr,
     ...st.jacenter,
-    marginTop: 10,
+    padding: 10,
+    backgroundColor: '#fff',
   },
   imagesView: {
     ...st.fr,

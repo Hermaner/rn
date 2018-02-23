@@ -40,13 +40,16 @@ class Base extends React.Component {
   createService = () => {
     const { push } = this.props;
     const { info: { salesPrice, id, name, imgUrl }, count } = this.state;
-    push({ key: '',
+    push({ key: 'CreateConfirm',
       params: {
-        salesPrice,
-        id,
-        count,
-        name,
-        imgUrl: imgUrl.split(',')[0],
+        items: [{
+          salesPrice,
+          id,
+          count,
+          name,
+          imgUrl: imgUrl.split(',')[0],
+        },
+        ],
       },
     });
   }

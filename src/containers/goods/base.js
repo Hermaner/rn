@@ -12,8 +12,8 @@ class Base extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
-      orderByName: '',
-      orderByType: '',
+      orderByType: 'desc',
+      orderByName: 'modiDate',
       currentPage: '',
       items: [],
       ModalOpen: false,

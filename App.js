@@ -63,8 +63,10 @@ class App extends React.Component {
     global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
-        // global.userData = JSON.parse(res);
-        // global.memberId = JSON.parse(res).memberId;
+        global.userData = JSON.parse(res);
+        console.log(global.userData)
+        global.memberId = '2';
+        global.masterId = '6';
       }
       global.socketStore.getConnect();
       DeviceEventEmitter.emit('emitSession');
@@ -72,13 +74,6 @@ class App extends React.Component {
     DeviceEventEmitter.addListener('socketConnet', () => {
       global.socketStore.getConnect();
     });
-    global.memberId = '102';
-    global.userData = {
-      memberId: 102,
-      userName: '%E4%B8%8A%E6%B5%B7%E7%BB%B4%E4%BF%AE%E7%96%8F%E9%80%9A15900653759',
-      nickName: '%E4%B8%8A%E6%B5%B7%E7%BB%B4%E4%BF%AE%E7%96%8F%E9%80%9A15900653759',
-      imgUrl: 'http://wx.qlogo.cn/mmopen/vi_32/UL8hfCvCibOwibiaBdGiaRLHeYeiaho4COaslyqtXTH8FwcDiat7mVdXB0ic82OxNTAOdh3Dg5Wx53nlXEo8V3wYWAGSg/132',
-    };
     global.Toast = Toast;
   }
   premInit = () => {
@@ -112,7 +107,7 @@ class App extends React.Component {
     applyMiddleware(
       thunk,
     ),
-  ));
+  ), autoRehydrate());
   render() {
     return (
       <Provider store={this.store}>

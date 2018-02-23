@@ -2,7 +2,7 @@ import TLight from './TLight';
 import TOpacity from './TOpacity';
 import TFeedback from './TFeedback';
 import Header from './Header';
-import GoodList from './goodList';
+import GoodItem from './GoodItem';
 import GoodhList from './goodhList';
 import NoData from './NoData';
 import ModalView from './ModalView';
@@ -10,6 +10,7 @@ import MyModalView from './MyModalView';
 import ScrollableTab from './ScrollableTab';
 import InputNumber from './InputNumber';
 import UploadFile from './UploadFile';
+import UploadLogo from './UploadLogo';
 import PeopleUploadFile from './PeopleUploadFile';
 import Loading from './Loading';
 import Iconfont from './Iconfont';
@@ -26,11 +27,23 @@ import SearchHeader from './SearchHeader';
 import TitleItem from './TitleItem';
 import BHeader from './BHeader';
 import DemanOrderItem from './DemanOrderItem';
+import CheckBox from './CheckBox';
+import OrderItem from './OrderItem';
+import SpotLine from './SpotLine';
+import MasterItem from './MasterItem';
+import MasterEval from './MasterEval';
+import DecorateItem from './DecorateItem';
 
 export {
   TLight,
+  SpotLine,
   DemanOrderItem,
+  OrderItem,
+  DecorateItem,
+  MasterEval,
   BHeader,
+  MasterItem,
+  CheckBox,
   TitleItem,
   ImageLook,
   SearchHeader,
@@ -40,7 +53,7 @@ export {
   TOpacity,
   LoadMore,
   LoadNoMore,
-  GoodList,
+  GoodItem,
   Iconfont,
   Loading,
   TFeedback,
@@ -49,6 +62,7 @@ export {
   InputNumber,
   NoData,
   UploadFile,
+  UploadLogo,
   PeopleUploadFile,
   GoodhList,
   Header,

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     marginTop: 4,
+    paddingRight: 10,
     borderBottomColor: '#e2e2e2',
   },
   line: {
@@ -25,14 +26,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-const TitleItem = ({ text }) => (
+const TitleItem = ({ text, rightContent }) => (
   <View style={styles.title}>
     <View style={styles.line} />
     <Text style={styles.text}>{text}</Text>
+    {
+      rightContent &&
+      rightContent
+    }
   </View>
 );
 
 TitleItem.propTypes = {
   text: PropTypes.string,
+  rightContent: PropTypes.any,
 };
 export default TitleItem;

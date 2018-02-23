@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Icon, Content, Footer } from 'native-base';
+import { Container, Text, Icon, Content, Footer, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import Modal from 'react-native-modalbox';
@@ -83,64 +83,72 @@ class DemandOrderDetail extends base {
       </View>
     );
   }
+  _renderFooter() {
+    return (
+      <Footer style={styles.footer}>
+        <View style={styles.footTips}>
+          {
+            !global.masterId && <Text style={styles.footTipsText}>需认证为平台师傅才可接单</Text>
+          }
+        </View>
+        <TOpacity
+          style={styles.footBtn}
+          content={
+            <View style={styles.footBtnView}>
+              <Text style={styles.footBtnText}>{global.masterId ? '接单' : '申请接单'}</Text>
+            </View>
+          }
+          onPress={global.masterId ? this.openModal : this.openModal}
+        />
+      </Footer>
+    );
+  }
   _renderModal() {
-    const { ModalOpen, popItems, twoItems, oneIndex } = this.state;
+    const { ModalOpen, price, message } = this.state;
     return (
       <Modal
         style={styles.ModalStyle}
-        position="top"
-        entry="top"
-        animationDuration={300}
+        position="bottom"
+        entry="bottom"
+        animationDuration={250}
         onClosed={this.closeModal}
         isOpen={ModalOpen}
-        coverScreen
         ref={(o) => { this.ModalView = o; }}
       >
         <View style={styles.modalView}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.modalTitle}>选择类目</Text>
-            <View style={styles.modalList}>
-              {
-                popItems.map((item, index) => (
-                  <TFeedback
-                    key={index}
-                    content={
-                      <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                        <Text style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}>
-                          {item.name}
-                        </Text>
-                      </View>
-                    }
-                    onPress={() => { this.tabOneItem(index); }}
-                  />
-                ))
-              }
-            </View>
-            {
-              oneIndex !== undefined &&
-              <View>
-                <Text style={styles.modalTitle}>选择产品类型</Text>
-                <View style={styles.modalList}>
-                  {
-                    twoItems.map((item, index) => (
-                      <TFeedback
-                        key={index}
-                        content={
-                          <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                            <Text
-                              style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                        }
-                        onPress={() => { this.tabTwoItem(index); }}
-                      />
-                    ))
-                  }
-                </View>
+          <View style={styles.modalTitle}>
+            <Text style={styles.modalTitleText}>申请信息</Text>
+          </View>
+          <View style={styles.modalContent}>
+            <View style={styles.modalListView}>
+              <Text style={styles.memoLabel}>期望薪酬</Text>
+              <View style={styles.modalListRight}>
+                <Input
+                  style={styles.listInput}
+                  placeholderTextColor="#999"
+                  placeholder="输入期望薪酬"
+                  keyboardType="numeric"
+                  clearButtonMode="while-editing"
+                  value={price}
+                  onChangeText={value => this.setState({ price: value })}
+                />
               </View>
-            }
+            </View>
+            <View style={styles.memoView}>
+              <Text style={styles.memoLabel}>补充信息</Text>
+              <View style={styles.memoInput}>
+                <Input
+                  multiline
+                  autoFocus
+                  style={styles.listMemo}
+                  placeholderTextColor="#999"
+                  placeholder="输入补充信息"
+                  clearButtonMode="while-editing"
+                  value={message}
+                  onChangeText={value => this.setState({ message: value })}
+                />
+              </View>
+            </View>
           </View>
           <View style={styles.modalBtns}>
             <TOpacity
@@ -159,34 +167,14 @@ class DemandOrderDetail extends base {
                   <Text style={styles.modalText}>确认</Text>
                 </View>
               }
-              onPress={this.closeModal}
+              onPress={this.CreateDemandOrderBiddingService}
             />
           </View>
         </View>
       </Modal>
     );
   }
-  _renderFooter() {
-    const { masterId } = this.state;
-    return (
-      <Footer style={styles.footer}>
-        <View style={styles.footTips}>
-          <Text style={styles.footTipsText}>需认证为平台师傅才可接单</Text>
-        </View>
-        <TOpacity
-          style={styles.footBtn}
-          content={
-            <View style={styles.footBtnView}>
-              <Text style={styles.footBtnText}>申请接单</Text>
-            </View>
-          }
-          onPress={this.createService}
-        />
-      </Footer>
-    );
-  }
   render() {
-    const { popItems } = this.state;
     const { pop } = this.props;
     return (
       <Container>
@@ -196,7 +184,7 @@ class DemandOrderDetail extends base {
           {this._renderList()}
         </Content>
         {this._renderFooter()}
-        {popItems && this._renderModal()}
+        {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

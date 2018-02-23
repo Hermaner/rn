@@ -1,5 +1,4 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
 import { GetMasterCaseService } from '../../api';
 
 class Base extends React.Component {
@@ -26,7 +25,7 @@ class Base extends React.Component {
           icon: 'icon-kefu',
           text: '找师傅',
           color: '#f86d5e',
-          page: 'masterCategory',
+          page: 'MasterCategory',
         },
       ],
       types: [
@@ -34,13 +33,13 @@ class Base extends React.Component {
           icon: 'icon-kefu',
           text: '装修公司',
           color: '#eeba57',
-          page: 'zxList',
+          page: 'DecorateList',
         },
         {
           icon: 'icon-kefu',
           text: '周边建材',
           color: '#9191d4',
-          page: 'jcList',
+          page: 'BmMarketList',
         },
         {
           icon: 'icon-kefu',
@@ -82,7 +81,6 @@ class Base extends React.Component {
         this.setState({
           cases: res.data.pageData,
         });
-        console.log(res.data.pageData)
       }
     }).catch((err) => {
       console.log(err);

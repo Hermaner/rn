@@ -52,7 +52,7 @@ class Home extends base {
                 content={
                   <IconItem item={item} big />
                 }
-                onPress={() => { push({ key: 'ChatIndex' }); }}
+                onPress={() => { push({ key: item.page }); }}
               />
             ))
           }
@@ -69,7 +69,7 @@ class Home extends base {
                 content={
                   <IconItem item={item} />
                 }
-                onPress={() => push(item.page)}
+                onPress={() => { push({ key: item.page }); }}
               />
             ))
           }
@@ -98,7 +98,6 @@ class Home extends base {
   }
   renderCases() {
     const { cases } = this.state;
-    console.log(cases)
     return (
       <View style={styles.caseView}>
         <View style={styles.caseTitleView}>

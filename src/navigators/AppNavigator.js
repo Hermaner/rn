@@ -12,6 +12,22 @@ import User from '../containers/User';
 import ChatIndex from '../containers/ChatIndex';
 import ChatRoom from '../containers/ChatRoom';
 import DemandOrderDetail from '../containers/DemandOrderDetail';
+import CreateConfirm from '../containers/CreateConfirm';
+import CreatePay from '../containers/CreatePay';
+import MemberInfo from '../containers/MemberInfo';
+import InputChange from '../containers/InputChange';
+import BindPhone from '../containers/BindPhone';
+import Orders from '../containers/Orders';
+import OrderDetail from '../containers/OrderDetail';
+import OrderEval from '../containers/OrderEval';
+import MyDemandOrderDetail from '../containers/MyDemandOrderDetail';
+import MasterList from '../containers/MasterList';
+import MasterCategory from '../containers/MasterCategory';
+import EvalList from '../containers/EvalList';
+import DecorateList from '../containers/DecorateList';
+import DecorateDetail from '../containers/DecorateDetail';
+import BmMarketList from '../containers/BmMarketList';
+import BmMarketDetail from '../containers/BmMarketDetail';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -22,6 +38,22 @@ export const AppNavigator = StackNavigator({
   ChatRoom: { screen: ChatRoom },
   ChatIndex: { screen: ChatIndex },
   DemandOrderDetail: { screen: DemandOrderDetail },
+  CreateConfirm: { screen: CreateConfirm },
+  CreatePay: { screen: CreatePay },
+  MemberInfo: { screen: MemberInfo },
+  InputChange: { screen: InputChange },
+  BindPhone: { screen: BindPhone },
+  Orders: { screen: Orders },
+  OrderDetail: { screen: OrderDetail },
+  OrderEval: { screen: OrderEval },
+  MyDemandOrderDetail: { screen: MyDemandOrderDetail },
+  MasterList: { screen: MasterList },
+  MasterCategory: { screen: MasterCategory },
+  EvalList: { screen: EvalList },
+  DecorateList: { screen: DecorateList },
+  DecorateDetail: { screen: DecorateDetail },
+  BmMarketList: { screen: BmMarketList },
+  BmMarketDetail: { screen: BmMarketDetail },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

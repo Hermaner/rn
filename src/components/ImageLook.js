@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     ...st.fr,
     backgroundColor: '#fff',
     flexWrap: 'wrap',
+    paddingBottom: 10,
   },
   imageListView: {
     position: 'relative',

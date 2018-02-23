@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   rightText: {
-    color: Mcolor,
+    color: '#fff',
     fontSize: 14,
   },
   backIcon: {

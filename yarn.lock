@@ -1668,6 +1668,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dateformat-util@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/dateformat-util/-/dateformat-util-1.0.5.tgz#2e6f67ea212e715aef58921b6723aad997f54512"
+
 dateformat@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"

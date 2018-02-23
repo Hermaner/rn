@@ -151,7 +151,7 @@ const CaseItem = ({ item }) => (
             iconSet={'Ionicons'}
             starColor={Mcolor}
             maxStars={5}
-            rating={1.5}
+            rating={item.masterStarLevel || 5}
           />
           <Text style={styles.starText}>{item.masterStarLevel || 5}分</Text>
         </View>
@@ -167,7 +167,9 @@ const CaseItem = ({ item }) => (
       <View style={styles.detail}><Text style={styles.detailText}>{item.detail}</Text></View>
     </View>
     <View style={styles.bom}>
-      <ImageLook images={item.images.split(',')} />
+      {
+        item.images && <ImageLook images={item.images.split(',')} />
+      }
     </View>
   </View>
 );
