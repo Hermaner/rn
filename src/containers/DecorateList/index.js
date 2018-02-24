@@ -55,7 +55,7 @@ class DecorateList extends base {
         item={item}
         rowID={index}
         key={index}
-        onPress={() => { this.props.push({ key: 'ServiceDetail', params: { masterServicesId: item.id } }); }}
+        onPress={() => { this.props.push({ key: 'DecorateDetail', params: { decorationId: item.decorationId } }); }}
       />
     </View>
   )

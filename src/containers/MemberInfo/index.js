@@ -1,12 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Icon, Content, Input } from 'native-base';
+import { Container, Text, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import SelectInput from 'react-native-select-input-ios';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, TOpacity, Header, TitleItem, UploadFile, UploadLogo } from '../../components';
+import { Loading, TFeedback, Header, UploadLogo, Select } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -87,18 +86,15 @@ class CreateConfirm extends base {
     );
   }
   _renderSelect() {
-    const { optionType, options } = this.state;
+    const { optionType, selectShow, options } = this.state;
     return (
-      <SelectInput
+      <Select
+        selectShow={selectShow}
         value={optionType}
-        options={options}
-        ref={(c) => { this.SelectInput = c; }}
-        submitKeyText="确认"
-        cancelKeyText="取消"
-        onCancelEditing={() => console.log('onCancel')}
-        onSubmitEditing={value => this.selectSex(value)}
-        style={styles.selectType}
-        labelStyle={{ fontSize: 12, color: '#666' }}
+        items={options}
+        title="请选择性别"
+        closeModal={this.closeModal}
+        onValueChange={this.selectModel}
       />
     );
   }
@@ -122,8 +118,8 @@ class CreateConfirm extends base {
         <Content style={styles.content}>
           {this._renderLogo()}
           {this._renderList()}
-          {this._renderSelect()}
         </Content>
+        {this._renderSelect()}
         <DateTimePicker
           titleIOS="选择时间"
           confirmTextIOS="确定"

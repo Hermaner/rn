@@ -45,7 +45,7 @@ class Base extends React.Component {
           icon: 'icon-kefu',
           text: '平台入驻',
           color: '#9ed35a',
-          page: 'myWantIn',
+          page: 'ApplyWant',
         },
         {
           icon: 'icon-kefu',

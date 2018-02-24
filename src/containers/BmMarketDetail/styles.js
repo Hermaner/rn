@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native';
-import { Mcolor, st } from '../../utils';
+import { Mcolor, st, deviceW } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -120,9 +120,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   intrText: {
-    color: '#666',
-    fontSize: 12,
-    lineHeight: 20,
+    color: '#444',
+    fontSize: 13,
+    lineHeight: 22,
+  },
+  swiperImage: {
+    width: deviceW,
+    height: 200,
+    backgroundColor: 'transparent',
+    resizeMode: 'stretch',
   },
   footer: {
     ...st.fr,
@@ -182,14 +188,51 @@ const styles = StyleSheet.create({
   moreView: {
     ...st.frcenter,
   },
-  moreText: {
-    fontSize: 12,
+  moreTextColor: {
+    fontSize: 13,
     color: Mcolor,
   },
+  moreText: {
+    fontSize: 13,
+    color: '#666',
+  },
   arr: {
-    fontSize: 14,
-    color: Mcolor,
+    fontSize: 16,
+    color: '#666',
     marginLeft: 5,
+  },
+  caseView: {
+    backgroundColor: '#fff',
+  },
+  caseList: {
+    position: 'relative',
+    margin: 8,
+  },
+  caseImg: {
+    width: '100%',
+    height: 230,
+  },
+  caseGray: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,.6)',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  caseName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    lineHeight: 24,
+    color: '#fff',
+  },
+  caseLabel: {
+    fontSize: 12,
+    lineHeight: 20,
+    color: '#bbb',
   },
 });
 export default styles;

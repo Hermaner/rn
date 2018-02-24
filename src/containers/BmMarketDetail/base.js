@@ -2,14 +2,16 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import Communications from 'react-native-communications';
-import { GetMasterBasicInfoService, CreateMemberMasterService, DeleteMemberMasterService } from '../../api';
+import { GetBmMarketInfoService, CreateMemberBmMarketService, DeleteMemberBmMarketService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isColl: false,
-      masterId: this.props.navigation.state.params.masterId,
+      bmMarketId: props.navigation.state.params.bmMarketId,
+      info: null,
+      credentialss: [],
       bz: [{
         label: '未服务全额退',
       }, {
@@ -19,7 +21,7 @@ class Base extends React.Component {
       }],
       footIcons: [{
         icon: 'ios-person',
-        label: '服务项目',
+        label: '相关商品',
         page: '',
       }, {
         icon: 'ios-call',
@@ -33,20 +35,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetMasterBasicInfoService();
-  }
-  createService = () => {
-    const { push } = this.props;
-    const { info: { salesPrice, id, name, imgUrl }, count } = this.state;
-    push({ key: '',
-      params: {
-        salesPrice,
-        id,
-        count,
-        name,
-        imgUrl: imgUrl.split(',')[0],
-      },
-    });
+    this.GetBmMarketInfoService();
   }
   footAction = (index) => {
     const { info: { masterId }, isColl } = this.state;
@@ -68,26 +57,31 @@ class Base extends React.Component {
           return;
         }
         if (isColl) {
-          this.DeleteMemberMasterService();
+          this.DeleteMemberBmMarketService();
         } else {
-          this.CreateMemberMasterService();
+          this.CreateMemberBmMarketService();
         }
         break;
       default:
     }
   }
-  GetMasterBasicInfoService = () => {
-    const { masterId } = this.state;
+  GetBmMarketInfoService = () => {
+    const { bmMarketId } = this.state;
     this.sleek.toggle();
-    GetMasterBasicInfoService({
-      masterId,
+    GetBmMarketInfoService({
+      bmMarketId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        const info = res.data;
+        if (info.credentialss.length > 3) {
+          info.credentialss.length = 3;
+        }
         this.setState({
-          info: res.data,
+          info,
+          credentialss: res.data.credentialss,
           isColl: res.data.isFavorite === 1,
         });
       } else {
@@ -97,11 +91,11 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  CreateMemberMasterService = () => {
-    const { masterId, isColl } = this.state;
+  CreateMemberBmMarketService = () => {
+    const { bmMarketId, isColl } = this.state;
     this.sleek.toggle();
-    CreateMemberMasterService({
-      masterId,
+    CreateMemberBmMarketService({
+      bmMarketId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);
@@ -118,11 +112,11 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  DeleteMemberMasterService = () => {
+  DeleteMemberBmMarketService = () => {
     this.sleek.toggle();
-    const { masterId, isColl } = this.state;
-    DeleteMemberMasterService({
-      masterId,
+    const { bmMarketId, isColl } = this.state;
+    DeleteMemberBmMarketService({
+      bmMarketId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);

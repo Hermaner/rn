@@ -55,14 +55,11 @@ export default class Prompt extends React.Component {
     this.GetUploadTokenService();
   }
   goAsheet = (index) => {
-    switch (index) {
-      case 0:
-        this.openCamera();
-        break;
-      case 1:
-        this.pickMultiple();
-        break;
-      default:
+    if (index === 0 || index === '0') {
+      this.openCamera();
+    }
+    if (index === 1 || index === '1') {
+      this.pickMultiple();
     }
   }
   openCamera = () => {

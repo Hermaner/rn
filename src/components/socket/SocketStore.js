@@ -16,7 +16,7 @@ export default class SocketStore {
   // 非监听对象
   socket: Object;
   getConnect = () => {
-    this.socket = io(`${config.server}?memberId=${global.userData.memberId}`, {
+    this.socket = io(`${config.server}?memberId=${global.memberId}`, {
       transports: ['websocket'],
     });
     this.socket.on('connect', () => {

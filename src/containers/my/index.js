@@ -40,7 +40,7 @@ class My extends Base {
               <CachedImage source={defaultImg} style={styles.userImg} />
             </View>
             {
-              global.memberId ?
+              !global.memberId ?
                 <TFeedback
                   content={
                     <View style={styles.userNameView}>

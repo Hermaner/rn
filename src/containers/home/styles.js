@@ -28,10 +28,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  dl: {
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: '#ccc',
+  dvImg: {
+    height: 1,
+    width: '100%',
   },
   normalIconView: {
     ...st.fr,

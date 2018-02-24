@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 import { st, Mcolor } from '../utils';
 import ImageLook from './ImageLook';
 
@@ -71,15 +71,13 @@ const styles = StyleSheet.create({
     height: 1,
     marginBottom: 10,
   },
-  dl: {
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: '#ccc',
+  dvImg: {
+    height: 1,
+    width: '100%',
   },
   mid: {
     paddingRight: 8,
     paddingLeft: 8,
-    paddingBottom: 8,
     position: 'relative',
   },
   leftcon: {
@@ -113,13 +111,6 @@ const styles = StyleSheet.create({
   bom: {
     ...st.fr,
     flexWrap: 'wrap',
-    paddingLeft: 10,
-  },
-  bomImg: {
-    width: 60,
-    height: 60,
-    marginTop: 4,
-    marginRight: 4,
   },
 });
 
@@ -159,12 +150,12 @@ const CaseItem = ({ item }) => (
     </View>
     <View style={styles.mid}>
       <View style={styles.dv}>
-        <View style={styles.dl} />
+        <Image source={require('../assets/img/dashed.png')} style={styles.dvImg} />
       </View>
       <View style={styles.leftcon} />
       <View style={styles.rightcon} />
       <View style={styles.address}><Text style={styles.addressText}>{item.address}</Text></View>
-      <View style={styles.detail}><Text style={styles.detailText}>{item.detail}</Text></View>
+      <View style={styles.detail}><Text style={styles.detailText}>{item.detail || '好评'}</Text></View>
     </View>
     <View style={styles.bom}>
       {

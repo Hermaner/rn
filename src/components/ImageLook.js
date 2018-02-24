@@ -35,7 +35,7 @@ export default class ImageLook extends React.Component {
     super(props);
     const images = [];
     props.images.forEach((item) => {
-      images.push({ uri: `${item.imgUrl}?imageView2/1/w/200`, key: item.key });
+      images.push({ uri: `${item}?imageView2/1/w/200`, key: item.key });
     });
     this.state = {
       images,
@@ -81,6 +81,7 @@ export default class ImageLook extends React.Component {
         </View>
         <Modal
           visible={isImageDateShow}
+          onRequestClose={() => {}}
           transparent
         >
           <ImageViewer

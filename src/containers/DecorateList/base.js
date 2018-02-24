@@ -63,7 +63,7 @@ class Base extends React.Component {
       latitude: '',
       longitude: '',
       pageSize,
-      memberId: global.memberId,
+      memberId: global.memberId || '',
       currentPage,
     }).then((res) => {
       console.log(res);
@@ -150,7 +150,6 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
       currentPage: 1,
-      isFlushDistance: '1',
     }, () => this.GetDecorationCompanyService());
   }
   _reachEnd = () => {

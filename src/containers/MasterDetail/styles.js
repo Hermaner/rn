@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   intrText: {
-    color: '#666',
-    fontSize: 12,
+    color: '#444',
+    fontSize: 13,
     lineHeight: 20,
   },
   footer: {

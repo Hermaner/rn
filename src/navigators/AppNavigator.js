@@ -28,6 +28,16 @@ import DecorateList from '../containers/DecorateList';
 import DecorateDetail from '../containers/DecorateDetail';
 import BmMarketList from '../containers/BmMarketList';
 import BmMarketDetail from '../containers/BmMarketDetail';
+import DecorateCaseDetail from '../containers/DecorateCaseDetail';
+import DecorateCaseList from '../containers/DecorateCaseList';
+import DecorateImageDetail from '../containers/DecorateImageDetail';
+import DecorateIntrDetail from '../containers/DecorateIntrDetail';
+import ApplyWant from '../containers/ApplyWant';
+import ApplyOther from '../containers/ApplyOther';
+import ApplyMaster from '../containers/ApplyMaster';
+import ApplyDecorate from '../containers/ApplyDecorate';
+import ApplyBmMarket from '../containers/ApplyBmMarket';
+import GetCitys from '../containers/GetCitys';
 
 export const AppNavigator = StackNavigator({
   Main: { screen: Main },
@@ -54,6 +64,16 @@ export const AppNavigator = StackNavigator({
   DecorateDetail: { screen: DecorateDetail },
   BmMarketList: { screen: BmMarketList },
   BmMarketDetail: { screen: BmMarketDetail },
+  DecorateCaseDetail: { screen: DecorateCaseDetail },
+  DecorateCaseList: { screen: DecorateCaseList },
+  DecorateImageDetail: { screen: DecorateImageDetail },
+  DecorateIntrDetail: { screen: DecorateIntrDetail },
+  ApplyWant: { screen: ApplyWant },
+  ApplyOther: { screen: ApplyOther },
+  ApplyMaster: { screen: ApplyMaster },
+  ApplyDecorate: { screen: ApplyDecorate },
+  ApplyBmMarket: { screen: ApplyBmMarket },
+  GetCitys: { screen: GetCitys },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

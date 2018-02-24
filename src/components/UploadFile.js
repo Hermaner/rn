@@ -6,6 +6,7 @@ import {
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
+  Image,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon, ActionSheet } from 'native-base';
@@ -15,7 +16,7 @@ import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
-import { st } from '../utils';
+import { st, deviceW } from '../utils';
 
 const styles = StyleSheet.create({
   upView: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.6)',
     ...st.jacenter,
     position: 'absolute',
-    right: 10,
+    right: 0,
     top: 10,
   },
   selectType: {
@@ -51,13 +52,13 @@ const styles = StyleSheet.create({
   },
   imageList: {
     marginTop: 10,
-    marginRight: 10,
-    width: 80,
-    height: 80,
+    marginLeft: 10,
+    width: deviceW / 3,
+    height: deviceW / 3,
   },
   upViewImg: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     marginRight: 10,
   },
   upViewText: {
@@ -95,14 +96,11 @@ export default class Prompt extends React.Component {
     this.GetUploadTokenService();
   }
   goAsheet = (index) => {
-    switch (index) {
-      case 0:
-        this.openCamera();
-        break;
-      case 1:
-        this.pickMultiple();
-        break;
-      default:
+    if (index === 0 || index === '0') {
+      this.openCamera();
+    }
+    if (index === 1 || index === '1') {
+      this.pickMultiple();
     }
   }
   showImageDate = (imageDateIndex) => {
@@ -175,7 +173,7 @@ export default class Prompt extends React.Component {
     let ran = parseInt(Math.random() * 888, 10);
     ran += 100;
     const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
-    images[index].key = key;
+    images[index].key = `${global.buketUrl}${key}`;
     this.setState({
       images,
     }, () => this.props.getImages(images));
@@ -187,8 +185,9 @@ export default class Prompt extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         this.setState({
-          uptoken: res.data,
+          uptoken: res.data.upToken,
         });
+        global.buketUrl = res.data.buketUrl;
       } else {
         Toast.show(res.msg);
       }
@@ -220,7 +219,12 @@ export default class Prompt extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <CachedImage source={{ uri: item.uri }} style={styles.imageList} />
+                  {
+                    item.uri.substr(0, 4) === 'http' ?
+                      <CachedImage source={{ uri: item.uri }} style={styles.imageList} />
+                      :
+                      <Image source={{ uri: item.uri }} style={styles.imageList} />
+                  }
                   <TouchableOpacity style={styles.imageDel} onPress={() => this.imageDel(index)}>
                     <Icon name="ios-close-outline" style={styles.imageDelIcon} />
                   </TouchableOpacity>

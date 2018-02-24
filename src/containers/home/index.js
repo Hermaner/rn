@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, NativeAppEventEmitter, ScrollView, RefreshControl } from 'react-native';
+import { View, NativeAppEventEmitter, ScrollView, RefreshControl, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
@@ -58,7 +58,7 @@ class Home extends base {
           }
         </View>
         <View style={styles.dv}>
-          <View style={styles.dl} />
+          <Image source={require('../../assets/img/dashed.png')} style={styles.dvImg} />
         </View>
         <View style={styles.normalIconView}>
           {

@@ -38,9 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   selectType: {
-    width: 0,
-    height: 0,
-    overflow: 'hidden',
+    backgroundColor: '#fff', borderWidth: 0, padding: 0,
   },
 });
 export default styles;

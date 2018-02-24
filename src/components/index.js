@@ -33,10 +33,14 @@ import SpotLine from './SpotLine';
 import MasterItem from './MasterItem';
 import MasterEval from './MasterEval';
 import DecorateItem from './DecorateItem';
+import BmMarketItem from './BmMarketItem';
+import Select from './Select';
 
 export {
   TLight,
   SpotLine,
+  BmMarketItem,
+  Select,
   DemanOrderItem,
   OrderItem,
   DecorateItem,

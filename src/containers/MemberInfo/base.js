@@ -17,10 +17,11 @@ class Base extends React.Component {
       sex: '',
       sexValue: '',
       isDateShow: false,
+      selectShow: false,
       minimumDate: new Date('1900-01-01'),
       maximumDate: new Date(),
       optionType: '',
-      options: [{ value: '', label: '请选择性别' },
+      options: [
       { value: '1', label: '男' },
       { value: '2', label: '女' }],
     };
@@ -60,22 +61,22 @@ class Base extends React.Component {
     this.toggleDate();
   }
   showSelectSex = () => {
-    this.SelectInput.focus();
-  }
-  selectSex = (optionType) => {
-    if (!optionType) {
-      return;
-    }
-    const { options } = this.state;
-    options.forEach((item) => {
-      if (item.value === optionType) {
-        this.setState({
-          sexValue: item.label,
-          optionType,
-        });
-        this.UpdateMemberService({ sex: optionType });
-      }
+    this.setState({
+      selectShow: true,
     });
+  }
+  closeModal = () => {
+    this.setState({
+      selectShow: false,
+    });
+  }
+  selectModel = (optionType, sexValue) => {
+    this.setState({
+      optionType,
+      sexValue,
+    });
+    this.UpdateMemberService({ sex: optionType });
+    this.closeModal();
   }
   UpdateMemberService = (data) => {
     this.sleek.toggle();

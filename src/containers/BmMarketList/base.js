@@ -2,7 +2,7 @@ import React from 'react';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMasterServicesService, GetCategoryService, DeepClone } from '../../api';
+import { GetBmMarketService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -13,13 +13,10 @@ class Base extends React.Component {
     });
     this.state = {
       orderByName: '',
-      orderByType: '',
+      orderByType: 'desc',
       currentPage: '',
-      seachValue: '',
+      bmMarketName: '',
       items: [],
-      popItems: null,
-      resetCategory: null,
-      ModalOpen: false,
       ds,
       dataSource: ds.cloneWithRows([]),
       refresh: false,
@@ -28,16 +25,16 @@ class Base extends React.Component {
       noData: false,
       pageSize: '15',
       tabs: [{
-        label: '智能排序',
+        label: '默认排序',
         cur: true,
       }, {
-        label: '销量优先',
+        label: '离我最近',
         cur: false,
       }, {
-        label: '价格排序',
+        label: '热度排序',
         cur: false,
       }, {
-        label: '筛选',
+        label: '销量排序',
         cur: false,
       }],
       tabIndex: 0,
@@ -45,25 +42,28 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
-    this.GetCategoryService();
   }
-  GetMasterServicesService = () => {
+  GetBmMarketService = () => {
     const {
       orderByName,
       orderByType,
+      bmMarketName,
       pageSize,
       currentPage,
-      seachValue,
       refresh,
       ds,
       items,
       dataSource,
     } = this.state;
-    GetMasterServicesService({
+    GetBmMarketService({
       orderByName,
       orderByType,
+      bmMarketName,
+      isFlushDistance: refresh ? '1' : '0',
+      latitude: '',
+      longitude: '',
       pageSize,
-      name: seachValue,
+      memberId: global.memberId || '',
       currentPage,
     }).then((res) => {
       console.log(res);
@@ -98,7 +98,6 @@ class Base extends React.Component {
             dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
-            isFlushDistance: '0',
           });
         }
         setTimeout(() => { canEnd = true; }, 0);
@@ -116,103 +115,48 @@ class Base extends React.Component {
     });
   }
   changeTab = (index) => {
-    const { tabs } = this.state;
-    let { tabIndex, orderByName, orderByType } = this.state;
-    if (index === 3) {
-      this.setState({
-        ModalOpen: true,
-      });
+    const { tabs, tabIndex } = this.state;
+    let { orderByName, orderByType } = this.state;
+    if (tabIndex === index) {
       return;
     }
+    orderByType = 'desc';
     switch (index) {
       case 0:
         orderByName = '';
         break;
       case 1:
-        orderByName = 'sales';
+        orderByName = 'distance';
+        orderByType = 'asc';
         break;
       case 2:
-        orderByName = 'salesPrice';
+        orderByName = 'browsingVolume';
+        break;
+      case 3:
+        orderByName = 'browsingVolume';
         break;
       default:
     }
-    if (tabIndex === index) {
-      if (index === 0 || index === 1) {
-        return;
-      }
-      orderByType = orderByType === 'desc' ? 'asc' : 'desc';
-    } else {
-      orderByType = 'desc';
-      tabs[index].cur = true;
-      tabs[tabIndex].cur = false;
-      tabIndex = index;
-    }
+    tabs[index].cur = true;
+    tabs[tabIndex].cur = false;
     this.setState({
       orderByName,
       orderByType,
       tabs,
-      tabIndex,
+      tabIndex: index,
     }, this._onRefresh);
-  }
-  closeModal = () => {
-    this.setState({
-      ModalOpen: false,
-    });
-  }
-  tabOneItem = (index) => {
-    const { resetCategory } = this.state;
-    const popItems = DeepClone(resetCategory);
-    popItems[index].cur = true;
-    this.setState({
-      popItems,
-      oneIndex: index,
-      twoItems: popItems[index].categorys,
-      twoIndex: null,
-    });
-  }
-  tabTwoItem = (index) => {
-    const { twoItems, twoIndex } = this.state;
-    if (twoIndex === index) {
-      return;
-    }
-    if (twoIndex !== null) {
-      twoItems[twoIndex].cur = false;
-    }
-    twoItems[index].cur = true;
-    this.setState({
-      twoIndex: index,
-      threeItems: twoItems[index].categorys,
-    });
-  }
-  GetCategoryService = () => {
-    GetCategoryService({
-      parentId: '0',
-    }).then((res) => {
-      console.log(res);
-      if (res.isSuccess) {
-        this.setState({
-          popItems: res.data,
-          resetCategory: DeepClone(res.data),
-        });
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
   }
   _onRefresh = () => {
     this.setState({
       refresh: true,
       currentPage: 1,
-      isFlushDistance: '1',
-    }, () => this.GetMasterServicesService());
+    }, () => this.GetBmMarketService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetMasterServicesService());
+      this.setState({ loading: true }, () => this.GetBmMarketService());
     }
   }
 }

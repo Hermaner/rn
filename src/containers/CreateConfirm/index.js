@@ -113,7 +113,6 @@ class CreateConfirm extends base {
           <Text style={styles.listLabel}>备注</Text>
           <View style={styles.listRight}>
             <Input
-              multiple
               style={styles.listMemo}
               placeholderTextColor="#999"
               placeholder="其他备注"

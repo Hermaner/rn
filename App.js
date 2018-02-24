@@ -67,9 +67,9 @@ class App extends React.Component {
         console.log(global.userData)
         global.memberId = '2';
         global.masterId = '6';
+        global.socketStore.getConnect();
+        DeviceEventEmitter.emit('emitSession');
       }
-      global.socketStore.getConnect();
-      DeviceEventEmitter.emit('emitSession');
     });
     DeviceEventEmitter.addListener('socketConnet', () => {
       global.socketStore.getConnect();

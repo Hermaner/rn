@@ -2,14 +2,16 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import Communications from 'react-native-communications';
-import { GetMasterBasicInfoService, CreateMemberMasterService, DeleteMemberMasterService } from '../../api';
+import { GetDecorationCompanyInfoService, CreateMemberDecorationService, DeleteMemberDecorationService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isColl: false,
-      masterId: this.props.navigation.state.params.masterId,
+      decorationId: props.navigation.state.params.decorationId,
+      info: null,
+      credentialss: [],
       bz: [{
         label: '未服务全额退',
       }, {
@@ -33,20 +35,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetMasterBasicInfoService();
-  }
-  createService = () => {
-    const { push } = this.props;
-    const { info: { salesPrice, id, name, imgUrl }, count } = this.state;
-    push({ key: '',
-      params: {
-        salesPrice,
-        id,
-        count,
-        name,
-        imgUrl: imgUrl.split(',')[0],
-      },
-    });
+    this.GetDecorationCompanyInfoService();
   }
   footAction = (index) => {
     const { info: { masterId }, isColl } = this.state;
@@ -68,26 +57,31 @@ class Base extends React.Component {
           return;
         }
         if (isColl) {
-          this.DeleteMemberMasterService();
+          this.DeleteMemberDecorationService();
         } else {
-          this.CreateMemberMasterService();
+          this.CreateMemberDecorationService();
         }
         break;
       default:
     }
   }
-  GetMasterBasicInfoService = () => {
-    const { masterId } = this.state;
+  GetDecorationCompanyInfoService = () => {
+    const { decorationId } = this.state;
     this.sleek.toggle();
-    GetMasterBasicInfoService({
-      masterId,
+    GetDecorationCompanyInfoService({
+      decorationId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        const info = res.data;
+        if (info.credentialss.length > 3) {
+          info.credentialss.length = 3;
+        }
         this.setState({
-          info: res.data,
+          info,
+          credentialss: res.data.credentialss,
           isColl: res.data.isFavorite === 1,
         });
       } else {
@@ -97,11 +91,11 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  CreateMemberMasterService = () => {
-    const { masterId, isColl } = this.state;
+  CreateMemberDecorationService = () => {
+    const { decorationId, isColl } = this.state;
     this.sleek.toggle();
-    CreateMemberMasterService({
-      masterId,
+    CreateMemberDecorationService({
+      decorationId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);
@@ -118,11 +112,11 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  DeleteMemberMasterService = () => {
+  DeleteMemberDecorationService = () => {
     this.sleek.toggle();
-    const { masterId, isColl } = this.state;
-    DeleteMemberMasterService({
-      masterId,
+    const { decorationId, isColl } = this.state;
+    DeleteMemberDecorationService({
+      decorationId,
       memberId: global.memberId || '',
     }).then((res) => {
       console.log(res);

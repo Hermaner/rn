@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
+import Swiper from 'react-native-swiper';
 import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
 import { popRoute, pushRoute } from '../../actions';
@@ -10,7 +11,7 @@ import { Loading, TFeedback, Header, ImageLook, TOpacity, TitleItem, MasterEval 
 import base from './base';
 import styles from './styles';
 
-class MasterDetail extends base {
+class DecorateDetail extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,16 +34,13 @@ class MasterDetail extends base {
           <View style={styles.topName}>
             <View style={styles.topNameView}>
               <Text style={styles.topNameText}>
-                {info.realName}
-              </Text>
-              <Text style={styles.topLabelText}>
-                编号:{info.masterNumber}
+                {info.bmMarketName}
               </Text>
             </View>
             <Icon style={styles.topNameLevel} name="ios-shirt-outline" />
           </View>
           <Text style={styles.topLabelText}>
-            已接{info.itemLogCount || 0}单 好评率{info.praiseRate || 100}% 投诉{info.complains.length}次
+            销量1999 好评率{info.praiseRate || 100}%
           </Text>
           <View style={styles.topBzView}>
             <Icon style={styles.topBzIcon} name="md-ribbon" />
@@ -76,12 +74,18 @@ class MasterDetail extends base {
           <Text style={styles.starText}>{info.starLevel || 5}分</Text>
         </View>
         <View style={styles.tecView}>
-          <Text style={styles.tecLabel}>浏览次数：</Text>
-          <Text style={styles.tecValue}>{info.browsingVolume || 1}</Text>
+          <Text style={styles.tecLabel}>营业时间：</Text>
+          <Text style={styles.tecValue}>{info.businessHours}</Text>
         </View>
         <View style={styles.tecView}>
-          <Text style={styles.tecLabel}>擅长行业：</Text>
-          <Text style={styles.tecValue}>{info.masterTypes.join(',')}</Text>
+          <Text style={styles.tecLabel}>相关评分：</Text>
+          <Text style={styles.tecValue}>环境9.7分服务8.9分质量9.8分</Text>
+        </View>
+        <View style={styles.tecView}>
+          <Text style={styles.tecLabel}>所在地址：</Text>
+          <Text style={styles.tecValue}>
+            {info.provinceName}{info.cityName}{info.districtName}{info.address}
+          </Text>
         </View>
         <View style={styles.tecView}>
           <Text style={styles.tecLabel}>服务保障：</Text>
@@ -102,57 +106,67 @@ class MasterDetail extends base {
     );
   }
   _renderIntr() {
-    const { info } = this.state;
+    const { info, credentialss } = this.state;
     return (
       <View style={styles.intrView}>
-        {
-          info.masterAuths && info.masterAuths.length > 0 &&
-          <View>
-            <TitleItem text="认证图片" />
-            <ImageLook images={info.masterAuths} />
-          </View>
-        }
-        <TitleItem text="师傅介绍" />
+        <TitleItem
+          text="公司简介"
+        />
         <View style={styles.intrTextView}>
           <Text style={styles.intrText}>
-            {info.detail}
+            {info.detail ? info.detail : ''}
           </Text>
         </View>
+        <TitleItem
+          text="公司图片"
+        />
+        {
+          info.bmMarketImages.length > 0 &&
+          <Swiper
+            height={200}
+            paginationStyle={{ justifyContent: 'center', bottom: 10 }}
+          >
+            {
+              info.bmMarketImages.map((item, i) => (
+                <View key={i}>
+                  <CachedImage source={{ uri: item.imgUrl }} style={styles.swiperImage} />
+                </View>
+              ))
+            }
+          </Swiper>
+        }
+        {
+          info.credentialss.length > 0 &&
+          <View>
+            <TitleItem
+              text="企业证书"
+              rightContent={
+                <TOpacity
+                  content={
+                    <View style={styles.moreView}>
+                      <Text style={styles.moreText}>查看更多</Text>
+                      <Icon name="md-arrow-dropright" style={styles.arr} />
+                    </View>
+                  }
+                  onPress={() => this.props.push({ key: 'DecorateImageDetail', params: { items: credentialss } })}
+                />
+              }
+            />
+            <ImageLook images={info.credentialss} />
+          </View>
+        }
         <TitleItem text="平台保障" />
         <View style={styles.intrTextView}>
           <Text style={styles.intrText}>
-            1、全国覆盖</Text><Text style={styles.intrText}>
-            十万专业师傅，遍布全国</Text><Text style={styles.intrText}>
-            2、技能专业</Text><Text style={styles.intrText}>
-            实名认证，专业技能培训考核后，持证上岗</Text><Text style={styles.intrText}>
-            3、价格透明</Text><Text style={styles.intrText}>
-            去除中间商环节，信息透明用户自主选择</Text><Text style={styles.intrText}>
-            4、平台质保</Text><Text style={styles.intrText}>
-            严格把控服务质量，客户验收好评后订单方可完成
-          </Text>
+          正品保障</Text><Text style={styles.intrText}>
+          通过平台成交15天内，平台承诺为消费者提供交易保障服务</Text><Text style={styles.intrText}>
+          先行赔付</Text><Text style={styles.intrText}>
+          产品质量问题，平台先行为客户赔付</Text><Text style={styles.intrText}>
+          价格最优</Text><Text style={styles.intrText}>
+          平台价格保障，用户举报有奖</Text><Text style={styles.intrText}>
+          安心购买</Text><Text style={styles.intrText}>
+          精准送装</Text>
         </View>
-      </View>
-    );
-  }
-  _renderRecord() {
-    const { info: { masterOrderItemLogs } } = this.state;
-    return (
-      <View>
-        <TitleItem text="近期服务记录" />
-        <View style={styles.recordList}>
-          <Text style={styles.f1}>服务地址</Text>
-          <Text style={styles.f70}>服务类型</Text>
-          <Text style={styles.f1}>服务时间</Text>
-        </View>
-        {
-          masterOrderItemLogs.map((item, index) => (
-            <View key={index} style={styles.recordList}>
-              <Text style={styles.f1}>{item.address}</Text>
-              <Text style={styles.f70}>{item.servicesTypeName}</Text>
-              <Text style={styles.f1}>{item.postDate}</Text>
-            </View>
-          ))
-        }
       </View>
     );
   }
@@ -222,7 +236,7 @@ class MasterDetail extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="师傅详情" />
+        <Header back={pop} title="装修公司详情" />
         {
           info &&
           <Content>
@@ -230,7 +244,6 @@ class MasterDetail extends base {
             {this._renderTec()}
             {this._renderIntr()}
             {info.orderEvaluate && this._renderEval()}
-            {this._renderRecord()}
           </Content>
         }
         {info && this._renderFooter()}
@@ -240,8 +253,8 @@ class MasterDetail extends base {
   }
 }
 
-MasterDetail.propTypes = {
+DecorateDetail.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MasterDetail);
+export default connect(null, { pop: popRoute, push: pushRoute })(DecorateDetail);
