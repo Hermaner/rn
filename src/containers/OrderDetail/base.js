@@ -92,7 +92,7 @@ class Base extends React.Component {
   }
   CancelOrder = () => {
     Alert.alert(
-      '温馨提示', null,
+      '温馨提示', '取消订单？',
       [
         { text: '取消', onPress: () => {} },
         { text: '确认', onPress: () => this.UpdateOrderStatusService(7) },

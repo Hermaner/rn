@@ -1,18 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, deviceW } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
-const leftWidth = 70;
 const styles = StyleSheet.create({
-  ModalStyle: {
-    marginLeft: leftWidth / 2,
-    width: deviceW - leftWidth,
-    backgroundColor: '#f6f6f6',
-  },
-  modalView: {
-    margin: 10,
-    marginTop: 40,
-    marginBottom: 20,
-  },
   mainList: {
     backgroundColor: '#fff',
     marginTop: 10,
@@ -117,42 +106,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 8,
     fontSize: 14,
-  },
-  tabs: {
-    flexWrap: 'wrap',
-    ...st.fr,
-  },
-  tab: {
-    width: '33.3%',
-    borderRightWidth: 1,
-    borderRightColor: '#e3e3e3',
-    borderBottomWidth: 1,
-    backgroundColor: '#fff',
-    borderBottomColor: '#e3e3e3',
-    height: 45,
-    ...st.jacenter,
-  },
-  tabCur: {
-    backgroundColor: Mcolor,
-    borderColor: Mcolor,
-  },
-  tabText: {
-    color: '#444',
-    fontSize: 14,
-  },
-  tabTextCur: {
-    color: '#fff',
-  },
-  titleColor: {
-    width: 20,
-    height: 20,
-    backgroundColor: Mcolor,
-    borderRadius: 10,
-    ...st.jacenter,
-  },
-  titleIcon: {
-    fontSize: 14,
-    color: '#fff',
   },
   footer: {
     backgroundColor: '#f8f8f8',

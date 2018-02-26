@@ -76,6 +76,9 @@ export function DeepClone(obj) {
   return result;
 }
 
+export function RegisterMemberService(data) {
+  return post('RegisterMemberService', data);
+}
 export function PayAppWeiXinService(data) {
   return get('PayAppWeiXinService', data);
 }

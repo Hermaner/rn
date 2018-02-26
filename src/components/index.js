@@ -35,11 +35,15 @@ import MasterEval from './MasterEval';
 import DecorateItem from './DecorateItem';
 import BmMarketItem from './BmMarketItem';
 import Select from './Select';
+import UserObser from './UserObser';
+
+const UserSocket = new UserObser();
 
 export {
   TLight,
   SpotLine,
   BmMarketItem,
+  UserSocket,
   Select,
   DemanOrderItem,
   OrderItem,

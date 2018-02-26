@@ -1,14 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
-import { TFeedback, Loading, TOpacity, Iconfont } from '../../components';
+import { observer } from 'mobx-react/native';
+import { TFeedback, Loading, UserSocket } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import Base from './base';
 import styles from './styles';
 
+@observer
 class My extends Base {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class My extends Base {
     };
   }
   componentDidMount() {
-    // this.initData();
+    this.getInit();
   }
   _renderTop() {
     return (
@@ -32,20 +34,25 @@ class My extends Base {
   }
   _renderUser() {
     const { defaultImg } = this.state;
+    const { userData, userData: { memberId } } = UserSocket;
     return (
       <View style={styles.userAllView}>
         <View style={styles.userView}>
           <View style={styles.userTop}>
             <View style={styles.userImgView}>
-              <CachedImage source={defaultImg} style={styles.userImg} />
+              <CachedImage
+                source={
+                  userData.imgUrl ? { uri: userData.imgUrl } : defaultImg}
+                style={styles.userImg}
+              />
             </View>
             {
-              !global.memberId ?
+              memberId ?
                 <TFeedback
                   content={
                     <View style={styles.userNameView}>
-                      <Text style={styles.nameText}>翰承</Text>
-                      <Text style={styles.nameText}>15666666666</Text>
+                      <Text style={styles.nameText}>{UserSocket.userData.nickName}</Text>
+                      <Text style={styles.nameText}>{UserSocket.userData.phone}</Text>
                     </View>
                   }
                   onPress={() => { this.goPage('MemberInfo'); }}
@@ -60,21 +67,38 @@ class My extends Base {
                   onPress={() => { this.goPage('User'); }}
                 />
             }
-            <Icon name="md-arrow-dropright" style={styles.rightArr} />
+            {
+              memberId && <Icon name="md-arrow-dropright" style={styles.rightArr} />
+            }
           </View>
           <View style={styles.topPage}>
-            <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>0</Text>
-              <Text style={styles.topText}>账户</Text>
-            </View>
-            <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>1</Text>
-              <Text style={styles.topText}>优惠券</Text>
-            </View>
-            <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>0</Text>
-              <Text style={styles.topText}>收藏</Text>
-            </View>
+            <TFeedback
+              content={
+                <View style={styles.topPageList}>
+                  <Text style={styles.topBoldText}>0</Text>
+                  <Text style={styles.topText}>账户</Text>
+                </View>
+              }
+              onPress={() => { this.goPage('MyAccount'); }}
+            />
+            <TFeedback
+              content={
+                <View style={styles.topPageList}>
+                  <Text style={styles.topBoldText}>1</Text>
+                  <Text style={styles.topText}>优惠券</Text>
+                </View>
+              }
+              onPress={() => { this.goPage('MyCoupons'); }}
+            />
+            <TFeedback
+              content={
+                <View style={styles.topPageList}>
+                  <Text style={styles.topBoldText}>0</Text>
+                  <Text style={styles.topText}>收藏</Text>
+                </View>
+              }
+              onPress={() => { this.goPage('MyColl'); }}
+            />
           </View>
         </View>
         <View style={styles.memberView}>
@@ -188,26 +212,33 @@ class My extends Base {
       <View style={styles.iconsPage}>
         {
           icons.map((item, index) => (
-            <View key={index} style={styles.iconsItem}>
-              <View style={[styles.iconsTop, { backgroundColor: item.color }]}>
-                <Icon name="md-alarm" style={styles.iconsIcon} />
-              </View>
-              <Text style={styles.roleText}>{item.label}</Text>
-            </View>
+            <TFeedback
+              key={index}
+              content={
+                <View key={index} style={styles.iconsItem}>
+                  <View style={[styles.iconsTop, { backgroundColor: item.color }]}>
+                    <Icon name="md-alarm" style={styles.iconsIcon} />
+                  </View>
+                  <Text style={styles.roleText}>{item.label}</Text>
+                </View>
+              }
+              onPress={() => { this.goPage(item.page); }}
+            />
           ))
         }
       </View>
     );
   }
   render() {
+    const { userData: { memberId, bmMarketId, decorationId } } = UserSocket;
     return (
       <Container>
         <Content>
           {this._renderTop()}
           {this._renderUser()}
-          {global.masterId && this._renderRole1()}
-          {global.bmMarketId && this._renderRole2()}
-          {global.decorationId && this._renderRole3()}
+          {memberId && this._renderRole1()}
+          {bmMarketId && this._renderRole2()}
+          {decorationId && this._renderRole3()}
           {this._renderOrder()}
           {this._renderIcons()}
         </Content>

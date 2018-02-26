@@ -1,6 +1,8 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { AsyncStorage } from 'react-native';
+import { UserSocket } from '../../components';
 import { GetCodeService, UpdateMemberService } from '../../api';
 
 class Base extends React.Component {
@@ -8,11 +10,11 @@ class Base extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '',
-      sendPhone: '',
+      phone: '15777667761',
+      sendPhone: '15777667761',
       sec: 60,
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
     };
   }
   onChangeText = (txt, index) => {
@@ -103,6 +105,8 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('修改成功');
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
+        UserSocket.changeData(res.data);
         this.props.pop();
       }
     }).catch(() => {

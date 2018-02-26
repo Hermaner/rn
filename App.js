@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 
 import AppReducer from './src/reducers';
+import { UserSocket } from './src/components';
 import SocketStore from './src/components/socket/SocketStore';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 
@@ -56,17 +57,18 @@ class App extends React.Component {
       });
     }
     JPushModule.getRegistrationID((registrationId) => {
-      console.log(registrationId);
-      this.setState({ cid: registrationId });
+      console.log(registrationId)
+      global.registration = registrationId || 'ios';
     });
     this.premInit();
     global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
         global.userData = JSON.parse(res);
-        console.log(global.userData)
-        global.memberId = '2';
-        global.masterId = '6';
+        UserSocket.changeData(global.userData)
+        console.log(global.userData);
+        global.memberId = global.userData.memberId;
+        global.masterId = global.userData.masterId;
         global.socketStore.getConnect();
         DeviceEventEmitter.emit('emitSession');
       }

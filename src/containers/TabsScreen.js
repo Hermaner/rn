@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
-import home from './home';
-import goods from './goods';
-import ChatIndex from './ChatIndex';
-import mine from './my';
+import TabHome from './TabHome';
+import TabOrder from './TabOrder';
+import TabChat from './TabChat';
+import TabMine from './TabMine';
 import { Mcolor } from '../utils';
 import { Iconfont } from '../components';
 
@@ -23,17 +23,17 @@ const styles = StyleSheet.create({
 });
 const TabsScreen = (navigationOptions = {}) => TabNavigator(
   {
-    Home: {
-      screen: home,
+    TabHome: {
+      screen: TabHome,
     },
-    Goods: {
-      screen: goods,
+    TabOrder: {
+      screen: TabOrder,
     },
-    ChatIndex: {
-      screen: ChatIndex,
+    TabChat: {
+      screen: TabChat,
     },
-    Mine: {
-      screen: mine,
+    TabMine: {
+      screen: TabMine,
     },
   },
   {
@@ -44,19 +44,19 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         let iconName;
         let name;
         switch (routeName) {
-          case 'Home':
+          case 'TabHome':
             iconName = 'icon-caigou-xianxing';
             name = '我要买';
             break;
-          case 'Goods':
+          case 'TabOrder':
             iconName = 'icon-caigou-xianxing';
             name = '我要卖';
             break;
-          case 'ChatIndex':
+          case 'TabChat':
             iconName = 'icon-kefu';
             name = '聊生意';
             break;
-          case 'Mine':
+          case 'TabMine':
             iconName = 'icon-wode';
             name = '我的';
             break;

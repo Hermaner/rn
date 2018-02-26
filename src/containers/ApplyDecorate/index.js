@@ -164,7 +164,7 @@ class ApplyDecorate extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="装修公司申请" />
+        <Header back={pop} title="装修公司入驻" />
         <Content>
           {this._renderUser()}
           {this._renderStore()}

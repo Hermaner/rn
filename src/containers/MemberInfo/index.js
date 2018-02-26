@@ -3,12 +3,14 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
+import { observer } from 'mobx-react/native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, Header, UploadLogo, Select } from '../../components';
+import { Loading, TFeedback, Header, UploadLogo, Select, UserSocket } from '../../components';
 import base from './base';
 import styles from './styles';
 
+@observer
 class CreateConfirm extends base {
   constructor(props) {
     super(props);
@@ -23,7 +25,8 @@ class CreateConfirm extends base {
     this.deleteInit();
   }
   _renderList() {
-    const { nickName, phone, sexValue, birthDay } = this.state;
+    const { sexValue } = this.state;
+    const { userData: { nickName, birthDay, phone } } = UserSocket;
     return (
       <View>
         <View style={styles.listView}>
@@ -74,7 +77,7 @@ class CreateConfirm extends base {
             content={
               <View style={styles.listRight}>
                 <Text style={styles.listText}>
-                  {birthDay || '请选择生日'}
+                  {birthDay ? birthDay.substr(0, 10) : '请选择生日'}
                 </Text>
                 <Icon name="md-arrow-dropright" style={styles.arr} />
               </View>
@@ -86,11 +89,11 @@ class CreateConfirm extends base {
     );
   }
   _renderSelect() {
-    const { optionType, selectShow, options } = this.state;
+    const { sex, selectShow, options } = this.state;
     return (
       <Select
         selectShow={selectShow}
-        value={optionType}
+        value={sex}
         items={options}
         title="请选择性别"
         closeModal={this.closeModal}
@@ -99,11 +102,11 @@ class CreateConfirm extends base {
     );
   }
   _renderLogo() {
-    const { initImages } = this.state;
+    const { initImage } = this.state;
     return (
       <View>
         <UploadLogo
-          initImages={initImages}
+          initImage={initImage}
           getImages={this.getImages}
         />
       </View>

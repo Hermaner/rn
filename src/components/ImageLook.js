@@ -35,7 +35,8 @@ export default class ImageLook extends React.Component {
     super(props);
     const images = [];
     props.images.forEach((item) => {
-      images.push({ uri: `${item}?imageView2/1/w/200`, key: item.key });
+      const key = item.key || item.imgUrl;
+      images.push({ uri: `${key}?imageView2/1/w/200`, key });
     });
     this.state = {
       images,

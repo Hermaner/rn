@@ -7,8 +7,8 @@ import TFeedback from './TFeedback';
 
 const styles = StyleSheet.create({
   list: {
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 4,
+    paddingBottom: 4,
     backgroundColor: '#fff',
     ...st.frcenter,
   },
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   rightIco: {
     marginLeft: 5,
-    marginRight: 5,
+    marginRight: 3,
     fontSize: 26,
   },
 });

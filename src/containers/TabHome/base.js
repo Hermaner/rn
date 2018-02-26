@@ -51,7 +51,7 @@ class Base extends React.Component {
           icon: 'icon-kefu',
           text: '其他需求',
           color: '#00CD66',
-          page: 'demandList',
+          page: 'DemandCategory',
         },
         {
           icon: 'icon-kefu',

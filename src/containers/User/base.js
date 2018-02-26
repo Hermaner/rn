@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetCodeService, RegisterMemberService } from '../../api';
@@ -9,12 +9,12 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '',
-      sendPhone: '',
+      phone: '15666666666',
+      sendPhone: '15666666666',
       sec: 60,
       password: '',
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
     };
   }
   onChangeText = (txt, index) => {
@@ -84,7 +84,6 @@ class UserBase extends React.Component {
       codeVal,
       sendPhone,
     } = this.state;
-    console.log(phone, sendPhone)
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信的手机号不一致');
       return;
@@ -100,18 +99,18 @@ class UserBase extends React.Component {
     this.sleek.toggle();
     RegisterMemberService({
       phone,
+      phoneType: Platform.OS === 'ios' ? '2' : '1',
+      registration: global.registration,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
-        global.memberId = res.data.memberId.toString();
+        global.userData = res.data;
+        global.memberId = res.data.memberId;
+        global.masterId = res.data.masterId;
         Toast.show('登陆成功');
-        if (res.data.role) {
-          this.props.resetHome();
-        } else {
-          this.props.push({ key: 'WhyChoose' });
-        }
+        this.props.pop();
       }
     }).catch(() => {
       this.sleek.toggle();
@@ -119,7 +118,6 @@ class UserBase extends React.Component {
   }
 }
 UserBase.propTypes = {
-  push: PropTypes.func,
-  resetHome: PropTypes.func,
+  pop: PropTypes.func,
 };
 export default UserBase;

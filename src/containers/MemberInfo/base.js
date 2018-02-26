@@ -1,45 +1,44 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, AsyncStorage } from 'react-native';
 import Dateformat from 'dateformat';
+import { UserSocket } from '../../components';
 import { UpdateMemberService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { userData: { memberId, imgUrl, sex } } = UserSocket;
     this.state = {
-      upImages: [],
-      initImages: [],
+      upImages: {},
+      memberId,
+      initImage: imgUrl || '',
       nickName: '',
       birthDay: '',
       phone: '',
-      sex: '',
-      sexValue: '',
+      sex: sex || '',
+      sexValue: sex ? (sex === 1 ? '男' : '女') : '',
       isDateShow: false,
       selectShow: false,
       minimumDate: new Date('1900-01-01'),
       maximumDate: new Date(),
-      optionType: '',
       options: [
-      { value: '1', label: '男' },
-      { value: '2', label: '女' }],
+      { value: 1, label: '男' },
+      { value: 2, label: '女' }],
     };
   }
   getInit = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    console.log(Dateformat(date, 'N'));
     this.emitNick = DeviceEventEmitter.addListener('emitNick', (nickName) => {
       this.setState({
         nickName,
-      });
+      }, () => this.UpdateMemberService({ nickName }));
     });
   }
   getImages = (upImages) => {
     this.setState({
       upImages,
-    });
+    }, () => this.UpdateMemberService({ imgUrl: upImages.key }));
   }
   deleteInit = () => {
     this.emitNick.remove();
@@ -70,12 +69,12 @@ class Base extends React.Component {
       selectShow: false,
     });
   }
-  selectModel = (optionType, sexValue) => {
+  selectModel = (sex, sexValue) => {
     this.setState({
-      optionType,
+      sex,
       sexValue,
     });
-    this.UpdateMemberService({ sex: optionType });
+    this.UpdateMemberService({ sex });
     this.closeModal();
   }
   UpdateMemberService = (data) => {
@@ -88,6 +87,8 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('保存成功');
+        UserSocket.changeData(res.data);
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
       }
     }).catch(() => {
       this.sleek.toggle();

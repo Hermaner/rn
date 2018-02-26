@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
-import { popRoute, pushRoute, resetHome } from '../../actions';
+import { popRoute, pushRoute } from '../../actions';
 import { BHeader, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
@@ -81,4 +81,4 @@ UserPage.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute, resetHome })(UserPage);
+export default connect(null, { pop: popRoute, push: pushRoute })(UserPage);

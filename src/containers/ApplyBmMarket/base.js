@@ -2,49 +2,33 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetCodeService, RegisterService, GetMasterTypeService } from '../../api';
+import { GetCodeService, AuthBmMarketService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15666666666',
-      sendPhone: '15666666666',
+      phone: '',
+      sendPhone: '',
       sec: 60,
-      code: '1111',
-      codeVal: '1111',
+      code: '',
+      codeVal: '',
       upImages: [],
-      ModalOpen: false,
-      masterTypes: [],
       provinceId: '',
       provinceName: '',
       cityId: '',
-      masterTypeCount: 0,
       cityName: '',
       districtId: '',
       districtName: '',
+      bmMarketName: '',
       addressTitle: '',
       address: '',
       detail: '',
-      servicesDistrictIds: '',
-      masterTypeIds: '',
-      realName: '',
-      identityCard: '',
+      contacts: '',
     };
   }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          phone: txt,
-        });
-        break;
-      default:
-    }
-  }
   getInit = () => {
-    this.GetMasterTypeService();
     this.emitArea = DeviceEventEmitter.addListener('emitArea', (data) => {
       console.log(data);
       const {
@@ -126,47 +110,11 @@ class Base extends React.Component {
       this.sleek.toggle();
     });
   }
-  closeModal = () => {
-    this.setState({
-      ModalOpen: false,
-    });
-  }
-  tabTec = (index, i) => {
-    const { masterTypes } = this.state;
-    let { masterTypeCount } = this.state;
-    const cur = masterTypes[index].childs[i].cur;
-    if (cur) {
-      masterTypeCount -= 1;
-    } else {
-      masterTypeCount += 1;
-    }
-    masterTypes[index].childs[i].cur = !cur;
-    this.setState({
-      masterTypes,
-      masterTypeCount,
-    });
-  }
-  GetMasterTypeService = () => {
-    this.sleek.toggle();
-    GetMasterTypeService().then((res) => {
-      console.log(res);
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        this.setState({
-          masterTypes: res.data,
-        });
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      this.sleek.toggle();
-      console.log(err);
-    });
-  }
-  RegisterService = () => {
+  AuthBmMarketService = () => {
     const {
       address,
       detail,
+      businessHours,
       provinceId,
       provinceName,
       cityId,
@@ -176,76 +124,68 @@ class Base extends React.Component {
       districtName,
       upImages,
       sendPhone,
-      realName,
-      identityCard,
+      contacts,
       phone,
       code,
-      masterTypes,
-      masterTypeCount,
+      codeVal,
+      bmMarketName,
     } = this.state;
-    const masterTypeIds = [];
-    masterTypes.forEach((item) => {
-      if (item.childs) {
-        item.childs.forEach((list) => {
-          if (list.cur) {
-            masterTypeIds.push(list.id);
-          }
-        });
-      }
-    });
-    if (!realName
-      || !identityCard || !phone || !code || !addressTitle || !detail || masterTypeCount === 0) {
-      Toast.show('信息不全');
+    if (bmMarketName.length < 4) {
+      Toast.show('店铺名称至少4字');
       return;
     }
-    if (this.code !== this.codeVal) {
-      Toast.show('验证码错误');
+    if (upImages.length < 2) {
+      Toast.show('至少上传2张店铺图片');
+      return;
+    }
+    if (address.length < 4) {
+      Toast.show('详细地址至少4字');
+      return;
+    }
+    if (detail.length < 10) {
+      Toast.show('店铺介绍至少10字');
+      return;
+    }
+    if (businessHours.length < 6) {
+      Toast.show('营业时间至少6字');
+      return;
+    }
+    if (!addressTitle) {
+      Toast.show('请选择省市区');
+      return;
+    }
+    if (!code) {
+      Toast.show('请输入验证码');
+      return;
+    }
+    if (!contacts) {
+      Toast.show('请输入联系人');
       return;
     }
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信手机号不一致');
       return;
     }
-    if (upImages.length !== 3) {
-      Toast.show('上传照片数量错误');
-      return;
-    }
-    const idCardReg = !identityCard.match(/\d{17}[\d|x]|\d{15}/);
-    if (idCardReg) {
-      Toast.show('身份证号码格式不对');
+    if (code !== codeVal) {
+      Toast.show('验证码错误');
       return;
     }
     this.sleek.toggle();
-    const info = {
+    AuthBmMarketService({
+      address,
+      bmMarketImages: upImages.map(item => item.key).join(','),
+      imgUrl: '',
+      contacts,
+      detail,
+      phone,
+      businessHours,
+      bmMarketName,
       provinceId,
       provinceName,
       cityId,
       cityName,
       districtId,
       districtName,
-      address,
-      detail,
-      servicesDistrictIds: '',
-      masterSkills: '',
-      masterTypeIds: masterTypeIds.join(','),
-      realName,
-      identityCard,
-      firstImage: upImages[0].key,
-      twoImage: upImages[1].key,
-      threeImage: upImages[2].key,
-    };
-    console.log({
-      phone,
-      opTypeId: '7',
-      passWord: '',
-      info: JSON.stringify(info),
-      memberId: global.memberId,
-    });
-    RegisterService({
-      phone,
-      opTypeId: '7',
-      passWord: '',
-      info: JSON.stringify(info),
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);
@@ -255,6 +195,7 @@ class Base extends React.Component {
         this.props.pop();
       } else {
         Toast.show(res.msg);
+        this.props.pop();
       }
     }).catch((err) => {
       this.sleek.toggle();

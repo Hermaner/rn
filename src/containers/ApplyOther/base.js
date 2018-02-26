@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetCodeService, UpdateMemberService } from '../../api';
+import { GetCodeService, CreateOtherOrgService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -13,17 +13,9 @@ class Base extends React.Component {
       sec: 60,
       code: '',
       codeVal: '',
+      contacts: '',
+      companyName: '',
     };
-  }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          phone: txt,
-        });
-        break;
-      default:
-    }
   }
   sendCode = () => {
     const { phone } = this.state;
@@ -31,7 +23,7 @@ class Base extends React.Component {
       Toast.show('请输入手机号');
       return;
     }
-    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[1678]|18[0-9]|14[57])[0-9]{8}$/);
+    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9]|19[0-9])[0-9]{8}$/);
     if (telReg) {
       Toast.show('手机号格式不对');
       return;
@@ -75,19 +67,29 @@ class Base extends React.Component {
       this.sleek.toggle();
     });
   }
-  UpdateMemberService = () => {
+  CreateOtherOrgService = () => {
     const {
+      sendPhone,
+      contacts,
       phone,
       code,
       codeVal,
-      sendPhone,
+      companyName,
     } = this.state;
-    if (phone !== sendPhone) {
-      Toast.show('手机号与发送短信的手机号不一致');
+    if (companyName.length < 4) {
+      Toast.show('企业名称至少4字');
       return;
     }
     if (!code) {
       Toast.show('请输入验证码');
+      return;
+    }
+    if (!contacts) {
+      Toast.show('请输入联系人');
+      return;
+    }
+    if (phone !== sendPhone) {
+      Toast.show('手机号与发送短信手机号不一致');
       return;
     }
     if (code !== codeVal) {
@@ -95,18 +97,24 @@ class Base extends React.Component {
       return;
     }
     this.sleek.toggle();
-    UpdateMemberService({
+    CreateOtherOrgService({
+      companyName,
+      contacts,
       phone,
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        Toast.show('修改成功');
+        Toast.show('申请成功，请等待审核短信通知');
+        this.props.pop();
+      } else {
+        Toast.show(res.msg);
         this.props.pop();
       }
-    }).catch(() => {
+    }).catch((err) => {
       this.sleek.toggle();
+      console.log(err);
     });
   }
 }

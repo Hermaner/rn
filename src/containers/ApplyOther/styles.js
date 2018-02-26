@@ -1,42 +1,92 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, Mblue } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
-  text: {
-    color: '#fff',
-    ...st.font24,
-    fontWeight: 'bold',
-  },
-  form: {
+  mainList: {
     backgroundColor: '#fff',
-    marginTop: 20,
-    paddingLeft: 15,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
-  accountView: {
-    height: 50,
-    borderBottomColor: '#eee',
+  listView: {
+    ...st.frcenter,
     borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    backgroundColor: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    minHeight: 50,
   },
-  account: {
+  listLabel: {
+    fontSize: 14,
     color: '#666',
-    ...st.font14,
-    borderBottomColor: '#eee',
+    width: 80,
   },
-  password: {
-    color: '#666', ...st.font14, height: 40,
+  listRight: {
+    flex: 1,
+    ...st.frcenter,
   },
-  formBom: {
+  listInput: {
+    color: '#333',
+    fontSize: 14,
+  },
+  memoView: {
+    alignItems: 'flex-start',
+  },
+  memoLabel: {
+    color: '#666',
+    fontSize: 14,
+    width: 80,
+    marginTop: 10,
+    lineHeight: 24,
+  },
+  listMemo: {
+    color: '#333',
+    fontSize: 14,
+    textAlignVertical: 'top',
+    height: 80,
+    marginTop: 10,
+    lineHeight: 24,
+  },
+  areaView: {
+    ...st.frcenter,
+    flex: 1,
+  },
+  areaText: {
+    flex: 1,
+    marginLeft: 5,
+    fontSize: 14,
+    color: '#333',
+  },
+  arr: {
+    fontSize: 16,
+    color: '#666',
+  },
+  cardTips: {
+    fontSize: 13,
+    lineHeight: 18,
+    margin: 10,
+    marginBottom: 0,
+    color: '#ff0000',
+  },
+  btnView: {
+    backgroundColor: Mcolor,
+    flex: 1,
+    margin: 10,
     height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...st.jacenter,
+  },
+  btnText: {
+    fontSize: 16,
+    color: '#fff',
   },
   sendBtn: {
     height: 35,
     width: 120,
     padding: 0,
     ...st.jacenter,
-    marginRight: 10,
     backgroundColor: Mcolor,
   },
   sendBtnCur: {
@@ -45,58 +95,21 @@ const styles = StyleSheet.create({
   sendBtnText: {
     color: '#fff', ...st.font14,
   },
-  submitBtn: {
-    backgroundColor: Mcolor,
-    margin: 20,
+  list: {
+  },
+  title: {
+    ...st.frcenter,
     height: 50,
-    borderRadius: 5,
   },
-  submitBtnText: {
-    color: '#fff', ...st.font16,
-  },
-  switchView: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  switchLabel: {
-    ...st.font14,
+  listName: {
     color: '#444',
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 14,
   },
-  switchBtn: {
-    backgroundColor: '#fff',
-    height: 30,
-    paddingLeft: 30,
-    paddingRight: 30,
-    borderRadius: 4,
-    marginTop: 14,
-  },
-  switchBtnText: {
-    ...st.font14,
-    color: Mcolor,
-  },
-  bottomView: {
-  },
-  agreementView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  agreementLabel: {
-    color: '#888', ...st.font12,
-  },
-  agreementText: {
-    color: Mcolor, ...st.font12,
-  },
-  bottomTipsView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  bottomTipsLabel: {
-    color: '#666', ...st.font12,
-  },
-  bottomTipsText: {
-    color: Mcolor, ...st.font12,
+  footer: {
+    backgroundColor: '#f8f8f8',
+    height: 70,
   },
 });
 export default styles;

@@ -9,7 +9,6 @@ import ServiceList from '../containers/ServiceList';
 import ServiceDetail from '../containers/ServiceDetail';
 import MasterDetail from '../containers/MasterDetail';
 import User from '../containers/User';
-import ChatIndex from '../containers/ChatIndex';
 import ChatRoom from '../containers/ChatRoom';
 import DemandOrderDetail from '../containers/DemandOrderDetail';
 import CreateConfirm from '../containers/CreateConfirm';
@@ -38,15 +37,36 @@ import ApplyMaster from '../containers/ApplyMaster';
 import ApplyDecorate from '../containers/ApplyDecorate';
 import ApplyBmMarket from '../containers/ApplyBmMarket';
 import GetCitys from '../containers/GetCitys';
+import DemandConfirm from '../containers/DemandConfirm';
+import DemandCategory from '../containers/DemandCategory';
+import MyAddress from '../containers/MyAddress';
+import MyAddressCreate from '../containers/MyAddressCreate';
+import MyAccount from '../containers/MyAccount';
+import MyCard from '../containers/MyCard';
+import MyColl from '../containers/MyColl';
+import MyCoupons from '../containers/MyCoupons';
+import MyTixian from '../containers/MyTixian';
+import PlatProblem from '../containers/PlatProblem';
+import About from '../containers/About';
+import Feedback from '../containers/Feedback';
 
 export const AppNavigator = StackNavigator({
+  MyAccount: { screen: MyAccount },
+  MyAddress: { screen: MyAddress },
+  MyCard: { screen: MyCard },
+  MyColl: { screen: MyColl },
+  MyCoupons: { screen: MyCoupons },
+  MyTixian: { screen: MyTixian },
+  PlatProblem: { screen: PlatProblem },
+  About: { screen: About },
+  Feedback: { screen: Feedback },
+  MyAddressCreate: { screen: MyAddressCreate },
   Main: { screen: Main },
   User: { screen: User },
   ServiceList: { screen: ServiceList },
   ServiceDetail: { screen: ServiceDetail },
   MasterDetail: { screen: MasterDetail },
   ChatRoom: { screen: ChatRoom },
-  ChatIndex: { screen: ChatIndex },
   DemandOrderDetail: { screen: DemandOrderDetail },
   CreateConfirm: { screen: CreateConfirm },
   CreatePay: { screen: CreatePay },
@@ -74,6 +94,8 @@ export const AppNavigator = StackNavigator({
   ApplyDecorate: { screen: ApplyDecorate },
   ApplyBmMarket: { screen: ApplyBmMarket },
   GetCitys: { screen: GetCitys },
+  DemandConfirm: { screen: DemandConfirm },
+  DemandCategory: { screen: DemandCategory },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

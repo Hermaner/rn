@@ -37,14 +37,13 @@ const styles = StyleSheet.create({
 export default class Prompt extends React.Component {
   static propTypes = {
     getImages: PropTypes.func,
-    initImage: PropTypes.array,
+    initImage: PropTypes.string,
   };
   constructor(props) {
     super(props);
     let image = null;
     if (props.initImage && props.initImage.length > 0) {
-      image = { uri: `${props.initImage.imgUrl}?imageView2/1/w/200`, key: props.initImage.key };
-      this.props.getImages(image);
+      image = { uri: `${props.initImage}?imageView2/1/w/200`, key: props.initImage };
     }
     this.state = {
       upImg: require('../assets/img/addAc.png'),
@@ -102,7 +101,7 @@ export default class Prompt extends React.Component {
     let ran = parseInt(Math.random() * 888, 10);
     ran += 100;
     const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
-    image.key = key;
+    image.key = `${global.buketUrl}${key}`;
     this.setState({
       image,
     }, () => this.props.getImages(image));
@@ -114,8 +113,9 @@ export default class Prompt extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         this.setState({
-          uptoken: res.data,
+          uptoken: res.data.upToken,
         });
+        global.buketUrl = res.data.buketUrl;
       } else {
         Toast.show(res.msg);
       }

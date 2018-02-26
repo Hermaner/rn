@@ -9,11 +9,11 @@ class Base extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15666666666',
-      sendPhone: '15666666666',
+      phone: '',
+      sendPhone: '',
       sec: 60,
-      code: '1111',
-      codeVal: '1111',
+      code: '',
+      codeVal: '',
       upImages: [],
       provinceId: '',
       provinceName: '',
@@ -22,6 +22,7 @@ class Base extends React.Component {
       districtId: '',
       districtName: '',
       addressTitle: '',
+      decorationName: '',
       address: '',
       detail: '',
       contacts: '',
@@ -194,6 +195,7 @@ class Base extends React.Component {
         this.props.pop();
       } else {
         Toast.show(res.msg);
+        this.props.pop();
       }
     }).catch((err) => {
       this.sleek.toggle();

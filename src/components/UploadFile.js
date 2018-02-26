@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   imagesView: {
     ...st.fr,
     flexWrap: 'wrap',
+    backgroundColor: '#fff',
   },
   imageListView: {
     position: 'relative',

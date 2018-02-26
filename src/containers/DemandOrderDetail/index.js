@@ -124,6 +124,7 @@ class DemandOrderDetail extends base {
               <Text style={styles.memoLabel}>期望薪酬</Text>
               <View style={styles.modalListRight}>
                 <Input
+                  autoFocus
                   style={styles.listInput}
                   placeholderTextColor="#999"
                   placeholder="输入期望薪酬"
@@ -139,7 +140,6 @@ class DemandOrderDetail extends base {
               <View style={styles.memoInput}>
                 <Input
                   multiline
-                  autoFocus
                   style={styles.listMemo}
                   placeholderTextColor="#999"
                   placeholder="输入补充信息"
