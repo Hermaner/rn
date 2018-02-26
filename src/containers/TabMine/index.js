@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { observer } from 'mobx-react/native';
-import { TFeedback, Loading, UserSocket } from '../../components';
+import { TFeedback, Loading, UserSocket, TOpacity } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import Base from './base';
 import styles from './styles';
@@ -110,56 +110,95 @@ class My extends Base {
     );
   }
   _renderRole1() {
+    const { push } = this.props;
     return (
       <View style={styles.roleView}>
-        <View style={[styles.roleList, styles.roleBorder]}>
-          <Text style={styles.roleText}>服务订单</Text>
-          <View style={styles.roleColor}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
-        <View style={styles.roleList}>
-          <Text style={styles.roleText}>师傅管理</Text>
-          <View style={styles.roleColor2}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={[styles.roleList, styles.roleBorder]}>
+              <Text style={styles.roleText}>服务订单</Text>
+              <View style={styles.roleColor}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: 'MgMasterOrders' })}
+        />
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={styles.roleList}>
+              <Text style={styles.roleText}>师傅管理</Text>
+              <View style={styles.roleColor2}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: 'MgMaster' })}
+        />
       </View>
     );
   }
   _renderRole2() {
+    const { push } = this.props;
     return (
       <View style={styles.roleView}>
-        <View style={[styles.roleList, styles.roleBorder]}>
-          <Text style={styles.roleText}>服务订单</Text>
-          <View style={styles.roleColor}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
-        <View style={styles.roleList}>
-          <Text style={styles.roleText}>建材管理</Text>
-          <View style={styles.roleColor2}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={styles.roleList}>
+              <Text style={styles.roleText}>服务订单</Text>
+              <View style={styles.roleColor2}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: '' })}
+        />
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={styles.roleList}>
+              <Text style={styles.roleText}>建材管理</Text>
+              <View style={styles.roleColor2}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: 'MgBmMarket' })}
+        />
       </View>
     );
   }
   _renderRole3() {
+    const { push } = this.props;
     return (
       <View style={styles.roleView}>
-        <View style={[styles.roleList, styles.roleBorder]}>
-          <Text style={styles.roleText}>服务订单</Text>
-          <View style={styles.roleColor}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
-        <View style={styles.roleList}>
-          <Text style={styles.roleText}>装修管理</Text>
-          <View style={styles.roleColor2}>
-            <Icon name="md-alarm" style={styles.topRoleIcon} />
-          </View>
-        </View>
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={styles.roleList}>
+              <Text style={styles.roleText}>服务订单</Text>
+              <View style={styles.roleColor2}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: '' })}
+        />
+        <TOpacity
+          style={styles.roleTOp}
+          content={
+            <View style={styles.roleList}>
+              <Text style={styles.roleText}>装修管理</Text>
+              <View style={styles.roleColor2}>
+                <Icon name="md-alarm" style={styles.topRoleIcon} />
+              </View>
+            </View>
+          }
+          onPress={() => push({ key: 'MgDecorate' })}
+        />
       </View>
     );
   }

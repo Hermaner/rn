@@ -102,6 +102,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     ...st.frcenter,
   },
+  roleTOp: {
+    flex: 1,
+  },
   roleList: {
     flex: 1,
     height: 60,

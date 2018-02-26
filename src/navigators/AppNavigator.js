@@ -49,9 +49,47 @@ import MyTixian from '../containers/MyTixian';
 import PlatProblem from '../containers/PlatProblem';
 import About from '../containers/About';
 import Feedback from '../containers/Feedback';
+import MgBmMarket from '../containers/MgBmMarket';
+import MgBmMarketCert from '../containers/MgBmMarketCert';
+import MgBmMarketImages from '../containers/MgBmMarketImages';
+import MgBmMarketIntr from '../containers/MgBmMarketIntr';
+import MgBmMarketSetting from '../containers/MgBmMarketSetting';
+import MgDecorate from '../containers/MgDecorate';
+import MgDecorateCert from '../containers/MgDecorateCert';
+import MgDecorateCreateCase from '../containers/MgDecorateCreateCase';
+import MgDecorateIntr from '../containers/MgDecorateIntr';
+import MgDecorateLogo from '../containers/MgDecorateLogo';
+import MgDecorateSetting from '../containers/MgDecorateSetting';
+import MgMaster from '../containers/MgMaster';
+import MgMasterCert from '../containers/MgMasterCert';
+import MgMasterIntr from '../containers/MgMasterIntr';
+import MgMasterLogo from '../containers/MgMasterLogo';
+import MgMasterOrderDetail from '../containers/MgMasterOrderDetail';
+import MgMasterOrders from '../containers/MgMasterOrders';
+import MgMasterPublish from '../containers/MgMasterPublish';
+import MgMasterSetting from '../containers/MgMasterSetting';
 
 export const AppNavigator = StackNavigator({
+  MgBmMarket: { screen: MgBmMarket },
+  MgBmMarketCert: { screen: MgBmMarketCert },
   MyAccount: { screen: MyAccount },
+  MgBmMarketImages: { screen: MgBmMarketImages },
+  MgBmMarketIntr: { screen: MgBmMarketIntr },
+  MgBmMarketSetting: { screen: MgBmMarketSetting },
+  MgDecorate: { screen: MgDecorate },
+  MgDecorateCert: { screen: MgDecorateCert },
+  MgDecorateCreateCase: { screen: MgDecorateCreateCase },
+  MgDecorateIntr: { screen: MgDecorateIntr },
+  MgDecorateLogo: { screen: MgDecorateLogo },
+  MgDecorateSetting: { screen: MgDecorateSetting },
+  MgMaster: { screen: MgMaster },
+  MgMasterCert: { screen: MgMasterCert },
+  MgMasterIntr: { screen: MgMasterIntr },
+  MgMasterLogo: { screen: MgMasterLogo },
+  MgMasterOrderDetail: { screen: MgMasterOrderDetail },
+  MgMasterOrders: { screen: MgMasterOrders },
+  MgMasterPublish: { screen: MgMasterPublish },
+  MgMasterSetting: { screen: MgMasterSetting },
   MyAddress: { screen: MyAddress },
   MyCard: { screen: MyCard },
   MyColl: { screen: MyColl },
