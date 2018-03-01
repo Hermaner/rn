@@ -1,59 +1,16 @@
 
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
-  top: {
-    backgroundColor: '#4dbecd',
-    height: 200,
-    ...st.jacenter,
-  },
-  account: {
-    fontSize: 42,
-    color: '#fff',
-    lineHeight: 50,
-  },
-  topLabel: {
-    fontSize: 14,
-    color: '#fff',
-    lineHeight: 30,
-  },
-  btn: {
-    backgroundColor: Mcolor,
-    marginTop: 5,
-    height: 40,
-    width: 100,
-    ...st.jacenter,
-  },
-  btnText: {
-    fontSize: 16,
-    color: '#fff',
-  },
-  list: {
-    height: 50,
+  mainList: {
     backgroundColor: '#fff',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 8,
-    ...st.frcenter,
-  },
-  name: {
-    flex: 1,
-    color: '#333',
-    fontSize: 14,
-  },
-  right: {
-    ...st.frcenter,
-  },
-  label: {
-    color: '#666',
-    fontSize: 14,
-  },
-  arr: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 4,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
 export default styles;

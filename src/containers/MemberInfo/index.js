@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { observer } from 'mobx-react/native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, Header, UploadLogo, Select, UserSocket } from '../../components';
+import { Loading, TFeedback, BHeader, UploadLogo, Select, UserSocket } from '../../components';
 import base from './base';
 import styles from './styles';
 
 @observer
-class CreateConfirm extends base {
+class MemberInfo extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -117,7 +117,7 @@ class CreateConfirm extends base {
     const { isDateShow, maximumDate, minimumDate } = this.state;
     return (
       <Container>
-        <Header back={pop} title="会员信息" />
+        <BHeader back={pop} title="会员信息" />
         <Content style={styles.content}>
           {this._renderLogo()}
           {this._renderList()}
@@ -140,8 +140,8 @@ class CreateConfirm extends base {
   }
 }
 
-CreateConfirm.propTypes = {
+MemberInfo.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(CreateConfirm);
+export default connect(null, { pop: popRoute, push: pushRoute })(MemberInfo);

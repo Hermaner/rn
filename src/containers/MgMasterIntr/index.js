@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Content, Text, Footer, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header } from '../../components';
+import { Header, Loading, TitleItem, TOpacity } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MyAccount extends base {
+class MgMasterPublish extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,44 +19,22 @@ class MyAccount extends base {
   }
   componentWillUnmount() {
   }
-  _renderTop() {
-    const { amount } = this.state;
+  _renderContent() {
+    const { detail } = this.state;
     return (
-      <View style={styles.top}>
-        <Text style={styles.account}>{amount}</Text>
-        <Text style={styles.topLabel}>余额(元)</Text>
-        <TOpacity
-          style={styles.btn}
-          content={
-            <Text style={styles.btnText}>提现</Text>
-          }
-          onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
-        />
-      </View>
-    );
-  }
-  _renderList() {
-    return (
-      <View>
-        <View style={styles.list}>
-          <Text style={styles.name}>提现记录</Text>
-          <View style={styles.right}>
-            <Text style={styles.label}>0.00元</Text>
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>收入明细</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>账户设置</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
+      <View style={styles.mainList}>
+        <TitleItem text="服务介绍" />
+        <View style={[styles.listView, styles.memoView]}>
+          <View style={styles.listRight}>
+            <Input
+              multiline
+              style={styles.listMemo}
+              placeholderTextColor="#999"
+              placeholder="输入您的服务介绍"
+              clearButtonMode="while-editing"
+              value={detail}
+              onChangeText={value => this.setState({ detail: value })}
+            />
           </View>
         </View>
       </View>
@@ -66,22 +44,27 @@ class MyAccount extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
-          back={pop}
-          title="我的账户"
-        />
+        <Header back={pop} title="服务介绍" />
         <Content>
-          {this._renderTop()}
-          {this._renderList()}
+          {this._renderContent()}
         </Content>
+        <Footer style={styles.footer}>
+          <TOpacity
+            style={styles.btnView}
+            content={
+              <Text style={styles.btnText}>{'立即保存'}</Text>
+            }
+            onPress={this.save}
+          />
+        </Footer>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
 }
 
-MyAccount.propTypes = {
+MgMasterPublish.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyAccount);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgMasterPublish);

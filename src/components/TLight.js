@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 export default class TLight extends React.Component {
   static propTypes = {
     content: PropTypes.element,
-    TPress: PropTypes.func,
+    onPress: PropTypes.func,
     style: PropTypes.any,
+    underlayColor: PropTypes.string,
   };
   constructor(props) {
     super(props);
@@ -16,24 +17,25 @@ export default class TLight extends React.Component {
     this.lightPress = this.lightPress.bind(this);
   }
   async lightPress() {
-    const { TPress } = this.props;
-    if (!TPress) {
+    const { onPress } = this.props;
+    if (!onPress) {
       return;
     }
-    TPress();
+    onPress();
     await this.setState({ isDisable: true });
     this.timer = setTimeout(async () => {
       await this.setState({ isDisable: false });
     }, 500);
   }
   render() {
-    const { style, content } = this.props;
+    const { style, content, underlayColor } = this.props;
     const { isDisable } = this.state;
     return (
       <TouchableHighlight
         disabled={isDisable}
-        onPress={this.lightPress}
         {...this.props}
+        // underlayColor={underlayColor || '#e2e2e2'}
+        onPress={this.lightPress}
         style={style}
       >
         {content}

@@ -12,7 +12,7 @@ class Orders extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...this.state,
+      initialPage: props.navigation.state.params.initialPage,
     };
   }
   componentDidMount() {
@@ -21,16 +21,24 @@ class Orders extends React.Component {
   }
   render() {
     const { pop } = this.props;
+    const { initialPage } = this.state;
     return (
       <Container>
-        <Header back={pop} title="订单列表" />
-        <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
+        <Header
+          back={pop}
+          title="订单列表"
+        />
+        <ScrollableTabView
+          style={{ flex: 1 }}
+          initialPage={initialPage}
+          renderTabBar={() => <ScrollableTab />}
+        >
           <Demand tabLabel="需求单" status="0" />
-          <Normal tabLabel="全部" status="" />
           <Normal tabLabel="待付款" status="1" />
           <Normal tabLabel="待服务" status="3" />
           <Normal tabLabel="待评价" status="4" />
           <Normal tabLabel="退款单" status="6" />
+          <Normal tabLabel="全部" status="" />
         </ScrollableTabView>
       </Container>
     );
@@ -39,5 +47,6 @@ class Orders extends React.Component {
 
 Orders.propTypes = {
   pop: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default connect(null, { pop: popRoute })(Orders);

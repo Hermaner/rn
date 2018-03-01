@@ -64,13 +64,18 @@ class App extends React.Component {
     global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
-        global.userData = JSON.parse(res);
-        UserSocket.changeData(global.userData)
-        console.log(global.userData);
-        global.memberId = global.userData.memberId;
-        global.masterId = global.userData.masterId;
+        const userData = JSON.parse(res);
+        UserSocket.changeData(userData);
+        console.log(userData);
+        global.memberId = userData.memberId;
         global.socketStore.getConnect();
         DeviceEventEmitter.emit('emitSession');
+      }
+    });
+    AsyncStorage.getItem('searchHistorys', (error, res) => {
+      if (res) {
+        console.log(res)
+        global.searchHistorys = JSON.parse(res);
       }
     });
     DeviceEventEmitter.addListener('socketConnet', () => {

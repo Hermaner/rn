@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   footer: {
+    backgroundColor: '#f8f8f8',
     ...st.fr,
     ...st.jcenter,
   },

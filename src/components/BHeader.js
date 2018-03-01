@@ -6,7 +6,7 @@ import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f6f6f6',
   },
   left: {
     position: 'absolute',

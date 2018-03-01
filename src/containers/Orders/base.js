@@ -22,23 +22,6 @@ class Base extends React.Component {
       nomore: false,
       noData: false,
       pageSize: '15',
-      tabs: [{
-        label: '需求单',
-        cur: true,
-      }, {
-        label: '待付款',
-        cur: false,
-      }, {
-        label: '待服务',
-        cur: false,
-      }, {
-        label: '待评价',
-        cur: false,
-      }, {
-        label: '退款/售后',
-        cur: false,
-      }],
-      tabIndex: 0,
     };
   }
   getInit = () => {
@@ -105,61 +88,6 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       console.log(err);
-    });
-  }
-  computeDate = (time) => {
-    let target = (new Date().getTime() - new Date(time).getTime()) / 1000 / 60;
-    if (target < 60) {
-      target = parseInt(target, 10);
-      return `${target}分钟前`;
-    } else if (target >= 60 && target < (24 * 60)) {
-      target = parseInt(target / 60, 10);
-      return `${target}小时前`;
-    }
-    return time.substr(0, 10);
-  }
-  changeTab = (index) => {
-    const { tabs } = this.state;
-    let { tabIndex, orderByName, orderByType } = this.state;
-    if (index === 3) {
-      this.setState({
-        ModalOpen: true,
-      });
-      return;
-    }
-    switch (index) {
-      case 0:
-        orderByName = '';
-        break;
-      case 1:
-        orderByName = 'sales';
-        break;
-      case 2:
-        orderByName = 'salesPrice';
-        break;
-      default:
-    }
-    if (tabIndex === index) {
-      if (index === 0 || index === 1) {
-        return;
-      }
-      orderByType = orderByType === 'desc' ? 'asc' : 'desc';
-    } else {
-      orderByType = 'desc';
-      tabs[index].cur = true;
-      tabs[tabIndex].cur = false;
-      tabIndex = index;
-    }
-    this.setState({
-      orderByName,
-      orderByType,
-      tabs,
-      tabIndex,
-    }, this._onRefresh);
-  }
-  closeModal = () => {
-    this.setState({
-      ModalOpen: false,
     });
   }
   _onRefresh = () => {

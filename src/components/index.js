@@ -35,12 +35,16 @@ import MasterEval from './MasterEval';
 import DecorateItem from './DecorateItem';
 import BmMarketItem from './BmMarketItem';
 import Select from './Select';
+import MasterOrderItem from './MasterOrderItem';
+import HomeSearch from './HomeSearch';
 import UserObser from './UserObser';
 
 const UserSocket = new UserObser();
 
 export {
   TLight,
+  HomeSearch,
+  MasterOrderItem,
   SpotLine,
   BmMarketItem,
   UserSocket,

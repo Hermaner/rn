@@ -1,7 +1,7 @@
 
-// const httpurl = 'http://192.168.50.61:8084/api/lede/';
+const httpurl = 'http://192.168.50.57:8081/api/mall/';
 // const httpurl = 'http://192.168.0.11:8084/api/lede/';
-const httpurl = 'https://mm.sunhousm.cn/api/mall/';
+// const httpurl = 'https://mm.sunhousm.cn/api/mall/';
 export function parseJSON(response) {
   return response.json();
 }
@@ -39,6 +39,9 @@ export function post(path, data) {
   return request(`${httpurl}${path}`, {
     method: 'POST',
     body: JSON.stringify(systemParam(data)),
+    headers: {
+      Authorization: global.memberId || '2',
+    },
   });
 }
 export function get(path, data) {
@@ -46,6 +49,9 @@ export function get(path, data) {
   console.log(purl);
   return request(purl, {
     method: 'GET',
+    headers: {
+      Authorization: global.memberId || '2',
+    },
   });
 }
 export function isClass(o) {
@@ -75,15 +81,17 @@ export function DeepClone(obj) {
   }
   return result;
 }
-
+export function AuthMasterService(data) {
+  return post('AuthMasterService', data);
+}
 export function RegisterMemberService(data) {
   return post('RegisterMemberService', data);
 }
 export function PayAppWeiXinService(data) {
-  return get('PayAppWeiXinService', data);
+  return post('PayAppWeiXinService', data);
 }
-export function PayAliService(data) {
-  return get('PayAliService', data);
+export function AliAppPayService(data) {
+  return post('AliAppPayService', data);
 }
 export function NetPayService(data) {
   return get('NetPayService', data);
@@ -329,7 +337,7 @@ export function CreateBmMarketCredentialsService(data) {
   return post('CreateBmMarketCredentialsService', data);
 }
 export function UpdateBmMarketService(data) {
-  return get('UpdateBmMarketService', data);
+  return post('UpdateBmMarketService', data);
 }
 export function UpdateDecorationCompanyService(data) {
   return get('UpdateDecorationCompanyService', data);
@@ -396,4 +404,19 @@ export function GetWithdrawalsOrderService(data) {
 }
 export function GetUploadTokenService(data) {
   return get('GetUploadTokenService', data);
+}
+export function GetDepositMasterService(data) {
+  return get('GetDepositMasterService', data);
+}
+export function CreateDepositOrderService(data) {
+  return post('CreateDepositOrderService', data);
+}
+export function PayDepositOrderService(data) {
+  return get('PayDepositOrderService', data);
+}
+export function CreateRechargeOrderService(data) {
+  return post('CreateRechargeOrderService', data);
+}
+export function GetMemberRechargeService(data) {
+  return get('GetMemberRechargeService', data);
 }

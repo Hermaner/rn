@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   listLabel: {
     fontSize: 16,
     color: '#666',
-    width: 80,
+    width: 95,
   },
   listRight: {
     flex: 1,

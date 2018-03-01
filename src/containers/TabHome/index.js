@@ -8,7 +8,7 @@ import AMapLocation from 'react-native-smart-amap-location';
 import { CachedImage } from 'react-native-img-cache';
 import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import { pushRoute } from '../../actions';
-import { Iconfont, TOpacity, IconItem, CaseItem } from '../../components';
+import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -82,7 +82,7 @@ class Home extends base {
     return (
       <View>
         <Swiper
-          height={200}
+          height={100}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
@@ -104,11 +104,15 @@ class Home extends base {
           <Text style={styles.caseTitleText}>
             师傅案例
           </Text>
-          <View style={styles.caseMore}>
-            <Text style={styles.caseMoreText}>
-              师傅案例
-            </Text>
-          </View>
+          <TOpacity
+            style={styles.caseMore}
+            content={
+              <Text style={styles.caseMoreText}>
+                更多案例
+              </Text>
+            }
+            onPress={() => { this.props.push({ key: 'MasterCaseList' }); }}
+          />
         </View>
         {
           cases.map((item, index) => (
@@ -124,6 +128,7 @@ class Home extends base {
     } = this.state;
     return (
       <Container>
+        <HomeSearch label="上海" />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={

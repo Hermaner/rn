@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
     height: 50,
   },
   topIcon: {
-    fontSize: 24,
+    fontSize: 28,
     color: '#fff',
-    marginRight: 10,
+    marginRight: 14,
   },
   userAllView: {
     marginLeft: 20,
@@ -83,6 +83,11 @@ const styles = StyleSheet.create({
     paddingTop: 28,
     marginTop: -20,
   },
+  glod: {
+    color: '#FFD700',
+    fontSize: 15,
+    marginRight: 4,
+  },
   memberText: {
     flex: 1,
     color: '#fff',
@@ -96,6 +101,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#fff',
     marginLeft: 5,
+  },
+  applyView: {
+    backgroundColor: '#fff',
+    height: 45,
+    paddingLeft: 10,
+    paddingRight: 10,
+    ...st.frcenter,
+  },
+  applyName: {
+    fontSize: 15,
+    color: '#444',
+    flex: 1,
+  },
+  applyStatus: {
+    fontSize: 14,
+    color: 'green',
   },
   roleView: {
     backgroundColor: '#fff',
@@ -141,6 +162,10 @@ const styles = StyleSheet.create({
     marginTop: 8,
     backgroundColor: '#fff',
   },
+  orderText: {
+    fontSize: 14,
+    color: '#555',
+  },
   orderTop: {
     height: 45,
     borderBottomWidth: 1,
@@ -162,9 +187,9 @@ const styles = StyleSheet.create({
     color: '#888',
     marginRight: 3,
   },
-  rightArr: {
+  arr: {
     fontSize: 18,
-    color: '#888',
+    color: '#666',
     marginLeft: 4,
   },
   orderPage: {

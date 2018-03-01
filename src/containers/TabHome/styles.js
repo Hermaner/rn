@@ -6,17 +6,16 @@ const styles = StyleSheet.create({
   ...st,
   swiperImage: {
     width,
-    height: 200,
+    height: 100,
     backgroundColor: 'transparent',
     resizeMode: 'stretch',
   },
   navIconView: {
     backgroundColor: '#fff',
-    borderRadius: 8,
-    margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
     paddingTop: 15,
     paddingBottom: 10,
-    marginTop: -20,
     position: 'relative',
   },
   bigIconView: {

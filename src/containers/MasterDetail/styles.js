@@ -54,8 +54,18 @@ const styles = StyleSheet.create({
     marginRight: 5,
     color: '#CD3700',
   },
+  topNoBzIcon: {
+    fontSize: 18,
+    marginRight: 5,
+    color: '#aaa',
+  },
   topBzBorder: {
     backgroundColor: '#CD3700',
+    borderRadius: 3,
+    padding: 3,
+  },
+  topNoBzBorder: {
+    backgroundColor: '#aaa',
     borderRadius: 3,
     padding: 3,
   },
@@ -125,6 +135,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   footer: {
+    backgroundColor: '#f8f8f8',
     ...st.fr,
     ...st.jcenter,
   },

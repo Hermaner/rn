@@ -68,10 +68,26 @@ import MgMasterOrderDetail from '../containers/MgMasterOrderDetail';
 import MgMasterOrders from '../containers/MgMasterOrders';
 import MgMasterPublish from '../containers/MgMasterPublish';
 import MgMasterSetting from '../containers/MgMasterSetting';
+import MyMessage from '../containers/MyMessage';
+import MySetting from '../containers/MySetting';
+import MgMasterItems from '../containers/MgMasterItems';
+import MasterCaseList from '../containers/MasterCaseList';
+import MgSecurity from '../containers/MgSecurity';
+import MyDrawList from '../containers/MyDrawList';
+import MyDrawAdd from '../containers/MyDrawAdd';
+import MainSearch from '../containers/MainSearch';
 
 export const AppNavigator = StackNavigator({
-  MgBmMarket: { screen: MgBmMarket },
+  MainSearch: { screen: MainSearch },
+  MyDrawAdd: { screen: MyDrawAdd },
+  MyDrawList: { screen: MyDrawList },
+  MgSecurity: { screen: MgSecurity },
+  MasterCaseList: { screen: MasterCaseList },
+  MgMasterItems: { screen: MgMasterItems },
+  MyMessage: { screen: MyMessage },
   MgBmMarketCert: { screen: MgBmMarketCert },
+  MgBmMarket: { screen: MgBmMarket },
+  MySetting: { screen: MySetting },
   MyAccount: { screen: MyAccount },
   MgBmMarketImages: { screen: MgBmMarketImages },
   MgBmMarketIntr: { screen: MgBmMarketIntr },

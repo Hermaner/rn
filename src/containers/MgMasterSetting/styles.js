@@ -1,59 +1,67 @@
 
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st, deviceW } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
-  top: {
-    backgroundColor: '#4dbecd',
-    height: 200,
-    ...st.jacenter,
-  },
-  account: {
-    fontSize: 42,
-    color: '#fff',
-    lineHeight: 50,
-  },
-  topLabel: {
-    fontSize: 14,
-    color: '#fff',
-    lineHeight: 30,
-  },
-  btn: {
-    backgroundColor: Mcolor,
-    marginTop: 5,
-    height: 40,
-    width: 100,
-    ...st.jacenter,
-  },
-  btnText: {
-    fontSize: 16,
-    color: '#fff',
-  },
-  list: {
-    height: 50,
+  content: {
     backgroundColor: '#fff',
+    padding: 30,
+    flex: 1,
+  },
+  logoMidView: {
+    ...st.jacenter,
+    paddingBottom: 30,
+  },
+  logoView: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    overflow: 'hidden',
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+  },
+  listView: {
+    ...st.frcenter,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e6e6e6',
+    height: 50,
     paddingLeft: 10,
     paddingRight: 10,
-    marginBottom: 8,
-    ...st.frcenter,
   },
-  name: {
-    flex: 1,
-    color: '#333',
+  listLabel: {
     fontSize: 14,
-  },
-  right: {
-    ...st.frcenter,
-  },
-  label: {
     color: '#666',
+    width: 80,
+  },
+  listRight: {
+    flex: 1,
+    ...st.fr,
+    ...st.acenter,
+    justifyContent: 'space-between',
+  },
+  listText: {
     fontSize: 14,
+    lineHeight: 18,
+    color: '#333',
+  },
+  cardView: {
+    ...st.fr,
+  },
+  cardImg: {
+    width: (deviceW / 3) - 30,
+    height: (deviceW / 3) - 30,
+    marginRight: 10,
   },
   arr: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 4,
+    color: '#888',
+    fontSize: 18,
+  },
+  selectType: {
+    backgroundColor: '#fff', borderWidth: 0, padding: 0,
   },
 });
 export default styles;

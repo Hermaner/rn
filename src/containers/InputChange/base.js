@@ -25,8 +25,8 @@ class Base extends React.Component {
     this.emitAmout.remove();
   }
   save = () => {
-    const { value } = this.state;
-    if (value.length < 2 || value.length > 8) {
+    const { value, label } = this.state;
+    if (label === '昵称' && (value.length < 2 || value.length > 8)) {
       Toast.show('长度2-8');
       return;
     }

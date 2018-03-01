@@ -2,6 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter } from 'react-native';
+import { UserSocket } from '../../components';
 import { GetMemberCenterService } from '../../api';
 
 class Base extends React.Component {
@@ -9,8 +10,8 @@ class Base extends React.Component {
     super(props);
     this.state = {
       defaultImg: require('../../assets/img/tx.png'),
-      userData: {},
-      userInfo: {},
+      applyData: [],
+      balance: 0,
       orderItems: [
         {
           label: '需求单',
@@ -49,6 +50,18 @@ class Base extends React.Component {
           icon: 'icon-location',
           color: '#ff6a54',
           page: 'MyAddress',
+        },
+        {
+          label: '我的收藏',
+          icon: 'icon-location',
+          color: '#ff6a54',
+          page: 'MyColl',
+        },
+        {
+          label: '提现账号',
+          icon: 'icon-like',
+          color: '#eeba57',
+          page: 'MyDrawList',
         },
         {
           label: '邀请好友',
@@ -90,9 +103,8 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ userData: global.userData });
     this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
-      this.getInit();
+      this.getData();
     });
     this.getData();
   }
@@ -105,14 +117,71 @@ class Base extends React.Component {
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
-        const result = res.data;
+        const {
+          balance,
+          demandCount,
+          waitePayCount,
+          waiteServiceCount,
+          waiteEvaluateCount,
+          bmMarketInfo,
+          couponCount,
+          decorationInfo,
+          depositOrderMaster,
+          masterInfo,
+        } = res.data;
+        const applyData = [];
+        const applyInfo = {};
+        if (bmMarketInfo) {
+          if (bmMarketInfo.checkStatus === 4) {
+            global.bmMarketId = bmMarketInfo.bmMarketId;
+            applyInfo.bmMarketId = bmMarketInfo.bmMarketId;
+          } else {
+            applyData.push({
+              status: bmMarketInfo.checkStatus,
+              name: '装修公司入驻申请',
+              memo: bmMarketInfo.checkMemo,
+              id: '1',
+            });
+          }
+        }
+        if (decorationInfo) {
+          if (decorationInfo.checkStatus === 4) {
+            global.decorationId = decorationInfo.decorationId;
+            applyInfo.decorationId = decorationInfo.decorationId;
+          } else {
+            applyData.push({
+              status: decorationInfo.checkStatus,
+              name: '建材市场入驻申请',
+              memo: decorationInfo.checkMemo,
+              id: '2',
+            });
+          }
+        }
+        if (masterInfo) {
+          if (masterInfo.checkStatus === 4) {
+            applyInfo.masterId = masterInfo.masterId;
+            global.masterId = masterInfo.masterId;
+          } else {
+            applyData.push({
+              status: masterInfo.checkStatus,
+              name: '师傅入驻申请',
+              memo: masterInfo.checkMemo,
+              id: '3',
+            });
+          }
+        }
+        UserSocket.changeApply(applyInfo);
+        global.depositOrderMaster = depositOrderMaster;
         const { orderItems } = this.state;
-        orderItems[0].count = result.demandCount || 0;
-        orderItems[1].count = result.waitePayCount || 0;
-        orderItems[2].count = result.waiteServiceCount || 0;
-        orderItems[3].count = result.waiteEvaluateCount || 0;
+        orderItems[0].count = demandCount || 0;
+        orderItems[1].count = waitePayCount || 0;
+        orderItems[2].count = waiteServiceCount || 0;
+        orderItems[3].count = waiteEvaluateCount || 0;
         this.setState({
           orderItems,
+          balance,
+          applyData,
+          couponCount,
         });
       } else {
         Toast.show('温馨提示');
@@ -121,8 +190,27 @@ class Base extends React.Component {
       this.sleek.toggle();
     });
   }
-  goPage = (key) => {
-    this.props.push({ key });
+  goRoleStatus = (item) => {
+    const { push } = this.props;
+    switch (item.id) {
+      case '1':
+        push({ key: '', params: { } });
+        break;
+      case '2':
+        push({ key: '', params: { } });
+        break;
+      case '3':
+        push({ key: '', params: { } });
+        break;
+      default:
+    }
+  }
+  goPage = (key, params) => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    this.props.push({ key, params: params || {} });
   }
 }
 Base.propTypes = {

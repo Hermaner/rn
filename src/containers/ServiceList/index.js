@@ -5,7 +5,7 @@ import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { ServiceItem, Loading, TFeedback, TOpacity, SearchHeader } from '../../components';
+import { ServiceItem, Loading, TFeedback, TOpacity, Header } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -181,11 +181,16 @@ class ServiceList extends base {
   }
   render() {
     const { popItems } = this.state;
-    const { pop } = this.props;
+    const { pop, push } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>
-          <SearchHeader back={pop} />
+          <Header
+            title="服务列表"
+            back={pop}
+            rightPress={() => push({ key: 'MainSearch' })}
+            rightContent={<Icon name="ios-search" style={{ color: '#fff', fontSize: 20 }} />}
+          />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>

@@ -58,6 +58,7 @@ class Base extends React.Component {
             orderNumber: res.data.orderNumber,
             orderId: res.data.orderId,
             amount: list.price,
+            type: 2,
           } });
       } else {
         Toast.show(res.msg);

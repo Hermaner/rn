@@ -1,63 +1,66 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { CachedImage } from 'react-native-img-cache';
+import { Container, Text, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header } from '../../components';
+import { Loading, BHeader } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MyAccount extends base {
+class MgBmMarketSetting extends base {
   constructor(props) {
     super(props);
     this.state = {
       ...this.state,
     };
   }
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
-  _renderTop() {
-    const { amount } = this.state;
+  _renderList() {
+    const { info } = this.state;
     return (
-      <View style={styles.top}>
-        <Text style={styles.account}>{amount}</Text>
-        <Text style={styles.topLabel}>余额(元)</Text>
-        <TOpacity
-          style={styles.btn}
-          content={
-            <Text style={styles.btnText}>提现</Text>
-          }
-          onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
-        />
+      <View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>公司名称</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.bmMarketName}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>公司地址</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.address}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>联系人</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.contacts}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>手机号</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.phone}
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
-  _renderList() {
+  _renderLogo() {
+    const { info } = this.state;
     return (
-      <View>
-        <View style={styles.list}>
-          <Text style={styles.name}>提现记录</Text>
-          <View style={styles.right}>
-            <Text style={styles.label}>0.00元</Text>
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>收入明细</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>账户设置</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
+      <View style={styles.logoMidView}>
+        <View style={styles.logoView}>
+          <CachedImage source={{ uri: info.imgUrl }} style={styles.logo} />
         </View>
       </View>
     );
@@ -66,12 +69,9 @@ class MyAccount extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
-          back={pop}
-          title="我的账户"
-        />
-        <Content>
-          {this._renderTop()}
+        <BHeader back={pop} title="公司基本信息" />
+        <Content style={styles.content}>
+          {this._renderLogo()}
           {this._renderList()}
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
@@ -80,8 +80,8 @@ class MyAccount extends base {
   }
 }
 
-MyAccount.propTypes = {
+MgBmMarketSetting.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyAccount);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgBmMarketSetting);

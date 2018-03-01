@@ -1,64 +1,80 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { CachedImage } from 'react-native-img-cache';
+import { Container, Text, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header } from '../../components';
+import { Loading, BHeader, TitleItem, ImageLook } from '../../components';
 import base from './base';
 import styles from './styles';
+import { deviceW } from '../../utils';
 
-class MyAccount extends base {
+class MgMasterSetting extends base {
   constructor(props) {
     super(props);
     this.state = {
       ...this.state,
     };
   }
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
-  _renderTop() {
-    const { amount } = this.state;
+  _renderList() {
+    const { info } = this.state;
     return (
-      <View style={styles.top}>
-        <Text style={styles.account}>{amount}</Text>
-        <Text style={styles.topLabel}>余额(元)</Text>
-        <TOpacity
-          style={styles.btn}
-          content={
-            <Text style={styles.btnText}>提现</Text>
-          }
-          onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
-        />
+      <View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>真实姓名</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.realName}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>身份证号</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.identityCard}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>性别</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.memberInfo.sex === 1 ? '男' : '女'}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>注册日期</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {info.postDate}
+            </Text>
+          </View>
+        </View>
       </View>
     );
   }
-  _renderList() {
+  _renderLogo() {
+    const { info } = this.state;
+    return (
+      <View style={styles.logoMidView}>
+        <View style={styles.logoView}>
+          <CachedImage source={{ uri: info.imgUrl }} style={styles.logo} />
+        </View>
+      </View>
+    );
+  }
+  _renderCard() {
+    const { info } = this.state;
     return (
       <View>
-        <View style={styles.list}>
-          <Text style={styles.name}>提现记录</Text>
-          <View style={styles.right}>
-            <Text style={styles.label}>0.00元</Text>
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>收入明细</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>账户设置</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
+        <TitleItem text="我的身份证照" />
+        <ImageLook
+          width={(deviceW / 3) - 30}
+          images={[info.firstImage, info.twoImage, info.threeImage]}
+        />
       </View>
     );
   }
@@ -66,13 +82,11 @@ class MyAccount extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
-          back={pop}
-          title="我的账户"
-        />
-        <Content>
-          {this._renderTop()}
+        <BHeader back={pop} title="我的基本信息" />
+        <Content style={styles.content}>
+          {this._renderLogo()}
           {this._renderList()}
+          {this._renderCard()}
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
@@ -80,8 +94,8 @@ class MyAccount extends base {
   }
 }
 
-MyAccount.propTypes = {
+MgMasterSetting.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyAccount);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgMasterSetting);

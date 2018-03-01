@@ -44,11 +44,14 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
+const headerBar = ({ back, title, showRight, rightText, rightPress, hideLeft, rightContent }) => (
   <Header style={styles.header}>
-    <TouchableOpacity onPress={back} style={styles.left}>
-      <Icon name="arrow-back" style={styles.backIcon} />
-    </TouchableOpacity>
+    {
+      !hideLeft &&
+      <TouchableOpacity onPress={back} style={styles.left}>
+        <Icon name="arrow-back" style={styles.backIcon} />
+      </TouchableOpacity>
+    }
     <View style={styles.title}>
       <Text style={styles.titleText}>{title}</Text>
     </View>
@@ -56,6 +59,12 @@ const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
       showRight &&
       <TouchableOpacity onPress={rightPress} style={styles.right}>
         <Text style={styles.rightText}>{rightText}</Text>
+      </TouchableOpacity>
+    }
+    {
+      rightContent &&
+      <TouchableOpacity onPress={rightPress} style={styles.right}>
+        {rightContent}
       </TouchableOpacity>
     }
   </Header>
@@ -67,5 +76,7 @@ headerBar.propTypes = {
   rightPress: PropTypes.func,
   rightText: PropTypes.string,
   showRight: PropTypes.bool,
+  rightContent: PropTypes.any,
+  hideLeft: PropTypes.bool,
 };
 export default headerBar;

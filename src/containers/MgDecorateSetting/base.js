@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { info } = this.props.navigation.state.params;
     this.state = {
-      amount: '0.00',
+      info,
     };
   }
 }
 Base.propTypes = {
-  pop: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default Base;

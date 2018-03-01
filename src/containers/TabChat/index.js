@@ -18,10 +18,9 @@ class MySupply extends React.Component {
   componentDidMount() {
   }
   render() {
-    const { pop } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <Header back={pop} title="聊天" />
+        <Header hideLeft title="聊天" />
         <ScrollableTabView style={{ flex: 1 }} locked renderTabBar={() => <ScrollableTab />}>
           <SessionList tabLabel="聊天" type="1" />
           <FriendList tabLabel="好友" type="1" />

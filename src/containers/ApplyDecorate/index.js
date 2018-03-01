@@ -149,7 +149,7 @@ class ApplyDecorate extends base {
   }
   _renderImages() {
     return (
-      <View style={styles.mainList}>
+      <View style={[styles.mainList, { paddingBottom: 10 }]}>
         <TitleItem text="上传店铺图片" />
         <Text style={styles.cardTips}>至少上传2张您的店铺图片</Text>
         <UploadFile

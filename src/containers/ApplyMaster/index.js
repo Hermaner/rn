@@ -150,7 +150,7 @@ class ApplyMaster extends base {
   }
   _renderImages() {
     return (
-      <View style={styles.mainList}>
+      <View style={[styles.mainList, { paddingBottom: 10 }]}>
         <TitleItem text="上传认证图片" />
         <Text style={styles.cardTips}>请上传身份证正、反面及手持身份共3张（上身免冠照，五官清晰，身份证号码清晰）</Text>
         <UploadFile
@@ -225,7 +225,7 @@ class ApplyMaster extends base {
             content={
               <Text style={styles.btnText}>{'立即申请'}</Text>
             }
-            onPress={this.RegisterService}
+            onPress={this.AuthMasterService}
           />
         </Footer>
         {this._renderModal()}

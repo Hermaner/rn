@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   footer: {
+    backgroundColor: '#f8f8f8',
     ...st.fr,
     ...st.acenter,
     justifyContent: 'flex-end',

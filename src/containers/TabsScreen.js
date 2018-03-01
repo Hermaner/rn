@@ -46,19 +46,19 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         switch (routeName) {
           case 'TabHome':
             iconName = 'icon-caigou-xianxing';
-            name = '我要买';
+            name = '首页';
             break;
           case 'TabOrder':
             iconName = 'icon-caigou-xianxing';
-            name = '我要卖';
+            name = '接单';
             break;
           case 'TabChat':
             iconName = 'icon-kefu';
-            name = '聊生意';
+            name = '聊天';
             break;
           case 'TabMine':
             iconName = 'icon-wode';
-            name = '我的';
+            name = '我';
             break;
           default:
             break;
@@ -78,9 +78,6 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
           if (!global.memberId) {
             this.props.push({ key: 'User' });
           }
-        }
-        if (index === 3) {
-          DeviceEventEmitter.emit('emitUser');
         }
         jumpToIndex(index);
       },

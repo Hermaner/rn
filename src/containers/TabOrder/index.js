@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, DemanOrderItem, TFeedback, TOpacity, Header } from '../../components';
+import { Loading, DemanOrderItem, TFeedback, TOpacity, Header, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -88,15 +88,10 @@ class DemandOrder extends base {
                 />}
             />
             :
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableWithoutFeedback onPress={this._onRefresh}>
-                <View>
-                  <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                    没有相关数据,点击刷新
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
+            <NoData
+              label="没有相关数据,点击刷新"
+              onPress={this._onRefresh}
+            />
         }
       </View>
     );
@@ -189,7 +184,7 @@ class DemandOrder extends base {
     return (
       <Container>
         <View style={styles.fixTop}>
-          <Header title="可接订单" />
+          <Header title="可接订单" hideLeft />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Communications from 'react-native-communications';
 import { CachedImage } from 'react-native-img-cache';
 import { observer } from 'mobx-react/native';
 import { TFeedback, Loading, UserSocket, TOpacity } from '../../components';
@@ -16,7 +17,6 @@ class My extends Base {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {
@@ -26,14 +26,24 @@ class My extends Base {
     return (
       <View style={styles.topView}>
         <View style={styles.topIconView}>
-          <Icon name="md-alarm" style={styles.topIcon} />
-          <Icon name="md-alarm" style={styles.topIcon} />
+          <TOpacity
+            content={
+              <Icon name="ios-settings-outline" style={styles.topIcon} />
+            }
+            onPress={() => this.goPage('MySetting')}
+          />
+          <TOpacity
+            content={
+              <Icon name="ios-chatboxes-outline" style={styles.topIcon} />
+            }
+            onPress={() => this.goPage('MyMessage')}
+          />
         </View>
       </View>
     );
   }
   _renderUser() {
-    const { defaultImg } = this.state;
+    const { defaultImg, balance, couponCount } = this.state;
     const { userData, userData: { memberId } } = UserSocket;
     return (
       <View style={styles.userAllView}>
@@ -64,18 +74,18 @@ class My extends Base {
                       <Text style={styles.nameText}>请先登录</Text>
                     </View>
                   }
-                  onPress={() => { this.goPage('User'); }}
+                  onPress={() => this.goPage('User')}
                 />
             }
             {
-              memberId && <Icon name="md-arrow-dropright" style={styles.rightArr} />
+              memberId && <Icon name="md-arrow-dropright" style={styles.arr} />
             }
           </View>
           <View style={styles.topPage}>
             <TFeedback
               content={
                 <View style={styles.topPageList}>
-                  <Text style={styles.topBoldText}>0</Text>
+                  <Text style={styles.topBoldText}>{balance}</Text>
                   <Text style={styles.topText}>账户</Text>
                 </View>
               }
@@ -84,7 +94,7 @@ class My extends Base {
             <TFeedback
               content={
                 <View style={styles.topPageList}>
-                  <Text style={styles.topBoldText}>1</Text>
+                  <Text style={styles.topBoldText}>{couponCount}</Text>
                   <Text style={styles.topText}>优惠券</Text>
                 </View>
               }
@@ -94,18 +104,47 @@ class My extends Base {
               content={
                 <View style={styles.topPageList}>
                   <Text style={styles.topBoldText}>0</Text>
-                  <Text style={styles.topText}>收藏</Text>
+                  <Text style={styles.topText}>关注</Text>
                 </View>
               }
-              onPress={() => { this.goPage('MyColl'); }}
+              onPress={() => { }}
             />
           </View>
         </View>
-        <View style={styles.memberView}>
-          <Text style={styles.memberText}>普通会员</Text>
-          <Text style={styles.memberRightText}>查看会员特权</Text>
-          <Icon name="md-arrow-dropright" style={styles.memberArr} />
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.memberView}>
+              <Icon name="logo-vimeo" style={styles.glod} />
+              <Text style={styles.memberText}>普通会员</Text>
+              <Text style={styles.memberRightText}>查看会员特权</Text>
+              <Icon name="md-arrow-dropright" style={styles.memberArr} />
+            </View>
+          }
+          onPress={() => { this.goPage('MyCard'); }}
+        />
+      </View>
+    );
+  }
+  _renderRoleStatus() {
+    const { applyData } = this.state;
+    return (
+      <View>
+        {
+          applyData.map((item, index) => (
+            <TOpacity
+              key={index}
+              style={{ marginTop: 8 }}
+              content={
+                <View style={styles.applyView}>
+                  <Text style={styles.applyName}>{item.name}</Text>
+                  <Text style={styles.applyStatus}>{item.status === 1 ? '待审核' : item.status === 2 ? '审核中' : item.status === 3 ? '审核失败' : item.status === 4 ? '审核通过' : ''}</Text>
+                  <Icon name="md-arrow-dropright" style={styles.arr} />
+                </View>
+              }
+              onPress={() => this.goRoleStatus(item)}
+            />
+          ))
+        }
       </View>
     );
   }
@@ -123,7 +162,7 @@ class My extends Base {
               </View>
             </View>
           }
-          onPress={() => push({ key: 'MgMasterOrders' })}
+          onPress={() => { push({ key: 'MgMasterOrders', params: { initialPage: 0 } }); }}
         />
         <TOpacity
           style={styles.roleTOp}
@@ -147,7 +186,7 @@ class My extends Base {
         <TOpacity
           style={styles.roleTOp}
           content={
-            <View style={styles.roleList}>
+            <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>服务订单</Text>
               <View style={styles.roleColor2}>
                 <Icon name="md-alarm" style={styles.topRoleIcon} />
@@ -178,7 +217,7 @@ class My extends Base {
         <TOpacity
           style={styles.roleTOp}
           content={
-            <View style={styles.roleList}>
+            <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>服务订单</Text>
               <View style={styles.roleColor2}>
                 <Icon name="md-alarm" style={styles.topRoleIcon} />
@@ -212,10 +251,10 @@ class My extends Base {
             content={
               <View style={styles.orderTopRight}>
                 <Text style={styles.orderTopText}>全部订单</Text>
-                <Icon name="md-alarm" style={styles.rightArr} />
+                <Icon name="md-arrow-dropright" style={styles.arr} />
               </View>
             }
-            onPress={() => { this.goPage('Orders'); }}
+            onPress={() => this.goPage('Orders', { initialPage: 5 })}
           />
         </View>
         <View style={styles.orderPage}>
@@ -234,10 +273,10 @@ class My extends Base {
                         </View>
                       }
                     </View>
-                    <Text style={styles.roleText}>{item.label}</Text>
+                    <Text style={styles.orderText}>{item.label}</Text>
                   </View>
                 }
-                onPress={() => { this.goPage('Orders'); }}
+                onPress={() => this.goPage('Orders', { initialPage: index })}
               />
             ))
           }
@@ -265,17 +304,29 @@ class My extends Base {
             />
           ))
         }
+        <TFeedback
+          content={
+            <View style={styles.iconsItem}>
+              <View style={[styles.iconsTop, { backgroundColor: '#f2a050' }]}>
+                <Icon name="md-alarm" style={styles.iconsIcon} />
+              </View>
+              <Text style={styles.roleText}>客服热线</Text>
+            </View>
+          }
+          onPress={() => Communications.phonecall('4009201913', false)}
+        />
       </View>
     );
   }
   render() {
-    const { userData: { memberId, bmMarketId, decorationId } } = UserSocket;
+    const { userData: { masterId, bmMarketId, decorationId } } = UserSocket;
     return (
       <Container>
         <Content>
           {this._renderTop()}
           {this._renderUser()}
-          {memberId && this._renderRole1()}
+          {this._renderRoleStatus()}
+          {masterId && this._renderRole1()}
           {bmMarketId && this._renderRole2()}
           {decorationId && this._renderRole3()}
           {this._renderOrder()}

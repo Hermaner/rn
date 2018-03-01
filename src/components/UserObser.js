@@ -8,16 +8,23 @@ moment.locale('zh-cn');
 export default class UserObser {
   // 监听对象
   @observable userInfo = {};
+  @observable applyInfo = {};
 
   getConnect = () => {
   }
   @action changeData(data) {
     this.userInfo = data;
   }
+  @action changeApply(data) {
+    this.applyInfo = data;
+  }
   @computed get total() {
     return this.price * this.amount;
   }
   @computed get userData() {
-    return this.userInfo;
+    return {
+      ...this.userInfo,
+      ...this.applyInfo,
+    };
   }
 }

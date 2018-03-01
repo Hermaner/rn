@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Text, Content, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header, CheckBox } from '../../components';
+import { Loading, TOpacity, BHeader, CheckBox } from '../../components';
 import base from './base';
 import styles from './styles';
 import { Mcolor } from '../../utils';
@@ -27,7 +27,7 @@ class MyAddress extends base {
     const { items, ads } = this.state;
     return (
       <Container>
-        <Header back={pop} title="我的地址" />
+        <BHeader back={pop} title="我的地址" />
         <Content>
           {
             items.map((item, index) => (

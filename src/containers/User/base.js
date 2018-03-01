@@ -1,7 +1,8 @@
 import React from 'react';
-import { AsyncStorage, Platform } from 'react-native';
+import { AsyncStorage, Platform, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { UserSocket } from '../../components';
 import { GetCodeService, RegisterMemberService } from '../../api';
 
 class UserBase extends React.Component {
@@ -9,8 +10,8 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15666666666',
-      sendPhone: '15666666666',
+      phone: '18017011377',
+      sendPhone: '18017011377',
       sec: 60,
       password: '',
       code: '1111',
@@ -105,10 +106,11 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        UserSocket.changeData(res.data);
+        DeviceEventEmitter.emit('emitUser');
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.userData = res.data;
         global.memberId = res.data.memberId;
-        global.masterId = res.data.masterId;
         Toast.show('登陆成功');
         this.props.pop();
       }

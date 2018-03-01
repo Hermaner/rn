@@ -22,7 +22,7 @@ class BindPhone extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <BHeader back={pop} title="修改手机号" />
+        <BHeader back={pop} title="绑定手机号" />
         <Content contentContainerStyle={{ flex: 1 }}>
           <View style={styles.form}>
             <View style={styles.accountView}>

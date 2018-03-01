@@ -119,6 +119,7 @@ class Base extends React.Component {
             orderNumber: res.data.orderNumber,
             orderId: res.data.orderId,
             amount,
+            type: 1,
           },
         });
       } else {

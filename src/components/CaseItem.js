@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
 import { Text, View, StyleSheet, Image } from 'react-native';
-import { st, Mcolor } from '../utils';
+import { st, Mcolor, deviceW } from '../utils';
 import ImageLook from './ImageLook';
 
 const styles = StyleSheet.create({
@@ -159,7 +159,11 @@ const CaseItem = ({ item }) => (
     </View>
     <View style={styles.bom}>
       {
-        item.images && <ImageLook images={item.images.split(',')} />
+        item.images &&
+        <ImageLook
+          width={(deviceW / 3) - 16}
+          images={item.images.split(',')}
+        />
       }
     </View>
   </View>

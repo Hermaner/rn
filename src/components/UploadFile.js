@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   imageList: {
     marginTop: 10,
     marginLeft: 10,
-    width: deviceW / 3,
-    height: deviceW / 3,
+    width: (deviceW / 3) - 20,
+    height: (deviceW / 3) - 20,
   },
   upViewImg: {
     width: 70,
@@ -81,7 +81,7 @@ export default class Prompt extends React.Component {
     const images = [];
     if (props.initImages && props.initImages.length > 0) {
       props.initImages.forEach((item) => {
-        images.push({ uri: `${item.imgUrl}?imageView2/1/w/200`, key: item.key });
+        images.push({ uri: `${item}?imageView2/1/w/200`, key: item });
       });
       this.props.getImages(images);
     }

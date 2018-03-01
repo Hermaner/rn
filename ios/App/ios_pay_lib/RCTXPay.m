@@ -53,10 +53,10 @@ RCT_EXPORT_MODULE(PutiPay);
     }
 }
 
-// RCT_EXPORT_METHOD(setWxId:(NSString *)wxid){
-//     wxOpenId = wxid;
-//     [WXApi registerApp:wxid];
-// }
+ RCT_EXPORT_METHOD(setWxId:(NSString *)wxid){
+     wxOpenId = wxid;
+     [WXApi registerApp:wxid];
+ }
 RCT_EXPORT_METHOD(setAlipayScheme:(NSString *)scheme){
     alipayScheme = scheme;
 }

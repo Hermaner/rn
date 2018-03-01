@@ -44,14 +44,26 @@ class MasterDetail extends base {
           <Text style={styles.topLabelText}>
             已接{info.itemLogCount || 0}单 好评率{info.praiseRate || 100}% 投诉{info.complains.length}次
           </Text>
-          <View style={styles.topBzView}>
-            <Icon style={styles.topBzIcon} name="md-ribbon" />
-            <View style={styles.topBzBorder}>
-              <Text style={styles.topBzText}>
-                已缴纳保证金3000元
-              </Text>
-            </View>
-          </View>
+          {
+            info.depositAmount ?
+              <View style={styles.topBzView}>
+                <Icon style={styles.topBzIcon} name="md-ribbon" />
+                <View style={styles.topBzBorder}>
+                  <Text style={styles.topBzText}>
+                    已缴纳保证金{info.depositAmount}元
+                  </Text>
+                </View>
+              </View>
+              :
+              <View style={styles.topBzView}>
+                <Icon style={styles.topNoBzIcon} name="md-ribbon" />
+                <View style={styles.topNoBzBorder}>
+                  <Text style={styles.topBzText}>
+                    未缴纳保障金，请谨慎交易
+                  </Text>
+                </View>
+              </View>
+          }
         </View>
       </View>
     );
@@ -109,7 +121,7 @@ class MasterDetail extends base {
           info.masterAuths && info.masterAuths.length > 0 &&
           <View>
             <TitleItem text="认证图片" />
-            <ImageLook images={info.masterAuths} />
+            <ImageLook images={info.masterAuths.map(item => item.imgUrl)} />
           </View>
         }
         <TitleItem text="师傅介绍" />

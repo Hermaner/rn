@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Content, Text, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header } from '../../components';
+import { Header, Loading, TitleItem, TOpacity, UploadFile } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MyAccount extends base {
+class MgMasterCert extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,46 +19,18 @@ class MyAccount extends base {
   }
   componentWillUnmount() {
   }
-  _renderTop() {
-    const { amount } = this.state;
+  _renderImages() {
+    const { initImages } = this.state;
+    console.log(initImages);
     return (
-      <View style={styles.top}>
-        <Text style={styles.account}>{amount}</Text>
-        <Text style={styles.topLabel}>余额(元)</Text>
-        <TOpacity
-          style={styles.btn}
-          content={
-            <Text style={styles.btnText}>提现</Text>
-          }
-          onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
+      <View style={[styles.mainList, { paddingBottom: 10 }]}>
+        <TitleItem text="上传证书图片" />
+        <UploadFile
+          initImages={initImages}
+          getImages={this.getImages}
+          label="上传证书图片"
+          imageCount={20}
         />
-      </View>
-    );
-  }
-  _renderList() {
-    return (
-      <View>
-        <View style={styles.list}>
-          <Text style={styles.name}>提现记录</Text>
-          <View style={styles.right}>
-            <Text style={styles.label}>0.00元</Text>
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>收入明细</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
-        <View style={styles.list}>
-          <Text style={styles.name}>账户设置</Text>
-          <View style={styles.right}>
-            <Text style={styles.label} />
-            <Icon name="md-arrow-dropright" style={styles.arr} />
-          </View>
-        </View>
       </View>
     );
   }
@@ -66,22 +38,27 @@ class MyAccount extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
-          back={pop}
-          title="我的账户"
-        />
+        <Header back={pop} title="上传证书图片" />
         <Content>
-          {this._renderTop()}
-          {this._renderList()}
+          {this._renderImages()}
         </Content>
+        <Footer style={styles.footer}>
+          <TOpacity
+            style={styles.btnView}
+            content={
+              <Text style={styles.btnText}>{'立即上传'}</Text>
+            }
+            onPress={this.save}
+          />
+        </Footer>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
 }
 
-MyAccount.propTypes = {
+MgMasterCert.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyAccount);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgMasterCert);

@@ -10,6 +10,7 @@ import { popRoute, pushRoute } from '../../actions';
 import { Loading, TFeedback, Header, ImageLook, TOpacity, TitleItem, MasterEval } from '../../components';
 import base from './base';
 import styles from './styles';
+import { deviceW } from '../../utils';
 
 class DecorateDetail extends base {
   constructor(props) {
@@ -42,14 +43,26 @@ class DecorateDetail extends base {
           <Text style={styles.topLabelText}>
             销量1999 好评率{info.praiseRate || 100}%
           </Text>
-          <View style={styles.topBzView}>
-            <Icon style={styles.topBzIcon} name="md-ribbon" />
-            <View style={styles.topBzBorder}>
-              <Text style={styles.topBzText}>
-                已缴纳保证金3000元
-              </Text>
-            </View>
-          </View>
+          {
+            info.depositAmount ?
+              <View style={styles.topBzView}>
+                <Icon style={styles.topBzIcon} name="md-ribbon" />
+                <View style={styles.topBzBorder}>
+                  <Text style={styles.topBzText}>
+                    已缴纳保证金{info.depositAmount}元
+                  </Text>
+                </View>
+              </View>
+              :
+              <View style={styles.topBzView}>
+                <Icon style={styles.topNoBzIcon} name="md-ribbon" />
+                <View style={styles.topNoBzBorder}>
+                  <Text style={styles.topBzText}>
+                    未缴纳保障金，请谨慎交易
+                  </Text>
+                </View>
+              </View>
+          }
         </View>
       </View>
     );
@@ -152,7 +165,10 @@ class DecorateDetail extends base {
                 />
               }
             />
-            <ImageLook images={info.credentialss} />
+            <ImageLook
+              width={(deviceW / 3) - 13}
+              images={info.credentialss.map(item => item.imgUrl)}
+            />
           </View>
         }
         <TitleItem text="平台保障" />
@@ -236,7 +252,7 @@ class DecorateDetail extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="装修公司详情" />
+        <Header back={pop} title="建材市场详情" />
         {
           info &&
           <Content>

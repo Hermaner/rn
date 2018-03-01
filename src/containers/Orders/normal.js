@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';

@@ -23,20 +23,20 @@ const styles = StyleSheet.create({
   imageList: {
     marginTop: 10,
     marginLeft: 10,
-    width: (deviceW / 4) - 10,
-    height: (deviceW / 4) - 10,
+    width: (deviceW / 3) - 10,
+    height: (deviceW / 3) - 10,
   },
 });
 export default class ImageLook extends React.Component {
   static propTypes = {
     images: PropTypes.array,
+    width: PropTypes.number,
   };
   constructor(props) {
     super(props);
     const images = [];
     props.images.forEach((item) => {
-      const key = item.key || item.imgUrl;
-      images.push({ uri: `${key}?imageView2/1/w/200`, key });
+      images.push({ uri: `${item}?imageView2/1/w/200`, item });
     });
     this.state = {
       images,
@@ -64,6 +64,7 @@ export default class ImageLook extends React.Component {
       isImageDateShow,
       imageViewData,
     } = this.state;
+    const { width } = this.props;
     return (
       <View>
         <View style={styles.imagesView}>
@@ -74,7 +75,10 @@ export default class ImageLook extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <CachedImage source={{ uri: item.uri }} style={styles.imageList} />
+                  <CachedImage
+                    source={{ uri: item.uri }}
+                    style={[styles.imageList, width && { width, height: width }]}
+                  />
                 </View>
               </TouchableWithoutFeedback>
             ))

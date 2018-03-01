@@ -61,7 +61,7 @@ class Base extends React.Component {
   }
   goPay = () => {
     const { item: { orderNumber, orderId, amount } } = this.state;
-    this.props.push({ key: 'CreatePay', params: { orderNumber, orderId, amount } });
+    this.props.push({ key: 'CreatePay', params: { orderNumber, orderId, amount, type: 3 } });
   }
   diffOrder = () => {
     this.setState({
@@ -159,6 +159,7 @@ class Base extends React.Component {
             orderNumber: res.data.orderNumber,
             orderId: res.data.orderId,
             amount: diffPrice,
+            type: 4,
           } });
       } else {
         Toast.show(res.msg);

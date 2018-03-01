@@ -2,7 +2,7 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetCodeService, RegisterService, GetMasterTypeService } from '../../api';
+import { GetCodeService, AuthMasterService, GetMasterTypeService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -153,7 +153,7 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  RegisterService = () => {
+  AuthMasterService = () => {
     const {
       address,
       detail,
@@ -206,7 +206,8 @@ class Base extends React.Component {
       return;
     }
     this.sleek.toggle();
-    const info = {
+    AuthMasterService({
+      phone,
       provinceId,
       provinceName,
       cityId,
@@ -223,19 +224,6 @@ class Base extends React.Component {
       firstImage: upImages[0].key,
       twoImage: upImages[1].key,
       threeImage: upImages[2].key,
-    };
-    console.log({
-      phone,
-      opTypeId: '7',
-      passWord: '',
-      info: JSON.stringify(info),
-      memberId: global.memberId,
-    });
-    RegisterService({
-      phone,
-      opTypeId: '7',
-      passWord: '',
-      info: JSON.stringify(info),
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);

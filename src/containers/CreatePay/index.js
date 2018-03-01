@@ -13,7 +13,6 @@ class CreatePay extends myBase {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {

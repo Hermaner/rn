@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute } from '../../actions';
-import { Header } from '../../components';
+import { BHeader } from '../../components';
 import styles from './styles';
 
 class About extends React.Component {
@@ -32,7 +32,7 @@ class About extends React.Component {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
+        <BHeader
           back={pop}
           title="关于我们"
         />

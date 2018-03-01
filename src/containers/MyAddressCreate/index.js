@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text, Footer, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, Loading, TOpacity, CheckBox } from '../../components';
+import { BHeader, Loading, TOpacity, CheckBox } from '../../components';
 import base from './base';
 import styles from './styles';
 import { Mcolor } from '../../utils';
@@ -123,7 +123,7 @@ class MyAddressCreate extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="创建新地址" />
+        <BHeader back={pop} title="创建新地址" />
         <Content>
           {this._renderUser()}
         </Content>

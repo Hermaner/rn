@@ -89,6 +89,7 @@ class Base extends React.Component {
             dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
             refresh: false,
+            noData: false,
             nomore: false,
           });
         } else {

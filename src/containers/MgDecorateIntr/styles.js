@@ -1,59 +1,61 @@
-
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
-  ...st,
-  top: {
-    backgroundColor: '#4dbecd',
-    height: 200,
-    ...st.jacenter,
+  mainList: {
+    // backgroundColor: '#fff',
+    // marginTop: 10,
+    // marginLeft: 10,
+    // marginRight: 10,
+    // borderRadius: 8,
+    // overflow: 'hidden',
   },
-  account: {
-    fontSize: 42,
-    color: '#fff',
-    lineHeight: 50,
+  listView: {
+    ...st.frcenter,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    backgroundColor: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    minHeight: 50,
   },
-  topLabel: {
+  listRight: {
+    flex: 1,
+    ...st.frcenter,
+  },
+  memoView: {
+    alignItems: 'flex-start',
+  },
+  listMemo: {
+    color: '#333',
     fontSize: 14,
-    color: '#fff',
-    lineHeight: 30,
+    textAlignVertical: 'top',
+    height: 120,
+    marginTop: 10,
+    lineHeight: 24,
   },
-  btn: {
+  listMemoShort: {
+    color: '#333',
+    fontSize: 14,
+    textAlignVertical: 'top',
+    height: 50,
+    marginTop: 10,
+    lineHeight: 24,
+  },
+  btnView: {
     backgroundColor: Mcolor,
-    marginTop: 5,
-    height: 40,
-    width: 100,
+    flex: 1,
+    margin: 10,
+    height: 50,
     ...st.jacenter,
   },
   btnText: {
     fontSize: 16,
     color: '#fff',
   },
-  list: {
-    height: 50,
-    backgroundColor: '#fff',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginBottom: 8,
-    ...st.frcenter,
-  },
-  name: {
-    flex: 1,
-    color: '#333',
-    fontSize: 14,
-  },
-  right: {
-    ...st.frcenter,
-  },
-  label: {
-    color: '#666',
-    fontSize: 14,
-  },
-  arr: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 4,
+  footer: {
+    backgroundColor: '#f8f8f8',
+    height: 70,
   },
 });
 export default styles;

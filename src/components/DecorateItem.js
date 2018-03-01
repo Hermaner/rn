@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
     ...st.frcenter,
     flex: 1,
   },
+  noBao: {
+    ...st.jacenter,
+    width: 15,
+    height: 15,
+    backgroundColor: '#aaa',
+    borderRadius: 3,
+    marginRight: 5,
+  },
   bao: {
     ...st.jacenter,
     width: 15,
@@ -113,16 +121,30 @@ const DecorateItem = ({ item, onPress }) => (
           </Text>
         </View>
         <View style={styles.line}>
-          <View style={styles.bzView}>
-            <View style={styles.bao}>
-              <Text style={styles.baoText}>
-                保
-              </Text>
-            </View>
-            <Text style={styles.baoLabel}>
-              已缴纳3000元保障金
-            </Text>
-          </View>
+          {
+            item.depositAmount ?
+              <View style={styles.bzView}>
+                <View style={styles.bao}>
+                  <Text style={styles.baoText}>
+                    保
+                  </Text>
+                </View>
+                <Text style={styles.baoLabel}>
+                  已缴纳{item.depositAmount}元保障金
+                </Text>
+              </View>
+              :
+              <View style={styles.bzView}>
+                <View style={styles.noBao}>
+                  <Text style={styles.baoText}>
+                    保
+                  </Text>
+                </View>
+                <Text style={styles.baoLabel}>
+                未缴纳保障金
+                </Text>
+              </View>
+          }
           <Text style={styles.text}>
             {item.distance > 200 ? `${(item.distance / 1000).toFixed(2)}km` : '小于200m'}
           </Text>
