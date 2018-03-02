@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BackHandler } from 'react-native';
 import { Container } from 'native-base';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { connect } from 'react-redux';
@@ -15,6 +16,10 @@ class MgMasterTxList extends React.Component {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

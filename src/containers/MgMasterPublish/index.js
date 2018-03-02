@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Input, Switch, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -17,6 +17,10 @@ class MgMasterPublish extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {

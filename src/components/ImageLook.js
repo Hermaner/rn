@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   imageList: {
     marginTop: 10,
     marginLeft: 10,
-    width: (deviceW / 3) - 10,
-    height: (deviceW / 3) - 10,
+    width: (deviceW / 3) - 13,
+    height: (deviceW / 3) - 13,
   },
 });
 export default class ImageLook extends React.Component {
@@ -50,7 +50,7 @@ export default class ImageLook extends React.Component {
   showImageDate = (imageDateIndex) => {
     const { images } = this.state;
     const imageViewData = [];
-    images.forEach(item => imageViewData.push({ url: item.uri }));
+    images.forEach(item => imageViewData.push({ url: item.item }));
     this.setState({
       imageDateIndex,
       isImageDateShow: true,

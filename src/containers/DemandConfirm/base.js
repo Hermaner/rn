@@ -99,7 +99,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
-        this.props.push({ key: '' });
+        this.props.push({ key: 'MyDemandOrderDetail', params: { item: res.data, type: 'reset' } });
       } else {
         Toast.show(res.msg);
       }

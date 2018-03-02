@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class BindPhone extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   render() {
     const { phone, code, sec } = this.state;

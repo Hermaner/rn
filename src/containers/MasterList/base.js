@@ -29,13 +29,13 @@ class Base extends React.Component {
         label: '智能排序',
         cur: true,
       }, {
-        label: '次数',
+        label: '离我最近',
         cur: false,
       }, {
         label: '评价排序',
         cur: false,
       }, {
-        label: '离我最近',
+        label: '筛选',
         cur: false,
       }],
       tabIndex: 0,
@@ -43,6 +43,9 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+  }
+  deleteInit = () => {
+    canEnd = false;
   }
   GetMasterService = () => {
     const {
@@ -127,15 +130,17 @@ class Base extends React.Component {
         orderByName = '';
         break;
       case 1:
-        orderByName = 'itemLogCount';
+        orderByName = 'distance';
+        orderByType = 'asc';
         break;
       case 2:
         orderByName = 'praiseRate';
         break;
       case 3:
-        orderByName = 'distance';
-        orderByType = 'asc';
-        break;
+        this.setState({
+          ModalOpen: true,
+        });
+        return;
       default:
     }
     if (tabIndex === index) {
@@ -150,6 +155,11 @@ class Base extends React.Component {
       tabs,
       tabIndex,
     }, this._onRefresh);
+  }
+  closeModal = () => {
+    this.setState({
+      ModalOpen: false,
+    });
   }
   _onRefresh = () => {
     this.setState({

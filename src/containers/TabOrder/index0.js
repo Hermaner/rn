@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, ListView, RefreshControl, BackHandler } from 'react-native';
+import { View, ListView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { ServiceItem, Loading, TFeedback, TOpacity, Header } from '../../components';
+import { Loading, DemanOrderItem, TFeedback, TOpacity, Header, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class ServiceList extends base {
+class DemandOrder extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,13 +17,10 @@ class ServiceList extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
   }
   _readerConditions() {
     const { tabs } = this.state;
@@ -55,14 +52,19 @@ class ServiceList extends base {
     );
   }
   _renderRow = (item, sectionID, index) => (
-    <View>
-      <ServiceItem
-        item={item}
-        rowID={index}
-        key={index}
-        onPress={() => { this.props.push({ key: 'ServiceDetail', params: { masterServicesId: item.id } }); }}
-      />
-    </View>
+    <TFeedback
+      key={index}
+      content={
+        <View>
+          <DemanOrderItem
+            item={item}
+            rowID={index}
+            key={index}
+          />
+        </View>
+      }
+      onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
+    />
   )
   _renderContent() {
     const { noData, dataSource, nomore, refresh } = this.state;
@@ -87,21 +89,19 @@ class ServiceList extends base {
                 />}
             />
             :
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableWithoutFeedback onPress={this._onRefresh}>
-                <View>
-                  <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                    没有相关数据,点击刷新
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
+            <NoData
+              label="没有相关数据,点击刷新"
+              onPress={this._onRefresh}
+            />
         }
       </View>
     );
   }
   _renderModal() {
-    const { ModalOpen, popItems, twoItems, oneIndex } = this.state;
+    const { ModalOpen } = this.state;
+    const popItems = [{
+      name: '安装师傅',
+    }];
     return (
       <Modal
         style={styles.ModalStyle}
@@ -133,31 +133,6 @@ class ServiceList extends base {
                 ))
               }
             </View>
-            {
-              oneIndex !== undefined &&
-              <View>
-                <Text style={styles.modalTitle}>选择产品类型</Text>
-                <View style={styles.modalList}>
-                  {
-                    twoItems.map((item, index) => (
-                      <TFeedback
-                        key={index}
-                        content={
-                          <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                            <Text
-                              style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                        }
-                        onPress={() => { this.tabTwoItem(index); }}
-                      />
-                    ))
-                  }
-                </View>
-              </View>
-            }
           </View>
           <View style={styles.modalBtns}>
             <TOpacity
@@ -184,31 +159,24 @@ class ServiceList extends base {
     );
   }
   render() {
-    const { popItems } = this.state;
-    const { pop, push } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>
-          <Header
-            title="服务列表"
-            back={pop}
-            rightPress={() => push({ key: 'MainSearch' })}
-            rightContent={<Icon name="ios-search" style={{ color: '#fff', fontSize: 20 }} />}
-          />
+          <Header title="可接订单" hideLeft />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>
           {this._renderContent()}
         </View>
-        {popItems && this._renderModal()}
+        {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
 }
 
-ServiceList.propTypes = {
+DemandOrder.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(ServiceList);
+export default connect(null, { pop: popRoute, push: pushRoute })(DemandOrder);

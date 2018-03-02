@@ -1,4 +1,5 @@
 import React from 'react';
+import { BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container } from 'native-base';
 import { connect } from 'react-redux';
@@ -15,6 +16,10 @@ class EvalList extends React.Component {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

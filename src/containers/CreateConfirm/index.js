@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Content, Footer, Input } from 'native-base';
 import { connect } from 'react-redux';
@@ -17,6 +17,10 @@ class CreateConfirm extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -31,7 +35,7 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="logo-usd" style={styles.leftIco} />
+                  <Icon name="ios-locate-outline" style={styles.locIcon} />
                   <View style={styles.addressRight}>
                     <View style={styles.addressTop}>
                       <Text style={styles.userName}>{decodeURI(adsData.nickName)}</Text>
@@ -44,7 +48,7 @@ class CreateConfirm extends base {
                       {adsData.address}
                     </Text>
                   </View>
-                  <Icon name="logo-usd" style={styles.rightIco} />
+                  <Icon name="md-arrow-dropright" style={styles.arr} />
                 </View>
               }
               onPress={this.showAds}
@@ -53,13 +57,13 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="logo-usd" style={styles.leftIco} />
+                  <Icon name="ios-locate-outline" style={styles.locIcon} />
                   <View style={styles.addressRight}>
                     <Text style={styles.userAddress}>
                       点击添加服务地址
                     </Text>
                   </View>
-                  <Icon name="logo-usd" style={styles.rightIco} />
+                  <Icon name="md-arrow-dropright" style={styles.arr} />
                 </View>
               }
               onPress={this.showAds}
@@ -96,7 +100,7 @@ class CreateConfirm extends base {
                   <Text style={styles.listText}>
                     {appointDate || '请选择服务时间'}
                   </Text>
-                  <Icon name="logo-usd" style={styles.rightIco} />
+                  <Icon name="md-arrow-dropright" style={styles.arr} />
                 </View>
               }
               onPress={this.showPopDate}
@@ -162,7 +166,7 @@ class CreateConfirm extends base {
                           {item.provinceName}{item.cityName}{item.districtName}{item.address}
                         </Text>
                       </View>
-                      <Icon name="logo-usd" style={styles.rightIco} />
+                      <Icon name="md-arrow-dropright" style={styles.rightIco} />
                     </View>
                   }
                   onPress={() => { this.selectAddress(item); }}

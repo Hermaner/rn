@@ -65,6 +65,25 @@ const styles = StyleSheet.create({
     flex: 1,
     ...st.jacenter,
   },
+  tiPage: {
+    ...st.jacenter,
+    marginRight: 4,
+  },
+  tiBtn: {
+    ...st.frcenter,
+    flex: 1,
+  },
+  tiView: {
+    backgroundColor: Mcolor,
+    borderRadius: 4,
+    ...st.jacenter,
+    height: 24,
+    width: 36,
+  },
+  tiText: {
+    fontSize: 12,
+    color: '#fff',
+  },
   topText: {
     fontSize: 14,
     color: '#555',

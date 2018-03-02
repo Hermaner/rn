@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TLight, Header } from '../../components';
+import { Loading, TLight, BHeader } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -16,6 +16,10 @@ class MyDrawList extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -36,7 +40,7 @@ class MyDrawList extends base {
                     <Image style={styles.img} source={item.img} />
                     <Text style={styles.label}>{item.name}</Text>
                   </View>
-                  <Text style={styles.label}>{item.label}</Text>
+                  <Text style={styles.label}>{item.info.label}</Text>
                   <Icon name="md-arrow-dropright" style={styles.arr} />
                 </View>
               }
@@ -51,7 +55,7 @@ class MyDrawList extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header
+        <BHeader
           back={pop}
           title="提现账号"
         />

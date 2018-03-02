@@ -9,12 +9,7 @@ class Base extends React.Component {
     super(props);
     this.state = {
       defaultImg: require('../../assets/img/tx.png'),
-      info: {},
-      totalMoney: '0.00',
-      outMoney: '0.00',
-      inMoney: '0.00',
-      userData: {},
-      userInfo: {},
+      info: null,
       orderItems: [
         {
           label: '待预约',
@@ -144,6 +139,11 @@ class Base extends React.Component {
   goIconPage = (key) => {
     const { info } = this.state;
     let params = {};
+    if (key === 'MyTixian') {
+      params = {
+        amount: info.wallet.balance,
+      };
+    }
     if (key === 'MgMasterIntr') {
       params = {
         detail: info.detail,
@@ -173,6 +173,7 @@ class Base extends React.Component {
     if (key === 'MgSecurity') {
       params = {
         depositAmount: info.depositAmount || '',
+        type: 1,
       };
     }
     this.props.push({ key, params });

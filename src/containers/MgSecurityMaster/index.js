@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Footer, Input } from 'native-base';
+import { Container, Content, Text, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, Loading, TitleItem, TOpacity } from '../../components';
@@ -16,6 +16,10 @@ class MgSecurity extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

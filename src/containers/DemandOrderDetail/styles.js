@@ -1,9 +1,8 @@
 
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, deviceW } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
-  ...st,
   address: {
     ...st.frcenter,
     padding: 15,
@@ -12,7 +11,7 @@ const styles = StyleSheet.create({
   userImg: {
     width: 50,
     height: 50,
-    borderRadius: 20,
+    borderRadius: 25,
     marginRight: 10,
   },
   addressRight: {
@@ -42,6 +41,18 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
     minHeight: 50,
     marginTop: 4,
+  },
+  imagesView: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    backgroundColor: '#fff',
+    minHeight: 50,
+    ...st.jcenter,
+  },
+  imagesText: {
+    fontSize: 14,
+    color: '#666',
+    marginLeft: 10,
   },
   listLabel: {
     fontSize: 14,
@@ -74,7 +85,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     color: Mcolor,
-    fontSize: 12,
+    fontSize: 16,
   },
   price: {
     backgroundColor: Mcolor,
@@ -86,9 +97,11 @@ const styles = StyleSheet.create({
   },
   priceIcon: {
     backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 4,
-    marginRight: 3,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    ...st.jacenter,
+    marginRight: 5,
   },
   priceValue: {
     color: '#fff',

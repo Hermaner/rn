@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -14,6 +14,12 @@ class DecorateIntrDetail extends base {
     this.state = {
       ...this.state,
     };
+  }
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   _renderIntr() {
     const { introInfo } = this.state;

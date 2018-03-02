@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetDemandOrderService } from '../../api';
@@ -8,17 +8,12 @@ let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       orderByType: 'desc',
       orderByName: 'modiDate',
       currentPage: '',
       items: [],
       ModalOpen: false,
-      ds,
-      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
@@ -42,6 +37,13 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+    this.emitTabOrder = DeviceEventEmitter.addListener('emitTabOrder', (data) => {
+      console.log(data);
+    });
+  }
+  deleteInit = () => {
+    canEnd = false;
+    this.emitTabOrder.remove();
   }
   GetDemandOrderService = () => {
     const {
@@ -50,9 +52,7 @@ class Base extends React.Component {
       pageSize,
       currentPage,
       refresh,
-      ds,
       items,
-      dataSource,
     } = this.state;
     GetDemandOrderService({
       orderByName,
@@ -86,7 +86,6 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
             refresh: false,
             noData: false,
@@ -96,7 +95,6 @@ class Base extends React.Component {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
           });
@@ -130,9 +128,10 @@ class Base extends React.Component {
     const { tabs } = this.state;
     let { tabIndex, orderByName, orderByType } = this.state;
     if (index === 3) {
-      this.setState({
-        ModalOpen: true,
-      });
+      // this.setState({
+      //   ModalOpen: true,
+      // });
+      this.props.push({ key: 'DemandCategory', params: { type: 'TabOrder' } });
       return;
     }
     switch (index) {
@@ -140,10 +139,12 @@ class Base extends React.Component {
         orderByName = '';
         break;
       case 1:
-        orderByName = 'sales';
+        orderByName = 'distance';
         break;
       case 2:
-        orderByName = 'salesPrice';
+        orderByName = 'servicesPrice';
+        break;
+      case 3:
         break;
       default:
     }
@@ -178,6 +179,7 @@ class Base extends React.Component {
   }
   _reachEnd = () => {
     const { nomore } = this.state;
+    console.log(canEnd)
     if (canEnd && !nomore) {
       canEnd = false;
       this.setState({ loading: true }, () => this.GetDemandOrderService());

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container } from 'native-base';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
@@ -16,6 +17,10 @@ class Orders extends React.Component {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

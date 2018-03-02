@@ -156,6 +156,12 @@ class Base extends React.Component {
         type: 3,
       };
     }
+    if (key === 'MgSecurity') {
+      params = {
+        depositAmount: info.depositAmount || '',
+        type: 3,
+      };
+    }
     this.props.push({ key, params });
   }
   goNoPage = () => {

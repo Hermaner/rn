@@ -10,7 +10,6 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     const { orderNumber, orderId, amount, type } = this.props.navigation.state.params;
-    console.log(type)
     this.state = {
       orderNumber,
       orderId,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ class DemandOrder extends base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
   }
   _readerConditions() {
     const { tabs } = this.state;
@@ -36,7 +37,7 @@ class DemandOrder extends base {
                   </Text>
                   {
                     index === 3 ?
-                      <Icon name="keypad" style={[styles.cddown, item.cur && styles.cddownCur]} />
+                      <Icon name="keypad" style={[styles.cddown, { fontSize: 16 }, item.cur && styles.cddownCur]} />
                     :
                       <Icon name={item.cur ? 'ios-arrow-up' : 'ios-arrow-down'} style={[styles.cddown, item.cur && styles.cddownCur]} />
                   }
@@ -50,54 +51,52 @@ class DemandOrder extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index) => (
+  _renderRow = ({ item, index }) => (
     <TFeedback
       key={index}
       content={
-        <View>
-          <DemanOrderItem
-            item={item}
-            rowID={index}
-            key={index}
-          />
-        </View>
+        <DemanOrderItem
+          item={item}
+        />
       }
       onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
     />
   )
   _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, items, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
           !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
+            <FlatList
+              data={items}
+              renderItem={this._renderRow}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              ListFooterComponent={() =>
+                <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: '#666', fontSize: 14 }}>
+                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                  </Text>
+                </View>}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
               onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
+              onEndReachedThreshold={0.1}
             />
             :
             <NoData
-              label="没有相关数据,点击刷新"
-              onPress={this._onRefresh}
+              label="没有相关数据"
             />
         }
       </View>
     );
   }
   _renderModal() {
-    const { ModalOpen, popItems, twoItems, oneIndex } = this.state;
+    const { ModalOpen } = this.state;
+    const popItems = [{
+      name: '安装师傅',
+    }];
     return (
       <Modal
         style={styles.ModalStyle}
@@ -129,31 +128,6 @@ class DemandOrder extends base {
                 ))
               }
             </View>
-            {
-              oneIndex !== undefined &&
-              <View>
-                <Text style={styles.modalTitle}>选择产品类型</Text>
-                <View style={styles.modalList}>
-                  {
-                    twoItems.map((item, index) => (
-                      <TFeedback
-                        key={index}
-                        content={
-                          <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                            <Text
-                              style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                        }
-                        onPress={() => { this.tabTwoItem(index); }}
-                      />
-                    ))
-                  }
-                </View>
-              </View>
-            }
           </View>
           <View style={styles.modalBtns}>
             <TOpacity
@@ -180,7 +154,6 @@ class DemandOrder extends base {
     );
   }
   render() {
-    const { popItems } = this.state;
     return (
       <Container>
         <View style={styles.fixTop}>
@@ -190,7 +163,7 @@ class DemandOrder extends base {
         <View style={styles.mainView}>
           {this._renderContent()}
         </View>
-        {popItems && this._renderModal()}
+        {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

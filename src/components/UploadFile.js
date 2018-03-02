@@ -107,7 +107,7 @@ export default class Prompt extends React.Component {
   showImageDate = (imageDateIndex) => {
     const { images } = this.state;
     const imageViewData = [];
-    images.forEach(item => imageViewData.push({ url: item.uri }));
+    images.forEach(item => imageViewData.push({ url: item.item }));
     this.setState({
       imageDateIndex,
       isImageDateShow: true,

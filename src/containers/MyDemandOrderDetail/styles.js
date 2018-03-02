@@ -44,6 +44,18 @@ const styles = StyleSheet.create({
     minHeight: 50,
     marginTop: 3,
   },
+  imagesView: {
+    minHeight: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e2e2',
+    backgroundColor: '#fff',
+    ...st.jcenter,
+  },
+  imagesText: {
+    fontSize: 14,
+    color: '#666',
+    marginLeft: 10,
+  },
   listLabel: {
     fontSize: 14,
     color: '#666',

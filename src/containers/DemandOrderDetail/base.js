@@ -56,7 +56,6 @@ class Base extends React.Component {
   }
 }
 Base.propTypes = {
-  push: PropTypes.func,
   navigation: PropTypes.object,
 };
 export default Base;

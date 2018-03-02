@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
   cddown: {
-    color: '#666',
+    color: '#333',
     fontSize: 12,
     marginLeft: 3,
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Content, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -19,6 +19,10 @@ class MyCard extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -63,7 +67,7 @@ class MyCard extends base {
     return (
       <View style={styles.icons}>
         <View style={styles.iconList}>
-          <Icon name="logo-usd" style={styles.iconType} />
+          <Icon name="ios-flame" style={styles.iconType} />
           <View style={styles.iconBom}>
             <Text style={styles.text}>余额</Text>
             <Text style={styles.text}>22元</Text>

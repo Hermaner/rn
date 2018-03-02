@@ -1,12 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Content, Footer, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, TOpacity, Header, ImageLook } from '../../components';
+import { Loading, TitleItem, TOpacity, Header, ImageLook } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -18,6 +18,10 @@ class DemandOrderDetail extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }
@@ -50,7 +54,7 @@ class DemandOrderDetail extends base {
               </View>
               <View style={styles.price}>
                 <View style={styles.priceIcon}>
-                  <Icon name="logo-usd" style={styles.priceText} />
+                  <Icon name="ios-flame" style={styles.priceText} />
                 </View>
                 <Text style={styles.priceValue}>{item.servicesPrice ? `${item.servicesPrice}元` : '再议'}</Text>
               </View>
@@ -69,16 +73,18 @@ class DemandOrderDetail extends base {
             <Text style={styles.listText}>{item.closingDate.substr(0, 10)}</Text>
           </View>
         </View>
-        <View style={styles.listView}>
-          <Text style={styles.listLabel}>图片详情</Text>
-          <View style={styles.listRight}>
-            {
-              item.demandOrderImages && item.demandOrderImages.length > 0 ?
-                <ImageLook images={item.demandOrderImages} />
-                :
-                <Text style={styles.listText}>发起人没有上传相关图片</Text>
-            }
-          </View>
+        <TitleItem
+          text="相关图片"
+        />
+        <View style={styles.imagesView}>
+          {
+            item.demandOrderImages && item.demandOrderImages.length > 0 ?
+              <ImageLook
+                images={item.demandOrderImages.map(list => list.imgUrl)}
+              />
+              :
+              <Text style={styles.imagesText}>发起人没有上传相关图片</Text>
+          }
         </View>
       </View>
     );

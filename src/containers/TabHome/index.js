@@ -69,7 +69,7 @@ class Home extends base {
                 content={
                   <IconItem item={item} />
                 }
-                onPress={() => { push({ key: item.page }); }}
+                onPress={() => { push({ key: item.page, params: {} }); }}
               />
             ))
           }

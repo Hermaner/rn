@@ -34,7 +34,7 @@ class Base extends React.Component {
         label: '热度排序',
         cur: false,
       }, {
-        label: '销量排序',
+        label: '筛选',
         cur: false,
       }],
       tabIndex: 0,
@@ -42,6 +42,9 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+  }
+  deleteInit = () => {
+    canEnd = false;
   }
   GetBmMarketService = () => {
     const {
@@ -161,6 +164,6 @@ class Base extends React.Component {
   }
 }
 Base.propTypes = {
-  push: PropTypes.func,
+  pop: PropTypes.func,
 };
 export default Base;

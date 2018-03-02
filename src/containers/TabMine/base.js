@@ -138,7 +138,7 @@ class Base extends React.Component {
           } else {
             applyData.push({
               status: bmMarketInfo.checkStatus,
-              name: '装修公司入驻申请',
+              name: '建材市场入驻申请',
               memo: bmMarketInfo.checkMemo,
               id: '1',
             });
@@ -151,7 +151,7 @@ class Base extends React.Component {
           } else {
             applyData.push({
               status: decorationInfo.checkStatus,
-              name: '建材市场入驻申请',
+              name: '装修公司入驻申请',
               memo: decorationInfo.checkMemo,
               id: '2',
             });

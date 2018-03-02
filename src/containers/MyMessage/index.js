@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,7 +16,10 @@ class MyMessage extends base {
     };
   }
   componentDidMount() {
-    // this.getInit();
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

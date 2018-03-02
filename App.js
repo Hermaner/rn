@@ -74,7 +74,6 @@ class App extends React.Component {
     });
     AsyncStorage.getItem('searchHistorys', (error, res) => {
       if (res) {
-        console.log(res)
         global.searchHistorys = JSON.parse(res);
       }
     });

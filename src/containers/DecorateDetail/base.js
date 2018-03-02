@@ -38,18 +38,14 @@ class Base extends React.Component {
     this.GetDecorationCompanyInfoService();
   }
   footAction = (index) => {
-    const { info: { masterId }, isColl } = this.state;
+    const { info: { phone }, isColl } = this.state;
     const { push } = this.props;
     switch (index) {
       case 0:
-        push({ key: 'MasterDetail',
-          params: {
-            masterId,
-          },
-        });
+        Toast.show('敬请期待');
         break;
       case 1:
-        Communications.phonecall('4009201913', false);
+        Communications.phonecall(phone, false);
         break;
       case 2:
         if (!global.memberId) {

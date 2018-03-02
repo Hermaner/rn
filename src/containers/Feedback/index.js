@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Content, Input } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class Feedback extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   componentWillUnmount() {
   }

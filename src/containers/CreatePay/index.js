@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class CreatePay extends myBase {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   _renderHeader() {
     const { orderNumber, amount } = this.state;

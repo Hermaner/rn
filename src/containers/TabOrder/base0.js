@@ -1,8 +1,8 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetDecorationCompanyService } from '../../api';
+import { GetDemandOrderService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -12,11 +12,11 @@ class Base extends React.Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
-      orderByName: '',
-      orderByType: '',
+      orderByType: 'desc',
+      orderByName: 'modiDate',
       currentPage: '',
-      decorationName: '',
       items: [],
+      ModalOpen: false,
       ds,
       dataSource: ds.cloneWithRows([]),
       refresh: false,
@@ -25,16 +25,16 @@ class Base extends React.Component {
       noData: false,
       pageSize: '15',
       tabs: [{
-        label: '默认排序',
+        label: '智能排序',
         cur: true,
       }, {
-        label: '离我最近',
+        label: '距离排序',
         cur: false,
       }, {
-        label: '热度排序',
+        label: '价格排序',
         cur: false,
       }, {
-        label: '星级排序',
+        label: '筛选',
         cur: false,
       }],
       tabIndex: 0,
@@ -42,15 +42,18 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+    this.emitTabOrder = DeviceEventEmitter.addListener('emitTabOrder', (data) => {
+      console.log(data);
+    });
   }
   deleteInit = () => {
     canEnd = false;
+    this.emitTabOrder.remove();
   }
-  GetDecorationCompanyService = () => {
+  GetDemandOrderService = () => {
     const {
       orderByName,
       orderByType,
-      decorationName,
       pageSize,
       currentPage,
       refresh,
@@ -58,20 +61,22 @@ class Base extends React.Component {
       items,
       dataSource,
     } = this.state;
-    GetDecorationCompanyService({
+    GetDemandOrderService({
       orderByName,
       orderByType,
-      decorationName,
-      isFlushDistance: refresh ? '1' : '0',
-      latitude: '',
-      longitude: '',
       pageSize,
-      memberId: global.memberId || global.registration,
+      memberId: global.memberId || '1',
+      isFlushDistance: refresh ? '1' : '0',
+      longitude: global.longitude || '',
+      latitude: global.latitude || '',
       currentPage,
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
+        result.forEach((list) => {
+          list.modiDate = this.computeDate(list.modiDate)
+        });
         if (result.length === 0) {
           if (refresh) {
             this.setState({
@@ -81,7 +86,6 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
-              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -91,8 +95,8 @@ class Base extends React.Component {
             items: result,
             dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
-            noData: false,
             refresh: false,
+            noData: false,
             nomore: false,
           });
         } else {
@@ -104,7 +108,7 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 200);
+        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -118,49 +122,75 @@ class Base extends React.Component {
       console.log(err);
     });
   }
+  computeDate = (time) => {
+    let target = (new Date().getTime() - new Date(time).getTime()) / 1000 / 60;
+    if (target < 60) {
+      target = parseInt(target, 10);
+      return `${target}分钟前`;
+    } else if (target >= 60 && target < (24 * 60)) {
+      target = parseInt(target / 60, 10);
+      return `${target}小时前`;
+    }
+    return time.substr(0, 10);
+  }
   changeTab = (index) => {
-    const { tabs, tabIndex } = this.state;
-    let { orderByName, orderByType } = this.state;
-    if (tabIndex === index) {
+    const { tabs } = this.state;
+    let { tabIndex, orderByName, orderByType } = this.state;
+    if (index === 3) {
+      // this.setState({
+      //   ModalOpen: true,
+      // });
+      this.props.push({ key: 'DemandCategory', params: { type: 'TabOrder' } });
       return;
     }
-    orderByType = 'desc';
     switch (index) {
       case 0:
         orderByName = '';
         break;
       case 1:
         orderByName = 'distance';
-        orderByType = 'asc';
         break;
       case 2:
-        orderByName = 'browsingVolume';
+        orderByName = 'servicesPrice';
         break;
       case 3:
-        orderByName = 'browsingVolume';
         break;
       default:
     }
-    tabs[index].cur = true;
-    tabs[tabIndex].cur = false;
+    if (tabIndex === index) {
+      if (index === 0 || index === 1) {
+        return;
+      }
+      orderByType = orderByType === 'desc' ? 'asc' : 'desc';
+    } else {
+      orderByType = 'desc';
+      tabs[index].cur = true;
+      tabs[tabIndex].cur = false;
+      tabIndex = index;
+    }
     this.setState({
       orderByName,
       orderByType,
       tabs,
-      tabIndex: index,
+      tabIndex,
     }, this._onRefresh);
+  }
+  closeModal = () => {
+    this.setState({
+      ModalOpen: false,
+    });
   }
   _onRefresh = () => {
     this.setState({
       refresh: true,
       currentPage: 1,
-    }, () => this.GetDecorationCompanyService());
+    }, () => this.GetDemandOrderService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetDecorationCompanyService());
+      this.setState({ loading: true }, () => this.GetDemandOrderService());
     }
   }
 }

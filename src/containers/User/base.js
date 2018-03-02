@@ -106,11 +106,11 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        global.memberId = res.data.memberId;
         UserSocket.changeData(res.data);
         DeviceEventEmitter.emit('emitUser');
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.userData = res.data;
-        global.memberId = res.data.memberId;
         Toast.show('登陆成功');
         this.props.pop();
       }

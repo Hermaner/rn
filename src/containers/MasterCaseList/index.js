@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
-import { CachedImage } from 'react-native-img-cache';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, Header, NoData, CaseItem } from '../../components';
+import { Loading, Header, NoData, CaseItem } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -17,6 +16,10 @@ class MasterCaseList extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class MgSecurity extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -63,7 +67,7 @@ class MgSecurity extends base {
   }
   render() {
     const { pop } = this.props;
-    const { amount } = this.state;
+    const { amount, depositAmount } = this.state;
     return (
       <Container>
         <Header back={pop} title="我的押金" />
@@ -72,20 +76,24 @@ class MgSecurity extends base {
           {this._renderMid()}
         </Content>
         <Footer style={styles.footer}>
-          <TOpacity
-            style={styles.btnView}
-            content={
-              <Text style={styles.btnText}>缴纳保障金{amount}元</Text>
-            }
-            onPress={this.CreateDepositOrderService}
-          />
-          <TOpacity
-            style={styles.grayBtn}
-            content={
-              <Text style={styles.btnText}>退回保障金</Text>
-            }
-            onPress={this.save}
-          />
+          {
+            depositAmount ?
+              <TOpacity
+                style={styles.grayBtn}
+                content={
+                  <Text style={styles.btnText}>退回保障金</Text>
+                }
+                onPress={this.save}
+              />
+              :
+              <TOpacity
+                style={styles.btnView}
+                content={
+                  <Text style={styles.btnText}>缴纳保障金{amount}元</Text>
+                }
+                onPress={this.save}
+              />
+          }
         </Footer>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
@@ -20,6 +20,10 @@ class DecorateDetail extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -242,7 +246,7 @@ class DecorateDetail extends base {
               <Text style={styles.footBtnText}>预约服务</Text>
             </View>
           }
-          onPress={this.createService}
+          onPress={this.save}
         />
       </Footer>
     );

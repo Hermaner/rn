@@ -7,7 +7,6 @@ import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
-    marginBottom: 3,
     position: 'relative',
     backgroundColor: '#fff',
   },
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     color: Mcolor,
-    fontSize: 12,
+    fontSize: 16,
   },
   price: {
     backgroundColor: Mcolor,
@@ -34,13 +33,15 @@ const styles = StyleSheet.create({
     ...st.frcenter,
     borderRadius: 15,
     paddingRight: 10,
-    paddingLeft: 10,
+    paddingLeft: 5,
   },
   priceIcon: {
     backgroundColor: '#fff',
-    borderRadius: 15,
-    padding: 4,
-    marginRight: 3,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    ...st.jacenter,
+    marginRight: 5,
   },
   priceValue: {
     color: '#fff',
@@ -115,7 +116,7 @@ const DemanOrderItem = ({ item }) => (
       </Text>
       <View style={styles.price}>
         <View style={styles.priceIcon}>
-          <Icon name="logo-usd" style={styles.priceText} />
+          <Icon name="ios-flame" style={styles.priceText} />
         </View>
         <Text style={styles.priceValue}>{item.servicesPrice ? `${item.servicesPrice}元` : '再议'}</Text>
       </View>

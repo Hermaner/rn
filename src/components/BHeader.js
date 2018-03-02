@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
   },
   left: {
     position: 'absolute',
-    left: 10,
+    left: 0,
     bottom: 0,
     height: 48,
-    width: 20,
-    ...st.jacenter,
+    width: 48,
+    ...st.jcenter,
     zIndex: 9,
   },
   title: {
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     fontSize: 24,
+    marginLeft: 15,
     color: '#444',
   },
 });

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Content, Icon } from 'native-base';
+import { Container, Text, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header } from '../../components';
+import { Loading, Header } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -16,6 +16,10 @@ class MasterCategory extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {

@@ -11,7 +11,9 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   left: {
-    width: 20,
+    width: 40,
+    height: 48,
+    marginLeft: -10,
     ...st.jacenter,
   },
   HeaderMain: {
@@ -67,6 +69,7 @@ const headerBar = ({ back, submit, value, searchChange }) => (
             placeholder="搜索服务"
             clearButtonMode="while-editing"
             value={value}
+            autoFocus
             onSubmitEditing={() => submit(value)}
             onChangeText={searchChange}
           />

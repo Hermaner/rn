@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { DecorateItem, Loading, TFeedback, SearchHeader, NoData } from '../../components';
+import { DecorateItem, Loading, TFeedback, Header, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -16,9 +16,14 @@ class DecorateList extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
   }
   _readerConditions() {
     const { tabs } = this.state;
@@ -91,11 +96,16 @@ class DecorateList extends base {
     );
   }
   render() {
-    const { pop } = this.props;
+    const { pop, push } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>
-          <SearchHeader back={pop} />
+          <Header
+            title="装修公司列表"
+            back={pop}
+            rightPress={() => push({ key: 'MainSearch' })}
+            rightContent={<Icon name="ios-search" style={{ color: '#fff', fontSize: 20 }} />}
+          />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>

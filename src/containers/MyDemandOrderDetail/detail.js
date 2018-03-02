@@ -5,7 +5,7 @@ import { Container, Text, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { popRoute, pushRoute } from '../../actions';
-import { ImageLook, SpotLine } from '../../components';
+import { ImageLook, SpotLine, TitleItem } from '../../components';
 import base from './detailBase';
 import styles from './styles';
 
@@ -71,16 +71,18 @@ class DemandOrderDetail extends base {
             <Text style={styles.listText}>{item.closingDate.substr(0, 10)}</Text>
           </View>
         </View>
-        <View style={styles.listView}>
-          <Text style={styles.listLabel}>图片详情</Text>
-          <View style={styles.listRight}>
-            {
-              item.demandOrderImages && item.demandOrderImages.length > 0 ?
-                <ImageLook images={item.demandOrderImages} />
-                :
-                <Text style={styles.listText}>发起人没有上传相关图片</Text>
-            }
-          </View>
+        <TitleItem
+          text="相关图片"
+        />
+        <View style={styles.imagesView}>
+          {
+            item.demandOrderImages && item.demandOrderImages.length > 0 ?
+              <ImageLook
+                images={item.demandOrderImages.map(list => list.imgUrl)}
+              />
+              :
+              <Text style={styles.imagesText}>发起人没有上传相关图片</Text>
+          }
         </View>
       </View>
     );

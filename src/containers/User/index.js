@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content, Input, Button, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class UserPage extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   render() {
     const { phone, code, sec } = this.state;
@@ -59,16 +63,10 @@ class UserPage extends base {
           <View style={styles.bottomView}>
             <View style={styles.agreementView}>
               <Text style={styles.agreementLabel}>登陆即表示同意</Text>
-              <TouchableOpacity onPress={() => push({ key: 'Agreement' })}>
+              <TouchableOpacity onPress={() => push({ key: 'UserAgreement' })}>
                 <Text style={styles.agreementText}>《服务协议》</Text>
               </TouchableOpacity>
             </View>
-            {/* <View style={styles.bottomTipsView}>
-              <Text style={styles.bottomTipsLabel}>如有疑问，请联系客服：</Text>
-              <TouchableOpacity onPress={() => Communications.phonecall('400322322', true)}>
-                <Text style={styles.bottomTipsText}>400-000-000</Text>
-              </TouchableOpacity>
-            </View> */}
           </View>
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />

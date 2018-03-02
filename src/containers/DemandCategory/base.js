@@ -1,19 +1,30 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { DeviceEventEmitter } from 'react-native';
 import { GetDemandCategoryService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    this.isSend = false;
+    const { type } = props.navigation.state.params;
     this.state = {
       items: [],
+      type,
       tabIndex: 0,
     };
   }
   getInit = () => {
     this.GetDemandCategoryService();
+  }
+  goNext = (item) => {
+    const { type } = this.state;
+    if (type === 'TabOrder') {
+      DeviceEventEmitter.emit('emitTabOrder', item);
+      this.props.pop();
+      return;
+    }
+    this.props.push({ key: 'DemandConfirm', params: { item } });
   }
   changeTab = (index) => {
     const { items, tabIndex } = this.state;
@@ -55,5 +66,7 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   pop: PropTypes.func,
+  push: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default Base;

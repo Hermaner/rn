@@ -1,28 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BackHandler } from 'react-native';
 import { Container } from 'native-base';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { Header, ScrollableTab } from '../../components';
-import { popRoute } from '../../actions';
+import { popRoute, resetHome } from '../../actions';
 import List from './list';
 import Detail from './detail';
 
 class DemandOrderDetail extends React.Component {
   constructor(props) {
     super(props);
+    const { item, type } = props.navigation.state.params;
     this.state = {
-      item: props.navigation.state.params.item,
+      item,
+      type,
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   render() {
-    const { pop } = this.props;
-    const { item } = this.state;
+    const { pop, reset } = this.props;
+    const { item, type } = this.state;
     return (
       <Container>
-        <Header back={pop} title="订单详情" />
+        <Header back={type === 'reset' ? reset : pop} title="订单详情" />
         <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
           <List tabLabel="订单动态" demandOrderId={item.demandOrderId} />
           <Detail tabLabel="订单明细" item={item} />
@@ -34,6 +41,7 @@ class DemandOrderDetail extends React.Component {
 
 DemandOrderDetail.propTypes = {
   pop: PropTypes.func,
+  reset: PropTypes.func,
   navigation: PropTypes.object,
 };
-export default connect(null, { pop: popRoute })(DemandOrderDetail);
+export default connect(null, { pop: popRoute, reset: resetHome })(DemandOrderDetail);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Content } from 'native-base';
 import AutoHeightImage from 'react-native-auto-height-image';
@@ -16,6 +16,12 @@ class DecorateImageDetail extends base {
     this.state = {
       ...this.state,
     };
+  }
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   _renderContent() {
     const { items } = this.state;

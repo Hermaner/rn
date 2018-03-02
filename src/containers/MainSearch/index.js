@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl, ScrollView } from 'react-native';
+import { View, ListView, RefreshControl, ScrollView, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class ServiceList extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {

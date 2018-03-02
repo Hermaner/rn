@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, SectionList } from 'react-native';
+import { View, ScrollView, SectionList, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,6 +16,10 @@ class DemandCategory extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   _renderLeft() {
@@ -52,7 +56,7 @@ class DemandCategory extends base {
               content={
                 <Text style={styles.text}>{list.name}</Text>
               }
-              onPress={() => { this.props.push({ key: 'DemandConfirm', params: { item: list } }); }}
+              onPress={() => this.goNext(list)}
             />
           ))
         }
@@ -98,7 +102,7 @@ class DemandCategory extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="选择发布类别" />
+        <Header back={pop} title="选择类别" />
         <View style={styles.content}>
           {this._renderLeft()}
           {this._renderRight()}

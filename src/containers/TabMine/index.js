@@ -85,7 +85,7 @@ class My extends Base {
             <TFeedback
               content={
                 <View style={styles.topPageList}>
-                  <Text style={styles.topBoldText}>{balance}</Text>
+                  <Text style={styles.topBoldText}>{balance || 0}</Text>
                   <Text style={styles.topText}>账户</Text>
                 </View>
               }
@@ -94,7 +94,7 @@ class My extends Base {
             <TFeedback
               content={
                 <View style={styles.topPageList}>
-                  <Text style={styles.topBoldText}>{couponCount}</Text>
+                  <Text style={styles.topBoldText}>{couponCount || 0 }</Text>
                   <Text style={styles.topText}>优惠券</Text>
                 </View>
               }
@@ -319,13 +319,13 @@ class My extends Base {
     );
   }
   render() {
-    const { userData: { masterId, bmMarketId, decorationId } } = UserSocket;
+    const { userData: { memberId, masterId, bmMarketId, decorationId } } = UserSocket;
     return (
       <Container>
         <Content>
           {this._renderTop()}
           {this._renderUser()}
-          {this._renderRoleStatus()}
+          {memberId && this._renderRoleStatus()}
           {masterId && this._renderRole1()}
           {bmMarketId && this._renderRole2()}
           {decorationId && this._renderRole3()}

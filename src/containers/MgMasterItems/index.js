@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Switch } from 'native-base';
 import { connect } from 'react-redux';
@@ -18,6 +18,10 @@ class MgMasterItems extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {

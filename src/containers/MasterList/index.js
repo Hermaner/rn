@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, ListView, RefreshControl, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
+import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, SearchHeader, MasterItem, NoData } from '../../components';
+import { Loading, TFeedback, Header, TOpacity, MasterItem, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -16,9 +17,14 @@ class MasterList extends base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
   }
   _readerConditions() {
     const { tabs } = this.state;
@@ -35,7 +41,7 @@ class MasterList extends base {
                   </Text>
                   {
                     index === 3 ?
-                      <Icon name="keypad" style={[styles.cddown, item.cur && styles.cddownCur]} />
+                      <Icon name="keypad" style={[styles.cddown, { fontSize: 16 }, item.cur && styles.cddownCur]} />
                     :
                       <Icon name={item.cur ? 'ios-arrow-up' : 'ios-arrow-down'} style={[styles.cddown, item.cur && styles.cddownCur]} />
                   }
@@ -88,19 +94,82 @@ class MasterList extends base {
       </View>
     );
   }
+  _renderModal() {
+    const { ModalOpen } = this.state;
+    const popItems = [{
+      name: '安装师傅',
+    }];
+    return (
+      <Modal
+        style={styles.ModalStyle}
+        position="top"
+        entry="top"
+        animationDuration={300}
+        onClosed={this.closeModal}
+        isOpen={ModalOpen}
+        coverScreen
+        ref={(o) => { this.ModalView = o; }}
+      >
+        <View style={styles.modalView}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.modalTitle}>选择类目</Text>
+            <View style={styles.modalList}>
+              {
+                popItems.map((item, index) => (
+                  <TFeedback
+                    key={index}
+                    content={
+                      <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
+                        <Text style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}>
+                          {item.name}
+                        </Text>
+                      </View>
+                    }
+                    onPress={() => { this.tabOneItem(index); }}
+                  />
+                ))
+              }
+            </View>
+          </View>
+          <View style={styles.modalBtns}>
+            <TOpacity
+              style={[styles.modalBtn, styles.cancelBtn]}
+              content={
+                <View>
+                  <Text style={styles.modalText}>取消</Text>
+                </View>
+              }
+              onPress={this.closeModal}
+            />
+            <TOpacity
+              style={styles.modalBtn}
+              content={
+                <View>
+                  <Text style={styles.modalText}>确认</Text>
+                </View>
+              }
+              onPress={this.closeModal}
+            />
+          </View>
+        </View>
+      </Modal>
+    );
+  }
   render() {
-    const { popItems } = this.state;
     const { pop } = this.props;
     return (
       <Container>
         <View style={styles.fixTop}>
-          <SearchHeader back={pop} />
+          <Header
+            title="师傅列表"
+            back={pop}
+          />
           {this._readerConditions()}
         </View>
         <View style={styles.mainView}>
           {this._renderContent()}
         </View>
-        {popItems && this._renderModal()}
+        {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

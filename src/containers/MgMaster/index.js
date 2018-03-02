@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,6 +17,10 @@ class MgMaster extends Base {
     };
   }
   componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
     this.getInit();
   }
   componentWillUnmount() {
@@ -52,8 +56,7 @@ class MgMaster extends Base {
     );
   }
   _renderUser() {
-    const { defaultImg, info, totalMoney, outMoney, inMoney } = this.state;
-    console.log(info);
+    const { defaultImg, info } = this.state;
     return (
       <View style={styles.userAllView}>
         <View style={styles.userView}>
@@ -78,21 +81,24 @@ class MgMaster extends Base {
           </View>
           <View style={styles.topPage}>
             <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>{totalMoney}</Text>
+              <Text style={styles.topBoldText}>{info.wallet.total}</Text>
               <Text style={styles.topText}>总金额(元)</Text>
             </View>
             <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>{outMoney}</Text>
+              <Text style={styles.topBoldText}>{info.wallet.withdrawals}</Text>
               <Text style={styles.topText}>已提现(元)</Text>
             </View>
             <TFeedback
               content={
-                <View style={styles.topPageList}>
-                  <Text style={styles.topBoldText}>{inMoney}</Text>
-                  <Text style={styles.topText}>余额(元)</Text>
+                <View style={styles.tiBtn}>
+                  <View style={styles.tiPage}>
+                    <Text style={styles.topBoldText}>{info.wallet.balance}</Text>
+                    <Text style={styles.topText}>余额(元)</Text>
+                  </View>
+                  <Icon name="md-arrow-dropright" style={styles.rightArr} />
                 </View>
               }
-              onPress={() => { this.goPage('MyColl'); }}
+              onPress={() => this.goIconPage('MyTixian')}
             />
           </View>
         </View>
@@ -197,11 +203,12 @@ class MgMaster extends Base {
     );
   }
   render() {
+    const { info } = this.state;
     return (
       <Container>
         <Content>
           {this._renderTop()}
-          {this._renderUser()}
+          {info && this._renderUser()}
           {this._renderRole1()}
           {this._renderOrder()}
           {this._renderIcons()}

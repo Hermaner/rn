@@ -196,5 +196,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
+  locIcon: {
+    fontSize: 20,
+    color: '#666',
+  },
+  arr: {
+    fontSize: 16,
+    color: '#666',
+  },
 });
 export default styles;

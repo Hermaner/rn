@@ -17,7 +17,11 @@ class MyColl extends React.Component {
       ...this.state,
     };
   }
-  componentWillUnmount() {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      this.props.pop();
+      return true;
+    });
   }
   render() {
     const { pop } = this.props;

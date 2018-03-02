@@ -76,8 +76,10 @@ import MgSecurity from '../containers/MgSecurity';
 import MyDrawList from '../containers/MyDrawList';
 import MyDrawAdd from '../containers/MyDrawAdd';
 import MainSearch from '../containers/MainSearch';
+import UserAgreement from '../containers/UserAgreement';
 
 export const AppNavigator = StackNavigator({
+  UserAgreement: { screen: UserAgreement },
   MainSearch: { screen: MainSearch },
   MyDrawAdd: { screen: MyDrawAdd },
   MyDrawList: { screen: MyDrawList },

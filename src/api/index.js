@@ -411,6 +411,18 @@ export function GetDepositMasterService(data) {
 export function CreateDepositOrderService(data) {
   return post('CreateDepositOrderService', data);
 }
+export function GetDepositBmMarketService(data) {
+  return get('GetDepositBmMarketService', data);
+}
+export function CreateDepositOrderBmMarketService(data) {
+  return post('CreateDepositOrderBmMarketService', data);
+}
+export function GetDepositDecorationService(data) {
+  return get('GetDepositDecorationService', data);
+}
+export function CreateDepositOrderDecorationService(data) {
+  return post('CreateDepositOrderDecorationService', data);
+}
 export function PayDepositOrderService(data) {
   return get('PayDepositOrderService', data);
 }
@@ -419,4 +431,10 @@ export function CreateRechargeOrderService(data) {
 }
 export function GetMemberRechargeService(data) {
   return get('GetMemberRechargeService', data);
+}
+export function GetWithdrawalsNumberService(data) {
+  return get('GetWithdrawalsNumberService', data);
+}
+export function CreateWithdrawalsNumberService(data) {
+  return get('CreateWithdrawalsNumberService', data);
 }

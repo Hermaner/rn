@@ -55,7 +55,7 @@ class Base extends React.Component {
         },
         {
           icon: 'icon-kefu',
-          text: '投票',
+          text: '发现',
           color: '#8A2BE2',
           page: 'LuckVote',
         },
