@@ -166,7 +166,7 @@ class CreateConfirm extends base {
                           {item.provinceName}{item.cityName}{item.districtName}{item.address}
                         </Text>
                       </View>
-                      <Icon name="md-arrow-dropright" style={styles.rightIco} />
+                      <Icon name="md-arrow-dropright" style={styles.arr} />
                     </View>
                   }
                   onPress={() => { this.selectAddress(item); }}
@@ -182,7 +182,7 @@ class CreateConfirm extends base {
                   <Text style={styles.modalText}>添加新地址</Text>
                 </View>
               }
-              onPress={this.hidepopDate}
+              onPress={this.createAddress}
             />
           </View>
         </View>

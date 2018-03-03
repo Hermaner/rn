@@ -30,6 +30,13 @@ class Base extends React.Component {
   getInit = () => {
     const { params } = this.props.navigation.state;
     if (params) {
+      const { item, type } = this.state;
+      if (type) {
+        this.setState({
+          type,
+        });
+        return;
+      }
       const {
         phone,
         provinceId,
@@ -42,7 +49,7 @@ class Base extends React.Component {
         nickName,
         addressId,
         isDefault,
-      } = params.item;
+      } = item;
       this.setState({
         phone,
         provinceId,

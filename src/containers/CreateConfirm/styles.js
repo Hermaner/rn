@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#e2e2e2',
     borderBottomWidth: 1,
     paddingBottom: 10,
+    paddingRight: 10,
   },
   addressRight: {
     flex: 1,

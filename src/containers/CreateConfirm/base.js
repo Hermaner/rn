@@ -224,6 +224,9 @@ class Base extends React.Component {
       isDtShow: false,
     });
   }
+  createAddress = () => {
+    this.props.push({ key: 'MyAddressCreate', params: { type: 'CreateConfirm' } });
+  }
   savePopDate = () => {
     const { popDates, dayIndex, timeIndex, popTimes } = this.state;
     if (dayIndex === null || timeIndex === null) {
