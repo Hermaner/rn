@@ -54,6 +54,13 @@ export function get(path, data) {
     },
   });
 }
+export function ampGet(data) {
+  const purl = `https://restapi.amap.com/v3/geocode/regeo?${obj2form(data)}`;
+  console.log(purl);
+  return request(purl, {
+    method: 'GET',
+  });
+}
 export function isClass(o) {
   if (o === null) return 'null';
   if (o === undefined) return 'Undefined';
@@ -80,6 +87,12 @@ export function DeepClone(obj) {
     }
   }
   return result;
+}
+export function AmapGeocode(location) {
+  return ampGet({
+    key: '592a01ec378d68c795627c0f61dc9975',
+    location,
+  });
 }
 export function AuthMasterService(data) {
   return post('AuthMasterService', data);

@@ -1,5 +1,6 @@
 import React from 'react';
-import { GetMasterCaseService } from '../../api';
+import { DeviceEventEmitter } from 'react-native';
+import { GetMasterCaseService, AmapGeocode } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class Base extends React.Component {
     this.state = {
       cases: [],
       refresh: false,
+      districtName: '',
       banners: [{
         img: require('../../assets/img/choujiang.png'),
       }, {
@@ -64,9 +66,44 @@ class Base extends React.Component {
   }
   getInit = () => {
     this.GetMasterCaseService();
+    this.emitHomePosition = DeviceEventEmitter.addListener('emitHomePosition', (data) => {
+      console.log(data);
+      const {
+        districtId,
+        districtName,
+      } = data;
+      this.setState({
+        districtId,
+        districtName,
+      });
+    });
+  }
+  deleteInit = () => {
+    this.emitHomePosition.remove();
   }
   _onRefresh = () => {
     console.log('1111');
+  }
+  AmapGeocode = (location) => {
+    AmapGeocode(location).then((res) => {
+      console.log(res);
+      if (res.info === 'OK') {
+        const {
+          adcode,
+          province,
+          district,
+        } = res.regeocode.addressComponent;
+        global.districtId = adcode;
+        global.provinceName = province;
+        global.districtName = district;
+        this.setState({
+          districtId: adcode,
+          districtName: district,
+        });
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   }
   GetMasterCaseService = () => {
     GetMasterCaseService({

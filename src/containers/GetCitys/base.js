@@ -42,6 +42,15 @@ class Base extends React.Component {
     DeviceEventEmitter.emit(type, data);
     this.props.pop();
   }
+  locationDistrict = () => {
+    const { type } = this.state;
+    const data = {
+      districtId: global.districtId,
+      districtName: global.districtName,
+    };
+    DeviceEventEmitter.emit(type, data);
+    this.props.pop();
+  }
   changeLeftTab = (index) => {
     const { citys, leftIndex, midIndex } = this.state;
     if (leftIndex === index) {

@@ -69,7 +69,12 @@ const headerBar = ({ label, push }) => (
           <Icon name="ios-arrow-down-outline" style={styles.leftIcon} />
         </View>
       }
-      onPress={() => { }}
+      onPress={() => {
+        if (label === '定位中') {
+          return;
+        }
+        push({ key: 'GetCitys', params: { type: 'emitHomePosition' } });
+      }}
     />
     <TFeedback
       content={

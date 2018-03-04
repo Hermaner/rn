@@ -28,14 +28,20 @@ class Home extends base {
       pausesLocationUpdatesAutomatically: false,
       allowsBackgroundLocationUpdates: true,
     });
-    // AMapLocation.startUpdatingLocation();
-    AMapLocation.getReGeocode();
+    AMapLocation.startUpdatingLocation();
+    // AMapLocation.getReGeocode();
     this.getInit();
+  }
+  componentWillUnmount() {
+    this.deleteInit();
   }
   _onLocationResult = (result) => {
     if (result.coordinate) {
-      global.longitude = result.coordinate.longitude;
-      global.latitude = result.coordinate.latitude;
+      console.log(result)
+      const { longitude, latitude } = result.coordinate;
+      this.AmapGeocode(`${longitude},${latitude}`);
+      global.longitude = longitude;
+      global.latitude = latitude;
     }
   }
   renderNav() {
@@ -125,10 +131,11 @@ class Home extends base {
   render() {
     const {
       refresh,
+      districtName,
     } = this.state;
     return (
       <Container>
-        <HomeSearch label="上海" />
+        <HomeSearch label={districtName || '定位中'} />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={
