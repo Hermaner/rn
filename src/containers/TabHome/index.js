@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, NativeAppEventEmitter, ScrollView, RefreshControl, Image } from 'react-native';
+import { View, ScrollView, RefreshControl, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AMapLocation from 'react-native-smart-amap-location';
 import { CachedImage } from 'react-native-img-cache';
-import AppEventListenerEnhance from 'react-native-smart-app-event-listener-enhance';
 import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
 import base from './base';
@@ -20,16 +18,6 @@ class Home extends base {
     };
   }
   componentDidMount() {
-    this.addAppEventListener(
-        NativeAppEventEmitter.addListener('amap.location.onLocationResult', this._onLocationResult),
-    );
-    AMapLocation.init(null);
-    AMapLocation.setOptions({
-      pausesLocationUpdatesAutomatically: false,
-      allowsBackgroundLocationUpdates: true,
-    });
-    AMapLocation.startUpdatingLocation();
-    // AMapLocation.getReGeocode();
     this.getInit();
   }
   componentWillUnmount() {
@@ -162,4 +150,4 @@ class Home extends base {
 Home.propTypes = {
   push: PropTypes.func,
 };
-export default connect(null, { push: pushRoute })(AppEventListenerEnhance(Home));
+export default connect(null, { push: pushRoute })(Home);

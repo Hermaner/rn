@@ -13,7 +13,6 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 #import <React/RCTBundleURLProvider.h>
-#import <AMapFoundationKit/AMapFoundationKit.h>
 #import <React/RCTRootView.h>
 #import "SplashScreen.h"
 
@@ -40,7 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [AMapServices sharedServices].apiKey = @"2387dad089c2f0765f7a7f038da98267";
+  // [AMapServices sharedServices].apiKey = @"2387dad089c2f0765f7a7f038da98267";
 JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
      entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
      [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];

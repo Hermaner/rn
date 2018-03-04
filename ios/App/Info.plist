@@ -102,7 +102,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>Allow Arbitrary Loads</key>
-	<true/>
 </dict>
 </plist>
