@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { MapView } from 'react-native-amap3d'
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
@@ -141,6 +142,10 @@ class Home extends base {
           {this.renderSwiper()}
           {this.renderNav()}
           {this.renderCases()}
+          {/* <MapView
+            locationEnabled
+            onLocation={this.GetLocation}
+          /> */}
         </ScrollView>
       </Container>
     );

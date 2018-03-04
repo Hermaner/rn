@@ -45,8 +45,8 @@ class Base extends React.Component {
       pageSize,
       status,
       isFlushDistance: refresh ? '1' : '0',
-      longitude: '',
-      latitude: '',
+      longitude: global.longitude || '',
+      latitude: global.latitude || '',
       currentPage,
       masterId: global.masterId,
     }).then((res) => {

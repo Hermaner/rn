@@ -84,6 +84,12 @@ class Base extends React.Component {
   _onRefresh = () => {
     console.log('1111');
   }
+  GetLocation = ({ nativeEvent }) => {
+    const { longitude, latitude } = nativeEvent;
+    this.AmapGeocode(`${longitude},${latitude}`);
+    global.longitude = longitude;
+    global.latitude = latitude;
+  }
   AmapGeocode = (location) => {
     AmapGeocode(location).then((res) => {
       console.log(res);
