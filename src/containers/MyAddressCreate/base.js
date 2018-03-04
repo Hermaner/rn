@@ -30,7 +30,7 @@ class Base extends React.Component {
   getInit = () => {
     const { params } = this.props.navigation.state;
     if (params) {
-      const { item, type } = this.state;
+      const { item, type } = params;
       if (type) {
         this.setState({
           type,
