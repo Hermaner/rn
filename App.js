@@ -9,9 +9,11 @@ import {
   persistStore,
   autoRehydrate,
 } from 'redux-persist';
-import thunk from 'redux-thunk';
+import {
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers';
 import { Provider } from 'react-redux';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
 import AppReducer from './src/reducers';
 import { UserSocket } from './src/components';
@@ -109,11 +111,10 @@ class App extends React.Component {
   _openSettings = () => Permissions.openSettings().then(() => {})
   store = createStore(
     AppReducer,
-    compose(
-    applyMiddleware(
-      thunk,
-    ),
-  ), autoRehydrate());
+    applyMiddleware(createReactNavigationReduxMiddleware(
+      'root',
+      state => state.nav,
+    )), autoRehydrate());
   render() {
     return (
       <Provider store={this.store}>

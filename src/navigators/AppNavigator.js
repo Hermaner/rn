@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  createReduxBoundAddListener,
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers';
 import { Root } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
@@ -159,9 +163,20 @@ export const AppNavigator = StackNavigator({
   }),
 });
 
+createReactNavigationReduxMiddleware(
+  'root',
+  state => state.nav,
+);
+const addListener = createReduxBoundAddListener('root');
 const AppWithNavigationState = ({ dispatch, nav }) => (
   <Root>
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    <AppNavigator
+      navigation={addNavigationHelpers({
+        dispatch,
+        state: nav,
+        addListener,
+      })}
+    />
   </Root>
 );
 
