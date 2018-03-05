@@ -6,6 +6,17 @@ const styles = StyleSheet.create({
     ...st.fr,
     flex: 1,
   },
+  allTab: {
+    margin: 10,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    height: 40,
+    ...st.jacenter,
+  },
+  alltext: {
+    color: '#444',
+    fontSize: 14,
+  },
   left: {
     width: 80,
     height: deviceH,

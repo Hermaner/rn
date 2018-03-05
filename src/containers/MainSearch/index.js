@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl, ScrollView, BackHandler } from 'react-native';
+import { View, FlatList, ScrollView, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import { ServiceItem, Loading, TOpacity, SearchHeader, NoData } from '../../comp
 import base from './base';
 import styles from './styles';
 
-class ServiceList extends base {
+class MainSearch extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,14 +16,16 @@ class ServiceList extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   renderHot() {
     const { hots } = this.state;
     return (
@@ -73,42 +75,42 @@ class ServiceList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index) => (
-    <View>
+  _renderRow = (data) => {
+    const { item, index } = data;
+    return (
       <ServiceItem
         item={item}
         rowID={index}
         key={index}
         onPress={() => { this.props.push({ key: 'ServiceDetail', params: { masterServicesId: item.id } }); }}
       />
-    </View>
-  )
+    );
+  }
   _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, items, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
           !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
+            <FlatList
+              data={items}
+              renderItem={this._renderRow}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              ListFooterComponent={() =>
+                <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: '#666', fontSize: 14 }}>
+                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                  </Text>
+                </View>}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
               onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
+              onEndReachedThreshold={0.1}
             />
             :
             <NoData
-              label="没有相关数据,请重新搜索"
-              onPress={() => {}}
+              label="没有相关数据"
             />
         }
       </View>
@@ -142,8 +144,8 @@ class ServiceList extends base {
   }
 }
 
-ServiceList.propTypes = {
+MainSearch.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(ServiceList);
+export default connect(null, { pop: popRoute, push: pushRoute })(MainSearch);

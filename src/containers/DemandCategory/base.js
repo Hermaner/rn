@@ -18,6 +18,11 @@ class Base extends React.Component {
     this.GetDemandCategoryService();
   }
   goNext = (item) => {
+    if (item === 0) {
+      DeviceEventEmitter.emit('emitTabOrder');
+      this.props.pop();
+      return;
+    }
     const { type } = this.state;
     if (type === 'TabOrder') {
       DeviceEventEmitter.emit('emitTabOrder', item);
@@ -28,17 +33,20 @@ class Base extends React.Component {
   }
   changeTab = (index) => {
     const { items, tabIndex } = this.state;
-    items[index].cur = true;
-    items[tabIndex].cur = false;
-    this.setState({
-      items,
-      tabIndex: index,
-    });
     this.tableList.scrollToLocation({
       animated: true,
       itemIndex: 0,
       sectionIndex: index,
       viewOffset: 35,
+    });
+    if (tabIndex === index) {
+      return;
+    }
+    items[index].cur = true;
+    items[tabIndex].cur = false;
+    this.setState({
+      items,
+      tabIndex: index,
     });
   }
   GetDemandCategoryService = () => {

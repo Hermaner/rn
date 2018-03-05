@@ -103,10 +103,10 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
+    this.getData();
     this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
       this.getData();
     });
-    this.getData();
   }
   getData = () => {
     if (!global.memberId) {

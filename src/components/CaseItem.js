@@ -5,6 +5,7 @@ import StarRating from 'react-native-star-rating';
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { st, Mcolor, deviceW } from '../utils';
 import ImageLook from './ImageLook';
+import TOpacity from './TOpacity';
 
 const styles = StyleSheet.create({
   list: {
@@ -115,39 +116,44 @@ const styles = StyleSheet.create({
 });
 
 
-const CaseItem = ({ item }) => (
+const CaseItem = ({ item, onPress }) => (
   <View style={styles.list}>
-    <View style={styles.top}>
-      <CachedImage source={{ uri: item.masterHeadImg }} style={styles.img} />
-      <View style={styles.info}>
-        <View style={styles.infoTop}>
-          <Text style={styles.name}>
-            {item.masterName}
-          </Text>
-          <Text style={styles.dateText}>{item.modiDate}</Text>
-        </View>
-        <View style={styles.typeView}>
-          <View style={styles.type}>
-            <Text style={styles.typeText}>{item.servicesTypeName}</Text>
+    <TOpacity
+      content={
+        <View style={styles.top}>
+          <CachedImage source={{ uri: item.masterHeadImg }} style={styles.img} />
+          <View style={styles.info}>
+            <View style={styles.infoTop}>
+              <Text style={styles.name}>
+                {item.masterName}
+              </Text>
+              <Text style={styles.dateText}>{item.modiDate}</Text>
+            </View>
+            <View style={styles.typeView}>
+              <View style={styles.type}>
+                <Text style={styles.typeText}>{item.servicesTypeName}</Text>
+              </View>
+            </View>
+            <View style={styles.star}>
+              <StarRating
+                disabled
+                starSize={20}
+                emptyStarColor={Mcolor}
+                emptyStar={'ios-star-outline'}
+                fullStar={'ios-star'}
+                halfStar={'ios-star-half'}
+                iconSet={'Ionicons'}
+                starColor={Mcolor}
+                maxStars={5}
+                rating={item.masterStarLevel || 5}
+              />
+              <Text style={styles.starText}>{item.masterStarLevel || 5}分</Text>
+            </View>
           </View>
         </View>
-        <View style={styles.star}>
-          <StarRating
-            disabled
-            starSize={20}
-            emptyStarColor={Mcolor}
-            emptyStar={'ios-star-outline'}
-            fullStar={'ios-star'}
-            halfStar={'ios-star-half'}
-            iconSet={'Ionicons'}
-            starColor={Mcolor}
-            maxStars={5}
-            rating={item.masterStarLevel || 5}
-          />
-          <Text style={styles.starText}>{item.masterStarLevel || 5}分</Text>
-        </View>
-      </View>
-    </View>
+      }
+      onPress={onPress}
+    />
     <View style={styles.mid}>
       <View style={styles.dv}>
         <Image source={require('../assets/img/dashed.png')} style={styles.dvImg} />
@@ -171,5 +177,6 @@ const CaseItem = ({ item }) => (
 
 CaseItem.propTypes = {
   item: PropTypes.object,
+  onPress: PropTypes.func,
 };
 export default CaseItem;

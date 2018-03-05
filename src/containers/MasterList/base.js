@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetMasterService } from '../../api';
@@ -8,9 +7,6 @@ let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       orderByName: '',
       orderByType: 'desc',
@@ -18,8 +14,6 @@ class Base extends React.Component {
       realName: '',
       typeIds: props.navigation.state.params.typeIds,
       items: [],
-      ds,
-      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
@@ -55,10 +49,8 @@ class Base extends React.Component {
       currentPage,
       realName,
       refresh,
-      ds,
       typeIds,
       items,
-      dataSource,
     } = this.state;
     GetMasterService({
       orderByName,
@@ -84,7 +76,6 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
-              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -92,7 +83,6 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
             refresh: false,
             nomore: false,
@@ -101,10 +91,8 @@ class Base extends React.Component {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
-            isFlushDistance: '0',
           });
         }
         setTimeout(() => { canEnd = true; }, 0);

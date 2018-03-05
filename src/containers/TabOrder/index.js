@@ -28,8 +28,9 @@ class DemandOrder extends base {
       <View style={styles.conditions}>
         {
           tabs.map((item, index) => (
-            <TFeedback
+            <TOpacity
               key={index}
+              style={{ flex: 1 }}
               content={
                 <View style={styles.cdsList}>
                   <Text style={[styles.cdsListText, item.cur && styles.cdsCurText]}>
@@ -51,19 +52,22 @@ class DemandOrder extends base {
       </View>
     );
   }
-  _renderRow = ({ item, index }) => (
-    <TFeedback
-      key={index}
-      content={
-        <View>
-          <DemanOrderItem
-            item={item}
-          />
-        </View>
-      }
-      onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
-    />
-  )
+  _renderRow = (data) => {
+    const { item, index } = data;
+    return (
+      <TFeedback
+        key={index}
+        content={
+          <View>
+            <DemanOrderItem
+              item={item}
+            />
+          </View>
+        }
+        onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
+      />
+    );
+  }
   _renderContent() {
     const { noData, items, nomore, refresh } = this.state;
     return (

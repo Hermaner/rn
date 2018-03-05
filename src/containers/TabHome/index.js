@@ -10,6 +10,7 @@ import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
 import base from './base';
 import styles from './styles';
+import { Mcolor } from '../../utils';
 
 class Home extends base {
   constructor(props) {
@@ -111,7 +112,11 @@ class Home extends base {
         </View>
         {
           cases.map((item, index) => (
-            <CaseItem key={index} item={item} />
+            <CaseItem
+              key={index}
+              item={item}
+              onPress={() => this.props.push({ key: 'MasterDetail', params: { masterId: item.masterId } })}
+            />
           ))
         }
       </View>
@@ -131,10 +136,10 @@ class Home extends base {
             <RefreshControl
               refreshing={refresh}
               onRefresh={this._onRefresh}
-              tintColor="#ff0000"
+              tintColor={'#444'}
               title="加载中..."
-              titleColor="#00ff00"
-              colors={['#ff0000', '#00ff00', '#0000ff']}
+              titleColor="#666"
+              colors={[Mcolor, Mcolor, Mcolor]}
               progressBackgroundColor="#ffffff"
             />
           }

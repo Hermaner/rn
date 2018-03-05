@@ -7,7 +7,6 @@ import { st, Mcolor } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 4,
     backgroundColor: '#fff',
     padding: 10,
     ...st.frcenter,

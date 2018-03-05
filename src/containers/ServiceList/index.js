@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, ListView, RefreshControl, BackHandler } from 'react-native';
+import { View, FlatList, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { ServiceItem, Loading, TFeedback, TOpacity, Header } from '../../components';
+import { ServiceItem, Loading, TFeedback, TOpacity, Header, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -17,14 +17,16 @@ class ServiceList extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _readerConditions() {
     const { tabs } = this.state;
     return (
@@ -54,48 +56,43 @@ class ServiceList extends base {
       </View>
     );
   }
-  _renderRow = (item, sectionID, index) => (
-    <View>
+  _renderRow = (data) => {
+    const { item, index } = data;
+    return (
       <ServiceItem
         item={item}
         rowID={index}
         key={index}
         onPress={() => { this.props.push({ key: 'ServiceDetail', params: { masterServicesId: item.id } }); }}
       />
-    </View>
-  )
+    );
+  }
   _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, items, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
           !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
+            <FlatList
+              data={items}
+              renderItem={this._renderRow}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              ListFooterComponent={() =>
+                <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: '#666', fontSize: 14 }}>
+                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                  </Text>
+                </View>}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
               onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
+              onEndReachedThreshold={0.1}
             />
             :
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <TouchableWithoutFeedback onPress={this._onRefresh}>
-                <View>
-                  <Text style={{ marginBottom: 8, marginTop: 5, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                    没有相关数据,点击刷新
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
+            <NoData
+              label="没有相关数据"
+            />
         }
       </View>
     );
@@ -134,7 +131,7 @@ class ServiceList extends base {
               }
             </View>
             {
-              oneIndex !== undefined &&
+              oneIndex !== null &&
               <View>
                 <Text style={styles.modalTitle}>选择产品类型</Text>
                 <View style={styles.modalList}>
@@ -173,10 +170,10 @@ class ServiceList extends base {
               style={styles.modalBtn}
               content={
                 <View>
-                  <Text style={styles.modalText}>确认</Text>
+                  <Text style={styles.modalText}>重置</Text>
                 </View>
               }
-              onPress={this.closeModal}
+              onPress={this.resetModal}
             />
           </View>
         </View>

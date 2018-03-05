@@ -100,9 +100,20 @@ class DemandCategory extends base {
   }
   render() {
     const { pop } = this.props;
+    const { type } = this.state;
     return (
       <Container>
         <Header back={pop} title="选择类别" />
+        {
+          type === 'TabOrder' &&
+          <TOpacity
+            style={styles.allTab}
+            content={
+              <Text style={styles.alltext}>不限</Text>
+            }
+            onPress={() => this.goNext(0)}
+          />
+        }
         <View style={styles.content}>
           {this._renderLeft()}
           {this._renderRight()}

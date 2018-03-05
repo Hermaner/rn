@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   list: {
     ...st.fr,
     padding: 8,
-    marginTop: 3,
     backgroundColor: '#fff',
   },
   img: {
@@ -92,7 +91,7 @@ const ServiceItem = ({ onPress, item }) => (
               <Text style={styles.tips}>新用户立减10</Text>
             </View>
           </View>
-          <Text style={styles.label}>好评{item.praiseRate || '100%'}</Text>
+          <Text style={styles.label}>{item.distance > 200 ? `${(item.distance / 1000).toFixed(2)}km` : '小于200m'}</Text>
         </View>
       </View>
     </View>

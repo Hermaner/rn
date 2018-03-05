@@ -19,6 +19,9 @@ class Base extends React.Component {
       nomore: false,
       noData: false,
       pageSize: '15',
+      demandCategoryId: '',
+      demandCategoryName: '',
+      distance: '',
       tabs: [{
         label: '智能排序',
         cur: true,
@@ -38,7 +41,13 @@ class Base extends React.Component {
   getInit = () => {
     this._onRefresh();
     this.emitTabOrder = DeviceEventEmitter.addListener('emitTabOrder', (data) => {
-      console.log(data);
+      const { tabs } = this.state;
+      tabs[3].label = data ? data.name : '筛选';
+      tabs[3].cur = data !== undefined;
+      this.setState({
+        demandCategoryId: data ? data.categoryId : '',
+        tabs,
+      }, this._onRefresh);
     });
   }
   deleteInit = () => {
@@ -51,6 +60,8 @@ class Base extends React.Component {
       orderByType,
       pageSize,
       currentPage,
+      demandCategoryId,
+      distance,
       refresh,
       items,
     } = this.state;
@@ -58,6 +69,8 @@ class Base extends React.Component {
       orderByName,
       orderByType,
       pageSize,
+      demandCategoryId,
+      distance,
       memberId: global.memberId || '1',
       isFlushDistance: refresh ? '1' : '0',
       longitude: global.longitude || '',
@@ -179,7 +192,6 @@ class Base extends React.Component {
   }
   _reachEnd = () => {
     const { nomore } = this.state;
-    console.log(canEnd)
     if (canEnd && !nomore) {
       canEnd = false;
       this.setState({ loading: true }, () => this.GetDemandOrderService());

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetMasterServicesService, GetCategoryService, DeepClone } from '../../api';
@@ -8,20 +7,20 @@ let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       orderByName: '',
       orderByType: '',
       currentPage: '',
       seachValue: '',
       items: [],
-      popItems: null,
+      categoryParentId: '',
+      categoryId: '',
+      distance: '',
+      oneIndex: null,
+      twoIndex: null,
+      popItems: [],
       resetCategory: null,
       ModalOpen: false,
-      ds,
-      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
@@ -55,14 +54,21 @@ class Base extends React.Component {
       currentPage,
       seachValue,
       refresh,
-      ds,
       items,
-      dataSource,
+      categoryParentId,
+      categoryId,
+      distance,
     } = this.state;
     GetMasterServicesService({
       orderByName,
       orderByType,
       pageSize,
+      categoryParentId,
+      categoryId,
+      distance,
+      longitude: global.longitude || '',
+      latitude: global.latitude || '',
+      isFlushDistance: refresh ? '1' : '0',
       name: seachValue,
       currentPage,
     }).then((res) => {
@@ -78,7 +84,6 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
-              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -86,19 +91,17 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
             refresh: false,
+            noData: false,
             nomore: false,
           });
         } else {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
-            isFlushDistance: '0',
           });
         }
         setTimeout(() => { canEnd = true; }, 0);
@@ -154,21 +157,33 @@ class Base extends React.Component {
       tabIndex,
     }, this._onRefresh);
   }
+  resetModal = () => {
+    const { resetCategory } = this.state;
+    this.setState({
+      categoryParentId: '',
+      categoryId: '',
+      oneIndex: null,
+      twoItems: [],
+      popItems: resetCategory,
+    }, this._onRefresh);
+  }
   closeModal = () => {
     this.setState({
       ModalOpen: false,
     });
   }
   tabOneItem = (index) => {
-    const { resetCategory } = this.state;
+    const { resetCategory, oneIndex } = this.state;
     const popItems = DeepClone(resetCategory);
-    popItems[index].cur = true;
+    popItems[index].cur = index !== oneIndex;
     this.setState({
       popItems,
-      oneIndex: index,
-      twoItems: popItems[index].categorys,
+      categoryParentId: index === oneIndex ? '' : popItems[index].categoryId,
+      categoryId: '',
+      oneIndex: index === oneIndex ? null : index,
+      twoItems: index === oneIndex ? [] : popItems[index].categorys,
       twoIndex: null,
-    });
+    }, this._onRefresh);
   }
   tabTwoItem = (index) => {
     const { twoItems, twoIndex } = this.state;
@@ -181,8 +196,9 @@ class Base extends React.Component {
     twoItems[index].cur = true;
     this.setState({
       twoIndex: index,
-      threeItems: twoItems[index].categorys,
-    });
+      categoryId: twoItems[index].categoryId,
+      twoItems,
+    }, this._onRefresh);
   }
   GetCategoryService = () => {
     GetCategoryService({
