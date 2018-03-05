@@ -17,14 +17,16 @@ class ServiceDetail extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _renderMain() {
     const { bz, count, info } = this.state;
     return (

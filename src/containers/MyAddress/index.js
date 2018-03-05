@@ -17,15 +17,17 @@ class MyAddress extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     this.deleteInit();
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   render() {
     const { pop } = this.props;
     const { items, ads } = this.state;

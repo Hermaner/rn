@@ -20,14 +20,16 @@ class MgMasterOrderDetail extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _renderTop() {
     const { status, masterLogs, info } = this.state;
     return (

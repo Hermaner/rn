@@ -16,13 +16,15 @@ class MgMasterLogo extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _renderLogo() {
     const { initImage, title } = this.state;
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView, DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetDemandOrderService } from '../../api';
@@ -8,15 +8,10 @@ let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       currentPage: '',
       items: [],
-      ds,
       status: '',
-      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
@@ -39,9 +34,7 @@ class Base extends React.Component {
       pageSize,
       currentPage,
       refresh,
-      ds,
       items,
-      dataSource,
     } = this.state;
     GetDemandOrderService({
       pageSize,
@@ -69,7 +62,7 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            dataSource: ds.cloneWithRows(result),
+            noData: false,
             currentPage: currentPage + 1,
             refresh: false,
             nomore: false,
@@ -78,7 +71,6 @@ class Base extends React.Component {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
           });

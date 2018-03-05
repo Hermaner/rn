@@ -10,6 +10,7 @@ class Base extends React.Component {
     this.isSend = false;
     this.state = {
       phone: '',
+      itemPhone: '',
       sendPhone: '',
       sec: 60,
       code: '',
@@ -52,6 +53,7 @@ class Base extends React.Component {
       } = item;
       this.setState({
         phone,
+        itemPhone: phone,
         provinceId,
         provinceName,
         cityId,
@@ -161,8 +163,9 @@ class Base extends React.Component {
       nickName,
       addressId,
       isDefault,
+      itemPhone,
     } = this.state;
-    if (!address || !provinceId || !phone || !code || !phone) {
+    if (!address || !provinceId || !phone) {
       Toast.show('信息不全');
       return;
     }
@@ -170,13 +173,19 @@ class Base extends React.Component {
       Toast.show('姓名长度2-8');
       return;
     }
-    if (phone !== sendPhone) {
-      Toast.show('手机号与发送短信手机号不一致');
-      return;
-    }
-    if (code !== codeVal) {
-      Toast.show('验证码错误');
-      return;
+    if (!itemPhone || itemPhone !== phone) {
+      if (!code) {
+        Toast.show('请输入验证码');
+        return;
+      }
+      if (phone !== sendPhone) {
+        Toast.show('手机号与发送短信手机号不一致');
+        return;
+      }
+      if (code !== codeVal) {
+        Toast.show('验证码错误');
+        return;
+      }
     }
     const targetFn = addressId ? UpdateMemberAddressService : CreateMemberAddressService;
     this.sleek.toggle();

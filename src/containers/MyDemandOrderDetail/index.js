@@ -19,11 +19,15 @@ class DemandOrderDetail extends React.Component {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   render() {
     const { pop, reset } = this.props;
     const { item, type } = this.state;

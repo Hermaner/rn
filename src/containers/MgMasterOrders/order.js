@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl } from 'react-native';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -20,47 +20,49 @@ class MasterOrder extends base {
   }
   componentWillUnmount() {
   }
-  _renderRow = (item, sectionID, index) => (
-    <TFeedback
-      key={index}
-      content={
-        <View>
-          <MasterOrderItem
-            item={item}
-            rowID={index}
-            key={index}
-          />
-        </View>
-      }
-      onPress={() => { this.props.push({ key: 'MgMasterOrderDetail', params: { masterOrderId: item.masterOrderId, status: item.status } }); }}
-    />
-  )
+  _renderRow = (data) => {
+    const { item, index } = data;
+    return (
+      <TFeedback
+        key={index}
+        content={
+          <View>
+            <MasterOrderItem
+              item={item}
+              rowID={index}
+              key={index}
+            />
+          </View>
+        }
+        onPress={() => { this.props.push({ key: 'MgMasterOrderDetail', params: { masterOrderId: item.masterOrderId, status: item.status } }); }}
+      />
+    );
+  }
   _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, items, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
           !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
+            <FlatList
+              data={items}
+              renderItem={this._renderRow}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              ListFooterComponent={() =>
+                <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: '#666', fontSize: 14 }}>
+                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                  </Text>
+                </View>}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
               onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
+              onEndReachedThreshold={0.1}
             />
             :
             <NoData
-              label="没有相关数据,点击刷新"
-              onPress={this._onRefresh}
+              label="没有相关数据"
             />
         }
       </View>

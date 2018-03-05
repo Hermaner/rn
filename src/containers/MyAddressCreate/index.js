@@ -17,17 +17,19 @@ class MyAddressCreate extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     this.deleteInit();
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _renderUser() {
-    const { nickName, phone, code, sec, addressTitle, address, addressId } = this.state;
+    const { nickName, phone, itemPhone, code, sec, addressTitle, address, addressId } = this.state;
     return (
       <View style={styles.mainList}>
         <View style={styles.listView}>
@@ -56,24 +58,27 @@ class MyAddressCreate extends base {
             />
           </View>
         </View>
-        <View style={styles.listView}>
-          <Text style={styles.listLabel}>验证码</Text>
-          <View style={styles.listRight}>
-            <Input
-              style={styles.listInput}
-              placeholderTextColor="#999"
-              placeholder="请输入验证码"
-              clearButtonMode="while-editing"
-              value={code}
-              onChangeText={value => this.setState({ code: value })}
-            />
-            <View>
-              <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
-                <Text style={[styles.sendBtnText, this.isSend && styles.sendBtnCur]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
-              </Button>
+        {
+          (!itemPhone || itemPhone !== phone) &&
+          <View style={styles.listView}>
+            <Text style={styles.listLabel}>验证码</Text>
+            <View style={styles.listRight}>
+              <Input
+                style={styles.listInput}
+                placeholderTextColor="#999"
+                placeholder="请输入验证码"
+                clearButtonMode="while-editing"
+                value={code}
+                onChangeText={value => this.setState({ code: value })}
+              />
+              <View>
+                <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
+                  <Text style={[styles.sendBtnText, this.isSend && styles.sendBtnCur]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
+                </Button>
+              </View>
             </View>
           </View>
-        </View>
+        }
         <View style={styles.listView}>
           <Text style={styles.listLabel}>所在地区</Text>
           <TOpacity

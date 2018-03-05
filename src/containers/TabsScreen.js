@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
+import { Icon } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import TabHome from './TabHome';
 import TabOrder from './TabOrder';
 import TabChat from './TabChat';
 import TabMine from './TabMine';
 import { Mcolor } from '../utils';
-import { Iconfont } from '../components';
 
 const styles = StyleSheet.create({
   tabView: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabViewIcon: {
-    fontSize: 20,
+    fontSize: 26,
   },
   tabViewText: {
     fontSize: 12,
@@ -45,19 +45,19 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         let name;
         switch (routeName) {
           case 'TabHome':
-            iconName = 'icon-caigou-xianxing';
+            iconName = 'ios-home-outline';
             name = '首页';
             break;
           case 'TabOrder':
-            iconName = 'icon-caigou-xianxing';
+            iconName = 'ios-list-box-outline';
             name = '接单';
             break;
           case 'TabChat':
-            iconName = 'icon-kefu';
+            iconName = 'ios-chatbubbles-outline';
             name = '聊天';
             break;
           case 'TabMine':
-            iconName = 'icon-wode';
+            iconName = 'ios-contact-outline';
             name = '我';
             break;
           default:
@@ -65,7 +65,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         }
         return (
           <View style={styles.tabView}>
-            <Iconfont style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
+            <Icon style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
             <Text style={[styles.tabViewText, { color: focused ? Mcolor : '#666' }]}>{name}</Text>
           </View>
         );

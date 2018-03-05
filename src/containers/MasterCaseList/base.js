@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetMasterCaseService } from '../../api';
@@ -8,15 +7,10 @@ let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
     this.state = {
       items: [],
-      ds,
       orderByName: '',
       orderByType: '',
-      dataSource: ds.cloneWithRows([]),
       refresh: false,
       loading: true,
       nomore: false,
@@ -34,9 +28,7 @@ class Base extends React.Component {
       refresh,
       orderByName,
       orderByType,
-      ds,
       items,
-      dataSource,
     } = this.state;
     GetMasterCaseService({
       orderByName,
@@ -56,7 +48,6 @@ class Base extends React.Component {
             this.setState({
               nomore: true,
               loading: false,
-              dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -64,16 +55,15 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            dataSource: ds.cloneWithRows(result),
             currentPage: currentPage + 1,
             refresh: false,
+            noData: false,
             nomore: false,
           });
         } else {
           const newItems = items.concat(result);
           this.setState({
             items: newItems,
-            dataSource: dataSource.cloneWithRows(newItems),
             currentPage: currentPage + 1,
             loading: false,
           });

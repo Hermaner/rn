@@ -17,15 +17,17 @@ class MgMaster extends Base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     this.deleteInit();
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   _renderTop() {
     const { push, pop } = this.props;
     return (

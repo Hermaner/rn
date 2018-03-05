@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ListView, RefreshControl, BackHandler } from 'react-native';
+import { View, FlatList, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
@@ -16,57 +16,61 @@ class MyMessage extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.pop();
-      return true;
-    });
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
-  _renderRow = (item, sectionID, index) => (
-    <View
-      key={index}
-      style={styles.list}
-    >
-      <View style={styles.top}>
-        <Text style={styles.title}>息没有您的通</Text>
-        <Text style={styles.date}>息没有您的通</Text>
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
+  _renderRow = (data) => {
+    const { item, index } = data;
+    return (
+      <View
+        key={index}
+        style={styles.list}
+      >
+        <View style={styles.top}>
+          <Text style={styles.title}>息没有您的通</Text>
+          <Text style={styles.date}>息没有您的通</Text>
+        </View>
+        <Text style={styles.content}>
+          没有您的通知消息没有您的通知消息没有您的通
+          知消息没有您的通知消息没有您的通知消息没
+          有您的通知消息没有您的通知消息没有您的通知
+          消息没有您的通知消息没有您的通知消息没有您的通
+          知消息没有您的通知消息没有您的通知消息没有您的通
+          知消息没有您的通知消息</Text>
       </View>
-      <Text style={styles.content}>
-        没有您的通知消息没有您的通知消息没有您的通
-        知消息没有您的通知消息没有您的通知消息没
-        有您的通知消息没有您的通知消息没有您的通知
-        消息没有您的通知消息没有您的通知消息没有您的通
-        知消息没有您的通知消息没有您的通知消息没有您的通
-        知消息没有您的通知消息</Text>
-    </View>
-  )
+    );
+  }
   _renderContent() {
-    const { noData, dataSource, nomore, refresh } = this.state;
+    const { noData, items, nomore, refresh } = this.state;
     return (
       <View style={styles.listContent}>
         {
           !noData ?
-            <ListView
-              dataSource={dataSource}
-              renderRow={this._renderRow}
+            <FlatList
+              data={items}
+              renderItem={this._renderRow}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              ListFooterComponent={() =>
+                <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: '#666', fontSize: 14 }}>
+                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                  </Text>
+                </View>}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
               onEndReached={this._reachEnd}
-              enableEmptySections
-              onEndReachedThreshold={10}
-              contentContainerStyle={styles.listViewStyle}
-              renderFooter={() => <Text style={{ lineHeight: 30, textAlign: 'center', color: '#666', fontSize: 12 }}>
-                {nomore ? '没有更多数据了' : '数据加载中...'}
-              </Text>}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refresh}
-                  onRefresh={this._onRefresh}
-                />}
+              onEndReachedThreshold={0.1}
             />
             :
             <NoData
-              label="没有您的通知消息"
-              onPress={this._onRefresh}
+              label="没有相关数据"
             />
         }
       </View>

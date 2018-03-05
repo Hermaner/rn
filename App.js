@@ -114,7 +114,7 @@ class App extends React.Component {
     applyMiddleware(createReactNavigationReduxMiddleware(
       'root',
       state => state.nav,
-    )));
+    )), autoRehydrate());
   render() {
     return (
       <Provider store={this.store}>
