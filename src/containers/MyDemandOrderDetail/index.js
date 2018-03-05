@@ -31,7 +31,7 @@ class DemandOrderDetail extends React.Component {
       <Container>
         <Header back={type === 'reset' ? reset : pop} title="订单详情" />
         <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-          <List tabLabel="订单动态" demandOrderId={item.demandOrderId} />
+          <List tabLabel="订单动态" demandOrderId={item.demandOrderId} demandOrderNumber={item.demandOrderNumber} />
           <Detail tabLabel="订单明细" item={item} />
         </ScrollableTabView>
       </Container>

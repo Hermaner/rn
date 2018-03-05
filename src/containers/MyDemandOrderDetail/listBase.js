@@ -1,14 +1,15 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { Alert } from 'react-native';
-import { GetDemandOrderBiddingService, PayDemandOrderService, DeleteDemandOrderService } from '../../api';
+import { Alert, DeviceEventEmitter } from 'react-native';
+import { GetDemandOrderBiddingService, PayDemandOrderService, DeleteDemandOrderService, AgreeDemandOrderService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
+      demandOrderNumber: props.demandOrderNumber,
       demandOrderId: props.demandOrderId,
     };
   }
@@ -34,7 +35,33 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('取消成功');
+        DeviceEventEmitter.emit('emitDemandLoad');
         this.props.pop();
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      this.sleek.toggle();
+      console.log(err);
+    });
+  }
+  AgreeDemandOrderService = (list) => {
+    this.sleek.toggle();
+    const { demandOrderId, demandOrderNumber } = this.state;
+    AgreeDemandOrderService({
+      demandOrderId,
+      masterId: list.masterId,
+    }).then((res) => {
+      console.log(res);
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.props.push({ key: 'CreatePay',
+          params: {
+            orderNumber: demandOrderNumber,
+            orderId: res.data.demandOrderId,
+            amount: list.price,
+            type: 2,
+          } });
       } else {
         Toast.show(res.msg);
       }
@@ -97,6 +124,7 @@ class Base extends React.Component {
 Base.propTypes = {
   push: PropTypes.func,
   pop: PropTypes.func,
+  demandOrderNumber: PropTypes.string,
   demandOrderId: PropTypes.string,
 };
 export default Base;

@@ -55,9 +55,11 @@ class DemandOrder extends base {
     <TFeedback
       key={index}
       content={
-        <DemanOrderItem
-          item={item}
-        />
+        <View>
+          <DemanOrderItem
+            item={item}
+          />
+        </View>
       }
       onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
     />

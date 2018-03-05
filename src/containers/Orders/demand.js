@@ -55,6 +55,7 @@ class Demand extends base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
   }
   _renderRow = (item, sectionID, index) => (
     <TFeedback

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView } from 'react-native';
+import { ListView, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetDemandOrderService } from '../../api';
@@ -26,6 +26,12 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+    this.emitDemandLoad = DeviceEventEmitter.addListener('emitDemandLoad', () => {
+      this._onRefresh();
+    });
+  }
+  deleteInit = () => {
+    this.emitDemandLoad.remove();
   }
   GetDemandOrderService = () => {
     const {

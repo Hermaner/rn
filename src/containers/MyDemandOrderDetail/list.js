@@ -119,7 +119,7 @@ class DemandOrderList extends base {
                     content={
                       <Text style={styles.btnText}>同意</Text>
                     }
-                    onPress={() => this.PayDemandOrderService(list)}
+                    onPress={() => this.AgreeDemandOrderService(list)}
                   />
                 </View>
               </View>
