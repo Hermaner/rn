@@ -17,9 +17,13 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
   },
+  topLeft: {
+    ...st.fr,
+    ...st.acenter,
+    flex: 1,
+  },
   name: {
     fontSize: 14,
-    flex: 1,
     color: Mcolor,
     fontWeight: 'bold',
   },
@@ -105,15 +109,37 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
   },
+  apply: {
+    width: 50,
+    height: 20,
+    ...st.jacenter,
+    backgroundColor: 'green',
+    borderRadius: 4,
+    marginLeft: 4,
+  },
+  applyText: {
+    fontSize: 12,
+    color: '#fff',
+  },
 });
 
 
 const DemanOrderItem = ({ item }) => (
   <View style={styles.list}>
     <View style={styles.top}>
-      <Text style={styles.name}>
-        {item.demandCategoryName}
-      </Text>
+      <View style={styles.topLeft}>
+        <Text style={styles.name}>
+          {item.demandCategoryName}
+        </Text>
+        {
+          item.isAccept === 1 &&
+          <View style={styles.apply}>
+            <Text style={styles.applyText}>
+              已申请
+            </Text>
+          </View>
+        }
+      </View>
       <View style={styles.price}>
         <View style={styles.priceIcon}>
           <Icon name="ios-flame" style={styles.priceText} />
