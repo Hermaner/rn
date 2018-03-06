@@ -72,8 +72,8 @@ class MyAddressCreate extends base {
                 onChangeText={value => this.setState({ code: value })}
               />
               <View>
-                <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
-                  <Text style={[styles.sendBtnText, this.isSend && styles.sendBtnCur]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
+                <Button light style={styles.sendBtn} onPress={this.sendCode}>
+                  <Text style={styles.sendBtnText}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
                 </Button>
               </View>
             </View>

@@ -256,6 +256,7 @@ export default class Prompt extends React.Component {
         }
         <Modal
           visible={isImageDateShow}
+          onRequestClose={() => {}}
           transparent
         >
           <ImageViewer

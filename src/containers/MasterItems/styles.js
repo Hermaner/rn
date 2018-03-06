@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
 
   },
   list: {
+    marginBottom: 4,
     backgroundColor: '#fff',
     padding: 10,
     ...st.frcenter,

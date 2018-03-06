@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     backgroundColor: Mcolor,
   },
   sendBtnCur: {
-    backgroundColor: '#aaa',
   },
   sendBtnText: {
     color: '#fff', ...st.font14,

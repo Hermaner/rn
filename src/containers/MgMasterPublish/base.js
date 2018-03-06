@@ -31,6 +31,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { params } = this.props.navigation.state;
+    this.GetCategoryService();
     if (params) {
       const {
         id,
@@ -60,9 +61,7 @@ class Base extends React.Component {
         categoryId,
         status: status === 1,
       });
-      return;
     }
-    this.GetCategoryService();
   }
   getImages = (upImages) => {
     this.setState({
@@ -184,10 +183,10 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
-        // if (masterServicesId) {
-        //   DeviceEventEmitter.emit('emitRefresh');
-        // }
-        // this.props.pop();
+        if (masterServicesId) {
+          DeviceEventEmitter.emit('emitRefresh');
+        }
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }

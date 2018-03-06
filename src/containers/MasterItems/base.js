@@ -2,7 +2,7 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMyMasterServicesService, DeleteMasterServicesService } from '../../api';
+import { GetMasterServicesService, DeleteMasterServicesService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -10,6 +10,7 @@ class Base extends React.Component {
     super(props);
     this.state = {
       items: [],
+      masterId: props.navigation.state.params.masterId,
       refresh: false,
       loading: true,
       nomore: false,
@@ -29,7 +30,7 @@ class Base extends React.Component {
   deleteInit = () => {
     this.emitRefresh.remove();
   }
-  GetMyMasterServicesService = () => {
+  GetMasterServicesService = () => {
     const {
       pageSize,
       currentPage,
@@ -37,8 +38,10 @@ class Base extends React.Component {
       orderByName,
       orderByType,
       items,
+      masterId,
     } = this.state;
-    GetMyMasterServicesService({
+    GetMasterServicesService({
+      masterId,
       orderByName,
       orderByType,
       pageSize,
@@ -114,13 +117,13 @@ class Base extends React.Component {
       refresh: true,
       items: [],
       currentPage: 1,
-    }, () => this.GetMyMasterServicesService());
+    }, () => this.GetMasterServicesService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetMyMasterServicesService());
+      this.setState({ loading: true }, () => this.GetMasterServicesService());
     }
   }
 }

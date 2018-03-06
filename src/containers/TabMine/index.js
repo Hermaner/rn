@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Container, Content, Icon, Text } from 'native-base';
+import { View, ScrollView, RefreshControl } from 'react-native';
+import { Container, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
@@ -10,6 +10,7 @@ import { TFeedback, Loading, UserSocket, TOpacity } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import Base from './base';
 import styles from './styles';
+import { Mcolor } from '../../utils';
 
 @observer
 class My extends Base {
@@ -43,8 +44,11 @@ class My extends Base {
     );
   }
   _renderUser() {
-    const { defaultImg, balance, couponCount } = this.state;
-    const { userData, userData: { memberId } } = UserSocket;
+    const { defaultImg } = this.state;
+    const {
+      userData: { memberId, nickName, phone, imgUrl },
+      applyInfo: { balance, couponCount },
+    } = UserSocket;
     return (
       <View style={styles.userAllView}>
         <View style={styles.userView}>
@@ -52,7 +56,7 @@ class My extends Base {
             <View style={styles.userImgView}>
               <CachedImage
                 source={
-                  userData.imgUrl ? { uri: userData.imgUrl } : defaultImg}
+                  imgUrl ? { uri: imgUrl } : defaultImg}
                 style={styles.userImg}
               />
             </View>
@@ -61,8 +65,8 @@ class My extends Base {
                 <TFeedback
                   content={
                     <View style={styles.userNameView}>
-                      <Text style={styles.nameText}>{UserSocket.userData.nickName}</Text>
-                      <Text style={styles.nameText}>{UserSocket.userData.phone}</Text>
+                      <Text style={styles.nameText}>{nickName}</Text>
+                      <Text style={styles.nameText}>{phone}</Text>
                     </View>
                   }
                   onPress={() => { this.goPage('MemberInfo'); }}
@@ -126,10 +130,13 @@ class My extends Base {
     );
   }
   _renderRoleStatus() {
-    const { applyData } = this.state;
+    const {
+      applyInfo: { applyData },
+    } = UserSocket;
     return (
       <View>
         {
+          applyData && applyData.length > 0 &&
           applyData.map((item, index) => (
             <TOpacity
               key={index}
@@ -243,6 +250,9 @@ class My extends Base {
   }
   _renderOrder() {
     const { orderItems } = this.state;
+    const {
+      applyInfo: { demandCount, waitePayCount, waiteServiceCount, waiteEvaluateCount },
+    } = UserSocket;
     return (
       <View style={styles.order}>
         <View style={styles.orderTop}>
@@ -267,9 +277,27 @@ class My extends Base {
                     <View style={styles.orderItemTop}>
                       <Icon name={item.icon} style={styles.orderItemIcon} />
                       {
-                        item.count > 0 &&
+                        index === 0 && demandCount > 0 &&
                         <View style={styles.orderItemBadge}>
-                          <Text style={styles.orderItemNum}>{item.count}</Text>
+                          <Text style={styles.orderItemNum}>{demandCount}</Text>
+                        </View>
+                      }
+                      {
+                        index === 1 && waitePayCount > 0 &&
+                        <View style={styles.orderItemBadge}>
+                          <Text style={styles.orderItemNum}>{waitePayCount}</Text>
+                        </View>
+                      }
+                      {
+                        index === 2 && waiteServiceCount > 0 &&
+                        <View style={styles.orderItemBadge}>
+                          <Text style={styles.orderItemNum}>{waiteServiceCount}</Text>
+                        </View>
+                      }
+                      {
+                        index === 3 && waiteEvaluateCount > 0 &&
+                        <View style={styles.orderItemBadge}>
+                          <Text style={styles.orderItemNum}>{waiteEvaluateCount}</Text>
                         </View>
                       }
                     </View>
@@ -320,9 +348,23 @@ class My extends Base {
   }
   render() {
     const { userData: { memberId, masterId, bmMarketId, decorationId } } = UserSocket;
+    const { refresh } = this.state;
     return (
       <Container>
-        <Content>
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={this._onRefresh}
+              tintColor={'#444'}
+              title="加载中..."
+              titleColor="#666"
+              colors={[Mcolor, Mcolor, Mcolor]}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+        >
           {this._renderTop()}
           {this._renderUser()}
           {memberId && this._renderRoleStatus()}
@@ -331,7 +373,7 @@ class My extends Base {
           {decorationId && this._renderRole3()}
           {this._renderOrder()}
           {this._renderIcons()}
-        </Content>
+        </ScrollView>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

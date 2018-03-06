@@ -18,9 +18,6 @@ export default class UserObser {
   @action changeApply(data) {
     this.applyInfo = data;
   }
-  @computed get total() {
-    return this.price * this.amount;
-  }
   @computed get userData() {
     return {
       ...this.userInfo,

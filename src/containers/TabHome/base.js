@@ -1,5 +1,6 @@
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { GetMasterCaseService, AmapGeocode } from '../../api';
 
 class Base extends React.Component {
@@ -82,7 +83,7 @@ class Base extends React.Component {
     this.emitHomePosition.remove();
   }
   _onRefresh = () => {
-    console.log('1111');
+    this.GetMasterCaseService();
   }
   GetLocation = ({ nativeEvent }) => {
     const { longitude, latitude } = nativeEvent;
@@ -124,6 +125,8 @@ class Base extends React.Component {
         this.setState({
           cases: res.data.pageData,
         });
+      } else {
+        Toast.show(res.msg);
       }
     }).catch((err) => {
       console.log(err);

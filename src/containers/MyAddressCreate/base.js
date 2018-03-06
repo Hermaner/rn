@@ -98,12 +98,15 @@ class Base extends React.Component {
     this.emitArea.remove();
   }
   sendCode = () => {
+    if (this.isSend) {
+      return;
+    }
     const { phone } = this.state;
     if (!phone) {
       Toast.show('请输入手机号');
       return;
     }
-    const telReg = !(phone).match(/^(0|86|17951)?(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9]|19[0-9])[0-9]{8}$/);
+    const telReg = !(phone).match(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
     if (telReg) {
       Toast.show('手机号格式不对');
       return;

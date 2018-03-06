@@ -158,6 +158,7 @@ class Base extends React.Component {
     if (key === 'MgMasterLogo') {
       params = {
         imgUrl: info.imgUrl || '',
+        title: '我的工照',
       };
     }
     if (key === 'MgMasterCert') {

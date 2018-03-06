@@ -11,6 +11,7 @@ class Base extends React.Component {
     this.state = {
       defaultImg: require('../../assets/img/tx.png'),
       applyData: [],
+      refresh: false,
       balance: 0,
       orderItems: [
         {
@@ -103,7 +104,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.getData();
+    // this.getData();
     this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
       this.getData();
     });
@@ -130,7 +131,7 @@ class Base extends React.Component {
           masterInfo,
         } = res.data;
         const applyData = [];
-        const applyInfo = {};
+        let applyInfo = {};
         if (bmMarketInfo) {
           if (bmMarketInfo.checkStatus === 4) {
             global.bmMarketId = bmMarketInfo.bmMarketId;
@@ -170,25 +171,27 @@ class Base extends React.Component {
             });
           }
         }
-        UserSocket.changeApply(applyInfo);
-        global.depositOrderMaster = depositOrderMaster;
-        const { orderItems } = this.state;
-        orderItems[0].count = demandCount || 0;
-        orderItems[1].count = waitePayCount || 0;
-        orderItems[2].count = waiteServiceCount || 0;
-        orderItems[3].count = waiteEvaluateCount || 0;
-        this.setState({
-          orderItems,
-          balance,
+        applyInfo = {
+          ...applyInfo,
           applyData,
           couponCount,
-        });
+          balance,
+          demandCount,
+          waitePayCount,
+          waiteServiceCount,
+          waiteEvaluateCount,
+        };
+        UserSocket.changeApply(applyInfo);
+        global.depositOrderMaster = depositOrderMaster;
       } else {
-        Toast.show('温馨提示');
+        Toast.show(res.msg);
       }
     }).catch(() => {
       this.sleek.toggle();
     });
+  }
+  _onRefresh = () => {
+    DeviceEventEmitter.emit('emitMine');
   }
   goRoleStatus = (item) => {
     const { push } = this.props;

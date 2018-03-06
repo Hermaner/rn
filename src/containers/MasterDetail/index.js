@@ -230,7 +230,7 @@ class MasterDetail extends base {
               <Text style={styles.footBtnText}>预约服务</Text>
             </View>
           }
-          onPress={this.createService}
+          onPress={this.save}
         />
       </Footer>
     );

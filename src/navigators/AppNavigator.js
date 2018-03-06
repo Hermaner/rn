@@ -81,8 +81,12 @@ import MyDrawList from '../containers/MyDrawList';
 import MyDrawAdd from '../containers/MyDrawAdd';
 import MainSearch from '../containers/MainSearch';
 import UserAgreement from '../containers/UserAgreement';
+import MgMasterApply from '../containers/MgMasterApply';
+import MasterItems from '../containers/MasterItems';
 
 export const AppNavigator = StackNavigator({
+  MasterItems: { screen: MasterItems },
+  MgMasterApply: { screen: MgMasterApply },
   UserAgreement: { screen: UserAgreement },
   MainSearch: { screen: MainSearch },
   MyDrawAdd: { screen: MyDrawAdd },

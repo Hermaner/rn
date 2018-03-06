@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, Header, NoData, CaseItem } from '../../components';
+import { Loading, Header, NoData, ServiceItem } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class MasterCaseList extends base {
+class MgMasterItems extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +29,11 @@ class MasterCaseList extends base {
   _renderRow = (data) => {
     const { item, index } = data;
     return (
-      <CaseItem
-        key={index}
+      <ServiceItem
         item={item}
-        onPress={() => this.props.push({ key: 'MasterDetail', params: { masterId: item.masterId } })}
+        rowID={index}
+        key={index}
+        onPress={() => { this.props.push({ key: 'ServiceDetail', params: { masterServicesId: item.id } }); }}
       />
     );
   }
@@ -70,7 +71,7 @@ class MasterCaseList extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="师傅案例" />
+        <Header back={pop} title="我的项目" />
         {this._renderContent()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
@@ -78,8 +79,8 @@ class MasterCaseList extends base {
   }
 }
 
-MasterCaseList.propTypes = {
+MgMasterItems.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MasterCaseList);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgMasterItems);

@@ -454,3 +454,6 @@ export function CreateWithdrawalsNumberService(data) {
 export function AgreeDemandOrderService(data) {
   return get('AgreeDemandOrderService', data);
 }
+export function GetMyMasterServicesService(data) {
+  return get('GetMyMasterServicesService', data);
+}

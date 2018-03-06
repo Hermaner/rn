@@ -151,7 +151,7 @@ class MgMaster extends Base {
                 <Icon name="md-alarm" style={styles.rightArr} />
               </View>
             }
-            onPress={() => { this.props.push({ key: 'MgMasterOrders', params: { initialPage: '0' } }); }}
+            onPress={() => { this.props.push({ key: 'MgMasterOrders', params: { initialPage: 0 } }); }}
           />
         </View>
         <View style={styles.orderPage}>
