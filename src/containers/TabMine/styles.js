@@ -252,5 +252,50 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: '#fff',
   },
+  ModalStyle: {
+    backgroundColor: '#fff',
+    height: 150,
+  },
+  modalView: {
+    flex: 1,
+  },
+  shareLists: {
+    ...st.frcenter,
+    backgroundColor: '#f8f8f8',
+    height: 100,
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  shareList: {
+    flex: 1,
+    ...st.acenter,
+  },
+  shareTop: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginBottom: 10,
+  },
+  shareIcon: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  shareText: {
+    fontSize: 12,
+    color: '#444',
+  },
+  shareBtn: {
+    backgroundColor: '#fff',
+    borderTopColor: '#ccc',
+    borderTopWidth: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    height: 50,
+    ...st.jacenter,
+  },
+  shareBtnText: {
+    fontSize: 14,
+    color: '#333',
+  },
 });
 export default styles;

@@ -1,6 +1,6 @@
 
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st } from '../../utils';
 
 const styles = StyleSheet.create({
   list: {

@@ -72,10 +72,13 @@ import MgMasterOrderDetail from '../containers/MgMasterOrderDetail';
 import MgMasterOrders from '../containers/MgMasterOrders';
 import MgMasterPublish from '../containers/MgMasterPublish';
 import MgMasterSetting from '../containers/MgMasterSetting';
+import MgMasterTxList from '../containers/MgMasterTxList';
+import MgMasterLogList from '../containers/MgMasterLogList';
 import MyMessage from '../containers/MyMessage';
 import MySetting from '../containers/MySetting';
 import MgMasterItems from '../containers/MgMasterItems';
 import MasterCaseList from '../containers/MasterCaseList';
+import MgMasterBadList from '../containers/MgMasterBadList';
 import MgSecurity from '../containers/MgSecurity';
 import MyDrawList from '../containers/MyDrawList';
 import MyDrawAdd from '../containers/MyDrawAdd';
@@ -85,7 +88,9 @@ import MgMasterApply from '../containers/MgMasterApply';
 import MasterItems from '../containers/MasterItems';
 
 export const AppNavigator = StackNavigator({
+  MgMasterBadList: { screen: MgMasterBadList },
   MasterItems: { screen: MasterItems },
+  MgMasterLogList: { screen: MgMasterLogList },
   MgMasterApply: { screen: MgMasterApply },
   UserAgreement: { screen: UserAgreement },
   MainSearch: { screen: MainSearch },
@@ -116,6 +121,7 @@ export const AppNavigator = StackNavigator({
   MgMasterOrders: { screen: MgMasterOrders },
   MgMasterPublish: { screen: MgMasterPublish },
   MgMasterSetting: { screen: MgMasterSetting },
+  MgMasterTxList: { screen: MgMasterTxList },
   MyAddress: { screen: MyAddress },
   MyCard: { screen: MyCard },
   MyColl: { screen: MyColl },

@@ -30,15 +30,15 @@ class MgMasterTxList extends React.Component {
     const { initialPage } = this.state;
     return (
       <Container>
-        <Header back={pop} title="服务订单" />
+        <Header back={pop} title="提现记录" />
         <ScrollableTabView
           style={{ flex: 1 }}
           initialPage={initialPage}
           renderTabBar={() => <ScrollableTab />}
         >
-          <List tabLabel="全部" status="2" />
-          <List tabLabel="成功" status="3" />
-          <List tabLabel="失败" status="4" />
+          <List tabLabel="成功" status="2" />
+          <List tabLabel="处理中" status="1" />
+          <List tabLabel="失败" status="3" />
         </ScrollableTabView>
       </Container>
     );

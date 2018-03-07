@@ -1,8 +1,7 @@
 import React from 'react';
-import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMyMasterServicesService, DeleteMasterServicesService, UpdateMasterServicesStatusService } from '../../api';
+import { GetMasterAmountLogService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -14,33 +13,20 @@ class Base extends React.Component {
       loading: true,
       nomore: false,
       noData: false,
-      orderByName: '',
-      orderByType: '',
       pageSize: '15',
-      currentPage: '1',
     };
   }
   getInit = () => {
     this._onRefresh();
-    this.emitRefresh = DeviceEventEmitter.addListener('emitRefresh', () => {
-      this._onRefresh();
-    });
   }
-  deleteInit = () => {
-    this.emitRefresh.remove();
-  }
-  GetMyMasterServicesService = () => {
+  GetMasterAmountLogService = () => {
     const {
       pageSize,
       currentPage,
       refresh,
-      orderByName,
-      orderByType,
       items,
     } = this.state;
-    GetMyMasterServicesService({
-      orderByName,
-      orderByType,
+    GetMasterAmountLogService({
       pageSize,
       currentPage,
     }).then((res) => {
@@ -63,9 +49,9 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
-            noData: false,
             currentPage: currentPage + 1,
             refresh: false,
+            noData: false,
             nomore: false,
           });
         } else {
@@ -90,59 +76,17 @@ class Base extends React.Component {
       console.log(err);
     });
   }
-  UpdateMasterServicesStatusService = (value, index) => {
-    this.sleek.toggle();
-    const { items } = this.state;
-    UpdateMasterServicesStatusService({
-      masterServicesId: items[index].id,
-      status: value ? '1' : '2',
-    }).then((res) => {
-      console.log(res);
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        items[index].status = value ? 1 : 0;
-        this.setState({
-          items,
-        });
-        Toast.show(value ? '上架成功' : '下架成功');
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      this.sleek.toggle();
-      console.log(err);
-    });
-  }
-  del = (index) => {
-    this.sleek.toggle();
-    const { items } = this.state;
-    DeleteMasterServicesService({
-      masterServicesId: items[index].id,
-    }).then((res) => {
-      console.log(res);
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        this._onRefresh();
-        Toast.show('删除成功');
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch((err) => {
-      this.sleek.toggle();
-      console.log(err);
-    });
-  }
   _onRefresh = () => {
     this.setState({
       refresh: true,
       currentPage: 1,
-    }, () => this.GetMyMasterServicesService());
+    }, () => this.GetMasterAmountLogService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetMyMasterServicesService());
+      this.setState({ loading: true }, () => this.GetMasterAmountLogService());
     }
   }
 }

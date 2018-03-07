@@ -59,5 +59,44 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
   },
+  listView: {
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  list: {
+    ...st.frcenter,
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    borderWidth: 1,
+    height: 50,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  listCur: {
+    borderColor: Mcolor,
+  },
+  left: {
+    flex: 1,
+    ...st.fr,
+    ...st.acenter,
+  },
+  img: {
+    width: 36,
+    height: 36,
+    marginRight: 8,
+  },
+  listLabel: {
+    fontSize: 15,
+    color: '#666',
+  },
+  bomtips: {
+    height: 30,
+    marginTop: 10,
+    ...st.jacenter,
+  },
+  bomtipsText: {
+    fontSize: 13,
+    color: '#666',
+  },
 });
 export default styles;

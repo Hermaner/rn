@@ -7,6 +7,19 @@ const styles = StyleSheet.create({
     backgroundColor: Mcolor,
     height: deviceW * 0.5,
   },
+  start: {
+    ...st.frcenter,
+    height: 50,
+    marginTop: 4,
+    backgroundColor: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  startText: {
+    fontSize: 15,
+    flex: 1,
+    color: '#444',
+  },
   topIconView: {
     ...st.fr,
     marginTop: 50,
@@ -227,6 +240,21 @@ const styles = StyleSheet.create({
   },
   iconsIcon: {
     fontSize: 22,
+    color: '#fff',
+  },
+  txBtn: {
+    width: 50,
+    height: 26,
+    ...st.jacenter,
+    borderRadius: 3,
+    marginLeft: 4,
+    backgroundColor: Mcolor,
+  },
+  txBtnGray: {
+    backgroundColor: '#aaa',
+  },
+  txText: {
+    fontSize: 12,
     color: '#fff',
   },
 });

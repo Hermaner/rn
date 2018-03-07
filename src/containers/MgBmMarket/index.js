@@ -41,7 +41,7 @@ class MgBmMarket extends Base {
               onPress={pop}
             />
           </View>
-          <TOpacity
+          {/* <TOpacity
             content={
               <Icon name="ios-settings-outline" style={styles.topIcon} />
             }
@@ -52,7 +52,7 @@ class MgBmMarket extends Base {
               <Icon name="ios-chatboxes-outline" style={styles.topIcon} />
             }
             onPress={() => push({ key: 'MyMessage' })}
-          />
+          /> */}
         </View>
       </View>
     );
@@ -84,10 +84,6 @@ class MgBmMarket extends Base {
           </View>
           <View style={styles.topPage}>
             <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>{totalMoney}</Text>
-              <Text style={styles.topText}>总金额(元)</Text>
-            </View>
-            <View style={styles.topPageList}>
               <Text style={styles.topBoldText}>{outMoney}</Text>
               <Text style={styles.topText}>已提现(元)</Text>
             </View>
@@ -98,7 +94,7 @@ class MgBmMarket extends Base {
                   <Text style={styles.topText}>余额(元)</Text>
                 </View>
               }
-              onPress={() => { this.goPage('MyColl'); }}
+              onPress={() => { }}
             />
           </View>
         </View>

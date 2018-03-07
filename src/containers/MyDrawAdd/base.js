@@ -2,7 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter, Alert } from 'react-native';
-import { CreateWithdrawalsNumberService } from '../../api';
+import { CreateWithdrawalsNumberMasterService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Base extends React.Component {
   }
   getInit = () => {
   }
-  CreateWithdrawalsNumberService = () => {
+  CreateWithdrawalsNumberMasterService = () => {
     const {
       realName,
       numberName,
@@ -44,7 +44,7 @@ class Base extends React.Component {
         { text: '确认',
           onPress: () => {
             this.sleek.toggle();
-            CreateWithdrawalsNumberService({
+            CreateWithdrawalsNumberMasterService({
               realName,
               numberName,
               number,

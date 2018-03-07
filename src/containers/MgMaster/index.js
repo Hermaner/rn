@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
-import { Container, Content, Icon, Text } from 'native-base';
+import { Container, Content, Icon, Text, Switch } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
@@ -29,7 +29,7 @@ class MgMaster extends Base {
     return true;
   };
   _renderTop() {
-    const { push, pop } = this.props;
+    const { pop } = this.props;
     return (
       <View style={styles.topView}>
         <View style={styles.topIconView}>
@@ -41,7 +41,7 @@ class MgMaster extends Base {
               onPress={pop}
             />
           </View>
-          <TOpacity
+          {/* <TOpacity
             content={
               <Icon name="ios-settings-outline" style={styles.topIcon} />
             }
@@ -52,7 +52,7 @@ class MgMaster extends Base {
               <Icon name="ios-chatboxes-outline" style={styles.topIcon} />
             }
             onPress={() => push({ key: 'MyMessage' })}
-          />
+          /> */}
         </View>
       </View>
     );
@@ -61,49 +61,49 @@ class MgMaster extends Base {
     const { defaultImg, info } = this.state;
     return (
       <View style={styles.userAllView}>
-        <View style={styles.userView}>
-          <View style={styles.userTop}>
-            <View style={styles.userImgView}>
-              <CachedImage
-                source={
-                  info.imgUrl ? { uri: info.imgUrl } : defaultImg}
-                style={styles.userImg}
-              />
-            </View>
-            <TFeedback
-              content={
-                <View style={styles.userNameView}>
-                  <Text style={styles.nameText}>{info.realName}</Text>
-                  <Text style={styles.nameText}>{info.masterNumber}</Text>
-                </View>
-              }
-              onPress={() => this.props.push({ key: 'MasterDetail', params: { masterId: global.masterId } })}
-            />
-            <Icon name="md-arrow-dropright" style={styles.rightArr} />
-          </View>
-          <View style={styles.topPage}>
-            <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>{info.wallet.total}</Text>
-              <Text style={styles.topText}>总金额(元)</Text>
-            </View>
-            <View style={styles.topPageList}>
-              <Text style={styles.topBoldText}>{info.wallet.withdrawals}</Text>
-              <Text style={styles.topText}>已提现(元)</Text>
-            </View>
-            <TFeedback
-              content={
-                <View style={styles.tiBtn}>
-                  <View style={styles.tiPage}>
-                    <Text style={styles.topBoldText}>{info.wallet.balance}</Text>
-                    <Text style={styles.topText}>余额(元)</Text>
+        {
+          info &&
+          <View style={styles.userView}>
+            <View style={styles.userTop}>
+              <View style={styles.userImgView}>
+                <CachedImage
+                  source={
+                    info.imgUrl ? { uri: info.imgUrl } : defaultImg}
+                  style={styles.userImg}
+                />
+              </View>
+              <TFeedback
+                content={
+                  <View style={styles.userNameView}>
+                    <Text style={styles.nameText}>{info.realName}</Text>
+                    <Text style={styles.nameText}>{info.masterNumber}</Text>
                   </View>
-                  <Icon name="md-arrow-dropright" style={styles.rightArr} />
+                }
+                onPress={() => this.props.push({ key: 'MasterDetail', params: { masterId: global.masterId } })}
+              />
+              <Icon name="md-arrow-dropright" style={styles.rightArr} />
+            </View>
+            <View style={styles.topPage}>
+              <View style={styles.topPageList}>
+                <Text style={styles.topBoldText}>{info.wallet.withdrawals}</Text>
+                <Text style={styles.topText}>已提现(元)</Text>
+              </View>
+              <View style={styles.tiBtn}>
+                <View style={styles.tiPage}>
+                  <Text style={styles.topBoldText}>{info.wallet.balance}</Text>
+                  <Text style={styles.topText}>余额(元)</Text>
                 </View>
-              }
-              onPress={() => this.goIconPage('MyTixian')}
-            />
+                <TOpacity
+                  style={[styles.txBtn, info.isWithdrawals && styles.txBtnGray]}
+                  content={
+                    <Text style={styles.txText}>{info.isWithdrawals ? '提现中' : '提现'}</Text>
+                  }
+                  onPress={() => !info.isWithdrawals && this.goIconPage('MyTixian')}
+                />
+              </View>
+            </View>
           </View>
-        </View>
+        }
       </View>
     );
   }
@@ -204,16 +204,28 @@ class MgMaster extends Base {
       </View>
     );
   }
+  _renderStart() {
+    const { isStart } = this.state;
+    return (
+      <View style={styles.start}>
+        <Text style={styles.startText}>上工设置</Text>
+        <Switch
+          value={isStart}
+          onValueChange={val => this.changeStart(val)}
+        />
+      </View>
+    );
+  }
   render() {
-    const { info } = this.state;
     return (
       <Container>
         <Content>
           {this._renderTop()}
-          {info && this._renderUser()}
+          {this._renderUser()}
           {this._renderRole1()}
           {this._renderOrder()}
           {this._renderIcons()}
+          {this._renderStart()}
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

@@ -51,30 +51,35 @@ class Base extends React.Component {
   }
   goAlipay = () => {
     const { orderNumber, amount } = this.state;
+    this.sleek.toggle();
     AliAppPayService({
       orderNumber,
       amount: '0.01' || amount.toString(),
     }).then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
         XPay.alipay(res.data, (json) => {
           console.log(json);
-          if (json.resultStatus) {
-            Toast.show('用户取消');
-            return;
+          if (json.resultStatus === '9000') {
+            this.goNext();
           }
-          this.goNext();
         }).catch(err => console.log(err));
       }
-    }).catch(err => console.log(err));
+    }).catch((err) => {
+      console.log(err);
+      this.sleek.toggle();
+    });
   }
   goWXpay = () => {
     const { orderNumber, amount } = this.state;
+    this.sleek.toggle();
     PayAppWeiXinService({
       orderNumber,
       amount: amount.toString(),
     }).then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
         const parmas = res.data;
         console.log(parmas);
@@ -86,11 +91,16 @@ class Base extends React.Component {
           timeStamp: parmas.timestamp,
           sign: parmas.sign,
         }, (json) => {
-          console.log(json);
-          this.goNext();
+          const { type } = json;
+          if (type === '0' || type === 0) {
+            this.goNext();
+          }
         });
       }
-    }).catch(err => console.log(err));
+    }).catch((err) => {
+      console.log(err);
+      this.sleek.toggle();
+    });
   }
   goNext = () => {
     const { type, orderId } = this.state;

@@ -115,7 +115,6 @@ class Base extends React.Component {
   _onRefresh = () => {
     this.setState({
       refresh: true,
-      items: [],
       currentPage: 1,
     }, () => this.GetMasterServicesService());
   }

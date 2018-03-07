@@ -12,6 +12,7 @@ class Base extends React.Component {
       defaultImg: require('../../assets/img/tx.png'),
       applyData: [],
       refresh: false,
+      isModalShow: false,
       balance: 0,
       orderItems: [
         {
@@ -68,7 +69,7 @@ class Base extends React.Component {
           label: '邀请好友',
           icon: 'icon-youhuiquan',
           color: '#f96b57',
-          page: 'myCoupons',
+          page: 'showModal',
         },
         {
           label: '签到领福利',
@@ -213,7 +214,21 @@ class Base extends React.Component {
       this.props.push({ key: 'User' });
       return;
     }
+    if (key === 'showModal') {
+      this.showModal();
+      return;
+    }
     this.props.push({ key, params: params || {} });
+  }
+  showModal = () => {
+    this.setState({
+      isModalShow: true,
+    });
+  }
+  closeModal = () => {
+    this.setState({
+      isModalShow: false,
+    });
   }
 }
 Base.propTypes = {

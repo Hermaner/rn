@@ -88,7 +88,7 @@ class MyDrawAdd extends base {
             content={
               <Text style={styles.btnText}>{'保存账号'}</Text>
             }
-            onPress={this.CreateWithdrawalsNumberService}
+            onPress={this.CreateWithdrawalsNumberMasterService}
           />
         </Footer>
         <Loading ref={(c) => { this.sleek = c; }} />

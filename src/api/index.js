@@ -409,8 +409,8 @@ export function GetMemberCenterService(data) {
 export function CreateOtherOrgService(data) {
   return get('CreateOtherOrgService', data);
 }
-export function CreateWithdrawalsOrderService(data) {
-  return get('CreateWithdrawalsOrderService', data);
+export function CreateWithdrawalsOrderMasterService(data) {
+  return get('CreateWithdrawalsOrderMasterService', data);
 }
 export function GetWithdrawalsOrderService(data) {
   return get('GetWithdrawalsOrderService', data);
@@ -445,8 +445,8 @@ export function CreateRechargeOrderService(data) {
 export function GetMemberRechargeService(data) {
   return get('GetMemberRechargeService', data);
 }
-export function GetWithdrawalsNumberService(data) {
-  return get('GetWithdrawalsNumberService', data);
+export function GetWithdrawalsNumberMasterService(data) {
+  return get('GetWithdrawalsNumberMasterService', data);
 }
 export function CreateWithdrawalsNumberService(data) {
   return get('CreateWithdrawalsNumberService', data);
@@ -456,4 +456,19 @@ export function AgreeDemandOrderService(data) {
 }
 export function GetMyMasterServicesService(data) {
   return get('GetMyMasterServicesService', data);
+}
+export function CreateWithdrawalsNumberMasterService(data) {
+  return get('CreateWithdrawalsNumberMasterService', data);
+}
+export function UpdateMasterServicesStatusService(data) {
+  return get('UpdateMasterServicesStatusService', data);
+}
+export function GetWithdrawalsOrderMasterService(data) {
+  return get('GetWithdrawalsOrderMasterService', data);
+}
+export function GetMasterAmountLogService(data) {
+  return get('GetMasterAmountLogService', data);
+}
+export function GetMasterPunishOrderService(data) {
+  return get('GetMasterPunishOrderService', data);
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
-import { GetWithdrawalsNumberService } from '../../api';
+import { GetWithdrawalsNumberMasterService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -20,17 +20,17 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetWithdrawalsNumberService();
-    this.emitNick = DeviceEventEmitter.addListener('emitNick', (data) => {
-      console.log(data);
+    this.GetWithdrawalsNumberMasterService();
+    this.emitLoad = DeviceEventEmitter.addListener('emitLoad', () => {
+      this.GetWithdrawalsNumberMasterService();
     });
   }
   deleteInit = () => {
-    this.emitNick.remove();
+    this.emitLoad.remove();
   }
-  GetWithdrawalsNumberService = () => {
+  GetWithdrawalsNumberMasterService = () => {
     this.sleek.toggle();
-    GetWithdrawalsNumberService({
+    GetWithdrawalsNumberMasterService({
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);

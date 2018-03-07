@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMasterOrderService } from '../../api';
+import { GetWithdrawalsOrderMasterService } from '../../api';
 
 require('moment/locale/zh-cn');
 const moment = require('moment');
@@ -25,7 +25,7 @@ class Base extends React.Component {
   getInit = () => {
     this._onRefresh();
   }
-  GetMasterOrderService = () => {
+  GetWithdrawalsOrderMasterService = () => {
     const {
       status,
       pageSize,
@@ -33,14 +33,10 @@ class Base extends React.Component {
       refresh,
       items,
     } = this.state;
-    GetMasterOrderService({
+    GetWithdrawalsOrderMasterService({
       pageSize,
       status,
-      isFlushDistance: refresh ? '1' : '0',
-      longitude: global.longitude || '',
-      latitude: global.latitude || '',
       currentPage,
-      masterId: global.masterId,
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
@@ -106,13 +102,13 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
       currentPage: 1,
-    }, () => this.GetMasterOrderService());
+    }, () => this.GetWithdrawalsOrderMasterService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetMasterOrderService());
+      this.setState({ loading: true }, () => this.GetWithdrawalsOrderMasterService());
     }
   }
 }

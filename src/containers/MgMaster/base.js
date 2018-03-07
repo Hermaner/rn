@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Alert } from 'react-native';
 import { GetMasterBasicInfoService, UpdateMasterService } from '../../api';
 
 class Base extends React.Component {
@@ -10,6 +10,7 @@ class Base extends React.Component {
     this.state = {
       defaultImg: require('../../assets/img/tx.png'),
       info: null,
+      isStart: false,
       orderItems: [
         {
           label: '待预约',
@@ -77,19 +78,19 @@ class Base extends React.Component {
           label: '提现记录',
           icon: 'icon-youhuiquan',
           color: '#f96b57',
-          page: 'myCoupons',
+          page: 'MgMasterTxList',
         },
         {
           label: '收入明细',
           icon: 'icon-like',
           color: '#eeba57',
-          page: 'myColl',
+          page: 'MgMasterLogList',
         },
         {
           label: '处罚记录',
           icon: 'icon-hezuo',
           color: '#febf27',
-          page: 'ApplyWant',
+          page: 'MgMasterBadList',
         },
       ],
     };
@@ -103,15 +104,30 @@ class Base extends React.Component {
   deleteInit = () => {
     this.emitMasterLoad.remove();
   }
-  UpdateMasterService = () => {
+  changeStart = (val) => {
+    if (!val) {
+      Alert.alert(
+        '温馨提示', '确认下工',
+        [
+          { text: '取消', onPress: () => {} },
+          { text: '确认', onPress: () => this.UpdateMasterService(val) },
+        ],
+      );
+    } else {
+      this.UpdateMasterService(val);
+    }
+  }
+  UpdateMasterService = (val) => {
+    console.log(val);
+    this.sleek.toggle();
     UpdateMasterService({
-      masterId: global.masterId,
-      isStart: '1',
+      isStart: val ? '1' : '0',
     }).then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
-          info: res.data,
+          isStart: val,
         });
       } else {
         Toast.show(res.msg);
@@ -121,13 +137,15 @@ class Base extends React.Component {
     });
   }
   GetMasterBasicInfoService = () => {
-    GetMasterBasicInfoService({
-      masterId: global.masterId,
-    }).then((res) => {
+    this.sleek.toggle();
+    GetMasterBasicInfoService().then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
+        const info = res.data;
         this.setState({
-          info: res.data,
+          info,
+          isStart: info.isStart === 1 || info.isStart === '1',
         });
       } else {
         Toast.show(res.msg);

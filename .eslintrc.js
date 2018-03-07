@@ -17,6 +17,7 @@ module.exports = {
     "global-require": 0,
     "linebreak-style": 0,
     "no-nested-ternary": 0,
+    "no-param-reassign": 0,
     "react/jsx-filename-extension": [
       1,
       {

@@ -3,6 +3,7 @@ import { View, ScrollView, RefreshControl } from 'react-native';
 import { Container, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Modal from 'react-native-modalbox';
 import Communications from 'react-native-communications';
 import { CachedImage } from 'react-native-img-cache';
 import { observer } from 'mobx-react/native';
@@ -346,6 +347,38 @@ class My extends Base {
       </View>
     );
   }
+  _renderModal() {
+    const { isModalShow } = this.state;
+    return (
+      <Modal
+        style={styles.ModalStyle}
+        position="bottom"
+        entry="bottom"
+        animationDuration={250}
+        onClosed={this.closeModal}
+        isOpen={isModalShow}
+        ref={(o) => { this.ModalView = o; }}
+      >
+        <View style={styles.modalView}>
+          <View style={styles.shareLists}>
+            <View style={styles.shareList}>
+              <View style={[styles.shareTop, { backgroundColor: '#f2a050' }]}>
+                <Icon name="md-alarm" style={styles.shareIcon} />
+              </View>
+              <Text style={styles.shareText}>客服热线</Text>
+            </View>
+          </View>
+          <TOpacity
+            style={styles.shareBtn}
+            content={
+              <Text style={styles.shareBtnText}>取消</Text>
+            }
+            onPress={this.closeModal}
+          />
+        </View>
+      </Modal>
+    );
+  }
   render() {
     const { userData: { memberId, masterId, bmMarketId, decorationId } } = UserSocket;
     const { refresh } = this.state;
@@ -374,6 +407,7 @@ class My extends Base {
           {this._renderOrder()}
           {this._renderIcons()}
         </ScrollView>
+        {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
