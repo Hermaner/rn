@@ -137,6 +137,7 @@ android {
     }
     dexOptions {
         jumboMode true
+        javaMaxHeapSize "4g"
     }
     buildTypes {
         release {
@@ -161,14 +162,13 @@ android {
 }
 
 dependencies {
+    // compile project(':react-native-amap3d')
     compile project(':react-native-puti-pay')
     compile project(':react-native-fetch-blob')
-    compile project(':react-native-smart-amap-location')
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
     compile project(':react-native-splash-screen')
-    compile project(':react-native-picker')
     compile project(':react-native-device-info')
     compile project(':react-native-camera')
     compile project(':jpush-react-native')

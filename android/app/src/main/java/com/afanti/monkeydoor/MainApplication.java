@@ -3,10 +3,10 @@ package com.afanti.monkeydoor;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+// import cn.qiuxiang.react.amap3d.AMap3DPackage;
 import com.puti.paylib.PayReactPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.reactnativecomponent.amaplocation.RCTAMapLocationPackage;
 import com.horcrux.svg.SvgPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -17,7 +17,6 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.beefe.picker.PickerViewPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 
 import java.util.Arrays;
@@ -41,8 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new PayReactPackage(),
+            // new AMap3DPackage(),
             new RNFetchBlobPackage(),
-          new RCTAMapLocationPackage(),
             new PickerPackage(),
             new SvgPackage(),
             new JPushPackage(SHUTDOWN_TOAST, SHUTDOWN_LOG),
@@ -50,7 +49,6 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
             new RCTCameraPackage(),
-            new PickerViewPackage(),
             new UpdatePackage()
       );
     }
