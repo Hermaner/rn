@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, Mblue } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   text: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   sendBtn: {
     height: 35,
-    width: 120,
+    width: 110,
     padding: 0,
     ...st.jacenter,
     marginRight: 10,
@@ -47,12 +47,14 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: Mcolor,
-    margin: 20,
+    margin: 15,
     height: 50,
+    ...st.jacenter,
     borderRadius: 5,
   },
   submitBtnText: {
-    color: '#fff', ...st.font16,
+    color: '#fff',
+    ...st.font16,
   },
   switchView: {
     flex: 1,
@@ -76,10 +78,18 @@ const styles = StyleSheet.create({
     color: Mcolor,
   },
   bottomView: {
+    ...st.frcenter,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   agreementView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    ...st.fr,
+    ...st.acenter,
+    flex: 1,
+  },
+  changeText: {
+    fontSize: 14,
+    color: Mcolor,
   },
   agreementLabel: {
     color: '#888', ...st.font12,
@@ -97,6 +107,39 @@ const styles = StyleSheet.create({
   },
   bottomTipsText: {
     color: Mcolor, ...st.font12,
+  },
+  otherView: {
+    padding: 30,
+  },
+  otherTitle: {
+    height: 60,
+    ...st.jacenter,
+  },
+  otherTitleText: {
+    fontSize: 15,
+    color: '#333',
+  },
+  otherLists: {
+    ...st.frcenter,
+  },
+  otherList: {
+    flex: 1,
+    ...st.acenter,
+  },
+  otherTop: {
+    width: 60,
+    height: 60,
+    ...st.jacenter,
+    borderRadius: 30,
+    marginBottom: 10,
+  },
+  otherIcon: {
+    fontSize: 30,
+    color: '#fff',
+  },
+  otherText: {
+    fontSize: 14,
+    color: '#444',
   },
 });
 export default styles;

@@ -16,19 +16,31 @@ class UserBase extends React.Component {
       password: '',
       code: '1111',
       codeVal: '1111',
+      isCode: true,
+      others: [{
+        label: '微信',
+        icon: 'md-alarm',
+        color: '#62b900',
+      }, {
+        label: '微博',
+        icon: 'md-alarm',
+        color: '#fc5e6a',
+      }, {
+        label: 'QQ',
+        icon: 'md-alarm',
+        color: '#68a5e1',
+      }],
     };
   }
-  onChangeText = (txt, index) => {
-    switch (index) {
-      case 0:
-        this.setState({
-          phone: txt,
-        });
-        break;
-      default:
-    }
+  changeLogin = () => {
+    this.setState({
+      isCode: !this.state.isCode,
+    });
   }
   sendCode = () => {
+    if (this.isSend) {
+      return;
+    }
     const { phone } = this.state;
     if (!phone) {
       Toast.show('请输入手机号');
@@ -37,9 +49,6 @@ class UserBase extends React.Component {
     const telReg = !(phone).match(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
     if (telReg) {
       Toast.show('手机号格式不对');
-      return;
-    }
-    if (this.isSend) {
       return;
     }
     this.isSend = true;

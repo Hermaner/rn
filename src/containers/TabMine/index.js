@@ -348,7 +348,7 @@ class My extends Base {
     );
   }
   _renderModal() {
-    const { isModalShow } = this.state;
+    const { isModalShow, shares } = this.state;
     return (
       <Modal
         style={styles.ModalStyle}
@@ -361,12 +361,23 @@ class My extends Base {
       >
         <View style={styles.modalView}>
           <View style={styles.shareLists}>
-            <View style={styles.shareList}>
-              <View style={[styles.shareTop, { backgroundColor: '#f2a050' }]}>
-                <Icon name="md-alarm" style={styles.shareIcon} />
-              </View>
-              <Text style={styles.shareText}>客服热线</Text>
-            </View>
+            {
+              shares.map((item, index) => (
+                <TOpacity
+                  key={index}
+                  style={styles.shareList}
+                  content={
+                    <View key={index} style={styles.shareList}>
+                      <View style={[styles.shareTop, { backgroundColor: item.color }]}>
+                        <Icon name={item.icon} style={styles.shareIcon} />
+                      </View>
+                      <Text style={styles.shareText}>{item.label}</Text>
+                    </View>
+                  }
+                  onPress={this.closeModal}
+                />
+              ))
+            }
           </View>
           <TOpacity
             style={styles.shareBtn}

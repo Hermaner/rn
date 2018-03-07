@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, BackHandler } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Input, Button, Text } from 'native-base';
+import { Container, Content, Input, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { BHeader, Loading } from '../../components';
+import { BHeader, Loading, TOpacity } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -25,25 +25,23 @@ class UserPage extends base {
     this.props.pop();
     return true;
   };
-  render() {
-    const { phone, code, sec } = this.state;
-    const { pop, push } = this.props;
+  _renderForm() {
+    const { phone, password, code, sec, isCode } = this.state;
     return (
-      <Container>
-        <BHeader back={pop} title="注册登陆" />
-        <Content contentContainerStyle={{ flex: 1 }}>
-          <View style={styles.form}>
-            <View style={styles.accountView}>
-              <Input
-                style={styles.account}
-                placeholderTextColor="#999"
-                placeholder="输入您的手机号"
-                clearButtonMode="while-editing"
-                value={phone}
-                onChangeText={value => this.setState({ phone: value })}
-                onSubmitEditing={this.login}
-              />
-            </View>
+      <View style={styles.form}>
+        <View style={styles.accountView}>
+          <Input
+            style={styles.account}
+            placeholderTextColor="#999"
+            placeholder="输入您的手机号"
+            clearButtonMode="while-editing"
+            value={phone}
+            onChangeText={value => this.setState({ phone: value })}
+            onSubmitEditing={this.login}
+          />
+        </View>
+        {
+          isCode ?
             <View style={styles.formBom}>
               <Input
                 style={styles.password}
@@ -55,23 +53,101 @@ class UserPage extends base {
                 onSubmitEditing={this.login}
               />
               <View>
-                <Button light style={styles.sendBtn} disabled={this.isSend} onPress={this.sendCode}>
-                  <Text style={[styles.sendBtnText, this.isSend && styles.sendBtnCur]}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
-                </Button>
+                <TOpacity
+                  style={styles.sendBtn}
+                  content={
+                    <Text style={styles.sendBtnText}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
+                  }
+                  onPress={this.sendCode}
+                />
               </View>
             </View>
-          </View>
-          <Button full style={styles.submitBtn} onPress={this.login}>
-            <Text style={styles.submitBtnText}>登陆</Text>
-          </Button>
-          <View style={styles.bottomView}>
-            <View style={styles.agreementView}>
-              <Text style={styles.agreementLabel}>登陆即表示同意</Text>
-              <TouchableOpacity onPress={() => push({ key: 'UserAgreement' })}>
-                <Text style={styles.agreementText}>《服务协议》</Text>
-              </TouchableOpacity>
+            :
+            <View style={styles.accountView}>
+              <Input
+                style={styles.account}
+                placeholderTextColor="#999"
+                placeholder="输入您的密码"
+                clearButtonMode="while-editing"
+                value={password}
+                onChangeText={value => this.setState({ password: value })}
+                onSubmitEditing={this.login}
+              />
             </View>
+        }
+      </View>
+    );
+  }
+  _renderMid() {
+    const { isCode } = this.state;
+    const { push } = this.props;
+    return (
+      <View>
+        <TOpacity
+          style={styles.submitBtn}
+          content={
+            <Text style={styles.submitBtnText}>登陆</Text>
+          }
+          onPress={this.login}
+        />
+        <View style={styles.bottomView}>
+          <View style={styles.agreementView}>
+            <Text style={styles.agreementLabel}>登陆即表示同意</Text>
+            <TOpacity
+              content={
+                <Text style={styles.agreementText}>《服务协议》</Text>
+              }
+              onPress={() => push({ key: 'UserAgreement' })}
+            />
           </View>
+          <TOpacity
+            content={
+              <Text style={styles.changeText}>切换至{!isCode ? '验证码' : '密码'}登陆</Text>
+            }
+            onPress={this.changeLogin}
+          />
+        </View>
+      </View>
+    );
+  }
+  _renderOther() {
+    const { others } = this.state;
+    return (
+      <View style={styles.otherView}>
+        <View style={styles.otherTitle}>
+          <Text style={styles.otherTitleText}>第三方登录</Text>
+        </View>
+        <View style={styles.otherLists}>
+          {
+            others.map((item, index) => (
+              <TOpacity
+                key={index}
+                style={styles.otherList}
+                content={
+                  <View key={index} style={styles.otherList}>
+                    <View style={[styles.otherTop, { backgroundColor: item.color }]}>
+                      <Icon name={item.icon} style={styles.otherIcon} />
+                    </View>
+                    <Text style={styles.otherText}>{item.label}</Text>
+                  </View>
+                }
+                onPress={this.closeModal}
+              />
+            ))
+          }
+        </View>
+      </View>
+    );
+  }
+  render() {
+    const { pop } = this.props;
+    return (
+      <Container>
+        <BHeader back={pop} title="注册登陆" />
+        <Content contentContainerStyle={{ flex: 1 }}>
+          {this._renderForm()}
+          {this._renderMid()}
+          {this._renderOther()}
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

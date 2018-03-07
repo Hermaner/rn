@@ -102,6 +102,23 @@ class Base extends React.Component {
           page: 'About',
         },
       ],
+      shares: [{
+        label: '微信',
+        icon: 'md-alarm',
+        color: '#62b900',
+      }, {
+        label: '朋友圈',
+        icon: 'md-alarm',
+        color: '#556876',
+      }, {
+        label: '微博',
+        icon: 'md-alarm',
+        color: '#fc5e6a',
+      }, {
+        label: 'QQ',
+        icon: 'md-alarm',
+        color: '#68a5e1',
+      }],
     };
   }
   getInit = () => {

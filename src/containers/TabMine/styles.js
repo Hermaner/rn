@@ -271,8 +271,9 @@ const styles = StyleSheet.create({
     ...st.acenter,
   },
   shareTop: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
+    ...st.jacenter,
     borderRadius: 30,
     marginBottom: 10,
   },
@@ -286,10 +287,8 @@ const styles = StyleSheet.create({
   },
   shareBtn: {
     backgroundColor: '#fff',
-    borderTopColor: '#ccc',
+    borderTopColor: '#ddd',
     borderTopWidth: 1,
-    marginLeft: 10,
-    marginRight: 10,
     height: 50,
     ...st.jacenter,
   },
