@@ -38,11 +38,15 @@ import Select from './Select';
 import MasterOrderItem from './MasterOrderItem';
 import HomeSearch from './HomeSearch';
 import UserObser from './UserObser';
+import Share from './Share';
+import SharePlatform from './SharePlatform';
 
 const UserSocket = new UserObser();
 
 export {
   TLight,
+  SharePlatform,
+  Share,
   HomeSearch,
   MasterOrderItem,
   SpotLine,
