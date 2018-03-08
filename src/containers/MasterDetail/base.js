@@ -2,7 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import Communications from 'react-native-communications';
-import { GetMasterBasicInfoService, CreateMemberMasterService, DeleteMemberMasterService } from '../../api';
+import { GetMasterInfoByIDService, CreateMemberMasterService, DeleteMemberMasterService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetMasterBasicInfoService();
+    this.GetMasterInfoByIDService();
   }
   save = () => {
     Toast.show('敬请期待！');
@@ -66,10 +66,10 @@ class Base extends React.Component {
       default:
     }
   }
-  GetMasterBasicInfoService = () => {
+  GetMasterInfoByIDService = () => {
     const { masterId } = this.state;
     this.sleek.toggle();
-    GetMasterBasicInfoService({
+    GetMasterInfoByIDService({
       masterId,
       memberId: global.memberId || '',
     }).then((res) => {

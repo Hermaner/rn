@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, MasterOrderItem, TFeedback, NoData } from '../../components';
+import { Loading, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -23,19 +23,21 @@ class MasterOrder extends base {
   _renderRow = (data) => {
     const { item, index } = data;
     return (
-      <TFeedback
-        key={index}
-        content={
-          <View>
-            <MasterOrderItem
-              item={item}
-              rowID={index}
-              key={index}
-            />
-          </View>
-        }
-        onPress={() => { this.props.push({ key: 'MgMasterOrderDetail', params: { masterOrderId: item.masterOrderId, status: item.status } }); }}
-      />
+      <View key={index} style={styles.list}>
+        <View style={styles.top}>
+          <Text style={styles.num}>
+            流水号：{item.serialNumber}
+          </Text>
+          <Text style={styles.price}>
+            ￥{item.amount}
+          </Text>
+        </View>
+        <View style={styles.bom}>
+          <Text style={styles.date}>
+            {item.modiDate}
+          </Text>
+        </View>
+      </View>
     );
   }
   _renderContent() {
@@ -71,9 +73,7 @@ class MasterOrder extends base {
   render() {
     return (
       <Container>
-        <View style={styles.mainView}>
-          {this._renderContent()}
-        </View>
+        {this._renderContent()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

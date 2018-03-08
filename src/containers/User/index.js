@@ -26,7 +26,7 @@ class UserPage extends base {
     return true;
   };
   _renderForm() {
-    const { phone, password, code, sec, isCode } = this.state;
+    const { phone, passWord, code, sec, isCode } = this.state;
     return (
       <View style={styles.form}>
         <View style={styles.accountView}>
@@ -69,8 +69,9 @@ class UserPage extends base {
                 placeholderTextColor="#999"
                 placeholder="输入您的密码"
                 clearButtonMode="while-editing"
-                value={password}
-                onChangeText={value => this.setState({ password: value })}
+                value={passWord}
+                secureTextEntry
+                onChangeText={value => this.setState({ passWord: value })}
                 onSubmitEditing={this.login}
               />
             </View>

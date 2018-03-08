@@ -2,7 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter, Alert } from 'react-native';
-import { GetMasterBasicInfoService, UpdateMasterService } from '../../api';
+import { GetMasterCenterService, UpdateMasterService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -11,6 +11,8 @@ class Base extends React.Component {
       defaultImg: require('../../assets/img/tx.png'),
       info: null,
       isStart: false,
+      biddingCount: 0,
+      servicesCount: 0,
       orderItems: [
         {
           label: '待预约',
@@ -44,6 +46,18 @@ class Base extends React.Component {
         },
       ],
       icons: [
+        {
+          label: '我的申请单',
+          icon: 'icon-location',
+          color: '#ff6a54',
+          page: 'MgMasterApply',
+        },
+        {
+          label: '我的工种',
+          icon: 'icon-location',
+          color: '#ff6a54',
+          page: 'MgMasterCategory',
+        },
         {
           label: '我的认证',
           icon: 'icon-location',
@@ -96,9 +110,9 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetMasterBasicInfoService();
+    this.GetMasterCenterService();
     this.emitMasterLoad = DeviceEventEmitter.addListener('emitMasterLoad', () => {
-      this.GetMasterBasicInfoService();
+      this.GetMasterCenterService();
     });
   }
   deleteInit = () => {
@@ -136,15 +150,31 @@ class Base extends React.Component {
       this.sleek.toggle();
     });
   }
-  GetMasterBasicInfoService = () => {
+  GetMasterCenterService = () => {
     this.sleek.toggle();
-    GetMasterBasicInfoService().then((res) => {
+    const { orderItems } = this.state;
+    GetMasterCenterService().then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const info = res.data;
+        const { warnCount: {
+          biddingCount,
+          inServiceCount,
+          servicesCount,
+          waiteAccountCount,
+          waiteBespeakCount,
+          waiteServiceCount,
+        } } = info;
+        orderItems[0].count = waiteBespeakCount;
+        orderItems[1].count = waiteServiceCount;
+        orderItems[2].count = inServiceCount;
+        orderItems[3].count = waiteAccountCount;
         this.setState({
+          biddingCount,
+          servicesCount,
           info,
+          orderItems,
           isStart: info.isStart === 1 || info.isStart === '1',
         });
       } else {
@@ -157,6 +187,11 @@ class Base extends React.Component {
   goIconPage = (key) => {
     const { info } = this.state;
     let params = {};
+    if (key === 'MgMasterCategory') {
+      params = {
+        masterTypes: info.masterTypes,
+      };
+    }
     if (key === 'MyTixian') {
       params = {
         amount: info.wallet.balance,

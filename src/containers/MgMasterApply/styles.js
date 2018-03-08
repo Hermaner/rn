@@ -1,64 +1,34 @@
 
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, deviceW } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
-const leftWidth = 70;
 const styles = StyleSheet.create({
   ...st,
-  fixTop: {
-  },
   ModalStyle: {
-    marginLeft: leftWidth / 2,
-    width: deviceW - leftWidth,
     backgroundColor: '#fff',
+    height: 300,
   },
   modalView: {
-    padding: 10,
     flex: 1,
-    paddingTop: 40,
   },
   modalTitle: {
-    fontSize: 12,
-    color: '#888',
-    lineHeight: 26,
-    marginTop: 8,
-    marginBottom: 5,
-  },
-  modalList: {
-    ...st.fr,
-    flexWrap: 'wrap',
-  },
-  modalItem: {
-    marginRight: 8,
-    marginBottom: 8,
-    backgroundColor: '#eee',
-    borderRadius: 6,
-    width: (deviceW - leftWidth - 20 - 24) / 3,
-    height: 28,
+    height: 45,
+    marginBottom: 1,
+    backgroundColor: Mcolor,
     ...st.jacenter,
   },
-  modalItemCur: {
-    backgroundColor: Mcolor,
-  },
-  modalItemText: {
-    color: '#444',
-    fontSize: 12,
-  },
-  modalItemTextCur: {
+  modalTitleText: {
+    fontSize: 14,
     color: '#fff',
   },
   modalBtns: {
     height: 60,
-    padding: 10,
     ...st.fr,
   },
   modalBtn: {
     flex: 1,
     backgroundColor: Mcolor,
-    borderRadius: 5,
     ...st.jacenter,
-    marginLeft: 5,
-    marginRight: 5,
   },
   cancelBtn: {
     backgroundColor: '#aaa',
@@ -67,47 +37,59 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
-  conditions: {
-    height: 45,
-    borderBottomColor: '#ddd',
+  modalContent: {
+    flex: 1,
+    backgroundColor: '#f8f8f8',
+  },
+  memoView: {
+    flex: 1,
+    ...st.fr,
+    marginTop: 5,
+    borderTopColor: '#e4e4e4',
+    borderTopWidth: 1,
+    borderBottomColor: '#e4e4e4',
     borderBottomWidth: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: '#fff',
-    ...st.fr,
+    paddingTop: 4,
+    marginBottom: 5,
   },
-  cdsList: {
+  memoLabel: {
+    fontSize: 14,
+    color: '#666',
+    width: 80,
+    lineHeight: 24,
+  },
+  modalListView: {
+    borderBottomColor: '#e4e4e4',
+    borderBottomWidth: 1,
+    borderTopColor: '#e4e4e4',
+    borderTopWidth: 1,
+    height: 50,
+    backgroundColor: '#fff',
+    marginTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    ...st.frcenter,
+  },
+  modalListRight: {
     flex: 1,
-    ...st.fr,
-    ...st.jacenter,
   },
-  rightLine: {
-    position: 'absolute',
-    right: 0,
-    top: 12,
-    height: 16,
-    width: 0.7,
-    backgroundColor: '#ccc',
-  },
-  cddown: {
-    color: '#333',
-    fontSize: 12,
-    marginLeft: 3,
-  },
-  cddownCur: {
-    color: Mcolor,
-  },
-  cdsListText: {
-    color: '#444',
-    fontSize: 13,
-  },
-  cdsCurText: {
-    color: Mcolor,
-  },
-  mainView: {
+  memoInput: {
     flex: 1,
-    ...st.fr,
   },
-  listContent: {
+  listMemo: {
     flex: 1,
+    lineHeight: 24,
+    fontSize: 14,
+    color: '#666',
+    textAlignVertical: 'top',
+  },
+  listInput: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
   },
 });
 export default styles;

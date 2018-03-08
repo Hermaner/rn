@@ -28,14 +28,23 @@ class MgMasterSetting extends base {
     return true;
   };
   _renderList() {
-    const { info } = this.state;
+    const {
+      info: {
+        realName,
+        identityCard,
+        provinceName,
+        cityName,
+        districtName,
+        address,
+        memberInfo: { sex },
+        postDate } } = this.state;
     return (
-      <View>
+      <View style={styles.listViews}>
         <View style={styles.listView}>
           <Text style={styles.listLabel}>真实姓名</Text>
           <View style={styles.listRight}>
             <Text style={styles.listText}>
-              {info.realName}
+              {realName}
             </Text>
           </View>
         </View>
@@ -43,7 +52,7 @@ class MgMasterSetting extends base {
           <Text style={styles.listLabel}>身份证号</Text>
           <View style={styles.listRight}>
             <Text style={styles.listText}>
-              {info.identityCard}
+              {identityCard}
             </Text>
           </View>
         </View>
@@ -51,7 +60,15 @@ class MgMasterSetting extends base {
           <Text style={styles.listLabel}>性别</Text>
           <View style={styles.listRight}>
             <Text style={styles.listText}>
-              {info.memberInfo.sex === 1 ? '男' : '女'}
+              {sex === 1 ? '男' : '女'}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.listView}>
+          <Text style={styles.listLabel}>所在地址</Text>
+          <View style={styles.listRight}>
+            <Text style={styles.listText}>
+              {provinceName}{cityName}{districtName}{address}
             </Text>
           </View>
         </View>
@@ -59,7 +76,7 @@ class MgMasterSetting extends base {
           <Text style={styles.listLabel}>注册日期</Text>
           <View style={styles.listRight}>
             <Text style={styles.listText}>
-              {info.postDate}
+              {postDate}
             </Text>
           </View>
         </View>

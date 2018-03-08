@@ -80,6 +80,7 @@ import MgMasterItems from '../containers/MgMasterItems';
 import MasterCaseList from '../containers/MasterCaseList';
 import MgMasterBadList from '../containers/MgMasterBadList';
 import MgSecurity from '../containers/MgSecurity';
+import MgMasterCategory from '../containers/MgMasterCategory';
 import MyDrawList from '../containers/MyDrawList';
 import MyDrawAdd from '../containers/MyDrawAdd';
 import MainSearch from '../containers/MainSearch';
@@ -90,6 +91,7 @@ import ChangePassword from '../containers/ChangePassword';
 
 export const AppNavigator = StackNavigator({
   MgMasterBadList: { screen: MgMasterBadList },
+  MgMasterCategory: { screen: MgMasterCategory },
   ChangePassword: { screen: ChangePassword },
   MasterItems: { screen: MasterItems },
   MgMasterLogList: { screen: MgMasterLogList },

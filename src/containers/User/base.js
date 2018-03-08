@@ -3,17 +3,17 @@ import { AsyncStorage, Platform, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { UserSocket } from '../../components';
-import { GetCodeService, RegisterMemberService } from '../../api';
+import { GetCodeService, RegisterMemberService, LoginService } from '../../api';
 
 class UserBase extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '18017011377',
-      sendPhone: '18017011377',
+      phone: '15666666666',
+      sendPhone: '15666666666',
       sec: 60,
-      password: '',
+      passWord: '',
       code: '1111',
       codeVal: '1111',
       isCode: true,
@@ -48,7 +48,7 @@ class UserBase extends React.Component {
     }
     const telReg = !(phone).match(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
     if (telReg) {
-      Toast.show('手机号格式不对');
+      Toast.show('手机号格式错误');
       return;
     }
     this.isSend = true;
@@ -89,6 +89,16 @@ class UserBase extends React.Component {
   }
   login = () => {
     const {
+      isCode,
+    } = this.state;
+    if (isCode) {
+      this.RegisterMemberService();
+    } else {
+      this.LoginService();
+    }
+  }
+  RegisterMemberService = () => {
+    const {
       phone,
       code,
       codeVal,
@@ -122,6 +132,46 @@ class UserBase extends React.Component {
         global.userData = res.data;
         Toast.show('登陆成功');
         this.props.pop();
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  LoginService = () => {
+    const {
+      phone,
+      passWord,
+    } = this.state;
+    const telReg = !(phone).match(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
+    if (telReg) {
+      Toast.show('手机号格式错误');
+      return;
+    }
+    if (!passWord) {
+      Toast.show('请输入密码');
+      return;
+    }
+    this.sleek.toggle();
+    LoginService({
+      phone,
+      passWord,
+      phoneType: Platform.OS === 'ios' ? '2' : '1',
+      registration: global.registration,
+    }).then((res) => {
+      console.log(res);
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        global.memberId = res.data.memberId;
+        UserSocket.changeData(res.data);
+        DeviceEventEmitter.emit('emitUser');
+        AsyncStorage.setItem('userData', JSON.stringify(res.data));
+        global.userData = res.data;
+        Toast.show('登陆成功');
+        this.props.pop();
+      } else {
+        Toast.show(res.msg);
       }
     }).catch(() => {
       this.sleek.toggle();

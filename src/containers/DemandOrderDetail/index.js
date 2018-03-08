@@ -184,6 +184,7 @@ class DemandOrderDetail extends base {
   }
   render() {
     const { pop } = this.props;
+    const { type } = this.state;
     return (
       <Container>
         <Header back={pop} title="接单详情" />
@@ -191,7 +192,7 @@ class DemandOrderDetail extends base {
           {this._renderAddress()}
           {this._renderList()}
         </Content>
-        {this._renderFooter()}
+        {!type && this._renderFooter()}
         {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

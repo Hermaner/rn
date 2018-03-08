@@ -40,11 +40,15 @@ import HomeSearch from './HomeSearch';
 import UserObser from './UserObser';
 import Share from './Share';
 import SharePlatform from './SharePlatform';
+import MasterDemanOrderItem from './MasterDemanOrderItem';
+import IdCard from './IdCard';
 
 const UserSocket = new UserObser();
 
 export {
   TLight,
+  IdCard,
+  MasterDemanOrderItem,
   SharePlatform,
   Share,
   HomeSearch,

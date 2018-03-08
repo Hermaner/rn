@@ -5,13 +5,15 @@ import { st, deviceW } from '../../utils';
 const styles = StyleSheet.create({
   ...st,
   content: {
-    backgroundColor: '#fff',
-    padding: 30,
+    padding: 20,
     flex: 1,
   },
   logoMidView: {
     ...st.jacenter,
     paddingBottom: 30,
+  },
+  listViews: {
+    backgroundColor: '#fff',
   },
   logoView: {
     width: 100,

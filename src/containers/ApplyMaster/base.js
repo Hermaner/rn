@@ -14,7 +14,6 @@ class Base extends React.Component {
       sec: 60,
       code: '1111',
       codeVal: '1111',
-      upImages: [],
       ModalOpen: false,
       masterTypes: [],
       provinceId: '',
@@ -31,6 +30,9 @@ class Base extends React.Component {
       masterTypeIds: '',
       realName: '',
       identityCard: '',
+      firstImage: {},
+      twoImage: {},
+      threeImage: {},
     };
   }
   getInit = () => {
@@ -57,11 +59,21 @@ class Base extends React.Component {
       });
     });
   }
-  getImages = (upImages) => {
-    console.log(upImages);
-    this.setState({
-      upImages,
-    });
+  getImage = (image, index) => {
+    if (index === 0) {
+      this.setState({
+        firstImage: image,
+      });
+    } else if (index === 1) {
+      this.setState({
+        twoImage: image,
+      });
+    } else if (index === 2) {
+      this.setState({
+        threeImage: image,
+      });
+    }
+    console.log(image, index);
   }
   deleteInit = () => {
     this.emitArea.remove();
@@ -164,7 +176,9 @@ class Base extends React.Component {
       districtId,
       addressTitle,
       districtName,
-      upImages,
+      firstImage,
+      twoImage,
+      threeImage,
       sendPhone,
       realName,
       identityCard,
@@ -196,8 +210,8 @@ class Base extends React.Component {
       Toast.show('手机号与发送短信手机号不一致');
       return;
     }
-    if (upImages.length !== 3) {
-      Toast.show('上传照片数量错误');
+    if (!firstImage.key || !twoImage.key || !threeImage.key) {
+      Toast.show('身份证照上传错误');
       return;
     }
     const idCardReg = !identityCard.match(/\d{17}[\d|x]|\d{15}/);
@@ -221,9 +235,9 @@ class Base extends React.Component {
       masterTypeIds: masterTypeIds.join(','),
       realName,
       identityCard,
-      firstImage: upImages[0].key,
-      twoImage: upImages[1].key,
-      threeImage: upImages[2].key,
+      firstImage: firstImage.key,
+      twoImage: twoImage.key,
+      threeImage: threeImage.key,
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);

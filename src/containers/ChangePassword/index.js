@@ -26,7 +26,7 @@ class BindPhone extends base {
     return true;
   };
   render() {
-    const { phone, code, sec, passwrod } = this.state;
+    const { phone, code, sec, passWord } = this.state;
     const { pop } = this.props;
     return (
       <Container>
@@ -70,8 +70,8 @@ class BindPhone extends base {
                 placeholderTextColor="#999"
                 placeholder="6-12位密码"
                 clearButtonMode="while-editing"
-                value={passwrod}
-                onChangeText={value => this.setState({ passwrod: value })}
+                value={passWord}
+                onChangeText={value => this.setState({ passWord: value })}
                 onSubmitEditing={this.login}
               />
             </View>
@@ -81,7 +81,7 @@ class BindPhone extends base {
             content={
               <Text style={styles.submitBtnText}>保存</Text>
             }
-            onPress={this.login}
+            onPress={this.UpdateMemberService}
           />
         </Content>
         <Loading ref={(c) => { this.sleek = c; }} />

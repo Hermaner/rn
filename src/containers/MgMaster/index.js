@@ -81,7 +81,7 @@ class MgMaster extends Base {
                 }
                 onPress={() => this.props.push({ key: 'MasterDetail', params: { masterId: global.masterId } })}
               />
-              <Icon name="md-arrow-dropright" style={styles.rightArr} />
+              <Icon name="md-arrow-dropright" style={styles.arr} />
             </View>
             <View style={styles.topPage}>
               <View style={styles.topPageList}>
@@ -109,6 +109,7 @@ class MgMaster extends Base {
   }
   _renderRole1() {
     const { push } = this.props;
+    const { servicesCount } = this.state;
     return (
       <View style={styles.roleView}>
         <TOpacity
@@ -119,6 +120,12 @@ class MgMaster extends Base {
               <View style={styles.roleColor}>
                 <Icon name="md-alarm" style={styles.topRoleIcon} />
               </View>
+              {
+                servicesCount > 0 &&
+                <View style={styles.roleListBadge}>
+                  <Text style={styles.orderItemNum}>{servicesCount}</Text>
+                </View>
+              }
             </View>
           }
           onPress={() => push({ key: 'MgMasterItems' })}
@@ -148,7 +155,7 @@ class MgMaster extends Base {
             content={
               <View style={styles.orderTopRight}>
                 <Text style={styles.orderTopText}>全部订单</Text>
-                <Icon name="md-alarm" style={styles.rightArr} />
+                <Icon name="md-arrow-dropright" style={styles.arr} />
               </View>
             }
             onPress={() => { this.props.push({ key: 'MgMasterOrders', params: { initialPage: 0 } }); }}
@@ -182,7 +189,7 @@ class MgMaster extends Base {
     );
   }
   _renderIcons() {
-    const { icons } = this.state;
+    const { icons, biddingCount } = this.state;
     return (
       <View style={styles.iconsPage}>
         {
@@ -193,6 +200,12 @@ class MgMaster extends Base {
                 <View key={index} style={styles.iconsItem}>
                   <View style={[styles.iconsTop, { backgroundColor: item.color }]}>
                     <Icon name="md-alarm" style={styles.iconsIcon} />
+                    {
+                      index === 0 && biddingCount > 0 &&
+                      <View style={styles.orderItemBadge}>
+                        <Text style={styles.orderItemNum}>{biddingCount}</Text>
+                      </View>
+                    }
                   </View>
                   <Text style={styles.roleText}>{item.label}</Text>
                 </View>

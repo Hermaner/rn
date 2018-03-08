@@ -5,7 +5,7 @@ import { Container, Content, Input, Button, Text, Icon, Footer } from 'native-ba
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, Loading, TitleItem, TOpacity, UploadFile } from '../../components';
+import { Header, Loading, TitleItem, TOpacity, IdCard } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -125,7 +125,7 @@ class ApplyMaster extends base {
       <View style={styles.mainList}>
         <TitleItem text="服务信息" />
         <View style={styles.listView}>
-          <Text style={styles.listLabel}>擅长技能</Text>
+          <Text style={styles.listLabel}>选择工种</Text>
           <TOpacity
             style={styles.listRight}
             content={
@@ -155,14 +155,15 @@ class ApplyMaster extends base {
     );
   }
   _renderImages() {
+    const { firstImage, twoImage, threeImage } = this.state;
     return (
       <View style={[styles.mainList, { paddingBottom: 10 }]}>
         <TitleItem text="上传认证图片" />
-        <Text style={styles.cardTips}>请上传身份证正、反面及手持身份共3张（上身免冠照，五官清晰，身份证号码清晰）</Text>
-        <UploadFile
-          getImages={this.getImages}
-          label="上传3张身份证照"
-          imageCount={3}
+        <IdCard
+          first={firstImage.imgUrl || ''}
+          two={twoImage.imgUrl || ''}
+          three={threeImage.imgUrl || ''}
+          getImage={this.getImage}
         />
       </View>
     );

@@ -13,7 +13,7 @@ class Base extends React.Component {
       sec: 60,
       code: '',
       codeVal: '',
-      passwrod: '',
+      passWord: '',
     };
   }
   sendCode = () => {
@@ -72,7 +72,7 @@ class Base extends React.Component {
       code,
       codeVal,
       sendPhone,
-      password,
+      passWord,
     } = this.state;
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信的手机号不一致');
@@ -86,21 +86,22 @@ class Base extends React.Component {
       Toast.show('验证码错误');
       return;
     }
-    if (password.length > 12 || password.length < 6) {
+    if (passWord.length > 12 || passWord.length < 6) {
       Toast.show('密码长度6-12位');
       return;
     }
     this.sleek.toggle();
     UpdateMemberService({
       phone,
-      password,
-      memberId: global.memberId,
+      passWord,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('修改成功,可以使用此密码登陆');
         this.props.pop();
+      } else {
+        Toast.show(res.msg);
       }
     }).catch(() => {
       this.sleek.toggle();

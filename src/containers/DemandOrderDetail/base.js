@@ -6,8 +6,10 @@ import { CreateDemandOrderBiddingService } from '../../api';
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { type, item } = this.props.navigation.state.params;
     this.state = {
-      item: this.props.navigation.state.params.item,
+      item,
+      type,
       ModalOpen: false,
     };
   }

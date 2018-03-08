@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Icon } from 'native-base';
+import { Container, Text, Input } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, DemanOrderItem, TFeedback, TOpacity, Header, NoData } from '../../components';
+import { Loading, MasterDemanOrderItem, TFeedback, TOpacity, Header, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
 
-class DemandOrder extends base {
+class MgMasterApply extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,36 +22,6 @@ class DemandOrder extends base {
   componentWillUnmount() {
     this.deleteInit();
   }
-  _readerConditions() {
-    const { tabs } = this.state;
-    return (
-      <View style={styles.conditions}>
-        {
-          tabs.map((item, index) => (
-            <TOpacity
-              key={index}
-              style={{ flex: 1 }}
-              content={
-                <View style={styles.cdsList}>
-                  <Text style={[styles.cdsListText, item.cur && styles.cdsCurText]}>
-                    {item.label}
-                  </Text>
-                  {
-                    index === 3 ?
-                      <Icon name="keypad" style={[styles.cddown, { fontSize: 16 }, item.cur && styles.cddownCur]} />
-                    :
-                      <Icon name={item.cur ? 'ios-arrow-up' : 'ios-arrow-down'} style={[styles.cddown, item.cur && styles.cddownCur]} />
-                  }
-                  <View style={styles.rightLine} />
-                </View>
-              }
-              onPress={() => { this.changeTab(index); }}
-            />
-          ))
-        }
-      </View>
-    );
-  }
   _renderRow = (data) => {
     const { item, index } = data;
     return (
@@ -59,17 +29,18 @@ class DemandOrder extends base {
         key={index}
         content={
           <View>
-            <DemanOrderItem
+            <MasterDemanOrderItem
               item={item}
+              changePrice={() => this.changePrice(index)}
             />
           </View>
         }
-        onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item } }); }}
+        onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item: item.demandOrder, type: 'change' } }); }}
       />
     );
   }
   _renderContent() {
-    const { noData, items, nomore, refresh } = this.state;
+    const { noData, items, loading } = this.state;
     return (
       <View style={styles.listContent}>
         {
@@ -82,13 +53,9 @@ class DemandOrder extends base {
               ListFooterComponent={() =>
                 <View style={{ height: 40, justifyContent: 'center', alignItems: 'center' }}>
                   <Text style={{ color: '#666', fontSize: 14 }}>
-                    {nomore ? '没有更多数据了' : '数据加载中...'}
+                    {loading ? '数据加载中...' : '没有更多数据了'}
                   </Text>
                 </View>}
-              onRefresh={this._onRefresh}
-              refreshing={refresh}
-              onEndReached={this._reachEnd}
-              onEndReachedThreshold={0.1}
             />
             :
             <NoData
@@ -99,40 +66,50 @@ class DemandOrder extends base {
     );
   }
   _renderModal() {
-    const { ModalOpen } = this.state;
-    const popItems = [{
-      name: '安装师傅',
-    }];
+    const { ModalOpen, price, message } = this.state;
     return (
       <Modal
         style={styles.ModalStyle}
-        position="top"
-        entry="top"
-        animationDuration={300}
+        position="bottom"
+        entry="bottom"
+        animationDuration={250}
         onClosed={this.closeModal}
         isOpen={ModalOpen}
-        coverScreen
         ref={(o) => { this.ModalView = o; }}
       >
         <View style={styles.modalView}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.modalTitle}>选择类目</Text>
-            <View style={styles.modalList}>
-              {
-                popItems.map((item, index) => (
-                  <TFeedback
-                    key={index}
-                    content={
-                      <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                        <Text style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}>
-                          {item.name}
-                        </Text>
-                      </View>
-                    }
-                    onPress={() => { this.tabOneItem(index); }}
-                  />
-                ))
-              }
+          <View style={styles.modalTitle}>
+            <Text style={styles.modalTitleText}>申请信息</Text>
+          </View>
+          <View style={styles.modalContent}>
+            <View style={styles.modalListView}>
+              <Text style={styles.memoLabel}>期望薪酬</Text>
+              <View style={styles.modalListRight}>
+                <Input
+                  autoFocus
+                  style={styles.listInput}
+                  placeholderTextColor="#999"
+                  placeholder="输入期望薪酬"
+                  keyboardType="numeric"
+                  clearButtonMode="while-editing"
+                  value={price}
+                  onChangeText={value => this.setState({ price: value })}
+                />
+              </View>
+            </View>
+            <View style={styles.memoView}>
+              <Text style={styles.memoLabel}>补充信息</Text>
+              <View style={styles.memoInput}>
+                <Input
+                  multiline
+                  style={styles.listMemo}
+                  placeholderTextColor="#999"
+                  placeholder="输入补充信息"
+                  clearButtonMode="while-editing"
+                  value={message}
+                  onChangeText={value => this.setState({ message: value })}
+                />
+              </View>
             </View>
           </View>
           <View style={styles.modalBtns}>
@@ -152,7 +129,7 @@ class DemandOrder extends base {
                   <Text style={styles.modalText}>确认</Text>
                 </View>
               }
-              onPress={this.closeModal}
+              onPress={this.UpdateMasterDemandOrderBiddingService}
             />
           </View>
         </View>
@@ -160,12 +137,10 @@ class DemandOrder extends base {
     );
   }
   render() {
+    const { pop } = this.props;
     return (
       <Container>
-        <View style={styles.fixTop}>
-          <Header title="可接订单" hideLeft />
-          {this._readerConditions()}
-        </View>
+        <Header back={pop} title="我的申请订单" />
         <View style={styles.mainView}>
           {this._renderContent()}
         </View>
@@ -176,8 +151,8 @@ class DemandOrder extends base {
   }
 }
 
-DemandOrder.propTypes = {
+MgMasterApply.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(DemandOrder);
+export default connect(null, { pop: popRoute, push: pushRoute })(MgMasterApply);

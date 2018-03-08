@@ -177,6 +177,10 @@ const styles = StyleSheet.create({
     color: '#888',
     marginRight: 3,
   },
+  arr: {
+    fontSize: 18,
+    color: '#666',
+  },
   rightArr: {
     fontSize: 18,
     color: '#888',
@@ -211,6 +215,17 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     right: -7,
     top: -2,
+  },
+  roleListBadge: {
+    backgroundColor: '#ff0000',
+    ...st.jacenter,
+    height: 14,
+    paddingLeft: 4,
+    paddingRight: 4,
+    position: 'absolute',
+    borderRadius: 7,
+    right: 10,
+    top: 4,
   },
   orderItemNum: {
     fontSize: 11,

@@ -35,7 +35,7 @@ export function obj2form(data) {
   return string.substr(1, string.length);
 }
 export function post(path, data) {
-  console.log(`${httpurl}${path}`)
+  console.log(`${httpurl}${path}`);
   return request(`${httpurl}${path}`, {
     method: 'POST',
     body: JSON.stringify(systemParam(data)),
@@ -100,6 +100,9 @@ export function AuthMasterService(data) {
 export function RegisterMemberService(data) {
   return post('RegisterMemberService', data);
 }
+export function LoginService(data) {
+  return post('LoginService', data);
+}
 export function PayAppWeiXinService(data) {
   return post('PayAppWeiXinService', data);
 }
@@ -114,9 +117,6 @@ export function GetCodeService(data) {
 }
 export function RegisterService(data) {
   return get('RegisterService', data);
-}
-export function LoginService(data) {
-  return get('LoginService', data);
 }
 export function CreateMasterRecruitService(data) {
   return get('CreateMasterRecruitService', data);
@@ -223,8 +223,8 @@ export function GetMasterService(data) {
 export function GetMasterTypeService(data) {
   return get('GetMasterTypeService', data);
 }
-export function GetMasterBasicInfoService(data) {
-  return get('GetMasterBasicInfoService', data);
+export function GetMasterCenterService(data) {
+  return get('GetMasterCenterService', data);
 }
 export function CreateDemandOrderService(data) {
   return post('CreateDemandOrderService', data);
@@ -471,4 +471,13 @@ export function GetMasterAmountLogService(data) {
 }
 export function GetMasterPunishOrderService(data) {
   return get('GetMasterPunishOrderService', data);
+}
+export function UpdateMasterDemandOrderBiddingService(data) {
+  return post('UpdateMasterDemandOrderBiddingService', data);
+}
+export function GetMasterDemandOrderBiddingService(data) {
+  return get('GetMasterDemandOrderBiddingService', data);
+}
+export function GetMasterInfoByIDService(data) {
+  return get('GetMasterInfoByIDService', data);
 }
