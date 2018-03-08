@@ -20,6 +20,12 @@ class Base extends React.Component {
       bigTypes: [
         {
           icon: 'icon-kefu',
+          text: '估价需求',
+          color: '#ff892f',
+          page: 'FixedList',
+        },
+        {
+          icon: 'icon-kefu',
           text: '安装维修',
           color: '#ff892f',
           page: 'ServiceList',

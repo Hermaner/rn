@@ -481,3 +481,9 @@ export function GetMasterDemandOrderBiddingService(data) {
 export function GetMasterInfoByIDService(data) {
   return get('GetMasterInfoByIDService', data);
 }
+export function GetServiceCategoryService(data) {
+  return get('GetServiceCategoryService', data);
+}
+export function GetServiceProductService(data) {
+  return get('GetServiceProductService', data);
+}

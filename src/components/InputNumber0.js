@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
+import { Text, TextInput, TouchableWithoutFeedback, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { Icon } from 'native-base';
 import { Mred } from '../utils';
@@ -118,24 +118,24 @@ export default class InputNumber extends React.Component {
   onPressOutUp() {
     this.onPressOut('_stepUp');
   }
-  onChange(value) {
+  onChange(val) {
     const { min, max } = this.props;
-    const reg = /^[1-9]+[0-9]*]*$/;
-    if (value && reg.test(value)) {
-      if (value > max) {
-        value = max;
-      } else if (value < min) {
-        value = min;
-      }
+    let value = val;
+    if (val > max) {
+      value = max;
+    } else if (val < min) {
+      value = min;
+    }
+    if (!isNaN(value)) {
+      value = parseInt(value, 10) || 0;
       this.setState({
         value,
       });
       this.props.onChange(value);
     } else {
       this.setState({
-        value: '',
+        value: this.state.value,
       });
-      this.props.onChange('');
     }
   }
   down(e) {

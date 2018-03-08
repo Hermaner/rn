@@ -88,8 +88,10 @@ import UserAgreement from '../containers/UserAgreement';
 import MgMasterApply from '../containers/MgMasterApply';
 import MasterItems from '../containers/MasterItems';
 import ChangePassword from '../containers/ChangePassword';
+import FixedList from '../containers/FixedList';
 
 export const AppNavigator = StackNavigator({
+  FixedList: { screen: FixedList },
   MgMasterBadList: { screen: MgMasterBadList },
   MgMasterCategory: { screen: MgMasterCategory },
   ChangePassword: { screen: ChangePassword },
