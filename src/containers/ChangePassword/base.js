@@ -1,8 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { AsyncStorage } from 'react-native';
-import { UserSocket } from '../../components';
 import { GetCodeService, UpdateMemberService } from '../../api';
 
 class Base extends React.Component {
@@ -15,6 +13,7 @@ class Base extends React.Component {
       sec: 60,
       code: '',
       codeVal: '',
+      passwrod: '',
     };
   }
   sendCode = () => {
@@ -73,6 +72,7 @@ class Base extends React.Component {
       code,
       codeVal,
       sendPhone,
+      password,
     } = this.state;
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信的手机号不一致');
@@ -86,17 +86,20 @@ class Base extends React.Component {
       Toast.show('验证码错误');
       return;
     }
+    if (password.length > 12 || password.length < 6) {
+      Toast.show('密码长度6-12位');
+      return;
+    }
     this.sleek.toggle();
     UpdateMemberService({
       phone,
+      password,
       memberId: global.memberId,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        Toast.show('修改成功');
-        AsyncStorage.setItem('userData', JSON.stringify(res.data));
-        UserSocket.changeData(res.data);
+        Toast.show('修改成功,可以使用此密码登陆');
         this.props.pop();
       }
     }).catch(() => {

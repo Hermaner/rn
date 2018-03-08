@@ -99,7 +99,7 @@ const OrderItem = ({ item }) => (
       {
         item.orderItems.map((list, index) => (
           <View style={styles.product} key={index}>
-            <CachedImage source={{ uri: list.imgUrl }} style={styles.img} />
+            <CachedImage source={{ uri: `${list.imgUrl}?imageView2/1/w/60` }} style={styles.img} />
             <View style={styles.productName}>
               <Text style={styles.name}>
                 {list.servicesTypeName}

@@ -26,11 +26,11 @@ class BindPhone extends base {
     return true;
   };
   render() {
-    const { phone, code, sec } = this.state;
+    const { phone, code, sec, passwrod } = this.state;
     const { pop } = this.props;
     return (
       <Container>
-        <BHeader back={pop} title="绑定手机号" />
+        <BHeader back={pop} title="设置密码" />
         <Content>
           <View style={styles.form}>
             <View style={styles.accountView}>
@@ -64,11 +64,22 @@ class BindPhone extends base {
                 />
               </View>
             </View>
+            <View style={styles.formBom}>
+              <Input
+                style={styles.account}
+                placeholderTextColor="#999"
+                placeholder="6-12位密码"
+                clearButtonMode="while-editing"
+                value={passwrod}
+                onChangeText={value => this.setState({ passwrod: value })}
+                onSubmitEditing={this.login}
+              />
+            </View>
           </View>
           <TOpacity
             style={styles.submitBtn}
             content={
-              <Text style={styles.submitBtnText}>确认绑定</Text>
+              <Text style={styles.submitBtnText}>保存</Text>
             }
             onPress={this.login}
           />

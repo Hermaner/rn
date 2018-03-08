@@ -91,7 +91,7 @@ const MasterItem = ({ item, onPress }) => (
   >
     <View style={styles.list}>
       <View style={styles.left}>
-        <CachedImage source={item.imgUrl ? { uri: item.imgUrl } : require('../assets/img/aver.png')} style={styles.img} />
+        <CachedImage source={item.imgUrl ? { uri: `${item.imgUrl}?imageView2/1/w/70` } : require('../assets/img/aver.png')} style={styles.img} />
       </View>
       <View style={styles.right}>
         <View style={styles.line}>

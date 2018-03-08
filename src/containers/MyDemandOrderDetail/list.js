@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   },
   left: {
     marginRight: 6,
+    width: 80,
     ...st.acenter,
   },
   img: {
@@ -97,8 +98,10 @@ class DemandOrderList extends base {
           items.map((list, index) => (
             <View key={index} style={styles.list}>
               <View style={styles.left}>
-                <CachedImage source={{ uri: list.memberInfo.imgUrl }} style={styles.img} />
-                <Text style={styles.name}>{decodeURI(list.memberInfo.nickName)}</Text>
+                <CachedImage source={{ uri: `${list.masterInfo.imgUrl}?imageView2/1/w/60` }} style={styles.img} />
+                <Text numberOfLines={1} style={styles.name}>
+                  {decodeURI(list.masterInfo.realName)}
+                </Text>
               </View>
               <View style={styles.right}>
                 <View style={styles.line}>

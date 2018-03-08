@@ -155,7 +155,7 @@ const DemanOrderItem = ({ item }) => (
       </View>
     </View>
     <View style={styles.bom}>
-      <CachedImage source={{ uri: item.memberInfo.imgUrl }} style={styles.img} />
+      <CachedImage source={{ uri: `${item.memberInfo.imgUrl}?imageView2/1/w/30` }} style={styles.img} />
       <View style={styles.nick}>
         <Text style={styles.nickText}>{decodeURI(item.memberInfo.nickName)}</Text>
         <Text style={styles.addressText}>{item.provinceName}{item.cityName}</Text>

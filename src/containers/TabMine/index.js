@@ -57,7 +57,7 @@ class My extends Base {
             <View style={styles.userImgView}>
               <CachedImage
                 source={
-                  imgUrl ? { uri: imgUrl } : defaultImg}
+                  imgUrl ? { uri: `${imgUrl}?imageView2/1/w/80` } : defaultImg}
                 style={styles.userImg}
               />
             </View>

@@ -105,7 +105,7 @@ class OrderDetail extends base {
           {
             item.orderItems.map((list, index) => (
               <View style={styles.product} key={index}>
-                <CachedImage source={{ uri: list.imgUrl }} style={styles.img} />
+                <CachedImage source={{ uri: `${list.imgUrl}?imageView2/1/w/80` }} style={styles.img} />
                 <Text style={styles.name}>
                   {list.servicesTypeName}
                 </Text>

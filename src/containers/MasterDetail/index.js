@@ -33,7 +33,7 @@ class MasterDetail extends base {
     return (
       <View style={styles.topView}>
         <View style={styles.topImgView}>
-          <CachedImage source={info.imgUrl ? { uri: info.imgUrl } : require('../../assets/img/aver.png')} style={styles.topImg} />
+          <CachedImage source={info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/80` } : require('../../assets/img/aver.png')} style={styles.topImg} />
         </View>
         <View style={styles.topRight}>
           <View style={styles.topName}>

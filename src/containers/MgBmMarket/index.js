@@ -29,7 +29,7 @@ class MgBmMarket extends Base {
     return true;
   };
   _renderTop() {
-    const { push, pop } = this.props;
+    const { pop } = this.props;
     return (
       <View style={styles.topView}>
         <View style={styles.topIconView}>
@@ -58,7 +58,7 @@ class MgBmMarket extends Base {
     );
   }
   _renderUser() {
-    const { defaultImg, info, totalMoney, outMoney, inMoney } = this.state;
+    const { defaultImg, info, outMoney, inMoney } = this.state;
     console.log(info);
     return (
       <View style={styles.userAllView}>
@@ -67,7 +67,7 @@ class MgBmMarket extends Base {
             <View style={styles.userImgView}>
               <CachedImage
                 source={
-                  info.imgUrl ? { uri: info.imgUrl } : defaultImg}
+                  info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/80` } : defaultImg}
                 style={styles.userImg}
               />
             </View>

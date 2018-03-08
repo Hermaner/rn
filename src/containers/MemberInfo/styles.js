@@ -5,8 +5,15 @@ import { st } from '../../utils';
 const styles = StyleSheet.create({
   ...st,
   content: {
-    backgroundColor: '#fff',
     padding: 30,
+    flex: 1,
+  },
+  listViews: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  listOne: {
     flex: 1,
   },
   listView: {
@@ -16,6 +23,9 @@ const styles = StyleSheet.create({
     height: 50,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  noBorder: {
+    borderBottomWidth: 0,
   },
   listLabel: {
     fontSize: 14,

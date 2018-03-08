@@ -35,7 +35,7 @@ class DecorateDetail extends base {
     return (
       <View style={styles.topView}>
         <View style={styles.topImgView}>
-          <CachedImage source={info.imgUrl ? { uri: info.imgUrl } : require('../../assets/img/aver.png')} style={styles.topImg} />
+          <CachedImage source={info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/80` } : require('../../assets/img/aver.png')} style={styles.topImg} />
         </View>
         <View style={styles.topRight}>
           <View style={styles.topName}>
@@ -148,7 +148,7 @@ class DecorateDetail extends base {
             {
               info.bmMarketImages.map((item, i) => (
                 <View key={i}>
-                  <CachedImage source={{ uri: item.imgUrl }} style={styles.swiperImage} />
+                  <CachedImage source={{ uri: `${item.imgUrl}?imageView2/1/w/420/h/200` }} style={styles.swiperImage} />
                 </View>
               ))
             }

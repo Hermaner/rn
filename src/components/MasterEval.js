@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 const MasterEval = ({ item }) => (
   <View style={styles.list}>
     <View style={styles.top}>
-      <CachedImage source={{ uri: item.memberInfo.imgUrl }} style={styles.img} />
+      <CachedImage source={{ uri: `${item.memberInfo.imgUrl}?imageView2/1/w/60` }} style={styles.img} />
       <View style={styles.info}>
         <View style={styles.infoTop}>
           <Text style={styles.name}>

@@ -25,7 +25,7 @@ class DemandOrderDetail extends base {
     return (
       <View>
         <View style={styles.address}>
-          <CachedImage source={{ uri: item.memberInfo.imgUrl }} style={styles.userImg} />
+          <CachedImage source={{ uri: `${item.memberInfo.imgUrl}?imageView2/1/w/80` }} style={styles.userImg} />
           <View style={styles.addressRight}>
             <Text style={styles.userName}>{decodeURI(item.memberInfo.nickName)}</Text>
             <Text style={styles.userAddress}>

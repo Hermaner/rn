@@ -34,7 +34,7 @@ class DecorateDetail extends base {
     return (
       <View style={styles.topView}>
         <View style={styles.topImgView}>
-          <CachedImage source={info.imgUrl ? { uri: info.imgUrl } : require('../../assets/img/aver.png')} style={styles.topImg} />
+          <CachedImage source={info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/70` } : require('../../assets/img/aver.png')} style={styles.topImg} />
         </View>
         <View style={styles.topRight}>
           <View style={styles.topName}>
@@ -148,7 +148,7 @@ class DecorateDetail extends base {
               content={
                 <View style={styles.caseView}>
                   <View style={styles.caseList}>
-                    <CachedImage source={{ uri: info.caseInfo.imgUrl }} style={styles.caseImg} />
+                    <CachedImage source={{ uri: `${info.caseInfo.imgUrl}?imageView2/1/w/420/h/250` }} style={styles.caseImg} />
                     <View style={styles.caseGray}>
                       <Text style={styles.caseName}>
                         {info.caseInfo.title}

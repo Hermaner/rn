@@ -86,9 +86,11 @@ import MainSearch from '../containers/MainSearch';
 import UserAgreement from '../containers/UserAgreement';
 import MgMasterApply from '../containers/MgMasterApply';
 import MasterItems from '../containers/MasterItems';
+import ChangePassword from '../containers/ChangePassword';
 
 export const AppNavigator = StackNavigator({
   MgMasterBadList: { screen: MgMasterBadList },
+  ChangePassword: { screen: ChangePassword },
   MasterItems: { screen: MasterItems },
   MgMasterLogList: { screen: MgMasterLogList },
   MgMasterApply: { screen: MgMasterApply },

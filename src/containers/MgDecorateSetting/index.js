@@ -70,7 +70,7 @@ class MgDecorateSetting extends base {
     return (
       <View style={styles.logoMidView}>
         <View style={styles.logoView}>
-          <CachedImage source={{ uri: info.imgUrl }} style={styles.logo} />
+          <CachedImage source={{ uri: `${info.imgUrl}?imageView2/1/w/100` }} style={styles.logo} />
         </View>
       </View>
     );

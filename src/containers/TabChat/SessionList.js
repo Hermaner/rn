@@ -111,7 +111,7 @@ class SessionList extends React.Component {
       key={index}
       content={
         <View style={[styles.con, index === this.state.items.length - 1 && styles.conLast]}>
-          <CachedImage source={{ uri: item.user.imgUrl }} style={styles.img} />
+          <CachedImage source={{ uri: `${item.user.imgUrl}?imageView2/1/w/80` }} style={styles.img} />
           <View style={styles.right}>
             <View style={styles.top}>
               <Text style={styles.name} numberOfLines={1}>{decodeURI(item.user.userName)}</Text>

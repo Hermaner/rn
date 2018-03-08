@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 const GoodItem = ({ item, index, backChange }) => (
   <View style={styles.list}>
     <View style={styles.left}>
-      <CachedImage source={{ uri: item.imgUrl }} style={styles.img} />
+      <CachedImage source={{ uri: `${item.imgUrl}?imageView2/1/w/60` }} style={styles.img} />
     </View>
     <View style={styles.mid}>
       <Text style={styles.name}>{item.name}</Text>

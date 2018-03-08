@@ -68,7 +68,7 @@ class MgMaster extends Base {
               <View style={styles.userImgView}>
                 <CachedImage
                   source={
-                    info.imgUrl ? { uri: info.imgUrl } : defaultImg}
+                    info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/80` } : defaultImg}
                   style={styles.userImg}
                 />
               </View>

@@ -37,7 +37,7 @@ class MyCard extends base {
           <Image source={require('../../assets/img/card.png')} style={styles.cardbg} />
           <CachedImage
             source={
-              imgUrl ? { uri: imgUrl } : require('../../assets/img/tx.png')}
+              imgUrl ? { uri: `${imgUrl}?imageView2/1/w/80` } : require('../../assets/img/tx.png')}
             style={styles.cardLogo}
           />
           <View style={styles.cardContentView}>

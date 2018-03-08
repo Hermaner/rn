@@ -21,10 +21,14 @@ const styles = StyleSheet.create({
   account: {
     color: '#666',
     ...st.font14,
+    flex: 1,
     borderBottomColor: '#eee',
   },
   password: {
-    color: '#666', ...st.font14, height: 40,
+    color: '#666',
+    flex: 1,
+    ...st.font14,
+    height: 40,
   },
   formBom: {
     height: 50,

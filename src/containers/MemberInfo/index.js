@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { observer } from 'mobx-react/native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TFeedback, BHeader, UploadLogo, Select, UserSocket } from '../../components';
+import { Loading, BHeader, UploadLogo, Select, TOpacity, UserSocket } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -34,10 +34,11 @@ class MemberInfo extends base {
     const { sexValue } = this.state;
     const { userData: { nickName, birthDay, phone } } = UserSocket;
     return (
-      <View>
+      <View style={styles.listViews}>
         <View style={styles.listView}>
           <Text style={styles.listLabel}>昵称</Text>
-          <TFeedback
+          <TOpacity
+            style={styles.listOne}
             content={
               <View style={styles.listRight}>
                 <Text style={styles.listText}>
@@ -51,7 +52,8 @@ class MemberInfo extends base {
         </View>
         <View style={styles.listView}>
           <Text style={styles.listLabel}>手机号</Text>
-          <TFeedback
+          <TOpacity
+            style={styles.listOne}
             content={
               <View style={styles.listRight}>
                 <Text style={styles.listText}>
@@ -65,7 +67,8 @@ class MemberInfo extends base {
         </View>
         <View style={styles.listView}>
           <Text style={styles.listLabel}>性别</Text>
-          <TFeedback
+          <TOpacity
+            style={styles.listOne}
             content={
               <View style={styles.listRight}>
                 <Text style={styles.listText}>
@@ -77,9 +80,10 @@ class MemberInfo extends base {
             onPress={this.showSelectSex}
           />
         </View>
-        <View style={styles.listView}>
+        <View style={[styles.listView, styles.noBorder]}>
           <Text style={styles.listLabel}>生日</Text>
-          <TFeedback
+          <TOpacity
+            style={styles.listOne}
             content={
               <View style={styles.listRight}>
                 <Text style={styles.listText}>
@@ -118,6 +122,28 @@ class MemberInfo extends base {
       </View>
     );
   }
+  _renderPwd() {
+    const { password } = this.state;
+    return (
+      <View style={styles.listViews}>
+        <View style={[styles.listView, styles.noBorder]}>
+          <Text style={styles.listLabel}>设置密码</Text>
+          <TOpacity
+            style={styles.listOne}
+            content={
+              <View style={styles.listRight}>
+                <Text style={styles.listText}>
+                  {password || '设置新密码'}
+                </Text>
+                <Icon name="md-arrow-dropright" style={styles.arr} />
+              </View>
+            }
+            onPress={() => this.props.push({ key: 'ChangePassword' })}
+          />
+        </View>
+      </View>
+    );
+  }
   render() {
     const { pop } = this.props;
     const { isDateShow, maximumDate, minimumDate } = this.state;
@@ -127,6 +153,7 @@ class MemberInfo extends base {
         <Content style={styles.content}>
           {this._renderLogo()}
           {this._renderList()}
+          {this._renderPwd()}
         </Content>
         {this._renderSelect()}
         <DateTimePicker

@@ -115,7 +115,7 @@ const MasterOrderItem = ({ item }) => (
     {
       item.masterOrderItems.map((list, index) => (
         <View key={index} style={styles.item}>
-          <CachedImage source={{ uri: list.imgUrl }} style={styles.img} />
+          <CachedImage source={{ uri: `${list.imgUrl}?imageView2/1/w/60` }} style={styles.img} />
           <View style={styles.itemMid}>
             <Text style={styles.name}>{list.servicesTypeName}</Text>
             <Text style={styles.count}>数量{list.count}</Text>

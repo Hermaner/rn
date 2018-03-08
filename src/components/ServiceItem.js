@@ -77,7 +77,7 @@ const ServiceItem = ({ onPress, item }) => (
     onPress={onPress}
   >
     <View style={styles.list}>
-      <CachedImage source={{ uri: item.imgUrl.split(',')[0] }} style={styles.img} />
+      <CachedImage source={{ uri: `${item.imgUrl.split(',')[0]}?imageView2/1/w/80` }} style={styles.img} />
       <View style={styles.right}>
         <View style={styles.top}>
           <Text style={styles.topname}>{item.name}</Text>

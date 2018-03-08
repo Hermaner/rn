@@ -58,7 +58,7 @@ class MgDecorate extends Base {
     );
   }
   _renderUser() {
-    const { defaultImg, info, totalMoney, outMoney, inMoney } = this.state;
+    const { defaultImg, info, outMoney, inMoney } = this.state;
     return (
       <View style={styles.userAllView}>
         <View style={styles.userView}>
@@ -66,7 +66,7 @@ class MgDecorate extends Base {
             <View style={styles.userImgView}>
               <CachedImage
                 source={
-                  info.imgUrl ? { uri: info.imgUrl } : defaultImg}
+                  info.imgUrl ? { uri: `${info.imgUrl}?imageView2/1/w/80` } : defaultImg}
                 style={styles.userImg}
               />
             </View>

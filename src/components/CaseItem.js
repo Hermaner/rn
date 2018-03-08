@@ -121,7 +121,7 @@ const CaseItem = ({ item, onPress }) => (
     <TOpacity
       content={
         <View style={styles.top}>
-          <CachedImage source={{ uri: item.masterHeadImg }} style={styles.img} />
+          <CachedImage source={{ uri: `${item.masterHeadImg}?imageView2/1/w/60` }} style={styles.img} />
           <View style={styles.info}>
             <View style={styles.infoTop}>
               <Text style={styles.name}>

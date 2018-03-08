@@ -34,7 +34,7 @@ class DecorateCaseList extends base {
         key={index}
         content={
           <View style={styles.caseList}>
-            <CachedImage source={{ uri: item.imgUrl }} style={styles.caseImg} />
+            <CachedImage source={{ uri: `${item.imgUrl}?imageView2/1/w/420/h/250` }} style={styles.caseImg} />
             <View style={styles.caseGray}>
               <Text style={styles.caseName}>
                 {item.title}

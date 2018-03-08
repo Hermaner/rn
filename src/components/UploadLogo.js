@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 50,
     overflow: 'hidden',
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 30,
   },
   upViewImg: {
