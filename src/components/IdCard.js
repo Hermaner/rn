@@ -178,9 +178,9 @@ export default class Prompt extends React.Component {
                   >
                     <Image
                       source={
-                        index === 0 ? (first ? { uri: first } : upImg) :
-                        index === 1 ? (two ? { uri: two } : upImg) :
-                        (three ? { uri: three } : upImg)
+                        index === 0 ? (first ? { uri: `${first}?imageView2/1/w/80` } : upImg) :
+                        index === 1 ? (two ? { uri: `${two}?imageView2/1/w/80` } : upImg) :
+                        (three ? { uri: `${three}?imageView2/1/w/80` } : upImg)
                       }
                       style={styles.upViewImg}
                     />

@@ -34,16 +34,10 @@ class MyMessage extends base {
         style={styles.list}
       >
         <View style={styles.top}>
-          <Text style={styles.title}>息没有您的通</Text>
-          <Text style={styles.date}>息没有您的通</Text>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.date}>{item.modiDate}</Text>
         </View>
-        <Text style={styles.content}>
-          没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息没有您的通知消息没
-          有您的通知消息没有您的通知消息没有您的通知
-          消息没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息</Text>
+        <Text style={styles.content}>{item.content}</Text>
       </View>
     );
   }

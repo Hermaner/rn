@@ -3,6 +3,9 @@ import { StyleSheet } from 'react-native';
 import { st } from '../../utils';
 
 const styles = StyleSheet.create({
+  listContent: {
+    flex: 1,
+  },
   list: {
     marginLeft: 8,
     marginRight: 8,

@@ -211,9 +211,9 @@ class Base extends React.Component {
   _onRefresh = () => {
     DeviceEventEmitter.emit('emitMine');
   }
-  goRoleStatus = (item) => {
+  goRoleStatus = (info) => {
     const { push } = this.props;
-    switch (item.id) {
+    switch (info.id) {
       case '1':
         push({ key: '', params: { } });
         break;
@@ -221,7 +221,7 @@ class Base extends React.Component {
         push({ key: '', params: { } });
         break;
       case '3':
-        push({ key: '', params: { } });
+        push({ key: 'ApplyMaster', params: { update: true } });
         break;
       default:
     }

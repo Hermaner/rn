@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   ModalStyle: {
     backgroundColor: '#fff',
-    height: 150,
+    height: 170,
   },
   modalView: {
     flex: 1,
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
   shareLists: {
     ...st.frcenter,
     backgroundColor: '#f8f8f8',
-    height: 100,
+    height: 120,
     paddingTop: 20,
     paddingBottom: 20,
   },
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     ...st.jacenter,
-    borderRadius: 30,
+    borderRadius: 25,
     marginBottom: 10,
   },
   shareIcon: {

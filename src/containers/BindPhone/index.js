@@ -40,6 +40,7 @@ class BindPhone extends base {
                 placeholder="输入您的手机号"
                 clearButtonMode="while-editing"
                 value={phone}
+                keyboardType="numeric"
                 onChangeText={value => this.setState({ phone: value })}
                 onSubmitEditing={this.login}
               />
@@ -51,6 +52,7 @@ class BindPhone extends base {
                 placeholder="输入验证码"
                 clearButtonMode="while-editing"
                 value={code}
+                keyboardType="numeric"
                 onChangeText={value => this.setState({ code: value })}
                 onSubmitEditing={this.login}
               />

@@ -9,6 +9,7 @@ class Base extends React.Component {
     super(props);
     this.state = {
       items: [],
+      typeId: '1',
       orderByName: '',
       orderByType: '',
       refresh: false,
@@ -28,12 +29,14 @@ class Base extends React.Component {
       refresh,
       orderByName,
       orderByType,
+      typeId,
       items,
     } = this.state;
     GetMemberMessageService({
       orderByName,
       orderByType,
       pageSize,
+      typeId,
       currentPage,
     }).then((res) => {
       console.log(res);
@@ -68,7 +71,7 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
+        setTimeout(() => { canEnd = true; }, 100);
         if (result.length < pageSize) {
           this.setState({
             loading: false,

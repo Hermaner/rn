@@ -2,15 +2,18 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetCodeService, AuthMasterService, GetMasterTypeService } from '../../api';
+import { GetCodeService, AuthMasterService, GetMasterTypeService, GetMasterAuthService, UpdateAuthMasterService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { params } = props.navigation.state;
     this.isSend = false;
+    const update = params ? params.update : false;
     this.state = {
-      phone: '15666666666',
-      sendPhone: '15666666666',
+      update,
+      phone: '18017011377',
+      sendPhone: '18017011377',
       sec: 60,
       code: '1111',
       codeVal: '1111',
@@ -157,12 +160,79 @@ class Base extends React.Component {
         this.setState({
           masterTypes: res.data,
         });
+        const { update } = this.state;
+        if (update) {
+          this.GetMasterAuthService();
+        }
       } else {
         Toast.show(res.msg);
       }
     }).catch((err) => {
       this.sleek.toggle();
       console.log(err);
+    });
+  }
+  GetMasterAuthService = () => {
+    this.sleek.toggle();
+    const { masterTypes } = this.state;
+    GetMasterAuthService().then((res) => {
+      console.log(res);
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        const info = res.data;
+        console.log(info);
+        const {
+          phone,
+          masterTypes: masterTypeIds,
+          provinceId,
+          provinceName,
+          cityId,
+          cityName,
+          districtId,
+          districtName,
+          address,
+          detail,
+          realName,
+          identityCard,
+          firstImage,
+          twoImage,
+          threeImage,
+        } = res.data;
+        masterTypeIds.forEach((item) => {
+          masterTypes.forEach((list) => {
+            if (list.childs) {
+              list.childs.forEach((c) => {
+                if (item.toString() === c.id.toString()) {
+                  c.cur = true;
+                }
+              });
+            }
+          });
+        });
+        this.setState({
+          phone,
+          provinceId,
+          provinceName,
+          cityId,
+          masterTypeCount: masterTypeIds.length,
+          cityName,
+          districtId,
+          districtName,
+          addressTitle: `${provinceName}${cityName}${districtName}`,
+          address,
+          detail,
+          masterTypes,
+          realName,
+          identityCard,
+          firstImage: { key: firstImage, imgUrl: firstImage },
+          twoImage: { key: twoImage, imgUrl: twoImage },
+          threeImage: { key: threeImage, imgUrl: threeImage },
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   AuthMasterService = () => {
@@ -185,6 +255,7 @@ class Base extends React.Component {
       phone,
       code,
       masterTypes,
+      update,
       masterTypeCount,
     } = this.state;
     const masterTypeIds = [];
@@ -220,7 +291,8 @@ class Base extends React.Component {
       return;
     }
     this.sleek.toggle();
-    AuthMasterService({
+    const targetFn = update ? UpdateAuthMasterService : AuthMasterService;
+    targetFn({
       phone,
       provinceId,
       provinceName,
@@ -256,5 +328,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   pop: PropTypes.func,
+  navigation: PropTypes.object,
 };
 export default Base;

@@ -496,3 +496,9 @@ export function GetWaitMasterOrderInfoService(data) {
 export function GetMemberMessageService(data) {
   return get('GetMemberMessageService', data);
 }
+export function GetMasterAuthService(data) {
+  return get('GetMasterAuthService', data);
+}
+export function UpdateAuthMasterService(data) {
+  return post('UpdateAuthMasterService', data);
+}
