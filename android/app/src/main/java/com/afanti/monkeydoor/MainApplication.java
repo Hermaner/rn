@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
+import cn.qiuxiang.react.baidumap.BaiduMapPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -30,7 +31,6 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
-// import cn.qiuxiang.react.amap3d.AMap3DPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -49,8 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BaiduMapPackage(),
             new PayReactPackage(),
-            // new AMap3DPackage(),
             new RNFetchBlobPackage(),
             new PickerPackage(),
             new SvgPackage(),

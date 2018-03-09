@@ -115,16 +115,16 @@ android {
     }
     signingConfigs {
       debug {
-        storeFile file(MYAPP_HONGPLUS_FILE)
-        storePassword MYAPP_HONGPLUS_STORE_PASSWORD
-        keyAlias MYAPP_HONGPLUS_ALIAS
-        keyPassword MYAPP_HONGPLUS_KEY_PASSWORD
+          storeFile file(MYAPP_RELEASE_STORE_FILE)
+          storePassword MYAPP_RELEASE_STORE_PASSWORD
+          keyAlias MYAPP_RELEASE_KEY_ALIAS
+          keyPassword MYAPP_RELEASE_KEY_PASSWORD
       }
       release {
-          storeFile file(MYAPP_HONGPLUS_FILE)
-          storePassword MYAPP_HONGPLUS_STORE_PASSWORD
-          keyAlias MYAPP_HONGPLUS_ALIAS
-          keyPassword MYAPP_HONGPLUS_KEY_PASSWORD
+          storeFile file(MYAPP_RELEASE_STORE_FILE)
+          storePassword MYAPP_RELEASE_STORE_PASSWORD
+          keyAlias MYAPP_RELEASE_KEY_ALIAS
+          keyPassword MYAPP_RELEASE_KEY_PASSWORD
       }
     }
     splits {
@@ -166,7 +166,7 @@ android {
     }
 }
 dependencies {
-    // compile project(':react-native-amap3d')
+    compile project(':react-native-baidumap-sdk')
     compile project(':react-native-puti-pay')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-image-crop-picker')

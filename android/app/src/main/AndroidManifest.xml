@@ -33,8 +33,8 @@
       <meta-data android:name="JPUSH_CHANNEL" android:value="${APP_CHANNEL}"/>
       <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"/>
       <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="3d0a927d657c59843fa7bb7ea2b2a697"/>
+        android:name="com.baidu.lbsapi.API_KEY"
+        android:value="aiPltUNd7Oqgc2QeCNAzonGZk2WRuQi6" />
       <activity
         android:name=".wxapi.WXPayEntryActivity"
         android:exported="true" />
@@ -125,7 +125,7 @@
         android:screenOrientation="portrait"
         android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     <meta-data
-        android:name="UMENG_APPKEY"  
+        android:name="UMENG_APPKEY"
         android:value="561cae6ae0f55abd990035bf" >
     </meta-data>
     </application>

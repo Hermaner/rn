@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import <RCTJPushModule.h>
 #import "RCTLinkingManager.h"
-#import <AMapFoundationKit/AMapFoundationKit.h>
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
@@ -45,7 +44,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [AMapServices sharedServices].apiKey = @"2387dad089c2f0765f7a7f038da98267";
 JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
      entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
      [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];

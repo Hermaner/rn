@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, ScrollView, RefreshControl, Image } from 'react-native';
+import { View, ScrollView, StyleSheet, RefreshControl, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { MapView } from 'react-native-amap3d'
+import { MapView, Location } from 'react-native-baidumap-sdk';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
@@ -19,20 +19,17 @@ class Home extends base {
       ...this.state,
     };
   }
-  componentDidMount() {
-    this.getInit();
+  async componentDidMount() {
+    await Location.init();
+    await Location.setOptions({ gps: true });
+    this.listener = Location.addLocationListener(location => this.GetLocation(location));
+    Location.start();
   }
+
   componentWillUnmount() {
     this.deleteInit();
-  }
-  _onLocationResult = (result) => {
-    if (result.coordinate) {
-      console.log(result)
-      const { longitude, latitude } = result.coordinate;
-      this.AmapGeocode(`${longitude},${latitude}`);
-      global.longitude = longitude;
-      global.latitude = latitude;
-    }
+    Location.stop();
+    this.listener.remove();
   }
   renderNav() {
     const { push } = this.props;
@@ -147,10 +144,6 @@ class Home extends base {
           {this.renderSwiper()}
           {this.renderNav()}
           {this.renderCases()}
-          {/* <MapView
-            locationEnabled
-            onLocation={this.GetLocation}
-          /> */}
         </ScrollView>
       </Container>
     );

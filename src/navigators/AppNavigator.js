@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Initializer } from 'react-native-baidumap-sdk';
 import { connect } from 'react-redux';
 import {
   createReduxBoundAddListener,
@@ -178,7 +179,7 @@ export const AppNavigator = StackNavigator({
     header: null,
   }),
 });
-
+Initializer.init('DNwiZcWaIRLI1esNAYaOoPVrZcaj2XXD').catch(e => console.error(e));
 createReactNavigationReduxMiddleware(
   'root',
   state => state.nav,

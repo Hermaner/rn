@@ -11,7 +11,7 @@ target 'App' do
   pod 'React', path: '../node_modules/react-native/', :subspecs => [
     'DevSupport',
   ]
-  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios/'
+  pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
   pod 'RSKImageCropper'
   pod 'QBImagePickerController'
 
