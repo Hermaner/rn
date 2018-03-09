@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Mcolor, st, deviceH } from '../../utils';
+import { Mcolor, st } from '../../utils';
 
 const styles = StyleSheet.create({
   content: {
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   left: {
-    width: 100,
+    width: 80,
     backgroundColor: '#e9e9ef',
   },
   leftScroll: {
@@ -39,6 +39,19 @@ const styles = StyleSheet.create({
     height: 80,
     paddingRight: 5,
   },
+  imgView: {
+    width: 60,
+    height: 60,
+    marginRight: 5,
+  },
+  img: {
+    width: 60,
+    height: 60,
+  },
+  labelView: {
+    flex: 1,
+    ...st.frcenter,
+  },
   nameView: {
     height: 30,
     ...st.jcenter,
@@ -51,7 +64,6 @@ const styles = StyleSheet.create({
   label: {
     flex: 1,
     ...st.jcenter,
-    paddingRight: 6,
   },
   priceView: {
     ...st.fr,
@@ -75,12 +87,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   footPriceLabel: {
-    color: '#666',
+    color: '#333',
     fontSize: 14,
   },
   footPrice: {
     color: Mcolor,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   footBtn: {
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
   },
   footTips: {
     color: '#aaa',
-    marginTop: 6,
+    marginTop: 3,
     fontSize: 14,
   },
   footPriceView: {

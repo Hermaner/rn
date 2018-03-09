@@ -254,7 +254,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         const info = res.data;
-        const masterLogs = info.masterOrderItems[0].masterOrderItemLogs;
+        const masterLogs = info.masterOrderItems && info.masterOrderItems[0].masterOrderItemLogs;
         let initImages = '';
         if (masterLogs && masterLogs.images) {
           initImages = masterLogs.images;

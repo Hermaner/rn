@@ -74,7 +74,7 @@ class MgMasterOrderDetail extends base {
     return (
       <View>
         <View style={styles.address}>
-          <Icon name="ios-aperture-outline" style={styles.leftIco} />
+          <Icon name="ios-pin-outline" style={styles.leftIco} />
           <View style={styles.addressRight}>
             <View style={styles.addressTop}>
               <Text style={styles.userName}>{info.memberName}</Text>
@@ -100,6 +100,14 @@ class MgMasterOrderDetail extends base {
       <View>
         <TitleItem
           text="服务项目"
+          rightContent={
+            <View style={styles.price}>
+              <View style={styles.priceIcon}>
+                <Icon name="ios-flame" style={styles.priceText} />
+              </View>
+              <Text style={styles.priceValue}>{info.amount}元</Text>
+            </View>
+          }
         />
         <View style={styles.mid}>
           {
@@ -116,15 +124,18 @@ class MgMasterOrderDetail extends base {
             ))
           }
         </View>
-        <View style={styles.memo}>
-          <Text style={styles.memoText}>
-            用户留言：{info.buyMessage || '无'}
-          </Text>
+        <View>
+          <View style={styles.memo}>
+            <Text style={styles.memoText}>
+              用户留言：{info.buyMessage || '无'}
+            </Text>
+          </View>
           {
-            info.orderImages.length > 0 && <ImageLook images={info.orderImages} />
+            info.orderImages.length > 0 &&
+            <ImageLook images={info.orderImages.map(item => item.imgUrl)} />
           }
         </View>
-        <View style={styles.totalView}>
+        {/* <View style={styles.totalView}>
           <View style={styles.totalLine}>
             <Text style={styles.totalLeft2}>
               订单金额
@@ -133,7 +144,7 @@ class MgMasterOrderDetail extends base {
               ￥{info.amount}
             </Text>
           </View>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -271,6 +282,7 @@ class MgMasterOrderDetail extends base {
   }
   _renderCompleteFive() {
     const { initImages, masterLogs } = this.state;
+    console.log(initImages);
     return (
       <View style={styles.infoView}>
         <TitleItem

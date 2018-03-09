@@ -487,3 +487,12 @@ export function GetServiceCategoryService(data) {
 export function GetServiceProductService(data) {
   return get('GetServiceProductService', data);
 }
+export function GetWaitMasterOrderService(data) {
+  return get('GetWaitMasterOrderService', data);
+}
+export function GetWaitMasterOrderInfoService(data) {
+  return get('GetWaitMasterOrderInfoService', data);
+}
+export function GetMemberMessageService(data) {
+  return get('GetMemberMessageService', data);
+}

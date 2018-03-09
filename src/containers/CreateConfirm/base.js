@@ -3,13 +3,17 @@ import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { DeviceEventEmitter } from 'react-native';
 import Dateformat from 'dateformat';
-import { CreateOrderService, GetMemberAddressService, DeepClone } from '../../api';
+import { CreateOrderService, GetMemberAddressService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { typeId, items, ruleInfo } = props.navigation.state.params;
+    console.log(ruleInfo);
     this.state = {
-      items: this.props.navigation.state.params.items,
+      items,
+      ruleInfo,
+      typeId: typeId || '2',
       upImages: [],
       amount: 0,
       appointDate: '',
@@ -26,7 +30,6 @@ class Base extends React.Component {
       dayIndex: null,
       timeIndex: null,
       popTimes: [],
-      resetTimes: null,
       initImages: [],
     };
   }
@@ -49,10 +52,18 @@ class Base extends React.Component {
   }
   computeAmount = () => {
     let amount = 0;
-    const { items } = this.state;
+    const { items, ruleInfo } = this.state;
     items.forEach((item) => {
       amount += item.count * item.salesPrice;
     });
+    if (ruleInfo) {
+      const { conditionPrice, typeId, price } = ruleInfo;
+      if (typeId === 1) {
+        amount = amount < conditionPrice ? (amount + price) : amount;
+      } else if (typeId === 3) {
+        amount = amount < conditionPrice ? conditionPrice : amount;
+      }
+    }
     this.setState({
       amount,
     });
@@ -81,6 +92,7 @@ class Base extends React.Component {
       items,
       addressId,
       serviceDate,
+      typeId,
     } = this.state;
     if (!serviceDate) {
       Toast.show('请选择服务时间');
@@ -96,7 +108,7 @@ class Base extends React.Component {
         count: item.count.toString(),
         servicesPrice: item.salesPrice.toString(),
         servicesTypeId: item.id.toString(),
-        typeId: '2',
+        typeId,
         serviceDate,
       });
     });
@@ -106,7 +118,7 @@ class Base extends React.Component {
       deliveryTypeId,
       amount: amount.toString(),
       buyMessage,
-      orderImages: upImages.join(','),
+      orderImages: upImages.map(item => item.key).join(','),
       products: JSON.stringify(products),
       memberId: global.memberId,
     }).then((res) => {
@@ -130,7 +142,7 @@ class Base extends React.Component {
     });
   }
   dayTab = (index) => {
-    const { popDates, dayIndex, resetTimes } = this.state;
+    const { popDates, dayIndex } = this.state;
     if (dayIndex === index) {
       return;
     }
@@ -143,25 +155,26 @@ class Base extends React.Component {
     }
     this.setState({
       dayIndex: index,
-      popTimes: DeepClone(resetTimes),
-      timeIndex: null,
       popDates,
     });
   }
   timeTab = (index) => {
-    const { popTimes, timeIndex, dayIndex } = this.state;
+    const { popDates, popTimes, timeIndex, dayIndex } = this.state;
     if (timeIndex === index) {
       return;
     }
     if (dayIndex === 0 && popTimes[index].disabled) {
       return;
     }
+    console.log(popTimes[index].disabled);
+    popDates[0].disabled = popTimes[index].disabled;
     popTimes[index].cur = true;
     if (timeIndex !== null) {
       popTimes[timeIndex].cur = false;
     }
     this.setState({
       popTimes,
+      popDates,
       timeIndex: index,
     });
   }
@@ -200,8 +213,7 @@ class Base extends React.Component {
     }];
     this.setState({
       popDates,
-      resetTimes: popTimes,
-      popTimes: DeepClone(popTimes),
+      popTimes,
     });
   }
   showAds = () => {
@@ -226,6 +238,7 @@ class Base extends React.Component {
   }
   createAddress = () => {
     this.props.push({ key: 'MyAddressCreate', params: { type: 'CreateConfirm' } });
+    this.hideAds();
   }
   savePopDate = () => {
     const { popDates, dayIndex, timeIndex, popTimes } = this.state;

@@ -44,6 +44,11 @@ export default class Loading extends React.Component {
       isShow: !this.state.isShow,
     });
   }
+  hide() {
+    this.setState({
+      isShow: false,
+    });
+  }
   render() {
     if (this.state.isShow) {
       return (

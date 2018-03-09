@@ -41,7 +41,6 @@ Pods/
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
 .gradle
 
 # fastlane

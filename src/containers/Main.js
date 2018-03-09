@@ -19,8 +19,11 @@ class Main extends React.Component {
     Toast.show('再按一次退出应用');
     return true;
   };
+  midPress = () => {
+    console.log(1111);
+  };
   render() {
-    return <TabsScreen />;
+    return <TabsScreen midPress={this.midPress} />;
   }
 }
 Main.navigationOptions = {

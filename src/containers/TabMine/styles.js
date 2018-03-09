@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   iconsIcon: {
-    fontSize: 22,
+    fontSize: 26,
     color: '#fff',
   },
   ModalStyle: {

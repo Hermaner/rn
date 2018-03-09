@@ -48,19 +48,27 @@ class OrderDetail extends base {
     );
   }
   _renderAddress() {
-    const { item } = this.state;
+    const { item, masterInfo } = this.state;
     return (
       <View>
         <SpotLine />
         {
-          item.status !== 1 &&
+          item.status !== 1 && item.status !== 7 && masterInfo &&
           <View style={styles.masterInfo}>
-            <Icon name="ios-aperture-outline" style={styles.leftIco} />
-            <Text style={styles.leftText}>{item.orderItems[0].masterInfo.realName}</Text>
+            <TOpacity
+              style={{ flex: 1 }}
+              content={
+                <View style={styles.leftName}>
+                  <Icon name="md-eye" style={styles.leftIco} />
+                  <Text style={styles.leftText}>{masterInfo.realName}</Text>
+                </View>
+              }
+              onPress={this.call}
+            />
             <TOpacity
               content={
                 <View style={styles.rightTel}>
-                  <Icon name="ios-aperture-outline" style={styles.rightIco} />
+                  <Icon name="ios-call" style={styles.rightIco} />
                   <Text style={styles.mainText}>联系师傅</Text>
                 </View>
               }
@@ -69,7 +77,7 @@ class OrderDetail extends base {
           </View>
         }
         <View style={styles.address}>
-          <Icon name="ios-aperture-outline" style={styles.leftIco} />
+          <Icon name="ios-pin-outline" style={styles.leftIco} />
           <View style={styles.addressRight}>
             <View style={styles.addressTop}>
               <Text style={styles.userName}>{item.memberName}</Text>
@@ -121,7 +129,8 @@ class OrderDetail extends base {
             用户留言：{item.buyMessage || '无'}
           </Text>
           {
-            item.orderImages.length > 0 && <ImageLook images={item.orderImages} />
+            item.orderImages.length > 0 &&
+            <ImageLook images={item.orderImages.map(list => list.imgUrl)} />
           }
         </View>
         <View style={styles.totalView}>

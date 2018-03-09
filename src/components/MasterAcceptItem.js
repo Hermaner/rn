@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Text, View, StyleSheet } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Icon } from 'native-base';
-import { Mcolor, st } from '../utils';
+import { Mcolor, st, Mg } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
@@ -12,12 +12,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   top: {
-    height: 35,
+    height: 40,
     ...st.frcenter,
     borderBottomWidth: 1,
     borderBottomColor: '#e2e2e2',
     paddingRight: 10,
     paddingLeft: 10,
+  },
+  topLeft: {
+    flex: 1,
+    ...st.fr,
+    ...st.acenter,
   },
   topDate: {
     fontSize: 14,
@@ -25,12 +30,7 @@ const styles = StyleSheet.create({
   },
   topTime: {
     fontSize: 13,
-    color: 'green',
-  },
-  topLeft: {
-    flex: 1,
-    ...st.fr,
-    ...st.acenter,
+    color: Mg,
   },
   item: {
     ...st.frcenter,
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   name: {
-    fontSize: 14,
-    color: '#333',
+    fontSize: 15,
+    color: '#222',
     marginBottom: 4,
   },
   count: {
@@ -96,14 +96,20 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#888',
   },
-  bom: {
-    height: 35,
-    paddingLeft: 10,
-    ...st.jcenter,
-  },
   bomText: {
     fontSize: 12,
     color: '#666',
+  },
+  btn: {
+    width: 70,
+    height: 32,
+    ...st.jacenter,
+    backgroundColor: Mcolor,
+    borderRadius: 5,
+  },
+  btnText: {
+    fontSize: 14,
+    color: '#fff',
   },
   itemRight: {
 
@@ -120,7 +126,7 @@ const MasterOrderItem = ({ item }) => (
     <View style={styles.top}>
       <View style={styles.topLeft}>
         <Text style={styles.topDate}>
-          {item.masterOrderNumber}
+          {item.orderNumber}
         </Text>
         <Text style={styles.topTime} numberOfLines={1}>
           ({item.modiDate})
@@ -152,11 +158,6 @@ const MasterOrderItem = ({ item }) => (
         {item.provinceName}{item.cityName}{item.districtName}{item.address}
       </Text>
       <Text style={styles.disc}>{item.distance > 200 ? `${(item.distance / 1000).toFixed(2)}km` : '小于200m'}</Text>
-    </View>
-    <View style={styles.bom}>
-      <Text style={styles.bomText}>请尽快与用户电话联系并上门哦</Text>
-      {/* <Text style={styles.bomText}>请为客服做出最优质的服务</Text>
-      <Text style={styles.bomText}>订单已完成，等待7天入账</Text> */}
     </View>
   </View>
 );

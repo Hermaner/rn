@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
   },
   listMemo: {
     color: '#666',
+    textAlignVertical: 'top',
+    height: 60,
     fontSize: 13,
   },
   listText: {
@@ -120,6 +122,9 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: '#aaa',
     borderRadius: 4,
+  },
+  dtlistDisable: {
+    backgroundColor: '#ccc',
   },
   dtlistCur: {
     backgroundColor: Mcolor,
@@ -173,17 +178,16 @@ const styles = StyleSheet.create({
   },
   footLeft: {
     flex: 1,
-    ...st.fr,
-    ...st.acenter,
+    ...st.jcenter,
     paddingLeft: 10,
   },
   footPriceLabel: {
-    color: '#666',
+    color: '#333',
     fontSize: 14,
   },
   footPrice: {
     color: Mcolor,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   footBtn: {
@@ -191,7 +195,14 @@ const styles = StyleSheet.create({
     ...st.jacenter,
     width: 120,
   },
-  footBtnView: {
+  footTips: {
+    color: '#aaa',
+    marginTop: 3,
+    fontSize: 14,
+  },
+  footPriceView: {
+    ...st.fr,
+    ...st.acenter,
   },
   footBtnText: {
     color: '#fff',

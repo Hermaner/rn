@@ -16,6 +16,7 @@ class Base extends React.Component {
       masterImage: [],
       textList: [],
       telhref: '',
+      masterInfo: null,
       modalShow: false,
       showDiff: false,
       showRefund: false,
@@ -43,10 +44,12 @@ class Base extends React.Component {
           masterImage = str.split('$images:')[1].split('$memo')[0].split(',');
           memo = str.split('$images:')[1].split('$memo')[1].substr(1);
         }
-        telhref = res.data.orderItems[0].masterInfo ? `${res.data.orderItems[0].masterInfo.phone}` : '';
+        const masterInfo = res.data.orderItems[0].masterInfo;
+        telhref = masterInfo ? `${masterInfo.phone}` : '';
         this.setState({
           item: res.data,
           textList,
+          masterInfo,
           masterImage,
           memo,
           telhref,

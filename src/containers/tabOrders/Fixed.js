@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, FlatList, BackHandler } from 'react-native';
+import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, Header, NoData } from '../../components';
-import base from './base';
+import { Loading, MasterAcceptItem, TFeedback, NoData } from '../../components';
+import base from './FixedBase';
 import styles from './styles';
 
-class MyMessage extends base {
+class DemandOrder extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,35 +16,27 @@ class MyMessage extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
   }
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    this.deleteInit();
   }
-  onBackPress = () => {
-    this.props.pop();
-    return true;
-  };
   _renderRow = (data) => {
     const { item, index } = data;
     return (
-      <View
+      <TFeedback
         key={index}
-        style={styles.list}
-      >
-        <View style={styles.top}>
-          <Text style={styles.title}>息没有您的通</Text>
-          <Text style={styles.date}>息没有您的通</Text>
-        </View>
-        <Text style={styles.content}>
-          没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息没有您的通知消息没
-          有您的通知消息没有您的通知消息没有您的通知
-          消息没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息没有您的通知消息没有您的通
-          知消息没有您的通知消息</Text>
-      </View>
+        content={
+          <View>
+            <MasterAcceptItem
+              item={item}
+              rowID={index}
+              key={index}
+            />
+          </View>
+        }
+        onPress={() => { this.props.push({ key: 'OrderDetailAccept', params: { masterOrderId: item.masterOrderId, status: item.status } }); }}
+      />
     );
   }
   _renderContent() {
@@ -78,19 +70,19 @@ class MyMessage extends base {
     );
   }
   render() {
-    const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="通知消息" />
-        {this._renderContent()}
+        <View style={styles.mainView}>
+          {this._renderContent()}
+        </View>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
 }
 
-MyMessage.propTypes = {
+DemandOrder.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(MyMessage);
+export default connect(null, { pop: popRoute, push: pushRoute })(DemandOrder);

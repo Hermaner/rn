@@ -17,12 +17,12 @@ class MyAddressCreate extends base {
     };
   }
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getInit();
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     this.deleteInit();
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {
     this.props.pop();

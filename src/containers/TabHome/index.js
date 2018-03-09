@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet, RefreshControl, Image } from 'react-native';
+import { View, ScrollView, RefreshControl, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { MapView, Location } from 'react-native-baidumap-sdk';
+import { Location } from 'react-native-baidumap-sdk';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
@@ -20,13 +20,14 @@ class Home extends base {
     };
   }
   async componentDidMount() {
+    this.getInit();
     await Location.init();
     await Location.setOptions({ gps: true });
     this.listener = Location.addLocationListener(location => this.GetLocation(location));
     Location.start();
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
     this.deleteInit();
     Location.stop();
     this.listener.remove();

@@ -118,7 +118,7 @@ class MgMaster extends Base {
             <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>我的项目</Text>
               <View style={styles.roleColor}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="md-list-box" style={styles.topRoleIcon} />
               </View>
               {
                 servicesCount > 0 &&
@@ -136,7 +136,7 @@ class MgMaster extends Base {
             <View style={styles.roleList}>
               <Text style={styles.roleText}>发布项目</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="md-add" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -199,7 +199,7 @@ class MgMaster extends Base {
               content={
                 <View key={index} style={styles.iconsItem}>
                   <View style={[styles.iconsTop, { backgroundColor: item.color }]}>
-                    <Icon name="md-alarm" style={styles.iconsIcon} />
+                    <Icon name={item.icon} style={styles.iconsIcon} />
                     {
                       index === 0 && biddingCount > 0 &&
                       <View style={styles.orderItemBadge}>

@@ -57,7 +57,7 @@ class Base extends React.Component {
       amount: '0.01' || amount.toString(),
     }).then((res) => {
       console.log(res);
-      this.sleek.toggle();
+      this.sleek.hide();
       if (res.isSuccess) {
         XPay.alipay(res.data, (json) => {
           console.log(json);
@@ -68,7 +68,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       console.log(err);
-      this.sleek.toggle();
+      this.sleek.hide();
     });
   }
   goWXpay = () => {
@@ -79,7 +79,7 @@ class Base extends React.Component {
       amount: amount.toString(),
     }).then((res) => {
       console.log(res);
-      this.sleek.toggle();
+      this.sleek.hide();
       if (res.isSuccess) {
         const parmas = res.data;
         console.log(parmas);
@@ -99,7 +99,7 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       console.log(err);
-      this.sleek.toggle();
+      this.sleek.hide();
     });
   }
   goNext = () => {

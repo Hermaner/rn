@@ -51,6 +51,7 @@ const GoodItem = ({ item, index, backChange }) => (
       <InputNumber
         onChange={c => backChange(index, c)}
         value={item.count}
+        small
         min={1}
       />
     </View>

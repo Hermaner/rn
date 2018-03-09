@@ -42,12 +42,14 @@ import Share from './Share';
 import SharePlatform from './SharePlatform';
 import MasterDemanOrderItem from './MasterDemanOrderItem';
 import IdCard from './IdCard';
+import MasterAcceptItem from './MasterAcceptItem';
 
 const UserSocket = new UserObser();
 
 export {
   TLight,
   IdCard,
+  MasterAcceptItem,
   MasterDemanOrderItem,
   SharePlatform,
   Share,

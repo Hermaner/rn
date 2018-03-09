@@ -4,10 +4,10 @@ import { Icon } from 'native-base';
 import { View, Text, StyleSheet } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import TabHome from './TabHome';
-import TabOrder from './TabOrder';
+import TabOrder from './tabOrders';
 import TabChat from './TabChat';
 import TabMine from './TabMine';
-import { Mcolor } from '../utils';
+import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   tabView: {
@@ -20,6 +20,24 @@ const styles = StyleSheet.create({
   tabViewText: {
     fontSize: 12,
   },
+  tabMidView: {
+    ...st.jacenter,
+  },
+  tabMidColor: {
+    backgroundColor: Mcolor,
+    borderWidth: 3,
+    overflow: 'hidden',
+    borderColor: '#f8f8f8',
+    borderRadius: 22,
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabMidIcon: {
+    fontSize: 30,
+    color: '#fff',
+  },
 });
 const TabsScreen = (navigationOptions = {}) => TabNavigator(
   {
@@ -28,6 +46,9 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
     },
     TabOrder: {
       screen: TabOrder,
+    },
+    TabAdd: {
+      screen: 'TabAdd',
     },
     TabChat: {
       screen: TabChat,
@@ -39,7 +60,8 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       ...navigationOptions,
-      tabBarIcon: ({ focused }) => {
+      tabBarIcon: (data) => {
+        const { focused } = data;
         const { routeName } = navigation.state;
         let iconName;
         let name;
@@ -51,6 +73,10 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
           case 'TabOrder':
             iconName = 'ios-list-box-outline';
             name = '接单';
+            break;
+          case 'TabAdd':
+            iconName = 'ios-add';
+            name = '发布';
             break;
           case 'TabChat':
             iconName = 'ios-chatbubbles-outline';
@@ -64,9 +90,20 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
             break;
         }
         return (
-          <View style={styles.tabView}>
-            <Icon style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
-            <Text style={[styles.tabViewText, { color: focused ? Mcolor : '#666' }]}>{name}</Text>
+          <View style={{ overflow: 'visible' }}>
+            {
+              routeName === 'TabAdd' ?
+                <View style={styles.tabMidView}>
+                  <View style={styles.tabMidColor}>
+                    <Icon style={[styles.tabMidIcon]} name={iconName} />
+                  </View>
+                </View>
+                :
+                <View style={styles.tabView}>
+                  <Icon style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
+                  <Text style={[styles.tabViewText, { color: focused ? Mcolor : '#666' }]}>{name}</Text>
+                </View>
+            }
           </View>
         );
       },
@@ -79,7 +116,12 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
             this.props.push({ key: 'User' });
           }
         }
-        jumpToIndex(index);
+        if (index === 2) {
+          console.log(this);
+          // midPress();
+        } else {
+          jumpToIndex(index);
+        }
       },
     }),
     tabBarOptions: {
@@ -96,5 +138,6 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
 );
 TabsScreen.propTypes = {
   push: PropTypes.func,
+  midPress: PropTypes.func,
 };
 export default TabsScreen();

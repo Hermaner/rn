@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   name: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
     flex: 1,
     lineHeight: 22,
@@ -108,7 +108,10 @@ const styles = StyleSheet.create({
   },
   memo: {
     backgroundColor: '#fff',
-    padding: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    height: 30,
+    ...st.jcenter,
     borderTopColor: '#e2e2e2',
     borderTopWidth: 1,
   },
@@ -272,6 +275,30 @@ const styles = StyleSheet.create({
   arr: {
     fontSize: 16,
     color: '#666',
+  },
+  priceText: {
+    color: Mcolor,
+    fontSize: 12,
+  },
+  price: {
+    backgroundColor: Mcolor,
+    height: 30,
+    ...st.frcenter,
+    borderRadius: 15,
+    paddingRight: 10,
+    paddingLeft: 10,
+  },
+  priceIcon: {
+    backgroundColor: '#fff',
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    ...st.jacenter,
+    marginRight: 5,
+  },
+  priceValue: {
+    color: '#fff',
+    fontSize: 15,
   },
 });
 export default styles;

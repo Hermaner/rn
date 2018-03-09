@@ -19,19 +19,19 @@ class Base extends React.Component {
       }],
       bigTypes: [
         {
-          icon: 'icon-kefu',
-          text: '估价需求',
+          icon: 'ios-unlock',
+          text: '固价需求',
           color: '#ff892f',
           page: 'FixedList',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'ios-construct',
           text: '安装维修',
           color: '#ff892f',
           page: 'ServiceList',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'md-search',
           text: '找师傅',
           color: '#f86d5e',
           page: 'MasterCategory',
@@ -39,31 +39,31 @@ class Base extends React.Component {
       ],
       types: [
         {
-          icon: 'icon-kefu',
+          icon: 'logo-dropbox',
           text: '装修公司',
           color: '#eeba57',
           page: 'DecorateList',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'ios-cube',
           text: '周边建材',
           color: '#9191d4',
           page: 'BmMarketList',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'ios-flame',
           text: '平台入驻',
           color: '#9ed35a',
           page: 'ApplyWant',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'ios-clipboard',
           text: '其他需求',
           color: '#00CD66',
           page: 'DemandCategory',
         },
         {
-          icon: 'icon-kefu',
+          icon: 'md-eye',
           text: '发现',
           color: '#8A2BE2',
           page: 'LuckVote',
@@ -99,7 +99,6 @@ class Base extends React.Component {
   }
   AmapGeocode = (location) => {
     AmapGeocode(location).then((res) => {
-      console.log(res);
       if (res.info === 'OK') {
         const {
           adcode,

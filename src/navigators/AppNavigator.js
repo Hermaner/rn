@@ -90,8 +90,10 @@ import MgMasterApply from '../containers/MgMasterApply';
 import MasterItems from '../containers/MasterItems';
 import ChangePassword from '../containers/ChangePassword';
 import FixedList from '../containers/FixedList';
+import OrderDetailAccept from '../containers/OrderDetailAccept';
 
 export const AppNavigator = StackNavigator({
+  OrderDetailAccept: { screen: OrderDetailAccept },
   FixedList: { screen: FixedList },
   MgMasterBadList: { screen: MgMasterBadList },
   MgMasterCategory: { screen: MgMasterCategory },

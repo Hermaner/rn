@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, StyleSheet } from 'react-native';
-import { Iconfont } from './index';
+import { Icon } from 'native-base';
 import { st, deviceW } from '../utils';
 
 const styles = StyleSheet.create({
@@ -40,7 +40,7 @@ const IconItem = ({ item, big }) => (
         }]
     }
     >
-      <Iconfont style={styles.icon} name={item.icon} />
+      <Icon style={styles.icon} name={item.icon} />
     </View>
     <Text style={styles.text}>{item.text}</Text>
   </View>

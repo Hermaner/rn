@@ -166,7 +166,7 @@ class My extends Base {
             <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>服务订单</Text>
               <View style={styles.roleColor}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-list-box-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -178,7 +178,7 @@ class My extends Base {
             <View style={styles.roleList}>
               <Text style={styles.roleText}>师傅管理</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-apps-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -197,7 +197,7 @@ class My extends Base {
             <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>服务订单</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-list-box-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -209,7 +209,7 @@ class My extends Base {
             <View style={styles.roleList}>
               <Text style={styles.roleText}>建材管理</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-apps-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -228,7 +228,7 @@ class My extends Base {
             <View style={[styles.roleList, styles.roleBorder]}>
               <Text style={styles.roleText}>服务订单</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-list-box-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -240,7 +240,7 @@ class My extends Base {
             <View style={styles.roleList}>
               <Text style={styles.roleText}>装修管理</Text>
               <View style={styles.roleColor2}>
-                <Icon name="md-alarm" style={styles.topRoleIcon} />
+                <Icon name="ios-apps-outline" style={styles.topRoleIcon} />
               </View>
             </View>
           }
@@ -324,7 +324,7 @@ class My extends Base {
               content={
                 <View key={index} style={styles.iconsItem}>
                   <View style={[styles.iconsTop, { backgroundColor: item.color }]}>
-                    <Icon name="md-alarm" style={styles.iconsIcon} />
+                    <Icon name={item.icon} style={styles.iconsIcon} />
                   </View>
                   <Text style={styles.roleText}>{item.label}</Text>
                 </View>
@@ -337,7 +337,7 @@ class My extends Base {
           content={
             <View style={styles.iconsItem}>
               <View style={[styles.iconsTop, { backgroundColor: '#f2a050' }]}>
-                <Icon name="md-alarm" style={styles.iconsIcon} />
+                <Icon name="md-call" style={styles.iconsIcon} />
               </View>
               <Text style={styles.roleText}>客服热线</Text>
             </View>

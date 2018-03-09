@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMasterCaseService } from '../../api';
+import { GetMemberMessageService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -21,7 +21,7 @@ class Base extends React.Component {
   getInit = () => {
     this._onRefresh();
   }
-  GetMasterCaseService = () => {
+  GetMemberMessageService = () => {
     const {
       pageSize,
       currentPage,
@@ -30,7 +30,7 @@ class Base extends React.Component {
       orderByType,
       items,
     } = this.state;
-    GetMasterCaseService({
+    GetMemberMessageService({
       orderByName,
       orderByType,
       pageSize,
@@ -86,13 +86,13 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
       currentPage: 1,
-    }, () => this.GetMasterCaseService());
+    }, () => this.GetMemberMessageService());
   }
   _reachEnd = () => {
     const { nomore } = this.state;
     if (canEnd && !nomore) {
       canEnd = false;
-      this.setState({ loading: true }, () => this.GetMasterCaseService());
+      this.setState({ loading: true }, () => this.GetMemberMessageService());
     }
   }
 }

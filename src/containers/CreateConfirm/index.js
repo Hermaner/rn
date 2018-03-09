@@ -37,7 +37,7 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="ios-locate-outline" style={styles.locIcon} />
+                  <Icon name="ios-pin-outline" style={styles.locIcon} />
                   <View style={styles.addressRight}>
                     <View style={styles.addressTop}>
                       <Text style={styles.userName}>{decodeURI(adsData.nickName)}</Text>
@@ -59,7 +59,7 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="ios-locate-outline" style={styles.locIcon} />
+                  <Icon name="ios-pin-outline" style={styles.locIcon} />
                   <View style={styles.addressRight}>
                     <Text style={styles.userAddress}>
                       点击添加服务地址
@@ -96,7 +96,7 @@ class CreateConfirm extends base {
         <View style={styles.listView}>
           <Text style={styles.listLabel}>服务时间</Text>
           <View style={styles.listRight}>
-            <TFeedback
+            <TOpacity
               content={
                 <View style={styles.chooseTime}>
                   <Text style={styles.listText}>
@@ -119,6 +119,7 @@ class CreateConfirm extends base {
           <Text style={styles.listLabel}>备注</Text>
           <View style={styles.listRight}>
             <Input
+              multiline
               style={styles.listMemo}
               placeholderTextColor="#999"
               placeholder="其他备注"
@@ -192,7 +193,7 @@ class CreateConfirm extends base {
     );
   }
   _renderModal() {
-    const { isDtShow, popDates, popTimes } = this.state;
+    const { isDtShow, popDates, popTimes, dayIndex } = this.state;
     return (
       <Modal
         style={styles.ModalStyle}
@@ -210,18 +211,23 @@ class CreateConfirm extends base {
             <View style={styles.popDay}>
               {
                 popDates.map((item, index) => (
-                  <TFeedback
+                  <TOpacity
                     key={index}
+                    style={styles.dtlister}
                     content={
-                      <View style={styles.dtlister}>
-                        <View style={[styles.dtlist, item.cur && styles.dtlistCur]}>
-                          <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
-                            {item.day}
-                          </Text>
-                          <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
-                            {item.label}
-                          </Text>
-                        </View>
+                      <View
+                        style={[styles.dtlist,
+                          index === 0 &&
+                          popDates[0].disabled &&
+                          styles.dtlistDisable,
+                          item.cur && styles.dtlistCur]}
+                      >
+                        <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
+                          {item.day}
+                        </Text>
+                        <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
+                          {item.label}
+                        </Text>
                       </View>
                     }
                     onPress={() => { this.dayTab(index); }}
@@ -233,18 +239,23 @@ class CreateConfirm extends base {
             <View style={styles.popPm}>
               {
                 popTimes.map((item, index) => (
-                  <TFeedback
+                  <TOpacity
                     key={index}
+                    style={styles.dtpmlister}
                     content={
-                      <View style={styles.dtpmlister}>
-                        <View style={[styles.dtlist, item.cur && styles.dtlistCur]}>
-                          <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
-                            {item.day}
-                          </Text>
-                          <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
-                            {item.label}
-                          </Text>
-                        </View>
+                      <View
+                        style={[
+                          styles.dtlist,
+                          dayIndex === 0 && popTimes[index].disabled &&
+                          styles.dtlistDisable,
+                          item.cur && styles.dtlistCur]}
+                      >
+                        <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
+                          {item.day}
+                        </Text>
+                        <Text style={[styles.dtlabel, item.cur && styles.dtlabelCur]}>
+                          {item.label}
+                        </Text>
                       </View>
                     }
                     onPress={() => { this.timeTab(index); }}
@@ -279,12 +290,19 @@ class CreateConfirm extends base {
     );
   }
   _renderFooter() {
-    const { amount } = this.state;
+    const { amount, ruleInfo } = this.state;
     return (
       <Footer style={styles.footer}>
         <View style={styles.footLeft}>
-          <Text style={styles.footPriceLabel}>待支付</Text>
-          <Text style={styles.footPrice}>{amount}元</Text>
+          <View style={styles.footPriceView}>
+            <Text style={styles.footPriceLabel}>待支付</Text>
+            <Text style={styles.footPrice}>
+              {amount}元
+            </Text>
+          </View>
+          {
+            ruleInfo && <Text style={styles.footTips}>{ruleInfo.name}</Text>
+          }
         </View>
         <TOpacity
           style={styles.footBtn}

@@ -29,6 +29,27 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
+    this.emitArea = DeviceEventEmitter.addListener('emitArea', (data) => {
+      console.log(data);
+      const {
+        addressTitle,
+        provinceId,
+        provinceName,
+        cityId,
+        cityName,
+        districtId,
+        districtName,
+      } = data;
+      this.setState({
+        addressTitle,
+        provinceId,
+        provinceName,
+        cityId,
+        cityName,
+        districtId,
+        districtName,
+      });
+    });
     const { params } = this.props.navigation.state;
     if (params) {
       const { item, type } = params;
@@ -67,27 +88,6 @@ class Base extends React.Component {
         isDefault: isDefault === 1 ? [1] : [],
       });
     }
-    this.emitArea = DeviceEventEmitter.addListener('emitArea', (data) => {
-      console.log(data);
-      const {
-        addressTitle,
-        provinceId,
-        provinceName,
-        cityId,
-        cityName,
-        districtId,
-        districtName,
-      } = data;
-      this.setState({
-        addressTitle,
-        provinceId,
-        provinceName,
-        cityId,
-        cityName,
-        districtId,
-        districtName,
-      });
-    });
   }
   backCheck = (isDefault) => {
     this.setState({

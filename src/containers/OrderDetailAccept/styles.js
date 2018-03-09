@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
   ...st,
   top: {
     backgroundColor: '#e5464a',
-    height: 85,
+    paddingTop: 25,
+    paddingBottom: 25,
     paddingLeft: 30,
-    ...st.jcenter,
-    marginBottom: 6,
+    marginBottom: 5,
   },
   topText: {
     fontSize: 14,
+    lineHeight: 22,
     color: '#fff',
   },
   masterInfo: {
@@ -22,27 +23,10 @@ const styles = StyleSheet.create({
     height: 46,
     backgroundColor: '#fff',
   },
-  leftName: {
-    ...st.fr,
-    ...st.acenter,
-  },
   leftIco: {
     fontSize: 18,
     color: '#888',
     marginRight: 8,
-  },
-  leftText: {
-    flex: 1,
-    fontSize: 14,
-    color: '#666',
-  },
-  rightTel: {
-    ...st.frcenter,
-  },
-  rightIco: {
-    marginRight: 5,
-    fontSize: 18,
-    color: '#888',
   },
   mainText: {
     fontSize: 14,
@@ -73,29 +57,6 @@ const styles = StyleSheet.create({
     height: 22,
     marginBottom: 5,
   },
-  phone: {
-    fontSize: 14,
-    color: '#333',
-  },
-  userAddress: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 18,
-  },
-  diffBtn: {
-    backgroundColor: '#f2f2f2',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    height: 27,
-    ...st.jacenter,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  diffText: {
-    fontSize: 12,
-    color: Mcolor,
-  },
   mid: {
     paddingLeft: 10,
     paddingRight: 10,
@@ -113,7 +74,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   name: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
     flex: 1,
     lineHeight: 22,
@@ -125,7 +86,10 @@ const styles = StyleSheet.create({
   },
   memo: {
     backgroundColor: '#fff',
-    padding: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
+    height: 30,
+    ...st.jcenter,
     borderTopColor: '#e2e2e2',
     borderTopWidth: 1,
   },
@@ -186,136 +150,57 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 18,
   },
-  evalView: {
-    backgroundColor: '#fff',
-    marginTop: 6,
-  },
-  evalDate: {
-    fontSize: 13,
-    color: '#666',
-    paddingLeft: 10,
-    marginTop: 10,
-    marginBottom: 5,
-  },
-  star: {
-    ...st.fr,
-    paddingLeft: 10,
-    ...st.acenter,
-  },
-  starText: {
-    fontSize: 13,
-    color: '#666',
-    marginRight: 4,
-  },
-  starText2: {
-    fontSize: 13,
-    color: '#666',
-    marginRight: 4,
-    marginLeft: 4,
-  },
-  evalMemo: {
-    paddingLeft: 10,
-    fontSize: 13,
-    color: '#666',
-    lineHeight: 20,
-  },
   footer: {
     backgroundColor: '#f8f8f8',
     ...st.fr,
-    ...st.acenter,
-    justifyContent: 'flex-end',
-  },
-  acBtn: {
-    marginRight: 8,
-    height: 30,
-    borderRadius: 15,
     ...st.jcenter,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    paddingLeft: 10,
-    paddingRight: 10,
   },
-  ModalStyle: {
-    backgroundColor: '#fff',
-    height: 300,
-  },
-  modalView: {
+  footTips: {
     flex: 1,
-  },
-  modalTitle: {
-    height: 45,
-    marginBottom: 1,
-    backgroundColor: Mcolor,
     ...st.jacenter,
   },
-  modalTitleText: {
-    fontSize: 14,
-    color: '#fff',
-  },
-  modalBtns: {
-    height: 60,
-    ...st.fr,
-  },
-  modalBtn: {
-    flex: 1,
-    backgroundColor: Mcolor,
-    ...st.jacenter,
-  },
-  cancelBtn: {
-    backgroundColor: '#aaa',
-  },
-  modalText: {
-    color: '#fff',
-    fontSize: 14,
-  },
-  modalContent: {
-    flex: 1,
-    backgroundColor: '#f8f8f8',
-  },
-  memoView: {
-    flex: 1,
-    ...st.fr,
-    paddingLeft: 10,
-    paddingRight: 10,
-    backgroundColor: '#fff',
-    paddingTop: 4,
-    paddingBottom: 6,
-  },
-  memoLabel: {
-    fontSize: 14,
+  footTipsText: {
     color: '#666',
-    width: 80,
-    lineHeight: 24,
+    fontSize: 14,
   },
-  listView: {
-    borderBottomColor: '#e4e4e4',
-    borderBottomWidth: 1,
-    borderTopColor: '#e4e4e4',
-    borderTopWidth: 1,
-    height: 50,
-    backgroundColor: '#fff',
-    marginTop: 5,
-    paddingLeft: 10,
-    paddingRight: 10,
+  footBtn: {
+    backgroundColor: Mcolor,
+    ...st.jacenter,
+    width: 120,
+  },
+  footBtnView: {
+  },
+  footBtnText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  arr: {
+    fontSize: 16,
+    color: '#666',
+  },
+  priceText: {
+    color: Mcolor,
+    fontSize: 12,
+  },
+  price: {
+    backgroundColor: Mcolor,
+    height: 30,
     ...st.frcenter,
+    borderRadius: 15,
+    paddingRight: 10,
+    paddingLeft: 10,
   },
-  listRight: {
-    flex: 1,
+  priceIcon: {
+    backgroundColor: '#fff',
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    ...st.jacenter,
+    marginRight: 5,
   },
-  memoInput: {
-    flex: 1,
-  },
-  listMemo: {
-    flex: 1,
-    lineHeight: 24,
-    fontSize: 14,
-    color: '#666',
-    textAlignVertical: 'top',
-  },
-  listInput: {
-    flex: 1,
-    fontSize: 14,
-    color: '#666',
+  priceValue: {
+    color: '#fff',
+    fontSize: 15,
   },
 });
 export default styles;

@@ -37,7 +37,7 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="ios-locate-outline" style={styles.leftIco} />
+                  <Icon name="ios-pin-outline" style={styles.leftIco} />
                   <View style={styles.addressRight}>
                     <View style={styles.addressTop}>
                       <Text style={styles.userName}>{decodeURI(adsData.nickName)}</Text>
@@ -59,7 +59,7 @@ class CreateConfirm extends base {
             <TFeedback
               content={
                 <View style={styles.address}>
-                  <Icon name="ios-locate-outline" style={styles.leftIco} />
+                  <Icon name="ios-pin-outline" style={styles.leftIco} />
                   <View style={styles.addressRight}>
                     <Text style={styles.userAddress}>
                       点击添加服务地址

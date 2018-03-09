@@ -9,12 +9,17 @@ const styles = StyleSheet.create({
     width: 120,
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Mred,
-    borderRadius: 4,
     overflow: 'hidden',
-    justifyContent: 'center',
-    height: 35,
+    justifyContent: 'flex-end',
+    height: 34,
+  },
+  containerSmall: {
+    width: 90,
+    flexDirection: 'row',
+    alignItems: 'center',
+    overflow: 'hidden',
+    justifyContent: 'flex-end',
+    height: 30,
   },
   input: {
     flex: 1,
@@ -24,8 +29,17 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   stepWrap: {
-    width: 35,
-    height: 35,
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Mred,
+  },
+  stepWrapSmall: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Mred,
@@ -52,13 +66,12 @@ const styles = StyleSheet.create({
 export default class InputNumber extends React.Component {
   static propTypes = {
     style: PropTypes.object,
-    upStyle: PropTypes.object,
-    downStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     onChange: PropTypes.func,
     max: PropTypes.any,
     min: PropTypes.any,
     disabled: PropTypes.bool,
+    small: PropTypes.bool,
     value: PropTypes.any,
     readOnly: PropTypes.bool,
   };
@@ -83,22 +96,24 @@ export default class InputNumber extends React.Component {
     this.step = this.step.bind(this);
   }
   onPressIn(type) {
-    if (this.props.disabled) {
+    const { small, disabled } = this.props;
+    if (disabled) {
       return;
     }
     this[type].setNativeProps({
-      style: [styles.stepWrap, styles.highlightStepBorderColor],
+      style: [styles.stepWrap, small && styles.stepWrapSmall, styles.highlightStepBorderColor],
     });
     this[`${type}Text`].setNativeProps({
       style: [styles.stepText, styles.highlightStepTextColor],
     });
   }
   onPressOut(type) {
-    if (this.props.disabled) {
+    const { small, disabled } = this.props;
+    if (disabled) {
       return;
     }
     this[type].setNativeProps({
-      style: [styles.stepWrap],
+      style: [styles.stepWrap, small && styles.stepWrapSmall],
     });
     this[`${type}Text`].setNativeProps({
       style: [styles.stepText],
@@ -164,9 +179,9 @@ export default class InputNumber extends React.Component {
     } else if (val < props.min) {
       val = props.min;
     } else if (type === 'down') {
-      val -= 1;
+      val = parseInt(val, 10) - 1;
     } else {
-      val += 1;
+      val = parseInt(val, 10) + 1;
     }
     this.setState({
       value: val,
@@ -176,7 +191,7 @@ export default class InputNumber extends React.Component {
   render() {
     const { props } = this;
     const { value } = this.state;
-    const { style, upStyle, downStyle, inputStyle, max, min } = this.props;
+    const { style, inputStyle, max, min, small } = this.props;
     const editable = !this.props.readOnly && !this.props.disabled;
 
     let upDisabledStyle = null;
@@ -193,50 +208,43 @@ export default class InputNumber extends React.Component {
         downDisabledStyle = styles.stepDisabled;
         downDisabledTextStyle = styles.disabledStepTextColor;
       }
-    } else {
-      upDisabledStyle = styles.stepDisabled;
-      downDisabledStyle = styles.stepDisabled;
-      upDisabledTextStyle = styles.disabledStepTextColor;
-      downDisabledTextStyle = styles.disabledStepTextColor;
     }
-
-    let inputDisabledStyle = null;
-    if (props.disabled) {
-      upDisabledStyle = styles.stepDisabled;
-      downDisabledStyle = styles.stepDisabled;
-      upDisabledTextStyle = styles.disabledStepTextColor;
-      downDisabledTextStyle = styles.disabledStepTextColor;
-      inputDisabledStyle = styles.disabledStepTextColor;
-    }
+    const v = props.value.toString() || value.toString();
     return (
-      <View style={[styles.container, style]}>
-        <TouchableWithoutFeedback
-          onPressIn={(editable && !downDisabledStyle) ? this.onPressInDown : undefined}
-          onPressOut={(editable && !downDisabledStyle) ? this.onPressOutDown : undefined}
-        >
-          <View
-            ref={(component) => { this._stepDown = component; }}
-            style={[styles.stepWrap, downDisabledStyle, downStyle]}
+      <View style={[styles.container, small && styles.containerSmall, style]}>
+        {
+          v && v > 0 &&
+          <TouchableWithoutFeedback
+            onPressIn={(editable && !downDisabledStyle) ? this.onPressInDown : undefined}
+            onPressOut={(editable && !downDisabledStyle) ? this.onPressOutDown : undefined}
           >
-            <Icon ref={(component) => { this._stepDownText = component; }} name="md-remove" style={[styles.stepText, downDisabledTextStyle]} />
-          </View>
-        </TouchableWithoutFeedback>
-        <TextInput
-          style={[styles.input, inputDisabledStyle, inputStyle]}
-          ref={(component) => { this.input = component; }}
-          value={this.props.value.toString() || value.toString()}
-          editable={editable}
-          onChangeText={this.onChange}
-          underlineColorAndroid="transparent"
-          keyboardType={'numeric'}
-        />
+            <View
+              ref={(component) => { this._stepDown = component; }}
+              style={[styles.stepWrap, small && styles.stepWrapSmall, downDisabledStyle]}
+            >
+              <Icon ref={(component) => { this._stepDownText = component; }} name="md-remove" style={[styles.stepText, downDisabledTextStyle]} />
+            </View>
+          </TouchableWithoutFeedback>
+        }
+        {
+          v && v > 0 &&
+          <TextInput
+            style={[styles.input, inputStyle]}
+            ref={(component) => { this.input = component; }}
+            value={v}
+            editable={editable}
+            onChangeText={this.onChange}
+            underlineColorAndroid="transparent"
+            keyboardType={'numeric'}
+          />
+        }
         <TouchableWithoutFeedback
           onPressIn={(editable && !upDisabledStyle) ? this.onPressInUp : undefined}
           onPressOut={(editable && !upDisabledStyle) ? this.onPressOutUp : undefined}
         >
           <View
             ref={(component) => { this._stepUp = component; }}
-            style={[styles.stepWrap, upDisabledStyle, upStyle]}
+            style={[styles.stepWrap, small && styles.stepWrapSmall, upDisabledStyle]}
           >
             <Icon ref={(component) => { this._stepUpText = component; }} name="md-add" style={[styles.stepText, upDisabledTextStyle]} />
           </View>
