@@ -10,8 +10,8 @@ import TOpacity from './TOpacity';
 const styles = StyleSheet.create({
   list: {
     paddingBottom: 5,
-    margin: 4,
-    marginBottom: 0,
+    marginLeft: 4,
+    marginRight: 4,
     backgroundColor: '#fff',
   },
   top: {

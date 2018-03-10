@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   ...st,
   listContent: {
     flex: 1,
+    paddingTop: 4,
   },
   caseList: {
     position: 'relative',

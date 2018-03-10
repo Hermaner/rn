@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Initializer } from 'react-native-baidumap-sdk';
 import { connect } from 'react-redux';
+import { View, Text } from 'react-native';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import { Root } from 'native-base';
+import { Root, Icon } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import Modal from 'react-native-modalbox';
+import { TOpacity } from '../components';
+import base from './base';
+import styles from './styles';
 
 import Main from '../containers/Main';
 import ServiceList from '../containers/ServiceList';
@@ -187,17 +192,75 @@ createReactNavigationReduxMiddleware(
   state => state.nav,
 );
 const addListener = createReduxBoundAddListener('root');
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <Root>
-    <AppNavigator
-      navigation={addNavigationHelpers({
-        dispatch,
-        state: nav,
-        addListener,
-      })}
-    />
-  </Root>
-);
+class AppWithNavigationState extends base {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+    };
+  }
+  componentDidMount() {
+    this.getInit();
+  }
+  _renderModal() {
+    const { isModalShow, shares } = this.state;
+    return (
+      <Modal
+        style={styles.ModalStyle}
+        position="bottom"
+        entry="bottom"
+        animationDuration={250}
+        onClosed={this.closeModal}
+        isOpen={isModalShow}
+        ref={(o) => { this.ModalView = o; }}
+      >
+        <View style={styles.modalView}>
+          <View style={styles.shareLists}>
+            {
+              shares.map((item, index) => (
+                <TOpacity
+                  key={index}
+                  style={styles.shareList}
+                  content={
+                    <View key={index} style={styles.shareList}>
+                      <View style={[styles.shareTop, { backgroundColor: item.color }]}>
+                        <Icon name={item.icon} style={styles.shareIcon} />
+                      </View>
+                      <Text style={styles.shareText}>{item.label}</Text>
+                    </View>
+                  }
+                  onPress={this.go}
+                />
+              ))
+            }
+          </View>
+          <TOpacity
+            style={styles.shareBtn}
+            content={
+              <Text style={styles.shareBtnText}>取消</Text>
+            }
+            onPress={this.closeModal}
+          />
+        </View>
+      </Modal>
+    );
+  }
+  render() {
+    const { dispatch, nav } = this.props;
+    return (
+      <Root>
+        <AppNavigator
+          navigation={addNavigationHelpers({
+            dispatch,
+            state: nav,
+            addListener,
+          })}
+        />
+        {this._renderModal()}
+      </Root>
+    );
+  }
+}
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,

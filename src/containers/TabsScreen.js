@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import TabHome from './TabHome';
 import TabOrder from './tabOrders';
@@ -117,8 +117,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
           }
         }
         if (index === 2) {
-          console.log(this);
-          // midPress();
+          DeviceEventEmitter.emit('emitmodalShow');
         } else {
           jumpToIndex(index);
         }

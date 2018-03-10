@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   row: {
     backgroundColor: '#fff',
     padding: 10,
-    marginTop: 3,
   },
   rowOne: {
     ...st.frcenter,

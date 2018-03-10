@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, ScrollView, RefreshControl, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Text } from 'native-base';
+import { Container, Text, Icon } from 'native-base';
+import Modal from 'react-native-modalbox';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Location } from 'react-native-baidumap-sdk';

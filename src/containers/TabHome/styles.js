@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   },
   caseTitleView: {
     height: 45,
+    marginBottom: 4,
     ...st.jacenter,
     backgroundColor: '#fff',
     position: 'relative',

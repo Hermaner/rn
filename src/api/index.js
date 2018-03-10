@@ -1,7 +1,7 @@
 
-const httpurl = 'http://192.168.50.57:8081/api/mall/';
+// const httpurl = 'http://192.168.50.57:8081/api/mall/';
 // const httpurl = 'http://192.168.0.11:8084/api/lede/';
-// const httpurl = 'https://mm.sunhousm.cn/api/mall/';
+const httpurl = 'https://mm.sunhousm.cn/api/mall/';
 export function parseJSON(response) {
   return response.json();
 }
