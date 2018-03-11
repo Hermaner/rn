@@ -28,7 +28,7 @@ class Base extends React.Component {
           icon: 'ios-construct',
           text: '安装维修',
           color: '#ff892f',
-          page: 'ServiceList',
+          page: 'MapView',
         },
         {
           icon: 'md-search',

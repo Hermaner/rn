@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-const headerBar = ({ back, title, showRight, rightText, rightPress, hideLeft, rightContent }) => (
+const headerBar = ({ back, title, rightText, rightPress, hideLeft, rightContent }) => (
   <Header style={styles.header}>
     {
       !hideLeft &&
@@ -57,7 +57,7 @@ const headerBar = ({ back, title, showRight, rightText, rightPress, hideLeft, ri
       <Text style={styles.titleText}>{title}</Text>
     </View>
     {
-      showRight &&
+      rightText &&
       <TouchableOpacity onPress={rightPress} style={styles.right}>
         <Text style={styles.rightText}>{rightText}</Text>
       </TouchableOpacity>
@@ -76,7 +76,6 @@ headerBar.propTypes = {
   title: PropTypes.string,
   rightPress: PropTypes.func,
   rightText: PropTypes.string,
-  showRight: PropTypes.bool,
   rightContent: PropTypes.any,
   hideLeft: PropTypes.bool,
 };

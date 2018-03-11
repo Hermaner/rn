@@ -3,46 +3,33 @@ import { st } from '../utils';
 
 const styles = StyleSheet.create({
   ModalStyle: {
-    height: 170,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    flex: 1,
+    ...st.jcenter,
   },
   modalView: {
-    flex: 1,
-  },
-  shareLists: {
+    height: 100,
+    marginTop: 200,
     ...st.frcenter,
-    height: 120,
-    paddingTop: 20,
-    paddingBottom: 20,
   },
   shareList: {
     flex: 1,
     ...st.acenter,
   },
   shareTop: {
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
     ...st.jacenter,
-    borderRadius: 25,
+    borderRadius: 40,
     marginBottom: 10,
   },
   shareIcon: {
-    fontSize: 20,
+    fontSize: 35,
     color: '#fff',
   },
   shareText: {
     fontSize: 12,
-    color: '#444',
-  },
-  shareBtn: {
-    backgroundColor: '#fff',
-    borderTopColor: '#ddd',
-    borderTopWidth: 1,
-    height: 50,
-    ...st.jacenter,
-  },
-  shareBtnText: {
-    fontSize: 14,
-    color: '#333',
+    color: '#fff',
   },
 });
 export default styles;

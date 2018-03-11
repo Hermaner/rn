@@ -9,8 +9,8 @@ import ImageLook from './ImageLook';
 const styles = StyleSheet.create({
   list: {
     paddingBottom: 5,
-    margin: 3,
-    marginBottom: 0,
+    marginLeft: 3,
+    marginRight: 3,
     backgroundColor: '#fff',
   },
   top: {

@@ -16,6 +16,8 @@ class Orders extends base {
         <Header
           hideLeft
           title="可接订单"
+          rightText="地图接单"
+          rightPress={() => this.props.push({ key: 'MapViewOrder' })}
         />
         <ScrollableTabView
           style={{ flex: 1 }}
@@ -31,5 +33,6 @@ class Orders extends base {
 
 Orders.propTypes = {
   pop: PropTypes.func,
+  push: PropTypes.func,
 };
 export default connect(null, { pop: popRoute, push: pushRoute })(Orders);

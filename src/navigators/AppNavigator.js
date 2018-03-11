@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Initializer } from 'react-native-baidumap-sdk';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, Modal } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 import { Root, Icon } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
-import Modal from 'react-native-modalbox';
-import { TOpacity } from '../components';
+import { TOpacity, TFeedback } from '../components';
 import base from './base';
 import styles from './styles';
 
@@ -96,8 +96,12 @@ import MasterItems from '../containers/MasterItems';
 import ChangePassword from '../containers/ChangePassword';
 import FixedList from '../containers/FixedList';
 import OrderDetailAccept from '../containers/OrderDetailAccept';
+import MapView from '../containers/MapView';
+import MapViewOrder from '../containers/MapViewOrder';
 
 export const AppNavigator = StackNavigator({
+  MapViewOrder: { screen: MapViewOrder },
+  MapView: { screen: MapView },
   OrderDetailAccept: { screen: OrderDetailAccept },
   FixedList: { screen: FixedList },
   MgMasterBadList: { screen: MgMasterBadList },
@@ -206,42 +210,37 @@ class AppWithNavigationState extends base {
     const { isModalShow, shares } = this.state;
     return (
       <Modal
-        style={styles.ModalStyle}
-        position="bottom"
-        entry="bottom"
-        animationDuration={250}
-        onClosed={this.closeModal}
-        isOpen={isModalShow}
-        ref={(o) => { this.ModalView = o; }}
+        animationType={'none'}
+        transparent
+        visible={isModalShow}
+        onRequestClose={() => {}}
       >
-        <View style={styles.modalView}>
-          <View style={styles.shareLists}>
-            {
-              shares.map((item, index) => (
-                <TOpacity
-                  key={index}
-                  style={styles.shareList}
-                  content={
-                    <View key={index} style={styles.shareList}>
-                      <View style={[styles.shareTop, { backgroundColor: item.color }]}>
-                        <Icon name={item.icon} style={styles.shareIcon} />
-                      </View>
-                      <Text style={styles.shareText}>{item.label}</Text>
-                    </View>
-                  }
-                  onPress={this.go}
-                />
-              ))
-            }
-          </View>
-          <TOpacity
-            style={styles.shareBtn}
-            content={
-              <Text style={styles.shareBtnText}>取消</Text>
-            }
-            onPress={this.closeModal}
-          />
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.ModalStyle}>
+              <View style={styles.modalView}>
+                {
+                  shares.map((item, index) => (
+                    <TOpacity
+                      key={index}
+                      style={styles.shareList}
+                      content={
+                        <Animatable.View delay={index === 1 ? 100 : 0} duration={300} animation="slideInUp" key={index} style={styles.shareList}>
+                          <View style={[styles.shareTop, { backgroundColor: item.color }]}>
+                            <Icon name={item.icon} style={styles.shareIcon} />
+                          </View>
+                          <Text style={styles.shareText}>{item.label}</Text>
+                        </Animatable.View>
+                      }
+                      onPress={this.go}
+                    />
+                  ))
+                }
+              </View>
+            </View>
+          }
+          onPress={this.closeModal}
+        />
       </Modal>
     );
   }

@@ -7,22 +7,17 @@ class Base extends React.Component {
     super(props);
     this.state = {
       show: false,
+      isModalShow: false,
       shares: [{
-        label: '微信',
-        icon: 'md-alarm',
-        color: '#62b900',
+        label: '固价需求',
+        icon: 'ios-unlock',
+        color: '#ff892f',
+        page: 'FixedList',
       }, {
-        label: '朋友圈',
-        icon: 'md-alarm',
-        color: '#556876',
-      }, {
-        label: '微博',
-        icon: 'md-alarm',
-        color: '#fc5e6a',
-      }, {
-        label: 'QQ',
-        icon: 'md-alarm',
-        color: '#68a5e1',
+        label: '大众需求',
+        icon: 'ios-clipboard',
+        color: '#00CD66',
+        page: 'DemandCategory',
       }],
     };
   }
