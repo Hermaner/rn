@@ -59,8 +59,12 @@ class App extends React.Component {
     }
     JPushModule.getRegistrationID((registrationId) => {
       console.log(registrationId);
+      alert(registrationId);
       global.registration = registrationId || 'ios';
     });
+    JPushModule.addGetRegistrationIdListener((registrationId) => {
+      alert(registrationId);
+    })
     this.premInit();
     global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {

@@ -18,7 +18,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - ReactNativePermissions (1.0.6):
+  - ReactNativePermissions (1.1.1):
     - React
   - RSKImageCropper (2.0.0)
   - yoga (0.50.4.React)
@@ -47,7 +47,7 @@ SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 6d7efef18e0241eb832cf4c085405169a15080ed
   react-native-baidumap-sdk: 079e2eb35c5006ec05170367e21b2b38e9c4e831
-  ReactNativePermissions: bf462424ca7823d1b8e6cb463184d6e7f151971b
+  ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
   yoga: b9aebf996711e50fc31f5608c10aa108a5a0c29e
 

@@ -112,11 +112,6 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
           return;
         }
         if (index === 2) {
-          if (!global.memberId) {
-            this.props.push({ key: 'User' });
-          }
-        }
-        if (index === 2) {
           DeviceEventEmitter.emit('emitmodalShow');
         } else {
           jumpToIndex(index);

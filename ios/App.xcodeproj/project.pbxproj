@@ -100,7 +100,7 @@
 		DF432D652025948400F14621 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DF432D5F2025948400F14621 /* README.txt */; };
 		DF432D662025948400F14621 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D612025948400F14621 /* libWeChatSDK.a */; };
 		DF432D672025948400F14621 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D622025948400F14621 /* AlipaySDK.framework */; };
-		DFA375B31FF5CF6B009B1874 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */; };
+		DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */; };
 		DFA6445E2050DB6200D99F4B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA6442A2050DB6200D99F4B /* ImageIO.framework */; };
 		DFA6447F2050E0A700D99F4B /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFA644612050E0A700D99F4B /* UMSocialSDKResources.bundle */; };
 		DFA644802050E0A700D99F4B /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA644622050E0A700D99F4B /* UShareUI.framework */; };
@@ -629,6 +629,8 @@
 		DF432D602025948400F14621 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		DF432D612025948400F14621 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		DF432D622025948400F14621 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		DF65B6FF20568DF1005D5C81 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = App.entitlements; path = App/App.entitlements; sourceTree = "<group>"; };
+		DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		DFA6442A2050DB6200D99F4B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		DFA644612050E0A700D99F4B /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */,
 				DFA6445E2050DB6200D99F4B /* ImageIO.framework in Frameworks */,
 				DFEB1AE0202463C500F735DD /* QuartzCore.framework in Frameworks */,
 				DFEB1A802024634700F735DD /* CoreText.framework in Frameworks */,
@@ -757,7 +760,6 @@
 				68BD8D49D9234FA39DA86601 /* libcxxreact.a in Frameworks */,
 				0307FD44C3294A2C9503B172 /* libjschelpers.a in Frameworks */,
 				DFA6448E2050E0A700D99F4B /* libUMSocialLog.a in Frameworks */,
-				DFA375B31FF5CF6B009B1874 /* libReactNativePermissions.a in Frameworks */,
 				DFB17A95202B4EE2004603D5 /* libRNFetchBlob.a in Frameworks */,
 				B8202B965BCC41328AEBC064 /* libthird-party.a in Frameworks */,
 				38CB44289C414F02BE965C98 /* libdouble-conversion.a in Frameworks */,
@@ -872,6 +874,7 @@
 		13B07FAE1A68108700A75B9A /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DF65B6FF20568DF1005D5C81 /* App.entitlements */,
 				DF432D592025948400F14621 /* ios_pay_lib */,
 				DFE0E9FE1FD4D97B00910057 /* bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -1344,6 +1347,7 @@
 		DFB58AE11FF73133006CFC1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */,
 				DFA6442A2050DB6200D99F4B /* ImageIO.framework */,
 				DFEB1ADF202463C500F735DD /* QuartzCore.framework */,
 				DFEB1A7F2024634700F735DD /* CoreText.framework */,
@@ -1455,6 +1459,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -2294,11 +2301,13 @@
 			baseConfigurationReference = 91A5C3D413B3242BB382F6BB /* Pods-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 53372QVXJ2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -2320,6 +2329,8 @@
 					"$(SRCROOT)/../node_modules/react-native-swrefresh-hm/RefreshDemo/ios/RefreshDemo",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
@@ -2361,10 +2372,12 @@
 			baseConfigurationReference = 0C684BC956ACAD36CDFF6F11 /* Pods-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53372QVXJ2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -2386,6 +2399,8 @@
 					"$(SRCROOT)/../node_modules/react-native-swrefresh-hm/RefreshDemo/ios/RefreshDemo",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-permissions",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
