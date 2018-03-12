@@ -9,21 +9,21 @@ class Base extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '',
+      phone: '15666666666',
       itemPhone: '',
-      sendPhone: '',
+      sendPhone: '15666666666',
       sec: 60,
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
       addressTitle: '',
-      address: '',
+      address: '泰宸复兴苑',
       provinceId: '',
       provinceName: '',
       cityId: '',
       cityName: '',
       districtId: '',
       districtName: '',
-      nickName: '',
+      nickName: '是的爱上',
       addressId: '',
       isDefault: [1],
     };

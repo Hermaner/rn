@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   ModalStyle: {
     marginLeft: leftWidth / 2,
     width: deviceW - leftWidth,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f8f8',
   },
   modalView: {
     padding: 10,
@@ -108,6 +108,62 @@ const styles = StyleSheet.create({
   },
   listContent: {
     flex: 1,
+  },
+  list: {
+  },
+  title: {
+    ...st.frcenter,
+    height: 50,
+  },
+  titleColor: {
+    width: 20,
+    height: 20,
+    backgroundColor: Mcolor,
+    borderRadius: 10,
+    ...st.jacenter,
+  },
+  titleIcon: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  listLabel: {
+    color: '#444',
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 14,
+  },
+  tabs: {
+    flexWrap: 'wrap',
+    ...st.fr,
+  },
+  tab: {
+    width: '25%',
+    borderRightWidth: 1,
+    borderRightColor: '#e3e3e3',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+    borderBottomColor: '#e3e3e3',
+    height: 45,
+    ...st.jacenter,
+  },
+  tabAll: {
+    borderColor: '#e3e3e3',
+    borderWidth: 1,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    height: 45,
+    ...st.jacenter,
+  },
+  tabText: {
+    color: '#444',
+    fontSize: 14,
+  },
+  tabTextCur: {
+    color: '#fff',
+  },
+  tabCur: {
+    backgroundColor: Mcolor,
+    borderColor: Mcolor,
   },
 });
 export default styles;

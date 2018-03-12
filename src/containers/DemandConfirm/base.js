@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { DeviceEventEmitter } from 'react-native';
 import Dateformat from 'dateformat';
 import { CreateNewDemandOrderService, GetMemberAddressService } from '../../api';
 
@@ -14,6 +15,7 @@ class Base extends React.Component {
       appointDate: '',
       serviceDate: '',
       Uploadurl: '',
+      detail: '',
       showAddress: false,
       buyMessage: '',
       adsItems: [],
@@ -27,12 +29,17 @@ class Base extends React.Component {
   }
   getInit = () => {
     this.GetMemberAddressService();
+    this.emitLoad = DeviceEventEmitter.addListener('emitLoad', () => {
+      this.GetMemberAddressService();
+    });
   }
   getImages = (upImages) => {
-    console.log(upImages);
     this.setState({
       upImages,
     });
+  }
+  deleteInit = () => {
+    this.emitLoad.remove();
   }
   toggleDate = () => {
     this.setState({
@@ -117,6 +124,10 @@ class Base extends React.Component {
     this.setState({
       isAdsShow: false,
     });
+  }
+  createAddress = () => {
+    this.props.push({ key: 'MyAddressCreate', params: { type: 'CreateConfirm' } });
+    this.hideAds();
   }
   GetMemberAddressService = () => {
     this.sleek.toggle();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Text, Icon } from 'native-base';
+import { Container, Text, Icon, Content } from 'native-base';
 import { connect } from 'react-redux';
 import Modal from 'react-native-modalbox';
 import { popRoute, pushRoute } from '../../actions';
@@ -99,10 +99,7 @@ class MasterList extends base {
     );
   }
   _renderModal() {
-    const { ModalOpen } = this.state;
-    const popItems = [{
-      name: '安装师傅',
-    }];
+    const { ModalOpen, types } = this.state;
     return (
       <Modal
         style={styles.ModalStyle}
@@ -112,50 +109,46 @@ class MasterList extends base {
         onClosed={this.closeModal}
         isOpen={ModalOpen}
         coverScreen
+        swipeToClose={false}
         ref={(o) => { this.ModalView = o; }}
       >
-        <View style={styles.modalView}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.modalTitle}>选择类目</Text>
-            <View style={styles.modalList}>
-              {
-                popItems.map((item, index) => (
-                  <TFeedback
-                    key={index}
-                    content={
-                      <View style={[styles.modalItem, item.cur && styles.modalItemCur]}>
-                        <Text style={[styles.modalItemText, item.cur && styles.modalItemTextCur]}>
-                          {item.name}
-                        </Text>
-                      </View>
+        <Content>
+          <View style={styles.modalView}>
+            <TOpacity
+              style={styles.tabAll}
+              content={
+                <Text style={styles.tabText}>查看所有</Text>
+              }
+              onPress={this.selectAllType}
+            />
+            {
+              types.map((item, index) => (
+                <View key={index} style={styles.list}>
+                  <View style={styles.title}>
+                    <View style={styles.titleColor}>
+                      <Icon name="md-apps" style={styles.titleIcon} />
+                    </View>
+                    <Text style={styles.listLabel}>{item.name}</Text>
+                  </View>
+                  <View style={styles.tabs}>
+                    {
+                      item.childs.map((list, i) => (
+                        <TOpacity
+                          key={i}
+                          style={[styles.tab, list.cur && styles.tabCur]}
+                          content={
+                            <Text style={[styles.tabText, list.cur && styles.tabTextCur]}>{list.name}</Text>
+                          }
+                          onPress={() => this.selectType(index, i)}
+                        />
+                      ))
                     }
-                    onPress={() => { this.tabOneItem(index); }}
-                  />
-                ))
-              }
-            </View>
-          </View>
-          <View style={styles.modalBtns}>
-            <TOpacity
-              style={[styles.modalBtn, styles.cancelBtn]}
-              content={
-                <View>
-                  <Text style={styles.modalText}>取消</Text>
+                  </View>
                 </View>
-              }
-              onPress={this.closeModal}
-            />
-            <TOpacity
-              style={styles.modalBtn}
-              content={
-                <View>
-                  <Text style={styles.modalText}>确认</Text>
-                </View>
-              }
-              onPress={this.closeModal}
-            />
+              ))
+            }
           </View>
-        </View>
+        </Content>
       </Modal>
     );
   }
@@ -167,6 +160,8 @@ class MasterList extends base {
           <Header
             title="师傅列表"
             back={pop}
+            rightText="地图找师傅"
+            rightPress={() => this.props.push({ key: 'MapView' })}
           />
           {this._readerConditions()}
         </View>

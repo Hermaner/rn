@@ -19,6 +19,7 @@ class MapViewPage extends base {
   }
   async componentDidMount() {
     this.getInit();
+    await Location.stop();
     await Location.init();
     Location.setOptions({ gps: true });
     this.listener = Location.addLocationListener((location) => {

@@ -21,6 +21,7 @@ class Home extends base {
   }
   async componentDidMount() {
     this.getInit();
+    await Location.stop();
     await Location.init();
     await Location.setOptions({ gps: true });
     this.listener = Location.addLocationListener(location => this.GetLocation(location));
@@ -123,11 +124,11 @@ class Home extends base {
   render() {
     const {
       refresh,
-      districtName,
+      cityName,
     } = this.state;
     return (
       <Container>
-        <HomeSearch label={districtName || '定位中'} />
+        <HomeSearch label={cityName || '定位中'} />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={

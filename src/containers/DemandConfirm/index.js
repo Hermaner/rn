@@ -194,7 +194,7 @@ class CreateConfirm extends base {
                   <Text style={styles.modalText}>添加新地址</Text>
                 </View>
               }
-              onPress={this.hidepopDate}
+              onPress={this.createAddress}
             />
           </View>
         </View>

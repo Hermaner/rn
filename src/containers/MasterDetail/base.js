@@ -39,7 +39,7 @@ class Base extends React.Component {
     Toast.show('敬请期待！');
   }
   footAction = (index) => {
-    const { info: { masterId, memberInfo: { phone } }, isColl } = this.state;
+    const { info: { masterId, phone }, isColl } = this.state;
     const { push } = this.props;
     switch (index) {
       case 0:

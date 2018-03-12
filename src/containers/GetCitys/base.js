@@ -46,7 +46,7 @@ class Base extends React.Component {
     const { type } = this.state;
     const data = {
       districtId: global.districtId,
-      districtName: global.districtName,
+      cityName: global.cityName,
     };
     DeviceEventEmitter.emit(type, data);
     this.props.pop();

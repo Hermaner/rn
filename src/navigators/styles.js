@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     ...st.jcenter,
   },
   modalView: {
-    height: 100,
+    height: 140,
     marginTop: 200,
     ...st.frcenter,
   },

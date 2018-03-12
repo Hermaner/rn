@@ -207,7 +207,7 @@ class AppWithNavigationState extends base {
     this.getInit();
   }
   _renderModal() {
-    const { isModalShow, shares } = this.state;
+    const { isModalShow, shares, animate } = this.state;
     return (
       <Modal
         animationType={'none'}
@@ -225,14 +225,20 @@ class AppWithNavigationState extends base {
                       key={index}
                       style={styles.shareList}
                       content={
-                        <Animatable.View delay={index === 1 ? 100 : 0} duration={300} animation="slideInUp" key={index} style={styles.shareList}>
+                        <Animatable.View
+                          delay={index === 1 ? 100 : 0}
+                          duration={300}
+                          animation={animate}
+                          key={index}
+                          style={styles.shareList}
+                        >
                           <View style={[styles.shareTop, { backgroundColor: item.color }]}>
                             <Icon name={item.icon} style={styles.shareIcon} />
                           </View>
                           <Text style={styles.shareText}>{item.label}</Text>
                         </Animatable.View>
                       }
-                      onPress={this.go}
+                      onPress={() => this.go(item.page)}
                     />
                   ))
                 }

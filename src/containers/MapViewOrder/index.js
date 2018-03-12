@@ -19,10 +19,12 @@ class MapViewOrder extends base {
   }
   async componentDidMount() {
     this.getInit();
+    await Location.stop();
     await Location.init();
     Location.setOptions({ gps: true });
     this.listener = Location.addLocationListener((location) => {
       this.mapView.setStatus({ center: location }, 1000);
+      console.log(location);
       this.setState({
         latitude: location.latitude,
         longitude: location.longitude,
@@ -78,7 +80,7 @@ class MapViewOrder extends base {
     if (!extra) {
       return null;
     }
-    const { key, imgUrl, demandCategoryName, detail, distance, userName } = extra;
+    const { key, data, data: { memberInfo: { imgUrl, userName }, demandCategoryName, detail, distance } } = extra;
     return (
       <MapView.Marker
         ref={ref => (this.marker = ref)}
@@ -95,13 +97,16 @@ class MapViewOrder extends base {
                   <Image source={{ uri: imgUrl }} style={styles.image} />
                 </View>
                 <View style={styles.calloutRight}>
-                  <Text style={styles.name}>{userName}</Text>
+                  <View style={styles.calloutTop}>
+                    <Text style={styles.name}>{userName}</Text>
+                    <Text style={styles.distance}>{distance}</Text>
+                  </View>
                   <Text numberOfLines={2} style={styles.detail}>{demandCategoryName}{detail}</Text>
                 </View>
                 <Icon name="md-arrow-dropright" style={styles.arr} />
               </View>
             }
-            // onPress={() => { this.props.push({ key: 'MasterDetail', params: { masterId } }); }}
+            onPress={() => { this.props.push({ key: 'DemandOrderDetail', params: { item: data } }); }}
           />
         </MapView.Callout>
       </MapView.Marker>
@@ -116,11 +121,7 @@ class MapViewOrder extends base {
       },
       extra: {
         key: `Marker${i}`,
-        demandCategoryName: item.demandCategoryName,
-        distance: item.distance,
-        detail: item.detail,
-        imgUrl: item.memberInfo.imgUrl,
-        userName: item.memberInfo.userName,
+        data: item,
       },
     }));
     return (
@@ -128,7 +129,7 @@ class MapViewOrder extends base {
         <MapView
           ref={ref => (this.mapView = ref)}
           style={StyleSheet.absoluteFill}
-          zoomLevel={16}
+          zoomLevel={15}
           onStatusChange={this.onStatusChange}
         >
           <MapView.Marker

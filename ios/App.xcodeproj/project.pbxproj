@@ -32,7 +32,7 @@
 		213F1E356E2E41BDA5549671 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EADDF649D4C0D879F823A /* libRCTActionSheet.a */; };
 		278E74D98F594934B90F2836 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486D4172E50B418A89E339F1 /* UIKit.framework */; };
 		2A7C4F059BF9426EB38C51BA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B543D7997C4B4DA01A98EE /* CoreFoundation.framework */; };
-		2C1D0F052E12413DB2EC5172 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A2A94A8D21465CAE5C5D9D /* UserNotifications.framework */; };
+		2C1D0F052E12413DB2EC5172 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A2A94A8D21465CAE5C5D9D /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -1451,6 +1451,8 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 53372QVXJ2;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2041,7 +2043,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-App/Pods-App-resources.sh",
 				"${PODS_ROOT}/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePicker.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePicker.bundle,
 				"${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle",
 				"$PODS_CONFIGURATION_BUILD_DIR/react-native-baidumap-sdk/react-native-baidumap-sdk.bundle",
 			);
@@ -2292,8 +2294,11 @@
 			baseConfigurationReference = 91A5C3D413B3242BB382F6BB /* Pods-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 53372QVXJ2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -2346,6 +2351,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
 				PRODUCT_NAME = App;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2355,7 +2361,10 @@
 			baseConfigurationReference = 0C684BC956ACAD36CDFF6F11 /* Pods-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 53372QVXJ2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -2408,6 +2417,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
 				PRODUCT_NAME = App;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2653,6 +2663,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2694,6 +2705,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;

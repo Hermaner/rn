@@ -35,7 +35,7 @@ class CgCitys extends base {
         <TOpacity
           style={styles.usedCityView}
           content={
-            <Text style={styles.nousedCity}>您的地址：{global.provinceName}{global.districtName}</Text>
+            <Text style={styles.nousedCity}>您的地址：{global.address}</Text>
           }
           onPress={this.locationDistrict}
         />

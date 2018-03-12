@@ -14,6 +14,7 @@ class Base extends React.Component {
       realName: '',
       items: [],
       pageSize: '15',
+      distance: '5000',
       markers: [],
       latitude: 39.914884,
       longitude: 116.403883,
@@ -56,6 +57,7 @@ class Base extends React.Component {
       typeIds,
       latitude,
       longitude,
+      distance,
     } = this.state;
     GetMasterService({
       orderByName,
@@ -65,6 +67,7 @@ class Base extends React.Component {
       typeIds,
       longitude,
       latitude,
+      distance,
       memberId: global.memberId,
       isFlushDistance: '1',
       currentPage,

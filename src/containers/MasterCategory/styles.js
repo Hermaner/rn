@@ -45,6 +45,14 @@ const styles = StyleSheet.create({
     height: 45,
     ...st.jacenter,
   },
+  tabAll: {
+    borderColor: '#e3e3e3',
+    borderWidth: 1,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    height: 45,
+    ...st.jacenter,
+  },
   tabText: {
     color: '#444',
     fontSize: 14,

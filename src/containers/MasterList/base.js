@@ -1,24 +1,28 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetMasterService } from '../../api';
+import { GetMasterService, GetMasterTypeService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { typeIds, typeIndex, typeI } = props.navigation.state.params;
     this.state = {
       orderByName: '',
       orderByType: 'desc',
       currentPage: '',
       realName: '',
-      typeIds: props.navigation.state.params.typeIds,
+      typeIds,
+      typeIndex,
+      typeI,
       items: [],
       refresh: false,
       loading: true,
       nomore: false,
       noData: false,
       pageSize: '15',
+      types: [],
       tabs: [{
         label: '智能排序',
         cur: true,
@@ -37,6 +41,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     this._onRefresh();
+    this.GetMasterTypeService();
   }
   deleteInit = () => {
     canEnd = false;
@@ -83,6 +88,7 @@ class Base extends React.Component {
         if (refresh) {
           this.setState({
             items: result,
+            noData: false,
             currentPage: currentPage + 1,
             refresh: false,
             nomore: false,
@@ -108,6 +114,52 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  GetMasterTypeService = () => {
+    const { typeIndex, typeI } = this.state;
+    GetMasterTypeService().then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const types = res.data;
+        if (typeIndex !== 'none') {
+          types[typeIndex].childs[typeI].cur = true;
+        }
+        this.setState({
+          types: res.data,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  selectType = (index, i) => {
+    const { types, typeIndex, typeI } = this.state;
+    if (index === typeIndex && i === typeI) {
+      return;
+    }
+    types[index].childs[i].cur = true;
+    if (typeIndex !== 'none') {
+      types[typeIndex].childs[typeI].cur = false;
+    }
+    const typeIds = types[index].childs[i].id;
+    this.setState({
+      typeIds,
+      typeIndex: index,
+      typeI: i,
+    }, this._onRefresh);
+  }
+  selectAllType = () => {
+    const { types, typeIndex, typeI } = this.state;
+    if (typeIndex !== 'none') {
+      types[typeIndex].childs[typeI].cur = false;
+    }
+    this.setState({
+      typeIds: '',
+      typeIndex: 'none',
+      typeI: 'none',
+    }, this._onRefresh);
   }
   changeTab = (index) => {
     const { tabs } = this.state;

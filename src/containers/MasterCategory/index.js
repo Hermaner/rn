@@ -30,6 +30,13 @@ class MasterCategory extends base {
     const { items } = this.state;
     return (
       <View style={styles.content}>
+        <TOpacity
+          style={styles.tabAll}
+          content={
+            <Text style={styles.tabText}>查看所有</Text>
+          }
+          onPress={() => this.props.push({ key: 'MasterList', params: { typeIds: '', typeIndex: 'none', type: 'none' } })}
+        />
         {
           items.map((item, index) => (
             <View key={index} style={styles.list}>
@@ -48,7 +55,7 @@ class MasterCategory extends base {
                       content={
                         <Text style={styles.tabText}>{list.name}</Text>
                       }
-                      onPress={() => this.props.push({ key: 'MasterList', params: { typeIds: list.id } })}
+                      onPress={() => this.props.push({ key: 'MasterList', params: { typeIds: list.id, typeIndex: index, typeI: i } })}
                     />
                   ))
                 }

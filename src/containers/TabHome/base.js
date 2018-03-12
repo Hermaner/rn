@@ -1,6 +1,7 @@
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
+import { Geocode } from 'react-native-baidumap-sdk'
 import { GetMasterCaseService, AmapGeocode } from '../../api';
 
 class Base extends React.Component {
@@ -9,7 +10,7 @@ class Base extends React.Component {
     this.state = {
       cases: [],
       refresh: false,
-      districtName: '',
+      cityName: '',
       banners: [{
         img: require('../../assets/img/choujiang.png'),
       }, {
@@ -28,7 +29,7 @@ class Base extends React.Component {
           icon: 'ios-construct',
           text: '安装维修',
           color: '#ff892f',
-          page: 'MapView',
+          page: 'ServiceList',
         },
         {
           icon: 'md-search',
@@ -93,9 +94,22 @@ class Base extends React.Component {
   }
   GetLocation = (location) => {
     const { longitude, latitude } = location;
-    this.AmapGeocode(`${longitude},${latitude}`);
+    // this.AmapGeocode(`${longitude},${latitude}`);
+    this.reverse({ longitude, latitude });
     global.longitude = longitude;
     global.latitude = latitude;
+  }
+  reverse = async (coordinate) => {
+    const result = await Geocode.reverse(coordinate);
+    const { province, city, adCode, address } = result;
+    global.districtId = adCode;
+    global.provinceName = province;
+    global.cityName = city;
+    global.address = address;
+    this.setState({
+      districtId: adCode,
+      cityName: city,
+    });
   }
   AmapGeocode = (location) => {
     AmapGeocode(location).then((res) => {
@@ -103,14 +117,14 @@ class Base extends React.Component {
         const {
           adcode,
           province,
-          district,
+          city,
         } = res.regeocode.addressComponent;
         global.districtId = adcode;
         global.provinceName = province;
-        global.districtName = district;
+        global.cityName = city;
         this.setState({
           districtId: adcode,
-          districtName: district,
+          cityName: city,
         });
       }
     }).catch((err) => {

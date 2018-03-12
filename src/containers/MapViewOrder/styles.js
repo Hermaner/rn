@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
     ...st.frcenter,
     width: 200,
   },
+  calloutTop: {
+    ...st.frcenter,
+  },
+  distance: {
+    color: Mcolor,
+    fontSize: 12,
+  },
   imageView: {
     width: 50,
     height: 50,
@@ -58,6 +65,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 14,
     color: '#333',
+    flex: 1,
     marginBottom: 6,
   },
   detail: {

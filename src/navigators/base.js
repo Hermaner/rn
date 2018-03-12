@@ -8,6 +8,7 @@ class Base extends React.Component {
     this.state = {
       show: false,
       isModalShow: false,
+      animate: 'slideInUp',
       shares: [{
         label: '固价需求',
         icon: 'ios-unlock',
@@ -29,16 +30,20 @@ class Base extends React.Component {
   showModal = () => {
     this.setState({
       isModalShow: true,
+      animate: 'slideInUp',
     });
   }
   closeModal = () => {
     this.setState({
-      isModalShow: false,
+      animate: 'slideOutDown',
     });
+    setTimeout(() => this.setState({
+      isModalShow: false,
+    }), 100);
   }
-  go = () => {
+  go = (key) => {
     this.closeModal();
-    this.props.dispatch({ type: 'push', routes: { key: 'ApplyWant' } });
+    this.props.dispatch({ type: 'push', routes: { key } });
   }
 }
 Base.propTypes = {

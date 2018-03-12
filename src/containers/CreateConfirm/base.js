@@ -39,16 +39,19 @@ class Base extends React.Component {
     this.emitAmout = DeviceEventEmitter.addListener('emitAmout', () => {
       this.computeAmount();
     });
+    this.emitLoad = DeviceEventEmitter.addListener('emitLoad', () => {
+      this.GetMemberAddressService();
+    });
     DeviceEventEmitter.emit('emitAmout');
   }
   getImages = (upImages) => {
-    console.log(upImages);
     this.setState({
       upImages,
     });
   }
   deleteInit = () => {
     this.emitAmout.remove();
+    this.emitLoad.remove();
   }
   computeAmount = () => {
     let amount = 0;
@@ -166,7 +169,6 @@ class Base extends React.Component {
     if (dayIndex === 0 && popTimes[index].disabled) {
       return;
     }
-    console.log(popTimes[index].disabled);
     popDates[0].disabled = popTimes[index].disabled;
     popTimes[index].cur = true;
     if (timeIndex !== null) {
@@ -237,7 +239,7 @@ class Base extends React.Component {
     });
   }
   createAddress = () => {
-    this.props.push({ key: 'MyAddressCreate', params: { type: 'CreateConfirm' } });
+    this.props.push({ key: 'MyAddressCreate', params: { type: 'loadAddress' } });
     this.hideAds();
   }
   savePopDate = () => {

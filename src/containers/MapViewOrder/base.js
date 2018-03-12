@@ -15,7 +15,7 @@ class Base extends React.Component {
       items: [],
       pageSize: '15',
       markers: [],
-      distance: '',
+      distance: '5000',
       demandCategoryId: '',
       latitude: 39.914884,
       longitude: 116.403883,
@@ -25,6 +25,7 @@ class Base extends React.Component {
   }
   onStatusChange = (result) => {
     this.status = result;
+    console.log(11)
     this.cluster.update(result);
     this.setState({
       centerLat: result.center.latitude,
@@ -56,8 +57,6 @@ class Base extends React.Component {
       currentPage,
       realName,
       typeIds,
-      latitude,
-      longitude,
       distance,
       demandCategoryId,
     } = this.state;
@@ -69,15 +68,19 @@ class Base extends React.Component {
       pageSize,
       realName,
       typeIds,
-      longitude,
-      latitude,
-      memberId: global.memberId,
+      longitude: global.longitude,
+      latitude: global.latitude,
+      memberId: global.memberId || '',
       isFlushDistance: '1',
       currentPage,
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
         const items = res.data.pageData;
+        items.forEach((item) => {
+          const disc = item.distance;
+          item.distance = disc > 1000 ? `${(disc / 1000).toFixed(2)}km` : '小于1km';
+        });
         console.log(items);
         this.setState({
           items,
