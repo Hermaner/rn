@@ -2,20 +2,17 @@
 import { observer } from 'mobx-react/native';
 import React from 'react';
 import {
-    KeyboardAvoidingView,
-    RefreshControl,
-    ListView,
-    Image,
     Text,
     TextInput,
-    Platform,
     View,
+    FlatList,
 } from 'react-native';
-import { Footer } from 'native-base';
+import { CachedImage } from 'react-native-img-cache';
+import { Footer, Container } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { TOpacity, Header } from '../../components';
+import { TOpacity, Header, NoData, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -29,126 +26,117 @@ class ChatRoom extends base {
   }
   // 不要和动画效果抢系统资源
   componentDidMount() {
+    this.getInit();
   }
   componentWillUnmount() {
   }
   // 判断用户是否输入过
   _userHasBeenInputed: boolean = false;
-  _userAtPage = 0;
   _userReachEnd = true;
-  _renderRow = (row, sectionID, index) => {
-    let differentStyle = {};
-    let item = {};
-    if (row.user.memberId === global.memberId) {
-      differentStyle = {
-        flexDirection: 'row-reverse',
-        backgroundColor: '#92E649',
-      };
-      item = row.user;
-    } else {
-      differentStyle = {
-        flexDirection: 'row',
-        backgroundColor: '#FFFFFF',
-      };
-      item = row.toUser;
-    }
+  _renderRow = (data) => {
+    const { memberId, imgUrl, toImgUrl, message } = data.item;
+    const isMine = memberId.toString() === global.memberId.toString();
     return (
       <View
-        style={[styles.messageCell, { flexDirection: differentStyle.flexDirection }]}
-        key={index}
+        style={[styles.list, isMine && { flexDirection: 'row-reverse' }]}
       >
-        <Image
+        <CachedImage
           source={{
-            uri: item.imgUrl,
+            uri: isMine ? imgUrl : toImgUrl,
           }}
           style={styles.avatar}
         />
-        <View style={styles.sepView}>
+        <View style={[styles.sepView, !isMine && { flexDirection: 'row-reverse' }]}>
           <View style={styles.sepViewEnd} />
           <View
-            style={[styles.contentView, { backgroundColor: differentStyle.backgroundColor }]}
+            style={[styles.contentView, isMine && { backgroundColor: '#92E649' }]}
           >
-            <Text style={styles.messageCellText}>{row.message.message}</Text>
+            <Text style={styles.message}>{message}</Text>
           </View>
         </View>
         <View style={styles.endBlankBlock} />
       </View>
     );
   }
-  render() {
-    const { ds, inputValue, textInputHeight, refreshing, toUser } = this.state;
-    const { pop } = this.props;
-    const lists = global.socketStore.sessionList;
-    console.log(lists);
-    const dataSource = ds.cloneWithRows(lists);
-    const content = (
-      <View style={styles.container}>
-        <Header back={pop} title={decodeURI(toUser.nickName)} />
-        <ListView
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={this._onPullMessage}
-            />
-          }
+  _renderContent() {
+    const { refresh } = this.state;
+    const items = global.socketStore.sessionList;
+    console.log(items);
+    return (
+      <View style={styles.listContent}>
+        <FlatList
+          data={items}
+          onLayout={(e) => {
+            console.log(e.nativeEvent);
+          }}
+          renderItem={this._renderRow}
+          ref={(reference) => { this.chatListView = reference; }}
+          keyExtractor={(item, index) => index}
+          ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+          onRefresh={this._onRefresh}
+          refreshing={refresh}
           onEndReached={() => {
             this._userReachEnd = true;
           }}
-          onEndReachedThreshold={10}
-          ref={(reference) => { this.chatListView = reference; }}
-          dataSource={dataSource}
           enableEmptySections
-          onLayout={this._scrollToBottom}
-          onContentSizeChange={this._scrollToBottom}
-          renderRow={this._renderRow}
+          getItemLayout={(data, index) => (
+            { length: 100, offset: (100 + 2) * index, index }
+          )}
+          // onLayout={this._scrollToBottom}
+          // onContentSizeChange={this._scrollToBottom}
+          onEndReachedThreshold={0.1}
         />
-        <Footer style={styles.bottomToolBar}>
-          <TextInput
-            style={[styles.input, {
-              height: Math.max(40,
-                textInputHeight < 180 ? textInputHeight : 180),
-            }]}
-            multiline
-            controlled
-            underlineColorAndroid="transparent"
-            returnKeyType="default"
-            value={inputValue}
-            onSubmitEditing={this._onSubmitEditing}
-            enablesReturnKeyAutomatically
-            onContentSizeChange={
-              (event) => {
-                this.setState({ textInputHeight: event.nativeEvent.contentSize.height });
-              }
-            }
-            onChangeText={(text) => {
-              this.setState({ inputValue: text });
-            }}
-          />
-          <TOpacity
-            style={styles.sendButton}
-            content={
-              <View>
-                <Text style={styles.sendButtonText}>发送</Text>
-              </View>
-            }
-            onPress={this._onSubmitEditing}
-          />
-        </Footer>
       </View>
     );
-
-    if (Platform.OS === 'ios') {
-      return (
-        <KeyboardAvoidingView
-          behavior="padding"
-          style={styles.KeyboardAvoidingView}
-          keyboardVerticalOffset={this.props.keyboardVerticalOffset || 64}
-        >
-          {content}
-        </KeyboardAvoidingView>
-      );
-    }
-    return content;
+  }
+  _renderFooter() {
+    const { inputValue, textInputHeight } = this.state;
+    return (
+      <Footer style={styles.bottomToolBar}>
+        <TextInput
+          style={[styles.input, {
+            height: Math.max(40,
+              textInputHeight < 180 ? textInputHeight : 180),
+          }]}
+          multiline
+          controlled
+          underlineColorAndroid="transparent"
+          returnKeyType="default"
+          value={inputValue}
+          onSubmitEditing={this._onSubmitEditing}
+          enablesReturnKeyAutomatically
+          onContentSizeChange={
+            (event) => {
+              this.setState({ textInputHeight: event.nativeEvent.contentSize.height });
+            }
+          }
+          onChangeText={(text) => {
+            this.setState({ inputValue: text });
+          }}
+        />
+        <TOpacity
+          style={styles.sendButton}
+          content={
+            <View>
+              <Text style={styles.sendButtonText}>发送</Text>
+            </View>
+          }
+          onPress={this._onSubmitEditing}
+        />
+      </Footer>
+    );
+  }
+  render() {
+    const { toUser } = this.state;
+    const { pop } = this.props;
+    return (
+      <Container>
+        <Header back={pop} title={decodeURI(toUser.userName)} />
+        {this._renderContent()}
+        {this._renderFooter()}
+        <Loading ref={(c) => { this.sleek = c; }} />
+      </Container>
+    );
   }
 }
 

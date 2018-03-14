@@ -16,7 +16,8 @@ export default class SocketStore {
   // 非监听对象
   socket: Object;
   getConnect = () => {
-    this.socket = io(`${config.server}?memberId=${global.memberId}`, {
+    console.log(111);
+    this.socket = io(`${config.server}${global.memberId}`, {
       transports: ['websocket'],
     });
     this.socket.on('connect', () => {
@@ -28,28 +29,29 @@ export default class SocketStore {
       console.log(data);
       this.sessionLists = this.sessionLists.concat(data);
     });
-    this.socket.on('messagelist', (data) => {
+    this.socket.on('messagelist', (data) => { // 获取我与所有好友列表
       console.log(data);
       this.chatLists = this.chatLists.concat(data);
     });
-    this.socket.on('notfiymessage', (data) => {
+    this.socket.on('notfiymessage', (data) => { // 发送消息通知是否发送成功
       console.log(data);
-      this.sessionLists = this.sessionLists.concat(data);
+      this.sessionLists.push(data);
+    });
+    this.socket.on('messagedetail', (data) => { // 获取我与好友消息记录
+      console.log(data);
+      this.sessionLists = data;
     });
   }
   @computed get sessionList(): Array<Object> {
-    return this.sessionLists.sort(
-      (a, b) => b.postDate - a.postDate)
-      .map((item) => {
-        item.latestTime = moment(item.postDate).startOf('minute').fromNow();
-        return item;
-      });
+    return this.sessionLists.map((item) => {
+      item.latestTime = moment(item.postDate).startOf('minute').fromNow();
+      return item;
+    });
   }
   @computed get chatList(): Array<Object> {
     return this.chatLists.sort(
-      (a, b) => b.lastMessage.postDate - a.lastMessage.postDate)
-      .map((item) => {
-        item.latestTime = moment(item.lastMessage.postDate).startOf('minute').fromNow();
+      (a, b) => b.lastChatObject.postDate - a.lastChatObject.postDate).map((item) => {
+        item.latestTime = moment(item.lastChatObject.postDate).startOf('minute').fromNow();
         return item;
       });
   }

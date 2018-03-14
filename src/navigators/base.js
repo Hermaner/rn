@@ -43,7 +43,7 @@ class Base extends React.Component {
   }
   go = (key) => {
     this.closeModal();
-    this.props.dispatch({ type: 'push', routes: { key } });
+    this.props.dispatch({ type: 'push', routes: { key, params: {} } });
   }
 }
 Base.propTypes = {

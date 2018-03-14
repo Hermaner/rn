@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   name: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
     flex: 1,
     lineHeight: 22,

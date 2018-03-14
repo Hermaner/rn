@@ -14,7 +14,6 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AppTests.m */; };
 		0307FD44C3294A2C9503B172 /* libjschelpers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC9C1F4074C49AE968392AB /* libjschelpers.a */; };
-		09F2500A260849D2A29AF60D /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 550FED7ABFC34A78A28D66B2 /* libRCTJPushModule.a */; };
 		0CA5FCDF29B9480A888C9465 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29F9D94A4514F7D832F8B61 /* Security.framework */; };
 		0CF7BB30943F449694C10C68 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC08B0D2D2AE4713A65354F8 /* Octicons.ttf */; };
 		0D396C011A5B49D18B5713A3 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA26E67A3F054EAAA3ED5AE2 /* MaterialCommunityIcons.ttf */; };
@@ -28,7 +27,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2096A05F564246C89CABD712 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC62C3A2BFA34CBF832E8804 /* libLRDRCTSimpleToast.a */; };
 		213F1E356E2E41BDA5549671 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27EADDF649D4C0D879F823A /* libRCTActionSheet.a */; };
 		278E74D98F594934B90F2836 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486D4172E50B418A89E339F1 /* UIKit.framework */; };
 		2A7C4F059BF9426EB38C51BA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B543D7997C4B4DA01A98EE /* CoreFoundation.framework */; };
@@ -52,7 +50,6 @@
 		454981F768F8447FA4E190B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A21642AD3C44F379DE70777 /* Foundation.framework */; };
 		4A704F2519804B829C4BD79A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B578AE3A8C4B44309521182A /* FontAwesome.ttf */; };
 		4E63BB4C46EC499BBAAA9904 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0FE46E6E9E4E55805C156E /* Roboto.ttf */; };
-		56BB2F6A13194AD59598FC45 /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD66A60218A4FD085316F0E /* libReactNativeKeyboardManager.a */; };
 		5999E5B756344FCE9FAC9F43 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48B05405258D43DC9F464F96 /* Entypo.ttf */; };
 		5AFDD1A570604C4FBEC98DC0 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56A5BD2F0C91424DB2E41DE4 /* Ionicons.ttf */; };
 		5B3C500DB82E430780D8723D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7FBEFFF606A435A84860122 /* EvilIcons.ttf */; };
@@ -69,9 +66,7 @@
 		82E7056C57B94080BB318CFD /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CEA090881844F6A49ACCF2 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		88659327D5CE4850A6B19970 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20CF3A72C7704496B0FDF238 /* Ionicons.ttf */; };
-		88B343CEB24C4F6389524613 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BB5AB11A05E4D1CA28DDD6D /* libRCTCamera.a */; };
 		8A6B459A759749ED91AA84D2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A999F082603468880EDA65C /* CoreTelephony.framework */; };
-		9174E66DC3094334BE5FEA2B /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7714FFAF8F75480FAEEFDBFC /* libRCTJCoreModule.a */; };
 		A446B294200DAF6F006F90B9 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A446B293200DAF6F006F90B9 /* iconfont.ttf */; };
 		A47ED8B65509505D5990AACE /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E698D090C201A3BBC44682 /* libPods-App.a */; };
 		AACC3811739A4260958B3C33 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6D9C21DB9DB474F992525C1 /* MaterialIcons.ttf */; };
@@ -101,6 +96,12 @@
 		DF432D662025948400F14621 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D612025948400F14621 /* libWeChatSDK.a */; };
 		DF432D672025948400F14621 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D622025948400F14621 /* AlipaySDK.framework */; };
 		DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */; };
+		DF771C8C2057B6F400A9FF55 /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BD061FD107D700877EF2 /* libReactNativeKeyboardManager.a */; };
+		DF771C8D2057B73500A9FF55 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCF21FD107D700877EF2 /* libRCTJPushModule.a */; };
+		DF771C8E2057B78700A9FF55 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCDC1FD107D700877EF2 /* libLRDRCTSimpleToast.a */; };
+		DF771C8F2057B7CF00A9FF55 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCE91FD107D700877EF2 /* libRCTCamera.a */; };
+		DF771C902057B80100A9FF55 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BD0F1FD107D700877EF2 /* libRNDeviceInfo.a */; };
+		DF771C912057B81300A9FF55 /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCEF1FD107D700877EF2 /* libRCTJCoreModule.a */; };
 		DFA6445E2050DB6200D99F4B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA6442A2050DB6200D99F4B /* ImageIO.framework */; };
 		DFA6447F2050E0A700D99F4B /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFA644612050E0A700D99F4B /* UMSocialSDKResources.bundle */; };
 		DFA644802050E0A700D99F4B /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA644622050E0A700D99F4B /* UShareUI.framework */; };
@@ -130,7 +131,6 @@
 		E15D08402A2AE4CD276B8982 /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9277B5617F6B9B16D971EE2A /* libPods-App.a */; };
 		E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1A1610579242DF82AF1C4E /* libRCTBEEPickerManager.a */; };
 		E51702876FF7461E952DB52F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F7EF02090E427EA13EE716 /* CoreGraphics.framework */; };
-		EB3700B16DDE4C029352CD8B /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B0BF973EC18452F985C61C9 /* libRNDeviceInfo.a */; };
 		FDB5808282FD4857872AA279 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D534D8633B7484094D75EEE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -561,6 +561,7 @@
 		2BE75893AEFBE013D1DA2AA6 /* libPods-App-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* App-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* App-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "App-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32F9BCE49C6749E18D3F778D /* libRCTAMapLocation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTAMapLocation.a; sourceTree = "<group>"; };
 		33B7432F7F89427084F8EC00 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		394BC85E00C34DA698510E36 /* libcxxreact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libcxxreact.a; sourceTree = "<group>"; };
 		3ACC062E912C4D29866E6984 /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -689,6 +690,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF771C912057B81300A9FF55 /* libRCTJCoreModule.a in Frameworks */,
+				DF771C902057B80100A9FF55 /* libRNDeviceInfo.a in Frameworks */,
+				DF771C8F2057B7CF00A9FF55 /* libRCTCamera.a in Frameworks */,
+				DF771C8E2057B78700A9FF55 /* libLRDRCTSimpleToast.a in Frameworks */,
+				DF771C8D2057B73500A9FF55 /* libRCTJPushModule.a in Frameworks */,
+				DF771C8C2057B6F400A9FF55 /* libReactNativeKeyboardManager.a in Frameworks */,
 				DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */,
 				DFA6445E2050DB6200D99F4B /* ImageIO.framework in Frameworks */,
 				DFEB1AE0202463C500F735DD /* QuartzCore.framework in Frameworks */,
@@ -727,8 +734,6 @@
 				DF39BE511FD1232A00877EF2 /* RSKImageCropper.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				9174E66DC3094334BE5FEA2B /* libRCTJCoreModule.a in Frameworks */,
-				09F2500A260849D2A29AF60D /* libRCTJPushModule.a in Frameworks */,
 				DFA644872050E0A700D99F4B /* FBSDKShareKit.framework in Frameworks */,
 				DF432D672025948400F14621 /* AlipaySDK.framework in Frameworks */,
 				2C1D0F052E12413DB2EC5172 /* UserNotifications.framework in Frameworks */,
@@ -737,13 +742,10 @@
 				454981F768F8447FA4E190B9 /* Foundation.framework in Frameworks */,
 				278E74D98F594934B90F2836 /* UIKit.framework in Frameworks */,
 				7155E1C879FA42499E8C0A20 /* libresolv.tbd in Frameworks */,
-				88B343CEB24C4F6389524613 /* libRCTCamera.a in Frameworks */,
-				EB3700B16DDE4C029352CD8B /* libRNDeviceInfo.a in Frameworks */,
 				E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */,
 				DF39BE861FD1237A00877EF2 /* RSKImageCropper.framework in Frameworks */,
 				DFA6448C2050E0A700D99F4B /* libSocialSina.a in Frameworks */,
 				DFA644842050E0A700D99F4B /* libSocialUniqueId.a in Frameworks */,
-				2096A05F564246C89CABD712 /* libLRDRCTSimpleToast.a in Frameworks */,
 				DFA644802050E0A700D99F4B /* UShareUI.framework in Frameworks */,
 				0F98E3CF08F94D95BEB9E40D /* libSplashScreen.a in Frameworks */,
 				DFA644882050E0A700D99F4B /* FBSDKMessengerShareKit.framework in Frameworks */,
@@ -751,7 +753,6 @@
 				B9E8FE74EC6644B6AFB5B3B1 /* libRNSVG.a in Frameworks */,
 				213F1E356E2E41BDA5549671 /* libRCTActionSheet.a in Frameworks */,
 				7C79DCB779354BF7ABD18F8B /* libRNVectorIcons.a in Frameworks */,
-				56BB2F6A13194AD59598FC45 /* libReactNativeKeyboardManager.a in Frameworks */,
 				C45319A73D90413C87481942 /* libimageCropPicker.a in Frameworks */,
 				E15D08402A2AE4CD276B8982 /* libPods-App.a in Frameworks */,
 				82E7056C57B94080BB318CFD /* libReact.a in Frameworks */,
@@ -1066,6 +1067,7 @@
 				C5140B3895E44B50BDF408F2 /* libdouble-conversion.a */,
 				63DEC93CB59A4CAEB8C6449F /* libAlipayModule.a */,
 				9C130A9BAA1A4ADC857E050A /* libAMap3D.a */,
+				32F9BCE49C6749E18D3F778D /* libRCTAMapLocation.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -2201,12 +2203,15 @@
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = AppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2259,12 +2264,15 @@
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = AppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2335,7 +2343,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2360,7 +2368,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyDoor;
 				PRODUCT_NAME = App;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2405,7 +2413,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2430,7 +2438,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = afanti.MonkeyDoor;
 				PRODUCT_NAME = App;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2465,11 +2473,14 @@
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = "App-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2532,11 +2543,14 @@
 					"$(SRCROOT)/../node_modules/react-native-keyboard-manager/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-amap3d/lib/ios/AMap3D/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
+					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 				);
 				INFOPLIST_FILE = "App-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2607,6 +2621,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.App-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2631,6 +2646,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

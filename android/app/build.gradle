@@ -103,6 +103,11 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "d5ab514dd37a028d4cc0835c",
+                APP_CHANNEL : "default"
+        ]
+
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -166,6 +171,8 @@ android {
     }
 }
 dependencies {
+    compile project(':jcore-react-native')
+    compile project(':jpush-react-native')
     compile project(':react-native-baidumap-sdk')
     compile project(':react-native-puti-pay')
     compile project(':react-native-fetch-blob')
@@ -175,8 +182,6 @@ dependencies {
     compile project(':react-native-splash-screen')
     compile project(':react-native-device-info')
     compile project(':react-native-camera')
-    compile project(':jpush-react-native')
-    compile project(':jcore-react-native')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile 'com.android.support:multidex:1.0.1'
     compile "com.android.support:appcompat-v7:23.0.1"

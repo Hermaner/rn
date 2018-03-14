@@ -120,7 +120,7 @@ class UserBase extends React.Component {
     RegisterMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration,
+      registration: global.registration || 'ios',
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
@@ -158,7 +158,7 @@ class UserBase extends React.Component {
       phone,
       passWord,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration,
+      registration: global.registration || 'ios',
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();

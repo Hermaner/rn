@@ -58,13 +58,8 @@ class App extends React.Component {
       });
     }
     JPushModule.getRegistrationID((registrationId) => {
-      console.log(registrationId);
-      alert(registrationId);
-      global.registration = registrationId || 'ios';
+      global.registration = registrationId;
     });
-    JPushModule.addGetRegistrationIdListener((registrationId) => {
-      alert(registrationId);
-    })
     this.premInit();
     global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
@@ -72,10 +67,10 @@ class App extends React.Component {
         const userData = JSON.parse(res);
         UserSocket.changeData(userData);
         console.log(userData);
+        global.userData = userData;
         global.memberId = userData.memberId;
         this.GetMemberCenterService();
         global.socketStore.getConnect();
-        DeviceEventEmitter.emit('emitSession');
       }
     });
     AsyncStorage.getItem('searchHistorys', (error, res) => {

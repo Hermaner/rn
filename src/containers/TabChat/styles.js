@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
   form: {
     backgroundColor: '#fff', borderRadius: 8,
   },
+  listContent: {
+    flex: 1,
+  },
   pagebody: {
     backgroundColor: '#fff',
     flex: 1,

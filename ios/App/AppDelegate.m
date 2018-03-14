@@ -19,35 +19,27 @@
 
 @implementation AppDelegate
 
-// - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
-//   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-// {
-//   if([[sourceApplication substringToIndex:10] isEqualToString:@"com.alipay"]){
-//     [AlipayModule handleCallback:url];
-//   }
-//   return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-// }
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-  if (!result) {
-    return [RCTLinkingManager application:application openURL:url
-                        sourceApplication:sourceApplication annotation:annotation];
-  }
-  return result;
+  return [RCTLinkingManager application:application openURL:url
+                      sourceApplication:sourceApplication annotation:annotation];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
   return [RCTLinkingManager application:application openURL:url options:options];
 }
-
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+  BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+  if (!result) {
+  }
+  return result;
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
-     entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
-     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-  [JPUSHService setupWithOption:launchOptions appKey:@"0e8f23b4e92803de128c3c31"
+  [JPUSHService setupWithOption:launchOptions appKey:@"d5ab514dd37a028d4cc0835c"
                         channel:nil apsForProduction:nil];
   NSURL *jsCodeLocation;
 
@@ -66,7 +58,7 @@ JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   /* 打开调试日志 */
-  [[UMSocialManager defaultManager] openLog:YES];
+  // [[UMSocialManager defaultManager] openLog:YES];
 
   /* 设置友盟appkey */
   [[UMSocialManager defaultManager] setUmSocialAppkey:@"596447cbe88bad3b82000eec"];
@@ -89,39 +81,31 @@ JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
 
   return YES;
 }
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-  BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-  if (!result) {
-    // 其他如支付等SDK的回调
-  }
-  return result;
-}
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-[JPUSHService registerDeviceToken:deviceToken];
+  [JPUSHService registerDeviceToken:deviceToken];
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-[[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
-}
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)   (UIBackgroundFetchResult))completionHandler {
-[[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
-}
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
- NSDictionary * userInfo = notification.request.content.userInfo;
-  [JPUSHService handleRemoteNotification:userInfo];
- [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
-
- completionHandler(UNNotificationPresentationOptionAlert);
-}
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
-NSDictionary * userInfo = response.notification.request.content.userInfo;
-[JPUSHService handleRemoteNotification:userInfo];
-[[NSNotificationCenter defaultCenter] postNotificationName:kJPFOpenNotification object:userInfo];
-
-completionHandler();
+  [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-[[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:notification.userInfo];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object: notification.userInfo];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)   (UIBackgroundFetchResult))completionHandler {
+  [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
+}
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
+  NSDictionary * userInfo = notification.request.content.userInfo;
+  if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+    [JPUSHService handleRemoteNotification:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
+  }
+  completionHandler(UNNotificationPresentationOptionAlert); }
+- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+  NSDictionary * userInfo = response.notification.request.content.userInfo;
+  if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+    [JPUSHService handleRemoteNotification:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJPFOpenNotification object:userInfo];
+  }
+  completionHandler();
 }
 @end

@@ -2,7 +2,12 @@ import { StyleSheet } from 'react-native';
 import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
-  listContent: {
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+  },
+  KeyboardAvoidingView: {
     flex: 1,
   },
   bottomToolBar: {
@@ -35,18 +40,16 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 10,
   },
-  list: {
+  messageCell: {
     marginTop: 5,
     marginBottom: 5,
-    ...st.fr,
   },
-  message: {
-    color: '#333',
+  messageCellText: {
     fontSize: 14,
   },
   avatar: {
     borderRadius: 4,
-    margin: 8,
+    margin: 5,
     width: 40,
     height: 40,
   },
@@ -62,7 +65,6 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 5,
     justifyContent: 'center',
-    backgroundColor: '#fff',
   },
   endBlankBlock: {
     margin: 5,

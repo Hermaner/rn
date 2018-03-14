@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { AliAppPayService, PayAppWeiXinService } from '../../api';
 
 XPay.setWxId('wx4d30b0136bad7f7e');
-XPay.setAlipayScheme('alipay');
+XPay.setAlipayScheme('2017070607661320');
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -76,7 +76,7 @@ class Base extends React.Component {
     this.sleek.toggle();
     PayAppWeiXinService({
       orderNumber,
-      amount: amount.toString(),
+      amount: '0.01' || amount.toString(),
     }).then((res) => {
       console.log(res);
       this.sleek.hide();

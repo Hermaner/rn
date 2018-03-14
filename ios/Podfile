@@ -12,6 +12,7 @@ target 'App' do
     'DevSupport',
   ]
   pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
+  # pod 'JPushRN', :path => '../node_modules/jpush-react-native'
   pod 'RSKImageCropper'
   pod 'QBImagePickerController'
 

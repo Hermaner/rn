@@ -15,15 +15,16 @@ import {
     StyleSheet,
     View,
     Text,
+    FlatList,
     DeviceEventEmitter,
 } from 'react-native';
+import { Container } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { Mcolor, st } from '../../utils';
-import socketStore from '../../components/socket/SocketStore';
-import { TOpacity } from '../../components';
+import { TOpacity, UserSocket } from '../../components';
 
 const moment = require('moment');
 
@@ -59,16 +60,16 @@ const styles = StyleSheet.create({
   },
   name: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 14,
     color: '#000',
   },
   date: {
     fontSize: 12,
-    color: '#888',
+    color: '#aaa',
   },
   msg: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 13,
+    color: '#888',
     lineHeight: 25,
   },
 });
@@ -87,67 +88,68 @@ class SessionList extends React.Component {
   }
   init = () => {
     if (global.memberId) {
-      this.setState({
-        hasLogin: true,
-      }, () => {
-        global.socketStore.socket.emit('messagelist', {
-          user: global.userData,
-        });
-      });
+      global.socketStore.socket.emit('messagelist');
     }
-    this.emitSession = DeviceEventEmitter.addListener('emitSession', () => {
-      this.setState({
-        hasLogin: true,
-      }, () => {
-        global.socketStore.socket.emit('messagelist', {
-          user: global.userData,
-        });
-      });
-    });
   }
-  _renderRow = (item, index) => (
-    <TOpacity
-      style={styles.list}
-      key={index}
-      content={
-        <View style={[styles.con, index === this.state.items.length - 1 && styles.conLast]}>
-          <CachedImage source={{ uri: `${item.user.imgUrl}?imageView2/1/w/80` }} style={styles.img} />
-          <View style={styles.right}>
-            <View style={styles.top}>
-              <Text style={styles.name} numberOfLines={1}>{decodeURI(item.user.userName)}</Text>
-              <Text style={styles.date} numberOfLines={1}>{item.latestTime}</Text>
-            </View>
-            <Text style={styles.msg}>{item.lastMessage.message.message}</Text>
-          </View>
-        </View>
-      }
-      onPress={() => {
-        this.props.push({ key: 'ChatRoom',
-          params: {
-            item,
-          },
-        });
-      }}
-    />
-  )
-  render() {
-    const { hasLogin } = this.state;
-    if (!hasLogin) {
-      return null;
-    }
-    const items = global.socketStore.chatList;
+  _renderRow = (data) => {
+    const { memberId, toMemberId, imgUrl, toImgUrl,
+      lastChatObject: { message }, latestTime, toUserName, userName } = data.item;
+    const isMine = memberId.toString() === global.memberId.toString();
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-      >
-        {
-          items.map((item, index) => (
-            <View key={index}>
-              {this._renderRow(item, index)}
+      <TOpacity
+        style={styles.list}
+        content={
+          <View style={[styles.con]}>
+            <CachedImage source={{ uri: `${isMine ? toImgUrl : imgUrl}?imageView2/1/w/80` }} style={styles.img} />
+            <View style={styles.right}>
+              <View style={styles.top}>
+                <Text style={styles.name} numberOfLines={1}>
+                  {decodeURI(isMine ? toUserName : userName)}
+                </Text>
+                <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
+              </View>
+              <Text style={styles.msg}>{message}</Text>
             </View>
-          ))
+          </View>
         }
-      </ScrollView>
+        onPress={() => {
+          this.props.push({ key: 'ChatRoom',
+            params: {
+              item: {
+                memberId: isMine ? toMemberId : memberId,
+                userName: isMine ? toUserName : userName,
+                imgUrl: isMine ? toImgUrl : imgUrl,
+              },
+            },
+          });
+        }}
+      />
+    );
+  }
+  _renderContent() {
+    const items = global.socketStore.chatList;
+    console.log(items);
+    return (
+      <View style={styles.listContent}>
+        <FlatList
+          data={items}
+          renderItem={this._renderRow}
+          ref={(reference) => { this.chatListView = reference; }}
+          keyExtractor={(item, index) => index}
+          enableEmptySections
+          getItemLayout={(data, index) => (
+            { length: 100, offset: (100 + 2) * index, index }
+          )}
+        />
+      </View>
+    );
+  }
+  render() {
+    return (
+      <Container>
+        {this._renderContent()}
+      </Container>
+
     );
   }
 }

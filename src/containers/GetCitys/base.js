@@ -44,6 +44,9 @@ class Base extends React.Component {
   }
   locationDistrict = () => {
     const { type } = this.state;
+    if (type !== 'emitHomePosition') {
+      return;
+    }
     const data = {
       districtId: global.districtId,
       cityName: global.cityName,
