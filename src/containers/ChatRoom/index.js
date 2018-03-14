@@ -6,29 +6,46 @@ import {
     TextInput,
     View,
     FlatList,
+    Keyboard,
 } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
-import { Footer, Container } from 'native-base';
+import KeyboardManager from 'react-native-keyboard-manager';
+import { Footer, Container, Content, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
 import { TOpacity, Header, NoData, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
+import { deviceH } from '../../utils';
 
 @observer
 class ChatRoom extends base {
   constructor(props: Object) {
     super(props);
     this.state = {
+      keyboardHeight: 0,
       ...this.state,
     };
   }
   // 不要和动画效果抢系统资源
   componentDidMount() {
     this.getInit();
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+    KeyboardManager.setEnable(false);
   }
   componentWillUnmount() {
+  }
+  _keyboardDidShow = (e) => {
+    this.setState({
+      keyboardHeight: e.startCoordinates.height,
+    }, () => this.chatListView.scrollToEnd());
+  }
+  _keyboardDidHide = () => {
+    this.setState({
+      keyboardHeight: 0,
+    });
   }
   // 判断用户是否输入过
   _userHasBeenInputed: boolean = false;
@@ -69,6 +86,7 @@ class ChatRoom extends base {
           onLayout={(e) => {
             console.log(e.nativeEvent);
           }}
+          style={{ borderWidth: 2 }}
           renderItem={this._renderRow}
           ref={(reference) => { this.chatListView = reference; }}
           keyExtractor={(item, index) => index}
@@ -79,11 +97,6 @@ class ChatRoom extends base {
             this._userReachEnd = true;
           }}
           enableEmptySections
-          getItemLayout={(data, index) => (
-            { length: 100, offset: (100 + 2) * index, index }
-          )}
-          // onLayout={this._scrollToBottom}
-          // onContentSizeChange={this._scrollToBottom}
           onEndReachedThreshold={0.1}
         />
       </View>
@@ -93,15 +106,13 @@ class ChatRoom extends base {
     const { inputValue, textInputHeight } = this.state;
     return (
       <Footer style={styles.bottomToolBar}>
-        <TextInput
+        <Input
+          // multiline
           style={[styles.input, {
             height: Math.max(40,
               textInputHeight < 180 ? textInputHeight : 180),
           }]}
-          multiline
-          controlled
-          underlineColorAndroid="transparent"
-          returnKeyType="default"
+          clearButtonMode="while-editing"
           value={inputValue}
           onSubmitEditing={this._onSubmitEditing}
           enablesReturnKeyAutomatically
@@ -127,15 +138,17 @@ class ChatRoom extends base {
     );
   }
   render() {
-    const { toUser } = this.state;
+    const { toUser, keyboardHeight } = this.state;
     const { pop } = this.props;
     return (
-      <Container>
+      <View style={{ height: deviceH - keyboardHeight }}>
         <Header back={pop} title={decodeURI(toUser.userName)} />
-        {this._renderContent()}
+        <View style={{ flex: 1 }}>
+          {this._renderContent()}
+        </View>
         {this._renderFooter()}
         <Loading ref={(c) => { this.sleek = c; }} />
-      </Container>
+      </View>
     );
   }
 }

@@ -9,6 +9,7 @@
  * 好友列表
  */
 import { observer } from 'mobx-react/native';
+import RNFetchBlob from 'react-native-fetch-blob';
 import React from 'react';
 import {
     ScrollView,
@@ -30,6 +31,9 @@ const moment = require('moment');
 
 moment.locale('zh-cn');
 const styles = StyleSheet.create({
+  listContent: {
+    flex: 1,
+  },
   list: {
     paddingLeft: 10,
     backgroundColor: '#fff',
@@ -72,6 +76,22 @@ const styles = StyleSheet.create({
     color: '#888',
     lineHeight: 25,
   },
+  badgeView: {
+    position: 'absolute',
+    top: 3,
+    left: 45,
+    height: 14,
+    paddingLeft: 4,
+    paddingRight: 4,
+    backgroundColor: '#ff0000',
+    borderRadius: 7,
+    ...st.jacenter,
+    overflow: 'hidden',
+  },
+  badgeText: {
+    fontSize: 11,
+    color: '#fff',
+  },
 });
 
 @observer
@@ -89,10 +109,24 @@ class SessionList extends React.Component {
   init = () => {
     if (global.memberId) {
       global.socketStore.socket.emit('messagelist');
+      const { CacheDir } = RNFetchBlob.fs.dirs;
+      const path = `${CacheDir}/chatList`;
+      RNFetchBlob.fs.exists(path)
+      .then((exist) => {
+        if (!exist) {
+          RNFetchBlob.fs.createFile(path, '', 'utf8');
+        } else {
+          RNFetchBlob.fs.readFile(path, 'ascii')
+          .then((data) => {
+            console.log(data);
+          });
+        }
+      })
+      .catch(err => console.log(err));
     }
   }
   _renderRow = (data) => {
-    const { memberId, toMemberId, imgUrl, toImgUrl,
+    const { memberId, toMemberId, imgUrl, toImgUrl, noReadCount,
       lastChatObject: { message }, latestTime, toUserName, userName } = data.item;
     const isMine = memberId.toString() === global.memberId.toString();
     return (
@@ -109,6 +143,9 @@ class SessionList extends React.Component {
                 <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
               </View>
               <Text style={styles.msg}>{message}</Text>
+            </View>
+            <View style={styles.badgeView}>
+              <Text style={styles.badgeText}>{noReadCount}</Text>
             </View>
           </View>
         }

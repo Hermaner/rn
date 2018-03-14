@@ -1,8 +1,10 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+// import RNFetchBlob from 'react-native-fetch-blob';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
 
+// const { CacheDir } = RNFetchBlob.fs.dirs;
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,29 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
+    // const { toUser } = this.state;
     this.getData();
+    // const path = `${CacheDir}/chatRoom${global.memberId}-${toUser.memberId}`;
+    // RNFetchBlob.fs.unlink(path)
+    // .then(() => { })
+    // .catch(() => { });
+    // RNFetchBlob.fs.exists(path)
+    // .then((exist) => {
+    //   if (!exist) {
+    //     RNFetchBlob.fs.createFile(path, '', 'utf8');
+    //   } else {
+    //     RNFetchBlob.fs.readFile(path, 'utf8')
+    //     .then((data) => {
+    //       const items = data.split('^');
+    //       items.splice(items.length - 1, 1);
+    //       items.forEach((item, index) => {
+    //         items[index] = JSON.parse(item);
+    //       });
+    //       console.log(items);
+    //     });
+    //   }
+    // })
+    // .catch(err => console.log(err));
   }
   getData = () => {
     const { toUser, currentPage, pageSize } = this.state;
@@ -27,7 +51,6 @@ class Base extends React.Component {
       currentPage,
       pageSize,
     });
-    this.chatListView.scrollToEnd();
   }
   _onSubmitEditing = () => {
     this._userHasBeenInputed = true;
@@ -49,6 +72,10 @@ class Base extends React.Component {
       postDateStr: new Date().getTime(),
       type: 1,
     };
+    // const path = `${CacheDir}/chatRoom${global.memberId}-${toUser.memberId}`;
+    // RNFetchBlob.fs.appendFile(path, `${JSON.stringify(data)}^`, 'utf8').then((res) => {
+    //   console.log(res);
+    // });
     global.socketStore.socket.emit('message', data);
     this.setState({ inputValue: '' });
     this.chatListView.scrollToEnd();

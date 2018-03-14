@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderTopWidth: 1,
-    padding: 10,
+    backgroundColor: '#f8f8f8',
   },
   sendButton: {
     borderColor: '#ccc',
