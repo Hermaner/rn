@@ -126,15 +126,16 @@ class SessionList extends React.Component {
     }
   }
   _renderRow = (data) => {
-    const { memberId, toMemberId, imgUrl, toImgUrl, noReadCount,
-      lastChatObject: { message }, latestTime, toUserName, userName } = data.item;
-    const isMine = memberId.toString() === global.memberId.toString();
+    const { noReadCount, lastChatObject:
+      { text, type, user:
+        { avatar, toAvatar, _id, toId, toUserName, userName } }, latestTime } = data.item;
+    const isMine = _id.toString() === global.memberId.toString();
     return (
       <TOpacity
         style={styles.list}
         content={
           <View style={[styles.con]}>
-            <CachedImage source={{ uri: `${isMine ? toImgUrl : imgUrl}?imageView2/1/w/80` }} style={styles.img} />
+            <CachedImage source={{ uri: `${isMine ? toAvatar : avatar}?imageView2/1/w/80` }} style={styles.img} />
             <View style={styles.right}>
               <View style={styles.top}>
                 <Text style={styles.name} numberOfLines={1}>
@@ -142,7 +143,7 @@ class SessionList extends React.Component {
                 </Text>
                 <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
               </View>
-              <Text style={styles.msg}>{message}</Text>
+              <Text style={styles.msg}>{type === '1' ? text : '图片'}</Text>
             </View>
             <View style={styles.badgeView}>
               <Text style={styles.badgeText}>{noReadCount}</Text>
@@ -153,9 +154,9 @@ class SessionList extends React.Component {
           this.props.push({ key: 'ChatRoom',
             params: {
               item: {
-                memberId: isMine ? toMemberId : memberId,
+                memberId: isMine ? toId : _id,
                 userName: isMine ? toUserName : userName,
-                imgUrl: isMine ? toImgUrl : imgUrl,
+                imgUrl: isMine ? toAvatar : avatar,
               },
             },
           });

@@ -18,7 +18,6 @@ export default class SocketStore {
   socket: Object;
   getConnect = () => {
     const { CacheDir } = RNFetchBlob.fs.dirs;
-    console.log(`${config.server}${global.memberId}`);
     this.socket = io(`${config.server}${global.memberId}`, {
       transports: ['websocket'],
     });
@@ -35,15 +34,15 @@ export default class SocketStore {
       console.log(data);
       this.chatLists = data;
     });
-    // this.socket.on('notifymessage', (data) => { // 发送消息通知是否发送成功
-    //   global.socketStore.socket.emit('messagelist');
-    //   console.log(data);
-    //   this.sessionLists.push(data);
-    // });
-    // this.socket.on('messagedetail', (data) => { // 获取我与好友消息记录
-    //   console.log(data);
-    //   this.sessionLists = data;
-    // });
+    this.socket.on('notifymessage', (data) => { // 发送消息通知是否发送成功
+      global.socketStore.socket.emit('messagelist');
+      console.log(data);
+      this.sessionLists.push(data);
+    });
+    this.socket.on('messagedetail', (data) => { // 获取我与好友消息记录
+      console.log(data);
+      this.sessionLists = data;
+    });
   }
   @computed get sessionList(): Array<Object> {
     return this.sessionLists.map((item) => {
@@ -53,8 +52,8 @@ export default class SocketStore {
   }
   @computed get chatList(): Array<Object> {
     return this.chatLists.sort(
-      (a, b) => b.lastChatObject.createdAt - a.lastChatObject.createdAt).map((item) => {
-        item.latestTime = moment(item.lastChatObject.createdAt).startOf('minute').fromNow();
+      (a, b) => b.lastChatObject.postDate - a.lastChatObject.postDate).map((item) => {
+        item.latestTime = moment(item.lastChatObject.postDate).startOf('minute').fromNow();
         return item;
       });
   }

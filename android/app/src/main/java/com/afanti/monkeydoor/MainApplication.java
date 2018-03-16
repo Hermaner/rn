@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
 import cn.qiuxiang.react.baidumap.BaiduMapPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -49,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ImageResizerPackage(),
             new BaiduMapPackage(),
             new PayReactPackage(),
             new RNFetchBlobPackage(),

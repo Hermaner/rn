@@ -98,8 +98,10 @@ import FixedList from '../containers/FixedList';
 import OrderDetailAccept from '../containers/OrderDetailAccept';
 import MapView from '../containers/MapView';
 import MapViewOrder from '../containers/MapViewOrder';
+import OrderSend from '../containers/OrderSend';
 
 export const AppNavigator = StackNavigator({
+  OrderSend: { screen: OrderSend },
   MapViewOrder: { screen: MapViewOrder },
   MapView: { screen: MapView },
   OrderDetailAccept: { screen: OrderDetailAccept },

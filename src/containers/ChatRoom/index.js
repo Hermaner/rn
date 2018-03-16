@@ -1,154 +1,131 @@
-
-import { observer } from 'mobx-react/native';
 import React from 'react';
 import {
-    Text,
-    TextInput,
-    View,
-    FlatList,
-    Keyboard,
+  Platform,
 } from 'react-native';
-import { CachedImage } from 'react-native-img-cache';
-import KeyboardManager from 'react-native-keyboard-manager';
-import { Footer, Container, Content, Input } from 'native-base';
-import PropTypes from 'prop-types';
+import { Container } from 'native-base';
 import { connect } from 'react-redux';
+import KeyboardManager from 'react-native-keyboard-manager';
+import PropTypes from 'prop-types';
 import { popRoute, pushRoute } from '../../actions';
-import { TOpacity, Header, NoData, Loading } from '../../components';
+import CustomActions from './CustomActions';
+import AccessoryActions from './AccessoryActions';
+import { Chat, Header } from '../../components';
 import base from './base';
-import styles from './styles';
-import { deviceH } from '../../utils';
 
-@observer
+const { GiftedChat, Actions } = Chat;
 class ChatRoom extends base {
-  constructor(props: Object) {
+  constructor(props) {
     super(props);
     this.state = {
-      keyboardHeight: 0,
       ...this.state,
     };
+    this._isMounted = false;
+    this.renderCustomActions = this.renderCustomActions.bind(this);
+
+    this._isAlright = null;
   }
-  // 不要和动画效果抢系统资源
-  componentDidMount() {
-    this.getInit();
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+
+  componentWillMount() {
+    this._isMounted = true;
     KeyboardManager.setEnable(false);
-  }
-  componentWillUnmount() {
-  }
-  _keyboardDidShow = (e) => {
-    this.setState({
-      keyboardHeight: e.startCoordinates.height,
-    }, () => this.chatListView.scrollToEnd());
-  }
-  _keyboardDidHide = () => {
-    this.setState({
-      keyboardHeight: 0,
+    this.getInit();
+    this.setState(() => {
+      return {
+        messages: require('./messages.js'),
+      };
     });
   }
-  // 判断用户是否输入过
-  _userHasBeenInputed: boolean = false;
-  _userReachEnd = true;
-  _renderRow = (data) => {
-    const { memberId, imgUrl, toImgUrl, message } = data.item;
-    const isMine = memberId.toString() === global.memberId.toString();
-    return (
-      <View
-        style={[styles.list, isMine && { flexDirection: 'row-reverse' }]}
-      >
-        <CachedImage
-          source={{
-            uri: isMine ? imgUrl : toImgUrl,
-          }}
-          style={styles.avatar}
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+  onLoadEarlier = () => {
+    this.setState({
+      isLoadingEarlier: true,
+    });
+    if (this._isMounted === true) {
+      this.loadMore();
+    }
+  }
+  onProductPress = (id) => {
+    console.log(id)
+  }
+  goAccessory = (index) => {
+    console.log(index);
+    switch (index) {
+      case 0:
+
+        break;
+      default:
+    }
+  }
+  onSend = (messages = []) => {
+    console.log(messages);
+    global.socketStore.socket.emit('message', messages);
+    this.setState((previousState) => {
+      return {
+        messages: GiftedChat.append(previousState.messages, messages),
+      };
+    });
+    global.socketStore.socket.emit('messagelist');
+  }
+  renderCustomActions(props) {
+    if (Platform.OS === 'ios') {
+      return (
+        <CustomActions
+          {...props}
         />
-        <View style={[styles.sepView, !isMine && { flexDirection: 'row-reverse' }]}>
-          <View style={styles.sepViewEnd} />
-          <View
-            style={[styles.contentView, isMine && { backgroundColor: '#92E649' }]}
-          >
-            <Text style={styles.message}>{message}</Text>
-          </View>
-        </View>
-        <View style={styles.endBlankBlock} />
-      </View>
+      );
+    }
+    const options = {
+      'Action 1': (props) => {
+        alert('option 1');
+      },
+      'Action 2': (props) => {
+        alert('option 2');
+      },
+      'Cancel': () => {},
+    };
+    return (
+      <Actions
+        {...props}
+        options={options}
+      />
     );
   }
-  _renderContent() {
-    const { refresh } = this.state;
-    const items = global.socketStore.sessionList;
-    console.log(items);
+  renderAccessory(props) {
     return (
-      <View style={styles.listContent}>
-        <FlatList
-          data={items}
-          onLayout={(e) => {
-            console.log(e.nativeEvent);
-          }}
-          style={{ borderWidth: 2 }}
-          renderItem={this._renderRow}
-          ref={(reference) => { this.chatListView = reference; }}
-          keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
-          onRefresh={this._onRefresh}
-          refreshing={refresh}
-          onEndReached={() => {
-            this._userReachEnd = true;
-          }}
-          enableEmptySections
-          onEndReachedThreshold={0.1}
-        />
-      </View>
-    );
-  }
-  _renderFooter() {
-    const { inputValue, textInputHeight } = this.state;
-    return (
-      <Footer style={styles.bottomToolBar}>
-        <Input
-          // multiline
-          style={[styles.input, {
-            height: Math.max(40,
-              textInputHeight < 180 ? textInputHeight : 180),
-          }]}
-          clearButtonMode="while-editing"
-          value={inputValue}
-          onSubmitEditing={this._onSubmitEditing}
-          enablesReturnKeyAutomatically
-          onContentSizeChange={
-            (event) => {
-              this.setState({ textInputHeight: event.nativeEvent.contentSize.height });
-            }
-          }
-          onChangeText={(text) => {
-            this.setState({ inputValue: text });
-          }}
-        />
-        <TOpacity
-          style={styles.sendButton}
-          content={
-            <View>
-              <Text style={styles.sendButtonText}>发送</Text>
-            </View>
-          }
-          onPress={this._onSubmitEditing}
-        />
-      </Footer>
+      <AccessoryActions
+        {...props}
+      />
     );
   }
   render() {
-    const { toUser, keyboardHeight } = this.state;
     const { pop } = this.props;
+    const { toUser, messages } = this.state;
+    const { memberId, imgUrl, userName } = global.userData;
     return (
-      <View style={{ height: deviceH - keyboardHeight }}>
+      <Container>
         <Header back={pop} title={decodeURI(toUser.userName)} />
-        <View style={{ flex: 1 }}>
-          {this._renderContent()}
-        </View>
-        {this._renderFooter()}
-        <Loading ref={(c) => { this.sleek = c; }} />
-      </View>
+        <GiftedChat
+          messages={messages}
+          onSend={this.onSend}
+          loadEarlier={this.state.loadEarlier}
+          onLoadEarlier={this.onLoadEarlier}
+          onProductPress={this.onProductPress}
+          isLoadingEarlier={this.state.isLoadingEarlier}
+          renderAccessory={this.renderAccessory}
+          user={{
+            _id: memberId.toString(),
+            userName,
+            avatar: imgUrl,
+            toId: toUser.memberId.toString(),
+            toUserName: toUser.userName,
+            toAvatar: toUser.imgUrl,
+          }}
+          renderActions={this.renderCustomActions}
+        />
+      </Container>
     );
   }
 }

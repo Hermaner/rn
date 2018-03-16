@@ -43,10 +43,12 @@ import SharePlatform from './SharePlatform';
 import MasterDemanOrderItem from './MasterDemanOrderItem';
 import IdCard from './IdCard';
 import MasterAcceptItem from './MasterAcceptItem';
+import Chat from './chat/GiftedChat';
 
 const UserSocket = new UserObser();
 
 export {
+  Chat,
   TLight,
   IdCard,
   MasterAcceptItem,

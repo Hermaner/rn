@@ -20,6 +20,8 @@ target 'App' do
 
   # pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
+  pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
+
 end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
