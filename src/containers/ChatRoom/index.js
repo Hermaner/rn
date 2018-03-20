@@ -36,17 +36,13 @@ class ChatRoom extends base {
       this.onSend({
         text,
         type: '1',
+        status: '1',
         user: this.renderUser(),
         createdAt: new Date().getTime(),
         _id: uuid.v4(),
       });
     });
     this.getInit();
-    this.setState(() => {
-      return {
-        messages: require('./messages.js'),
-      };
-    });
   }
 
   componentWillUnmount() {
@@ -74,13 +70,13 @@ class ChatRoom extends base {
   }
   onSend = (messages = []) => {
     console.log(messages);
-    global.socketStore.socket.emit('message', messages);
+    global.socketStore.socket.emit('sendMessage', messages);
     this.setState((previousState) => {
       return {
         messages: GiftedChat.append(previousState.messages, messages),
       };
     });
-    global.socketStore.socket.emit('messagelist');
+    global.socketStore.socket.emit('sendGetChatList');
   }
   renderCustomActions(props) {
     if (Platform.OS === 'ios') {

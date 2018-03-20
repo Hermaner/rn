@@ -112,7 +112,7 @@ class SessionList extends React.Component {
   }
   init = () => {
     if (global.memberId) {
-      global.socketStore.socket.emit('messagelist');
+      global.socketStore.socket.emit('sendGetChatList');
       const { CacheDir } = RNFetchBlob.fs.dirs;
       const path = `${CacheDir}/chatList`;
       RNFetchBlob.fs.exists(path)
@@ -130,7 +130,7 @@ class SessionList extends React.Component {
     }
   }
   _renderRow = (data) => {
-    const { noReadCount, lastChatObject:
+    const { showMemberNoReadCount, lastChatObject:
       { text, type, user:
         { avatar, toAvatar, _id, toId, toUserName, userName } }, latestTime } = data.item;
     const isMine = _id.toString() === global.memberId.toString();
@@ -147,11 +147,14 @@ class SessionList extends React.Component {
                 </Text>
                 <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
               </View>
-              <Text style={styles.msg}>{type === '1' ? text : '图片'}</Text>
+              <Text style={styles.msg}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
             </View>
-            <View style={styles.badgeView}>
-              <Text style={styles.badgeText}>{noReadCount}</Text>
-            </View>
+            {
+              showMemberNoReadCount && showMemberNoReadCount > 0 &&
+              <View style={styles.badgeView}>
+                <Text style={styles.badgeText}>{showMemberNoReadCount}</Text>
+              </View>
+            }
           </View>
         }
         onPress={() => {

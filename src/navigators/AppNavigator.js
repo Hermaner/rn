@@ -99,12 +99,14 @@ import OrderDetailAccept from '../containers/OrderDetailAccept';
 import MapView from '../containers/MapView';
 import MapViewOrder from '../containers/MapViewOrder';
 import OrderSend from '../containers/OrderSend';
-import Audio from '../containers/ChatRoom/Audio';
 import ChatPhrase from '../containers/ChatPhrase';
+import NoticeSetting from '../containers/NoticeSetting';
+import ChatPhraseChange from '../containers/ChatPhraseChange';
 
 export const AppNavigator = StackNavigator({
+  ChatPhraseChange: { screen: ChatPhraseChange },
+  NoticeSetting: { screen: NoticeSetting },
   ChatPhrase: { screen: ChatPhrase },
-  Audio: { screen: Audio },
   OrderSend: { screen: OrderSend },
   MapViewOrder: { screen: MapViewOrder },
   MapView: { screen: MapView },

@@ -44,11 +44,13 @@ import MasterDemanOrderItem from './MasterDemanOrderItem';
 import IdCard from './IdCard';
 import MasterAcceptItem from './MasterAcceptItem';
 import Chat from './chat/GiftedChat';
+import Upload from './Upload';
 
 const UserSocket = new UserObser();
 
 export {
   Chat,
+  Upload,
   TLight,
   IdCard,
   MasterAcceptItem,

@@ -26,19 +26,25 @@ class CgCitys extends base {
     return true;
   };
   _renderAddressContent() {
-    const { citys, leftIndex, midIndex } = this.state;
+    const { citys, leftIndex, midIndex, type } = this.state;
     return (
       <View style={styles.maskerContentView}>
-        <View style={styles.maskerTitle}>
-          <Text style={styles.maskerTitleText}>自动定位</Text>
-        </View>
-        <TOpacity
-          style={styles.usedCityView}
-          content={
-            <Text style={styles.nousedCity}>您的地址：{global.address}</Text>
-          }
-          onPress={this.locationDistrict}
-        />
+        {
+          type === 'emitHomePosition' &&
+          <View style={styles.maskerTitle}>
+            <Text style={styles.maskerTitleText}>自动定位</Text>
+          </View>
+        }
+        {
+          type === 'emitHomePosition' &&
+          <TOpacity
+            style={styles.usedCityView}
+            content={
+              <Text style={styles.nousedCity}>您的地址：{global.address}</Text>
+            }
+            onPress={this.locationDistrict}
+          />
+        }
         <View style={styles.maskerTitle}>
           <Text style={styles.maskerTitleText}>省、市、区</Text>
         </View>

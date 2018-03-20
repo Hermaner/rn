@@ -7,7 +7,6 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      memberId: '2' || global.memberId,
       items: [],
     };
   }
@@ -15,16 +14,17 @@ class Base extends React.Component {
     this.GetMemberMasterService();
   }
   GetMemberMasterService = () => {
-    const {
-      memberId,
-    } = this.state;
     GetMemberMasterService({
-      memberId,
+      memberId: global.memberId,
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {
+        const items = res.data;
+        if (items && items.length === 0) {
+          return;
+        }
         this.setState({
-          items: res.data,
+          items,
         });
       } else {
         Toast.show(res.msg);

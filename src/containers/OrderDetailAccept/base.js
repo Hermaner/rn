@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { Alert } from 'react-native';
+import { Alert, DeviceEventEmitter } from 'react-native';
 import { GetWaitMasterOrderInfoService, UpdateMasterOrderItemService } from '../../api';
 
 class Base extends React.Component {
@@ -59,6 +59,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('接单成功');
+        DeviceEventEmitter.emit('emitReloadAccept');
         this.props.pop();
       } else {
         Toast.show(res.msg);

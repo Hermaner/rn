@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { DeviceEventEmitter } from 'react-native';
 import { CreateDemandOrderBiddingService } from '../../api';
 
 class Base extends React.Component {
@@ -37,7 +38,9 @@ class Base extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        Toast.show('发送申请成功，请耐心等待雇主操作');
+        DeviceEventEmitter.emit('emitReloadDemand');
+        Toast.show('发送申请成功，请耐心等待用户操作');
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }
@@ -59,5 +62,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
+  pop: PropTypes.func,
 };
 export default Base;

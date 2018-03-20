@@ -11,12 +11,13 @@ import {
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon, ActionSheet } from 'native-base';
 import { CachedImage } from 'react-native-img-cache';
+import ImageResizer from 'react-native-image-resizer';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
-import { st, deviceW } from '../utils';
+import { st, deviceW, fileKey } from '../utils';
 
 const styles = StyleSheet.create({
   upView: {
@@ -88,6 +89,7 @@ export default class Prompt extends React.Component {
     this.state = {
       upImg: require('../assets/img/addAc.png'),
       images,
+      width: 500,
       imageDateIndex: 0,
       isImageDateShow: false,
       imageViewData: [],
@@ -158,22 +160,20 @@ export default class Prompt extends React.Component {
     const { images } = this.state;
     images.forEach((item, index) => {
       if (!item.key) {
-        this.upLoadImage(item.uri, index);
+        const { width } = this.state;
+        const bl = item.height / item.width;
+        const height = width * bl;
+        ImageResizer.createResizedImage(item.uri, width, height, 'JPEG', 60).then((response) => {
+          this.upLoadImage(response.uri, index);
+        }).catch((err) => {
+          console.log(err);
+        });
       }
     });
   }
   upLoadImage = (source, index) => {
     const { uptoken, images } = this.state;
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
-    let ran = parseInt(Math.random() * 888, 10);
-    ran += 100;
-    const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
+    const key = fileKey();
     images[index].key = `${global.buketUrl}${key}`;
     this.setState({
       images,

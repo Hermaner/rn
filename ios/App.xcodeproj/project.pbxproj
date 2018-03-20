@@ -133,7 +133,6 @@
 		DFEB1A802024634700F735DD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEB1A7F2024634700F735DD /* CoreText.framework */; };
 		DFEB1AE0202463C500F735DD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEB1ADF202463C500F735DD /* QuartzCore.framework */; };
 		E15D08402A2AE4CD276B8982 /* libPods-App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9277B5617F6B9B16D971EE2A /* libPods-App.a */; };
-		E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1A1610579242DF82AF1C4E /* libRCTBEEPickerManager.a */; };
 		E51702876FF7461E952DB52F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F7EF02090E427EA13EE716 /* CoreGraphics.framework */; };
 		FDB5808282FD4857872AA279 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D534D8633B7484094D75EEE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
@@ -775,7 +774,6 @@
 				454981F768F8447FA4E190B9 /* Foundation.framework in Frameworks */,
 				278E74D98F594934B90F2836 /* UIKit.framework in Frameworks */,
 				7155E1C879FA42499E8C0A20 /* libresolv.tbd in Frameworks */,
-				E2F3A78C7F85439BBA8ED63E /* libRCTBEEPickerManager.a in Frameworks */,
 				DF39BE861FD1237A00877EF2 /* RSKImageCropper.framework in Frameworks */,
 				DFA6448C2050E0A700D99F4B /* libSocialSina.a in Frameworks */,
 				DFA644842050E0A700D99F4B /* libSocialUniqueId.a in Frameworks */,

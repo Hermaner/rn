@@ -80,6 +80,7 @@ class MapViewPage extends base {
       return null;
     }
     const { key, imgUrl, realName, detail, firstImage, masterId } = extra;
+    console.log(extra)
     return (
       <MapView.Marker
         ref={ref => (this.marker = ref)}

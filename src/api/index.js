@@ -1,7 +1,7 @@
 
-const httpurl = 'http://192.168.50.57:8081/api/mall/';
+// const httpurl = 'http://192.168.50.57:8081/api/mall/';
 // const httpurl = 'http://192.168.0.11:8084/api/lede/';
-// const httpurl = 'https://mm.sunhousm.cn/api/mall/';
+const httpurl = 'https://mm.sunhousm.cn/api/mall/';
 export function parseJSON(response) {
   return response.json();
 }
@@ -505,6 +505,15 @@ export function UpdateAuthMasterService(data) {
 export function GetHomePageService(data) {
   return get('GetHomePageService', data);
 }
-export function getPhraseService(data) {
-  return get('getPhraseService', data);
+export function GetPhraseService(data) {
+  return get('GetPhraseService', data);
+}
+export function CreateMemberPhraseService(data) {
+  return get('CreateMemberPhraseService', data);
+}
+export function DeleteMemberPhraseService(data) {
+  return get('DeleteMemberPhraseService', data);
+}
+export function UpdateMemberPhraseService(data) {
+  return get('UpdateMemberPhraseService', data);
 }

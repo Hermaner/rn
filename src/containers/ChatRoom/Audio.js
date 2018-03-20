@@ -47,6 +47,7 @@ class AudioExample extends Component {
         this.prepareRecordingPath(this.state.audioPath);
 
         AudioRecorder.onProgress = (data) => {
+          console.log(data)
           this.setState({currentTime: Math.floor(data.currentTime)});
         };
 
@@ -203,7 +204,7 @@ class AudioExample extends Component {
     _finishRecording(didSucceed, filePath) {
       console.log(filePath);
       this.setState({ finished: didSucceed });
-      const key = fileKey;
+      const key = fileKey();
       const urlkey = `${global.buketUrl}${key}`;
       Rpc.uploadFile(filePath, global.uptoken, { key, name: key });
       console.log(urlkey);

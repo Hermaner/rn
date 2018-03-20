@@ -7,7 +7,6 @@ import { Mcolor, st, Mg } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
-    marginBottom: 4,
     position: 'relative',
     backgroundColor: '#fff',
   },

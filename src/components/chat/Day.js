@@ -17,11 +17,11 @@ export default function Day(
   const sTime = isSameTime(currentMessage, previousMessage);
   let label = '';
   if (!sDay) {
-    label = moment(currentMessage.createdAt)
+    label = moment(new Date(parseInt(currentMessage.createdAt, 10)))
       .locale('cn')
       .format('LLL');
   } else if (sTime > 1) {
-    label = moment(currentMessage.createdAt)
+    label = moment(new Date(parseInt(currentMessage.createdAt, 10)))
       .locale('cn')
       .format('LT');
   }

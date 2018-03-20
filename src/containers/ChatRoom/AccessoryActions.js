@@ -9,10 +9,11 @@ import {
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import ImageResizer from 'react-native-image-resizer';
+import ImagePicker from 'react-native-image-crop-picker';
 import { Rpc } from 'react-native-qiniu-hm';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
-import { Header, TOpacity } from '../../components';
+import { Header, TOpacity, Upload } from '../../components';
 
 import { st, fileKey } from '../../utils';
 
@@ -57,16 +58,13 @@ class AccessoryActions extends React.Component {
     super(props);
     this._images = [];
     this.state = {
-      width: 300,
+      width: 500,
       modalVisible: false,
       access: [{
         name: '照片',
         icon: 'ios-flame',
       }, {
         name: '拍摄',
-        icon: 'ios-flame',
-      }, {
-        name: '语音',
         icon: 'ios-flame',
       }, {
         name: '快捷短语',
@@ -76,7 +74,6 @@ class AccessoryActions extends React.Component {
         icon: 'ios-flame',
       }],
     };
-    console.log(props);
     this.selectImages = this.selectImages.bind(this);
   }
 
@@ -89,21 +86,31 @@ class AccessoryActions extends React.Component {
   setModalVisible(visible = false) {
     this.setState({ modalVisible: visible });
   }
-  upLoadImage = () => {
+  openCamera = () => {
+    let image;
+    ImagePicker.openCamera({
+      includeExif: true,
+    }).then((img) => {
+      image = [{ uri: img.path, width: img.width, height: img.height, mime: img.mime }];
+      this.upLoadImage(image);
+    }).catch(e => console.log(e));
+  }
+  upLoadImage = (getImages) => {
     this.setModalVisible(false);
     const { width } = this.state;
     const images = [];
-    this.getImages().forEach((image) => {
+    getImages.forEach((image) => {
       const bl = image.height / image.width;
       const height = width * bl;
       ImageResizer.createResizedImage(image.uri, width, height, 'JPEG', 60).then((response) => {
-        const key = fileKey;
+        const key = fileKey();
         const urlkey = `${global.buketUrl}${key}`;
-        Rpc.uploadFile(response.uri, global.uptoken, { key, name: key });
+        Upload(response.uri, global.uptoken, key);
         images.push({
           text: urlkey,
           image: response.uri,
           type: '2',
+          status: '1',
         });
         if (images.length === this.getImages().length) {
           this.props.onSend(images);
@@ -115,22 +122,18 @@ class AccessoryActions extends React.Component {
     });
   }
   goAccessory = (index) => {
-    console.log(index);
     switch (index) {
       case 0:
         this.setModalVisible(true);
         break;
       case 1:
-        this.setModalVisible(true);
+        this.openCamera();
         break;
       case 2:
-        this.props.setAudioShow(true);
+        this.props.push({ key: 'ChatPhrase' });
         return;
       case 3:
         this.props.push({ key: 'ChatPhrase' });
-        return;
-      case 4:
-        this.props.push({ key: 'Audio' });
         break;
       default:
     }
@@ -139,7 +142,7 @@ class AccessoryActions extends React.Component {
     this.setImages(images);
   }
   render() {
-    const { access, audios } = this.state;
+    const { access } = this.state;
     return (
       <View style={styles.access}>
         {
@@ -171,7 +174,7 @@ class AccessoryActions extends React.Component {
             back={() => this.setModalVisible(false)}
             title="选择图片"
             rightText="选择"
-            rightPress={this.upLoadImage}
+            rightPress={() => this.upLoadImage(this._images)}
           />
           <CameraRollPicker
             maximum={10}

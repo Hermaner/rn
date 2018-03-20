@@ -371,7 +371,6 @@ class GiftedChat extends React.Component {
 
   renderMessages() {
     const AnimatedView = this.props.isAnimated === true ? Animated.View : View;
-    console.log(this.getMessages());
     return (
       <AnimatedView
         style={{
@@ -394,10 +393,10 @@ class GiftedChat extends React.Component {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-    console.log(messages);
     messages = messages.map((message) => {
       return {
         ...message,
+        status: '1', // 1: 发送中2：发送成功未读：3对方已读4:发送失败
         user: this.props.user,
         createdAt: new Date().getTime(),
         _id: this.props.messageIdGenerator(),

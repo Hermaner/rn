@@ -44,10 +44,14 @@ class Base extends React.Component {
       tabs[3].cur = data !== undefined;
       this._onRefresh();
     });
+    this.emitReloadAccept = DeviceEventEmitter.addListener('emitReloadAccept', () => {
+      this._onRefresh();
+    });
   }
   deleteInit = () => {
     canEnd = false;
     this.emitTabOrder.remove();
+    this.emitReloadAccept.remove();
   }
   GetWaitMasterOrderService = () => {
     const {

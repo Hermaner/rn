@@ -15,7 +15,7 @@ class Base extends React.Component {
       items: [],
       pageSize: '15',
       markers: [],
-      distance: '5000',
+      distance: '',
       demandCategoryId: '',
       latitude: 39.914884,
       longitude: 116.403883,

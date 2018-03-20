@@ -13,7 +13,7 @@ import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
-import { st } from '../utils';
+import { st, fileKey } from '../utils';
 
 const styles = StyleSheet.create({
   lists: {
@@ -63,10 +63,10 @@ export default class Prompt extends React.Component {
       index: 0,
       items: [{
         label: '身份证正面照',
-        imgUrl: require('../assets/img/idf.png'),
+        imgUrl: require('../assets/img/idz.png'),
       }, {
         label: '身份证反面照',
-        imgUrl: require('../assets/img/idz.png'),
+        imgUrl: require('../assets/img/idf.png'),
       }, {
         label: '手持身份证照',
         imgUrl: require('../assets/img/idn.png'),
@@ -105,19 +105,10 @@ export default class Prompt extends React.Component {
   }
   upLoadImage = (source) => {
     const { uptoken, index } = this.state;
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
-    let ran = parseInt(Math.random() * 888, 10);
-    ran += 100;
-    const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
+    const key = fileKey();
     const image = {
-      imgUrl: source,
-      key: `${global.buketUrl}${key}`,
+      imgUrl: `${global.buketUrl}${key}`,
+      source,
     };
     this.props.getImage(image, index);
     Rpc.uploadFile(source, uptoken, { key, name: key });
@@ -149,6 +140,8 @@ export default class Prompt extends React.Component {
       { text: '从相册选择' },
       { text: '取消' },
     ];
+    console.log(first);
+    console.log(`${first}?imageView2/1/w/80`)
     return (
       <View style={styles.lists}>
         {
@@ -176,14 +169,35 @@ export default class Prompt extends React.Component {
                       );
                     }}
                   >
-                    <Image
-                      source={
-                        index === 0 ? (first ? { uri: `${first}?imageView2/1/w/80` } : upImg) :
-                        index === 1 ? (two ? { uri: `${two}?imageView2/1/w/80` } : upImg) :
-                        (three ? { uri: `${three}?imageView2/1/w/80` } : upImg)
+                    <View>
+                      { index === 0 &&
+                        (first ?
+                          <CachedImage source={{ uri: `${first}?imageView2/1/w/80` }} style={styles.upViewImg} />
+                          :
+                          <Image
+                            source={upImg}
+                            style={styles.upViewImg}
+                          />)
                       }
-                      style={styles.upViewImg}
-                    />
+                      { index === 1 &&
+                        (two ?
+                          <CachedImage source={{ uri: `${two}?imageView2/1/w/80` }} style={styles.upViewImg} />
+                          :
+                          <Image
+                            source={upImg}
+                            style={styles.upViewImg}
+                          />)
+                      }
+                      { index === 2 &&
+                        (three ?
+                          <CachedImage source={{ uri: `${three}?imageView2/1/w/80` }} style={styles.upViewImg} />
+                          :
+                          <Image
+                            source={upImg}
+                            style={styles.upViewImg}
+                          />)
+                      }
+                    </View>
                   </TouchableWithoutFeedback>
                 </View>
               </View>

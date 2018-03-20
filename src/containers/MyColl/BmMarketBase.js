@@ -7,7 +7,6 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      memberId: '2' || global.memberId,
       items: [],
     };
   }
@@ -15,11 +14,8 @@ class Base extends React.Component {
     this.GetMemberBmMarketService();
   }
   GetMemberBmMarketService = () => {
-    const {
-      memberId,
-    } = this.state;
     GetMemberBmMarketService({
-      memberId,
+      memberId: global.memberId,
     }).then((res) => {
       console.log(res);
       if (res.isSuccess) {

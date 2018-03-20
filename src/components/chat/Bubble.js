@@ -74,37 +74,56 @@ export default class Bubble extends React.Component {
     return null;
   }
   _play = async (url) => {
-    console.log(url)
-    RNFetchBlob.config({
-      fileCache: true,
-    })
-    .fetch('GET', url, {
-    })
-    .then((res) => {
-      const sound = new Sound(res.path(), '', (error) => {
-        if (error) {
-          console.log('failed to load the sound', error);
-        }
-        console.log('chenggong')
-      });
-      setTimeout(() => {
-        sound.play((success) => {
-          if (success) {
-            console.log('successfully finished playing');
-          } else {
-            console.log('playback failed due to audio decoding errors');
-          }
+    if (global.sound) {
+      global.sound.stop();
+    }
+    const index = url.lastIndexOf('/') + 1;
+    const key = url.substr(index);
+    const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
+    RNFetchBlob.fs.exists(path)
+    .then((exist) => {
+      if (!exist) {
+        RNFetchBlob.config({
+          fileCache: true,
+          path,
+        })
+        .fetch('GET', url, {
+        })
+        .then(() => {
+          this.readSound(path);
         });
-      }, 100);
+      } else {
+        this.readSound(path);
+      }
+    })
+    .catch(err => console.log(err));
+  }
+  readSound = (path) => {
+    global.sound = new Sound(path, '', (error) => {
+      if (error) {
+        console.log('failed to load the sound', error);
+      }
+      console.log('chenggong');
     });
+    setTimeout(() => {
+      global.sound.play((success) => {
+        if (success) {
+          global.sound = null;
+        } else {
+          console.log('playback failed due to audio decoding errors');
+        }
+      });
+    }, 100);
   }
   renderMessageText() {
-    const { type } = this.props.currentMessage;
+    const { currentMessage: { type }, position } = this.props;
     if (type === '1') {
       return (
-        <Text style={styles.left.text}>
-          {this.props.currentMessage.text}
-        </Text>
+        <View style={[styles.messageTextView, position === 'left' && { backgroundColor: '#fff' }]}>
+          <Text style={styles.left.text}>
+            {this.props.currentMessage.text}
+          </Text>
+        </View>
       );
     }
     return null;
@@ -151,22 +170,26 @@ export default class Bubble extends React.Component {
   renderMessageAudio() {
     const { type } = this.props.currentMessage;
     if (type === '4') {
+      const { position } = this.props;
       const { text, secend } = this.props.currentMessage;
       const width = 40 + secend * 8;
       return (
-        <TOpacity
-          style={[styles.messageAudio, { width: width > 200 ? 200 : width }]}
-          content={
-            <Icon name="ios-volume-up" style={[styles.messageAudioIcon, { transform: [{ rotate: '180deg' }] }]} />
-          }
-          onPress={() => this._play(text)}
-        />
+        <View style={[styles.messageAudioView, position === 'left' && { flexDirection: 'row-reverse' }]}>
+          <Text style={styles.messageAudioText}>{secend}s</Text>
+          <TOpacity
+            style={[styles.messageAudio, { width: width > 200 ? 200 : width }, position === 'left' && { alignItems: 'flex-start' }]}
+            content={
+              <Icon name="ios-volume-up" style={[styles.messageAudioIcon, { transform: [{ rotate: position === 'left' ? '360deg' : '180deg' }] }]} />
+            }
+            onPress={() => this._play(text)}
+          />
+        </View>
       );
     }
     return null;
   }
   render() {
-    const { position, touchableProps } = this.props;
+    const { position, touchableProps, currentMessage: { status } } = this.props;
     return (
       <View
         style={[
@@ -185,7 +208,12 @@ export default class Bubble extends React.Component {
             accessibilityTraits="text"
             {...touchableProps}
           >
-            <View>
+            <View
+              style={{
+                ...st.fr,
+              }}
+            >
+              {position === 'right' && <Text style={[styles.unRead, status === '3' && { color: '#888' }]}>{status === '1' ? '发送中' : status === '2' ? '未读' : status === '3' ? '已读' : '失败'}</Text>}
               {this.renderMessageImage()}
               {this.renderMessageText()}
               {this.renderMessageProduct()}
@@ -207,7 +235,6 @@ const styles = {
     },
     wrapper: {
       borderRadius: 4,
-      backgroundColor: '#fff',
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
@@ -235,7 +262,6 @@ const styles = {
     },
     wrapper: {
       borderRadius: 4,
-      backgroundColor: '#92E649',
       marginLeft: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
@@ -247,10 +273,33 @@ const styles = {
       borderTopRightRadius: 3,
     },
   }),
+  unRead: {
+    color: Mcolor,
+    fontSize: 12,
+    marginRight: 6,
+    marginTop: 10,
+  },
+  messageTextList: {
+    ...st.fr,
+  },
+  messageTextView: {
+    backgroundColor: '#92E649',
+    borderRadius: 5,
+  },
+  messageAudioView: {
+    ...st.fr,
+    ...st.acenter,
+  },
+  messageAudioText: {
+    fontSize: 12,
+    color: '#666',
+    marginRight: 5,
+    marginLeft: 5,
+  },
   messageAudio: {
     height: 35,
     borderRadius: 6,
-    backgroundColor: '#a2e65a',
+    backgroundColor: '#92E649',
     ...st.jcenter,
     alignItems: 'flex-end',
   },
@@ -278,6 +327,7 @@ const styles = {
     height: 70,
     padding: 5,
     borderRadius: 5,
+    backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: '#ddd',
   },

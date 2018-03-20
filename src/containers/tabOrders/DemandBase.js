@@ -49,10 +49,14 @@ class Base extends React.Component {
         tabs,
       }, this._onRefresh);
     });
+    this.emitReloadDemand = DeviceEventEmitter.addListener('emitReloadDemand', () => {
+      this._onRefresh();
+    });
   }
   deleteInit = () => {
     canEnd = false;
     this.emitTabOrder.remove();
+    this.emitReloadDemand.remove();
   }
   GetDemandOrderService = () => {
     const {

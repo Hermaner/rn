@@ -26,7 +26,7 @@ class About extends React.Component {
   _renderContent() {
     return (
       <View style={styles.content}>
-        <Image source={require('../../assets/img/aver.png')} style={styles.logo} />
+        <Image source={require('../../assets/img/logo.png')} style={styles.logo} />
         <Text style={styles.text}>身边最好的服务平台</Text>
         <Text style={styles.text}>孙猴上门V1.0.0</Text>
         <Text style={styles.text}>上海悟帮实业有限公司</Text>

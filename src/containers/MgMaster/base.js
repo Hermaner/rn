@@ -212,6 +212,7 @@ class Base extends React.Component {
       params = {
         imgUrl: info.imgUrl || '',
         title: '我的工照',
+        type: 1,
       };
     }
     if (key === 'MgMasterCert') {

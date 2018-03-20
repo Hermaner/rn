@@ -10,7 +10,7 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15666666666',
+      phone: '15666666666', // 15618385521 15666666666
       sendPhone: '15666666666',
       sec: 60,
       passWord: '',
@@ -127,7 +127,9 @@ class UserBase extends React.Component {
       if (res.isSuccess) {
         global.memberId = res.data.memberId;
         UserSocket.changeData(res.data);
+        DeviceEventEmitter.emit('socketConnet');
         DeviceEventEmitter.emit('emitUser');
+        DeviceEventEmitter.emit('sessionEmit');
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.userData = res.data;
         Toast.show('登陆成功');

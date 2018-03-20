@@ -125,7 +125,7 @@ class CreateConfirm extends base {
     return (
       <View>
         <View style={styles.listView}>
-          <Text style={styles.listLabel}>服务时间</Text>
+          <Text style={styles.listLabel}>截止时间</Text>
           <View style={styles.listRight}>
             <TFeedback
               content={

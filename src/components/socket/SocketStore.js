@@ -27,23 +27,10 @@ export default class SocketStore {
     });
     this.socket.on('disconnect', () => {
     });
-    this.socket.on('message', (data) => {
-      console.log(data);
-      this.sessionLists = this.sessionLists.concat(data);
-    });
-    this.socket.on('messagelist', (data) => { // 获取我与所有好友列表
+    this.socket.on('notifyGetChatList', (data) => { // 获取我与所有好友列表
       console.log(data);
       this.chatLists = data;
     });
-    // this.socket.on('notifymessage', (data) => { // 发送消息通知是否发送成功
-    //   global.socketStore.socket.emit('messagelist');
-    //   console.log(data);
-    //   this.sessionLists.push(data);
-    // });
-    // this.socket.on('messagedetail', (data) => { // 获取我与好友消息记录
-    //   console.log(data);
-    //   this.sessionLists = data;
-    // });
   }
   @computed get sessionList(): Array<Object> {
     return this.sessionLists.map((item) => {

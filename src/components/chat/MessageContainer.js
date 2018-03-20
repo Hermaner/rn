@@ -40,13 +40,15 @@ export default class MessageContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.messages === nextProps.messages) {
-      return;
-    }
-    const messagesData = this.prepareMessages(nextProps.messages);
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
-    });
+    // console.log(nextProps.messages);
+    // if (this.props.messages === nextProps.messages) {
+    //   return;
+    // }
+    // const messagesData = this.prepareMessages(nextProps.messages);
+    // console.log(messagesData);
+    // this.setState({
+    //   dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
+    // });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -141,6 +143,8 @@ export default class MessageContainer extends React.Component {
   }
 
   render() {
+    const messagesData = this.prepareMessages(this.props.messages);
+    const dataSource = this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys);
     const contentContainerStyle = this.props.inverted
       ? {}
       : styles.notInvertedContentContainerStyle;
@@ -152,7 +156,7 @@ export default class MessageContainer extends React.Component {
           initialListSize={20}
           pageSize={20}
           {...this.props.listViewProps}
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           contentContainerStyle={contentContainerStyle}
           renderRow={this.renderRow}
           renderHeader={this.props.inverted ? this.renderFooter : this.renderLoadEarlier}

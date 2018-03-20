@@ -18,7 +18,7 @@ class Base extends React.Component {
         page: 'MyAddress',
       }, {
         name: '通知设置',
-        page: 'MemberInfo',
+        page: 'NoticeSetting',
       }],
     };
   }

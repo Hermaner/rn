@@ -2,9 +2,12 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import RNFetchBlob from 'react-native-fetch-blob';
 import { Platform, StyleSheet, TextInput, View, Text, PanResponder } from 'react-native';
+import Toast from 'react-native-simple-toast';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import { Rpc } from 'react-native-qiniu-hm';
+import { Upload } from '../../components';
 import { st, fileKey } from '../../utils';
 
 import { MIN_COMPOSER_HEIGHT } from './Constant';
@@ -15,7 +18,7 @@ export default class Composer extends React.Component {
     this.state = {
       isTab: false,
       currentTime: 0,
-      audioPath: `${AudioUtils.DocumentDirectoryPath}/test.aac`,
+      audioPath: `${AudioUtils.DocumentDirectoryPath}/aaa.aac`,
     };
   }
   componentWillMount() {
@@ -70,6 +73,7 @@ export default class Composer extends React.Component {
   }
   _handlePanResponderGrant = async () => {
     this.props.audioTipShow(true);
+    this.prepareRecordingPath(this.state.audioPath);
     try {
       const filePath = await AudioRecorder.startRecording();
       console.log(filePath);
@@ -82,14 +86,13 @@ export default class Composer extends React.Component {
   }
   _finishRecording = (filePath) => {
     console.log(filePath);
-    const key = fileKey;
+    const key = fileKey();
     const urlkey = `${global.buketUrl}${key}`;
-    Rpc.uploadFile(filePath, global.uptoken, { key, name: key }, (event, xhr) => {
-      // console.log(event, xhr)
+    Upload(filePath, global.uptoken, key, () => {
+      RNFetchBlob.fs.unlink(this.state.audioPath)
+      .then(() => {});
     });
-    this.props.onSend({ text: urlkey, type: '4', secend: this.state.currentTime }, true);
-    console.log(urlkey);
-    console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath}`);
+    this.props.onSend({ text: urlkey, type: '4', status: '1', secend: this.state.currentTime }, true);
   }
   _handlePanResponderMove = (e: Object, gestureState: Object) => {
     const { dy } = gestureState;
@@ -106,8 +109,19 @@ export default class Composer extends React.Component {
     this.setState({
       isTab: false,
     });
+    if (this.state.currentTime < 1) {
+      try {
+        await AudioRecorder.stopRecording();
+      } catch (error) {
+        console.error(error);
+      }
+      Toast.show('少于1s自动取消');
+      return;
+    }
     if (dy < -50) {
       console.log('显示取消');
+      RNFetchBlob.fs.unlink(this.state.audioPath)
+      .then(() => {});
     } else {
       console.log('发送');
       try {

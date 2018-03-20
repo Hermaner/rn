@@ -31,6 +31,7 @@ class Base extends React.Component {
       masterId: global.masterId,
       imgUrl,
     }).then((res) => {
+      this.sleek.toggle();
       console.log(res);
       if (res.isSuccess) {
         Toast.show('上传成功');
@@ -47,6 +48,7 @@ class Base extends React.Component {
       imgUrl,
     }).then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('上传成功');
         DeviceEventEmitter.emit('emitMasterLoad');
@@ -62,6 +64,7 @@ class Base extends React.Component {
       imgUrl,
     }).then((res) => {
       console.log(res);
+      this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('上传成功');
         DeviceEventEmitter.emit('emitMasterLoad');
