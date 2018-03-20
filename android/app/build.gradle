@@ -171,6 +171,8 @@ android {
     }
 }
 dependencies {
+    compile project(':react-native-sound')
+    compile project(':react-native-audio')
     compile project(':react-native-image-resizer')
     compile project(':jcore-react-native')
     compile project(':jpush-react-native')

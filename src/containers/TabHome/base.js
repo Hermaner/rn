@@ -1,8 +1,8 @@
 import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { Geocode } from 'react-native-baidumap-sdk'
-import { GetMasterCaseService, AmapGeocode } from '../../api';
+import { Geocode } from 'react-native-baidumap-sdk';
+import { GetMasterCaseService, AmapGeocode, GetHomePageService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -11,13 +11,7 @@ class Base extends React.Component {
       cases: [],
       refresh: false,
       cityName: '',
-      banners: [{
-        img: require('../../assets/img/choujiang.png'),
-      }, {
-        img: require('../../assets/img/nianhui.png'),
-      }, {
-        img: require('../../assets/img/xinnian.png'),
-      }],
+      banners: [],
       bigTypes: [
         {
           icon: 'ios-unlock',
@@ -73,7 +67,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.GetMasterCaseService();
+    this.GetHomePageService();
     this.emitHomePosition = DeviceEventEmitter.addListener('emitHomePosition', (data) => {
       console.log(data);
       const {
@@ -126,6 +120,21 @@ class Base extends React.Component {
           districtId: adcode,
           cityName: city,
         });
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  GetHomePageService = () => {
+    GetHomePageService().then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        this.setState({
+          cases: res.data.masterCases.pageData,
+          banners: res.data.banners,
+        });
+      } else {
+        Toast.show(res.msg);
       }
     }).catch((err) => {
       console.log(err);

@@ -14,7 +14,7 @@ const config = {
     server: 'https://chat.mm.sunhousm.cn?memberId=',
   },
   dev: {
-    server: 'http://192.168.50.57:9092?memberId=',
+    server: 'http://192.168.50.57:9091?memberId=',
   },
 };
 

@@ -81,9 +81,9 @@ class App extends React.Component {
     DeviceEventEmitter.addListener('socketConnet', () => {
       global.socketStore.getConnect();
     });
-    DeviceEventEmitter.addListener('emitMine', () => {
-      this.GetMemberCenterService();
-    });
+    // DeviceEventEmitter.addListener('emitMine', () => {
+    //   this.GetMemberCenterService();
+    // });
   }
   premInit = () => {
     const types = Permissions.getTypes();

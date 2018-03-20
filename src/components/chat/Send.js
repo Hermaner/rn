@@ -6,20 +6,20 @@ import { StyleSheet, Text, TouchableOpacity, View, ViewPropTypes } from 'react-n
 import Color from './Color';
 
 export default function Send({ text, containerStyle, onSend, children, textStyle, label }) {
-  if (text.trim().length > 0) {
-    return (
-      <TouchableOpacity
-        style={[styles.container, containerStyle]}
-        onPress={() => {
-          onSend({ text: text.trim(), type: '1' }, true);
-        }}
-        accessibilityTraits="button"
-      >
-        <View>{children || <Text style={[styles.text, textStyle]}>{label}</Text>}</View>
-      </TouchableOpacity>
-    );
-  }
-  return <View />;
+  return (
+    <TouchableOpacity
+      style={[styles.container, containerStyle]}
+      onPress={() => {
+        if (text.trim().length === 0) {
+          return;
+        }
+        onSend({ text: text.trim(), type: '1' }, true);
+      }}
+      accessibilityTraits="button"
+    >
+      <View>{children || <Text style={[styles.text, textStyle]}>{label}</Text>}</View>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({

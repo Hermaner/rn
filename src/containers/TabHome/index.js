@@ -10,7 +10,7 @@ import { pushRoute } from '../../actions';
 import { Iconfont, TOpacity, IconItem, CaseItem, HomeSearch } from '../../components';
 import base from './base';
 import styles from './styles';
-import { Mcolor } from '../../utils';
+import { Mcolor, deviceW } from '../../utils';
 
 class Home extends base {
   constructor(props) {
@@ -77,13 +77,13 @@ class Home extends base {
     return (
       <View>
         <Swiper
-          height={100}
+          height={deviceW * 0.52}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
             banners.map((item, i) => (
               <View key={i}>
-                <CachedImage source={item.img} style={styles.swiperImage} />
+                <CachedImage source={{ uri: item.imgUrl }} style={styles.swiperImage} />
               </View>
             ))
           }

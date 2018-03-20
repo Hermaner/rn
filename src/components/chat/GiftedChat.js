@@ -8,11 +8,12 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Animated, Platform, StyleSheet, View } from 'react-native';
+import { Animated, Platform, StyleSheet, View, Text } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment';
 import uuid from 'uuid';
+import { Icon } from 'native-base';
 
 import * as utils from './utils';
 import Actions from './Actions';
@@ -30,6 +31,7 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
+import { st, Mcolor } from '../../utils';
 
 import {
   MIN_COMPOSER_HEIGHT,
@@ -58,6 +60,11 @@ class GiftedChat extends React.Component {
       messagesContainerHeight: null,
       accessoryContainerHeight: 0,
       typingDisabled: false,
+      audioHeight: new Animated.Value(80),
+      isAudioShow: false,
+      isAudioTab: false,
+      isAudioTipShow: false,
+      isAudioTipUp: false,
     };
 
     this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
@@ -142,7 +149,52 @@ class GiftedChat extends React.Component {
       this.setState({ text: textProp });
     }
   }
-
+  audioTipShow = (isAudioTipShow) => {
+    this.setState({
+      isAudioTipShow,
+    });
+  }
+  audioTipUp = (isAudioTipUp) => {
+    this.setState({
+      isAudioTipUp,
+    });
+  }
+  tabAudio = (isAudioTab) => {
+    this.setState({
+      isAudioTab,
+    });
+  }
+  setAudioShow = (isAudioShow) => {
+    this.setState({
+      isAudioShow,
+    });
+    if (isAudioShow) {
+      this.setState({
+        isAudioShow: true,
+      }, () => {
+        Animated.timing(
+          this.state.audioHeight,
+          {
+            toValue: 0,
+            duration: 200,
+          },
+        ).start();
+      });
+    } else {
+      setTimeout(() => {
+        this.setState({
+          modalVisible: false,
+        });
+      }, 200);
+      Animated.timing(
+        this.state.audioHeight,
+        {
+          toValue: 80,
+          duration: 200,
+        },
+      ).start();
+    }
+  }
   getTextFromProp(fallback) {
     if (this.props.text === undefined) {
       return fallback;
@@ -259,6 +311,7 @@ class GiftedChat extends React.Component {
   }
   onKeyboardWillShow(e) {
     this.setIsTypingDisabled(true);
+    this.setAudioShow(false);
     this.showAccessory();
     this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
     this.setBottomOffset(this.props.bottomOffset);
@@ -276,6 +329,7 @@ class GiftedChat extends React.Component {
   }
 
   onKeyboardWillHide() {
+    this.setAudioShow(false);
     this.setIsTypingDisabled(true);
     this.setKeyboardHeight(0);
     this.setBottomOffset(0);
@@ -456,6 +510,13 @@ class GiftedChat extends React.Component {
       text: this.getTextFromProp(this.state.text),
       composerHeight: Math.max(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
       onSend: this.onSend,
+      isAudioShow: this.state.isAudioShow,
+      isAudioTab: this.state.isAudioTab,
+      audioHeight: this.state.audioHeight,
+      setAudioShow: this.setAudioShow,
+      audioTipShow: this.audioTipShow,
+      audioTipUp: this.audioTipUp,
+      tabAudio: this.tabAudio,
       accessoryContainerHeight: this.state.accessoryContainerHeight,
       onInputSizeChanged: this.onInputSizeChanged,
       onTextChanged: this.onInputTextChanged,
@@ -484,7 +545,33 @@ class GiftedChat extends React.Component {
     }
     return null;
   }
-
+  audioTipShow = (isAudioTipShow) => {
+    this.setState({
+      isAudioTipShow,
+    });
+  }
+  audioTipUp = (isAudioTipUp) => {
+    this.setState({
+      isAudioTipUp,
+    });
+  }
+  renderAudioTips() {
+    const { isAudioTipUp } = this.state;
+    return (
+      <View style={styles.audioContent}>
+        <View style={styles.audioTips}>
+          <View style={styles.audioIconView}>
+            <Icon name={isAudioTipUp ? 'ios-undo-outline' : 'ios-microphone-outline'} style={styles.audioTipsIcon} />
+          </View>
+          <View style={[styles.audioTipsView, isAudioTipUp && { backgroundColor: Mcolor }]}>
+            <Text style={styles.audioTipsText}>
+              {isAudioTipUp ? '手指松开，取消发送' : '手指上滑，取消发送'}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
   renderLoading() {
     if (this.props.renderLoading) {
       return this.props.renderLoading();
@@ -493,12 +580,14 @@ class GiftedChat extends React.Component {
   }
 
   render() {
+    const { isAudioTipShow } = this.state;
     if (this.state.isInitialized === true) {
       return (
         <ActionSheet ref={component => (this._actionSheetRef = component)}>
           <View style={styles.container} onLayout={this.onMainViewLayout}>
             {this.renderMessages()}
             {this.renderInputToolbar()}
+            {isAudioTipShow && this.renderAudioTips()}
           </View>
         </ActionSheet>
       );
@@ -515,6 +604,39 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  audioContent: {
+    position: 'absolute',
+    flex: 1,
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 90,
+    ...st.jacenter,
+  },
+  audioTips: {
+    width: 140,
+    height: 140,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    borderRadius: 8,
+  },
+  audioIconView: {
+    height: 110,
+    ...st.jacenter,
+  },
+  audioTipsIcon: {
+    fontSize: 60,
+    color: '#fff',
+  },
+  audioTipsView: {
+    height: 24,
+    marginLeft: 10,
+    marginRight: 10,
+    ...st.jacenter,
+  },
+  audioTipsText: {
+    fontSize: 12,
+    color: '#fff',
   },
 });
 

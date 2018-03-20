@@ -32,6 +32,9 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         const items = res.data;
+        if (items.length === 0) {
+          return;
+        }
         res.data.sort((a, b) => b.isDefault - a.isDefault);
         this.setState({
           items,

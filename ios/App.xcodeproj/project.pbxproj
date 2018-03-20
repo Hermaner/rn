@@ -125,6 +125,8 @@
 		DFB58AE81FF73175006CFC1E /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB58AE71FF73175006CFC1E /* libstdc++.6.0.9.tbd */; };
 		DFB58AEA1FF731C1006CFC1E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB58AE91FF731C1006CFC1E /* JavaScriptCore.framework */; };
 		DFC859A5205BAD5A00BE19C4 /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC8597D205BAD2D00BE19C4 /* libRCTImageResizer.a */; };
+		DFC859AC205BB7A300BE19C4 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC859AB205BB79000BE19C4 /* libRNSound.a */; };
+		DFC859B3205BBA4B00BE19C4 /* libRNAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC859B2205BBA1E00BE19C4 /* libRNAudio.a */; };
 		DFE0E9FF1FD4D97B00910057 /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = DFE0E9FE1FD4D97B00910057 /* bundle */; };
 		DFEB1A7C202462E600F735DD /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEB1A7B202462E600F735DD /* CoreMotion.framework */; };
 		DFEB1A7E2024631300F735DD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEB1A7D2024631300F735DD /* libsqlite3.tbd */; };
@@ -515,6 +517,20 @@
 			remoteGlobalIDString = 5D72D2E81C16249000E22EC1;
 			remoteInfo = RCTImageResizer;
 		};
+		DFC859AA205BB79000BE19C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFC859A6205BB79000BE19C4 /* RNSound.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
+			remoteInfo = RNSound;
+		};
+		DFC859B1205BBA1E00BE19C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFC859AD205BBA1E00BE19C4 /* RNAudio.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42F559BA1CFC90C400DC3F84;
+			remoteInfo = RNAudio;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -672,6 +688,8 @@
 		DFB58AE71FF73175006CFC1E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		DFB58AE91FF731C1006CFC1E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		DFC8596C205BAD2D00BE19C4 /* RCTImageResizer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImageResizer.xcodeproj; path = "../node_modules/react-native-image-resizer/ios/RCTImageResizer.xcodeproj"; sourceTree = "<group>"; };
+		DFC859A6205BB79000BE19C4 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
+		DFC859AD205BBA1E00BE19C4 /* RNAudio.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNAudio.xcodeproj; path = "../node_modules/react-native-audio/ios/RNAudio.xcodeproj"; sourceTree = "<group>"; };
 		DFE0E9FE1FD4D97B00910057 /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		DFEB1A7B202462E600F735DD /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		DFEB1A7D2024631300F735DD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -701,6 +719,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFC859B3205BBA4B00BE19C4 /* libRNAudio.a in Frameworks */,
+				DFC859AC205BB7A300BE19C4 /* libRNSound.a in Frameworks */,
 				DFC859A5205BAD5A00BE19C4 /* libRCTImageResizer.a in Frameworks */,
 				DF2656CF205A5EC400C61DAE /* libRCTCameraRoll.a in Frameworks */,
 				DF771C912057B81300A9FF55 /* libRCTJCoreModule.a in Frameworks */,
@@ -975,6 +995,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				DFC859AD205BBA1E00BE19C4 /* RNAudio.xcodeproj */,
+				DFC859A6205BB79000BE19C4 /* RNSound.xcodeproj */,
 				DFC8596C205BAD2D00BE19C4 /* RCTImageResizer.xcodeproj */,
 				DF2656C9205A5D4F00C61DAE /* RCTCameraRoll.xcodeproj */,
 				DFB17A5C202B4EB1004603D5 /* RNFetchBlob.xcodeproj */,
@@ -1387,6 +1409,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DFC859A7205BB79000BE19C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFC859AB205BB79000BE19C4 /* libRNSound.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFC859AE205BBA1E00BE19C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFC859B2205BBA1E00BE19C4 /* libRNAudio.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1603,12 +1641,20 @@
 					ProjectRef = 9ADD3873CBAE496BB9C68DD3 /* RefreshDemo.xcodeproj */;
 				},
 				{
+					ProductGroup = DFC859AE205BBA1E00BE19C4 /* Products */;
+					ProjectRef = DFC859AD205BBA1E00BE19C4 /* RNAudio.xcodeproj */;
+				},
+				{
 					ProductGroup = DF39BCCA1FD107D700877EF2 /* Products */;
 					ProjectRef = 78B147D260B8436D821007C2 /* RNDeviceInfo.xcodeproj */;
 				},
 				{
 					ProductGroup = DFB17A5D202B4EB1004603D5 /* Products */;
 					ProjectRef = DFB17A5C202B4EB1004603D5 /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = DFC859A7205BB79000BE19C4 /* Products */;
+					ProjectRef = DFC859A6205BB79000BE19C4 /* RNSound.xcodeproj */;
 				},
 				{
 					ProductGroup = DF39BCD21FD107D700877EF2 /* Products */;
@@ -1996,6 +2042,20 @@
 			fileType = archive.ar;
 			path = libRCTImageResizer.a;
 			remoteRef = DFC8597C205BAD2D00BE19C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DFC859AB205BB79000BE19C4 /* libRNSound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSound.a;
+			remoteRef = DFC859AA205BB79000BE19C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DFC859B2205BBA1E00BE19C4 /* libRNAudio.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNAudio.a;
+			remoteRef = DFC859B1205BBA1E00BE19C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

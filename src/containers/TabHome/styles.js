@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   ...st,
   swiperImage: {
     width,
-    height: 100,
+    height: width * 0.52, // 420 / 220
     backgroundColor: 'transparent',
     resizeMode: 'stretch',
   },

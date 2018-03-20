@@ -14,7 +14,7 @@ import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
 import { Header, TOpacity } from '../../components';
 
-import { st } from '../../utils';
+import { st, fileKey } from '../../utils';
 
 const styles = StyleSheet.create({
   access: {
@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#666',
   },
+  audioView: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    ...st.frcenter,
+    backgroundColor: '#fff',
+  },
 });
 class AccessoryActions extends React.Component {
   constructor(props) {
@@ -54,16 +63,20 @@ class AccessoryActions extends React.Component {
         name: '照片',
         icon: 'ios-flame',
       }, {
+        name: '拍摄',
+        icon: 'ios-flame',
+      }, {
+        name: '语音',
+        icon: 'ios-flame',
+      }, {
         name: '快捷短语',
         icon: 'ios-flame',
       }, {
         name: '发商品',
         icon: 'ios-flame',
-      }, {
-        name: '拍摄',
-        icon: 'ios-flame',
       }],
     };
+    console.log(props);
     this.selectImages = this.selectImages.bind(this);
   }
 
@@ -84,16 +97,7 @@ class AccessoryActions extends React.Component {
       const bl = image.height / image.width;
       const height = width * bl;
       ImageResizer.createResizedImage(image.uri, width, height, 'JPEG', 60).then((response) => {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth() + 1;
-        const day = now.getDate();
-        const hour = now.getHours();
-        const minute = now.getMinutes();
-        const second = now.getSeconds();
-        let ran = parseInt(Math.random() * 888, 10);
-        ran += 100;
-        const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
+        const key = fileKey;
         const urlkey = `${global.buketUrl}${key}`;
         Rpc.uploadFile(response.uri, global.uptoken, { key, name: key });
         images.push({
@@ -120,10 +124,13 @@ class AccessoryActions extends React.Component {
         this.setModalVisible(true);
         break;
       case 2:
-        this.props.push({ key: 'OrderSend' });
-        break;
+        this.props.setAudioShow(true);
+        return;
       case 3:
-        this.setModalVisible(true);
+        this.props.push({ key: 'ChatPhrase' });
+        return;
+      case 4:
+        this.props.push({ key: 'Audio' });
         break;
       default:
     }
@@ -132,7 +139,7 @@ class AccessoryActions extends React.Component {
     this.setImages(images);
   }
   render() {
-    const { access } = this.state;
+    const { access, audios } = this.state;
     return (
       <View style={styles.access}>
         {
@@ -193,8 +200,7 @@ AccessoryActions.defaultProps = {
 
 AccessoryActions.propTypes = {
   onSend: PropTypes.func,
-};
-AccessoryActions.propTypes = {
+  setAudioShow: PropTypes.func,
   push: PropTypes.func,
 };
 export default connect(null, { push: pushRoute })(AccessoryActions);

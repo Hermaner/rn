@@ -65,7 +65,6 @@ export default class Prompt extends React.Component {
     let image;
     ImagePicker.openCamera({
       includeExif: true,
-      multiple: false,
     }).then((img) => {
       image = { uri: img.path, width: img.width, height: img.height, mime: img.mime };
       this.setState({
@@ -76,7 +75,6 @@ export default class Prompt extends React.Component {
   pickMultiple = () => {
     let image;
     ImagePicker.openPicker({
-      multiple: false,
       includeExif: true,
     }).then((img) => {
       image = { uri: img.path, width: img.width, height: img.height, mime: img.mime };

@@ -99,8 +99,12 @@ import OrderDetailAccept from '../containers/OrderDetailAccept';
 import MapView from '../containers/MapView';
 import MapViewOrder from '../containers/MapViewOrder';
 import OrderSend from '../containers/OrderSend';
+import Audio from '../containers/ChatRoom/Audio';
+import ChatPhrase from '../containers/ChatPhrase';
 
 export const AppNavigator = StackNavigator({
+  ChatPhrase: { screen: ChatPhrase },
+  Audio: { screen: Audio },
   OrderSend: { screen: OrderSend },
   MapViewOrder: { screen: MapViewOrder },
   MapView: { screen: MapView },

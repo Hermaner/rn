@@ -105,6 +105,10 @@ class SessionList extends React.Component {
   }
   componentDidMount() {
     this.init();
+    DeviceEventEmitter.addListener('sessionEmit', () => {
+      console.log(222)
+      this.init();
+    });
   }
   init = () => {
     if (global.memberId) {

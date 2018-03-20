@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import RNFetchBlob from 'react-native-fetch-blob';
 import {
   Clipboard,
   Text,
@@ -11,6 +12,8 @@ import {
   Image,
   ViewPropTypes,
 } from 'react-native';
+import { Icon } from 'native-base';
+import Sound from 'react-native-sound';
 
 import MessageImage from './MessageImage';
 import Color from './Color';
@@ -70,7 +73,31 @@ export default class Bubble extends React.Component {
     }
     return null;
   }
-
+  _play = async (url) => {
+    console.log(url)
+    RNFetchBlob.config({
+      fileCache: true,
+    })
+    .fetch('GET', url, {
+    })
+    .then((res) => {
+      const sound = new Sound(res.path(), '', (error) => {
+        if (error) {
+          console.log('failed to load the sound', error);
+        }
+        console.log('chenggong')
+      });
+      setTimeout(() => {
+        sound.play((success) => {
+          if (success) {
+            console.log('successfully finished playing');
+          } else {
+            console.log('playback failed due to audio decoding errors');
+          }
+        });
+      }, 100);
+    });
+  }
   renderMessageText() {
     const { type } = this.props.currentMessage;
     if (type === '1') {
@@ -121,6 +148,23 @@ export default class Bubble extends React.Component {
     }
     return null;
   }
+  renderMessageAudio() {
+    const { type } = this.props.currentMessage;
+    if (type === '4') {
+      const { text, secend } = this.props.currentMessage;
+      const width = 40 + secend * 8;
+      return (
+        <TOpacity
+          style={[styles.messageAudio, { width: width > 200 ? 200 : width }]}
+          content={
+            <Icon name="ios-volume-up" style={[styles.messageAudioIcon, { transform: [{ rotate: '180deg' }] }]} />
+          }
+          onPress={() => this._play(text)}
+        />
+      );
+    }
+    return null;
+  }
   render() {
     const { position, touchableProps } = this.props;
     return (
@@ -145,6 +189,7 @@ export default class Bubble extends React.Component {
               {this.renderMessageImage()}
               {this.renderMessageText()}
               {this.renderMessageProduct()}
+              {this.renderMessageAudio()}
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -202,6 +247,19 @@ const styles = {
       borderTopRightRadius: 3,
     },
   }),
+  messageAudio: {
+    height: 35,
+    borderRadius: 6,
+    backgroundColor: '#a2e65a',
+    ...st.jcenter,
+    alignItems: 'flex-end',
+  },
+  messageAudioIcon: {
+    color: '#666',
+    fontSize: 24,
+    marginLeft: 6,
+    marginRight: 6,
+  },
   bottom: {
     flexDirection: 'row',
     justifyContent: 'flex-end',

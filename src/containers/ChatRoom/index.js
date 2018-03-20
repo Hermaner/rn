@@ -1,9 +1,11 @@
 import React from 'react';
 import {
   Platform,
+  DeviceEventEmitter,
 } from 'react-native';
 import { Container } from 'native-base';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 import KeyboardManager from 'react-native-keyboard-manager';
 import PropTypes from 'prop-types';
 import { popRoute, pushRoute } from '../../actions';
@@ -27,7 +29,18 @@ class ChatRoom extends base {
 
   componentWillMount() {
     this._isMounted = true;
-    KeyboardManager.setEnable(false);
+    if (Platform.OS === 'ios') {
+      KeyboardManager.setEnable(false);
+    }
+    DeviceEventEmitter.addListener('phraseEmit', (text) => {
+      this.onSend({
+        text,
+        type: '1',
+        user: this.renderUser(),
+        createdAt: new Date().getTime(),
+        _id: uuid.v4(),
+      });
+    });
     this.getInit();
     this.setState(() => {
       return {
@@ -93,6 +106,18 @@ class ChatRoom extends base {
       />
     );
   }
+  renderUser = () => {
+    const { toUser } = this.state;
+    const { memberId, imgUrl, userName } = global.userData;
+    return {
+      _id: memberId.toString(),
+      userName,
+      avatar: imgUrl,
+      toId: toUser.memberId.toString(),
+      toUserName: toUser.userName,
+      toAvatar: toUser.imgUrl,
+    };
+  }
   renderAccessory(props) {
     return (
       <AccessoryActions
@@ -103,7 +128,6 @@ class ChatRoom extends base {
   render() {
     const { pop } = this.props;
     const { toUser, messages } = this.state;
-    const { memberId, imgUrl, userName } = global.userData;
     return (
       <Container>
         <Header back={pop} title={decodeURI(toUser.userName)} />
@@ -115,14 +139,7 @@ class ChatRoom extends base {
           onProductPress={this.onProductPress}
           isLoadingEarlier={this.state.isLoadingEarlier}
           renderAccessory={this.renderAccessory}
-          user={{
-            _id: memberId.toString(),
-            userName,
-            avatar: imgUrl,
-            toId: toUser.memberId.toString(),
-            toUserName: toUser.userName,
-            toAvatar: toUser.imgUrl,
-          }}
+          user={this.renderUser()}
           renderActions={this.renderCustomActions}
         />
       </Container>

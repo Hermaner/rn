@@ -165,7 +165,9 @@ class UserBase extends React.Component {
       if (res.isSuccess) {
         global.memberId = res.data.memberId;
         UserSocket.changeData(res.data);
-        DeviceEventEmitter.emit('emitUser');
+        DeviceEventEmitter.emit('socketConnet');
+        DeviceEventEmitter.emit('emitMine');
+        DeviceEventEmitter.emit('sessionEmit');
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
         global.userData = res.data;
         Toast.show('登陆成功');

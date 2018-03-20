@@ -22,6 +22,10 @@ target 'App' do
 
   pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
 
+  pod 'RNAudio', :path => '../node_modules/react-native-audio'
+
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
 end
 post_install do |installer|
   installer.pods_project.targets.each do |target|

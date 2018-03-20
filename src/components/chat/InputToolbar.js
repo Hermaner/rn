@@ -2,12 +2,14 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, View, Keyboard, ViewPropTypes, Text } from 'react-native';
-
+import { StyleSheet, View, Keyboard, ViewPropTypes, TouchableOpacity, Text, Animated } from 'react-native';
+import { Icon } from 'native-base';
 import Composer from './Composer';
 import Send from './Send';
 import Actions from './Actions';
 import Color from './Color';
+import { st } from '../../utils';
+import { TOpacity } from '../../components';
 
 export default class InputToolbar extends React.Component {
 
@@ -19,6 +21,16 @@ export default class InputToolbar extends React.Component {
 
     this.state = {
       position: 'absolute',
+      audios: [{
+        name: '取消',
+        icon: 'ios-flame',
+      }, {
+        name: '点击说话',
+        icon: 'ios-flame',
+      }, {
+        name: '拍摄',
+        icon: 'ios-flame',
+      }],
     };
   }
 
@@ -43,7 +55,23 @@ export default class InputToolbar extends React.Component {
       position: 'absolute',
     });
   }
-
+  goAduio = (index) => {
+    console.log(index);
+    switch (index) {
+      case 0:
+        this.props.setAudioShow(false);
+        break;
+      case 1:
+        this.setModalVisible(true);
+        break;
+      case 2:
+      default:
+    }
+  }
+  tabAudio = () => {
+    const { tabAudio, isAudioTab } = this.props;
+    tabAudio(!isAudioTab);
+  }
   renderActions() {
     if (this.props.renderActions) {
       return this.props.renderActions(this.props);
@@ -52,7 +80,17 @@ export default class InputToolbar extends React.Component {
     }
     return null;
   }
-
+  renderAudio() {
+    const { isAudioTab } = this.props;
+    return (
+      <TouchableOpacity
+        style={styles.leftAudioView}
+        onPress={this.tabAudio}
+      >
+        <Icon name={isAudioTab ? 'ios-keypad-outline' : 'ios-microphone-outline'} style={styles.leftAudioIcon} />
+      </TouchableOpacity>
+    );
+  }
   renderSend() {
     if (this.props.renderSend) {
       return this.props.renderSend(this.props);
@@ -69,11 +107,33 @@ export default class InputToolbar extends React.Component {
   }
 
   renderAccessory() {
-    const { accessoryContainerHeight } = this.props;
+    const { audios } = this.state;
+    const { audioHeight } = this.props;
     if (this.props.renderAccessory) {
       return (
         <View style={[styles.accessory]}>
           {this.props.renderAccessory(this.props)}
+          <Animated.View
+            style={[styles.audioView, { transform: [{ translateY: audioHeight }] }]}
+          >
+            {
+              audios.map((item, index) => (
+                <TOpacity
+                  key={index}
+                  style={styles.accessList}
+                  content={
+                    <View key={index} style={styles.accessList}>
+                      <View style={styles.accessView}>
+                        <Icon name={item.icon} style={styles.accessIcon} />
+                      </View>
+                      <Text style={styles.accessText}>{item.name}</Text>
+                    </View>
+                  }
+                  onPress={() => this.goAduio(index)}
+                />
+              ))
+            }
+          </Animated.View>
         </View>
       );
     }
@@ -86,7 +146,7 @@ export default class InputToolbar extends React.Component {
         style={[styles.container, this.props.containerStyle, { position: this.state.position }]}
       >
         <View style={[styles.primary, this.props.primaryStyle]}>
-          {this.renderActions()}
+          {this.renderAudio()}
           {this.renderComposer()}
           {this.renderSend()}
         </View>
@@ -117,6 +177,53 @@ const styles = StyleSheet.create({
     height: 80,
     overflow: 'hidden',
   },
+  accessList: {
+    flex: 1,
+    ...st.jacenter,
+  },
+  accessView: {
+    width: 40,
+    height: 40,
+    marginBottom: 6,
+    borderWidth: 1,
+    borderColor: '#aaa',
+    borderRadius: 6,
+    ...st.jacenter,
+  },
+  accessIcon: {
+    fontSize: 30,
+    color: '#666',
+  },
+  accessText: {
+    fontSize: 12,
+    color: '#666',
+  },
+  audioView: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    ...st.frcenter,
+    backgroundColor: '#fff',
+  },
+  leftAudioView: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginLeft: 6,
+    marginRight: 6,
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
+    overflow: 'hidden',
+    marginBottom: 5,
+    ...st.jacenter,
+  },
+  leftAudioIcon: {
+    fontSize: 20,
+    color: '#666',
+  },
 });
 
 InputToolbar.defaultProps = {
@@ -127,6 +234,8 @@ InputToolbar.defaultProps = {
   containerStyle: {},
   primaryStyle: {},
   accessoryStyle: {},
+  isAudioShow: false,
+  setAudioShow: () => {},
   onPressActionButton: () => {},
 };
 
@@ -135,7 +244,11 @@ InputToolbar.propTypes = {
   renderActions: PropTypes.func,
   renderSend: PropTypes.func,
   renderComposer: PropTypes.func,
+  isAudioShow: PropTypes.bool,
+  isAudioTab: PropTypes.bool,
+  tabAudio: PropTypes.func,
   onPressActionButton: PropTypes.func,
+  setAudioShow: PropTypes.func,
   containerStyle: ViewPropTypes.style,
   primaryStyle: ViewPropTypes.style,
   accessoryStyle: ViewPropTypes.style,
