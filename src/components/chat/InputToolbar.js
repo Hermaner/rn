@@ -2,11 +2,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, View, Keyboard, ViewPropTypes, TouchableOpacity, Text, Animated } from 'react-native';
+import { Platform, StyleSheet, View, Keyboard, ViewPropTypes, TouchableOpacity, Text, Animated } from 'react-native';
 import { Icon } from 'native-base';
 import Composer from './Composer';
 import Send from './Send';
-import Actions from './Actions';
 import Color from './Color';
 import { st } from '../../utils';
 import { TOpacity } from '../../components';
@@ -72,14 +71,6 @@ export default class InputToolbar extends React.Component {
     const { tabAudio, isAudioTab } = this.props;
     tabAudio(!isAudioTab);
   }
-  renderActions() {
-    if (this.props.renderActions) {
-      return this.props.renderActions(this.props);
-    } else if (this.props.onPressActionButton) {
-      return <Actions {...this.props} />;
-    }
-    return null;
-  }
   renderAudio() {
     const { isAudioTab } = this.props;
     return (
@@ -107,13 +98,13 @@ export default class InputToolbar extends React.Component {
   }
 
   renderAccessory() {
-    const { audios } = this.state;
-    const { audioHeight } = this.props;
+    // const { audios } = this.state;
+    // const { audioHeight } = this.props;
     if (this.props.renderAccessory) {
       return (
         <View style={[styles.accessory]}>
           {this.props.renderAccessory(this.props)}
-          <Animated.View
+          {/* <Animated.View
             style={[styles.audioView, { transform: [{ translateY: audioHeight }] }]}
           >
             {
@@ -133,7 +124,7 @@ export default class InputToolbar extends React.Component {
                 />
               ))
             }
-          </Animated.View>
+          </Animated.View> */}
         </View>
       );
     }
@@ -208,16 +199,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   leftAudioView: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    width: Platform.select({
+      ios: 30,
+      android: 34,
+    }),
+    height: Platform.select({
+      ios: 30,
+      android: 34,
+    }),
+    borderRadius: Platform.select({
+      ios: 15,
+      android: 17,
+    }),
     marginLeft: 6,
     marginRight: 6,
     borderWidth: 1,
     backgroundColor: '#fff',
     borderColor: '#ddd',
     overflow: 'hidden',
-    marginBottom: 5,
+    marginBottom: 8,
     ...st.jacenter,
   },
   leftAudioIcon: {
@@ -241,7 +241,6 @@ InputToolbar.defaultProps = {
 
 InputToolbar.propTypes = {
   renderAccessory: PropTypes.func,
-  renderActions: PropTypes.func,
   renderSend: PropTypes.func,
   renderComposer: PropTypes.func,
   isAudioShow: PropTypes.bool,

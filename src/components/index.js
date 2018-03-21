@@ -45,14 +45,17 @@ import IdCard from './IdCard';
 import MasterAcceptItem from './MasterAcceptItem';
 import Chat from './chat/GiftedChat';
 import Upload from './Upload';
+import SocketStore from './socket/SocketStore';
 
 const UserSocket = new UserObser();
+const SocketObser = new SocketStore();
 
 export {
   Chat,
   Upload,
   TLight,
   IdCard,
+  SocketObser,
   MasterAcceptItem,
   MasterDemanOrderItem,
   SharePlatform,

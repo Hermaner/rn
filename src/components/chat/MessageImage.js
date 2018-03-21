@@ -2,7 +2,8 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Image, StyleSheet, View, ViewPropTypes } from 'react-native';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { Image, StyleSheet, View, ViewPropTypes, Platform } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
 export default function MessageImage({
@@ -12,6 +13,30 @@ export default function MessageImage({
   imageStyle,
   currentMessage,
 }) {
+  const { text } = currentMessage;
+  const index = text.lastIndexOf('/') + 1;
+  const key = text.substr(index);
+  const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
+  RNFetchBlob.fs.exists(path)
+  .then((exist) => {
+    if (!exist) {
+      Image.getSize(text, () => {
+        RNFetchBlob.config({
+          fileCache: true,
+          path,
+        })
+        .fetch('GET', text, {
+        })
+        .then(() => {
+          // console.log(path);
+        });
+      }, () => {});
+    } else {
+      // console.log(path);
+    }
+  })
+  .catch(err => console.log(err));
+  console.log(text);
   return (
     <View style={[styles.container, containerStyle]}>
       <Lightbox
@@ -23,7 +48,8 @@ export default function MessageImage({
         <Image
           {...imageProps}
           style={[styles.image, imageStyle]}
-          source={{ uri: currentMessage.text }}
+          // source={{ uri: Platform.OS === 'android' ? `file://${path}` : '' + path }}
+          source={{ uri: text }}
         />
       </Lightbox>
     </View>

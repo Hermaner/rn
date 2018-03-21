@@ -12,7 +12,6 @@ import { observer } from 'mobx-react/native';
 import RNFetchBlob from 'react-native-fetch-blob';
 import React from 'react';
 import {
-    ScrollView,
     StyleSheet,
     View,
     Text,
@@ -24,8 +23,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
-import { Mcolor, st } from '../../utils';
-import { TOpacity, UserSocket } from '../../components';
+import { st, writeSessionList } from '../../utils';
+import { TOpacity, UserSocket, SocketObser } from '../../components';
 
 const moment = require('moment');
 
@@ -92,6 +91,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#fff',
   },
+  noLogin: {
+    flex: 1,
+    ...st.jacenter,
+  },
+  noLoginText: {
+    fontSize: 14,
+    color: '#3292ff',
+  },
 });
 
 @observer
@@ -105,29 +112,71 @@ class SessionList extends React.Component {
   }
   componentDidMount() {
     this.init();
-    DeviceEventEmitter.addListener('sessionEmit', () => {
-      console.log(222)
+    this.socket = SocketObser.socket;
+    this.sessionEmit = DeviceEventEmitter.addListener('sessionEmit', () => {
       this.init();
     });
+    this.offSessionEmit = DeviceEventEmitter.addListener('offSessionEmit', () => {
+      this.socket.off('notifyMessageRead', this.notifyMessageRead);
+    });
+  }
+  componentWillUnmount() {
+    this.sessionEmit.remove();
+    this.offSessionEmit.remove();
+    this.socket = null;
+    this.socket.off('notifyMessageRead', this.notifyMessageRead);
   }
   init = () => {
     if (global.memberId) {
-      global.socketStore.socket.emit('sendGetChatList');
+      if (this.socket === undefined) {
+        this.socket = SocketObser.socket;
+      }
       const { CacheDir } = RNFetchBlob.fs.dirs;
-      const path = `${CacheDir}/chatList`;
+      const path = `${CacheDir}/sessionList`;
+      // RNFetchBlob.fs.unlink(path);
       RNFetchBlob.fs.exists(path)
       .then((exist) => {
         if (!exist) {
           RNFetchBlob.fs.createFile(path, '', 'utf8');
         } else {
-          RNFetchBlob.fs.readFile(path, 'ascii')
+          RNFetchBlob.fs.readFile(path, 'utf8')
           .then((data) => {
-            console.log(data);
+            const items = JSON.parse(data);
+            this.setState({
+              items,
+            });
           });
         }
-      })
-      .catch(err => console.log(err));
+      });
+      this.socket.on('notifyGetChatList', this.notifyGetChatList); // 获取当前聊天列表
+      this.socket.on('notifyMessageRead', this.notifyMessageRead); // 有人给我发了新消息
+      this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
     }
+  }
+  notifyMessageRead = () => {
+    this.socket.emit('sendGetChatList');
+  }
+  notifyGetChatList = (lists) => {
+    let { items } = this.state;
+    const newLists = [];
+    lists.forEach((list) => {
+      let exit = false;
+      items.forEach((item) => {
+        if (item.id === list.id) {
+          exit = true;
+          item.lastChatObject = list.lastChatObject;
+          item.showMemberNoReadCount = list.showMemberNoReadCount;
+        }
+      });
+      if (!exit) {
+        newLists.push(list);
+      }
+    });
+    items = newLists.concat(items);
+    writeSessionList(JSON.stringify(items));
+    this.setState({
+      items,
+    });
   }
   _renderRow = (data) => {
     const { showMemberNoReadCount, lastChatObject:
@@ -147,7 +196,7 @@ class SessionList extends React.Component {
                 </Text>
                 <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
               </View>
-              <Text style={styles.msg}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
+              <Text style={styles.msg} numberOfLines={1}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
             </View>
             {
               showMemberNoReadCount && showMemberNoReadCount > 0 &&
@@ -158,6 +207,12 @@ class SessionList extends React.Component {
           </View>
         }
         onPress={() => {
+          const { items } = this.state;
+          items[data.index].showMemberNoReadCount = '0';
+          writeSessionList(JSON.stringify(items));
+          this.setState({
+            items,
+          });
           this.props.push({ key: 'ChatRoom',
             params: {
               item: {
@@ -172,8 +227,7 @@ class SessionList extends React.Component {
     );
   }
   _renderContent() {
-    const items = global.socketStore.chatList;
-    console.log(items);
+    const { items } = this.state;
     return (
       <View style={styles.listContent}>
         <FlatList
@@ -190,9 +244,25 @@ class SessionList extends React.Component {
     );
   }
   render() {
+    const { userData } = UserSocket;
     return (
       <Container>
-        {this._renderContent()}
+        {
+          userData && userData.memberId ?
+            this._renderContent()
+            :
+            <View style={styles.noLogin}>
+              <TOpacity
+                content={
+                  <Text style={styles.noLoginText}>请先登录</Text>
+                }
+                onPress={() => {
+                  this.props.push({ key: 'User',
+                  });
+                }}
+              />
+            </View>
+        }
       </Container>
 
     );

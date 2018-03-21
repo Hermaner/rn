@@ -16,7 +16,6 @@ import uuid from 'uuid';
 import { Icon } from 'native-base';
 
 import * as utils from './utils';
-import Actions from './Actions';
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import SystemMessage from './SystemMessage';
@@ -30,7 +29,6 @@ import Message from './Message';
 import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
-import GiftedAvatar from './GiftedAvatar';
 import { st, Mcolor } from '../../utils';
 
 import {
@@ -723,7 +721,6 @@ GiftedChat.propTypes = {
 
 export default {
   GiftedChat,
-  Actions,
   Avatar,
   Bubble,
   SystemMessage,
@@ -737,6 +734,5 @@ export default {
   MessageContainer,
   Send,
   Time,
-  GiftedAvatar,
   utils,
 };

@@ -17,15 +17,15 @@ export default function Day(
   const sTime = isSameTime(currentMessage, previousMessage);
   let label = '';
   if (!sDay) {
-    label = moment(new Date(parseInt(currentMessage.createdAt, 10)))
+    label = moment(parseInt(currentMessage.createdAt, 10))
       .locale('cn')
       .format('LLL');
   } else if (sTime > 1) {
-    label = moment(new Date(parseInt(currentMessage.createdAt, 10)))
+    label = moment(parseInt(currentMessage.createdAt, 10))
       .locale('cn')
       .format('LT');
   }
-  if (!sDay || sTime >= 1) {
+  if (!sDay || sTime > 1) {
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={wrapperStyle}>

@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   areaView: {
     ...st.frcenter,
     flex: 1,
+    height: 50,
   },
   areaText: {
     flex: 1,

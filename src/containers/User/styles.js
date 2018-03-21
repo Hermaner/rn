@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   otherList: {
     flex: 1,
     ...st.acenter,
+    height: 100,
   },
   otherTop: {
     width: 60,

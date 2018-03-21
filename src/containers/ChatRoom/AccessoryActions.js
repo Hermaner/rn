@@ -10,7 +10,6 @@ import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import ImageResizer from 'react-native-image-resizer';
 import ImagePicker from 'react-native-image-crop-picker';
-import { Rpc } from 'react-native-qiniu-hm';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
 import { Header, TOpacity, Upload } from '../../components';
@@ -99,9 +98,11 @@ class AccessoryActions extends React.Component {
     this.setModalVisible(false);
     const { width } = this.state;
     const images = [];
+    console.log(getImages)
     getImages.forEach((image) => {
       const bl = image.height / image.width;
       const height = width * bl;
+      console.log(image.uri);
       ImageResizer.createResizedImage(image.uri, width, height, 'JPEG', 60).then((response) => {
         const key = fileKey();
         const urlkey = `${global.buketUrl}${key}`;
@@ -112,7 +113,8 @@ class AccessoryActions extends React.Component {
           type: '2',
           status: '1',
         });
-        if (images.length === this.getImages().length) {
+        console.log(images);
+        if (images.length === getImages.length) {
           this.props.onSend(images);
           this.setImages([]);
         }
@@ -203,7 +205,6 @@ AccessoryActions.defaultProps = {
 
 AccessoryActions.propTypes = {
   onSend: PropTypes.func,
-  setAudioShow: PropTypes.func,
   push: PropTypes.func,
 };
 export default connect(null, { push: pushRoute })(AccessoryActions);

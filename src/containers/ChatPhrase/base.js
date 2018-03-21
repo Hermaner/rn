@@ -15,13 +15,16 @@ class Base extends React.Component {
   }
   getInit = () => {
     this.GetPhraseService();
-    DeviceEventEmitter.addListener('emitPhrase', (data) => {
+    this.emitPhrase = DeviceEventEmitter.addListener('emitPhrase', (data) => {
       if (data.id) {
         this.UpdateMemberPhraseService(data.value, data.id);
       } else {
         this.CreateMemberPhraseService(data.value);
       }
     });
+  }
+  deleteInit = () => {
+    this.emitPhrase.remove();
   }
   GetPhraseService = () => {
     GetPhraseService().then((res) => {

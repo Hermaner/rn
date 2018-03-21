@@ -8,13 +8,12 @@ export function isSameDay(currentMessage = {}, diffMessage = {}) {
     return false;
   }
 
-  const currentCreatedAt = moment(currentMessage.createdAt);
-  const diffCreatedAt = moment(diffMessage.createdAt);
+  const currentCreatedAt = moment(parseInt(currentMessage.createdAt, 10));
+  const diffCreatedAt = moment(parseInt(diffMessage.createdAt, 10));
 
   if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
     return false;
   }
-
   return currentCreatedAt.isSame(diffCreatedAt, 'day');
 }
 export function isSameTime(currentMessage = {}, diffMessage = {}) {
@@ -22,8 +21,8 @@ export function isSameTime(currentMessage = {}, diffMessage = {}) {
     return false;
   }
 
-  const currentCreatedAt = moment(currentMessage.createdAt);
-  const diffCreatedAt = moment(diffMessage.createdAt);
+  const currentCreatedAt = moment(parseInt(currentMessage.createdAt, 10));
+  const diffCreatedAt = moment(parseInt(diffMessage.createdAt, 10));
   if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
     return false;
   }

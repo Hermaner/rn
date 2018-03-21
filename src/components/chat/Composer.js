@@ -6,7 +6,6 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { Platform, StyleSheet, TextInput, View, Text, PanResponder } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
-import { Rpc } from 'react-native-qiniu-hm';
 import { Upload } from '../../components';
 import { st, fileKey } from '../../utils';
 
@@ -32,12 +31,10 @@ export default class Composer extends React.Component {
     });
     this.prepareRecordingPath(this.state.audioPath);
     AudioRecorder.onProgress = (data) => {
-      console.log(data);
       this.setState({ currentTime: Math.floor(data.currentTime) });
     };
 
     AudioRecorder.onFinished = (data) => {
-      console.log(data);
       if (Platform.OS === 'ios') {
         this._finishRecording(data.audioFileURL);
       }
@@ -75,8 +72,7 @@ export default class Composer extends React.Component {
     this.props.audioTipShow(true);
     this.prepareRecordingPath(this.state.audioPath);
     try {
-      const filePath = await AudioRecorder.startRecording();
-      console.log(filePath);
+      await AudioRecorder.startRecording();
     } catch (error) {
       console.error(error);
     }
@@ -85,7 +81,6 @@ export default class Composer extends React.Component {
     });
   }
   _finishRecording = (filePath) => {
-    console.log(filePath);
     const key = fileKey();
     const urlkey = `${global.buketUrl}${key}`;
     Upload(filePath, global.uptoken, key, () => {
@@ -127,7 +122,7 @@ export default class Composer extends React.Component {
       try {
         const filePath = await AudioRecorder.stopRecording();
         if (Platform.OS === 'android') {
-          this._finishRecording(true, filePath);
+          this._finishRecording(filePath);
         }
         return filePath;
       } catch (error) {
@@ -174,23 +169,19 @@ export default class Composer extends React.Component {
 
 const styles = StyleSheet.create({
   view: {
+    backgroundColor: '#fff',
     borderWidth: 1,
     borderColor: '#ddd',
-    flex: 1,
     borderRadius: 2,
-    height: 33,
-    backgroundColor: '#fff',
-    marginLeft: 5,
-    marginRight: 5,
+    margin: 5,
     ...st.jacenter,
-    marginTop: Platform.select({
-      ios: 6,
-      android: 0,
+    flex: 1,
+    height: Platform.select({
+      ios: 33,
+      android: 41,
     }),
-    marginBottom: Platform.select({
-      ios: 5,
-      android: 3,
-    }),
+    paddingRight: 5,
+    paddingLeft: 5,
   },
   text: {
     fontSize: 14,
@@ -198,24 +189,14 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginLeft: 5,
     fontSize: 14,
-    lineHeight: 16,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 2,
     backgroundColor: '#fff',
     paddingRight: 5,
     paddingLeft: 5,
-    marginRight: 5,
-    marginTop: Platform.select({
-      ios: 6,
-      android: 0,
-    }),
-    marginBottom: Platform.select({
-      ios: 5,
-      android: 3,
-    }),
+    margin: 5,
   },
 });
 

@@ -1,7 +1,5 @@
 
-import { Platform, AppState, AsyncStorage } from 'react-native';
-import { observable, computed, toJS } from 'mobx';
-import RNFetchBlob from 'react-native-fetch-blob';
+import { observable, computed } from 'mobx';
 import io from 'socket.io-client';
 import config from './config';
 
@@ -17,19 +15,15 @@ export default class SocketStore {
   // 非监听对象
   socket: Object;
   getConnect = () => {
-    const { CacheDir } = RNFetchBlob.fs.dirs;
-    console.log(`${config.server}${global.memberId}`);
     this.socket = io(`${config.server}${global.memberId}`, {
       transports: ['websocket'],
+      pingTimeout: 60000,
+      pingInterval: 60000,
     });
     this.socket.on('connect', () => {
       this.socketId = this.socket.id;
     });
     this.socket.on('disconnect', () => {
-    });
-    this.socket.on('notifyGetChatList', (data) => { // 获取我与所有好友列表
-      console.log(data);
-      this.chatLists = data;
     });
   }
   @computed get sessionList(): Array<Object> {

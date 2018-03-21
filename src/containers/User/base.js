@@ -2,7 +2,7 @@ import React from 'react';
 import { AsyncStorage, Platform, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { UserSocket } from '../../components';
+import { UserSocket, SocketObser } from '../../components';
 import { GetCodeService, RegisterMemberService, LoginService } from '../../api';
 
 class UserBase extends React.Component {
@@ -125,15 +125,7 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        global.memberId = res.data.memberId;
-        UserSocket.changeData(res.data);
-        DeviceEventEmitter.emit('socketConnet');
-        DeviceEventEmitter.emit('emitUser');
-        DeviceEventEmitter.emit('sessionEmit');
-        AsyncStorage.setItem('userData', JSON.stringify(res.data));
-        global.userData = res.data;
-        Toast.show('登陆成功');
-        this.props.pop();
+        this.loginAction(res.data);
       } else {
         Toast.show(res.msg);
       }
@@ -165,21 +157,24 @@ class UserBase extends React.Component {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        global.memberId = res.data.memberId;
-        UserSocket.changeData(res.data);
-        DeviceEventEmitter.emit('socketConnet');
-        DeviceEventEmitter.emit('emitMine');
-        DeviceEventEmitter.emit('sessionEmit');
-        AsyncStorage.setItem('userData', JSON.stringify(res.data));
-        global.userData = res.data;
-        Toast.show('登陆成功');
-        this.props.pop();
+        this.loginAction(res.data);
       } else {
         Toast.show(res.msg);
       }
     }).catch(() => {
       this.sleek.toggle();
     });
+  }
+  loginAction = (data) => {
+    global.memberId = data.memberId;
+    UserSocket.changeData(data);
+    SocketObser.getConnect();
+    DeviceEventEmitter.emit('emitMine');
+    DeviceEventEmitter.emit('sessionEmit');
+    AsyncStorage.setItem('userData', JSON.stringify(data));
+    global.userData = data;
+    Toast.show('登陆成功');
+    this.props.pop();
   }
 }
 UserBase.propTypes = {

@@ -1,8 +1,14 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import RNFetchBlob from 'react-native-fetch-blob';
+import {
+  AppState,
+  Platform,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import { Chat } from '../../components';
+import { Chat, SocketObser } from '../../components';
 import { GetUploadTokenService } from '../../api';
+import { writeChatList } from '../../utils';
 
 const { GiftedChat } = Chat;
 
@@ -12,7 +18,6 @@ class Base extends React.Component {
     this.state = {
       messages: [],
       loadEarlier: false,
-      typingText: null,
       isLoadingEarlier: false,
       items: [],
       toUser: props.navigation.state.params.item,
@@ -20,69 +25,172 @@ class Base extends React.Component {
       pageSize: 15,
     };
   }
-  getInit = () => {
-    this.GetUploadTokenService();
-    const socket = global.socketStore.socket;
-    socket.on('notifyMessageRead', (data) => { // 别人给我发消息我在这里接收
-      console.log(data);
-      console.log(2);
-      this.setState((previousState) => {
-        return {
-          messages: GiftedChat.append(previousState.messages, [data]),
-        };
-      });
-      socket.emit('sendMessageMyReadSuccess', [data]);
-      global.socketStore.socket.emit('sendGetChatList');
+  onLoadEarlier = () => {
+    this.setState({
+      isLoadingEarlier: true,
     });
-    socket.on('notifyMessageToReadSuccess', (data) => { // 接收对方已读消息告诉我对方已读
-      console.log(3);
-      console.log(data)
-      this.setState((previousState) => {
-        console.log(previousState.messages);
-        const { messages } = previousState;
-        messages.forEach((item) => {
-          data.forEach((list) => {
-            if (item._id === list._id) {
-              item.status = '3';
-            }
+    if (this._isMounted === true) {
+      this.loadMore();
+    }
+  }
+  onProductPress = (id) => {
+    console.log(id);
+  }
+  onSend = (items = []) => {
+    console.log(this.socket);
+    console.log(items)
+    this.socket.emit('sendMessage', items);
+    let { messages } = this.state;
+    messages = items.concat(messages);
+    this.writeAllFile(messages);
+    this.setState({
+      messages,
+    });
+    this.socket.emit('sendGetChatList');
+  }
+  getInit = () => {
+    const { toUser: { memberId } } = this.state;
+    const { CacheDir } = RNFetchBlob.fs.dirs;
+    const path = `${CacheDir}/${memberId}`;
+    // RNFetchBlob.fs.unlink(path);
+    RNFetchBlob.fs.exists(path)
+    .then((exist) => {
+      if (!exist) {
+        const first = [];
+        RNFetchBlob.fs.createFile(path, JSON.stringify(first), 'utf8');
+      } else {
+        RNFetchBlob.fs.readFile(path, 'utf8')
+        .then((data) => {
+          const messages = JSON.parse(data);
+          this.setState({
+            messages,
           });
         });
-        this.setState({
-          messages,
-        });
-      });
+      }
     });
-    socket.on('notifyMessageSendSuccess', (data) => { // 通知发送者消息发送成功
-      const { messages } = this.state;
-      messages.forEach((item) => {
-        if (item._id === data._id) {
-          item.status = '2';
+    AppState.addEventListener('change', this.appStateChange);
+    this.GetUploadTokenService();
+    this.socket = SocketObser.socket;
+    this.socket.on('notifyMessageRead', this.notifyMessageRead);  // 别人给我发的文件我看到了
+    this.socket.on('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);  // 我接受对方看到消息更改状态
+    this.socket.on('notifyMessageSendSuccess', this.notifyMessageSendSuccess);  // 告诉自己我消息发送成功了
+    this.socket.on('notifyGetChatLog', this.notifyGetChatLog);  // 获取分页聊天记录
+    this.socket.on('notifyGetChat', this.notifyGetChat);  // 获取最新的聊天记录
+    this.loadNewChat();// 发送请求获取最新的聊天记录
+  }
+  deleteInit = () => {
+    this.socket.off('notifyMessageRead', this.notifyMessageRead);
+    this.socket.off('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);
+    this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
+    this.socket.off('notifyGetChat', this.notifyGetChat);
+    this.socket = null;
+  }
+  notifyMessageRead = (data) => {
+    let { messages } = this.state;
+    messages = [data].concat(messages);
+    this.writeAllFile(messages);
+    this.setState({
+      messages,
+    });
+    this.socket.emit('sendMessageMyReadSuccess', [data]); // 告诉对方我收到消息了
+  }
+  notifyMessageToReadSuccess = (data) => {
+    const { messages } = this.state;
+    messages.forEach((item) => {
+      data.forEach((list) => {
+        if (item._id === list._id) {
+          item.status = '3';
         }
       });
-      this.setState({
-        messages,
-      });
     });
-    socket.on('notifyGetChat', (data) => { // 获取我与好友消息记录
-      this.setState((previousState) => {
-        return {
-          messages: GiftedChat.prepend(previousState.messages, data),
-          currentPage: this.state.currentPage + 1,
-          isLoadingEarlier: false,
-          loadEarlier: data.length === this.state.pageSize,
-        };
-      });
+    this.setState({
+      messages,
     });
-    this.loadMore();
+    this.writeNewFile(messages);
+  }
+  notifyMessageSendSuccess = (data) => {
+    console.log(111);
+    const { messages } = this.state;
+    messages.forEach((item) => {
+      if (item._id === data._id) {
+        item.status = '2';
+      }
+    });
+    this.setState({
+      messages,
+    });
+    this.writeNewFile(messages);
+  }
+  notifyGetChat = (items) => {
+    let { messages } = this.state;
+    const newItems = [];
+    items.forEach((item) => {
+      let exist = false;
+      messages.forEach((message) => {
+        if (message._id === item._id) {
+          exist = true;
+          if (message.status === '4' || (message.status < item.status && item.status !== '4')) {
+            message.status = item.status;
+          }
+        }
+      });
+      if (!exist) {
+        newItems.push(item);
+      }
+    });
+    messages = newItems.concat(messages);
+    this.writeAllFile(messages);
+    this.setState({
+      messages,
+      isLoadingEarlier: false,
+      loadEarlier: messages.length === 40,
+    });
+  }
+  notifyGetChatLog = (data) => {
+    const { pageSize } = this.state;
+    this.setState(previousState => ({
+      messages: GiftedChat.prepend(previousState.messages, data),
+      currentPage: this.state.currentPage + 1,
+      isLoadingEarlier: false,
+      loadEarlier: data.length === pageSize,
+    }));
+  }
+  appStateChange = (appState) => {
+    if (Platform.OS === 'ios' && appState === 'inactive') {
+      this.socket.disconnect();
+    }
+    if (Platform.OS === 'android' && appState === 'background') {
+      this.socket.disconnect();
+    }
+    if (appState === 'active') {
+      this.socket.connect();
+      this.socket.emit('sendGetChatList');
+    }
+  }
+  loadNewChat = () => {
+    const { toUser } = this.state;
+    this.socket.emit('sendGetChat', {
+      toUserId: toUser.memberId,
+    });
   }
   loadMore = () => {
     const { toUser, currentPage, pageSize } = this.state;
-    const socket = global.socketStore.socket;
-    socket.emit('sendGetChat', {
+    this.socket.emit('sendGetChatLog', { // 发送请求获取分页数据
       toUserId: toUser.memberId,
       currentPage,
       pageSize,
     });
+  }
+  writeNewFile = (messages) => { // 写入新文件，用户数据内部有状态更新
+    const { toUser: { memberId } } = this.state;
+    writeChatList(memberId, JSON.stringify(messages));
+  }
+  writeAllFile = (messages) => { // 又更新又写入
+    if (messages.length > 40) {
+      messages.length = 40;
+    }
+    const { toUser: { memberId } } = this.state;
+    writeChatList(memberId, JSON.stringify(messages));
   }
   GetUploadTokenService = () => {
     GetUploadTokenService()
@@ -97,6 +205,18 @@ class Base extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
+  }
+  renderUser = () => {
+    const { toUser } = this.state;
+    const { memberId, imgUrl, userName } = global.userData;
+    return {
+      _id: memberId.toString(),
+      userName,
+      avatar: imgUrl,
+      toId: toUser.memberId.toString(),
+      toUserName: toUser.userName,
+      toAvatar: toUser.imgUrl,
+    };
   }
 }
 Base.propTypes = {

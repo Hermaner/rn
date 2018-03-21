@@ -74,8 +74,8 @@ export default class Bubble extends React.Component {
     return null;
   }
   _play = async (url) => {
-    if (global.sound) {
-      global.sound.stop();
+    if (this.sound) {
+      this.sound.stop();
     }
     const index = url.lastIndexOf('/') + 1;
     const key = url.substr(index);
@@ -99,16 +99,16 @@ export default class Bubble extends React.Component {
     .catch(err => console.log(err));
   }
   readSound = (path) => {
-    global.sound = new Sound(path, '', (error) => {
+    this.sound = new Sound(path, '', (error) => {
       if (error) {
         console.log('failed to load the sound', error);
       }
       console.log('chenggong');
     });
     setTimeout(() => {
-      global.sound.play((success) => {
+      this.sound.play((success) => {
         if (success) {
-          global.sound = null;
+          this.sound = null;
         } else {
           console.log('playback failed due to audio decoding errors');
         }
@@ -213,7 +213,7 @@ export default class Bubble extends React.Component {
                 ...st.fr,
               }}
             >
-              {position === 'right' && <Text style={[styles.unRead, status === '3' && { color: '#888' }]}>{status === '1' ? '发送中' : status === '2' ? '未读' : status === '3' ? '已读' : '失败'}</Text>}
+              {position === 'right' && <Text style={[styles.unRead, status === '3' && { color: '#888' }]}>{status === '1' ? '发送中' : status === '2' ? '未读' : status === '3' ? '' : '失败'}</Text>}
               {this.renderMessageImage()}
               {this.renderMessageText()}
               {this.renderMessageProduct()}

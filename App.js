@@ -16,8 +16,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
 import AppReducer from './src/reducers';
-import { UserSocket } from './src/components';
-import SocketStore from './src/components/socket/SocketStore';
+import { UserSocket, SocketObser } from './src/components';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 import { GetMemberCenterService } from './src/api';
 
@@ -61,7 +60,6 @@ class App extends React.Component {
       global.registration = registrationId;
     });
     this.premInit();
-    global.socketStore = new SocketStore();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
         const userData = JSON.parse(res);
@@ -70,7 +68,7 @@ class App extends React.Component {
         global.userData = userData;
         global.memberId = userData.memberId;
         this.GetMemberCenterService();
-        global.socketStore.getConnect();
+        SocketObser.getConnect();
       }
     });
     AsyncStorage.getItem('searchHistorys', (error, res) => {
@@ -78,12 +76,9 @@ class App extends React.Component {
         global.searchHistorys = JSON.parse(res);
       }
     });
-    DeviceEventEmitter.addListener('socketConnet', () => {
-      global.socketStore.getConnect();
+    DeviceEventEmitter.addListener('emitMine', () => {
+      this.GetMemberCenterService();
     });
-    // DeviceEventEmitter.addListener('emitMine', () => {
-    //   this.GetMemberCenterService();
-    // });
   }
   premInit = () => {
     const types = Permissions.getTypes();

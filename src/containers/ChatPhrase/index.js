@@ -22,6 +22,7 @@ class ChatPhrase extends base {
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    this.deleteInit();
   }
   onBackPress = () => {
     this.props.pop();
