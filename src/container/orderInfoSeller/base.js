@@ -66,7 +66,7 @@ class Base extends React.Component {
         console.log(result);
         this.setState({
           myStatus: result.status,
-          removeInfo: result,
+          orderInfo: result,
         });
         DeviceEventEmitter.emit(type);
         DeviceEventEmitter.emit('getSoldGoodsCount');
@@ -130,7 +130,6 @@ class Base extends React.Component {
         const result = res.data;
         this.setState({
           myStatus: result.status,
-          removeInfo: result,
           orderInfo: result,
           favorable: result.discount,
           freight: result.freight,
