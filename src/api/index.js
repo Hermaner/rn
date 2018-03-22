@@ -1,7 +1,7 @@
 
-const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'http://192.168.50.61:8084/api/lede/';
 // const httpurl = 'http://192.168.0.15:8084/api/lede/';
-// const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+const httpurl = 'https://lede.sunhousm.cn/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -38,6 +38,9 @@ export function post(path, data) {
   return request(`${httpurl}${path}`, {
     method: 'POST',
     body: JSON.stringify(systemParam(data)),
+    headers: {
+      Authorization: global.memberId || '',
+    },
   });
 }
 export function get(path, data) {
@@ -45,6 +48,9 @@ export function get(path, data) {
   console.log(purl);
   return request(purl, {
     method: 'GET',
+    headers: {
+      Authorization: global.memberId || '',
+    },
   });
 }
 export function ampGet(data) {
@@ -416,4 +422,16 @@ export function GetIntentionMemberService(data) {
 }
 export function GetServicesTermService() {
   return get('GetServicesTermService');
+}
+export function GetPhraseService(data) {
+  return get('GetPhraseService', data);
+}
+export function CreateMemberPhraseService(data) {
+  return get('CreateMemberPhraseService', data);
+}
+export function DeleteMemberPhraseService(data) {
+  return get('DeleteMemberPhraseService', data);
+}
+export function UpdateMemberPhraseService(data) {
+  return get('UpdateMemberPhraseService', data);
 }

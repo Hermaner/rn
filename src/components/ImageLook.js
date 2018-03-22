@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   imageList: {
+    width: 60,
+    height: 60,
+  },
+  cachedView: {
     marginTop: 10,
     marginLeft: 10,
     width: 60,
@@ -78,10 +82,12 @@ export default class ImageLook extends React.Component {
                 onPress={() => this.showImageDate(index)}
               >
                 <View style={styles.imageListView}>
-                  <CachedImage
-                    source={{ uri: item.uri }}
-                    style={[styles.imageList, width && { width, height: width, borderWidth: 1 }]}
-                  />
+                  <View style={styles.cachedView}>
+                    <CachedImage
+                      source={{ uri: item.uri }}
+                      style={[styles.imageList, width && { width, height: width, borderWidth: 1 }]}
+                    />
+                  </View>
                   <Text style={{ textAlign: 'center', fontSize: 12, color: '#666' }}>{item.name}</Text>
                 </View>
               </TouchableWithoutFeedback>

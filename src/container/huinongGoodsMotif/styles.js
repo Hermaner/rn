@@ -21,17 +21,14 @@ const styles = StyleSheet.create({
   },
   tabView: {
     flex: 1,
-    height: 45,
-    borderBottomWidth: 2,
-    borderBottomColor: '#fff',
+    height: 50,
     ...st.jacenter,
-  },
-  textBorder: {
-    borderBottomColor: Mcolor,
+    backgroundColor: '#fff',
+    marginBottom: 5,
   },
   tabText: {
-    color: '#666',
-    fontSize: 14,
+    color: '#555',
+    fontSize: 15,
     textAlign: 'center',
   },
   tabTextChoose: {
@@ -109,17 +106,24 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Mcolor,
+    backgroundColor: '#B8860B',
     borderRadius: 20,
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 30,
+    marginTop: 15,
     marginBottom: 15,
   },
   goodsTypeText: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 18,
     color: '#fff',
+  },
+  specialItem: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 2,
+    borderWidth: 1,
+    borderColor: '#e4e4e4',
+    padding: 10,
   },
 });
 export default styles;
