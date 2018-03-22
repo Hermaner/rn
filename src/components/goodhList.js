@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
 import { Mred, deviceW } from '../utils';
 
 const styles = StyleSheet.create({
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   label: {
-    fontSize: 11,
+    fontSize: 12,
     color: Mred,
     lineHeight: 22,
     marginBottom: 6,
@@ -35,9 +36,14 @@ const GoodList = ({ onPress, data, count }) => {
     >
       <View style={styles.list}>
         <View>
-          <Image source={{ uri: data.supplyImages[0].imgUrl }} style={[styles.img, { width: height, height }]} />
+          <View style={[styles.img, { width: height, height }]}>
+            <CachedImage
+              source={{ uri: `${data.supplyImages[0].imgUrl}?imageView2/1/w/200` }}
+              style={[{ width: height, height }]}
+            />
+          </View>
           <View style={styles.bom}>
-            <Text style={styles.name} numberOfLines={1}>{data.categoryName}{data.brandName}{data.supplyItems.map((item => item.specName)).join(' ')}</Text>
+            <Text style={[styles.name, { width: height }]} numberOfLines={1}>{data.categoryName}{data.brandName}{data.supplyItems.map((item => item.specName)).join(' ')}</Text>
             <Text style={styles.label}>{data.wholesalePrice}元/{data.unit}</Text>
           </View>
         </View>

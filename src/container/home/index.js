@@ -1,0 +1,237 @@
+import React from 'react';
+import { View, ScrollView, RefreshControl } from 'react-native';
+import Swiper from 'react-native-swiper';
+import { Container, Text, Icon } from 'native-base';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Location } from 'react-native-baidumap-sdk';
+import { observer } from 'mobx-react/native';
+import { CachedImage } from 'react-native-img-cache';
+import { pushRoute } from '../../actions';
+import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
+import base from './base';
+import styles from './styles';
+import { Mcolor, deviceW } from '../../utils';
+import Child1 from './child1';
+
+@observer
+class HomeScreen extends base {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ...this.state,
+    };
+  }
+  async componentDidMount() {
+    this.getInit();
+    await Location.stop();
+    await Location.init();
+    await Location.setOptions({ gps: true });
+    this.listener = Location.addLocationListener(location => this.GetLocation(location));
+    Location.start();
+  }
+  componentWillUnmount() {
+    Location.stop();
+    this.listener.remove();
+  }
+  renderHeader() {
+    const { backGround1, backgroundImg } = this.state;
+    return (
+      <View>
+        {
+          backgroundImg !== '' ?
+            <View style={styles.headerImgBox}>
+              <CachedImage resizeMode="contain" style={styles.headerImg} source={{ uri: backgroundImg }} />
+            </View>
+          :
+            <View style={styles.headerImgBox}>
+              <CachedImage resizeMode="stretch" style={styles.headerImg} source={backGround1} />
+            </View>
+        }
+      </View>
+    );
+  }
+  renderHeaderNavigation() {
+    const { mainIcons } = this.state;
+    return (
+      <View style={[styles.flexRow, styles.headerNavigation]}>
+        {
+          mainIcons.map((item, index) => (
+            <TOpacity
+              style={styles.flexOne}
+              key={index}
+              content={
+                <View style={[styles.flexOne, styles.jacenter]}>
+                  <View style={[styles.mainIcon, { backgroundColor: item.color }]}>
+                    <Iconfont style={styles.mainIconFont} name={item.icon} />
+                  </View>
+                  <Text style={[styles.headerNavigationText, styles.textCenter]}>{item.label}</Text>
+                </View>
+              }
+              onPress={() => { this.goPage(index); }}
+            />
+          ))
+        }
+      </View>
+    );
+  }
+  renderGoodsType() {
+    const { categorys } = this.state;
+    const { push } = this.props;
+    return (
+      <View style={styles.goodsType}>
+        <Text style={styles.goodsTypeTitle}>- 货品分类 -</Text>
+        <View style={styles.flexRow}>
+          {
+            categorys.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={styles.goodsTypeOne}>
+                    <View
+                      style={[styles.icnBoxTwo, { backgroundColor: item.color }]}
+                    >
+                      <Text style={{ fontSize: 16, textAlign: 'center', color: '#fff' }}>{item.text}</Text>
+                    </View>
+                    <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
+                  </View>}
+                onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
+              />
+            ))
+          }
+        </View>
+      </View>
+    );
+  }
+  renderSampleCenter() {
+    const { push } = this.props;
+    const { SampleCenterList } = this.state;
+    return (
+      <View style={styles.SampleCenter}>
+        <View style={[styles.flexRow, { paddingTop: 10, paddingBottom: 10 }]}>
+          {
+            SampleCenterList.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={[styles.flexOne, styles.jacenter]}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', width: 50, height: 50, borderRadius: 25, backgroundColor: Mcolor, marginBottom: 5 }}>
+                      <Icon style={{ color: '#fff', fontSize: 30 }} name={item.icn} />
+                    </View>
+                    <Text style={[styles.SampleCenterText, styles.textCenter]}>{item.text}</Text>
+                  </View>}
+                onPress={() => { push({ key: item.push }); }}
+              />
+            ))
+          }
+        </View>
+      </View>
+    );
+  }
+  renderSeasonalGoods() {
+    const { seasonals } = this.state;
+    const { push } = this.props;
+    return (
+      <View style={styles.seasonalGoods}>
+        <Text style={styles.goodsTypeTitle}>- 应季好货 -</Text>
+        <View style={styles.seasonalGoodsBox}>
+          {
+            seasonals.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]}>
+                    <View style={styles.imageBox}>
+                      <CachedImage style={styles.image} source={{ uri: `${item.imgUrl}?imageView2/1/w/40` }} />
+                    </View>
+                    <Text numberOfLines={1} style={[styles.headerNavigationText, { textAlign: 'center' }]}>{item.name}</Text>
+                  </View>}
+                onPress={() => { push({ key: 'HuinongGoodsMotif', params: { categoryId: item.categoryId, brands: item.brands, name: item.name } }); }}
+              />
+            ))
+          }
+        </View>
+      </View>
+    );
+  }
+  renderSwiper() {
+    const { imgList } = this.state;
+    return (
+      <View style={{ height: 120, marginTop: 10 }}>
+        <Swiper
+          style={styles.wrapper}
+          height={200}
+          paginationStyle={{ justifyContent: 'center', bottom: 10 }}
+        >
+          {
+            imgList.map((item, i) => (
+              <View key={i} style={styles.slide}>
+                <CachedImage style={styles.swiperImage} source={{ uri: `${item.img}?imageView2/1/h/120` }} />
+              </View>
+            ))
+          }
+        </Swiper>
+      </View>
+    );
+  }
+  renderForYou() {
+    const { supplys } = this.state;
+    return (
+      <View style={styles.forYou}>
+        <View style={{ borderBottomWidth: 1, borderBottomColor: '#eee' }}>
+          <Text style={styles.forYouTitle}>- 推荐货品 -</Text>
+        </View>
+        <View>
+          <Child1 type="1" data={supplys} />
+        </View>
+      </View>
+    );
+  }
+  render() {
+    const {
+      refresh,
+      loading,
+      nomore,
+    } = this.state;
+    const { localData: { districtName } } = UserSocket;
+    return (
+      <Container>
+        <HomeSearch
+          label={districtName}
+          push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'home' } }); }}
+        />
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={this._onRefreshSupply}
+              tintColor="#666"
+              title="加载中..."
+              titleColor="#333"
+              colors={['#666', '#666', '#666']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
+          {this.renderHeader()}
+          {this.renderHeaderNavigation()}
+          {this.renderGoodsType()}
+          {this.renderSampleCenter()}
+          {this.renderSeasonalGoods()}
+          {/* {this.renderSwiper()} */}
+          {this.renderForYou()}
+          {loading && <LoadMore />}
+          {nomore && <LoadNoMore />}
+        </ScrollView>
+      </Container>
+    );
+  }
+}
+
+HomeScreen.propTypes = {
+  push: PropTypes.func,
+};
+export default connect(null, { push: pushRoute })(HomeScreen);

@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
-import { Mred } from '../utils';
+import { Text, View, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
+import { Mred, ColorList } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     padding: 8,
-    borderBottomColor: '#eee',
-    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+    marginBottom: 3,
   },
   img: {
     width: 80,
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
   iconView: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
     marginBottom: 5,
   },
   icon: {
@@ -98,6 +100,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#F28336',
   },
+  aaBox: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    borderWidth: 0.6,
+    borderRadius: 3,
+    marginRight: 4,
+    marginBottom: 2,
+  },
+  aa: {
+    color: '#777',
+    fontSize: 11,
+  },
   lastBtn: {
     paddingTop: 6,
     paddingBottom: 6,
@@ -121,22 +137,28 @@ const SampleGoodList = ({ onPress, data, onPressTell, onPressLastBtn }) => (
     onPress={onPress}
   >
     <View style={styles.list}>
-      <Image source={{ uri: data.supplyImages[0].imgUrl }} style={styles.img} />
+      <CachedImage source={{ uri: `${data.supplyImages[0].imgUrl}?imageView2/1/w/80` }} style={styles.img} />
       <View style={styles.right}>
         <Text style={styles.name} numberOfLines={1}>{data.categoryName}{data.brandName}{data.supplyItems.map((item => item.specName)).join(' ')}</Text>
         <Text style={styles.label}>
           {data.sendProvinceName}{data.sendCityName}{data.sendDistrictName}
         </Text>
         <View style={styles.iconView}>
-          <View style={[styles.icon, styles.icon1]}>
-            <Text style={[styles.iconText, styles.iconText1]}>lllll</Text>
-          </View>
-          <View style={[styles.icon, styles.icon2]}>
-            <Text style={[styles.iconText, styles.iconText2]}>买家保障</Text>
-          </View>
-          <View style={[styles.icon, styles.icon3]}>
-            <Text style={[styles.iconText, styles.iconText3]}>实名</Text>
-          </View>
+          {
+            data.member &&
+            data.member.memberVerifs &&
+            data.member.memberVerifs.map((item3, index3) => (
+              <View
+                style={[
+                  styles.aaBox,
+                  { borderColor: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }
+                ]}
+                key={index3}
+              >
+                <Text style={styles.aa}>{item3.verifFieldName}</Text>
+              </View>
+            ))
+          }
         </View>
         <View style={styles.priceView}>
           <View style={styles.priceLeftView}>
@@ -144,14 +166,14 @@ const SampleGoodList = ({ onPress, data, onPressTell, onPressLastBtn }) => (
             <Text style={styles.priceLabel}>元/{data.unit}</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity onPress={onPressTell}>
+            {/* <TouchableOpacity onPress={onPressTell}>
               <View style={styles.tell}>
                 <Text style={styles.tellText}>聊生意</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={onPressLastBtn}>
-              <View style={styles.lastBtn}>
-                <Text style={styles.lastBtnText}>申请拿样</Text>
+              <View style={styles.tell}>
+                <Text style={styles.tellText}>申请拿样</Text>
               </View>
             </TouchableOpacity>
           </View>

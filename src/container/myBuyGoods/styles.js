@@ -1,0 +1,76 @@
+import { StyleSheet } from 'react-native';
+import { Mcolor, st } from '../../utils';
+
+const styles = StyleSheet.create({
+  flexRowBox: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  goodsInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#f8f8f8',
+  },
+  goodsImg: {
+    width: 80,
+    height: 80,
+  },
+  goodsNameBox: {
+    flex: 1,
+    paddingLeft: 10,
+    height: 80,
+  },
+  totalBox: {
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff',
+  },
+  footerBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  btnBox: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 4,
+    marginLeft: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 28,
+    ...st.jacenter,
+  },
+  btnBox1: {
+    backgroundColor: Mcolor,
+    borderRadius: 4,
+    marginLeft: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 28,
+    ...st.jacenter,
+  },
+});
+export default styles;

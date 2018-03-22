@@ -35,5 +35,18 @@ const iconfont = {
   'icon-zuixinhuoyuan': parseInt('e683', 16),
   'icon-yewuzhongxin': parseInt('e645', 16),
   'icon-tuijianshangjia': parseInt('e61c', 16),
+  'icon-maichu': parseInt('e660;', 16),
+  'icon-xiaolianwawa': parseInt('e607', 16),
+  'icon-xiaolian1': parseInt('e64a', 16),
+  'icon-shengqi': parseInt('e602', 16),
+  'icon-4': parseInt('e649', 16),
+  'icon-youjiantou-01': parseInt('e60f', 16),
+  'icon--nav-hangqing': parseInt('e604', 16),
+  'icon-fasong': parseInt('e60c', 16),
+  'icon-dingdanwuliaocaigouruku': parseInt('e63d', 16),
+  'icon-201': parseInt('e631', 16),
+  'icon-qunfengfuwushang': parseInt('e77a', 16),
+  'icon-supplier': parseInt('e608', 16),
+  'icon-zizhutuiguang': parseInt('e603', 16),
 };
 export default iconfont;

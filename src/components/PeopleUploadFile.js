@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { ActionSheet } from 'native-base';
-import ImageViewer from 'react-native-image-zoom-viewer';
 import { Rpc } from 'react-native-qiniu-hm';
+import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
@@ -94,14 +94,11 @@ export default class PeopleUploadFile extends React.Component {
     this.GetUploadTokenService();
   }
   goAsheet = (index) => {
-    switch (index) {
-      case 0:
-        this.openCamera();
-        break;
-      case 1:
-        this.pickMultiple();
-        break;
-      default:
+    if (index === 0 || index === '0') {
+      this.openCamera();
+    }
+    if (index === 1 || index === '1') {
+      this.pickMultiple();
     }
   }
   showImageDate = (imageDateIndex) => {
@@ -221,7 +218,7 @@ export default class PeopleUploadFile extends React.Component {
                buttonIndex => this.goAsheet(buttonIndex),
              )}
           >
-            <Image source={upImg} style={styles.upViewImg} />
+            <CachedImage source={upImg} style={styles.upViewImg} />
           </TouchableWithoutFeedback>
           {
             !isTextHide && <Text style={styles.upViewText}>{this.props.label}</Text>
@@ -229,9 +226,10 @@ export default class PeopleUploadFile extends React.Component {
         </View>
         <Modal
           visible={isImageDateShow}
+          onRequestClose={() => {}}
           transparent
         >
-          <ImageViewer
+          <Image
             imageUrls={imageViewData}
             index={imageDateIndex}
             onClick={() => this.setState({ isImageDateShow: false })}

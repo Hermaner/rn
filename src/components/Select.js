@@ -79,7 +79,7 @@ Select.propTypes = {
   closeModal: PropTypes.func,
   onValueChange: PropTypes.func,
   title: PropTypes.string,
-  value: PropTypes.any,
+  value: PropTypes.string,
   items: PropTypes.array,
 };
 export default Select;

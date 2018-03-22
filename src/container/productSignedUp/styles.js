@@ -1,0 +1,220 @@
+import { StyleSheet } from 'react-native';
+import { st, Mcolor } from '../../utils';
+
+const styles = StyleSheet.create({
+  ...st,
+  pageBody: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  bodyBox: {
+    backgroundColor: '#fff',
+  },
+  topBox: {
+    height: 50,
+    backgroundColor: Mcolor,
+  },
+  introduceBox: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  title: {
+    flex: 1,
+    fontSize: 22,
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 15,
+  },
+  flexRowText: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  leftText: {
+    fontSize: 14,
+    color: Mcolor,
+  },
+  rightText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
+  },
+  infoBox: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  registerText: {
+    fontSize: 16,
+    color: Mcolor,
+    marginBottom: 4,
+  },
+  registerTextLeft: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 4,
+  },
+  flexRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  inputBox: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  positionBox: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icnBox: {
+    marginRight: 5,
+  },
+  icn: {
+    fontSize: 20,
+    color: '#666',
+  },
+  inputText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
+  },
+  paddingT: {
+    paddingTop: 15,
+  },
+  chooseTypeBox: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 30,
+  },
+  chooseTypeBorder: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  smallBtnBox: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 5,
+    height: 35,
+    ...st.jcenter,
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginBottom: 5,
+    marginRight: 5,
+  },
+  smallBtnBoxChoose: {
+    borderWidth: 1,
+    borderColor: Mcolor,
+    backgroundColor: Mcolor,
+    borderRadius: 5,
+    height: 35,
+    ...st.jcenter,
+    paddingLeft: 12,
+    paddingRight: 12,
+    marginBottom: 5,
+    marginRight: 5,
+  },
+  smallBtnText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  smallBtnTextChoose: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  footerTop: {
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  flexRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  circle: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: Mcolor,
+    marginRight: 10,
+    // marginTop: 4,
+  },
+  btnBox: {
+    flex: 1,
+    height: 50,
+    ...st.jcenter,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: Mcolor,
+    borderRadius: 5,
+    marginBottom: 40,
+  },
+  btnText: {
+    fontSize: 14,
+    color: '#fff',
+    textAlign: 'center',
+  },
+  marginFooter: {
+    marginBottom: 40,
+  },
+  positionTextBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    ...st.jcenter,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 5,
+  },
+  positionIcn: {
+    fontSize: 16,
+    color: Mcolor,
+    marginRight: 6,
+  },
+  positionIcnTwo: {
+    fontSize: 16,
+    color: Mcolor,
+    marginRight: 6,
+  },
+  positionText: {
+    fontSize: 14,
+    color: Mcolor,
+  },
+  positionTextTwo: {
+    flex: 1,
+    fontSize: 14,
+    color: Mcolor,
+  },
+  flexOne: {
+    flex: 1,
+  },
+  footerBackground: {
+    backgroundColor: '#f8f8f8',
+    paddingTop: 3,
+  },
+});
+export default styles;

@@ -104,12 +104,6 @@
     <service android:name="com.sina.weibo.sdk.net.DownloadService"
         android:exported="false"></service>
     <activity
-        android:name=".wxshare.WXEntryActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:exported="true"
-        android:screenOrientation="portrait"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-    <activity
         android:name="com.tencent.tauth.AuthActivity"
         android:launchMode="singleTask"
         android:noHistory="true" >

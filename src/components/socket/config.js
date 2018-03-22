@@ -11,10 +11,10 @@
 
 const config = {
   local: {
-    server: 'https://chat.mm.sunhousm.cn?memberId=',
+    server: 'http://127.0.0.1:7078',
   },
   dev: {
-    server: 'http://192.168.50.57:9092?memberId=',
+    server: 'http://im-server.plusman.cn',
   },
 };
 

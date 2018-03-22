@@ -1,6 +1,5 @@
 
 import { Dimensions, PixelRatio } from 'react-native';
-import RNFetchBlob from 'react-native-fetch-blob';
 
 export const deviceW = Dimensions.get('window').width;
 export const deviceH = Dimensions.get('window').height;
@@ -22,7 +21,6 @@ export const Global = {
   skuType: '0', // 0:默认采购进入 1：采购重新选择商品，返回3page 2： 采供选择规格返回1page 3：默认供应进入 4：供应重新选择商品，返回3page
 };
 export const Mcolor = '#f66c03';
-export const Mg = '#66bb46';
 export const Mred = '#f18334';
 export const Fred = '#ff0000';
 export const Mgreen = '#7eda99';
@@ -30,9 +28,15 @@ export const Sgreen = '#3d9940';
 export const Myellow = '#c08b2e';
 export const Mblue = '#49d1f4';
 export const Sblue = '#79adcd';
+export const ColorList = ['#ffa8a8', '#8be289', '#e196fa', '#fa96c0', '#96cafa', '#96fae1', '#fa9696', '#f6fa96', '#96faa6', '#fae496', '#f296fa', '#96fa9d', '#d6fa96'];
 
 export const st = {
   jacenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  frcenter: {
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -44,11 +48,6 @@ export const st = {
   },
   fr: {
     flexDirection: 'row',
-  },
-  frcenter: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   utilsText: {
     fontSize: 14,
@@ -88,42 +87,4 @@ export const st = {
   font24: {
     fontSize: 24,
   },
-};
-export const fileKey = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const second = now.getSeconds();
-  let ran = parseInt(Math.random() * 888, 10);
-  ran += 100;
-  return `${year}${month}${day}${hour}${minute}${second}${ran}`;
-};
-export const getSessionList = () => {
-  const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/sessionList`;
-  RNFetchBlob.fs.exists(path)
-  .then((exist) => {
-    if (!exist) {
-      RNFetchBlob.fs.createFile(path, '', 'utf8');
-    } else {
-      RNFetchBlob.fs.readFile(path, 'utf8')
-      .then((data) => {
-        console.log(data);
-        return data;
-      });
-    }
-  });
-};
-export const writeSessionList = (data) => {
-  const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/sessionList`;
-  RNFetchBlob.fs.writeFile(path, data, 'utf8');
-};
-export const writeChatList = (memberId, data) => {
-  const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/${memberId}`;
-  RNFetchBlob.fs.writeFile(path, data, 'utf8');
 };

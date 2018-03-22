@@ -1,11 +1,11 @@
 
-// const httpurl = 'http://192.168.50.57:8081/api/mall/';
-// const httpurl = 'http://192.168.0.11:8084/api/lede/';
-const httpurl = 'https://mm.sunhousm.cn/api/mall/';
-export function parseJSON(response) {
+// const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'http://192.168.0.15:8084/api/lede/';
+const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+function parseJSON(response) {
   return response.json();
 }
-export function checkStatus(response) {
+function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -13,12 +13,12 @@ export function checkStatus(response) {
   error.response = response;
   throw error;
 }
-export function request(url, options) {
+function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseJSON);
 }
-export function systemParam(data) {
+function systemParam(data) {
   const defaultdata = {
     timestamp: parseInt(new Date().getTime() / 1000, 10).toString(),
     nick: '1',
@@ -35,13 +35,9 @@ export function obj2form(data) {
   return string.substr(1, string.length);
 }
 export function post(path, data) {
-  console.log(`${httpurl}${path}`);
   return request(`${httpurl}${path}`, {
     method: 'POST',
     body: JSON.stringify(systemParam(data)),
-    headers: {
-      Authorization: global.memberId || '2',
-    },
   });
 }
 export function get(path, data) {
@@ -49,9 +45,6 @@ export function get(path, data) {
   console.log(purl);
   return request(purl, {
     method: 'GET',
-    headers: {
-      Authorization: global.memberId || '2',
-    },
   });
 }
 export function ampGet(data) {
@@ -61,7 +54,7 @@ export function ampGet(data) {
     method: 'GET',
   });
 }
-export function isClass(o) {
+function isClass(o) {
   if (o === null) return 'null';
   if (o === undefined) return 'Undefined';
   return Object.prototype.toString.call(o).slice(8, -1);
@@ -94,426 +87,333 @@ export function AmapGeocode(location) {
     location,
   });
 }
-export function AuthMasterService(data) {
-  return post('AuthMasterService', data);
-}
-export function RegisterMemberService(data) {
-  return post('RegisterMemberService', data);
-}
-export function LoginService(data) {
-  return post('LoginService', data);
-}
 export function PayAppWeiXinService(data) {
-  return post('PayAppWeiXinService', data);
+  return get('PayAppWeiXinService', data);
 }
-export function AliAppPayService(data) {
-  return post('AliAppPayService', data);
+export function PayAliService(data) {
+  return get('PayAliService', data);
 }
-export function NetPayService(data) {
-  return get('NetPayService', data);
+export function RepeatPurchaseService(data) {
+  return post('RepeatPurchaseService', data);
+}
+export function GetSpecService(data) {
+  return get('GetSpecService', data);
+}
+export function GetSupplyInfoService(data) {
+  return get('GetSupplyInfoService', data);
+}
+export function ValidateIsQuoteService(data) {
+  return get('ValidateIsQuoteService', data);
+}
+export function GetSameCategoryPurchaseService(data) {
+  return get('GetSameCategoryPurchaseService', data);
+}
+export function SaveMemberRoleService(data) {
+  return get('SaveMemberRoleService', data);
+}
+export function GetIdentityService(data) {
+  return get('GetIdentityService', data);
 }
 export function GetCodeService(data) {
   return get('GetCodeService', data);
 }
-export function RegisterService(data) {
-  return get('RegisterService', data);
+export function RegisterMemberService(data) {
+  return post('RegisterMemberService', data);
 }
-export function CreateMasterRecruitService(data) {
-  return get('CreateMasterRecruitService', data);
+export function GetAppCategoryService(data) {
+  return get('GetAppCategoryService', data);
 }
-export function CreateMemberAddressService(data) {
-  return get('CreateMemberAddressService', data);
+export function GetCityService() {
+  return get('GetCityService');
 }
-export function CreateShoppingCartService(data) {
-  return get('CreateShoppingCartService', data);
+export function GetDistrictService() {
+  return get('GetDistrictService');
 }
-export function DeleteShoppingCartService(data) {
-  return get('DeleteShoppingCartService', data);
+export function CreatePurchaseQuoteService(data) {
+  return post('CreatePurchaseQuoteService', data);
 }
-export function UpdateShoppingCartService(data) {
-  return get('UpdateShoppingCartService', data);
+export function CreatePurchaseService(data) {
+  return post('CreatePurchaseService', data);
 }
-export function GetShoppingCartService(data) {
-  return get('GetShoppingCartService', data);
+export function GetUploadTokenService() {
+  return get('GetUploadTokenService');
 }
-export function GetProductService(data) {
-  return get('GetProductService', data);
+export function GetPurchaseService(data) {
+  return get('GetPurchaseService', data);
 }
-export function GetProductInfoService(data) {
-  return get('GetProductInfoService', data);
+export function StopPurchaseService(data) {
+  return get('StopPurchaseService', data);
 }
-export function CreateOrderService(data) {
-  return post('CreateOrderService', data);
+export function CreateSupplyService(data) {
+  return post('CreateSupplyService', data);
 }
-export function PayWinXinService(data) {
-  return get('PayWinXinService', data);
+export function GetSupplyService(data) {
+  return get('GetSupplyService', data);
 }
-export function GetMemberAddressService(data) {
-  return get('GetMemberAddressService', data);
+export function RefreshSupplyService(data) {
+  return get('RefreshSupplyService', data);
 }
-export function GetOrderInfoService(data) {
-  return get('GetOrderInfoService', data);
+export function StopSupplyService(data) {
+  return get('StopSupplyService', data);
 }
-export function GetOrderService(data) {
-  return get('GetOrderService', data);
+export function GetQuoteService(data) {
+  return get('GetQuoteService', data);
 }
-export function CreateFeedbackService(data) {
-  return get('CreateFeedbackService', data);
+export function ShelfSupplyService(data) {
+  return get('ShelfSupplyService', data);
 }
-export function UpdateMemberService(data) {
-  return get('UpdateMemberService', data);
+export function DeleteSupplyService(data) {
+  return get('DeleteSupplyService', data);
 }
-export function AccessWinXinService(data) {
-  return get('AccessWinXinService', data);
+export function UpdateSupplyService(data) {
+  return post('UpdateSupplyService', data);
 }
-export function GetServicesByParentIdService(data) {
-  return get('GetServicesByParentIdService', data);
+export function GetMemberInfoService(data) {
+  return get('GetMemberInfoService', data);
 }
-export function UpdateOrderStatusService(d) {
-  return get('UpdateOrderStatusService', d);
+export function AddOrUpdateReceiveAddressService(data) {
+  return post('AddOrUpdateReceiveAddressService', data);
 }
-export function GetCategoryService(d) {
-  return get('GetCategoryService', d);
+export function DeleteReceiveAddressService(data) {
+  return get('DeleteReceiveAddressService', data);
 }
-export function UpdateMasterOrderItemService(data) {
-  return get('UpdateMasterOrderItemService', data);
+export function UpdateMemberInfoService(data) {
+  return post('UpdateMemberInfoService', data);
 }
-export function GetAppToWeiXinJsApiSign(data) {
-  return get('GetAppToWeiXinJsApiSign', data);
+export function SetDefaultService(data) {
+  return get('SetDefaultService', data);
 }
-export function CreateMemberSignService(d) {
-  return get('CreateMemberSignService', d);
+export function PersonVerifService(data) {
+  return post('PersonVerifService', data);
 }
-export function GetDecorationCompanyService(data) {
-  return get('GetDecorationCompanyService', data);
+export function EntVerifService(data) {
+  return post('EntVerifService', data);
 }
-export function GetDecorationCompanyInfoService(data) {
-  return get('GetDecorationCompanyInfoService', data);
+export function GetFootPrint(data) {
+  return get('GetFootPrint', data);
 }
-export function GetDecorationTemplateInfoService(data) {
-  return get('GetDecorationTemplateInfoService', data);
+export function GetOrgProductInfo(data) {
+  return get('GetOrgProductInfo', data);
 }
-export function CreateMemberDecorationService(data) {
-  return get('CreateMemberDecorationService', data);
+export function GetNewsService(data) {
+  return get('GetNewsService', data);
 }
-export function DeleteMemberDecorationService(data) {
-  return get('DeleteMemberDecorationService', data);
+export function GetNewsInfoService(data) {
+  return get('GetNewsInfoService', data);
 }
-export function CreateDecorationConsultService(data) {
-  return get('CreateDecorationConsultService', data);
+export function CreateNewsCommentService(data) {
+  return get('CreateNewsCommentService', data);
 }
-export function CreateMemberBmMarketService(data) {
-  return get('CreateMemberBmMarketService', data);
+export function CreateCommentPraiseService(data) {
+  return get('CreateCommentPraiseService', data);
 }
-export function DeleteMemberBmMarketService(data) {
-  return get('DeleteMemberBmMarketService', data);
+export function CreateNewsPraiseService(data) {
+  return get('CreateNewsPraiseService', data);
 }
-export function GetBmMarketInfoService(data) {
-  return get('GetBmMarketInfoService', data);
+export function GetRecomSupplyService(data) {
+  return get('GetRecomSupplyService', data);
 }
-export function GetBmMarketService(data) {
-  return get('GetBmMarketService', data);
+export function GetGoodBusinesService(data) {
+  return get('GetGoodBusinesService', data);
 }
-export function GetBmMarketProductService(data) {
-  return get('GetBmMarketProductService', data);
+export function GetGotSupplyService(data) {
+  return get('GetGotSupplyService', data);
 }
-export function GetMasterService(data) {
-  return get('GetMasterService', data);
+export function GetHomeCategoryService() {
+  return get('GetHomeCategoryService');
 }
-export function GetMasterTypeService(data) {
-  return get('GetMasterTypeService', data);
+export function GetPurchaseByCategoryService(data) {
+  return get('GetPurchaseByCategoryService', data);
 }
-export function GetMasterCenterService(data) {
-  return get('GetMasterCenterService', data);
+export function GetSupplyByFiltersService(data) {
+  return post('GetSupplyByFiltersService', data);
 }
-export function CreateDemandOrderService(data) {
-  return post('CreateDemandOrderService', data);
+export function FilterPurchaseService(data) {
+  return get('FilterPurchaseService', data);
 }
-export function GetServicesTypeService(data) {
-  return get('GetServicesTypeService', data);
+export function CreateSalesOrderService(data) {
+  return get('CreateSalesOrderService', data);
 }
-export function UpdateDemandOrderService(data) {
-  return post('UpdateDemandOrderService', data);
+export function UpdateOrderService(data) {
+  return get('UpdateOrderService', data);
 }
-export function PayDemandOrderService(data) {
-  return get('PayDemandOrderService', data);
+export function GetMemberBuyOrderService(data) {
+  return get('GetMemberBuyOrderService', data);
 }
-export function AuthDecorationService(data) {
-  return post('AuthDecorationService', data);
+export function DeleteOrderService(data) {
+  return get('DeleteOrderService', data);
 }
-export function AuthBmMarketService(data) {
-  return post('AuthBmMarketService', data);
+export function GetMemberSellOrderService(data) {
+  return get('GetMemberSellOrderService', data);
 }
-export function GetMemberBmMarketService(d) {
-  return get('GetMemberBmMarketService', d);
+export function CreateApplyDemoService(data) {
+  return get('CreateApplyDemoService', data);
 }
-export function GetMemberDecorationService(d) {
-  return get('GetMemberDecorationService', d);
+export function GetVisitorService(data) {
+  return get('GetVisitorService', data);
 }
-export function BindMemberPhoneService(d) {
-  return get('BindMemberPhoneService', d);
+export function CreateMemberFollowService(data) {
+  return get('CreateMemberFollowService', data);
 }
-export function GetPrizeService() {
-  return get('GetPrizeService');
+export function GetMemberFollowService(data) {
+  return get('GetMemberFollowService', data);
 }
-export function GetMemberPrizeService(data) {
-  return get('GetMemberPrizeService', data);
+export function DeleteMemberFollowService(data) {
+  return get('DeleteMemberFollowService', data);
 }
-export function GetBindMemberPhoneService(data) {
-  return get('GetBindMemberPhoneService', data);
+export function GetMessageService(data) {
+  return get('GetMessageService', data);
 }
-export function CreateMemberPrizeService(data) {
-  return get('CreateMemberPrizeService', data);
+export function GetHomeNewsService(data) {
+  return get('GetHomeNewsService', data);
 }
-export function CreateMemberMasterService(data) {
-  return get('CreateMemberMasterService', data);
+export function GetLogisticsService() {
+  return get('GetLogisticsService');
 }
-export function DeleteMemberMasterService(data) {
-  return get('DeleteMemberMasterService', data);
+export function CreateDeliverOrderService(data) {
+  return get('CreateDeliverOrderService', data);
 }
-export function CreateMasterServicesService(data) {
-  return post('CreateMasterServicesService', data);
+export function CreateSupplyEvaluatService(data) {
+  return get('CreateSupplyEvaluatService', data);
 }
-export function GetMasterServicesService(data) {
-  return get('GetMasterServicesService', data);
+export function GetDeliverOrderService(data) {
+  return get('GetDeliverOrderService', data);
 }
-export function DeleteMasterServicesService(data) {
-  return get('DeleteMasterServicesService', data);
+export function CreateReportService(data) {
+  return post('CreateReportService', data);
 }
-export function UpdateMasterServicesService(data) {
-  return post('UpdateMasterServicesService', data);
-}
-export function GetMasterServicesInfoService(data) {
-  return get('GetMasterServicesInfoService', data);
-}
-export function CreateMemberMasterServicesService(data) {
-  return get('CreateMemberMasterServicesService', data);
-}
-export function DeleteMemberMasterServicesService(data) {
-  return get('DeleteMemberMasterServicesService', data);
-}
-export function GetMasterOrderService(data) {
-  return get('GetMasterOrderService', data);
-}
-export function DeleteMemberAddressService(data) {
-  return get('DeleteMemberAddressService', data);
-}
-export function UpdateMemberAddressService(data) {
-  return get('UpdateMemberAddressService', data);
-}
-export function GetMasterOrderInfoService(data) {
-  return get('GetMasterOrderInfoService', data);
-}
-export function UpdateMemberAddressDefaultService(data) {
-  return get('UpdateMemberAddressDefaultService', data);
-}
-export function UpdateMasterOrderItemLogService(data) {
-  return get('UpdateMasterOrderItemLogService', data);
-}
-export function RefundService(data) {
-  return get('RefundService', data);
-}
-export function CreateOrderEvaluateService(data) {
-  return get('CreateOrderEvaluateService', data);
-}
-export function GetMasterCommentService(data) {
-  return get('GetMasterCommentService', data);
-}
-export function GetOrderEvaluateService(data) {
-  return get('GetOrderEvaluateService', data);
-}
-export function UpdateMasterService(data) {
-  return post('UpdateMasterService', data);
-}
-export function CreateMasterAuthService(data) {
-  return get('CreateMasterAuthService', data);
-}
-export function GetMemberMasterServicesService(d) {
-  return get('GetMemberMasterServicesService', d);
-}
-export function GetMemberMasterService(d) {
-  return get('GetMemberMasterService', d);
-}
-export function CreateDecorationIntroService(data) {
-  return post('CreateDecorationIntroService', data);
-}
-export function CreateDecorationCredentialsService(data) {
-  return post('CreateDecorationCredentialsService', data);
-}
-export function CreateDecorationCaseService(data) {
-  return post('CreateDecorationCaseService', data);
-}
-export function GetDecorationCaseService(data) {
-  return get('GetDecorationCaseService', data);
-}
-export function CreateBmMarketCredentialsService(data) {
-  return post('CreateBmMarketCredentialsService', data);
-}
-export function UpdateBmMarketService(data) {
-  return post('UpdateBmMarketService', data);
-}
-export function UpdateDecorationCompanyService(data) {
-  return get('UpdateDecorationCompanyService', data);
-}
-export function CreateBmMarketImageService(data) {
-  return post('CreateBmMarketImageService', data);
-}
-export function GetDemandCategoryService(data) {
-  return get('GetDemandCategoryService', data);
-}
-export function CreateNewDemandOrderService(data) {
-  return post('CreateNewDemandOrderService', data);
-}
-export function GetDemandOrderService(data) {
-  return get('GetDemandOrderService', data);
-}
-export function CreateDemandOrderBiddingService(data) {
-  return post('CreateDemandOrderBiddingService', data);
-}
-export function GetDemandOrderBiddingService(data) {
-  return get('GetDemandOrderBiddingService', data);
-}
-export function DeleteDemandOrderService(data) {
-  return get('DeleteDemandOrderService', data);
-}
-export function CreateDifferenceOrderService(data) {
-  return post('CreateDifferenceOrderService', data);
-}
-export function CreateRefundOrderService(data) {
-  return get('CreateRefundOrderService', data);
-}
-export function GetProgramService(data) {
-  return get('GetProgramService', data);
-}
-export function CreateProgramVoteService(data) {
-  return get('CreateProgramVoteService', data);
-}
-export function GetMasterCaseService(data) {
-  return get('GetMasterCaseService', data);
-}
-export function SuccessOrderStatusService(data) {
-  return get('SuccessOrderStatusService', data);
-}
-export function UpdateDecorationCompanyImgService(data) {
-  return get('UpdateDecorationCompanyImgService', data);
-}
-export function UpdateBmMarketImgService(data) {
-  return get('UpdateBmMarketImgService', data);
-}
-export function UpdateMasterImgService(data) {
-  return get('UpdateMasterImgService', data);
-}
-export function GetMemberCenterService(data) {
-  return get('GetMemberCenterService', data);
-}
-export function CreateOtherOrgService(data) {
-  return get('CreateOtherOrgService', data);
-}
-export function CreateWithdrawalsOrderMasterService(data) {
-  return get('CreateWithdrawalsOrderMasterService', data);
-}
-export function GetWithdrawalsOrderService(data) {
-  return get('GetWithdrawalsOrderService', data);
-}
-export function GetUploadTokenService(data) {
-  return get('GetUploadTokenService', data);
-}
-export function GetDepositMasterService(data) {
-  return get('GetDepositMasterService', data);
-}
-export function CreateDepositOrderService(data) {
-  return post('CreateDepositOrderService', data);
-}
-export function GetDepositBmMarketService(data) {
-  return get('GetDepositBmMarketService', data);
-}
-export function CreateDepositOrderBmMarketService(data) {
-  return post('CreateDepositOrderBmMarketService', data);
-}
-export function GetDepositDecorationService(data) {
-  return get('GetDepositDecorationService', data);
-}
-export function CreateDepositOrderDecorationService(data) {
-  return post('CreateDepositOrderDecorationService', data);
-}
-export function PayDepositOrderService(data) {
-  return get('PayDepositOrderService', data);
-}
-export function CreateRechargeOrderService(data) {
-  return post('CreateRechargeOrderService', data);
-}
-export function GetMemberRechargeService(data) {
-  return get('GetMemberRechargeService', data);
-}
-export function GetWithdrawalsNumberMasterService(data) {
-  return get('GetWithdrawalsNumberMasterService', data);
+export function CreateOpinionBackService(data) {
+  return get('CreateOpinionBackService', data);
 }
 export function CreateWithdrawalsNumberService(data) {
   return get('CreateWithdrawalsNumberService', data);
 }
-export function AgreeDemandOrderService(data) {
-  return get('AgreeDemandOrderService', data);
+export function GetWithdrawalsNumberService(data) {
+  return get('GetWithdrawalsNumberService', data);
 }
-export function GetMyMasterServicesService(data) {
-  return get('GetMyMasterServicesService', data);
+export function SetDefaultWithdrawalsNumberService(data) {
+  return get('SetDefaultWithdrawalsNumberService', data);
 }
-export function CreateWithdrawalsNumberMasterService(data) {
-  return get('CreateWithdrawalsNumberMasterService', data);
+export function UpdateMessageIsReadService(data) {
+  return get('UpdateMessageIsReadService', data);
 }
-export function UpdateMasterServicesStatusService(data) {
-  return get('UpdateMasterServicesStatusService', data);
+export function GetMemberSurplusAmountService(data) {
+  return get('GetMemberSurplusAmountService', data);
 }
-export function GetWithdrawalsOrderMasterService(data) {
-  return get('GetWithdrawalsOrderMasterService', data);
+export function CreateWithdrawalsOrderService(data) {
+  return get('CreateWithdrawalsOrderService', data);
 }
-export function GetMasterAmountLogService(data) {
-  return get('GetMasterAmountLogService', data);
+export function GetMemberAmountLogService(data) {
+  return get('GetMemberAmountLogService', data);
 }
-export function GetMasterPunishOrderService(data) {
-  return get('GetMasterPunishOrderService', data);
+export function GetMarketInfoService(data) {
+  return get('GetMarketInfoService', data);
 }
-export function UpdateMasterDemandOrderBiddingService(data) {
-  return post('UpdateMasterDemandOrderBiddingService', data);
+export function GetMarketService(data) {
+  return get('GetMarketService', data);
 }
-export function GetMasterDemandOrderBiddingService(data) {
-  return get('GetMasterDemandOrderBiddingService', data);
+export function FilterMarketInfoService(data) {
+  return post('FilterMarketInfoService', data);
 }
-export function GetMasterInfoByIDService(data) {
-  return get('GetMasterInfoByIDService', data);
+export function GetNewsTypeService(data) {
+  return get('GetNewsTypeService', data);
 }
-export function GetServiceCategoryService(data) {
-  return get('GetServiceCategoryService', data);
+export function GetDistrictMarketInfo(data) {
+  return get('GetDistrictMarketInfo', data);
 }
-export function GetServiceProductService(data) {
-  return get('GetServiceProductService', data);
+export function JudgeMemberIsPersonVerif(data) {
+  return get('JudgeMemberIsPersonVerif', data);
 }
-export function GetWaitMasterOrderService(data) {
-  return get('GetWaitMasterOrderService', data);
+export function GetServiceModeService() {
+  return get('GetServiceModeService');
 }
-export function GetWaitMasterOrderInfoService(data) {
-  return get('GetWaitMasterOrderInfoService', data);
+export function GetUnitsService() {
+  return get('GetUnitsService');
 }
-export function GetMemberMessageService(data) {
-  return get('GetMemberMessageService', data);
+export function GetDemoRoleService() {
+  return get('GetDemoRoleService');
 }
-export function GetMasterAuthService(data) {
-  return get('GetMasterAuthService', data);
+export function GetPowerBusinessImgService() {
+  return get('GetPowerBusinessImgService');
 }
-export function UpdateAuthMasterService(data) {
-  return post('UpdateAuthMasterService', data);
+export function GetPurchaseByOneLevelCategoryService(data) {
+  return get('GetPurchaseByOneLevelCategoryService', data);
 }
-export function GetHomePageService(data) {
-  return get('GetHomePageService', data);
+export function CreateEnterForService(data) {
+  return get('CreateEnterForService', data);
 }
-export function GetPhraseService(data) {
-  return get('GetPhraseService', data);
+export function LoginForPassWordService(data) {
+  return post('LoginForPassWordService', data);
 }
-export function CreateMemberPhraseService(data) {
-  return get('CreateMemberPhraseService', data);
+export function GetSpreadFieldService() {
+  return get('GetSpreadFieldService');
 }
-export function DeleteMemberPhraseService(data) {
-  return get('DeleteMemberPhraseService', data);
+export function CreateSpreadEnterForService(data) {
+  return post('CreateSpreadEnterForService', data);
 }
-export function UpdateMemberPhraseService(data) {
-  return get('UpdateMemberPhraseService', data);
+export function GetEnlistImgService() {
+  return get('GetEnlistImgService');
+}
+export function GetPlatformInfoService() {
+  return get('GetPlatformInfoService');
+}
+export function GetPurchaseInfoService(data) {
+  return get('GetPurchaseInfoService', data);
+}
+export function GetCategoryByNameService(data) {
+  return get('GetCategoryByNameService', data);
+}
+export function SetPayPasswordService(data) {
+  return get('SetPayPasswordService', data);
+}
+export function GetMemberSellOrderCountService(data) {
+  return get('GetMemberSellOrderCountService', data);
+}
+export function GetMemberBuyOrderCountService(data) {
+  return get('GetMemberBuyOrderCountService', data);
+}
+export function CreateCollectService(data) {
+  return get('CreateCollectService', data);
+}
+export function GetCollectService(data) {
+  return get('GetCollectService', data);
+}
+export function DeleteCollectService(data) {
+  return get('DeleteCollectService', data);
+}
+export function GetHotSearchService() {
+  return get('GetHotSearchService');
+}
+export function GetSeasonSupplyService(data) {
+  return get('GetSeasonSupplyService', data);
+}
+export function GetScoreInfoService(data) {
+  return get('GetScoreInfoService', data);
+}
+export function GetEvaluatFiledService(data) {
+  return get('GetEvaluatFiledService', data);
+}
+export function GetMemberAllEvaluatService(data) {
+  return get('GetMemberAllEvaluatService', data);
+}
+export function GetVerifSupplyService(data) {
+  return get('GetVerifSupplyService', data);
+}
+export function GetMemberFootCountsService(data) {
+  return get('GetMemberFootCountsService', data);
+}
+export function GetWithdrawalsOrderService(data) {
+  return get('GetWithdrawalsOrderService', data);
+}
+export function SetMemberAnIsPushService(data) {
+  return get('SetMemberAnIsPushService', data);
+}
+export function GetBackgroundImgService(data) {
+  return get('GetBackgroundImgService', data);
+}
+export function GetIntentionMemberService(data) {
+  return get('GetIntentionMemberService', data);
+}
+export function GetServicesTermService() {
+  return get('GetServicesTermService');
 }

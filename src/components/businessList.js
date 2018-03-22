@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Image, View, TouchableHighlight, StyleSheet } from 'react-native';
-import { Mred } from '../utils';
+import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { CachedImage } from 'react-native-img-cache';
+import { Mred, ColorList } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     padding: 8,
-    borderBottomColor: '#eee',
-    borderBottomWidth: 1,
+    marginBottom: 3,
     backgroundColor: '#fff',
   },
   img: {
     width: 80,
     height: 80,
-    marginRight: 8,
   },
   right: {
     flex: 1,
@@ -31,6 +30,7 @@ const styles = StyleSheet.create({
   },
   iconView: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     marginBottom: 5,
   },
@@ -42,9 +42,6 @@ const styles = StyleSheet.create({
   },
   iconText: {
     fontSize: 10,
-  },
-  icon1: {
-    borderColor: '#71cbf1',
   },
   iconText1: {
     color: '#71cbf1',
@@ -84,6 +81,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
   },
+  imgBox: {
+    width: 80,
+    marginRight: 8,
+  },
 });
 
 
@@ -93,7 +94,9 @@ const BusinessList = ({ onPress, data }) => (
     onPress={onPress}
   >
     <View style={styles.list}>
-      <Image source={{ uri: data.imgUrl }} style={styles.img} />
+      <View style={styles.imgBox}>
+        <CachedImage source={{ uri: `${data.imgUrl}?imageView2/1/w/80` }} style={styles.img} />
+      </View>
       <View style={styles.right}>
         <Text style={styles.name} numberOfLines={1}>{data.nickName}</Text>
         <Text style={styles.label}>
@@ -112,7 +115,7 @@ const BusinessList = ({ onPress, data }) => (
           {
             data.memberVerifs &&
             data.memberVerifs.map((item, index) => (
-              <View style={[styles.icon, styles.icon1]} key={index}>
+              <View style={[styles.icon, { borderColor: ColorList[index > ColorList.length ? index % ColorList.length : index] }]} key={index}>
                 <Text style={[styles.iconText, styles.iconText1]}>{item.verifFieldName}</Text>
               </View>
             ))

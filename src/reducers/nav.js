@@ -2,14 +2,7 @@ import { NavigationActions } from 'react-navigation';
 
 import { AppNavigator } from '../navigators/AppNavigator';
 
-
-const initialNavState = {
-  index: 0,
-  isSleekShow: false,
-  routes: [
-    { key: 'Main', routeName: 'Main' },
-  ],
-};
+const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Main'));
 function nav(state = initialNavState, action) {
   let nextState;
   const newRoutes = [];
@@ -46,10 +39,6 @@ function nav(state = initialNavState, action) {
         })
       , state);
       break;
-    case 'showSleek':
-      return { ...state, isSleekShow: true };
-    case 'closeSleek':
-      return { ...state, isSleekShow: false };
     default:
       nextState = AppNavigator.router.getStateForAction(action, state);
       break;

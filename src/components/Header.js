@@ -6,7 +6,7 @@ import { Mcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: Mcolor,
+    backgroundColor: '#f8f8f8',
   },
   left: {
     position: 'absolute',
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 48,
     width: 48,
-    ...st.jcenter,
+    ...st.jacenter,
     zIndex: 9,
   },
   title: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 15,
-    color: '#fff',
+    color: '#444',
     fontWeight: 'bold',
   },
   right: {
@@ -36,36 +36,27 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   rightText: {
-    color: '#fff',
+    color: Mcolor,
     fontSize: 14,
   },
   backIcon: {
-    fontSize: 24,
-    marginLeft: 15,
-    color: '#fff',
+    fontSize: 22,
+    marginLeft: 10,
+    color: '#666',
   },
 });
-const headerBar = ({ back, title, rightText, rightPress, hideLeft, rightContent }) => (
+const headerBar = ({ back, title, showRight, rightText, rightPress }) => (
   <Header style={styles.header}>
-    {
-      !hideLeft &&
-      <TouchableOpacity onPress={back} style={styles.left}>
-        <Icon name="arrow-back" style={styles.backIcon} />
-      </TouchableOpacity>
-    }
+    <TouchableOpacity onPress={back} style={styles.left}>
+      <Icon name="arrow-back" style={styles.backIcon} />
+    </TouchableOpacity>
     <View style={styles.title}>
       <Text style={styles.titleText}>{title}</Text>
     </View>
     {
-      rightText &&
+      showRight &&
       <TouchableOpacity onPress={rightPress} style={styles.right}>
         <Text style={styles.rightText}>{rightText}</Text>
-      </TouchableOpacity>
-    }
-    {
-      rightContent &&
-      <TouchableOpacity onPress={rightPress} style={styles.right}>
-        {rightContent}
       </TouchableOpacity>
     }
   </Header>
@@ -76,7 +67,6 @@ headerBar.propTypes = {
   title: PropTypes.string,
   rightPress: PropTypes.func,
   rightText: PropTypes.string,
-  rightContent: PropTypes.any,
-  hideLeft: PropTypes.bool,
+  showRight: PropTypes.bool,
 };
 export default headerBar;

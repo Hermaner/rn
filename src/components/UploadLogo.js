@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 50,
     overflow: 'hidden',
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 30,
   },
   upViewImg: {
@@ -65,6 +65,7 @@ export default class Prompt extends React.Component {
     let image;
     ImagePicker.openCamera({
       includeExif: true,
+      multiple: false,
     }).then((img) => {
       image = { uri: img.path, width: img.width, height: img.height, mime: img.mime };
       this.setState({
@@ -75,6 +76,7 @@ export default class Prompt extends React.Component {
   pickMultiple = () => {
     let image;
     ImagePicker.openPicker({
+      multiple: false,
       includeExif: true,
     }).then((img) => {
       image = { uri: img.path, width: img.width, height: img.height, mime: img.mime };
@@ -99,7 +101,7 @@ export default class Prompt extends React.Component {
     let ran = parseInt(Math.random() * 888, 10);
     ran += 100;
     const key = `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
-    image.key = `${global.buketUrl}${key}`;
+    image.key = `${key}`;
     this.setState({
       image,
     }, () => this.props.getImages(image));
@@ -111,9 +113,8 @@ export default class Prompt extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         this.setState({
-          uptoken: res.data.upToken,
+          uptoken: res.data,
         });
-        global.buketUrl = res.data.buketUrl;
       } else {
         Toast.show(res.msg);
       }

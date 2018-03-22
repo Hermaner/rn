@@ -4,6 +4,7 @@ import {
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
+  Text,
 } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { CachedImage } from 'react-native-img-cache';
@@ -23,8 +24,8 @@ const styles = StyleSheet.create({
   imageList: {
     marginTop: 10,
     marginLeft: 10,
-    width: (deviceW / 3) - 13,
-    height: (deviceW / 3) - 13,
+    width: 60,
+    height: 60,
   },
 });
 export default class ImageLook extends React.Component {
@@ -36,7 +37,8 @@ export default class ImageLook extends React.Component {
     super(props);
     const images = [];
     props.images.forEach((item) => {
-      images.push({ uri: `${item}?imageView2/1/w/200`, item });
+      console.log(item);
+      images.push({ uri: `${item.imgUrl}?imageView2/1/w/200`, imgUrl: item.imgUrl, name: item.name });
     });
     this.state = {
       images,
@@ -50,7 +52,8 @@ export default class ImageLook extends React.Component {
   showImageDate = (imageDateIndex) => {
     const { images } = this.state;
     const imageViewData = [];
-    images.forEach(item => imageViewData.push({ url: item.item }));
+    images.forEach(item => imageViewData.push({ url: item.imgUrl }));
+    console.log(imageViewData);
     this.setState({
       imageDateIndex,
       isImageDateShow: true,
@@ -77,8 +80,9 @@ export default class ImageLook extends React.Component {
                 <View style={styles.imageListView}>
                   <CachedImage
                     source={{ uri: item.uri }}
-                    style={[styles.imageList, width && { width, height: width }]}
+                    style={[styles.imageList, width && { width, height: width, borderWidth: 1 }]}
                   />
+                  <Text style={{ textAlign: 'center', fontSize: 12, color: '#666' }}>{item.name}</Text>
                 </View>
               </TouchableWithoutFeedback>
             ))

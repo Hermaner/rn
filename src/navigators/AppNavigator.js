@@ -1,199 +1,282 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Initializer } from 'react-native-baidumap-sdk';
 import { connect } from 'react-redux';
-import { View, Text, Modal } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import { Root } from 'native-base';
+import { Initializer } from 'react-native-baidumap-sdk';
 import {
   createReduxBoundAddListener,
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
-import { Root, Icon } from 'native-base';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
-import { TOpacity, TFeedback } from '../components';
-import base from './base';
-import styles from './styles';
 
-import Main from '../containers/Main';
-import ServiceList from '../containers/ServiceList';
-import ServiceDetail from '../containers/ServiceDetail';
-import MasterDetail from '../containers/MasterDetail';
-import User from '../containers/User';
-import ChatRoom from '../containers/ChatRoom';
-import DemandOrderDetail from '../containers/DemandOrderDetail';
-import CreateConfirm from '../containers/CreateConfirm';
-import CreatePay from '../containers/CreatePay';
-import MemberInfo from '../containers/MemberInfo';
-import InputChange from '../containers/InputChange';
-import BindPhone from '../containers/BindPhone';
-import Orders from '../containers/Orders';
-import OrderDetail from '../containers/OrderDetail';
-import OrderEval from '../containers/OrderEval';
-import MyDemandOrderDetail from '../containers/MyDemandOrderDetail';
-import MasterList from '../containers/MasterList';
-import MasterCategory from '../containers/MasterCategory';
-import EvalList from '../containers/EvalList';
-import DecorateList from '../containers/DecorateList';
-import DecorateDetail from '../containers/DecorateDetail';
-import BmMarketList from '../containers/BmMarketList';
-import BmMarketDetail from '../containers/BmMarketDetail';
-import DecorateCaseDetail from '../containers/DecorateCaseDetail';
-import DecorateCaseList from '../containers/DecorateCaseList';
-import DecorateImageDetail from '../containers/DecorateImageDetail';
-import DecorateIntrDetail from '../containers/DecorateIntrDetail';
-import ApplyWant from '../containers/ApplyWant';
-import ApplyOther from '../containers/ApplyOther';
-import ApplyMaster from '../containers/ApplyMaster';
-import ApplyDecorate from '../containers/ApplyDecorate';
-import ApplyBmMarket from '../containers/ApplyBmMarket';
-import GetCitys from '../containers/GetCitys';
-import DemandConfirm from '../containers/DemandConfirm';
-import DemandCategory from '../containers/DemandCategory';
-import MyAddress from '../containers/MyAddress';
-import MyAddressCreate from '../containers/MyAddressCreate';
-import MyAccount from '../containers/MyAccount';
-import MyCard from '../containers/MyCard';
-import MyColl from '../containers/MyColl';
-import MyCoupons from '../containers/MyCoupons';
-import MyTixian from '../containers/MyTixian';
-import PlatProblem from '../containers/PlatProblem';
-import About from '../containers/About';
-import Feedback from '../containers/Feedback';
-import MgBmMarket from '../containers/MgBmMarket';
-import MgBmMarketCert from '../containers/MgBmMarketCert';
-import MgBmMarketImages from '../containers/MgBmMarketImages';
-import MgBmMarketIntr from '../containers/MgBmMarketIntr';
-import MgBmMarketSetting from '../containers/MgBmMarketSetting';
-import MgDecorate from '../containers/MgDecorate';
-import MgDecorateCert from '../containers/MgDecorateCert';
-import MgDecorateCreateCase from '../containers/MgDecorateCreateCase';
-import MgDecorateIntr from '../containers/MgDecorateIntr';
-import MgDecorateLogo from '../containers/MgDecorateLogo';
-import MgDecorateSetting from '../containers/MgDecorateSetting';
-import MgMaster from '../containers/MgMaster';
-import MgMasterCert from '../containers/MgMasterCert';
-import MgMasterIntr from '../containers/MgMasterIntr';
-import MgMasterLogo from '../containers/MgMasterLogo';
-import MgMasterOrderDetail from '../containers/MgMasterOrderDetail';
-import MgMasterOrders from '../containers/MgMasterOrders';
-import MgMasterPublish from '../containers/MgMasterPublish';
-import MgMasterSetting from '../containers/MgMasterSetting';
-import MgMasterTxList from '../containers/MgMasterTxList';
-import MgMasterLogList from '../containers/MgMasterLogList';
-import MyMessage from '../containers/MyMessage';
-import MySetting from '../containers/MySetting';
-import MgMasterItems from '../containers/MgMasterItems';
-import MasterCaseList from '../containers/MasterCaseList';
-import MgMasterBadList from '../containers/MgMasterBadList';
-import MgSecurity from '../containers/MgSecurity';
-import MgMasterCategory from '../containers/MgMasterCategory';
-import MyDrawList from '../containers/MyDrawList';
-import MyDrawAdd from '../containers/MyDrawAdd';
-import MainSearch from '../containers/MainSearch';
-import UserAgreement from '../containers/UserAgreement';
-import MgMasterApply from '../containers/MgMasterApply';
-import MasterItems from '../containers/MasterItems';
-import ChangePassword from '../containers/ChangePassword';
-import FixedList from '../containers/FixedList';
-import OrderDetailAccept from '../containers/OrderDetailAccept';
-import MapView from '../containers/MapView';
-import MapViewOrder from '../containers/MapViewOrder';
-import OrderSend from '../containers/OrderSend';
-import ChatPhrase from '../containers/ChatPhrase';
-import NoticeSetting from '../containers/NoticeSetting';
-import ChatPhraseChange from '../containers/ChatPhraseChange';
-import ChatImage from '../containers/ChatImage';
+import LoginScreen from '../container/LoginScreen';
+import Main from '../container/Main';
+import MainSearch from '../container/mainSearch';
+import CgCategory from '../container/cgCategory';
+import CgSkus from '../container/cgSkus';
+import CgxSkus from '../container/cgxSkus';
+import CgCitys from '../container/cgCitys';
+import CgDemand from '../container/cgDemand';
+import CgComfirm from '../container/cgComfirm';
+import CgxComfirm from '../container/cgxComfirm';
+import CgyComfirm from '../container/cgyComfirm';
+import CgyxComfirm from '../container/cgyxComfirm';
+import CgyCitys from '../container/cgyCitys';
+import CgySpot from '../container/cgySpot';
+import CgyPrice from '../container/cgyPrice';
+import CgyDesc from '../container/cgyDesc';
+import CgyServices from '../container/cgyServices';
+import CbjConfirm from '../container/cbjConfirm';
+import ChatIndex from '../container/chatIndex';
+import ChatRoom from '../container/chatRoom';
+import MainSearcher from '../container/mainSearcher';
+import MainList from '../container/mainList';
+import GoodsScreen from '../container/goodsScreen';
+import ImageCrop from '../container/ImageCrop';
+import User from '../container/user';
+import Agreement from '../container/user/agreement';
+import GoodDetail from '../container/goodDetail';
+import StoreDetail from '../container/storeDetail';
+import WhyChoose from '../container/whyChoose';
+import AdjectiveInfo from '../container/adjectiveInfo';
+import ReportPage from '../container/reportPage';
+import ReportDetailPage from '../container/reportDetailPage';
+import AddAccount from '../container/addAccount';
+import GatheringAccount from '../container/gatheringAccount';
+import AccountCenter from '../container/accountCenter';
+import My from '../container/my';
+import MySetting from '../container/MySetting';
+import EvalList from '../container/evalList';
+import Certification from '../container/certification';
+import IndividualAuthentication from '../container/individualAuthentication';
+import CollectiveAuthentication from '../container/collectiveAuthentication';
+import AboutUs from '../container/aboutUs';
+import SystemSet from '../container/systemSet';
+import PurchaseHome from '../container/purchaseHome';
+import PurchaseDetail from '../container/purchaseDetail';
+import MySupply from '../container/mySupply';
+import MyRelease from '../container/myRelease';
+import MyBuyGoods from '../container/myBuyGoods';
+import MySoldGoods from '../container/mySoldGoods';
+import MySendOffer from '../container/mySendOffer';
+import MyNichePush from '../container/myNichePush';
+import MyVisitor from '../container/myVisitor';
+import MyInfo from '../container/myInfo';
+import MyFootprint from '../container/myFootprint';
+import VisitDetail from '../container/visitDetail';
+import TalkBusiness from '../container/talkBusiness';
+import Bill from '../container/bill';
+import NotificationSystem from '../container/notificationSystem';
+import NotificationSystemDetail from '../container/notificationSystemDetail';
+import RevisePhone from '../container/revisePhone';
+import UserInfo from '../container/userInfo';
+import ShippingAddress from '../container/shippingAddress';
+import AddAddress from '../container/addAddress';
+import Authentication from '../container/authentication';
+import ClauseAndAgreement from '../container/clauseAndAgreement';
+import Keyword from '../container/keyword';
+import KeywordReturn from '../container/keywordReturn';
+import ValidatePhone from '../container/validatePhone';
+import HuinongConsult from '../container/huinongConsult';
+import HuinongConsultDetail from '../container/huinongConsultDetail';
+import Comment from '../container/comment';
+import AccountNumberType from '../container/accountNumberType';
+import AddPersonalAccount from '../container/addPersonalAccount';
+import ChooseGatheringAccountNumbers from '../container/chooseGatheringAccountNumbers';
+import Cash from '../container/cash';
+import CashRule from '../container/cashRule';
+import ReleaseSuccess from '../container/releaseSuccess';
+import ReviseSuccess from '../container/reviseSuccess';
+import SeePrice from '../container/seePrice';
+import PriceDetail from '../container/priceDetail';
+import PriceInfo from '../container/priceInfo';
+import SetPassword from '../container/setPassword';
+import EnlistBusiness from '../container/enlistBusiness';
+import OtherInfo from '../container/otherInfo';
+// import GoodBusinessDetail from '../container/goodBusinessDetail';
+import HuinongGoodsMotif from '../container/huinongGoodsMotif';
+import HomeMainList from '../container/homeMainList';
+import ReleaseMainList from '../container/releaseMainList';
+import RecommendBusiness from '../container/recommendBusiness';
+import SampleMainList from '../container/sampleMainList';
+import SampleCenter from '../container/sampleCenter';
+import EnsureMainList from '../container/ensureMainList';
+import OrderDetail from '../container/orderDetail';
+import OrderInfo from '../container/orderInfo';
+import OrderInfoSeller from '../container/orderInfoSeller';
+import OrderPay from '../container/orderPay';
+import OrderSendGoods from '../container/orderSendGoods';
+import OrderThink from '../container/orderThink';
+import OrderLOG from '../container/orderLOG';
+import ReviewKnow from '../container/reviewKnow';
+import ReviewKnow2 from '../container/reviewKnow2';
+import MySoldGoodsWaitRevise from '../container/mySoldGoodsWaitRevise';
+import MemberInfo from '../container/memberInfo';
+import MarketHall from '../container/MarketHall';
+import MarketHallList from '../container/MarketHallList';
+import MarketHallDetail from '../container/MarketHallDetail';
+import MyAddress from '../container/MyAddress';
+import MyAddressCreate from '../container/MyAddressCreate';
+import Categorys from '../container/Categorys';
+import CategorysBrands from '../container/CategorysBrands';
+import StrengthBusiness from '../container/strengthBusiness';
+import HighQualityPurchasers from '../container/highQualityPurchasers';
+import ProductSignedUp from '../container/productSignedUp';
+import SignUp from '../container/signUp';
+import FacilitatorRecruit from '../container/facilitatorRecruit';
+import RevisePassword from '../container/revisePassword';
+import IntroducePage from '../container/introducePage';
+import InvestigationInfo from '../container/investigationInfo';
+import MyAccount from '../container/MyAccount';
+import MgMasterTxList from '../container/MgMasterTxList';
+import MyDrawAdd from '../container/MyDrawAdd';
+import MyDrawList from '../container/MyDrawList';
+import MyTixian from '../container/MyTixian';
+import SetPayPassword from '../container/setPayPassword';
+import SetPayPasswordUsOldPassword from '../container/setPayPasswordUsOldPassword';
+import MyCollect from '../container/myCollect';
+import DynamicEval from '../container/dynamicEval';
+import StoreEvalList from '../container/storeEvalList';
+import MessageSet from '../container/messageSet';
+import MyFriend from '../container/myFriend';
+import FriendCitys from '../container/friendCitys';
+import UserIdentity from '../container/userIdentity';
+import LogisticsInfo from '../container/logisticsInfo';
 
 export const AppNavigator = StackNavigator({
-  ChatImage: { screen: ChatImage },
-  ChatPhraseChange: { screen: ChatPhraseChange },
-  NoticeSetting: { screen: NoticeSetting },
-  ChatPhrase: { screen: ChatPhrase },
-  OrderSend: { screen: OrderSend },
-  MapViewOrder: { screen: MapViewOrder },
-  MapView: { screen: MapView },
-  OrderDetailAccept: { screen: OrderDetailAccept },
-  FixedList: { screen: FixedList },
-  MgMasterBadList: { screen: MgMasterBadList },
-  MgMasterCategory: { screen: MgMasterCategory },
-  ChangePassword: { screen: ChangePassword },
-  MasterItems: { screen: MasterItems },
-  MgMasterLogList: { screen: MgMasterLogList },
-  MgMasterApply: { screen: MgMasterApply },
-  UserAgreement: { screen: UserAgreement },
-  MainSearch: { screen: MainSearch },
-  MyDrawAdd: { screen: MyDrawAdd },
-  MyDrawList: { screen: MyDrawList },
-  MgSecurity: { screen: MgSecurity },
-  MasterCaseList: { screen: MasterCaseList },
-  MgMasterItems: { screen: MgMasterItems },
-  MyMessage: { screen: MyMessage },
-  MgBmMarketCert: { screen: MgBmMarketCert },
-  MgBmMarket: { screen: MgBmMarket },
-  MySetting: { screen: MySetting },
-  MyAccount: { screen: MyAccount },
-  MgBmMarketImages: { screen: MgBmMarketImages },
-  MgBmMarketIntr: { screen: MgBmMarketIntr },
-  MgBmMarketSetting: { screen: MgBmMarketSetting },
-  MgDecorate: { screen: MgDecorate },
-  MgDecorateCert: { screen: MgDecorateCert },
-  MgDecorateCreateCase: { screen: MgDecorateCreateCase },
-  MgDecorateIntr: { screen: MgDecorateIntr },
-  MgDecorateLogo: { screen: MgDecorateLogo },
-  MgDecorateSetting: { screen: MgDecorateSetting },
-  MgMaster: { screen: MgMaster },
-  MgMasterCert: { screen: MgMasterCert },
-  MgMasterIntr: { screen: MgMasterIntr },
-  MgMasterLogo: { screen: MgMasterLogo },
-  MgMasterOrderDetail: { screen: MgMasterOrderDetail },
-  MgMasterOrders: { screen: MgMasterOrders },
-  MgMasterPublish: { screen: MgMasterPublish },
-  MgMasterSetting: { screen: MgMasterSetting },
-  MgMasterTxList: { screen: MgMasterTxList },
+  CategorysBrands: { screen: CategorysBrands },
+  Categorys: { screen: Categorys },
   MyAddress: { screen: MyAddress },
-  MyCard: { screen: MyCard },
-  MyColl: { screen: MyColl },
-  MyCoupons: { screen: MyCoupons },
-  MyTixian: { screen: MyTixian },
-  PlatProblem: { screen: PlatProblem },
-  About: { screen: About },
-  Feedback: { screen: Feedback },
   MyAddressCreate: { screen: MyAddressCreate },
   Main: { screen: Main },
-  User: { screen: User },
-  ServiceList: { screen: ServiceList },
-  ServiceDetail: { screen: ServiceDetail },
-  MasterDetail: { screen: MasterDetail },
+  MarketHallList: { screen: MarketHallList },
+  MarketHallDetail: { screen: MarketHallDetail },
+  MarketHall: { screen: MarketHall },
+  MainSearch: { screen: MainSearch },
+  CgCategory: { screen: CgCategory },
+  CgSkus: { screen: CgSkus },
+  CgxSkus: { screen: CgxSkus },
+  CgCitys: { screen: CgCitys },
+  CgDemand: { screen: CgDemand },
+  CgComfirm: { screen: CgComfirm },
+  CgxComfirm: { screen: CgxComfirm },
+  CgyComfirm: { screen: CgyComfirm },
+  CgyxComfirm: { screen: CgyxComfirm },
+  CgyCitys: { screen: CgyCitys },
+  CgySpot: { screen: CgySpot },
+  CgyPrice: { screen: CgyPrice },
+  CgyDesc: { screen: CgyDesc },
+  CgyServices: { screen: CgyServices },
+  CbjConfirm: { screen: CbjConfirm },
+  ChatIndex: { screen: ChatIndex },
   ChatRoom: { screen: ChatRoom },
-  DemandOrderDetail: { screen: DemandOrderDetail },
-  CreateConfirm: { screen: CreateConfirm },
-  CreatePay: { screen: CreatePay },
-  MemberInfo: { screen: MemberInfo },
-  InputChange: { screen: InputChange },
-  BindPhone: { screen: BindPhone },
-  Orders: { screen: Orders },
-  OrderDetail: { screen: OrderDetail },
-  OrderEval: { screen: OrderEval },
-  MyDemandOrderDetail: { screen: MyDemandOrderDetail },
-  MasterList: { screen: MasterList },
-  MasterCategory: { screen: MasterCategory },
+  MainSearcher: { screen: MainSearcher },
+  MainList: { screen: MainList },
+  GoodsScreen: { screen: GoodsScreen },
+  StoreDetail: { screen: StoreDetail },
+  GoodDetail: { screen: GoodDetail },
+  User: { screen: User },
+  Agreement: { screen: Agreement },
+  Login: { screen: LoginScreen },
+  ImageCrop: { screen: ImageCrop },
   EvalList: { screen: EvalList },
-  DecorateList: { screen: DecorateList },
-  DecorateDetail: { screen: DecorateDetail },
-  BmMarketList: { screen: BmMarketList },
-  BmMarketDetail: { screen: BmMarketDetail },
-  DecorateCaseDetail: { screen: DecorateCaseDetail },
-  DecorateCaseList: { screen: DecorateCaseList },
-  DecorateImageDetail: { screen: DecorateImageDetail },
-  DecorateIntrDetail: { screen: DecorateIntrDetail },
-  ApplyWant: { screen: ApplyWant },
-  ApplyOther: { screen: ApplyOther },
-  ApplyMaster: { screen: ApplyMaster },
-  ApplyDecorate: { screen: ApplyDecorate },
-  ApplyBmMarket: { screen: ApplyBmMarket },
-  GetCitys: { screen: GetCitys },
-  DemandConfirm: { screen: DemandConfirm },
-  DemandCategory: { screen: DemandCategory },
+  WhyChoose: { screen: WhyChoose },
+  AdjectiveInfo: { screen: AdjectiveInfo },
+  ReportPage: { screen: ReportPage },
+  ReportDetailPage: { screen: ReportDetailPage },
+  AddAccount: { screen: AddAccount },
+  GatheringAccount: { screen: GatheringAccount },
+  AccountCenter: { screen: AccountCenter },
+  Certification: { screen: Certification },
+  My: { screen: My },
+  MySetting: { screen: MySetting },
+  IndividualAuthentication: { screen: IndividualAuthentication },
+  CollectiveAuthentication: { screen: CollectiveAuthentication },
+  AboutUs: { screen: AboutUs },
+  SystemSet: { screen: SystemSet },
+  PurchaseHome: { screen: PurchaseHome },
+  PurchaseDetail: { screen: PurchaseDetail },
+  MySupply: { screen: MySupply },
+  MyRelease: { screen: MyRelease },
+  MyBuyGoods: { screen: MyBuyGoods },
+  MySoldGoods: { screen: MySoldGoods },
+  MySendOffer: { screen: MySendOffer },
+  MyNichePush: { screen: MyNichePush },
+  MyVisitor: { screen: MyVisitor },
+  MyInfo: { screen: MyInfo },
+  MyFootprint: { screen: MyFootprint },
+  VisitDetail: { screen: VisitDetail },
+  TalkBusiness: { screen: TalkBusiness },
+  Bill: { screen: Bill },
+  NotificationSystem: { screen: NotificationSystem },
+  NotificationSystemDetail: { screen: NotificationSystemDetail },
+  RevisePhone: { screen: RevisePhone },
+  UserInfo: { screen: UserInfo },
+  ShippingAddress: { screen: ShippingAddress },
+  AddAddress: { screen: AddAddress },
+  Authentication: { screen: Authentication },
+  ClauseAndAgreement: { screen: ClauseAndAgreement },
+  Keyword: { screen: Keyword },
+  KeywordReturn: { screen: KeywordReturn },
+  ValidatePhone: { screen: ValidatePhone },
+  HuinongConsult: { screen: HuinongConsult },
+  HuinongConsultDetail: { screen: HuinongConsultDetail },
+  Comment: { screen: Comment },
+  AccountNumberType: { screen: AccountNumberType },
+  AddPersonalAccount: { screen: AddPersonalAccount },
+  ChooseGatheringAccountNumbers: { screen: ChooseGatheringAccountNumbers },
+  Cash: { screen: Cash },
+  CashRule: { screen: CashRule },
+  ReleaseSuccess: { screen: ReleaseSuccess },
+  ReviseSuccess: { screen: ReviseSuccess },
+  SeePrice: { screen: SeePrice },
+  PriceDetail: { screen: PriceDetail },
+  PriceInfo: { screen: PriceInfo },
+  SetPassword: { screen: SetPassword },
+  EnlistBusiness: { screen: EnlistBusiness },
+  OtherInfo: { screen: OtherInfo },
+  // GoodBusinessDetail: { screen: GoodBusinessDetail },
+  HuinongGoodsMotif: { screen: HuinongGoodsMotif },
+  HomeMainList: { screen: HomeMainList },
+  ReleaseMainList: { screen: ReleaseMainList },
+  RecommendBusiness: { screen: RecommendBusiness },
+  SampleMainList: { screen: SampleMainList },
+  SampleCenter: { screen: SampleCenter },
+  EnsureMainList: { screen: EnsureMainList },
+  OrderDetail: { screen: OrderDetail },
+  OrderInfo: { screen: OrderInfo },
+  OrderInfoSeller: { screen: OrderInfoSeller },
+  OrderPay: { screen: OrderPay },
+  OrderSendGoods: { screen: OrderSendGoods },
+  OrderThink: { screen: OrderThink },
+  OrderLOG: { screen: OrderLOG },
+  ReviewKnow: { screen: ReviewKnow },
+  ReviewKnow2: { screen: ReviewKnow2 },
+  MySoldGoodsWaitRevise: { screen: MySoldGoodsWaitRevise },
+  MemberInfo: { screen: MemberInfo },
+  StrengthBusiness: { screen: StrengthBusiness },
+  HighQualityPurchasers: { screen: HighQualityPurchasers },
+  ProductSignedUp: { screen: ProductSignedUp },
+  SignUp: { screen: SignUp },
+  FacilitatorRecruit: { screen: FacilitatorRecruit },
+  RevisePassword: { screen: RevisePassword },
+  IntroducePage: { screen: IntroducePage },
+  InvestigationInfo: { screen: InvestigationInfo },
+  MyAccount: { screen: MyAccount },
+  MgMasterTxList: { screen: MgMasterTxList },
+  MyDrawAdd: { screen: MyDrawAdd },
+  MyDrawList: { screen: MyDrawList },
+  MyTixian: { screen: MyTixian },
+  SetPayPassword: { screen: SetPayPassword },
+  SetPayPasswordUsOldPassword: { screen: SetPayPasswordUsOldPassword },
+  MyCollect: { screen: MyCollect },
+  DynamicEval: { screen: DynamicEval },
+  StoreEvalList: { screen: StoreEvalList },
+  MessageSet: { screen: MessageSet },
+  MyFriend: { screen: MyFriend },
+  FriendCitys: { screen: FriendCitys },
+  UserIdentity: { screen: UserIdentity },
+  LogisticsInfo: { screen: LogisticsInfo },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({
@@ -206,76 +289,17 @@ createReactNavigationReduxMiddleware(
   state => state.nav,
 );
 const addListener = createReduxBoundAddListener('root');
-class AppWithNavigationState extends base {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...this.state,
-    };
-  }
-  componentDidMount() {
-    this.getInit();
-  }
-  _renderModal() {
-    const { isModalShow, shares, animate } = this.state;
-    return (
-      <Modal
-        animationType={'none'}
-        transparent
-        visible={isModalShow}
-        onRequestClose={() => {}}
-      >
-        <TFeedback
-          content={
-            <View style={styles.ModalStyle}>
-              <View style={styles.modalView}>
-                {
-                  shares.map((item, index) => (
-                    <TOpacity
-                      key={index}
-                      style={styles.shareList}
-                      content={
-                        <Animatable.View
-                          delay={index === 1 ? 100 : 0}
-                          duration={300}
-                          animation={animate}
-                          key={index}
-                          style={styles.shareList}
-                        >
-                          <View style={[styles.shareTop, { backgroundColor: item.color }]}>
-                            <Icon name={item.icon} style={styles.shareIcon} />
-                          </View>
-                          <Text style={styles.shareText}>{item.label}</Text>
-                        </Animatable.View>
-                      }
-                      onPress={() => this.go(item.page)}
-                    />
-                  ))
-                }
-              </View>
-            </View>
-          }
-          onPress={this.closeModal}
-        />
-      </Modal>
-    );
-  }
-  render() {
-    const { dispatch, nav } = this.props;
-    return (
-      <Root>
-        <AppNavigator
-          navigation={addNavigationHelpers({
-            dispatch,
-            state: nav,
-            addListener,
-          })}
-        />
-        {this._renderModal()}
-      </Root>
-    );
-  }
-}
+const AppWithNavigationState = ({ dispatch, nav }) => (
+  <Root>
+    <AppNavigator
+      navigation={addNavigationHelpers({
+        dispatch,
+        state: nav,
+        addListener,
+      })}
+    />
+  </Root>
+);
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,

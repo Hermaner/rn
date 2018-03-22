@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 const loadMore = () => (
-  <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', padding: 15 }}>
+  <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center', padding: 10 }}>
     <ActivityIndicator
       size={'small'}
       color="#666"

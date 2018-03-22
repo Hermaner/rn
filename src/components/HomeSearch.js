@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { pushRoute } from '../actions';
 import { Mcolor, st } from '../utils';
 import TFeedback from './TFeedback';
-import TOpacity from './TOpacity';
 
 const styles = StyleSheet.create({
   header: {
@@ -60,30 +59,20 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 });
-const headerBar = ({ label, push }) => (
+const headerBar = ({ push, label }) => (
   <Header style={styles.header}>
-    <TOpacity
-      content={
-        <View style={styles.left}>
-          <Text style={styles.leftText}>{label}</Text>
-          <Icon name="ios-arrow-down-outline" style={styles.leftIcon} />
-        </View>
-      }
-      onPress={() => {
-        if (label === '定位中') {
-          return;
-        }
-        push({ key: 'GetCitys', params: { type: 'emitHomePosition' } });
-      }}
-    />
+    <View style={styles.left}>
+      <Text style={styles.leftText}>{label}</Text>
+      {/* <Icon name="ios-arrow-down-outline" style={styles.leftIcon} /> */}
+    </View>
     <TFeedback
       content={
         <View style={styles.HeaderMain}>
           <Icon name="ios-search-outline" style={styles.HeaderIcon} />
-          <Text style={styles.HeaderMainText}>搜索服务</Text>
+          <Text style={styles.HeaderMainText}>点击搜索</Text>
         </View>
       }
-      onPress={() => push({ key: 'MainSearch' })}
+      onPress={push}
     />
   </Header>
 );
@@ -92,4 +81,4 @@ headerBar.propTypes = {
   label: PropTypes.string,
   push: PropTypes.func,
 };
-export default connect(null, { push: pushRoute })(headerBar);
+export default connect(null, { pushR: pushRoute })(headerBar);

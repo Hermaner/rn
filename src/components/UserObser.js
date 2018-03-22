@@ -8,20 +8,25 @@ moment.locale('zh-cn');
 export default class UserObser {
   // 监听对象
   @observable userInfo = {};
-  @observable applyInfo = {};
+  @observable localInfo = {};
+  @observable countInfo = {};
 
-  getConnect = () => {
-  }
   @action changeData(data) {
     this.userInfo = data;
   }
-  @action changeApply(data) {
-    this.applyInfo = data;
+  @action changeLocal(data) {
+    this.localInfo = data;
+  }
+  @action changeCount(data) {
+    this.countInfo = data;
   }
   @computed get userData() {
-    return {
-      ...this.userInfo,
-      ...this.applyInfo,
-    };
+    return this.userInfo;
+  }
+  @computed get localData() {
+    return this.localInfo;
+  }
+  @computed get countData() {
+    return this.countInfo;
   }
 }
