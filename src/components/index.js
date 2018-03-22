@@ -31,6 +31,7 @@ import ImageLook from './ImageLook';
 import TitleItem from './TitleItem';
 import ScrollableStatusTab from './ScrollableStatusTab';
 import Upload from './Upload';
+import BHeader from './BHeader';
 import Chat from './chat/GiftedChat';
 import SocketStore from './socket/SocketStore';
 
@@ -39,6 +40,7 @@ const SocketObser = new SocketStore();
 
 export {
   TLight,
+  BHeader,
   Chat,
   SocketObser,
   Upload,

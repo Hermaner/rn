@@ -25,7 +25,7 @@ class CgyComfirm extends base {
     this.deleteData();
   }
   onBackPress = () => {
-    this.props.pop();
+    this.backToHome();
     return true;
   };
   _renderList() {

@@ -5,7 +5,7 @@ import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, TFeedback, Loading } from '../../components';
+import { BHeader, TFeedback, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -73,7 +73,7 @@ class HuinongGoodsMotif extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <Header back={pop} title="慧包好货专场" />
+        <BHeader back={pop} title="慧包好货专场" />
         <Content>
           {this._renderBody()}
         </Content>

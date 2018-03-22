@@ -40,7 +40,7 @@ class Child extends React.Component {
                     key={index2}
                     content={
                       <View>
-                        <View style={styles.goodsItem}>
+                        <View style={[styles.goodsItem, styles.specialItem]}>
                           {
                             item2.supplyImages && item2.supplyImages.length > 0 &&
                             <CachedImage style={styles.goodsImage} source={{ uri: `${item2.supplyImages[0].imgUrl}?imageView2/1/w/80` }} />
@@ -102,9 +102,9 @@ class Child extends React.Component {
     const { name, data } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.goodsTitle}>
+        {/* <View style={styles.goodsTitle}>
           <Text style={styles.goodsTitleText}>{name}</Text>
-        </View>
+        </View> */}
         {
           (data && data.length > 0) ?
           this._renderRow()
