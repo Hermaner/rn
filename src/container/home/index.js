@@ -11,7 +11,7 @@ import { pushRoute } from '../../actions';
 import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
 import base from './base';
 import styles from './styles';
-import { Mcolor, deviceW } from '../../utils';
+import { Mcolor } from '../../utils';
 import Child1 from './child1';
 
 @observer

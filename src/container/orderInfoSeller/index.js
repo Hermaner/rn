@@ -30,7 +30,7 @@ class OrderInfoSeller extends base {
   };
   _renderBody() {
     const { push } = this.props;
-    const { orderInfo, supplyInfo, tu, myStatus, removeInfo, revisePrice, favorable, LOGInfo, freight } = this.state;
+    const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo } = this.state;
     return (
       <View style={styles.pagebody}>
         {
@@ -188,7 +188,8 @@ class OrderInfoSeller extends base {
     const { orderInfo, freight, favorable } = this.state;
     const myFavorable = favorable || 0;
     const myFreight = freight || 0;
-    const newAllMoney = (parseFloat(orderInfo.unitPrice * orderInfo.buyCount) - parseFloat(myFavorable)) + parseFloat(myFreight);
+    const newAllMoney = (parseFloat(orderInfo.unitPrice * orderInfo.buyCount)
+    - parseFloat(myFavorable)) + parseFloat(myFreight);
     const content = (
       <View>
         <View style={styles.modal}>
@@ -229,7 +230,7 @@ class OrderInfoSeller extends base {
         ref={(o) => { this.ModalView = o; }}
         title={'订单修改'}
         content={content}
-        onConfirm={() => console.log(111)}
+        onConfirm={() => {}}
       />
     );
   }

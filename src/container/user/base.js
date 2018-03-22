@@ -10,8 +10,8 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '13545883079',
-      sendPhone: '13545883079',
+      phone: '18702111649', // 18702111649 13545883079
+      sendPhone: '18702111649',
       sec: 60,
       passWord: '',
       code: '1111',
@@ -73,7 +73,7 @@ class UserBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -123,9 +123,9 @@ class UserBase extends React.Component {
     RegisterMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration,
+      registration: global.registration || '12313',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.loginAction(res.data);
