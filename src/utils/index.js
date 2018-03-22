@@ -1,5 +1,6 @@
 
 import { Dimensions, PixelRatio } from 'react-native';
+import RNFetchBlob from 'react-native-fetch-blob';
 
 export const deviceW = Dimensions.get('window').width;
 export const deviceH = Dimensions.get('window').height;
@@ -87,4 +88,42 @@ export const st = {
   font24: {
     fontSize: 24,
   },
+};
+export const fileKey = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  let ran = parseInt(Math.random() * 888, 10);
+  ran += 100;
+  return `${year}${month}${day}${hour}${minute}${second}${ran}`;
+};
+export const getSessionList = () => {
+  const { CacheDir } = RNFetchBlob.fs.dirs;
+  const path = `${CacheDir}/sessionList`;
+  RNFetchBlob.fs.exists(path)
+  .then((exist) => {
+    if (!exist) {
+      RNFetchBlob.fs.createFile(path, '', 'utf8');
+    } else {
+      RNFetchBlob.fs.readFile(path, 'utf8')
+      .then((data) => {
+        console.log(data);
+        return data;
+      });
+    }
+  });
+};
+export const writeSessionList = (data) => {
+  const { CacheDir } = RNFetchBlob.fs.dirs;
+  const path = `${CacheDir}/sessionList`;
+  RNFetchBlob.fs.writeFile(path, data, 'utf8');
+};
+export const writeChatList = (memberId, data) => {
+  const { CacheDir } = RNFetchBlob.fs.dirs;
+  const path = `${CacheDir}/${memberId}`;
+  RNFetchBlob.fs.writeFile(path, data, 'utf8');
 };

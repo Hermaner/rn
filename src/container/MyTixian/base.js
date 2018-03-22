@@ -2,7 +2,7 @@ import React from 'react';
 import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
-import { CreateWithdrawalsOrderService, GetWithdrawalsNumberService } from '../../api';
+import { CreateWithdrawalsOrderService, GetWithdrawalsNumberService, GetMemberInfoService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -18,12 +18,35 @@ class Base extends React.Component {
         name: '银行卡账号',
       }],
       listIndex: null,
+      visible: false, // 模态场景是否可见
+      transparent: true, // 是否透明显示
+      label: '',
+      password: '',
+      myPayPassword: '',
     };
   }
   getInit = () => {
     this.GetWithdrawalsNumberService();
     this.emitLoad = DeviceEventEmitter.addListener('emitLoad', () => {
       this.GetWithdrawalsNumberService();
+    });
+    this.getData();
+  }
+  getData = () => {
+    GetMemberInfoService({
+      memberId: global.memberId,
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const result = res.data;
+        this.setState({
+          myPayPassword: result.payPassword,
+        });
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   deleteInit = () => {
@@ -35,8 +58,32 @@ class Base extends React.Component {
       value: amount,
     });
   }
+  savePassword = (password) => {
+    this.setState({
+      password,
+    });
+  }
+  openModal = () => {
+    const { myPayPassword } = this.state;
+    if (myPayPassword !== '' && myPayPassword !== null) {
+      this.setState({ visible: true });
+      return;
+    }
+    this.CreateWithdrawalsOrderService();
+  }
   CreateWithdrawalsOrderService = () => {
-    const { amount, value, listIndex, items } = this.state;
+    const { amount, value, listIndex, items, password, myPayPassword } = this.state;
+    this.setState({ visible: false });
+    if (myPayPassword !== '' && myPayPassword !== null) {
+      if (!password) {
+        Toast.show('请输入支付密码');
+        return;
+      }
+      if (parseFloat(password) !== parseFloat(myPayPassword)) {
+        Toast.show('支付密码不正确');
+        return;
+      }
+    }
     if (!value) {
       Toast.show('请输入提现金额');
       return;

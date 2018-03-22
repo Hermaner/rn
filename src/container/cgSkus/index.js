@@ -17,10 +17,14 @@ class CgSkus extends base {
     let isBtnGray = false;
     if (Global.skuType === '3' || Global.skuType === '4') {
       items.forEach((item) => {
-        item.specs.push({
-          specId: '0',
-          specName: '输入规格',
-        });
+        for (let i = 0; i < item.specs.length; i += 1) {
+          if (item.specs[item.specs.length - 1].specName !== '输入规格') {
+            item.specs.push({
+              specId: '0',
+              specName: '输入规格',
+            });
+          }
+        }
         if (item.itemIndex === undefined) {
           isBtnGray = true;
         }
@@ -110,7 +114,8 @@ class CgSkus extends base {
     const { isBtnGray } = this.state;
     return (
       <View style={{ padding: 10, backgroundColor: '#fff' }}>
-        <Button onPress={this.goCgComfirm} full light style={[styles.btn, isBtnGray && styles.grayBtn]}><Text style={{ color: '#fff' }}>选好了</Text></Button>
+        {/* <Button onPress={this.goCgComfirm} full light style={[styles.btn, isBtnGray && styles.grayBtn]}><Text style={{ color: '#fff' }}>选好了</Text></Button> */}
+        <Button onPress={this.goCgComfirm} full light style={[styles.btn]}><Text style={{ color: '#fff' }}>选好了</Text></Button>
       </View>
     );
   }

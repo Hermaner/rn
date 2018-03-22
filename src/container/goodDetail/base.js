@@ -262,6 +262,26 @@ class Base extends React.Component {
     this.props.push({ key: 'OrderDetail', params: { count: skuCount, supplyInfo: detail } });
     this.ModalView.closeModal();
   }
+  goChat = () => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    const { detail: { memberId, nickName, imgUrl } } = this.state;
+    if (memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId,
+          userName: nickName,
+          imgUrl,
+        },
+      },
+    });
+  }
 }
 Base.propTypes = {
   navigation: PropTypes.object,

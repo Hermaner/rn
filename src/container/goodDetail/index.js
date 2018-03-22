@@ -381,7 +381,7 @@ class MainScreen extends base {
     );
   }
   _renderFooter() {
-    const { haveCollect } = this.state;
+    const { haveCollect, detail } = this.state;
     return (
       <Footer>
         <TOpacity
@@ -396,10 +396,14 @@ class MainScreen extends base {
           }
           onPress={() => this.keepGoods()}
         />
-        <View style={styles.fotBtn1}>
-          <Icon name="chatboxes" style={styles.fotChatIcon} />
-          <Text style={styles.fotChatText}>聊生意</Text>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.fotBtn1}>
+              <Icon name="chatboxes" style={styles.fotChatIcon} />
+              <Text style={styles.fotChatText}>聊生意</Text>
+            </View>}
+          onPress={this.goChat}
+        />
         <TFeedback
           content={
             <View style={styles.fotBtn2}>

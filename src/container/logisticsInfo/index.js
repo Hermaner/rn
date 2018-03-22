@@ -34,6 +34,7 @@ class StrengthBusiness extends Base {
           style={styles.box}
           source={{ uri: `https://m.kuaidi100.com/index_all.html?type=${type}&postid=${postid}` }}
         />
+        <View style={{ marginTop: 30 }} />
       </View>
     );
   }

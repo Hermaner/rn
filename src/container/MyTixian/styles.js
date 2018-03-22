@@ -1,7 +1,8 @@
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { st, Mcolor } from '../../utils';
 
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   main: {
     margin: 15,
@@ -97,6 +98,36 @@ const styles = StyleSheet.create({
   bomtipsText: {
     fontSize: 13,
     color: '#666',
+  },
+  modalBox: {
+    width: width - 40,
+    backgroundColor: 'white',
+    paddingTop: 30,
+    paddingBottom: 30,
+    borderRadius: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  inputText: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    // borderRadius: 4,
+    fontSize: 16,
+    flex: 1,
+    color: '#666',
+    // textAlignVertical: 'top',
+  },
+  submitBox: {
+    backgroundColor: Mcolor,
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 4,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 export default styles;

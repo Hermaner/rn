@@ -124,7 +124,6 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data;
         if (result.memberVerifs !== '' && result.memberVerifs !== null && result.memberVerifs.length > 0) {
           for (let i = 0; i < result.memberVerifs.length; i += 1) {
@@ -381,6 +380,26 @@ class Base extends React.Component {
       }
     }).catch((err) => {
       console.log(err);
+    });
+  }
+  goChat = () => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    const { userInfo: { memberId, nickName, imgUrl } } = this.state;
+    if (memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId,
+          userName: nickName,
+          imgUrl,
+        },
+      },
     });
   }
   _onRefresh= () => {

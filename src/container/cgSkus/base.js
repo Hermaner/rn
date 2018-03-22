@@ -72,9 +72,9 @@ class Base extends React.Component {
   }
   goCgComfirm = async () => {
     const { isBtnGray, items } = this.state;
-    if (isBtnGray) {
-      return;
-    }
+    // if (isBtnGray) {
+    //   return;
+    // }
     for (let i = 0; i < items.length; i += 1) {
       for (let k = 0; k < items[i].specs.length; k += 1) {
         if (items[i].specs[k].cur) {

@@ -136,13 +136,16 @@ class Child extends ChildBase {
                   </View>}
                 onPress={() => { push({ key: 'OrderLOG', params: { orderId: item.orderId } }); }}
               />
-              <TFeedback
-                content={
-                  <View style={styles.btnBox1}>
-                    <Text style={{ color: '#fff', fontSize: 14 }}>去评价</Text>
-                  </View>}
-                onPress={() => { push({ key: 'OrderThink', params: { orderInfo: item, typpe: 'getBuyGoodsGoThink' } }); }}
-              />
+              {
+                item.supplyEvaluat !== null &&
+                <TFeedback
+                  content={
+                    <View style={styles.btnBox1}>
+                      <Text style={{ color: '#fff', fontSize: 14 }}>去评价</Text>
+                    </View>}
+                  onPress={() => { push({ key: 'OrderThink', params: { orderInfo: item, typpe: 'getBuyGoodsGoThink' } }); }}
+                />
+              }
             </View>
           }
           {

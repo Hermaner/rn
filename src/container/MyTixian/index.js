@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, BackHandler, Image } from 'react-native';
+import { View, BackHandler, Image, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { Container, Text, Content, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, TOpacity, Header, TitleItem, TLight } from '../../components';
+import { Loading, TOpacity, Header, TitleItem, TLight, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -70,7 +70,7 @@ class MyTixian extends base {
         content={
           <Text style={styles.btnText}>立即提现</Text>
         }
-        onPress={this.CreateWithdrawalsOrderMasterService}
+        onPress={this.openModal}
       />
     );
   }
@@ -106,6 +106,51 @@ class MyTixian extends base {
       </View>
     );
   }
+  renderModal() {
+    const { password } = this.state;
+    return (
+      <View>
+        <Modal
+          visible={this.state.visible}
+          transparent={this.state.transparent}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+          }}
+        >
+          <TFeedback
+            content={
+              <View
+                style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+              >
+                <TFeedback
+                  content={
+                    <View style={styles.modalBox}>
+                      <View style={{ height: 40 }}>
+                        <Input
+                          style={styles.inputText}
+                          value={password}
+                          onChangeText={text => this.savePassword(text)}
+                          placeholder="请输入取款密码"
+                          placeholderTextColor="#777"
+                        />
+                      </View>
+                      <TFeedback
+                        content={
+                          <View style={styles.submitBox}>
+                            <Text style={styles.submitText}>确认</Text>
+                          </View>}
+                        onPress={() => this.CreateWithdrawalsOrderService()}
+                      />
+                    </View>}
+                  onPress={() => { console.log('modal'); }}
+                />
+              </View>}
+            onPress={() => { this.setState({ visible: false }); }}
+          />
+        </Modal>
+      </View>
+    );
+  }
   render() {
     const { pop } = this.props;
     return (
@@ -119,6 +164,7 @@ class MyTixian extends base {
           {this._renderlist()}
           {this._renderBtn()}
         </Content>
+        {this.renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

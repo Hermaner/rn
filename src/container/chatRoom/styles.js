@@ -2,146 +2,72 @@ import { StyleSheet } from 'react-native';
 import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
-  ...st,
-  form: {
-    backgroundColor: '#fff', borderRadius: 8,
-  },
-  pagebody: {
-    backgroundColor: '#fff',
+  listContent: {
     flex: 1,
+  },
+  bottomToolBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    backgroundColor: '#f8f8f8',
+  },
+  sendButton: {
+    borderColor: '#ccc',
+    width: 60,
+    height: 40,
+    marginLeft: 8,
+    borderRadius: 4,
     ...st.jacenter,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
-    paddingTop: 15,
-    marginBottom: 20,
-    borderRadius: 5,
-  },
-  pageTitle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  userName: {
-    color: '#666',
-    fontSize: 14,
-    marginTop: 10,
-  },
-  inputBox: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 8,
-  },
-  inputs: {
-    flex: 1,
-    marginLeft: 20,
-    marginRight: 20,
     borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 6,
-    fontSize: 18,
-    paddingTop: 15,
-    paddingBottom: 15,
-    textAlign: 'center',
   },
-  typeChooseTitleBox: {
-    flex: 1,
-    flexDirection: 'row',
-    marginLeft: 10,
-    marginRight: 10,
-    paddingBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  typeChooseTitle: {
-    flex: 1,
-    marginTop: 30,
-    textAlign: 'center',
+  sendButtonText: {
+    color: '#333',
     fontSize: 14,
-    color: '#555',
   },
-  typeBox: {
+  input: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    color: '#444',
+    backgroundColor: '#fff',
+    fontSize: 13,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
     paddingTop: 10,
-    paddingRight: 10,
   },
-  typeTitleBox: {
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight: 12,
-    borderWidth: 1,
-    borderColor: '#eee',
-    marginLeft: 14,
-    marginBottom: 14,
-    borderRadius: 6,
+  list: {
+    marginTop: 5,
+    marginBottom: 5,
+    ...st.fr,
   },
-  typeTitle: {
-    fontSize: 14,
-    color: '#666',
-  },
-  button: {
-    marginLeft: 20,
-    marginRight: 20,
-    paddingTop: 15,
-    paddingBottom: 15,
-    backgroundColor: Mcolor,
-    borderRadius: 6,
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#fff',
+  message: {
+    color: '#333',
     fontSize: 14,
   },
-  prompt: {
-    marginTop: 10,
+  avatar: {
+    borderRadius: 4,
+    margin: 8,
+    width: 40,
+    height: 40,
   },
-  promptInfo: {
-    color: '#999',
-    fontSize: 12,
-    textAlign: 'center',
-  },
-  typeChoose: {
-    backgroundColor: Mcolor,
-    borderColor: Mcolor,
-  },
-  identity: {
+  sepView: {
+    ...st.frcenter,
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+  },
+  sepViewEnd: {
+    flex: 1,
+  },
+  contentView: {
+    borderRadius: 4,
+    padding: 8,
+    margin: 5,
     justifyContent: 'center',
-    marginTop: 20,
+    backgroundColor: '#fff',
   },
-  identityOne: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 5,
-    marginRight: 5,
-    borderWidth: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 4,
-    paddingBottom: 4,
-    borderColor: '#eee',
-    borderRadius: 5,
-  },
-  headerImg: {
+  endBlankBlock: {
+    margin: 5,
     width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginRight: 10,
-  },
-  isChooseBackground: {
-    backgroundColor: Mcolor,
-    borderColor: Mcolor,
-  },
-  isChooseText: {
-    color: '#fff',
-  },
-  identityText: {
-    color: '#666',
-    fontSize: 14,
+    height: 40,
   },
 });
 export default styles;

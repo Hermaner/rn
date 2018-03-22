@@ -15,6 +15,10 @@ export default class TLight extends React.Component {
     };
     this.lightPress = this.lightPress.bind(this);
   }
+  componentWillUnmount() {
+    this.timer = null;
+    this.setState = () => ({});
+  }
   async lightPress() {
     const { TPress } = this.props;
     if (!TPress) {

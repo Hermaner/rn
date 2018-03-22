@@ -121,7 +121,8 @@ class CgCategory extends base {
           {this._renderContent()}
           {!showBtn && this._renderOtherChoose()}
         </Content>
-        {showBtn && this._renderButton()}
+        {this._renderButton()}
+        {/* {showBtn && this._renderButton()} */}
         {this._renderModalView()}
       </Container>
     );

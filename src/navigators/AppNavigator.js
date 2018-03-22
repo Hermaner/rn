@@ -27,8 +27,6 @@ import CgyPrice from '../container/cgyPrice';
 import CgyDesc from '../container/cgyDesc';
 import CgyServices from '../container/cgyServices';
 import CbjConfirm from '../container/cbjConfirm';
-import ChatIndex from '../container/chatIndex';
-import ChatRoom from '../container/chatRoom';
 import MainSearcher from '../container/mainSearcher';
 import MainList from '../container/mainList';
 import GoodsScreen from '../container/goodsScreen';
@@ -142,8 +140,16 @@ import MyFriend from '../container/myFriend';
 import FriendCitys from '../container/friendCitys';
 import UserIdentity from '../container/userIdentity';
 import LogisticsInfo from '../container/logisticsInfo';
+import ChatRoom from '../container/ChatRoom';
+import ChatPhrase from '../container/ChatPhrase';
+import ChatPhraseChange from '../container/ChatPhraseChange';
+import ChatImage from '../container/ChatImage';
 
 export const AppNavigator = StackNavigator({
+  ChatPhrase: { screen: ChatPhrase },
+  ChatPhraseChange: { screen: ChatPhraseChange },
+  ChatImage: { screen: ChatImage },
+  ChatRoom: { screen: ChatRoom },
   CategorysBrands: { screen: CategorysBrands },
   Categorys: { screen: Categorys },
   MyAddress: { screen: MyAddress },
@@ -168,8 +174,6 @@ export const AppNavigator = StackNavigator({
   CgyDesc: { screen: CgyDesc },
   CgyServices: { screen: CgyServices },
   CbjConfirm: { screen: CbjConfirm },
-  ChatIndex: { screen: ChatIndex },
-  ChatRoom: { screen: ChatRoom },
   MainSearcher: { screen: MainSearcher },
   MainList: { screen: MainList },
   GoodsScreen: { screen: GoodsScreen },

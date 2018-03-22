@@ -361,9 +361,13 @@ class MainScreen extends base {
             </View>}
           onPress={() => { this.CreateMemberFollowService(); }}
         />
-        <View style={styles.fotBtn2}>
-          <Text style={styles.fotText}>聊生意</Text>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.fotBtn2}>
+              <Text style={styles.fotText}>聊生意</Text>
+            </View>}
+          onPress={this.goChat}
+        />
         <TFeedback
           content={
             <View style={styles.fotBtn3}>
@@ -388,9 +392,6 @@ class MainScreen extends base {
         <Header
           back={pop}
           title="店铺详情"
-          showRight
-          rightText=""
-          rightPress={this.resetState}
         />
         {
           userInfo &&

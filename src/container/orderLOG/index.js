@@ -30,7 +30,6 @@ class OrderLOG extends myBase {
   _renderHeader() {
     const { push } = this.props;
     const { LOGInfo, list, imgList } = this.state;
-    console.log('lllllllllllllllllllll', imgList)
     return (
       <View>
         <View style={styles.firstBox}>

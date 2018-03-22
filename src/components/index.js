@@ -30,11 +30,18 @@ import UploadStoreImg from './UploadStoreImg';
 import ImageLook from './ImageLook';
 import TitleItem from './TitleItem';
 import ScrollableStatusTab from './ScrollableStatusTab';
+import Upload from './Upload';
+import Chat from './chat/GiftedChat';
+import SocketStore from './socket/SocketStore';
 
 const UserSocket = new UserObser();
+const SocketObser = new SocketStore();
 
 export {
   TLight,
+  Chat,
+  SocketObser,
+  Upload,
   ImageLook,
   CheckBox,
   MHeader,

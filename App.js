@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter } from 'react-native';
+import { BackHandler, AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
@@ -16,7 +16,7 @@ import {
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import AppReducer from './src/reducers';
-import { UserSocket } from './src/components';
+import { UserSocket, SocketObser } from './src/components';
 import AppWithNavigationState from './src/navigators/AppNavigator';
 
 
@@ -24,6 +24,7 @@ import AppWithNavigationState from './src/navigators/AppNavigator';
 class App extends React.Component {
   componentDidMount() {
     SplashScreen.hide();
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     persistStore(this.store, { storage: AsyncStorage });
     if (Platform.OS === 'android') {
       JPushModule.notifyJSDidLoad(() => {});
@@ -75,6 +76,7 @@ class App extends React.Component {
         UserSocket.changeData(global.userData);
         global.memberId = JSON.parse(res).memberId;
         console.log(global.userData);
+        SocketObser.getConnect();
       }
     });
     AsyncStorage.getItem('searchHistorys', (error, res) => {
@@ -84,6 +86,18 @@ class App extends React.Component {
     });
     global.Toast = Toast;
   }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+  }
+  onBackPress = () => {
+    if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+      BackHandler.exitApp();
+      return false;
+    }
+    this.lastBackPressed = Date.now();
+    Toast.show('再按一次退出应用');
+    return true;
+  };
   premInit = () => {
     const types = Permissions.getTypes();
     const canOpenSettings = Permissions.canOpenSettings();

@@ -5,7 +5,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { Icon } from 'native-base';
 import home from '../container/home';
 import goods from '../container/goods';
-import chatIndex from '../container/chatIndex';
+import TabChat from './TabChat';
 import mine from '../container/my';
 import { Mcolor } from '../utils';
 
@@ -30,7 +30,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
       screen: goods,
     },
     Carts: {
-      screen: chatIndex,
+      screen: TabChat,
     },
     Mine: {
       screen: mine,

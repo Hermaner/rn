@@ -30,7 +30,7 @@ class Child extends React.Component {
               <View style={styles.goodsTypeBox}>
                 <View style={{ flex: 1 }} />
                 <View style={styles.goodsTypeCenter}>
-                  <Text style={styles.goodsTypeText}>{data[0].name}</Text>
+                  <Text style={styles.goodsTypeText}>{item.name}</Text>
                 </View>
                 <View style={{ flex: 1 }} />
               </View>
