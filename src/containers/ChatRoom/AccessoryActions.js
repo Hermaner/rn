@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
+import RNFetchBlob from 'react-native-fetch-blob';
+import Toast from 'react-native-simple-toast';
 import ImageResizer from 'react-native-image-resizer';
 import ImagePicker from 'react-native-image-crop-picker';
 import CameraRollPicker from 'react-native-camera-roll-picker';
@@ -57,20 +59,20 @@ class AccessoryActions extends React.Component {
     super(props);
     this._images = [];
     this.state = {
-      width: 500,
+      width: 700,
       modalVisible: false,
       access: [{
         name: '照片',
-        icon: 'ios-flame',
+        icon: 'ios-image',
       }, {
         name: '拍摄',
-        icon: 'ios-flame',
+        icon: 'ios-camera',
       }, {
         name: '快捷短语',
-        icon: 'ios-flame',
+        icon: 'ios-list-box',
       }, {
         name: '发商品',
-        icon: 'ios-flame',
+        icon: 'ios-cube',
       }],
     };
     this.selectImages = this.selectImages.bind(this);
@@ -98,28 +100,54 @@ class AccessoryActions extends React.Component {
     this.setModalVisible(false);
     const { width } = this.state;
     const images = [];
-    console.log(getImages)
     getImages.forEach((image) => {
       const bl = image.height / image.width;
       const height = width * bl;
-      console.log(image.uri);
       ImageResizer.createResizedImage(image.uri, width, height, 'JPEG', 60).then((response) => {
-        const key = fileKey();
-        const urlkey = `${global.buketUrl}${key}`;
-        Upload(response.uri, global.uptoken, key);
-        images.push({
-          text: urlkey,
-          image: response.uri,
-          type: '2',
-          status: '1',
-        });
-        console.log(images);
-        if (images.length === getImages.length) {
-          this.props.onSend(images);
-          this.setImages([]);
+        let newWidth = 150;
+        let newHeight = 150;
+        if (width >= height && width >= newHeight) {
+          newHeight = newWidth * bl;
         }
+        if (height >= width && height >= newWidth) {
+          newWidth = newHeight / bl;
+        }
+        if (width < newWidth && height < newHeight) {
+          newWidth = width;
+          newHeight = height;
+        }
+        const key = `${fileKey()}.png`;
+        const urlkey = `${global.buketUrl}${key}`;
+        Upload(response.uri, global.uptoken, key, () => {
+          const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
+          RNFetchBlob.config({
+            fileCache: true,
+            appendExt: 'png',
+            path,
+          })
+          .fetch('GET', urlkey, {
+          })
+          .then(() => {
+            images.push({
+              text: urlkey,
+              path,
+              pressWidth: newWidth,
+              pressHeight: newHeight,
+              width,
+              height,
+              type: '2',
+              status: '1',
+            });
+            if (images.length === getImages.length) {
+              this.props.onSend(images);
+              this.setImages([]);
+            }
+          });
+        }, () => {
+          Toast.show('上传失败');
+        });
       }).catch((err) => {
-        console.log(err);
+        Toast.show(err);
       });
     });
   }

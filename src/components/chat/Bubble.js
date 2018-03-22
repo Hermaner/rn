@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import Toast from 'react-native-simple-toast';
 import RNFetchBlob from 'react-native-fetch-blob';
 import {
   Clipboard,
@@ -95,22 +96,20 @@ export default class Bubble extends React.Component {
       } else {
         this.readSound(path);
       }
-    })
-    .catch(err => console.log(err));
+    });
   }
   readSound = (path) => {
     this.sound = new Sound(path, '', (error) => {
       if (error) {
-        console.log('failed to load the sound', error);
+        Toast.show('音频读取失败');
       }
-      console.log('chenggong');
     });
     setTimeout(() => {
       this.sound.play((success) => {
         if (success) {
           this.sound = null;
         } else {
-          console.log('playback failed due to audio decoding errors');
+          Toast.show('音频播放失败');
         }
       });
     }, 100);

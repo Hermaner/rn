@@ -75,9 +75,5 @@ Time.propTypes = {
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  textStyle: PropTypes.shape({
-    left: Text.propTypes.style,
-    right: Text.propTypes.style,
-  }),
   timeFormat: PropTypes.string,
 };

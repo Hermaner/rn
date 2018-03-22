@@ -4,7 +4,7 @@
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Platform } from 'react-native';
 
-function uploadFile(uri, token, key, callback) {
+function uploadFile(uri, token, key, callback, err) {
   const PATH = Platform.OS === 'ios' ? uri.replace('file:///', '') : uri;
   const body = [{
     name: 'token',
@@ -18,15 +18,12 @@ function uploadFile(uri, token, key, callback) {
     data: RNFetchBlob.wrap(PATH),
   }];
   RNFetchBlob
-  .fetch('POST', 'https://up.qbox.me', {
+  .fetch('POST', 'https://upload.qbox.me', {
     'Content-Type': 'octet-stream',
   }, body)
   .uploadProgress((written, total) => {
-    console.log(written, total);
   })
   .progress((received, total) => {
-    const perent = received / total;
-    console.log(perent);
   })
   .then(response => response.json())
   .then(() => {
@@ -34,9 +31,7 @@ function uploadFile(uri, token, key, callback) {
       callback();
     }
   })
-  .catch((error) => {
-    console.log(error);
-  });
+  .catch(err);
 }
 
 export default uploadFile;

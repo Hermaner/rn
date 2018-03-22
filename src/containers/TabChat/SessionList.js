@@ -16,6 +16,8 @@ import {
     View,
     Text,
     FlatList,
+    AppState,
+    Platform,
     DeviceEventEmitter,
 } from 'react-native';
 import { Container } from 'native-base';
@@ -112,6 +114,7 @@ class SessionList extends React.Component {
   }
   componentDidMount() {
     this.init();
+    AppState.addEventListener('change', this.appStateChange);
     this.socket = SocketObser.socket;
     this.sessionEmit = DeviceEventEmitter.addListener('sessionEmit', () => {
       this.init();
@@ -121,6 +124,7 @@ class SessionList extends React.Component {
     });
   }
   componentWillUnmount() {
+    AppState.removeEventListener('change', this.appStateChange);
     this.sessionEmit.remove();
     this.offSessionEmit.remove();
     this.socket = null;
@@ -153,6 +157,24 @@ class SessionList extends React.Component {
       this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
     }
   }
+  appStateChange = (appState) => {
+    if (Platform.OS === 'ios' && appState === 'inactive') {
+      if (this.socket) {
+        this.socket.disconnect();
+      }
+    }
+    if (Platform.OS === 'android' && appState === 'background') {
+      if (this.socket) {
+        this.socket.disconnect();
+      }
+    }
+    if (appState === 'active') {
+      if (this.socket) {
+        this.socket.connect();
+      }
+      this.socket.emit('sendGetChatList');
+    }
+  }
   notifyMessageRead = () => {
     this.socket.emit('sendGetChatList');
   }
@@ -165,7 +187,7 @@ class SessionList extends React.Component {
         if (item.id === list.id) {
           exit = true;
           item.lastChatObject = list.lastChatObject;
-          item.showMemberNoReadCount = list.showMemberNoReadCount;
+          item.showMemberNoReadCount = item.id === global.chatId ? '0' : list.showMemberNoReadCount;
         }
       });
       if (!exit) {
@@ -179,7 +201,7 @@ class SessionList extends React.Component {
     });
   }
   _renderRow = (data) => {
-    const { showMemberNoReadCount, lastChatObject:
+    const { showMemberNoReadCount, id, lastChatObject:
       { text, type, user:
         { avatar, toAvatar, _id, toId, toUserName, userName } }, latestTime } = data.item;
     const isMine = _id.toString() === global.memberId.toString();
@@ -208,6 +230,7 @@ class SessionList extends React.Component {
         }
         onPress={() => {
           const { items } = this.state;
+          global.chatId = id;
           items[data.index].showMemberNoReadCount = '0';
           writeSessionList(JSON.stringify(items));
           this.setState({

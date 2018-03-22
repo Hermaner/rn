@@ -2,44 +2,20 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import RNFetchBlob from 'react-native-fetch-blob';
-import { Image, StyleSheet, View, ViewPropTypes, Platform } from 'react-native';
+import { Image, StyleSheet, View, ViewPropTypes, Platform, TouchableOpacity } from 'react-native';
 import Lightbox from 'react-native-lightbox';
 
 export default function MessageImage({
   containerStyle,
   lightboxProps,
   imageProps,
-  imageStyle,
   currentMessage,
+  showImage,
 }) {
-  const { text } = currentMessage;
-  const index = text.lastIndexOf('/') + 1;
-  const key = text.substr(index);
-  const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
-  RNFetchBlob.fs.exists(path)
-  .then((exist) => {
-    if (!exist) {
-      Image.getSize(text, () => {
-        RNFetchBlob.config({
-          fileCache: true,
-          path,
-        })
-        .fetch('GET', text, {
-        })
-        .then(() => {
-          // console.log(path);
-        });
-      }, () => {});
-    } else {
-      // console.log(path);
-    }
-  })
-  .catch(err => console.log(err));
-  console.log(text);
+  const { text, path, pressWidth, pressHeight, width, height } = currentMessage;
   return (
     <View style={[styles.container, containerStyle]}>
-      <Lightbox
+      {/* <Lightbox
         activeProps={{
           style: styles.imageActive,
         }}
@@ -47,11 +23,26 @@ export default function MessageImage({
       >
         <Image
           {...imageProps}
-          style={[styles.image, imageStyle]}
-          // source={{ uri: Platform.OS === 'android' ? `file://${path}` : '' + path }}
-          source={{ uri: text }}
+          style={[styles.image, { width: pressWidth, height: pressHeight }]}
+          source={{ uri: path ? (Platform.OS === 'android' ? `file://${path}` : path) : text }}
         />
-      </Lightbox>
+      </Lightbox> */}
+      <TouchableOpacity
+        onPress={() => {
+          showImage({
+            path,
+            text,
+            width,
+            height,
+          });
+        }}
+      >
+        <Image
+          {...imageProps}
+          style={[styles.image, { width: parseFloat(pressWidth, 10), height: parseFloat(pressHeight, 10) }]}
+          source={{ uri: path ? (Platform.OS === 'android' ? `file://${path}` : path) : text }}
+        />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -60,10 +51,7 @@ const styles = StyleSheet.create({
   container: {
   },
   image: {
-    width: 150,
-    height: 100,
     borderRadius: 13,
-    resizeMode: 'cover',
   },
   imageActive: {
     flex: 1,
@@ -85,7 +73,7 @@ MessageImage.defaultProps = {
 MessageImage.propTypes = {
   currentMessage: PropTypes.object,
   containerStyle: ViewPropTypes.style,
-  imageStyle: Image.propTypes.style,
   imageProps: PropTypes.object,
   lightboxProps: PropTypes.object,
+  showImage: PropTypes.func,
 };

@@ -34,11 +34,12 @@ class Base extends React.Component {
     }
   }
   onProductPress = (id) => {
+    Toast.show(id);
+  }
+  onPressAvatar = (id) => {
     console.log(id);
   }
   onSend = (items = []) => {
-    console.log(this.socket);
-    console.log(items)
     this.socket.emit('sendMessage', items);
     let { messages } = this.state;
     messages = items.concat(messages);
@@ -62,6 +63,7 @@ class Base extends React.Component {
         RNFetchBlob.fs.readFile(path, 'utf8')
         .then((data) => {
           const messages = JSON.parse(data);
+          console.log(messages);
           this.setState({
             messages,
           });
@@ -79,6 +81,8 @@ class Base extends React.Component {
     this.loadNewChat();// 发送请求获取最新的聊天记录
   }
   deleteInit = () => {
+    global.chatId = null;
+    AppState.removeEventListener('change', this.appStateChange);
     this.socket.off('notifyMessageRead', this.notifyMessageRead);
     this.socket.off('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);
     this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
@@ -87,12 +91,38 @@ class Base extends React.Component {
   }
   notifyMessageRead = (data) => {
     let { messages } = this.state;
-    messages = [data].concat(messages);
-    this.writeAllFile(messages);
-    this.setState({
-      messages,
-    });
-    this.socket.emit('sendMessageMyReadSuccess', [data]); // 告诉对方我收到消息了
+    if (data.length === 1 && data[0].type !== '2') {
+      messages = data.concat(messages);
+      this.writeAllFile(messages);
+      this.setState({
+        messages,
+      });
+      this.socket.emit('sendMessageMyReadSuccess', data); // 告诉对方我收到消息了
+    } else {
+      data.forEach((item, i) => {
+        const index = item.text.lastIndexOf('/') + 1;
+        const key = item.text.substr(index);
+        const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
+        RNFetchBlob.config({
+          fileCache: true,
+          appendExt: 'png',
+          path,
+        })
+        .fetch('GET', item.text, {
+        })
+        .then(() => {
+          item.path = path;
+          if (i === data.length - 1) {
+            messages = data.concat(messages);
+            this.writeAllFile(messages);
+            this.setState({
+              messages,
+            });
+            this.socket.emit('sendMessageMyReadSuccess', data); // 告诉对方我收到消息了
+          }
+        });
+      });
+    }
   }
   notifyMessageToReadSuccess = (data) => {
     const { messages } = this.state;
@@ -108,13 +138,14 @@ class Base extends React.Component {
     });
     this.writeNewFile(messages);
   }
-  notifyMessageSendSuccess = (data) => {
-    console.log(111);
+  notifyMessageSendSuccess = (items) => {
     const { messages } = this.state;
-    messages.forEach((item) => {
-      if (item._id === data._id) {
-        item.status = '2';
-      }
+    messages.forEach((message) => {
+      items.forEach((item) => {
+        if (item._id === message._id) {
+          message.status = '2';
+        }
+      });
     });
     this.setState({
       messages,
@@ -138,13 +169,50 @@ class Base extends React.Component {
         newItems.push(item);
       }
     });
-    messages = newItems.concat(messages);
-    this.writeAllFile(messages);
-    this.setState({
-      messages,
-      isLoadingEarlier: false,
-      loadEarlier: messages.length === 40,
+    let count = 0;
+    newItems.forEach((item) => {
+      if (item.type === '2') {
+        count += 1;
+      }
     });
+    if (count === 0) { // 如果没有图片不需要缓存
+      messages = newItems.concat(messages);
+      this.writeAllFile(messages);
+      this.setState({
+        messages,
+        isLoadingEarlier: false,
+        loadEarlier: messages.length === 40,
+      });
+    } else {  // 如果有图片图片缓存以后再渲染
+      let count2 = 0;
+      newItems.forEach((item) => {
+        if (item.type === '2') {
+          const index = item.text.lastIndexOf('/') + 1;
+          const key = item.text.substr(index);
+          const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
+          RNFetchBlob.config({
+            fileCache: true,
+            appendExt: 'png',
+            path,
+          })
+          .fetch('GET', item.text, {
+          })
+          .then(() => {
+            item.path = path;
+            count2 += 1;
+            if (count === count2) {
+              messages = newItems.concat(messages);
+              this.writeAllFile(messages);
+              this.setState({
+                messages,
+                isLoadingEarlier: false,
+                loadEarlier: messages.length === 40,
+              });
+            }
+          });
+        }
+      });
+    }
   }
   notifyGetChatLog = (data) => {
     const { pageSize } = this.state;
@@ -155,8 +223,12 @@ class Base extends React.Component {
       loadEarlier: data.length === pageSize,
     }));
   }
+  showImage = (params) => {
+    this.props.push({ key: 'ChatImage', params });
+  }
   appStateChange = (appState) => {
     if (Platform.OS === 'ios' && appState === 'inactive') {
+      console.log(this.socket);
       this.socket.disconnect();
     }
     if (Platform.OS === 'android' && appState === 'background') {
@@ -164,7 +236,7 @@ class Base extends React.Component {
     }
     if (appState === 'active') {
       this.socket.connect();
-      this.socket.emit('sendGetChatList');
+      this.loadNewChat();
     }
   }
   loadNewChat = () => {
@@ -195,7 +267,6 @@ class Base extends React.Component {
   GetUploadTokenService = () => {
     GetUploadTokenService()
     .then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         global.uptoken = res.data.upToken;
         global.buketUrl = res.data.buketUrl;
@@ -203,7 +274,7 @@ class Base extends React.Component {
         Toast.show(res.msg);
       }
     }).catch((err) => {
-      console.log(err);
+      Toast.show(err);
     });
   }
   renderUser = () => {
@@ -221,5 +292,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
+  push: PropTypes.func,
 };
 export default Base;

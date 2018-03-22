@@ -74,7 +74,7 @@ export default class Composer extends React.Component {
     try {
       await AudioRecorder.startRecording();
     } catch (error) {
-      console.error(error);
+      Toast.show(error);
     }
     this.setState({
       isTab: true,
@@ -108,25 +108,22 @@ export default class Composer extends React.Component {
       try {
         await AudioRecorder.stopRecording();
       } catch (error) {
-        console.error(error);
+        Toast.show(error);
       }
       Toast.show('少于1s自动取消');
       return;
     }
     if (dy < -50) {
-      console.log('显示取消');
       RNFetchBlob.fs.unlink(this.state.audioPath)
       .then(() => {});
     } else {
-      console.log('发送');
       try {
         const filePath = await AudioRecorder.stopRecording();
         if (Platform.OS === 'android') {
           this._finishRecording(filePath);
         }
-        return filePath;
       } catch (error) {
-        console.error(error);
+        Toast.show(error);
       }
     }
   }

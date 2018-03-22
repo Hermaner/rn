@@ -21,25 +21,21 @@ export default class MessageContainer extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.renderRow = this.renderRow.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      },
+      rowHasChanged: (r1, r2) => r1.hash !== r2.hash,
     });
-    console.log(props.messages);
     const messagesData = this.prepareMessages(props.messages);
     this.state = {
       dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     // console.log(nextProps.messages);
     // if (this.props.messages === nextProps.messages) {
     //   return;
@@ -196,7 +192,6 @@ MessageContainer.propTypes = {
   renderFooter: PropTypes.func,
   renderMessage: PropTypes.func,
   renderLoadEarlier: PropTypes.func,
-  onLoadEarlier: PropTypes.func,
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
   loadEarlier: PropTypes.bool,

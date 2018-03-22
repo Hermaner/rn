@@ -14,8 +14,8 @@ const config = {
     server: 'https://chat.mm.sunhousm.cn?memberId=',
   },
   dev: {
-    server: 'http://192.168.50.57:9091?memberId=',
+    server: 'http://192.168.50.57:9092?memberId=',
   },
 };
 
-export default config.local;
+export default config.dev;

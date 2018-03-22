@@ -102,8 +102,10 @@ import OrderSend from '../containers/OrderSend';
 import ChatPhrase from '../containers/ChatPhrase';
 import NoticeSetting from '../containers/NoticeSetting';
 import ChatPhraseChange from '../containers/ChatPhraseChange';
+import ChatImage from '../containers/ChatImage';
 
 export const AppNavigator = StackNavigator({
+  ChatImage: { screen: ChatImage },
   ChatPhraseChange: { screen: ChatPhraseChange },
   NoticeSetting: { screen: NoticeSetting },
   ChatPhrase: { screen: ChatPhrase },

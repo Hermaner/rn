@@ -1,4 +1,3 @@
-/* eslint no-use-before-define: ["error", { "variables": false }], react-native/no-inline-styles: 0 */
 
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,6 +12,33 @@ import {
 } from 'react-native';
 import Color from './Color';
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  wrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Color.defaultColor,
+    borderRadius: 15,
+    height: 30,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  text: {
+    backgroundColor: Color.backgroundTransparent,
+    color: Color.white,
+    fontSize: 13,
+  },
+  activityIndicator: {
+    marginTop: Platform.select({
+      ios: -14,
+      android: -16,
+    }),
+  },
+});
 export default class LoadEarlier extends React.Component {
 
   renderLoading() {
@@ -56,34 +82,6 @@ export default class LoadEarlier extends React.Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 10,
-  },
-  wrapper: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Color.defaultColor,
-    borderRadius: 15,
-    height: 30,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  text: {
-    backgroundColor: Color.backgroundTransparent,
-    color: Color.white,
-    fontSize: 13,
-  },
-  activityIndicator: {
-    marginTop: Platform.select({
-      ios: -14,
-      android: -16,
-    }),
-  },
-});
 
 LoadEarlier.defaultProps = {
   onLoadEarlier: () => { },

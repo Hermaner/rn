@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
+import com.eaffy.rnandroidnotificationpermission.RNAndroidNotificationPermissionPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
@@ -52,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAndroidNotificationPermissionPackage(),
             new RNSoundPackage(),
             new ReactNativeAudioPackage(),
             new ImageResizerPackage(),

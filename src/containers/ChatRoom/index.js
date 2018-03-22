@@ -61,9 +61,11 @@ class ChatRoom extends base {
         <GiftedChat
           messages={messages}
           onSend={this.onSend}
+          showImage={this.showImage}
           loadEarlier={this.state.loadEarlier}
           onLoadEarlier={this.onLoadEarlier}
           onProductPress={this.onProductPress}
+          onPressAvatar={this.onPressAvatar}
           isLoadingEarlier={this.state.isLoadingEarlier}
           renderAccessory={this.renderAccessory}
           user={this.renderUser()}

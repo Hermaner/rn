@@ -391,15 +391,15 @@ class GiftedChat extends React.Component {
     if (!Array.isArray(messages)) {
       messages = [messages];
     }
-    messages = messages.map((message) => {
-      return {
+    messages = messages.map(message => (
+      {
         ...message,
         status: '1', // 1: 发送中2：发送成功未读：3对方已读4:发送失败
         user: this.props.user,
         createdAt: new Date().getTime(),
         _id: this.props.messageIdGenerator(),
-      };
-    });
+      }
+    ));
     if (shouldResetInputToolbar === true) {
       this.setIsTypingDisabled(true);
       this.resetInputToolbar();
@@ -662,7 +662,6 @@ GiftedChat.defaultProps = {
   renderLoadEarlier: null,
   renderAvatar: undefined,
   showUserAvatar: false,
-  onPressAvatar: null,
   renderAvatarOnTop: false,
   renderBubble: null,
   renderSystemMessage: null,

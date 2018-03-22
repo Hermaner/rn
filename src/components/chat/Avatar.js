@@ -12,7 +12,7 @@ const Avatar = ({ position, onPressAvatar, currentMessage }) => (
   >
     <TouchableOpacity
       onPress={() => onPressAvatar &&
-        this.props.onPressAvatar(currentMessage.user)}
+        onPressAvatar(currentMessage.user)}
       accessibilityTraits="image"
     >
       <Image

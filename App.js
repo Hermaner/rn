@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter } from 'react-native';
+import { AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter, AppState } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
@@ -52,13 +52,19 @@ class App extends React.Component {
       NativeAppEventEmitter.addListener('networkDidLogin', () => {
         // console.log(token);
       });
-      NativeAppEventEmitter.addListener('ReceiveNotification', () => {
-        // console.log(notification)
+      this.ReceiveNotification = NativeAppEventEmitter.addListener('ReceiveNotification', (notification) => {
+        console.log(notification);
       });
     }
     JPushModule.getRegistrationID((registrationId) => {
       global.registration = registrationId;
     });
+    AppState.addEventListener('change', (appState) => {
+      if (appState === 'active') {
+        this.clearIosBadge();
+      }
+    });
+    this.clearIosBadge();
     this.premInit();
     AsyncStorage.getItem('userData', (error, res) => {
       if (res) {
@@ -80,6 +86,18 @@ class App extends React.Component {
       this.GetMemberCenterService();
     });
   }
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      JPushModule.clearAllNotifications();
+    } else {
+      this.ReceiveNotification.remove();
+    }
+  }
+  clearIosBadge = () => {
+    if (Platform.OS === 'ios') {
+      JPushModule.setBadge(0, () => {});
+    }
+  }
   premInit = () => {
     const types = Permissions.getTypes();
     const canOpenSettings = Permissions.canOpenSettings();
@@ -94,14 +112,14 @@ class App extends React.Component {
         global.reqNotification = response;
       });
     }
-    Permissions.request('camera').then((response) => {
-      console.log(response);
-      global.reqCamera = response;
-    });
-    Permissions.request('photo').then((response) => {
-      console.log(response);
-      global.reqPhoto = response;
-    });
+    // Permissions.request('camera').then((response) => {
+    //   console.log(response);
+    //   global.reqCamera = response;
+    // });
+    // Permissions.request('photo').then((response) => {
+    //   console.log(response);
+    //   global.reqPhoto = response;
+    // });
     // this._openSettings();
   }
   GetMemberCenterService = () => {

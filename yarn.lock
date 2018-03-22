@@ -4645,6 +4645,10 @@ react-native-actionsheet-hm@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-actionsheet-hm/-/react-native-actionsheet-hm-1.0.0.tgz#a814bc67d657d2da74b88452975b7d6e7cd061bc"
 
+react-native-android-notification-permission@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-android-notification-permission/-/react-native-android-notification-permission-1.0.1.tgz#8d4f40f28a5f63dee9400db4525d0706519e06fd"
+
 react-native-android-statusbar@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/react-native-android-statusbar/-/react-native-android-statusbar-0.1.3.tgz#403856bb07f6a466ef5b0aa1c544b6ea564026ac"
