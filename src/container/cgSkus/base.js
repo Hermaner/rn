@@ -17,8 +17,10 @@ class Base extends React.Component {
     this.setState({
       chooseOne: index,
     });
-    if (i === items[index].specs.length - 1) {
-      this.ModalView.showModal();
+    if (Global.skuType === '3' || Global.skuType === '4') {
+      if (i === items[index].specs.length - 1) {
+        this.ModalView.showModal();
+      }
     }
     const itemIndex = items[index].itemIndex;
     items[index].specs[i].cur = true;
