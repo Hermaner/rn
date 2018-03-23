@@ -12,17 +12,10 @@ target 'App' do
     'RCTImage',
   ]
   pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
-  # pod 'JPushRN', :path => '../node_modules/jpush-react-native'
   pod 'RSKImageCropper'
   pod 'QBImagePickerController'
 
   pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
-
-  # pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
-
-  pod 'RNAudio', :path => '../node_modules/react-native-audio'
-
-  pod 'RNSound', :path => '../node_modules/react-native-sound'
 
 end
 post_install do |installer|
