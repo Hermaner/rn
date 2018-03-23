@@ -6,7 +6,7 @@ import XPay from 'react-native-puti-pay';
 import { PayAliService, PayAppWeiXinService } from '../../api';
 
 XPay.setWxId('wx4d30b0136bad7f7e');
-XPay.setAlipayScheme('alipay');
+XPay.setAlipayScheme('alipay2017070607661320');
 class Base extends React.Component {
   constructor(props) {
     super(props);

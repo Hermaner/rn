@@ -8,16 +8,27 @@ PODS:
     - React
   - React/Core (0.50.4):
     - yoga (= 0.50.4.React)
-  - React/DevSupport (0.50.4):
-    - React/Core
-    - React/RCTWebSocket
   - React/fishhook (0.50.4)
+  - React/RCTActionSheet (0.50.4):
+    - React/Core
+  - React/RCTAnimation (0.50.4):
+    - React/Core
   - React/RCTBlob (0.50.4):
+    - React/Core
+  - React/RCTGeolocation (0.50.4):
     - React/Core
   - React/RCTImage (0.50.4):
     - React/Core
     - React/RCTNetwork
+  - React/RCTLinkingIOS (0.50.4):
+    - React/Core
   - React/RCTNetwork (0.50.4):
+    - React/Core
+  - React/RCTSettings (0.50.4):
+    - React/Core
+  - React/RCTText (0.50.4):
+    - React/Core
+  - React/RCTVibration (0.50.4):
     - React/Core
   - React/RCTWebSocket (0.50.4):
     - React/Core
@@ -25,17 +36,28 @@ PODS:
     - React/RCTBlob
   - ReactNativePermissions (1.1.1):
     - React
+  - RNImageCropPicker (0.20.0):
+    - QBImagePickerController
+    - RSKImageCropper
   - RSKImageCropper (2.0.0)
   - yoga (0.50.4.React)
 
 DEPENDENCIES:
-  - QBImagePickerController
   - react-native-baidumap-sdk (from `../node_modules/react-native-baidumap-sdk/lib/ios`)
-  - React/DevSupport (from `../node_modules/react-native/`)
+  - React/Core (from `../node_modules/react-native/`)
+  - React/RCTActionSheet (from `../node_modules/react-native/`)
+  - React/RCTAnimation (from `../node_modules/react-native/`)
+  - React/RCTGeolocation (from `../node_modules/react-native/`)
   - React/RCTImage (from `../node_modules/react-native/`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native/`)
+  - React/RCTNetwork (from `../node_modules/react-native/`)
+  - React/RCTSettings (from `../node_modules/react-native/`)
+  - React/RCTText (from `../node_modules/react-native/`)
+  - React/RCTVibration (from `../node_modules/react-native/`)
+  - React/RCTWebSocket (from `../node_modules/react-native/`)
   - ReactNativePermissions (from `../node_modules/react-native-permissions`)
-  - RSKImageCropper
-  - yoga (from `../node_modules/react-native/ReactCommon/yoga/`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
   React:
@@ -44,8 +66,10 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-baidumap-sdk/lib/ios
   ReactNativePermissions:
     :path: ../node_modules/react-native-permissions
+  RNImageCropPicker:
+    :path: ../node_modules/react-native-image-crop-picker
   yoga:
-    :path: ../node_modules/react-native/ReactCommon/yoga/
+    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
   BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
@@ -53,9 +77,10 @@ SPEC CHECKSUMS:
   React: 6d7efef18e0241eb832cf4c085405169a15080ed
   react-native-baidumap-sdk: 079e2eb35c5006ec05170367e21b2b38e9c4e831
   ReactNativePermissions: b64e084dff6a5cad51587d38c306f09246246384
+  RNImageCropPicker: 9ef50df72d7e1c02cbbca043a35456a03200f887
   RSKImageCropper: d9a1acbc0600bf8decc8f0d21895872c99a9e4cf
   yoga: b9aebf996711e50fc31f5608c10aa108a5a0c29e
 
-PODFILE CHECKSUM: d0b5dea740f69e6e88360e04aa82335713e83155
+PODFILE CHECKSUM: fc5575058b5bbb6dac23d0080cba247d6988ffaf
 
 COCOAPODS: 1.3.1
