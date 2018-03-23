@@ -121,6 +121,14 @@ export default class Prompt extends React.Component {
     }
   }
   show() {
+    if (!global.memberId) {
+      Toast.show('请先登录');
+      return;
+    }
+    if (!global.userData.phone) {
+      Toast.show('请先绑定手机号');
+      return;
+    }
     this.setState({
       modalVisible: true,
     });

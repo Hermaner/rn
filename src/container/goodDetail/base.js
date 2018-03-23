@@ -282,17 +282,6 @@ class Base extends React.Component {
       },
     });
   }
-  goCall = () => {
-    if (!global.memberId) {
-      Toast.show('请先登录');
-      return;
-    }
-    if (!global.userData.phone) {
-      Toast.show('请先绑定手机号');
-      return;
-    }
-    this.ModalCall.show();
-  }
 }
 Base.propTypes = {
   navigation: PropTypes.object,
