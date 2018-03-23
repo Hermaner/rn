@@ -92,6 +92,7 @@ class AccessoryActions extends React.Component {
     ImagePicker.openCamera({
       includeExif: true,
     }).then((img) => {
+      console.log(img)
       image = [{ uri: img.path, width: img.width, height: img.height, mime: img.mime }];
       this.upLoadImage(image);
     }).catch(e => console.log(e));
@@ -147,7 +148,7 @@ class AccessoryActions extends React.Component {
           Toast.show('上传失败');
         });
       }).catch((err) => {
-        Toast.show(err);
+        console.log(err);
       });
     });
   }

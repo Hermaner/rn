@@ -279,8 +279,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      Toast.show(err);
+    }).catch((error) => {
+      console.log(error);
     });
   }
   renderUser = () => {

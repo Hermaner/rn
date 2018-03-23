@@ -76,6 +76,7 @@ export default class Bubble extends React.Component {
   }
   _play = async (url) => {
     if (this.sound) {
+      console.log(this.sound)
       this.sound.stop();
     }
     const index = url.lastIndexOf('/') + 1;
@@ -103,11 +104,13 @@ export default class Bubble extends React.Component {
       if (error) {
         Toast.show('音频读取失败');
       }
+      console.log(1)
     });
     setTimeout(() => {
       this.sound.play((success) => {
         if (success) {
           this.sound = null;
+          console.log(2)
         } else {
           Toast.show('音频播放失败');
         }
