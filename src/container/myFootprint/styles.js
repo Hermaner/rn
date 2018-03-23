@@ -229,18 +229,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  aa: {
-    color: '#666',
-    fontSize: 11,
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingLeft: 4,
-    paddingRight: 4,
+  aaBox: {
+    // paddingTop: 2,
+    // paddingBottom: 2,
+    paddingLeft: 2,
+    paddingRight: 2,
     borderWidth: 1,
-    borderColor: '#FC8521',
     borderRadius: 3,
     marginRight: 4,
     marginBottom: 2,
+  },
+  aa: {
+    color: '#666',
+    fontSize: 11,
   },
   name: {
     flex: 1,

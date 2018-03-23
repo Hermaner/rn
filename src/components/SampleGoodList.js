@@ -166,11 +166,11 @@ const SampleGoodList = ({ onPress, data, onPressTell, onPressLastBtn }) => (
             <Text style={styles.priceLabel}>元/{data.unit}</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {/* <TouchableOpacity onPress={onPressTell}>
+            <TouchableOpacity onPress={onPressTell}>
               <View style={styles.tell}>
                 <Text style={styles.tellText}>聊生意</Text>
               </View>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <TouchableOpacity onPress={onPressLastBtn}>
               <View style={styles.tell}>
                 <Text style={styles.tellText}>申请拿样</Text>

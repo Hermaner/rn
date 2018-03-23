@@ -200,11 +200,10 @@ class MyBase extends React.Component {
     this.setState({ memberId: global.memberId || '' }, this.getData);
   }
   getData = () => {
-    const { memberId, firstList, soldInfoList, list } = this.state;
+    const { memberId, firstList, list } = this.state;
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         UserSocket.changeData(res.data);
@@ -222,18 +221,8 @@ class MyBase extends React.Component {
     GetMemberSellOrderCountService({
       memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
-        // const result = res.data;
         UserSocket.changeCount(res.data);
-        // for (let i = 0; i < soldInfoList.length; i += 1) {
-        //   soldInfoList[1].count = result.update;
-        //   soldInfoList[2].count = result.send;
-        //   soldInfoList[3].count = result.refund;
-        // }
-        // this.setState({
-        //   soldInfoList,
-        // });
       } else {
         Toast.show(res.msg);
       }
@@ -244,7 +233,6 @@ class MyBase extends React.Component {
     GetMemberBuyOrderCountService({
       memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result.confirm !== '0' || result.pay !== '0' || result.receive !== '0') {
@@ -268,7 +256,6 @@ class MyBase extends React.Component {
     GetMemberFootCountsService({
       memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

@@ -4,7 +4,13 @@ import { DeviceEventEmitter } from 'react-native';
 import { observer } from 'mobx-react/native';
 import PropTypes from 'prop-types';
 import { UserSocket } from '../../components';
-import { GetHomeCategoryService, GetRecomSupplyService, AmapGeocode, GetPlatformInfoService, GetBackgroundImgService } from '../../api';
+import {
+  GetHomeCategoryService,
+  GetRecomSupplyService,
+  AmapGeocode,
+  GetPlatformInfoService,
+  GetBackgroundImgService,
+} from '../../api';
 
 @observer
 class Base extends React.Component {
@@ -75,7 +81,6 @@ class Base extends React.Component {
     const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
         let categorysArray = [];
@@ -100,8 +105,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
     this.GetBackgroundImgService();
     this._onRefreshSupply();
@@ -111,7 +115,6 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result.imgUrl !== '') {
@@ -129,15 +132,13 @@ class Base extends React.Component {
   GetPlatformInfoService = () => {
     GetPlatformInfoService({
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         global.phone = result[0].phone;
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetRecomSupplyService = () => {
@@ -146,7 +147,6 @@ class Base extends React.Component {
       pageSize,
       currentPage: scurrentPage,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
@@ -195,18 +195,15 @@ class Base extends React.Component {
         });
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetLocation = (location) => {
-    console.log(location);
     const { longitude, latitude } = location;
     this.AmapGeocode(longitude, latitude);
   }
   AmapGeocode = (longitude, latitude) => {
     AmapGeocode(`${longitude},${latitude}`).then((res) => {
-      console.log(res);
       if (res.info === 'OK') {
         const {
           adcode,
@@ -240,8 +237,7 @@ class Base extends React.Component {
           districtName: district,
         });
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   goPage = (index) => {

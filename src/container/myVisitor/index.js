@@ -141,7 +141,7 @@ class MyVisitor extends myVisitorBase {
                             <View style={[styles.btn, styles.btnRight]}>
                               <Text style={styles.btnText}>聊生意</Text>
                             </View>}
-                          onPress={() => { push({ key: '' }); }} // TalkBusiness
+                          onPress={() => this.chatPeople(item)} // TalkBusiness
                         />
                       </View>
                     </View>

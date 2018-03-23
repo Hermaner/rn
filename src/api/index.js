@@ -435,3 +435,9 @@ export function DeleteMemberPhraseService(data) {
 export function UpdateMemberPhraseService(data) {
   return get('UpdateMemberPhraseService', data);
 }
+export function GetSeasonCategoryService() {
+  return get('GetSeasonCategoryService');
+}
+export function GetChildSeasonCategoryService(data) {
+  return get('GetChildSeasonCategoryService', data);
+}

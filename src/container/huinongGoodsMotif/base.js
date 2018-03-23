@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetSeasonSupplyService } from '../../api';
+import { GetChildSeasonCategoryService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -22,32 +22,21 @@ class Base extends React.Component {
       name: '',
       isTabOne: 0,
       categoryId: '',
-      brandId: '',
+      seasonCategoryId: '',
       backGround1: require('../../assets/img/haohuo.jpg'),
     };
   }
   getInit = () => {
-    const { brands, categoryId } = this.props.navigation.state.params;
-    if (brands && brands.length > 0) {
-      for (let i = 0; i < brands.length; i += 1) {
-        this.setState({
-          brandId: brands[0].brandId,
-        });
-      }
-      this.setState({
-        brands,
-      });
-    }
+    const { seasonCategoryId } = this.props.navigation.state.params;
     this.setState({
-      categoryId,
+      seasonCategoryId,
     }, this.getData);
   }
   getData = () => {
-    const { categoryId, brandId } = this.state;
+    const { seasonCategoryId } = this.state;
     this.sleek.toggle();
-    GetSeasonSupplyService({
-      categoryId,
-      brandId,
+    GetChildSeasonCategoryService({
+      seasonCategoryId,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
@@ -69,10 +58,10 @@ class Base extends React.Component {
       refresh: true,
     }, () => this.getData());
   }
-  tabChange = (isTabOne, brandId) => {
+  tabChange = (isTabOne, seasonCategoryId) => {
     this.setState({
       isTabOne,
-      brandId,
+      seasonCategoryId,
       nomore: false,
     }, this.getData);
   }

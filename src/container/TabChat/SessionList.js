@@ -148,7 +148,6 @@ class SessionList extends React.Component {
           RNFetchBlob.fs.readFile(path, 'utf8')
           .then((data) => {
             const items = JSON.parse(data);
-            console.log(items);
             this.setState({
               items,
             });
@@ -182,7 +181,6 @@ class SessionList extends React.Component {
     this.socket.emit('sendGetChatList');
   }
   notifyGetChatList = (lists) => {
-    console.log(lists);
     let { items } = this.state;
     const newLists = [];
     lists.forEach((list) => {

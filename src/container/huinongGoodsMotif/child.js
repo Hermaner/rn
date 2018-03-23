@@ -25,7 +25,7 @@ class Child extends React.Component {
       <View>
         {
           data.map((item, index) => (
-            item.seasonCategoryId &&
+            item.supplys !== null && item.supplys !== '' && item.supplys.length > 0 &&
             <View key={index}>
               <View style={styles.goodsTypeBox}>
                 <View style={{ flex: 1 }} />
@@ -35,15 +35,16 @@ class Child extends React.Component {
                 <View style={{ flex: 1 }} />
               </View>
               {
+                item.supplys !== null && item.supplys !== '' && item.supplys.length > 0 &&
                 item.supplys.map((item2, index2) => (
                   <TFeedback
                     key={index2}
                     content={
-                      <View>
+                      <View style={{ flex: 1 }}>
                         <View style={[styles.goodsItem, styles.specialItem]}>
                           {
                             item2.supplyImages && item2.supplyImages.length > 0 &&
-                            <CachedImage style={styles.goodsImage} source={{ uri: `${item2.supplyImages[0].imgUrl}?imageView2/1/w/80` }} />
+                            <CachedImage style={styles.goodsImage} source={{ uri: `${item2.supplyImages[0].imgUrl}?imageView2/1/w/200` }} />
                           }
                           <View style={{ flex: 1 }}>
                             <Text style={styles.goodsName}>{item2.brandName}{item2.categoryName}</Text>
@@ -65,46 +66,13 @@ class Child extends React.Component {
             </View>
           ))
         }
-        {
-          data &&
-          !data[0].seasonCategoryId &&
-          data.map((item, index) => (
-            <TFeedback
-              key={index}
-              content={
-                <View>
-                  <View style={styles.goodsItem}>
-                    {
-                      item.supplyImages &&
-                      <CachedImage style={styles.goodsImage} source={{ uri: `${item.supplyImages[0].imgUrl}?imageView2/1/w/80` }} />
-                    }
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.goodsName}>{item.brandName}{item.categoryName}</Text>
-                      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-                        <Text style={{ color: Mcolor, fontSize: 20 }}>{item.wholesalePrice}</Text>
-                        <Text style={{ color: Mcolor, fontSize: 14, flex: 1 }}>元/{item.unit}</Text>
-                        <Text style={{ color: '#666', fontSize: 12 }}>{item.wholesaleCount}{item.unit}起批</Text>
-                      </View>
-                      <Text style={styles.userName}>
-                        {item.sendProvinceName}{item.sendCityName}{item.sendDistrictName}
-                      </Text>
-                    </View>
-                  </View>
-                </View>}
-              onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
-            />
-          ))
-        }
       </View>
     );
   }
   render() {
-    const { name, data } = this.props;
+    const { data } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        {/* <View style={styles.goodsTitle}>
-          <Text style={styles.goodsTitleText}>{name}</Text>
-        </View> */}
         {
           (data && data.length > 0) ?
           this._renderRow()

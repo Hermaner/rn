@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   goodsItem: {
+    width: '50%',
     backgroundColor: '#fff',
-    flexDirection: 'row',
     paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 10,
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   goodsImage: {
-    width: 80,
-    height: 80,
+    width: width / 2 - 20,
+    height: width / 2 - 20,
     marginRight: 10,
   },
   goodsName: {

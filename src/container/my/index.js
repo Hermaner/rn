@@ -188,7 +188,9 @@ class My extends myBase {
                               <View style={styles.infoBox}>
                                 <View style={styles.aa}>
                                   <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item2.title}</Text>
-                                  <View style={[styles.icnBox, { backgroundColor: item2.icnColor }]}>
+                                  <View
+                                    style={[styles.icnBox, { backgroundColor: item2.icnColor }]}
+                                  >
                                     <Iconfont
                                       style={{ fontSize: 20, color: '#fff', textAlign: 'center' }}
                                       name={item2.icn}

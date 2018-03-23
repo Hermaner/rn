@@ -74,9 +74,6 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         if (focused) {
           return;
         }
-        if (index === 2) {
-          console.log('判断是否登陆');
-        }
         if (index === 3) {
           AsyncStorage.getItem('userData', (error, res) => {
             if (res) {

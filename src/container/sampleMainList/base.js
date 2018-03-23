@@ -184,6 +184,25 @@ class Base extends React.Component {
       default:
     }
   }
+  chatPeople = (item) => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (item.memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId: item.memberId,
+          userName: item.nickName,
+          imgUrl: item.imgUrl,
+        },
+      },
+    });
+  }
   hideMasker = () => {
     this.setState({
       isSpecTypesShow: false,

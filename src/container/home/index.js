@@ -11,7 +11,7 @@ import { pushRoute } from '../../actions';
 import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
 import base from './base';
 import styles from './styles';
-import { Mcolor, deviceW } from '../../utils';
+import { Mcolor } from '../../utils';
 import Child1 from './child1';
 
 @observer
@@ -131,6 +131,7 @@ class HomeScreen extends base {
   renderSeasonalGoods() {
     const { seasonals } = this.state;
     const { push } = this.props;
+    console.log('AAAAAAAAAAA', seasonals);
     return (
       <View style={styles.seasonalGoods}>
         <Text style={styles.goodsTypeTitle}>- 应季好货 -</Text>
@@ -140,13 +141,17 @@ class HomeScreen extends base {
               <TFeedback
                 key={index}
                 content={
-                  <View style={[styles.goodsTypeOne, styles.seasonalGoodsItem]}>
+                  <View
+                    style={[
+                      seasonals.length > 3 ? styles.goodsTypeOneWidth : styles.goodsTypeOneWidthFlexOne, styles.goodsTypeOne2, styles.seasonalGoodsItem
+                    ]}
+                  >
                     <View style={styles.imageBox}>
-                      <CachedImage style={styles.image} source={{ uri: `${item.imgUrl}?imageView2/1/w/40` }} />
+                      <CachedImage style={styles.image} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/40` }} />
                     </View>
                     <Text numberOfLines={1} style={[styles.headerNavigationText, { textAlign: 'center' }]}>{item.name}</Text>
                   </View>}
-                onPress={() => { push({ key: 'HuinongGoodsMotif', params: { categoryId: item.categoryId, brands: item.brands, name: item.name } }); }}
+                onPress={() => { push({ key: 'HuinongGoodsMotif', params: { seasonCategoryId: item.seasonCategoryId, img: item.backgroundImgUrls } }); }}
               />
             ))
           }
@@ -192,6 +197,7 @@ class HomeScreen extends base {
       refresh,
       loading,
       nomore,
+      seasonals,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
@@ -220,7 +226,10 @@ class HomeScreen extends base {
           {this.renderHeaderNavigation()}
           {this.renderGoodsType()}
           {this.renderSampleCenter()}
-          {this.renderSeasonalGoods()}
+          {
+            seasonals.length > 0 &&
+            this.renderSeasonalGoods()
+          }
           {/* {this.renderSwiper()} */}
           {this.renderForYou()}
           {loading && <LoadMore />}

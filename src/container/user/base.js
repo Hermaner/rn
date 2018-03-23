@@ -10,12 +10,12 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '',
-      sendPhone: '',
+      phone: '13407156848',
+      sendPhone: '13407156848',
       sec: 60,
       passWord: '',
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
       isCode: true,
       others: [{
         label: '微信',
@@ -73,7 +73,7 @@ class UserBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -123,9 +123,9 @@ class UserBase extends React.Component {
     RegisterMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration,
+      registration: global.registration || '12313',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.loginAction(res.data);

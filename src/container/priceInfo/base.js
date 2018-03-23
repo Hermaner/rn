@@ -1,4 +1,6 @@
 import React from 'react';
+import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 import Communications from 'react-native-communications';
 
 class Base extends React.Component {
@@ -58,5 +60,27 @@ class Base extends React.Component {
   tellPhone = (phone) => {
     Communications.phonecall(phone, false);
   }
+  chatPeople = (item) => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (item.purchase.memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId: item.purchase.memberId,
+          userName: item.purchase.nickName,
+          imgUrl: item.purchase.imgUrl,
+        },
+      },
+    });
+  }
 }
+Base.propTypes = {
+  push: PropTypes.func,
+};
 export default Base;

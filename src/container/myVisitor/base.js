@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import PropTypes from 'prop-types';
 import Communications from 'react-native-communications';
 import { GetVisitorService } from '../../api';
 
@@ -147,6 +148,25 @@ class MyVisitorBase extends React.Component {
       }
     }
   }
+  chatPeople = (item) => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (item.member.memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId: item.member.memberId,
+          userName: item.member.nickName,
+          imgUrl: item.member.imgUrl,
+        },
+      },
+    });
+  }
   _onRefreshVisitor = () => {
     this.setState({
       refresh: true,
@@ -168,5 +188,7 @@ class MyVisitorBase extends React.Component {
     }
   }
 }
-
+MyVisitorBase.propTypes = {
+  push: PropTypes.func,
+};
 export default MyVisitorBase;

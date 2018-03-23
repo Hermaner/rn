@@ -1,6 +1,5 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { ListView } from 'react-native';
 import { GetVerifSupplyService } from '../../api';
 
 class Base extends React.Component {
@@ -28,7 +27,6 @@ class Base extends React.Component {
       currentPage,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -58,7 +56,6 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -68,8 +65,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   _onRefresh = () => {

@@ -3,7 +3,7 @@ import { View, ScrollView, RefreshControl } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import Swiper from 'react-native-swiper';
-import { Container, Text, Icon } from 'native-base';
+import { Container, Text } from 'native-base';
 import { observer } from 'mobx-react/native';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';

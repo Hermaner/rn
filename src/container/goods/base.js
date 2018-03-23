@@ -75,9 +75,7 @@ class Base extends React.Component {
     GetHomeNewsService({
       categoryId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data;
         const three = [];
         const newThree = [];
@@ -109,8 +107,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   FilterPurchaseService = () => {
@@ -125,7 +122,6 @@ class Base extends React.Component {
       provinceCode: '',
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data;
         if (result.length === 0) {
           if (refresh) {
@@ -168,15 +164,13 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetBackgroundImgService = () => {
     GetBackgroundImgService({
       type: '2',
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result.imgUrl !== '') {
