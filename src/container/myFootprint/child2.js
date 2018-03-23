@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
 import { TFeedback, NoData } from '../../components';
 import Base from './base';
+import { ColorList } from '../../utils';
 import styles from './styles';
 
 class Child2 extends Base {
@@ -65,26 +66,47 @@ class Child2 extends Base {
                           {
                             (item1.logisticsMode !== null && item1.logisticsMode !== '') &&
                             item1.logisticsMode.split(',').map((item3, index3) => (
-                              <Text style={styles.aa} key={index3}>{item3}</Text>
+                              <View
+                                style={[styles.aaBox,
+                                  { borderColor: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }]}
+                              >
+                                <Text
+                                  style={[
+                                    styles.aa,
+                                    { color: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }
+                                  ]}
+                                  key={index3}
+                                >{item3}</Text>
+                              </View>
                             ))
                           }
                           {
                             (item1.supplyMode !== null && item1.supplyMode !== '') &&
                             item1.supplyMode.split(',').map((item4, index4) => (
-                              <Text style={styles.aa} key={index4}>{item4}</Text>
+                              <View
+                                style={[styles.aaBox,
+                                  { borderColor: ColorList[index4 > ColorList.length ? index4 % ColorList.length : index4] }]}
+                              >
+                                <Text style={[styles.aa, { color: ColorList[index4 > ColorList.length ? index4 % ColorList.length : index4] }]} key={index4}>{item4}</Text>
+                              </View>
                             ))
                           }
                           {
                             (item1.renderServices !== null && item1.renderServices !== '') &&
                             item1.renderServices.split(',').map((item5, index5) => (
-                              <Text style={styles.aa} key={index5}>{item5}</Text>
+                              <View
+                                style={[styles.aaBox,
+                                  { borderColor: ColorList[index5 > ColorList.length ? index5 % ColorList.length : index5] }]}
+                              >
+                                <Text style={[styles.aa, { color: ColorList[index5 > ColorList.length ? index5 % ColorList.length : index5] }]} key={index5}>{item5}</Text>
+                              </View>
                             ))
                           }
                         </View>
                       </View>
                     </View>
                     <View style={styles.flexRow}>
-                      <Icon style={{ fontSize: 18, color: '#666', marginRight: 6 }} name="pin" />
+                      <Icon style={{ fontSize: 18, color: '#999', marginRight: 6 }} name="pin" />
                       <Text style={{ fontSize: 14, color: '#666' }}>{item1.sendProvinceName} {item1.sendCityName} {item1.sendDistrictName} {item1.nickName}</Text>
                     </View>
                   </View>

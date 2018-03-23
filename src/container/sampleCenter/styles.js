@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st } from '../../utils';
+import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingTop: 10,
     paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   checkBox: {
     flexDirection: 'row',
@@ -75,10 +77,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   btnbox: {
-    backgroundColor: '#65C12E',
+    backgroundColor: Mcolor,
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: 5,
+  },
+  oneBtnBox: {
+    height: 35,
+    ...st.jacenter,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 4,
+  },
+  oneBtnText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  oneBtnTextChoose: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  oneBtnBoxChoose: {
+    height: 35,
+    ...st.jacenter,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: Mcolor,
+    backgroundColor: Mcolor,
   },
 });
 export default styles;

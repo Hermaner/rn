@@ -106,6 +106,15 @@ const styles = StyleSheet.create({
     width: '25%',
     ...st.jacenter,
   },
+  goodsTypeOne2: {
+    ...st.jacenter,
+  },
+  goodsTypeOneWidth: {
+    width: '25%',
+  },
+  goodsTypeOneWidthFlexOne: {
+    flex: 1,
+  },
   icnBoxOne: {
     width: 50,
     height: 50,

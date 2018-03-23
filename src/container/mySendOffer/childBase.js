@@ -80,6 +80,10 @@ class Base extends React.Component {
   }
   pushPriceInfo = (item) => {
     const { push } = this.props;
+    if (item.purchase === null) {
+      Toast.show('该供应单已被删除');
+      return;
+    }
     push({ key: 'PriceInfo', params: { items: item } });
   }
   _onRefresh = () => {

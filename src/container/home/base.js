@@ -4,7 +4,13 @@ import { DeviceEventEmitter } from 'react-native';
 import { observer } from 'mobx-react/native';
 import PropTypes from 'prop-types';
 import { UserSocket } from '../../components';
-import { GetHomeCategoryService, GetRecomSupplyService, AmapGeocode, GetPlatformInfoService, GetBackgroundImgService } from '../../api';
+import {
+  GetHomeCategoryService,
+  GetRecomSupplyService,
+  AmapGeocode,
+  GetPlatformInfoService,
+  GetBackgroundImgService,
+} from '../../api';
 
 @observer
 class Base extends React.Component {

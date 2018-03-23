@@ -128,11 +128,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 10,
   },
+  positionIcn: {
+    fontSize: 18,
+    color: '#999',
+  },
   positionText: {
-    flex: 1,
     fontSize: 14,
     color: '#333',
-    textAlign: 'right',
+    marginLeft: 4,
   },
   nameTipsView: {
     backgroundColor: '#f6f6f6',

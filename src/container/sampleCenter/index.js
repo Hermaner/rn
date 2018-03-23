@@ -4,7 +4,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { Container, Input, Text, CheckBox, Content } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, UploadFile, TFeedback } from '../../components';
+import { Loading, Header, UploadFile, TFeedback, TOpacity } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import myBase from './base';
 import styles from './styles';
@@ -45,14 +45,20 @@ class SampleCenter extends myBase {
           <View style={styles.checkChoose}>
             {
               identityList.map((item, index) => (
-                <View key={index} style={styles.checkBox}>
-                  <CheckBox
-                    style={styles.check}
-                    onPress={() => this.chooseType(index)}
-                    checked={item.isChoose === 1}
-                  />
-                  <Text style={{ fontSize: 14, color: '#666' }}>{item.title}</Text>
-                </View>
+                <TOpacity
+                  key={index}
+                  style={{ marginBottom: 6, marginRight: 10 }}
+                  content={
+                    <View style={item.isChoose === 1 ? styles.oneBtnBoxChoose : styles.oneBtnBox}>
+                      <Text
+                        style={item.isChoose === 1 ? styles.oneBtnTextChoose : styles.oneBtnText}
+                      >
+                        {item.title}
+                      </Text>
+                    </View>
+                  }
+                  onPress={() => this.chooseType(index)}
+                />
               ))
             }
           </View>

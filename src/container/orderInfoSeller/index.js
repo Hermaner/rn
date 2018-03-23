@@ -178,7 +178,7 @@ class OrderInfoSeller extends base {
           <Text style={styles.norText}>下单时间：{orderInfo.postDate}</Text>
           {
             myStatus === '6' &&
-            <Text style={styles.norText}>取消时间：{removeInfo.postDate}</Text>
+            <Text style={styles.norText}>取消时间：{orderInfo.postDate}</Text>
           }
         </View>
       </View>

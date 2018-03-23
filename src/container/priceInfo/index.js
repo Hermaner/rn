@@ -28,6 +28,7 @@ class PriceDetail extends base {
   };
   _renderBody() {
     const { items } = this.props.navigation.state.params;
+    console.log('999999999999', items)
     const timestamp = new Date().getTime();
     const endTimeTimestamp = (parseFloat(items.purchase.purchaseTime) * 86400000)
     + parseFloat(new Date(items.purchase.postDate).getTime());
@@ -55,13 +56,15 @@ class PriceDetail extends base {
     );
   }
   render() {
-    const { pop, push } = this.props;
+    const { pop } = this.props;
     const { items } = this.props.navigation.state.params;
     return (
       <Container>
         <Header back={pop} title="报价详情" />
         <Content style={{ backgroundColor: '#fff' }}>
-          {this._renderBody()}
+          {
+            this._renderBody()
+          }
         </Content>
         <View style={styles.flexRow}>
           <TFeedback
@@ -69,7 +72,7 @@ class PriceDetail extends base {
               <View style={styles.leftBtn}>
                 <Text style={{ color: '#fff', fontSize: 16, textAlign: 'center' }}>聊生意</Text>
               </View>}
-            onPress={() => {}}
+            onPress={() => this.chatPeople(items)}
           />
           <TFeedback
             content={

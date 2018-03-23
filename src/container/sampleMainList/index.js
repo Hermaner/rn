@@ -113,8 +113,7 @@ class SampleMainList extends base {
         data={item}
         rowID={index}
         key={index}
-        onPressTell={() => { this.props.push({ key: 'User' }); }}
-        // onPressLastBtn={() => { this.props.push({ key: 'SampleCenter' }); }}
+        onPressTell={() => { this.chatPeople(item); }}
         onPressLastBtn={() => { this.isSampleCenter(item); }}
         onPress={() => { this.props.push({ key: 'GoodDetail', params: { supplyId: item.supplyId, memberId: item.memberId } }); }}
       />

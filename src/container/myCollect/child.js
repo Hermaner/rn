@@ -88,7 +88,6 @@ class Child extends Base {
   }
   render() {
     const { items, noData, nomore, refresh } = this.state;
-    console.log('MMMMMMMMMMMMM', items)
     return (
       <View>
         {

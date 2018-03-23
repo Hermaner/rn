@@ -30,41 +30,18 @@ class HuinongGoodsMotif extends base {
     return true;
   };
   _renderBody() {
-    const { isTabOne, brands, goodsItems, backGround1 } = this.state;
-    const { name } = this.props.navigation.state.params;
+    const { goodsItems } = this.state;
+    const { img } = this.props.navigation.state.params;
     return (
       <View style={styles.pagebody}>
-        <CachedImage style={styles.image} source={backGround1} />
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {
-            brands && brands.length > 0 &&
-            brands.map((item, index) => (
-              <TFeedback
-                key={index}
-                content={
-                  <View style={[styles.tabView, isTabOne === index ? styles.textBorder : '']}>
-                    <Text style={[styles.tabText, isTabOne === index ? styles.tabTextChoose : '']}>{item.brandName}</Text>
-                  </View>}
-                onPress={() => this.tabChange(index, brands[index].brandId || '')}
-              />
-            ))
-          }
-        </View>
+        {
+          img !== null && img !== null && img.split(',').length > 0 &&
+          <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
+        }
         <View style={{ flex: 1 }}>
-          {
-            brands && brands.length > 0 ?
-              <Child
-                name={name}
-                brandId={brands[isTabOne].brandId || ''}
-                data={goodsItems}
-              />
-            :
-              <Child
-                name={name}
-                brandId=""
-                data={goodsItems}
-              />
-          }
+          <Child
+            data={goodsItems}
+          />
         </View>
       </View>
     );

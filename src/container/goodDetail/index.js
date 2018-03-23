@@ -74,9 +74,15 @@ class MainScreen extends base {
             onPress={() => { push({ key: UserSocket.userData.memberId ? 'ReportPage' : 'User', params: { beMemberId: detail.memberId, supplyId: detail.supplyId } }); }}
           />
         </View>
-        <Text numberOfLines={1} style={[styles.grayText, { flex: 1, marginLeft: 10 }]}>
-          {detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}
-        </Text>
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+          <Text numberOfLines={1} style={[styles.grayText, { marginLeft: 10 }]}>
+            {detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}
+          </Text>
+          <View style={[styles.flexRow, { marginLeft: 10 }]}>
+            <Icon style={styles.positionIcn} name="pin" />
+            <Text numberOfLines={1} style={styles.positionText}>{distance}km</Text>
+          </View>
+        </View>
         <View style={styles.priceView}>
           <Text style={styles.priceText}>{detail.wholesalePrice}</Text>
           <Text style={styles.pricelabel}>元/{detail.unit}</Text>
@@ -90,7 +96,6 @@ class MainScreen extends base {
             }
             onPress={() => this.setState({ visible: true })}
           />
-          <Text numberOfLines={1} style={styles.positionText}>{distance}km</Text>
         </View>
         <View style={styles.nameTipsView}>
           <Icon name="md-volume-down" style={styles.nameTipsicon} />
