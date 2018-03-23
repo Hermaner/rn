@@ -144,8 +144,10 @@ import ChatRoom from '../container/ChatRoom';
 import ChatPhrase from '../container/ChatPhrase';
 import ChatPhraseChange from '../container/ChatPhraseChange';
 import ChatImage from '../container/ChatImage';
+import ChatSupply from '../container/ChatSupply';
 
 export const AppNavigator = StackNavigator({
+  ChatSupply: { screen: ChatSupply },
   ChatPhrase: { screen: ChatPhrase },
   ChatPhraseChange: { screen: ChatPhraseChange },
   ChatImage: { screen: ChatImage },

@@ -8,7 +8,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { observer } from 'mobx-react/native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, GoodhList, ModalView, InputNumber, Loading, TFeedback, UserSocket, NoData, TOpacity } from '../../components';
+import { Header, GoodhList, ModalView, InputNumber, Loading, TFeedback, UserSocket, NoData, TOpacity, ModalCall } from '../../components';
 import { Mred, deviceW, ColorList } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -409,7 +409,7 @@ class MainScreen extends base {
             <View style={styles.fotBtn2}>
               <Text style={styles.fotText}>打电话</Text>
             </View>}
-          onPress={() => { this.tellPhone(); }}
+          onPress={this.goCall}
         />
         <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
           <Text style={styles.fotText}>立即购买</Text>
@@ -553,6 +553,7 @@ class MainScreen extends base {
         }
         {detail && this._renderFooter()}
         {this.renderModal()}
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

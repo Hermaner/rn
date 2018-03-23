@@ -141,11 +141,7 @@ export default class Bubble extends React.Component {
   renderMessageProduct() {
     const { type } = this.props.currentMessage;
     if (type === '3') {
-      // const { order: { id, title, imgUrl, price } } = this.props.currentMessage;
-      const title = 'asdak=斯柯达拉开大龙大厦科利达恐龙当家阿达肯定是撒了口袋里卡山东省';
-      const price = '23';
-      const imgUrl = 'https://img.mm.sunhousm.cn/2018228113127873.jpg';
-      const id = 1;
+      const { order: { id, title, imgUrl, price } } = this.props.currentMessage;
       return (
         <TOpacity
           style={styles.productTab}
@@ -159,7 +155,7 @@ export default class Bubble extends React.Component {
               </View>
               <View style={styles.rightProduct}>
                 <Text numberOfLines={2} style={styles.name}>{title}</Text>
-                <Text style={styles.price}>{price}元</Text>
+                <Text style={styles.price}>{price}</Text>
               </View>
             </View>
           }

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Platform,
 } from 'react-native';
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
@@ -92,7 +93,7 @@ class AccessoryActions extends React.Component {
     ImagePicker.openCamera({
       includeExif: true,
     }).then((img) => {
-      console.log(img)
+      console.log(img);
       image = [{ uri: img.path, width: img.width, height: img.height, mime: img.mime }];
       this.upLoadImage(image);
     }).catch(e => console.log(e));
@@ -164,7 +165,7 @@ class AccessoryActions extends React.Component {
         this.props.push({ key: 'ChatPhrase' });
         return;
       case 3:
-        this.props.push({ key: 'ChatPhrase' });
+        this.props.push({ key: 'ChatSupply' });
         break;
       default:
     }

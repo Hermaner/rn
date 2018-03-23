@@ -7,9 +7,9 @@ target 'App' do
 
   # Pods for App
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/'
   pod 'React', path: '../node_modules/react-native/', :subspecs => [
     'DevSupport',
+    'RCTImage',
   ]
   pod 'react-native-baidumap-sdk', path: '../node_modules/react-native-baidumap-sdk/lib/ios'
   # pod 'JPushRN', :path => '../node_modules/jpush-react-native'
@@ -19,8 +19,6 @@ target 'App' do
   pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
 
   # pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
-
-  pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
 
   pod 'RNAudio', :path => '../node_modules/react-native-audio'
 

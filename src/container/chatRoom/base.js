@@ -33,11 +33,12 @@ class Base extends React.Component {
       this.loadMore();
     }
   }
-  onProductPress = (id) => {
-    Toast.show(id);
+  onProductPress = (supplyId) => {
+    this.props.push({ key: 'GoodDetail', params: { supplyId, memberId: global.memberId } });
   }
-  onPressAvatar = (id) => {
-    console.log(id);
+  onPressAvatar = (memberId) => {
+    console.log(memberId);
+    this.props.push({ key: 'MyInfo', params: { memberId } });
   }
   onSend = (items = []) => {
     this.socket.emit('sendMessage', items);
