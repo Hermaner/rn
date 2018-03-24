@@ -289,7 +289,7 @@ export const AppNavigator = StackNavigator({
     header: null,
   }),
 });
-Initializer.init('DNwiZcWaIRLI1esNAYaOoPVrZcaj2XXD').catch(e => console.error(e));
+Initializer.init('NGe39sDcxR1CywyfIw9TCktq14lvGkxM').catch(e => console.error(e));
 createReactNavigationReduxMiddleware(
   'root',
   state => state.nav,
