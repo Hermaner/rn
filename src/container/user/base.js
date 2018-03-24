@@ -2,6 +2,7 @@ import React from 'react';
 import { AsyncStorage, Platform, DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import * as WeChat from 'react-native-wechat';
 import { UserSocket, SocketObser } from '../../components';
 import { GetCodeService, RegisterMemberService, LoginForPassWordService } from '../../api';
 
@@ -35,6 +36,54 @@ class UserBase extends React.Component {
   changeLogin = () => {
     this.setState({
       isCode: !this.state.isCode,
+    });
+  }
+  otherLogin = (index) => {
+    if (index === 0) {
+      this.wxShareTimeLine();
+      return;
+      WeChat.sendAuthRequest('snsapi_userinfo', 'App')
+      .then((res) => {
+        console.log(res);
+      });
+    }
+  }
+  wxShareFriend = () => {
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        WeChat.shareToSession({
+          title: '分享朋友',
+          description: '分享来领券',
+          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          type: 'news',
+          webpageUrl: 'http://www.baidu.com',
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      } else {
+        Toast.show('没有安装微信软件，请您安装微信之后再试');
+      }
+    });
+  }
+  wxShareTimeLine = () => {
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        WeChat.shareToTimeline({
+          title: '分享朋友圈',
+          description: '分享来领券',
+          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          type: 'news',
+          webpageUrl: 'http://www.baidu.com',
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      } else {
+        Toast.show('没有安装微信软件，请您安装微信之后再试');
+      }
     });
   }
   sendCode = () => {

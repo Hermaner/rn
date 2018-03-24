@@ -134,7 +134,7 @@ class UserPage extends base {
                     <Text style={styles.otherText}>{item.label}</Text>
                   </View>
                 }
-                onPress={this.closeModal}
+                onPress={() => this.otherLogin(index)}
               />
             ))
           }
