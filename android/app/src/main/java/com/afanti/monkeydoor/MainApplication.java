@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
+import cn.reactnative.modules.qq.QQPackage;
 import com.theweflex.react.WeChatPackage;
 import com.emekalites.react.compress.image.ImageCompressPackage;
 import com.eaffy.rnandroidnotificationpermission.RNAndroidNotificationPermissionPackage;
@@ -51,6 +52,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new QQPackage(),
             new WeChatPackage(),
             new ImageCompressPackage(),
             new RNAndroidNotificationPermissionPackage(),

@@ -4929,6 +4929,10 @@ react-native-qiniu@^0.3.0:
     crypto-js "^3.1.6"
     url-parse "^1.1.1"
 
+react-native-qq@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-qq/-/react-native-qq-2.0.5.tgz#91c893bd9dd4be7b7953227e522c9d8bb3982624"
+
 react-native-qrcode@^0.2.3:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/react-native-qrcode/-/react-native-qrcode-0.2.6.tgz#dd92f151c118860092af9fa5bc0995f2f9dddb16"

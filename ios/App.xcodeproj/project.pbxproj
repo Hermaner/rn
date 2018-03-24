@@ -80,6 +80,7 @@
 		D88EE043C18C475AA9297E95 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A174F40A19E14207A5BB2623 /* SystemConfiguration.framework */; };
 		D95841342E9A44F08409918F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D7002291A6C4340B81E604C /* SimpleLineIcons.ttf */; };
 		DA5150AC50434986A786902B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29DB579156AA4A2E859A763F /* MaterialIcons.ttf */; };
+		DA645E5887B54930A88DEB56 /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C216A673163A424EB29DE4EE /* libRCTQQAPI.a */; };
 		DBD8754FE49C4D64B4CB7F8A /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E87E179752A473F94E3785F /* Entypo.ttf */; };
 		DF00D8B32064D6CD006C2310 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF00D8B42064D6CD006C2310 /* libRNSound.a */; };
 		DF2656CF205A5EC400C61DAE /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF2656CE205A5D4F00C61DAE /* libRCTCameraRoll.a */; };
@@ -90,6 +91,7 @@
 		DF432D652025948400F14621 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DF432D5F2025948400F14621 /* README.txt */; };
 		DF432D672025948400F14621 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D622025948400F14621 /* AlipaySDK.framework */; };
 		DF48A18D2066697A00037017 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF48A170206657CA00037017 /* libRCTWeChat.a */; };
+		DF48A1F420666C6500037017 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF48A1F320666C6500037017 /* libiconv.tbd */; };
 		DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */; };
 		DF771C8C2057B6F400A9FF55 /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BD061FD107D700877EF2 /* libReactNativeKeyboardManager.a */; };
 		DF771C8D2057B73500A9FF55 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCF21FD107D700877EF2 /* libRCTJPushModule.a */; };
@@ -478,6 +480,13 @@
 			remoteGlobalIDString = 10D6D7A41F160C250066F0F3;
 			remoteInfo = RCTWeChatTests;
 		};
+		DF48A1F120666C0C00037017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA407B964C3A43339E262C79 /* RCTQQAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9139321C1C232D310085E3BA;
+			remoteInfo = RCTQQAPI;
+		};
 		DFA375AA1FF5CF5C009B1874 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */;
@@ -613,6 +622,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		ADD06836E2A34BC09F806C17 /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
 		B578AE3A8C4B44309521182A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		C216A673163A424EB29DE4EE /* libRCTQQAPI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTQQAPI.a; sourceTree = "<group>"; };
 		C29F9D94A4514F7D832F8B61 /* Security.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		C3DFC2D0D65B4DF49B177473 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		C5140B3895E44B50BDF408F2 /* libdouble-conversion.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libdouble-conversion.a"; sourceTree = "<group>"; };
@@ -622,6 +632,7 @@
 		D11C8984D11CA2D80FA1A3EA /* libPods-App-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-App-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F71239C3AE40E886AC8B2B /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		D708E59AC63B453BB8F91ECF /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		DA407B964C3A43339E262C79 /* RCTQQAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTQQAPI.xcodeproj; path = "../node_modules/react-native-qq/ios/RCTQQAPI.xcodeproj"; sourceTree = "<group>"; };
 		DF00D8B42064D6CD006C2310 /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSound.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF2656C9205A5D4F00C61DAE /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		DF39BEEC1FD12DE000877EF2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -635,6 +646,7 @@
 		DF432D602025948400F14621 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		DF432D612025948400F14621 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		DF432D622025948400F14621 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		DF48A1F320666C6500037017 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		DF65B6FF20568DF1005D5C81 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = App.entitlements; path = App/App.entitlements; sourceTree = "<group>"; };
 		DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFA375791FF5CF5C009B1874 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
@@ -674,6 +686,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF48A1F420666C6500037017 /* libiconv.tbd in Frameworks */,
 				DF48A18D2066697A00037017 /* libRCTWeChat.a in Frameworks */,
 				DF00D8B32064D6CD006C2310 /* libRNSound.a in Frameworks */,
 				DFC859B3205BBA4B00BE19C4 /* libRNAudio.a in Frameworks */,
@@ -733,6 +746,7 @@
 				B8202B965BCC41328AEBC064 /* libthird-party.a in Frameworks */,
 				38CB44289C414F02BE965C98 /* libdouble-conversion.a in Frameworks */,
 				A47ED8B65509505D5990AACE /* libPods-App.a in Frameworks */,
+				DA645E5887B54930A88DEB56 /* libRCTQQAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +973,7 @@
 				0AE1854040EC4BE3A6037956 /* RNVectorIcons.xcodeproj */,
 				6889ADE33509422BADD4E73E /* ReactNativeKeyboardManager.xcodeproj */,
 				ADD06836E2A34BC09F806C17 /* RCTWeChat.xcodeproj */,
+				DA407B964C3A43339E262C79 /* RCTQQAPI.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1036,6 +1051,7 @@
 				9C130A9BAA1A4ADC857E050A /* libAMap3D.a */,
 				32F9BCE49C6749E18D3F778D /* libRCTAMapLocation.a */,
 				709ABD9424974FF1803EE211 /* libRNImgToBase64.a */,
+				C216A673163A424EB29DE4EE /* libRCTQQAPI.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1188,6 +1204,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DF48A1EE20666C0C00037017 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF48A1F220666C0C00037017 /* libRCTQQAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DFA3757A1FF5CF5C009B1874 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1207,6 +1231,7 @@
 		DFB58AE11FF73133006CFC1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DF48A1F320666C6500037017 /* libiconv.tbd */,
 				DF00D8B42064D6CD006C2310 /* libRNSound.a */,
 				DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */,
 				DFA6442A2050DB6200D99F4B /* ImageIO.framework */,
@@ -1425,6 +1450,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = DF48A1EE20666C0C00037017 /* Products */;
+					ProjectRef = DA407B964C3A43339E262C79 /* RCTQQAPI.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1852,6 +1881,13 @@
 			remoteRef = DF48A171206657CA00037017 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DF48A1F220666C0C00037017 /* libRCTQQAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTQQAPI.a;
+			remoteRef = DF48A1F120666C0C00037017 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		DFA375AB1FF5CF5C009B1874 /* libReactNativePermissions.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -2127,12 +2163,14 @@
 					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = AppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2191,12 +2229,14 @@
 					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = AppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2246,9 +2286,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2269,9 +2307,9 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2284,17 +2322,36 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ReactNativePermissions\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/yoga\"",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/UniqueId",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/UMSocial/UMSocialSDKPlugin",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/BaiduMapKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/QBImagePickerController\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RNImageCropPicker\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RSKImageCropper\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/React\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/ReactNativePermissions\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/react-native-baidumap-sdk\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/yoga\"",
+					"-isystem",
+					"\"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"\"TencentOpenAPI\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lelan.huibao;
 				PRODUCT_NAME = App;
@@ -2318,9 +2375,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
-					"$(PROJECT_DIR)/UMSocial/UMSocialSDK",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2341,9 +2396,9 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2356,17 +2411,36 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/ReactNativePermissions\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/yoga\"",
 					"$(PROJECT_DIR)/App/ios_pay_lib/**",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/UniqueId",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/WeChat",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Facebook",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/Sina",
-					"$(PROJECT_DIR)/UMSocial/SocialLibraries/QQ",
-					"$(PROJECT_DIR)/UMSocial/UMSocialSDKPlugin",
+				);
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/BaiduMapKit\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/QBImagePickerController\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RNImageCropPicker\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/RSKImageCropper\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/React\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/ReactNativePermissions\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/react-native-baidumap-sdk\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/yoga\"",
+					"-isystem",
+					"\"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"\"TencentOpenAPI\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lelan.huibao;
 				PRODUCT_NAME = App;
@@ -2407,11 +2481,13 @@
 					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = "App-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2480,11 +2556,13 @@
 					"$(SRCROOT)/../node_modules/react-native-smart-amap-location/ios/RCTAMapLocation/RCTAMapLocation/**",
 					"$(SRCROOT)/../node_modules/react-native-image-base64/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = "App-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2559,6 +2637,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.App-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2583,6 +2662,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
