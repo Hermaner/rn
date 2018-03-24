@@ -14,7 +14,6 @@
 #endif
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <UMSocialCore/UMSocialCore.h>
 #import "SplashScreen.h"
 
 @implementation AppDelegate
@@ -30,21 +29,15 @@
 {
   return [RCTLinkingManager application:application openURL:url options:options];
 }
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-  BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-  if (!result) {
-  }
-  return result;
-}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [JPUSHService setupWithOption:launchOptions appKey:@"d5ab514dd37a028d4cc0835c"
                         channel:nil apsForProduction:nil];
   NSURL *jsCodeLocation;
 
-//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundle/index.ios" withExtension:@"jsbundle"];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundle/index.ios" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"App"
@@ -57,26 +50,6 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  /* 打开调试日志 */
-  // [[UMSocialManager defaultManager] openLog:YES];
-
-  /* 设置友盟appkey */
-  [[UMSocialManager defaultManager] setUmSocialAppkey:@"596447cbe88bad3b82000eec"];
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx083bf496cbc48aec" appSecret:@"750e9075fa521c82274a9d548c399825" redirectURL:nil];
-
-  /* 设置分享到QQ互联的appID
-   * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
-   100424468.no permission of union id
-   [QQ/QZone平台集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_3
-   */
-
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106275762"/*设置QQ平台的appID*/  appSecret:@"YYMWvwcSeAH6nviv" redirectURL:@"http://mobile.umeng.com/social"];
-
-  /*
-   设置新浪的appKey和appSecret
-   [新浪微博集成说明]http://dev.umeng.com/social/ios/%E8%BF%9B%E9%98%B6%E6%96%87%E6%A1%A3#1_2
-   */
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2733400964"  appSecret:@"fac50980a44e3e3afd4bc968ea572887" redirectURL:@"http://www.baidu.com"];
 
 
   return YES;
