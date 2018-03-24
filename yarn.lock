@@ -4721,11 +4721,9 @@ react-native-communications@2.2.1, react-native-communications@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
 
-react-native-compress-images@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-compress-images/-/react-native-compress-images-0.2.2.tgz#1c62699b1cb6d0fc69643df268b04d832fd23ad3"
-  dependencies:
-    prop-types "^15.6.0"
+react-native-compress-image@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-compress-image/-/react-native-compress-image-2.0.1.tgz#f14d701be7f6fcf6973a34dd5ef51436d63fb469"
 
 react-native-datepicker@^1.6.0:
   version "1.6.0"

@@ -67,7 +67,6 @@ class ChatRoom extends base {
   render() {
     const { pop } = this.props;
     const { toUser, messages } = this.state;
-    console.log(toUser);
     return (
       <Container>
         <Header back={pop} title={decodeURI(toUser.userName)} />

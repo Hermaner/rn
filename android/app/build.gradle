@@ -171,6 +171,7 @@ android {
     }
 }
 dependencies {
+    compile project(':react-native-compress-image')
     compile project(':react-native-android-notification-permission')
     compile project(':react-native-sound')
     compile project(':react-native-audio')

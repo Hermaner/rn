@@ -126,7 +126,6 @@ class Base extends React.Component {
         Toast.show(res.msg);
       }
     }).catch(() => {
-      this.sleek.toggle();
     });
   }
   GetPlatformInfoService = () => {

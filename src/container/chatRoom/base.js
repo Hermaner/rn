@@ -273,7 +273,6 @@ class Base extends React.Component {
   GetUploadTokenService = () => {
     GetUploadTokenService()
     .then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         global.uptoken = res.map.upToken;
         global.buketUrl = res.map.buketUrl;
