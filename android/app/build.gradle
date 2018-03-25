@@ -106,7 +106,7 @@ android {
         manifestPlaceholders = [
                 JPUSH_APPKEY: "de0af63626de1e41a17ae452",
                 APP_CHANNEL : "default",
-                QQ_APPID: "1106800248"
+                QQ_APPID: "1106292962"
         ]
         ndk {
             abiFilters "armeabi-v7a", "x86"
