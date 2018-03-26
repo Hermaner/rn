@@ -19,7 +19,6 @@ class Base extends React.Component {
     GetMemberBuyOrderCountService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         countList[0] = '0';
