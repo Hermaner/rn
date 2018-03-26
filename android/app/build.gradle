@@ -168,7 +168,6 @@ android {
 }
 dependencies {
     compile project(':react-native-qq')
-    // compile project(':RCTWeChat')
     compile project(':react-native-wechat')
     compile project(':react-native-compress-image')
     compile project(':react-native-android-notification-permission')
