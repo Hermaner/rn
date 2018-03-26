@@ -24,6 +24,8 @@ class Base extends React.Component {
       categoryId: '',
       seasonCategoryId: '',
       backGround1: require('../../assets/img/haohuo.jpg'),
+      haveData: false,
+      backImg: '',
     };
   }
   getData = () => {
@@ -35,6 +37,7 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const result = res.data.news;
         this.setState({
+          backImg: res.data.background.imgUrl || '',
           goodsItems: result,
         });
       } else {

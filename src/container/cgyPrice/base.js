@@ -51,6 +51,10 @@ class Base extends React.Component {
       Toast.show('格式错误');
       return;
     }
+    if (optionType === '点击选择单位') {
+      Toast.show('请选择单位');
+      return;
+    }
     if (!reg.test(wholesaleCount)) {
       Toast.show('格式错误');
       return;

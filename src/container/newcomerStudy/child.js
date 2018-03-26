@@ -62,7 +62,7 @@ class Child extends React.Component {
                           }
                         </View>
                       </View>}
-                    onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item.newsId } }); }}
+                    onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item2.newsId } }); }}
                   />
                 ))
               }

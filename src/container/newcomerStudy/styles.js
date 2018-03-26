@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width,
-    height: 160,
+    height: 200,
   },
   flexOne: {
     flex: 1,

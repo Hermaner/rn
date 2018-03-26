@@ -168,6 +168,14 @@ class MyBase extends React.Component {
           isLast: true,
           push: 'MyFriend',
           icn: 'icon-renyuanxiaozu',
+        }, {
+          id: '1',
+          title: '通话记录',
+          last: true,
+          icnColor: '#64BD46',
+          isLast: true,
+          push: 'CallLog',
+          icn: 'icon-renyuanxiaozu',
         }]]],
       shares: [{
         label: '微信',

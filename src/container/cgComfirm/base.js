@@ -325,11 +325,42 @@ class Base extends React.Component {
       purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),
       purchaseImages: upImages.map(item => item.key).join(','),
+      isRepeat: '1',
     })
     .then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
+        if (res.map.isHave === '1') {
+          Alert.alert(
+            '温馨提示', '是否继续发送？',
+            [
+              { text: '取消' },
+              { text: '确认',
+                onPress: () => {
+                  CreatePurchaseService({
+                    purchase: JSON.stringify(purchase),
+                    purchaseItems: JSON.stringify(purchaseItems),
+                    purchaseImages: upImages.map(item => item.key).join(','),
+                    isRepeat: '1',
+                  })
+                  .then((res2) => {
+                    console.log(res2);
+                    this.sleek.toggle();
+                    if (res2.isSuccess) {
+                      Toast.show('发布成功');
+                      this.props.resetHome();
+                    } else {
+                      Toast.show(res2.msg);
+                    }
+                  }).catch((err2) => {
+                    this.sleek.toggle();
+                    console.log(err2);
+                  });
+                } },
+            ],
+          );
+        }
         Toast.show('发布成功');
         this.props.resetHome();
       } else {

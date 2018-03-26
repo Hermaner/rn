@@ -105,6 +105,8 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   btn: {
+    height: 50,
+    ...st.jacenter,
     backgroundColor: Mcolor,
     borderRadius: 3,
   },
