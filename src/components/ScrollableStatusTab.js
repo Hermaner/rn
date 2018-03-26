@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
   displayCountBox: {
     position: 'absolute',
     right: 10,
-    top: 0,
-    height: 20,
+    top: 2,
+    height: 18,
     ...st.jacenter,
-    borderRadius: 10,
+    borderRadius: 9,
     backgroundColor: Mcolor,
     paddingLeft: 6,
     paddingRight: 6,

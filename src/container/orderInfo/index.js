@@ -31,7 +31,6 @@ class OrderInfo extends base {
   _renderBody() {
     const { push } = this.props;
     const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo, statusInfo } = this.state;
-    console.log(this);
     return (
       <View style={styles.pagebody}>
         {
@@ -53,11 +52,26 @@ class OrderInfo extends base {
             <View style={styles.displayBox}>
               <View>
                 <View style={styles.distanceLabel}>
-                  <View style={parseFloat(orderInfo.status) === 1 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 2 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 3 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 4 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 5 ? styles.labelBoxNow : styles.labelBox} />
+                  <View
+                    style={parseFloat(orderInfo.status) === 1 ?
+                    styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 2 ?
+                    styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 3 ?
+                    styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 4 ?
+                    styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 5 ?
+                    styles.labelBoxNow : styles.labelBox}
+                  />
                 </View>
                 <View style={styles.line} />
               </View>

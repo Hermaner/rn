@@ -7,25 +7,16 @@ export function isSameDay(currentMessage = {}, diffMessage = {}) {
   if (!diffMessage.createdAt) {
     return false;
   }
-
   const currentCreatedAt = moment(parseInt(currentMessage.createdAt, 10));
   const diffCreatedAt = moment(parseInt(diffMessage.createdAt, 10));
-
-  if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
-    return false;
-  }
   return currentCreatedAt.isSame(diffCreatedAt, 'day');
 }
 export function isSameTime(currentMessage = {}, diffMessage = {}) {
   if (!diffMessage.createdAt) {
     return false;
   }
-
   const currentCreatedAt = moment(parseInt(currentMessage.createdAt, 10));
   const diffCreatedAt = moment(parseInt(diffMessage.createdAt, 10));
-  if (!currentCreatedAt.isValid() || !diffCreatedAt.isValid()) {
-    return false;
-  }
   return currentCreatedAt.diff(diffCreatedAt, 'minutes');
 }
 export function isSameUser(currentMessage = {}, diffMessage = {}) {
