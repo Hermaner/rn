@@ -44,7 +44,7 @@ class Base extends React.Component {
     this.socket.emit('sendMessage', items);
     let { messages } = this.state;
     messages = items.concat(messages);
-    this.writeAllFile(messages);
+    // this.writeAllFile(messages);
     this.setState({
       messages,
     });

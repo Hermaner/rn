@@ -18,11 +18,11 @@ export default function Day(
   let label = '';
   if (!sDay) {
     label = moment(parseInt(currentMessage.createdAt, 10))
-      .locale('cn')
+      .locale('zh-cn')
       .format('LLL');
   } else if (sTime > 1) {
     label = moment(parseInt(currentMessage.createdAt, 10))
-      .locale('cn')
+      .locale('zh-cn')
       .format('LT');
   }
   if (!sDay || sTime > 1) {

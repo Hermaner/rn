@@ -95,7 +95,24 @@ class HomeScreen extends base {
                     </View>
                     <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
                   </View>}
-                onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
+                  onPress={() => {
+                    if (index === 0) {
+                      this.test1()
+                    }
+                    if (index === 1) {
+                      this.test2()
+                    }
+                    if (index === 2) {
+                      this.test3()
+                    }
+                    if (index === 3) {
+                      this.test4()
+                    }
+                    if (index === 4) {
+                      this.test5()
+                    }
+                  }}
+                // onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
               />
             ))
           }

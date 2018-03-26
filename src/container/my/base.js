@@ -1,6 +1,8 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import * as WeChat from 'react-native-wechat';
+import * as QQAPI from 'react-native-qq';
 import { DeviceEventEmitter } from 'react-native';
 import Communications from 'react-native-communications';
 import { observer } from 'mobx-react/native';
@@ -178,11 +180,11 @@ class MyBase extends React.Component {
         icon: 'md-alarm',
         color: '#556876',
       }, {
-        label: '微博',
+        label: 'QQ',
         icon: 'md-alarm',
         color: '#fc5e6a',
       }, {
-        label: 'QQ',
+        label: 'QQ空间',
         icon: 'md-alarm',
         color: '#68a5e1',
       }],
@@ -309,6 +311,90 @@ class MyBase extends React.Component {
     }
     this.setState({ memberId: global.memberId || '' }, this.getInit);
   }
+  otherShare = (index) => {
+    switch (index) {
+      case 0:
+        this.wxShareFriend();
+        break;
+      case 1:
+        this.wxShareTimeLine();
+        break;
+      case 2:
+        this.shareToQQ();
+        break;
+      case 3:
+        this.shareToQzone();
+        break;
+      default:
+    }
+  }
+  wxShareFriend = () => {
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        WeChat.shareToSession({
+          title: '分享朋友',
+          description: '分享来领券',
+          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          type: 'news',
+          webpageUrl: 'http://www.baidu.com',
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      } else {
+        Toast.show('没有安装微信软件，请您安装微信之后再试');
+      }
+    });
+  }
+  wxShareTimeLine = () => {
+    WeChat.isWXAppInstalled()
+    .then((isInstalled) => {
+      if (isInstalled) {
+        WeChat.shareToTimeline({
+          title: '分享朋友圈',
+          description: '分享来领券',
+          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          type: 'news',
+          webpageUrl: 'http://www.baidu.com',
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      } else {
+        Toast.show('没有安装微信软件，请您安装微信之后再试');
+      }
+    });
+  }
+  shareToQQ = () => {
+    QQAPI.isQQInstalled().then(() => {
+      QQAPI.shareToQQ({
+        type: 'news',
+        title: '分享好友',
+        description: '分享来领券',
+        webpageUrl: 'http://www.baidu.com',
+        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+      })
+      .then((res) => {
+        console.log(res);
+      }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+  }
+  shareToQzone = () => {
+    QQAPI.isQQInstalled().then(() => {
+      QQAPI.shareToQzone({
+        type: 'news',
+        title: '分享好友',
+        description: '分享来领券',
+        webpageUrl: 'http://www.baidu.com',
+        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+      })
+      .then((res) => {
+        console.log(res);
+      }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
+  }
+
   showModal = () => {
     this.setState({
       isModalShow: true,

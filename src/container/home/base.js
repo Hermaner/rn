@@ -3,6 +3,7 @@ import Toast from 'react-native-simple-toast';
 import { DeviceEventEmitter } from 'react-native';
 import { observer } from 'mobx-react/native';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { UserSocket } from '../../components';
 import {
   GetHomeCategoryService,
@@ -277,6 +278,26 @@ class Base extends React.Component {
         loading: true,
       }, this.GetRecomSupplyService);
     }
+  }
+  test1 = () => {
+    alert(parseInt('1522056193623', 10));
+  }
+  test2 = () => {
+    alert(moment(parseInt('1522056193623', 10)));
+  }
+  test3 = () => {
+    alert(moment(parseInt('1522056193623', 10))
+      .locale('zh-cn'));
+  }
+  test4 = () => {
+    alert(moment(parseInt('1522056193623', 10))
+      .locale('zh-cn')
+      .format('LLL'));
+  }
+  test5 = () => {
+    alert(moment(parseInt('1522056193623', 10))
+      .locale('zh-cn')
+      .format('LT'));
   }
 }
 Base.propTypes = {

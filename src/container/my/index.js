@@ -257,7 +257,7 @@ class My extends myBase {
                       <Text style={styles.shareText}>{item.label}</Text>
                     </View>
                   }
-                  onPress={this.closeModal}
+                  onPress={() => this.otherShare(index)}
                 />
               ))
             }
