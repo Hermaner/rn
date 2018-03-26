@@ -26,7 +26,6 @@ import CheckBox from './CheckBox';
 import HomeSearch from './HomeSearch';
 import MHeader from './MHeader';
 import UploadLogo from './UploadLogo';
-import UploadStoreImg from './UploadStoreImg';
 import ImageLook from './ImageLook';
 import TitleItem from './TitleItem';
 import ScrollableStatusTab from './ScrollableStatusTab';
@@ -74,7 +73,6 @@ export {
   SampleGoodList,
   EnsureGoodList,
   UploadLogo,
-  UploadStoreImg,
   TitleItem,
   ScrollableStatusTab,
 };

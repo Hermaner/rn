@@ -174,6 +174,7 @@ class MemberInfoBase extends React.Component {
       nickName: myRealName || name,
     };
     this.sleek.toggle();
+    console.log(member);
     UpdateMemberInfoService({
       member: JSON.stringify(member),
     }).then((res) => {

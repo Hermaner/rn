@@ -138,3 +138,23 @@ export const ImageCompress = (url, upWidth, upHeight) => {
       ImageResizer.createResizedImage(url, upWidth, upHeight, 'JPEG', 60);
   return CompressFunc;
 };
+export const DoImageCompress = (image, myWidth) => {
+  const width = myWidth || Platform.OS === 'android' ? 400 : 700;
+  let upHeight = '';
+  let upWidth = '';
+  const bl = image.height / image.width;
+  if (image.width > width) {
+    upHeight = width * bl;
+    upWidth = width;
+  } else {
+    upHeight = image.height;
+    upWidth = image.width;
+  }
+  const CompressFunc =
+    Platform.OS === 'android' ?
+    CompressImage.createCustomCompressedImage(
+      image.uri, RNFetchBlob.fs.dirs.DocumentDir, upWidth, upHeight, 60)
+      :
+      ImageResizer.createResizedImage(image.uri, upWidth, upHeight, 'JPEG', 60);
+  return CompressFunc;
+};
