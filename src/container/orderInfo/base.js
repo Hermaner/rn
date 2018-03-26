@@ -51,17 +51,15 @@ class Base extends React.Component {
     GetDeliverOrderService({
       orderId: orderInfo.orderId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
           LOGInfo: result,
         });
       } else {
-        console.log(res.msg);
+        Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   removeOrder = () => { // 取消订单
@@ -84,7 +82,6 @@ class Base extends React.Component {
               this.sleek.toggle();
               if (res.isSuccess) {
                 const result = res.data;
-                console.log(result);
                 this.setState({
                   myStatus: result.status,
                   removeInfo: result,
@@ -103,9 +100,8 @@ class Base extends React.Component {
               } else {
                 Toast.show(res.msg);
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.sleek.toggle();
-              console.log(err);
             });
           } },
       ],
@@ -161,9 +157,8 @@ class Base extends React.Component {
               } else {
                 Toast.show(res.msg);
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.sleek.toggle();
-              console.log(err);
             });
           } },
       ],
@@ -208,9 +203,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
     this.ModalView.closeModal();
   }
@@ -248,9 +242,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
     this.ModalView.closeModal();
   }

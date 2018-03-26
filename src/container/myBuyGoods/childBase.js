@@ -51,7 +51,6 @@ class Base extends React.Component {
       memberId: global.memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data.pageData;
         result.forEach((item) => {
           const statusName =
@@ -103,8 +102,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   removeOrder = (supplyInfo) => {
@@ -123,7 +121,6 @@ class Base extends React.Component {
               this.sleek.toggle();
               if (res.isSuccess) {
                 const result = res.data;
-                console.log(result);
                 this.setState({
                   myStatus: result.status,
                   removeInfo: result,
@@ -133,9 +130,8 @@ class Base extends React.Component {
               } else {
                 Toast.show(res.msg);
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.sleek.toggle();
-              console.log(err);
             });
           } },
       ],
@@ -154,7 +150,6 @@ class Base extends React.Component {
               orderId,
             }).then((res) => {
               this.sleek.toggle();
-              console.log(res);
               if (res.isSuccess) {
                 Toast.show('订单已删除！');
                 this.getInit();
@@ -163,9 +158,8 @@ class Base extends React.Component {
               } else {
                 Toast.show(res.msg);
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.sleek.toggle();
-              console.log(err);
             });
           } },
       ],
