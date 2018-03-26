@@ -476,7 +476,7 @@ class MainScreen extends base {
     );
   }
   _renderModalView() {
-    const { skuCount, detail } = this.state;
+    const { skuCount, detail, payImg, memo } = this.state;
     const content = (
       <View style={styles.maskerContent}>
         <View style={styles.maskerTop}>
@@ -506,6 +506,15 @@ class MainScreen extends base {
           />
           <Text style={styles.maskerNumText}>{detail.unit}</Text>
         </View>
+        <TOpacity
+          style={{ flex: 1 }}
+          content={
+            <View style={styles.imgBox}>
+              <CachedImage resizeMode="stretch" style={styles.headerImg} source={payImg} />
+            </View>
+          }
+          onPress={() => this.goNews()}
+        />
         <View style={styles.maskerBom}>
           <Text style={styles.maskerBomPrice}>
             合计：{(skuCount * detail.wholesalePrice).toFixed(2)}元
@@ -523,7 +532,7 @@ class MainScreen extends base {
     return (
       <ModalView
         ref={(o) => { this.ModalView = o; }}
-        title={'商品数量'}
+        title={memo !== '' ? '该商品已加入买家保障' : '该商品未加入买家保障'}
         content={content}
         onConfirm={() => console.log(111)}
       />

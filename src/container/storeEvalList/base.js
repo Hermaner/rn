@@ -89,7 +89,6 @@ class Base extends React.Component {
     });
   }
   _onRefresh = () => {
-    console.log('AAAAAAAAAAAAAAAAAAAa')
     this.setState({
       refresh: true,
       currentPage: 1,

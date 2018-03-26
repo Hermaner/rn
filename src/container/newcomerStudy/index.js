@@ -11,7 +11,7 @@ import styles from './styles';
 
 import Child from './child';
 
-class HuinongGoodsMotif extends base {
+class NewcomerStudy extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class HuinongGoodsMotif extends base {
   }
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
-    this.getInit();
+    this.getData();
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
@@ -30,18 +30,16 @@ class HuinongGoodsMotif extends base {
     return true;
   };
   _renderBody() {
-    const { goodsItems, haveData } = this.state;
-    const { img } = this.props.navigation.state.params;
+    const { goodsItems } = this.state;
     return (
       <View style={styles.pagebody}>
-        {
+        {/* {
           img !== null && img !== null && img.split(',').length > 0 &&
           <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
-        }
+        } */}
         <View style={{ flex: 1 }}>
           <Child
             data={goodsItems}
-            haveData={haveData}
           />
         </View>
       </View>
@@ -51,7 +49,7 @@ class HuinongGoodsMotif extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <BHeader back={pop} title="慧包好货专场" />
+        <BHeader back={pop} title="慧包在线交易新手指导" />
         <Content>
           {this._renderBody()}
         </Content>
@@ -61,8 +59,8 @@ class HuinongGoodsMotif extends base {
   }
 }
 
-HuinongGoodsMotif.propTypes = {
+NewcomerStudy.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(HuinongGoodsMotif);
+export default connect(null, { pop: popRoute, push: pushRoute })(NewcomerStudy);

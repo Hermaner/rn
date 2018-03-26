@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, BackHandler } from 'react-native';
+import { View, BackHandler, Clipboard } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity } from '../../components';
+import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import base from './base';
 import styles from './styles';
@@ -30,9 +30,56 @@ class OrderInfoSeller extends base {
   };
   _renderBody() {
     const { push } = this.props;
-    const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo } = this.state;
+    const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo, statusInfo } = this.state;
     return (
       <View style={styles.pagebody}>
+        {
+          parseFloat(orderInfo.status) < 6 &&
+          <View style={styles.removeBox}>
+            <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+              <View style={styles.noticeBox}>
+                <Text style={styles.noticeTitle}>
+                  {statusInfo[parseFloat(orderInfo.status) - 1].title}
+                </Text>
+                <Text style={styles.noticeLabel}>
+                  {statusInfo[parseFloat(orderInfo.status) - 1].lable}
+                </Text>
+              </View>
+              <View style={styles.nowBox}>
+                <Text style={styles.boxText}>当前</Text>
+              </View>
+            </View>
+            <View style={styles.displayBox}>
+              <View>
+                <View style={styles.distanceLabel}>
+                  <View style={parseFloat(orderInfo.status) === 1 ? styles.labelBoxNow : styles.labelBox} />
+                  <View style={parseFloat(orderInfo.status) === 2 ? styles.labelBoxNow : styles.labelBox} />
+                  <View style={parseFloat(orderInfo.status) === 3 ? styles.labelBoxNow : styles.labelBox} />
+                  <View style={parseFloat(orderInfo.status) === 4 ? styles.labelBoxNow : styles.labelBox} />
+                  <View style={parseFloat(orderInfo.status) === 5 ? styles.labelBoxNow : styles.labelBox} />
+                </View>
+                <View style={styles.line} />
+              </View>
+              <View style={styles.distanceLabel}>
+                <Text style={styles.labelText2} >
+                  待修改
+                </Text>
+                <Text style={styles.labelText2} >
+                  待确认
+                </Text>
+                <Text style={styles.labelText2} >
+                  待支付
+                </Text>
+                <Text style={styles.labelText2} >
+                  代发货
+                </Text>
+                <Text style={styles.labelText2} >
+                  待收货
+                </Text>
+              </View>
+            </View>
+          </View>
+        }
         {
           orderInfo.status === '8' &&
           <View style={styles.removeBoxNo}>
@@ -40,44 +87,8 @@ class OrderInfoSeller extends base {
           </View>
         }
         {
-          orderInfo.status === '1' &&
-          <View style={styles.removeBox}>
-            <View>
-              <Text style={{ fontSize: 16, color: '#fff' }}>待修改</Text>
-              <Text style={{ fontSize: 14, color: '#fff', marginTop: 10 }}>请修改订单的优惠金额及运费</Text>
-            </View>
-          </View>
-        }
-        {
-          orderInfo.status === '2' &&
-          <View style={styles.removeBox}>
-            <View>
-              <Text style={{ fontSize: 16, color: '#fff' }}>待确认</Text>
-              <Text style={{ fontSize: 14, color: '#fff', marginTop: 10 }}>等待买家确认修改订单</Text>
-            </View>
-          </View>
-        }
-        {
-          orderInfo.status === '3' &&
-          <View style={styles.removeBox}>
-            <View>
-              <Text style={{ fontSize: 16, color: '#fff' }}>待付款</Text>
-              <Text style={{ fontSize: 14, color: '#fff', marginTop: 10 }}>等待买家支付</Text>
-            </View>
-          </View>
-        }
-        {
-          orderInfo.status === '4' &&
-          <View style={styles.removeBox}>
-            <View>
-              <Text style={{ fontSize: 16, color: '#fff' }}>待发货</Text>
-              <Text style={{ fontSize: 14, color: '#fff', marginTop: 10 }}>买家已付款，请及时发货</Text>
-            </View>
-          </View>
-        }
-        {
           orderInfo.status === '7' &&
-          <View style={styles.removeBox}>
+          <View style={styles.removeBox2}>
             <View>
               <Text style={{ fontSize: 16, color: '#fff' }}>订单完成</Text>
               <Text style={{ fontSize: 14, color: '#fff', marginTop: 10 }}>买家已确认收货</Text>
@@ -115,7 +126,18 @@ class OrderInfoSeller extends base {
           <View style={{ flex: 1, paddingBottom: 10 }}>
             <View style={{ height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 5 }}>
               <Text style={{ fontSize: 15, color: '#333', flex: 1 }}>{orderInfo.receiveName}</Text>
-              <Text style={{ fontSize: 14, color: '#666' }}>{orderInfo.receivePhone}</Text>
+              <View style={styles.rowBox}>
+                <Text style={styles.phoneText}>{orderInfo.receivePhone}</Text>
+                <TOpacity
+                  style={styles.copyBox}
+                  content={
+                    <Text style={styles.copyText}>复制</Text>
+                  }
+                  onPress={() => Clipboard.setString(
+                    `联系人:${orderInfo.receiveName} 联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`
+                  )}
+                />
+              </View>
             </View>
             <Text style={styles.sixText}>
               {orderInfo.receiveProvinceName}
@@ -131,8 +153,21 @@ class OrderInfoSeller extends base {
               <View style={styles.mai}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                   <Text style={{ fontSize: 14, color: '#333', marginRight: 10 }}>买家: {orderInfo.receiveName}</Text>
+                  <TOpacity
+                    style={styles.copyBox}
+                    content={
+                      <Text style={styles.copyText}>聊生意</Text>
+                    }
+                    onPress={this.goChat}
+                  />
+                  <TOpacity
+                    style={styles.copyBox}
+                    content={
+                      <Text style={styles.copyText}>打电话</Text>
+                    }
+                    onPress={() => this.ModalCall.show()}
+                  />
                 </View>
-                {/* <Icon style={{ color: '#666', fontSize: 20 }} name="md-arrow-dropright" /> */}
               </View>}
             onPress={() => { push({ key: 'StoreDetail', params: { memberId: supplyInfo.memberId } }); }}
           />
@@ -291,6 +326,7 @@ class OrderInfoSeller extends base {
         </Content>
         {this.renderFooter()}
         {this._renderModalView()}
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

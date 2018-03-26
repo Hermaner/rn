@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { Mcolor, st } from '../../utils';
+import { Mcolor, st, Sgreen } from '../../utils';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
     color: Mcolor,
     textAlign: 'center',
   },
-  goodsItem: {
-    width: '50%',
+  box: {
+    width: width / 2,
     backgroundColor: '#fff',
     paddingTop: 10,
     paddingBottom: 10,
@@ -65,14 +65,18 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginBottom: 3,
   },
+  goodsItem: {
+    flex: 1,
+  },
   goodsImage: {
     width: width / 2 - 20,
     height: width / 2 - 20,
     marginRight: 10,
   },
   goodsName: {
+    // flex: 1,
     color: '#333',
-    fontSize: 16,
+    fontSize: 18,
     marginTop: 5,
   },
   userName: {
@@ -117,13 +121,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff',
   },
-  specialItem: {
-    marginLeft: 10,
+  chatBox: {
+    height: 35,
+    ...st.jacenter,
+    backgroundColor: '#B8860B',
+  },
+  chatText: {
+    fontSize: 14,
+    color: '#fff',
+    textAlign: 'center',
+  },
+  priceBox: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  needCount: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 4,
+    paddingRight: 4,
+    backgroundColor: Sgreen,
+  },
+  unit: {
+    color: '#B8860B',
+    fontSize: 14,
     marginRight: 10,
-    marginBottom: 2,
-    borderWidth: 1,
-    borderColor: '#e4e4e4',
-    padding: 10,
+  },
+  name: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
   },
 });
 export default styles;

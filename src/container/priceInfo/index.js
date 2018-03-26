@@ -4,7 +4,7 @@ import { Container, Content, Input, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { TFeedback, Header } from '../../components';
+import { TFeedback, Header, ModalCall } from '../../components';
 import base from './base';
 import styles from './styles';
 import { Mcolor } from '../../utils';
@@ -79,9 +79,10 @@ class PriceDetail extends base {
               <View style={styles.rightBtn}>
                 <Text style={{ color: '#fff', fontSize: 16, textAlign: 'center' }}>打电话</Text>
               </View>}
-            onPress={() => { this.tellPhone(items.phone); }}
+            onPress={this.ModalCall.show}
           />
         </View>
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
       </Container>
     );
   }

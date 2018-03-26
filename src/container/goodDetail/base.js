@@ -55,6 +55,7 @@ class Base extends React.Component {
       DTgoodsScore: '',
       DTlogisticsScore: '',
       DTsellScore: '',
+      payImg: require('../../assets/img/pay.png'),
     };
   }
   getInit = () => {
@@ -190,6 +191,10 @@ class Base extends React.Component {
     }).catch(() => {
       this.sleek.toggle();
     });
+  }
+  goNews = () => {
+    this.props.push({ key: 'NewcomerStudy' });
+    this.ModalView.closeModal();
   }
   DeleteCollectService = () => {
     const { supplyId } = this.state;

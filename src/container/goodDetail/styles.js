@@ -662,5 +662,19 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
+  imgBox: {
+    flex: 1,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerImg: {
+    width: 0.8 * deviceW,
+    height: 100,
+  },
+  maskerNumTextRight: {
+    fontSize: 14,
+    color: Mcolor,
+  },
 });
 export default styles;
