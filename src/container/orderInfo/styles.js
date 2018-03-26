@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st, Mcolor, deviceW } from '../../utils';
 
 const styles = StyleSheet.create({
   firstBox: {
@@ -28,9 +28,16 @@ const styles = StyleSheet.create({
   },
   removeBox: {
     flex: 1,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
+    height: 180,
+    backgroundColor: Mcolor,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  removeBox2: {
+    flex: 1,
     height: 120,
     backgroundColor: Mcolor,
     paddingLeft: 10,
@@ -248,6 +255,106 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  noticeBox: {
+    marginLeft: 10,
+    marginRight: 10,
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 4,
+  },
+  nowBox: {
+    position: 'absolute',
+    top: -10,
+    right: 20,
+    backgroundColor: '#F88E00',
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 6,
+    paddingRight: 6,
+  },
+  boxText: {
+    fontSize: 13,
+    color: '#fff',
+  },
+  noticeTitle: {
+    fontSize: 16,
+    color: Mcolor,
+  },
+  noticeLabel: {
+    fontSize: 14,
+    color: '#333',
+    marginTop: 6,
+  },
+  displayBox: {
+    marginTop: 15,
+    marginBottom: 15,
+  },
+  distanceLabel: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  labelText2: {
+    fontSize: 15,
+    color: '#fff',
+    textAlign: 'center',
+  },
+  labelBox: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+  },
+  labelBoxNow: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
+  },
+  line: {
+    width: deviceW - 20,
+    borderBottomWidth: 2,
+    borderBottomColor: '#fff',
+    position: 'absolute',
+    top: 7,
+  },
+  phoneText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  copyBox: {
+    marginLeft: 6,
+    paddingTop: 1,
+    paddingBottom: 1,
+    paddingLeft: 4,
+    paddingRight: 4,
+    borderWidth: 1,
+    borderColor: Mcolor,
+  },
+  rowBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  copyText: {
+    fontSize: 13,
+    color: Mcolor,
+  },
+  sellerText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#666',
+    marginRight: 10,
   },
 });
 export default styles;

@@ -20,6 +20,22 @@ class Base extends React.Component {
       type: '',
       freight: '', // 运费
       LOGInfo: '', // 快递信息
+      statusInfo: [{
+        title: '买家下单成功，等待卖家修改',
+        lable: '需要卖家修改运费，优惠等。您可以通过下方的‘聊生意’或‘打电话’，与之联系',
+      }, {
+        title: '卖家已修改，等待买家确认支付',
+        lable: '请您在确认运费，优惠等信息后，进行支付',
+      }, {
+        title: '买家已确认卖家修改信息',
+        lable: '请选择付款',
+      }, {
+        title: '买家已支付，等待卖家发货',
+        lable: '需要卖家确认发货，您可以通过下方的‘聊生意’或‘打电话’，与之联系',
+      }, {
+        title: '卖家已发货，等待买家收货',
+        lable: '请您在收到货物后，进行确认',
+      }],
     };
   }
   getInit = () => {
@@ -68,6 +84,26 @@ class Base extends React.Component {
       }
     }).catch(() => {
       this.sleek.toggle();
+    });
+  }
+  goChat = () => {
+    const { supplyInfo } = this.state;
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (supplyInfo.memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId: supplyInfo.memberId,
+          userName: supplyInfo.nickName,
+          imgUrl: supplyInfo.imgUrl,
+        },
+      },
     });
   }
   deleteOrder = (orderId) => {
@@ -156,5 +192,6 @@ class Base extends React.Component {
 Base.propTypes = {
   navigation: PropTypes.object,
   pop: PropTypes.func,
+  push: PropTypes.func,
 };
 export default Base;

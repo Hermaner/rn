@@ -17,13 +17,20 @@ class CgSkus extends base {
     let isBtnGray = false;
     if (Global.skuType === '3' || Global.skuType === '4') {
       items.forEach((item) => {
-        for (let i = 0; i < item.specs.length; i += 1) {
-          if (item.specs[item.specs.length - 1].specName !== '输入规格') {
-            item.specs.push({
-              specId: '0',
-              specName: '输入规格',
-            });
+        if (item.specs.length > 0) {
+          for (let i = 0; i < item.specs.length; i += 1) {
+            if (item.specs[item.specs.length - 1].specName !== '输入规格') {
+              item.specs.push({
+                specId: '0',
+                specName: '输入规格',
+              });
+            }
           }
+        } else {
+          item.specs.push({
+            specId: '0',
+            specName: '输入规格',
+          });
         }
         if (item.itemIndex === undefined) {
           isBtnGray = true;

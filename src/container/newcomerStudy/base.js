@@ -1,7 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetChildSeasonCategoryService } from '../../api';
+import { GetNoviceDealGuideService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -24,32 +24,16 @@ class Base extends React.Component {
       categoryId: '',
       seasonCategoryId: '',
       backGround1: require('../../assets/img/haohuo.jpg'),
-      haveData: false,
     };
   }
-  getInit = () => {
-    const { seasonCategoryId } = this.props.navigation.state.params;
-    this.setState({
-      seasonCategoryId,
-    }, this.getData);
-  }
   getData = () => {
-    const { seasonCategoryId } = this.state;
     this.sleek.toggle();
-    GetChildSeasonCategoryService({
-      seasonCategoryId,
+    GetNoviceDealGuideService({
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        const result = res.data;
-        for (let i = 0; i < result.length; i += 1) {
-          if (result[i].supplys !== null && result[i].supplys !== '' && result[i].supplys.length > 0) {
-            this.setState({
-              haveData: true,
-            });
-          }
-        }
+        const result = res.data.news;
         this.setState({
           goodsItems: result,
         });
@@ -59,25 +43,6 @@ class Base extends React.Component {
     }).catch((err) => {
       this.sleek.toggle();
       console.log(err);
-    });
-  }
-  goChat = (item) => {
-    if (!global.memberId) {
-      this.props.push({ key: 'User' });
-      return;
-    }
-    if (item.memberId.toString() === global.memberId.toString()) {
-      Toast.show('无法跟自己聊天');
-      return;
-    }
-    this.props.push({ key: 'ChatRoom',
-      params: {
-        item: {
-          memberId: item.memberId,
-          userName: item.nickName,
-          imgUrl: item.imgUrl,
-        },
-      },
     });
   }
   _onGetGotSupplyService = () => {
@@ -95,6 +60,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
-  push: PropTypes.func,
+  categoryId: PropTypes.string,
 };
 export default Base;

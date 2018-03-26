@@ -30,7 +30,9 @@ class RecommendBusiness extends base {
     <BusinessList
       data={item}
       key={index}
-      onPress={() => { this.props.push({ key: 'StoreDetail', params: { memberId: item.memberId } }); }}
+      onPress={() => {
+        this.props.push({ key: item.memberVerifs !== null && item.memberVerifs !== '' && item.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.memberId } });
+      }}
     />
   )
   _renderContent() {

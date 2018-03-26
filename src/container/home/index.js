@@ -131,7 +131,6 @@ class HomeScreen extends base {
   renderSeasonalGoods() {
     const { seasonals } = this.state;
     const { push } = this.props;
-    console.log('AAAAAAAAAAA', seasonals);
     return (
       <View style={styles.seasonalGoods}>
         <Text style={styles.goodsTypeTitle}>- 应季好货 -</Text>

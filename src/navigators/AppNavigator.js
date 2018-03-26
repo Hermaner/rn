@@ -145,6 +145,7 @@ import ChatPhrase from '../container/ChatPhrase';
 import ChatPhraseChange from '../container/ChatPhraseChange';
 import ChatImage from '../container/ChatImage';
 import ChatSupply from '../container/ChatSupply';
+import NewcomerStudy from '../container/newcomerStudy';
 
 export const AppNavigator = StackNavigator({
   ChatSupply: { screen: ChatSupply },
@@ -283,6 +284,7 @@ export const AppNavigator = StackNavigator({
   FriendCitys: { screen: FriendCitys },
   UserIdentity: { screen: UserIdentity },
   LogisticsInfo: { screen: LogisticsInfo },
+  NewcomerStudy: { screen: NewcomerStudy },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

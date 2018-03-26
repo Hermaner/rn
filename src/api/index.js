@@ -441,3 +441,6 @@ export function GetSeasonCategoryService() {
 export function GetChildSeasonCategoryService(data) {
   return get('GetChildSeasonCategoryService', data);
 }
+export function GetNoviceDealGuideService() {
+  return get('GetNoviceDealGuideService');
+}

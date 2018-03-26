@@ -6,7 +6,7 @@ import Echarts from 'native-echarts';
 import { Container, Content, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TFeedback } from '../../components';
+import { Header, TFeedback, ModalCall, Loading } from '../../components';
 import myVisitorBase from './base';
 import { deviceW } from '../../utils';
 import styles from './styles';
@@ -134,7 +134,7 @@ class MyVisitor extends myVisitorBase {
                             <View style={[styles.btn, styles.btnCenter]}>
                               <Text style={styles.btnText}>打电话</Text>
                             </View>}
-                          onPress={() => { this.tellPhone(index); }}
+                          onPress={this.ModalCall.show}
                         />
                         <TFeedback
                           content={
@@ -181,6 +181,8 @@ class MyVisitor extends myVisitorBase {
             {this._randerVisitor()}
           </ScrollView>
         </Content>
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }

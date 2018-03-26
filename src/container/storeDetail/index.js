@@ -7,7 +7,7 @@ import { Container, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TFeedback, MyModalView, Loading, LoadMore, LoadNoMore, ImageLook, TOpacity } from '../../components';
+import { Header, TFeedback, MyModalView, Loading, LoadMore, LoadNoMore, ImageLook, TOpacity, ModalCall } from '../../components';
 import base from './base';
 import { Mred } from '../../utils';
 import styles from './styles';
@@ -373,7 +373,7 @@ class MainScreen extends base {
             <View style={styles.fotBtn3}>
               <Text style={styles.fotText}>打电话</Text>
             </View>}
-          onPress={() => { this.tellPhone(); }}
+          onPress={this.ModalCall.show}
         />
       </Footer>
     );
@@ -433,6 +433,7 @@ class MainScreen extends base {
           this._renderFooter()
         }
         {this._renderModalView()}
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

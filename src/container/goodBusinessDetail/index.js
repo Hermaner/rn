@@ -8,7 +8,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import StarRating from 'react-native-star-rating';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading } from '../../components';
+import { Header, ScrollableTab, GoodhList, ModalView, InputNumber, Loading, ModalCall, TFeedback } from '../../components';
 import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';
@@ -278,9 +278,13 @@ class GoodBusinessDetail extends base {
           <Icon name="arrow-back" style={styles.fotChatIcon} />
           <Text style={styles.fotChatText}>聊生意</Text>
         </View>
-        <View style={styles.fotBtn2}>
-          <Text style={styles.fotText}>打电话</Text>
-        </View>
+        <TFeedback
+          content={
+            <View style={styles.fotBtn2}>
+              <Text style={styles.fotText}>打电话</Text>
+            </View>}
+          onPress={this.ModalCall.show}
+        />
         <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
           <Text style={styles.fotText}>立即购买</Text>
         </TouchableOpacity>
@@ -356,6 +360,7 @@ class GoodBusinessDetail extends base {
           </Content>
         }
         {detail && this._renderFooter()}
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
