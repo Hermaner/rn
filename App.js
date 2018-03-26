@@ -7,6 +7,7 @@ import JPushModule from 'jpush-react-native';
 import {
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
+import * as WeChat from 'react-native-wechat';
 import { observer } from 'mobx-react/native';
 import {
   persistStore,
@@ -68,6 +69,8 @@ class App extends React.Component {
       console.log(registrationId);
       global.registration = registrationId;
     });
+    console.log(WeChat)
+    WeChat.registerApp('wx4d30b0136bad7f7e');
     this.premInit();
     // AsyncStorage.removeItem('userData');
     AsyncStorage.getItem('userData', (error, res) => {

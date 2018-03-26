@@ -7,6 +7,9 @@ import android.support.multidex.MultiDex;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.afanti.monkeydoor.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
+import cn.reactnative.modules.qq.QQPackage;
+import com.theweflex.react.WeChatPackage;
+import com.emekalites.react.compress.image.ImageCompressPackage;
 import com.eaffy.rnandroidnotificationpermission.RNAndroidNotificationPermissionPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
@@ -30,10 +33,6 @@ import java.util.List;
 
 import cn.jpush.reactnativejpush.JPushPackage;
 
-import com.afanti.monkeydoor.module.SharePackage;
-import com.umeng.socialize.Config;
-import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
 
 
 public class MainApplication extends Application implements ReactApplication {
@@ -53,6 +52,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new QQPackage(),
+            new WeChatPackage(),
+            new ImageCompressPackage(),
             new RNAndroidNotificationPermissionPackage(),
             new RNSoundPackage(),
             new ReactNativeAudioPackage(),
@@ -80,21 +82,10 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this,false);
-    // 此处配置类型，供后台分析各渠道时使用
-    Config.shareType = "react native";
-    // 初始化Umeng分享
-    UMShareAPI.get(this);
   }
   @Override protected void attachBaseContext(Context base) {
     super.attachBaseContext(base);
     MultiDex.install(base);
   }
 
-
-  // 配置平台key、secret信息
-  // {
-  //   PlatformConfig.setWeixin("wx083bf496cbc48aec", "750e9075fa521c82274a9d548c399825");
-  //   PlatformConfig.setQQZone("1106207359", "3JjbG8aXMuh5w0sV");
-  //   PlatformConfig.setSinaWeibo("2733400964", "fac50980a44e3e3afd4bc968ea572887", "www.baidu.com");
-  // }
 }

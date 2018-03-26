@@ -11,13 +11,12 @@ import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import Toast from 'react-native-simple-toast';
-import ImageResizer from 'react-native-image-resizer';
 import ImagePicker from 'react-native-image-crop-picker';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
 import { Header, TOpacity, Upload } from '../../components';
 
-import { st, fileKey } from '../../utils';
+import { st, fileKey, ImageCompress } from '../../utils';
 
 const styles = StyleSheet.create({
   access: {
@@ -60,7 +59,7 @@ class AccessoryActions extends React.Component {
     super(props);
     this._images = [];
     this.state = {
-      width: 700,
+      width: Platform.OS === 'android' ? 400 : 700,
       modalVisible: false,
       access: [{
         name: '照片',
@@ -93,7 +92,6 @@ class AccessoryActions extends React.Component {
     ImagePicker.openCamera({
       includeExif: true,
     }).then((img) => {
-      console.log(img);
       image = [{ uri: img.path, width: img.width, height: img.height, mime: img.mime }];
       this.upLoadImage(image);
     }).catch(e => console.log(e));
@@ -103,23 +101,32 @@ class AccessoryActions extends React.Component {
     const { width } = this.state;
     const images = [];
     getImages.forEach((image) => {
+      let upHeight = '';
+      let upWidth = '';
       const bl = image.height / image.width;
-      const height = width * bl;
-      ImageResizer.createResizedImage(image.uri, width, height, 'JPEG', 60).then((response) => {
+      if (image.width > width) {
+        upHeight = width * bl;
+        upWidth = width;
+      } else {
+        upHeight = image.height;
+        upWidth = image.width;
+      }
+      ImageCompress(image.uri, upWidth, upHeight).then((response) => {
         let newWidth = 150;
         let newHeight = 150;
-        if (width >= height && width >= newHeight) {
+        if (upWidth >= upHeight && upWidth >= newHeight) {
           newHeight = newWidth * bl;
         }
-        if (height >= width && height >= newWidth) {
+        if (upHeight >= upWidth && upHeight >= newWidth) {
           newWidth = newHeight / bl;
         }
-        if (width < newWidth && height < newHeight) {
-          newWidth = width;
-          newHeight = height;
+        if (upWidth < newWidth && upHeight < newHeight) {
+          newWidth = upWidth;
+          newHeight = upHeight;
         }
         const key = `${fileKey()}.png`;
         const urlkey = `${global.buketUrl}${key}`;
+        // const urlkey = `https://img.hbw128.com/${key}`;
         Upload(response.uri, global.uptoken, key, () => {
           const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
           RNFetchBlob.config({
@@ -135,8 +142,8 @@ class AccessoryActions extends React.Component {
               path,
               pressWidth: newWidth,
               pressHeight: newHeight,
-              width,
-              height,
+              width: upWidth,
+              height: upHeight,
               type: '2',
               status: '1',
             });

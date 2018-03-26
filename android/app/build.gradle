@@ -104,19 +104,15 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                JPUSH_APPKEY: "d5ab514dd37a028d4cc0835c",
-                APP_CHANNEL : "default"
+                JPUSH_APPKEY: "de0af63626de1e41a17ae452",
+                APP_CHANNEL : "default",
+                QQ_APPID: "1106292962"
         ]
-
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-        manifestPlaceholders = [
-                JPUSH_APPKEY: "de0af63626de1e41a17ae452",   //在此替换你的APPKey
-                APP_CHANNEL: "developer-default"        //应用渠道号
-        ]
     }
     signingConfigs {
       debug {
@@ -171,6 +167,9 @@ android {
     }
 }
 dependencies {
+    compile project(':react-native-qq')
+    compile project(':react-native-wechat')
+    compile project(':react-native-compress-image')
     compile project(':react-native-android-notification-permission')
     compile project(':react-native-sound')
     compile project(':react-native-audio')

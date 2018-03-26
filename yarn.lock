@@ -2155,6 +2155,10 @@ event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
 
+events@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/events/-/events-1.0.2.tgz#75849dcfe93d10fb057c30055afdbd51d06a8e24"
+
 exec-sh@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.2.1.tgz#163b98a6e89e6b65b47c2a28d215bc1f63989c38"
@@ -4721,11 +4725,9 @@ react-native-communications@2.2.1, react-native-communications@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
 
-react-native-compress-images@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-compress-images/-/react-native-compress-images-0.2.2.tgz#1c62699b1cb6d0fc69643df268b04d832fd23ad3"
-  dependencies:
-    prop-types "^15.6.0"
+react-native-compress-image@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-compress-image/-/react-native-compress-image-2.0.1.tgz#f14d701be7f6fcf6973a34dd5ef51436d63fb469"
 
 react-native-datepicker@^1.6.0:
   version "1.6.0"
@@ -4794,9 +4796,9 @@ react-native-gifted-chat@^0.4.1:
     shallowequal "1.0.2"
     uuid "3.2.1"
 
-react-native-image-crop-picker@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.18.1.tgz#ebdbe72def5afb6c69aa6e2ad72fd3a7de8ee408"
+react-native-image-crop-picker@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.20.0.tgz#29b8df35eb17ff7ad61524ec09832f49e552427d"
 
 react-native-image-pan-zoom@^2.0.9:
   version "2.0.9"
@@ -4926,6 +4928,10 @@ react-native-qiniu@^0.3.0:
     base-64 "^0.1.0"
     crypto-js "^3.1.6"
     url-parse "^1.1.1"
+
+react-native-qq@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-qq/-/react-native-qq-2.0.5.tgz#91c893bd9dd4be7b7953227e522c9d8bb3982624"
 
 react-native-qrcode@^0.2.3:
   version "0.2.6"
@@ -5062,6 +5068,12 @@ react-native-vector-icons@4.4.2, react-native-vector-icons@^4.2.0, react-native-
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-wechat@^1.9.9:
+  version "1.9.9"
+  resolved "https://registry.yarnpkg.com/react-native-wechat/-/react-native-wechat-1.9.9.tgz#acc4f7f22a3aeae13671108bcee39cbcb023c23a"
+  dependencies:
+    events "1.0.2"
 
 react-native-wheel@^1.1.3:
   version "1.1.3"

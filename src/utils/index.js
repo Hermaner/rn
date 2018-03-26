@@ -1,6 +1,8 @@
 
-import { Dimensions, PixelRatio } from 'react-native';
+import { Dimensions, PixelRatio, Platform } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
+import CompressImage from 'react-native-compress-image';
+import ImageResizer from 'react-native-image-resizer';
 
 export const deviceW = Dimensions.get('window').width;
 export const deviceH = Dimensions.get('window').height;
@@ -126,4 +128,13 @@ export const writeChatList = (memberId, data) => {
   const { CacheDir } = RNFetchBlob.fs.dirs;
   const path = `${CacheDir}/${memberId}`;
   RNFetchBlob.fs.writeFile(path, data, 'utf8');
+};
+export const ImageCompress = (url, upWidth, upHeight) => {
+  const CompressFunc =
+    Platform.OS === 'android' ?
+    CompressImage.createCustomCompressedImage(
+      url, RNFetchBlob.fs.dirs.DocumentDir, upWidth, upHeight, 60)
+      :
+      ImageResizer.createResizedImage(url, upWidth, upHeight, 'JPEG', 60);
+  return CompressFunc;
 };
