@@ -4,7 +4,7 @@ import { Container, Content, Text, Input, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, TFeedback, Loading, UploadLogo, Select, TOpacity, UploadStoreImg } from '../../components';
+import { Header, TFeedback, Loading, UploadLogo, Select, TOpacity } from '../../components';
 import memberInfo from './base';
 import styles from './styles';
 

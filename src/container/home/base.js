@@ -148,6 +148,7 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data.pageData;
+        console.log(result);
         if (result.length === 0) {
           if (refresh) {
             this.setState({

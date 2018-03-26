@@ -4913,9 +4913,9 @@ react-native-puti-pay@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-puti-pay/-/react-native-puti-pay-1.0.2.tgz#85b3535d70bf736e0c8be2fc643a2156fd46117e"
 
-react-native-qiniu-hm@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-qiniu-hm/-/react-native-qiniu-hm-0.0.2.tgz#965d657b20977c67f335996d1092bacf730db28e"
+react-native-qiniu-hm@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-qiniu-hm/-/react-native-qiniu-hm-0.0.3.tgz#589c251faaff0f4750a56b16148d92da3a23fa41"
   dependencies:
     base-64 "^0.1.0"
     crypto-js "^3.1.6"

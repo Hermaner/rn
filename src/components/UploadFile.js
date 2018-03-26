@@ -15,7 +15,8 @@ import { Rpc } from 'react-native-qiniu-hm';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetUploadTokenService } from '../api';
-import { st } from '../utils';
+import { st, DoImageCompress } from '../utils';
+
 
 const styles = StyleSheet.create({
   upView: {
@@ -131,7 +132,7 @@ export default class Prompt extends React.Component {
       this.setState({
         images,
       }, () => this.startUpload());
-    }).catch(e => console.log(e));
+    }).catch(() => {});
   }
   pickMultiple = () => {
     const { images } = this.state;
@@ -149,17 +150,17 @@ export default class Prompt extends React.Component {
       this.setState({
         images,
       }, () => this.startUpload());
-    }).catch(e => console.log(e));
+    }).catch(() => {});
   }
   startUpload = () => {
     const { images } = this.state;
     images.forEach((item, index) => {
       if (!item.key) {
-        this.upLoadImage(item.uri, index);
+        this.upLoadImage(item, index);
       }
     });
   }
-  upLoadImage = (source, index) => {
+  upLoadImage = (item, index) => {
     const { uptoken, images } = this.state;
     const now = new Date();
     const year = now.getFullYear();
@@ -175,12 +176,13 @@ export default class Prompt extends React.Component {
     this.setState({
       images,
     }, () => this.props.getImages(images));
-    Rpc.uploadFile(source, uptoken, { key, name: key });
+    DoImageCompress(item).then((response) => {
+      Rpc.uploadFile(response.uri, uptoken, { key, name: key });
+    });
   }
   GetUploadTokenService = () => {
     GetUploadTokenService()
     .then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         this.setState({
           uptoken: res.data,
@@ -188,8 +190,7 @@ export default class Prompt extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   _renderImageUpload() {
