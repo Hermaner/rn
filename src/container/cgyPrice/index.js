@@ -94,7 +94,14 @@ class cgyPrice extends base {
   _renderButton() {
     return (
       <View style={{ padding: 10 }}>
-        <Button onPress={this.saveData} full light style={styles.btn}><Text style={{ color: '#fff' }}>填好了</Text></Button>
+        <TFeedback
+          content={
+            <View style={styles.btn}>
+              <Text style={{ color: '#fff' }}>选好了</Text>
+            </View>
+          }
+          onPress={this.saveData}
+        />
       </View>
     );
   }

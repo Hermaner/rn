@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   btn: {
+    height: 50,
+    ...st.jacenter,
     backgroundColor: Mcolor,
     borderRadius: 3,
   },

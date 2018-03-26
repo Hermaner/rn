@@ -143,7 +143,14 @@ class CgCategory extends base {
   _renderButton() {
     return (
       <View style={{ padding: 10, backgroundColor: '#fff' }}>
-        <Button onPress={this.goCgComfirm} full light style={styles.btn}><Text style={{ color: '#fff' }}>选好了</Text></Button>
+        <TFeedback
+          content={
+            <View style={styles.btn}>
+              <Text style={{ color: '#fff' }}>选好了</Text>
+            </View>
+          }
+          onPress={this.goCgComfirm}
+        />
       </View>
     );
   }

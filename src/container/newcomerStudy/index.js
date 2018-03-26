@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
-import { Container, Content, Text } from 'native-base';
+import { Container, Content } from 'native-base';
 import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
-import { BHeader, TFeedback, Loading } from '../../components';
+import { Header, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -30,13 +30,13 @@ class NewcomerStudy extends base {
     return true;
   };
   _renderBody() {
-    const { goodsItems } = this.state;
+    const { goodsItems, backImg } = this.state;
     return (
       <View style={styles.pagebody}>
-        {/* {
-          img !== null && img !== null && img.split(',').length > 0 &&
-          <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
-        } */}
+        {
+          backImg !== '' &&
+          <CachedImage resizeMode="stretch" style={styles.image} source={{ uri: backImg }} />
+        }
         <View style={{ flex: 1 }}>
           <Child
             data={goodsItems}
@@ -49,7 +49,7 @@ class NewcomerStudy extends base {
     const { pop } = this.props;
     return (
       <Container>
-        <BHeader back={pop} title="慧包在线交易新手指导" />
+        <Header back={pop} title="慧包在线交易新手指导" />
         <Content>
           {this._renderBody()}
         </Content>

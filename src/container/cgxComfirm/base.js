@@ -390,6 +390,7 @@ class Base extends React.Component {
       purchase: JSON.stringify(purchase),
       purchaseItems: JSON.stringify(purchaseItems),
       purchaseImages: upImages.map(item => item.key).join(','),
+      isRepeat: '1',
     })
     .then((res) => {
       console.log(res);

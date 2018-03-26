@@ -127,6 +127,10 @@ class Base extends React.Component {
       Toast.show('需求量输入错误');
       return;
     }
+    if (optionType === '点击选择单位') {
+      Toast.show('请选择单位');
+      return;
+    }
     if (wantStarPrice && !reg.test(wantStarPrice)) {
       Toast.show('起始价输入错误');
       return;
