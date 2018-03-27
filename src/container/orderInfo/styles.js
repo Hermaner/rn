@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
   },
   removeBoxNo: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     height: 120,
     backgroundColor: '#bbb',
     paddingLeft: 10,
