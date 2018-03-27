@@ -86,5 +86,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
+  flexOne: {
+    flex: 1,
+  },
 });
 export default styles;

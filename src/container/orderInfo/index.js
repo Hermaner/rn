@@ -180,7 +180,7 @@ class OrderInfo extends base {
                     content={
                       <Text style={styles.copyText}>打电话</Text>
                     }
-                    onPress={() => this.ModalCall.show()}
+                    onPress={() => this.ModalCall.show(supplyInfo.phone, supplyInfo.memberId)}
                   />
                 </View>
               </View>}

@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData } from '../../components';
+import { TFeedback, NoData, Loading } from '../../components';
 import Base from './base';
 import { ColorList } from '../../utils';
 import styles from './styles';
@@ -55,7 +55,7 @@ class Child2 extends Base {
                           <Text style={styles.gyTitle}>{item1.brandName} {item1.categoryName}</Text>
                           {
                             item1.supplyItems.map((item2, index2) => (
-                              <Text key={index2} style={{ fontSize: 18, color: '#333' }}> {item2.specName} </Text>
+                              <Text numberOfLines={1} key={index2} style={{ flex: 1, fontSize: 18, color: '#333' }}> {item2.specName} </Text>
                             ))
                           }
                         </View>
@@ -67,6 +67,7 @@ class Child2 extends Base {
                             (item1.logisticsMode !== null && item1.logisticsMode !== '') &&
                             item1.logisticsMode.split(',').map((item3, index3) => (
                               <View
+                                key={index3}
                                 style={[styles.aaBox,
                                   { borderColor: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }]}
                               >
@@ -75,7 +76,6 @@ class Child2 extends Base {
                                     styles.aa,
                                     { color: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }
                                   ]}
-                                  key={index3}
                                 >{item3}</Text>
                               </View>
                             ))
@@ -84,10 +84,11 @@ class Child2 extends Base {
                             (item1.supplyMode !== null && item1.supplyMode !== '') &&
                             item1.supplyMode.split(',').map((item4, index4) => (
                               <View
+                                key={index4}
                                 style={[styles.aaBox,
                                   { borderColor: ColorList[index4 > ColorList.length ? index4 % ColorList.length : index4] }]}
                               >
-                                <Text style={[styles.aa, { color: ColorList[index4 > ColorList.length ? index4 % ColorList.length : index4] }]} key={index4}>{item4}</Text>
+                                <Text style={[styles.aa, { color: ColorList[index4 > ColorList.length ? index4 % ColorList.length : index4] }]}>{item4}</Text>
                               </View>
                             ))
                           }
@@ -95,19 +96,20 @@ class Child2 extends Base {
                             (item1.renderServices !== null && item1.renderServices !== '') &&
                             item1.renderServices.split(',').map((item5, index5) => (
                               <View
+                                key={index5}
                                 style={[styles.aaBox,
                                   { borderColor: ColorList[index5 > ColorList.length ? index5 % ColorList.length : index5] }]}
                               >
-                                <Text style={[styles.aa, { color: ColorList[index5 > ColorList.length ? index5 % ColorList.length : index5] }]} key={index5}>{item5}</Text>
+                                <Text style={[styles.aa, { color: ColorList[index5 > ColorList.length ? index5 % ColorList.length : index5] }]}>{item5}</Text>
                               </View>
                             ))
                           }
                         </View>
                       </View>
                     </View>
-                    <View style={styles.flexRow}>
+                    <View style={[styles.flexRow, styles.flexOne]}>
                       <Icon style={{ fontSize: 18, color: '#999', marginRight: 6 }} name="pin" />
-                      <Text style={{ fontSize: 14, color: '#666' }}>{item1.sendProvinceName} {item1.sendCityName} {item1.sendDistrictName} {item1.nickName}</Text>
+                      <Text numberOfLines={1} style={{ flex: 1, fontSize: 14, color: '#666' }}>{item1.sendProvinceName} {item1.sendCityName} {item1.sendDistrictName} {item1.nickName}</Text>
                     </View>
                   </View>
                 </View>}
@@ -135,6 +137,7 @@ class Child2 extends Base {
               label="没有相关数据"
             />
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

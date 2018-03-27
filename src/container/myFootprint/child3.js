@@ -4,7 +4,7 @@ import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData } from '../../components';
+import { TFeedback, NoData, Loading } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -37,7 +37,6 @@ class Child3 extends Base {
                   <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.name}>{item1.nickName}</Text>
-                      {/* <Text style={styles.UserYw}>主营业务:</Text> */}
                       <View style={{ flexDirection: 'row', flex: 1 }}>
                         <Text style={{ fontSize: 14, color: '#666' }}>认证信息: </Text>
                         {
@@ -54,7 +53,7 @@ class Child3 extends Base {
                     <Text style={{ fontSize: 14, color: '#666' }}>地址: {item1.address}</Text>
                   </View>
                 </View>}
-              onPress={() => { push({ key: 'StoreDetail', params: { memberId: item1.memberId, name: item1.nickName } }); }}
+              onPress={() => { push({ key: item1.memberVerifs !== null && item1.memberVerifs !== '' && item1.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item1.memberId, name: item1.nickName } }); }}
             />
           ))
         }
@@ -78,6 +77,7 @@ class Child3 extends Base {
               label="没有相关数据"
             />
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

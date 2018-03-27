@@ -4,13 +4,11 @@ import { DeviceEventEmitter } from 'react-native';
 import citysJson from '../../api/citys.json';
 import { DeepClone } from '../../api';
 
-citysJson[0].cur = true;
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       citys: DeepClone(citysJson),
-      leftIndex: 0,
     };
   }
   locationDistrict = () => {
@@ -28,6 +26,14 @@ class Base extends React.Component {
     const data = {
       text: `${citys[index].name}`,
       ProvinceCode: citys[index].adcode,
+    };
+    DeviceEventEmitter.emit('emitMyFriend', data);
+    this.props.pop();
+  }
+  changeAll = () => {
+    const data = {
+      text: '全国',
+      ProvinceCode: '',
     };
     DeviceEventEmitter.emit('emitMyFriend', data);
     this.props.pop();

@@ -31,6 +31,7 @@ class OrderInfoSeller extends base {
   _renderBody() {
     const { push } = this.props;
     const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo, statusInfo } = this.state;
+    console.log('TTTTTTTTTTTTT', orderInfo)
     return (
       <View style={styles.pagebody}>
         {
@@ -152,7 +153,7 @@ class OrderInfoSeller extends base {
             content={
               <View style={styles.mai}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 14, color: '#333', marginRight: 10 }}>买家: {orderInfo.receiveName}</Text>
+                  <Text style={{ flex: 1, fontSize: 14, color: '#333', marginRight: 10 }}>买家: {orderInfo.receiveName}</Text>
                   <TOpacity
                     style={styles.copyBox}
                     content={
@@ -165,7 +166,7 @@ class OrderInfoSeller extends base {
                     content={
                       <Text style={styles.copyText}>打电话</Text>
                     }
-                    onPress={() => this.ModalCall.show()}
+                    onPress={() => this.ModalCall.show(orderInfo.receivePhone, orderInfo.memberId)}
                   />
                 </View>
               </View>}

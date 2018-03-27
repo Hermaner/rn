@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TFeedback } from '../../components';
+import { TFeedback, Loading } from '../../components';
 import { pushRoute } from '../../actions';
 import styles from './styles';
 import base2 from './base2';
@@ -46,6 +46,7 @@ class Child2 extends base2 {
             </View>
           ))
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

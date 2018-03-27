@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData } from '../../components';
+import { TFeedback, NoData, Loading } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -99,6 +99,7 @@ class Child1 extends Base {
               label="没有相关数据"
             />
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

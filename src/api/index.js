@@ -1,7 +1,7 @@
 
 const httpurl = 'http://192.168.50.61:8084/api/lede/';
 // const httpurl = 'http://192.168.0.15:8084/api/lede/';
-// const httpurl = 'https://lede.sunhousm.cn/api/lede/';
+// const httpurl = 'https://lede.hbw128.com/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -443,4 +443,19 @@ export function GetChildSeasonCategoryService(data) {
 }
 export function GetNoviceDealGuideService() {
   return get('GetNoviceDealGuideService');
+}
+export function GetCallRecordService(data) {
+  return get('GetCallRecordService', data);
+}
+export function DySmsCallService(data) {
+  return get('DySmsCallService', data);
+}
+export function UpdateAccessMemberService(data) {
+  return get('UpdateAccessMemberService', data);
+}
+export function AccessWinXinLoginService(data) {
+  return post('AccessWinXinLoginService', data);
+}
+export function GetMemberExistsService(data) {
+  return get('GetMemberExistsService', data);
 }

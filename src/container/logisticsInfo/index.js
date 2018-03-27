@@ -31,6 +31,8 @@ class StrengthBusiness extends Base {
     return (
       <View>
         <WebView
+          scrollEnabled
+          scalesPageToFit
           style={styles.box}
           source={{ uri: `https://m.kuaidi100.com/index_all.html?type=${type}&postid=${postid}` }}
         />

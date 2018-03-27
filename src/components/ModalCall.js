@@ -11,6 +11,7 @@ import Communications from 'react-native-communications';
 import { Input } from 'native-base';
 import { Mcolor, st } from '../utils';
 import TOpacity from './TOpacity';
+import { DySmsCallService } from '../api';
 
 const styles = StyleSheet.create({
   ModalStyle: {
@@ -107,7 +108,7 @@ export default class Prompt extends React.Component {
     });
   }
   call = () => {
-    const { value, isChange } = this.state;
+    const { value, isChange, phoneB, memberIdB } = this.state;
     const { phone } = global.userData;
     if (isChange) {
       const telReg = !(value).match(/^[1][3,4,5,6,7,8,9][0-9]{9}$/);
@@ -115,12 +116,41 @@ export default class Prompt extends React.Component {
         Toast.show('手机号格式不对');
         return;
       }
-      Communications.phonecall(value, false);
+      DySmsCallService({
+        phoneA: value,
+        memberIdA: global.memberId,
+        phoneB,
+        memberIdB,
+      }).then((res) => {
+        console.log(res);
+        if (res.isSuccess) {
+          const result = res.data;
+          Communications.phonecall(result, false);
+        } else {
+          Toast.show(res.msg);
+        }
+      }).catch(() => {
+        // this.sleek.toggle();
+      });
     } else {
-      Communications.phonecall(phone, false);
+      DySmsCallService({
+        phoneA: phone,
+        memberIdA: global.memberId,
+        phoneB,
+        memberIdB,
+      }).then((res) => {
+        console.log(res);
+        if (res.isSuccess) {
+          const result = res.data;
+          Communications.phonecall(result, false);
+        } else {
+          Toast.show(res.msg);
+        }
+      }).catch(() => {
+      });
     }
   }
-  show() {
+  show(phoneB, memberIdB) {
     if (!global.memberId) {
       Toast.show('请先登录');
       return;
@@ -131,6 +161,8 @@ export default class Prompt extends React.Component {
     }
     this.setState({
       modalVisible: true,
+      phoneB,
+      memberIdB,
     });
   }
   close() {

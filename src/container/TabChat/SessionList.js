@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
 import { st, writeSessionList } from '../../utils';
-import { TOpacity, UserSocket, SocketObser } from '../../components';
+import { TOpacity, UserSocket, SocketObser, NoData } from '../../components';
 
 const moment = require('moment');
 
@@ -116,7 +116,9 @@ class SessionList extends React.Component {
     };
   }
   componentDidMount() {
-    this.init();
+    if (SocketObser.socket) {
+      this.init();
+    }
     AppState.addEventListener('change', this.appStateChange);
     this.socket = SocketObser.socket;
     this.sessionEmit = DeviceEventEmitter.addListener('sessionEmit', () => {
@@ -135,10 +137,10 @@ class SessionList extends React.Component {
       this.socket.off('notifyMessageRead', this.notifyMessageRead);
     }
   }
-  init = () => {
+  init = async () => {
     if (global.memberId) {
-      if (this.socket === undefined) {
-        this.socket = SocketObser.socket;
+      if (!this.socket) {
+        this.socket = await SocketObser.socket;
       }
       const { CacheDir } = RNFetchBlob.fs.dirs;
       const path = `${CacheDir}/sessionList`;
@@ -205,6 +207,8 @@ class SessionList extends React.Component {
       }
     });
     items = newLists.concat(items);
+    items.sort(
+      (a, b) => b.lastChatObject.createdAt - a.lastChatObject.createdAt);
     writeSessionList(JSON.stringify(items));
     this.setState({
       items,
@@ -227,8 +231,8 @@ class SessionList extends React.Component {
   }
   _renderRow = (data) => {
     const { showMemberNoReadCount, id, lastChatObject:
-      { text, type, user:
-        { avatar, toAvatar, _id, toId, toUserName, userName } }, latestTime } = data.item;
+      { text, createdAt, type, user:
+        { avatar, toAvatar, _id, toId, toUserName, userName } } } = data.item;
     const isMine = _id.toString() === global.memberId.toString();
     // const { rowId } = this.state;
     return (
@@ -260,7 +264,7 @@ class SessionList extends React.Component {
                   <Text style={styles.name} numberOfLines={1}>
                     {decodeURI(isMine ? toUserName : userName)}
                   </Text>
-                  <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
+                  <Text style={styles.date} numberOfLines={1}>{moment(createdAt).startOf('minute').fromNow()}</Text>
                 </View>
                 <Text style={styles.msg} numberOfLines={1}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
               </View>
@@ -298,17 +302,24 @@ class SessionList extends React.Component {
     const { items, isAllowScroll } = this.state;
     return (
       <View style={styles.listContent}>
-        <FlatList
-          scrollEnabled={isAllowScroll}
-          data={items}
-          renderItem={this._renderRow}
-          ref={(reference) => { this.chatListView = reference; }}
-          keyExtractor={(item, index) => index}
-          enableEmptySections
-          getItemLayout={(data, index) => (
-            { length: 100, offset: (100 + 2) * index, index }
-          )}
-        />
+        {
+          items.length > 0 ?
+            <FlatList
+              scrollEnabled={isAllowScroll}
+              data={items}
+              renderItem={this._renderRow}
+              ref={(reference) => { this.chatListView = reference; }}
+              keyExtractor={(item, index) => index}
+              enableEmptySections
+              getItemLayout={(data, index) => (
+                { length: 100, offset: (100 + 2) * index, index }
+              )}
+            />
+            :
+            <NoData
+              label="没有聊天信息"
+            />
+        }
       </View>
     );
   }

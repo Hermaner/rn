@@ -22,19 +22,19 @@ class Base extends React.Component {
       LOGInfo: '', // 快递信息
       statusInfo: [{
         title: '买家下单成功，等待卖家修改',
-        lable: '需要卖家修改运费，优惠等。您可以通过下方的‘聊生意’或‘打电话’，与之联系',
+        lable: '买家已下单，请尽快修改优惠金额，运费及其他，可以通过电话，聊天与对方联系',
       }, {
         title: '卖家已修改，等待买家确认支付',
-        lable: '请您在确认运费，优惠等信息后，进行支付',
+        lable: '请等待买家确认付款',
       }, {
         title: '买家已确认卖家修改信息',
-        lable: '请选择付款',
+        lable: '请等待买家付款',
       }, {
         title: '买家已支付，等待卖家发货',
-        lable: '需要卖家确认发货，您可以通过下方的‘聊生意’或‘打电话’，与之联系',
+        lable: '买家已支付，请尽快发货',
       }, {
         title: '卖家已发货，等待买家收货',
-        lable: '请您在收到货物后，进行确认',
+        lable: '等待买家收货',
       }],
     };
   }
@@ -59,7 +59,7 @@ class Base extends React.Component {
           LOGInfo: result,
         });
       } else {
-        Toast.show(res.msg);
+        // Toast.show(res.msg);
       }
     }).catch(() => {
     });

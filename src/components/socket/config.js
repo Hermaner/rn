@@ -11,11 +11,11 @@
 
 const config = {
   local: {
-    server: 'https://chat.mm.sunhousm.cn?memberId=',
+    server: 'https://chat.lede.hbw128.com?memberId=',
   },
   dev: {
     server: 'http://192.168.50.57:9091?memberId=',
   },
 };
 
-export default config.dev;
+export default config.local;

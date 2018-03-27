@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, BackHandler, Text, FlatList } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container } from 'native-base';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import { CachedImage } from 'react-native-img-cache';
 import { popRoute, pushRoute } from '../../actions';
-import { TFeedback, Header, Iconfont, ModalCall, Loading, NoData, ScrollableTab } from '../../components';
+import { Header, ScrollableTab } from '../../components';
 import base from './base';
-import styles from './styles';
 
 import Child from './child';
 
@@ -32,13 +29,14 @@ class CallLog extends base {
   };
   render() {
     const { pop } = this.props;
-    const { text, provinceCode } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        <Header back={pop} title="通话记录" />
+        {/* <Header back={pop} title="通话记录" /> */}
         <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
-          <Child tabLabel="已拨" />
-          <Child tabLabel="未拨" />
+          <Child tabLabel="全部" type="0" />
+          <Child tabLabel="未接" type="1" />
+          <Child tabLabel="已拨" type="2" />
+          <Child tabLabel="已接" type="3" />
         </ScrollableTabView>
       </View>
     );

@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
   },
   removeBox2: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
     height: 120,
     backgroundColor: Mcolor,
     paddingLeft: 10,
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
   removeBoxNo: {
     flex: 1,
     flexDirection: 'row',
-    // justifyContent: 'center',
     alignItems: 'center',
     height: 120,
     backgroundColor: '#bbb',

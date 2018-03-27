@@ -53,10 +53,11 @@ class Base extends React.Component {
     this.socket.emit('sendGetChatList');
   }
   getInit = () => {
+    this.socket = SocketObser.socket;
     const { toUser: { memberId, imgUrl, userName } } = this.state;
     const { CacheDir } = RNFetchBlob.fs.dirs;
     const path = `${CacheDir}/${memberId}`;
-    RNFetchBlob.fs.unlink(path);
+    // RNFetchBlob.fs.unlink(path);
     RNFetchBlob.fs.exists(path)
     .then((exist) => {
       if (!exist) {
@@ -88,7 +89,6 @@ class Base extends React.Component {
     });
     AppState.addEventListener('change', this.appStateChange);
     this.GetUploadTokenService();
-    this.socket = SocketObser.socket;
     this.socket.on('notifyMessageRead', this.notifyMessageRead);  // 别人给我发的文件我看到了
     this.socket.on('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);  // 我接受对方看到消息更改状态
     this.socket.on('notifyMessageSendSuccess', this.notifyMessageSendSuccess);  // 告诉自己我消息发送成功了
@@ -103,7 +103,7 @@ class Base extends React.Component {
     this.socket.off('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);
     this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
     this.socket.off('notifyGetChat', this.notifyGetChat);
-    this.socket = null;
+    // this.socket = null;
   }
   notifyMessageRead = (data) => {
     let { messages } = this.state;
@@ -297,8 +297,8 @@ class Base extends React.Component {
     GetUploadTokenService()
     .then((res) => {
       if (res.isSuccess) {
-        global.uptoken = res.data.upToken;
-        global.buketUrl = res.data.buketUrl;
+        global.uptoken = res.map.upToken;
+        global.buketUrl = res.map.buketUrl;
       } else {
         Toast.show(res.msg);
       }

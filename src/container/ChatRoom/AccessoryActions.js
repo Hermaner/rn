@@ -126,6 +126,7 @@ class AccessoryActions extends React.Component {
         }
         const key = fileKey();
         const urlkey = `${global.buketUrl}${key}`;
+        console.log(urlkey)
         Upload(response.uri, global.uptoken, key, () => {
           const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
           RNFetchBlob.config({
@@ -136,6 +137,7 @@ class AccessoryActions extends React.Component {
           .fetch('GET', urlkey, {
           })
           .then(() => {
+            console.log(path);
             images.push({
               text: urlkey,
               path,
@@ -171,7 +173,7 @@ class AccessoryActions extends React.Component {
         this.props.push({ key: 'ChatPhrase' });
         return;
       case 3:
-        this.props.push({ key: 'ChatPhrase' });
+        this.props.push({ key: 'ChatSupply' });
         break;
       default:
     }

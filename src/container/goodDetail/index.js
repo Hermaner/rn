@@ -387,6 +387,7 @@ class MainScreen extends base {
   }
   _renderFooter() {
     const { haveCollect, detail } = this.state;
+    console.log('888888888888888888888', detail)
     return (
       <Footer>
         <TOpacity
@@ -414,7 +415,7 @@ class MainScreen extends base {
             <View style={styles.fotBtn2}>
               <Text style={styles.fotText}>打电话</Text>
             </View>}
-          onPress={this.ModalCall.show}
+          onPress={() => this.ModalCall.show(detail.phone, detail.memberId)}
         />
         <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
           <Text style={styles.fotText}>立即购买</Text>

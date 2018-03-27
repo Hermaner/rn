@@ -5,15 +5,15 @@ import PropTypes from 'prop-types';
 import * as WeChat from 'react-native-wechat';
 import * as QQAPI from 'react-native-qq';
 import { UserSocket, SocketObser } from '../../components';
-import { GetCodeService, RegisterMemberService, LoginForPassWordService, UpdateAccessMemberService, AccessWinXinLoginService, UpdateMemberInfoService, GetMemberExistsService } from '../../api';
+import { GetCodeService, RegisterMemberService, LoginForPassWordService, UpdateAccessMemberService, AccessWinXinLoginService, GetMemberExistsService } from '../../api';
 
 class UserBase extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15666666666', // 15618385521 15666666666
-      sendPhone: '15666666666',
+      phone: '13545883079',
+      sendPhone: '13545883079',
       sec: 60,
       passWord: '',
       code: '1111',
@@ -41,6 +41,7 @@ class UserBase extends React.Component {
     if (index === 0) {
       WeChat.sendAuthRequest('snsapi_userinfo', 'App')
       .then((res) => {
+        console.log(res)
         this.AccessWinXinLoginService(res.code);
       });
     } else {
@@ -193,9 +194,12 @@ class UserBase extends React.Component {
     this.sleek.toggle();
     UpdateAccessMemberService({
       phone,
+      phoneType: Platform.OS === 'ios' ? '2' : '1',
+      registration: global.registration || 'ios',
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
+        console.log(res);
         this.loginAction(res.data);
       } else {
         Toast.show(res.msg);
@@ -239,21 +243,7 @@ class UserBase extends React.Component {
             ],
           );
         } else {
-          const member = {
-            phone,
-          };
-          UpdateMemberInfoService({
-            member: JSON.stringify(member),
-          }).then((json) => {
-            this.sleek.toggle();
-            if (json.isSuccess) {
-              this.loginAction(json.data);
-            } else {
-              Toast.show(res.msg);
-            }
-          }).catch(() => {
-            this.sleek.toggle();
-          });
+          this.UpdateAccessMemberService();
         }
       } else {
         Toast.show(res.msg);
@@ -290,14 +280,14 @@ class UserBase extends React.Component {
       this.sleek.toggle();
     });
   }
-  loginAction = (data) => {
+  loginAction = async (data) => {
     global.memberId = data.memberId.toString();
     UserSocket.changeData(data);
     SocketObser.getConnect();
-    DeviceEventEmitter.emit('emitUser');
-    DeviceEventEmitter.emit('sessionEmit');
     AsyncStorage.setItem('userData', JSON.stringify(data));
     DeviceEventEmitter.emit('emitGoodsDetailData');
+    DeviceEventEmitter.emit('emitUser');
+    DeviceEventEmitter.emit('sessionEmit');
     global.userData = data;
     Toast.show('登陆成功');
     this.props.pop();

@@ -229,6 +229,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  flexOne: {
+    flex: 1,
+  },
   aaBox: {
     // paddingTop: 2,
     // paddingBottom: 2,
