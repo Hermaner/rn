@@ -444,3 +444,9 @@ export function GetChildSeasonCategoryService(data) {
 export function GetNoviceDealGuideService() {
   return get('GetNoviceDealGuideService');
 }
+export function GetCallRecordService(data) {
+  return get('GetCallRecordService', data);
+}
+export function DySmsCallService(data) {
+  return get('DySmsCallService', data);
+}

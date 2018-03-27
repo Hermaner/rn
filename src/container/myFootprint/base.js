@@ -24,10 +24,12 @@ class Base extends React.Component {
   getData = () => {
     const { memberId } = this.state;
     const { type } = this.props;
+    this.sleek.toggle();
     GetFootPrint({
       type,
       memberId,
     }).then((res) => {
+      this.sleek.toggle();
       console.log(res);
       if (res.isSuccess) {
         const result = res.data;

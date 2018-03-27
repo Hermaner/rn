@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TFeedback } from '../../components';
+import { TFeedback, Loading } from '../../components';
 import { pushRoute } from '../../actions';
 import { ColorList } from '../../utils';
 import styles from './styles';
@@ -102,6 +102,7 @@ class Child1 extends React.Component {
             </View>
           ))
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

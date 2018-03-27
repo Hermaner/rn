@@ -283,7 +283,7 @@ class GoodBusinessDetail extends base {
             <View style={styles.fotBtn2}>
               <Text style={styles.fotText}>打电话</Text>
             </View>}
-          onPress={this.ModalCall.show}
+          onPress={() => this.ModalCall.show()}
         />
         <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
           <Text style={styles.fotText}>立即购买</Text>

@@ -28,7 +28,7 @@ class PriceDetail extends base {
   };
   _renderBody() {
     const { items } = this.props.navigation.state.params;
-    console.log('999999999999', items)
+    console.log('TTTTTTTTTTTT', items)
     const timestamp = new Date().getTime();
     const endTimeTimestamp = (parseFloat(items.purchase.purchaseTime) * 86400000)
     + parseFloat(new Date(items.purchase.postDate).getTime());
@@ -79,7 +79,7 @@ class PriceDetail extends base {
               <View style={styles.rightBtn}>
                 <Text style={{ color: '#fff', fontSize: 16, textAlign: 'center' }}>打电话</Text>
               </View>}
-            onPress={this.ModalCall.show}
+            onPress={() => this.ModalCall.show(items.purchase.phone, items.purchase.memberId)}
           />
         </View>
         <ModalCall ref={(o) => { this.ModalCall = o; }} />

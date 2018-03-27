@@ -134,7 +134,7 @@ class MyVisitor extends myVisitorBase {
                             <View style={[styles.btn, styles.btnCenter]}>
                               <Text style={styles.btnText}>打电话</Text>
                             </View>}
-                          onPress={this.ModalCall.show}
+                          onPress={() => this.ModalCall.show(item.member.phone, item.member.memberId)}
                         />
                         <TFeedback
                           content={

@@ -57,7 +57,7 @@ class Base extends React.Component {
           LOGInfo: result,
         });
       } else {
-        Toast.show(res.msg);
+        // Toast.show(res.msg);
       }
     }).catch(() => {
     });
@@ -206,7 +206,6 @@ class Base extends React.Component {
     }).catch(() => {
       this.sleek.toggle();
     });
-    this.ModalView.closeModal();
   }
   back = () => {
     const { emit } = this.state;
@@ -245,7 +244,6 @@ class Base extends React.Component {
     }).catch(() => {
       this.sleek.toggle();
     });
-    this.ModalView.closeModal();
   }
 }
 Base.propTypes = {

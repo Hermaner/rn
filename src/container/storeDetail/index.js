@@ -345,7 +345,7 @@ class MainScreen extends base {
     );
   }
   _renderFooter() {
-    const { isFollow } = this.state;
+    const { isFollow, userInfo } = this.state;
     return (
       <Footer>
         <TFeedback
@@ -373,7 +373,7 @@ class MainScreen extends base {
             <View style={styles.fotBtn3}>
               <Text style={styles.fotText}>打电话</Text>
             </View>}
-          onPress={this.ModalCall.show}
+          onPress={() => this.ModalCall.show(userInfo.phone, userInfo.memberId)}
         />
       </Footer>
     );

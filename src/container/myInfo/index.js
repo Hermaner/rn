@@ -6,7 +6,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { connect } from 'react-redux';
 import { observer } from 'mobx-react/native';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore } from '../../components';
+import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore, Loading } from '../../components';
 import base from './base';
 import styles from './styles';
 import Child1 from './child1';
@@ -194,6 +194,7 @@ class MyInfo extends base {
           {loading && <LoadMore />}
           {nomore && <LoadNoMore />}
         </ScrollView>
+        <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
   }
