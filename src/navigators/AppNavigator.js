@@ -147,6 +147,7 @@ import ChatImage from '../container/ChatImage';
 import ChatSupply from '../container/ChatSupply';
 import NewcomerStudy from '../container/newcomerStudy';
 import CallLog from '../container/callLog';
+import BuyerProtection from '../container/buyerProtection';
 
 export const AppNavigator = StackNavigator({
   ChatSupply: { screen: ChatSupply },
@@ -287,6 +288,7 @@ export const AppNavigator = StackNavigator({
   LogisticsInfo: { screen: LogisticsInfo },
   NewcomerStudy: { screen: NewcomerStudy },
   CallLog: { screen: CallLog },
+  BuyerProtection: { screen: BuyerProtection },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

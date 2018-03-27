@@ -5,7 +5,7 @@ import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData } from '../../components';
+import { TFeedback, NoData, Loading } from '../../components';
 import styles from './styles';
 
 class Child extends React.Component {
@@ -21,7 +21,6 @@ class Child extends React.Component {
   }
   _renderRow = () => {
     const { data, push } = this.props;
-    console.log('IIIIIIIIIIIII', data)
     return (
       <View>
         {
@@ -86,6 +85,7 @@ class Child extends React.Component {
             />
           </View>
         }
+        <Loading ref={(c) => { this.sleek = c; }} />
       </View>
     );
   }

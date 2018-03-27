@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeviceEventEmitter, Alert } from 'react-native';
+import { DeviceEventEmitter, Alert, Clipboard } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService } from '../../api';
@@ -178,6 +178,13 @@ class Base extends React.Component {
     this.setState({
       favorable,
     });
+  }
+  copyInfo = () => {
+    const { orderInfo } = this.state;
+    Toast.show('复制成功！');
+    Clipboard.setString(
+      `联系人:${orderInfo.receiveName} 联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`
+    );
   }
   saveFreight = (freight) => {
     if (parseFloat(freight) < 0) {

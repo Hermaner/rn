@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { TFeedback, Loading, NoData, ModalCall } from '../../components';
 import { pushRoute } from '../../actions';
-import ChildBase from './childBase';
+import base from './base';
 import styles from './styles';
 
-class Child extends ChildBase {
+class Child extends base {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,67 +22,37 @@ class Child extends ChildBase {
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
     return (
-      <View>
-        {
-          item.type === '2' ?
-            <TFeedback
-              content={
-                <View style={styles.box}>
-                  <View style={styles.rowBox}>
-                    <View style={styles.imgBox}>
-                      <CachedImage style={styles.headerImg} source={{ uri: `${item.byCallMember.imgUrl}?imageView2/1/w/60` }} />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.name}>{item.byCallMember.nickName}</Text>
-                      <View style={styles.rowBox}>
-                        <Text style={styles.lable}>{item.call_time}</Text>
-                        <Text style={[styles.lable, { marginLeft: 10 }]}>
-                          {item.status === '1' ? '呼叫失败' : item.status === '2' ? '呼叫成功' : item.status === '3' ? '呼叫未接' : '呼叫已接'}
-                        </Text>
-                      </View>
-                    </View>
-                    <TFeedback
-                      content={
-                        <View style={styles.borderBox}>
-                          <Icon style={styles.mainIconFontChoose} name="call" />
-                        </View>}
-                      onPress={() => this.ModalCall.show(item.byCallMember.phone, item.byCallMember.memberId)}
-                    />
-                  </View>
-                </View>}
-              onPress={() => { push({ key: item.byCallMember.memberVerifs !== null && item.byCallMember.memberVerifs !== '' && item.byCallMember.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.byCallMember.memberId, name: item.byCallMember.nickName } }); }}
-            />
-          :
-            <TFeedback
-              content={
-                <View style={styles.box}>
-                  <View style={styles.rowBox}>
-                    <View style={styles.imgBox}>
-                      <CachedImage style={styles.headerImg} source={{ uri: `${item.callMember.imgUrl}?imageView2/1/w/60` }} />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.name}>{item.callMember.nickName}</Text>
-                      <Text numberOfLines={1} style={[styles.lable, styles.flexOne]}>
-                        {item.call_time}
-                      </Text>
-                    </View>
-                    <TFeedback
-                      content={
-                        <View style={styles.borderBox}>
-                          <Icon style={styles.mainIconFontChoose} name="call" />
-                        </View>}
-                      onPress={() => this.ModalCall.show(item.byCallMember.phone, item.byCallMember.memberId)}
-                    />
-                  </View>
-                </View>}
-              onPress={() => { push({ key: item.callMember.memberVerifs !== null && item.callMember.memberVerifs !== '' && item.callMember.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.callMember.memberId, name: item.callMember.nickName } }); }}
-            />
-        }
-      </View>
+      <TFeedback
+        content={
+          <View style={styles.box}>
+            <View style={styles.rowBox}>
+              <View style={styles.imgBox}>
+                <CachedImage style={styles.headerImg} source={{ uri: `${item.callMember.imgUrl}?imageView2/1/w/60` }} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.name}>{item.callMember.nickName}</Text>
+                <View style={styles.rowBox}>
+                  <Text style={styles.lable}>{item.call_time}</Text>
+                  <Text style={[styles.lable, { marginLeft: 10 }]}>
+                    {item.status === '1' ? '呼叫失败' : item.status === '2' ? '呼叫成功' : item.status === '3' ? '呼叫未接' : '呼叫已接'}
+                  </Text>
+                </View>
+              </View>
+              <TFeedback
+                content={
+                  <View style={styles.borderBox}>
+                    <Icon style={styles.mainIconFontChoose} name="call" />
+                  </View>}
+                onPress={() => this.ModalCall.show(item.callMember.phone, item.callMember.memberId)}
+              />
+            </View>
+          </View>}
+        onPress={() => { push({ key: item.callMember.memberVerifs !== null && item.callMember.memberVerifs !== '' && item.callMember.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.callMember.memberId, name: item.callMember.nickName } }); }}
+      />
     );
   }
   render() {
-    const { items } = this.state;
+    const { items, refresh } = this.state;
     return (
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {
@@ -93,6 +63,11 @@ class Child extends ChildBase {
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 4 }} />}
+              onRefresh={this._onRefresh}
+              refreshing={refresh}
+              onEndReached={this._reachEnd}
+              onEndReachedThreshold={0.1}
             />
             :
             <NoData

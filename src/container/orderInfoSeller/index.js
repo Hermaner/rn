@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, BackHandler, Clipboard } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
@@ -30,8 +30,7 @@ class OrderInfoSeller extends base {
   };
   _renderBody() {
     const { push } = this.props;
-    const { orderInfo, supplyInfo, tu, myStatus, removeInfo, LOGInfo, statusInfo } = this.state;
-    console.log('TTTTTTTTTTTTT', orderInfo)
+    const { orderInfo, supplyInfo, tu, myStatus, LOGInfo, statusInfo } = this.state;
     return (
       <View style={styles.pagebody}>
         {
@@ -134,9 +133,7 @@ class OrderInfoSeller extends base {
                   content={
                     <Text style={styles.copyText}>复制</Text>
                   }
-                  onPress={() => Clipboard.setString(
-                    `联系人:${orderInfo.receiveName} 联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`
-                  )}
+                  onPress={() => this.copyInfo()}
                 />
               </View>
             </View>
