@@ -387,7 +387,6 @@ class MainScreen extends base {
   }
   _renderFooter() {
     const { haveCollect, detail } = this.state;
-    console.log('888888888888888888888', detail)
     return (
       <Footer>
         <TOpacity

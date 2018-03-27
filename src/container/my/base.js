@@ -3,7 +3,7 @@ import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import * as WeChat from 'react-native-wechat';
 import * as QQAPI from 'react-native-qq';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Alert } from 'react-native';
 import Communications from 'react-native-communications';
 import { observer } from 'mobx-react/native';
 import { UserSocket } from '../../components';
@@ -290,7 +290,16 @@ class MyBase extends React.Component {
     });
   }
   tellPhone = () => {
-    Communications.phonecall(global.phone, false);
+    Alert.alert(
+      '温馨提示', '是否拨打客服电话？',
+      [
+        { text: '取消', onPress: () => {} },
+        { text: '确认',
+          onPress: () => {
+            Communications.phonecall(global.phone, false);
+          } },
+      ],
+    );
   }
   choseOne = (index, index2) => {
     const { push } = this.props;
