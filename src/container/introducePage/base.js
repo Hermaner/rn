@@ -9,7 +9,7 @@ class Base extends React.Component {
         id: '1',
         title: '买家保障',
         label: '缴纳诚信保证金并承诺提供买家保障服务',
-        labelTitle: '了解详情',
+        labelTitle: '',
         isHave: true,
       }, {
         id: '1',
