@@ -87,21 +87,21 @@ class Base extends React.Component {
     });
   }
   goChat = () => {
-    const { supplyInfo } = this.state;
+    const { orderInfo } = this.state;
     if (!global.memberId) {
       this.props.push({ key: 'User' });
       return;
     }
-    if (supplyInfo.memberId.toString() === global.memberId.toString()) {
+    if (orderInfo.memberId.toString() === global.memberId.toString()) {
       Toast.show('无法跟自己聊天');
       return;
     }
     this.props.push({ key: 'ChatRoom',
       params: {
         item: {
-          memberId: supplyInfo.memberId,
-          userName: supplyInfo.nickName,
-          imgUrl: supplyInfo.imgUrl,
+          memberId: orderInfo.memberId,
+          userName: orderInfo.nickName,
+          imgUrl: orderInfo.imgUrl,
         },
       },
     });
