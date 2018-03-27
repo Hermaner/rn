@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, TouchableWithoutFeedback, Text, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
@@ -20,7 +20,6 @@ class Child1 extends ChildBase1 {
   }
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
-    const { isFollow } = this.state;
     return (
       <TFeedback
         content={
@@ -36,8 +35,8 @@ class Child1 extends ChildBase1 {
               <TFeedback
                 content={
                   <View style={styles.borderBox}>
-                    <Iconfont style={[styles.mainIconFont, isFollow ? styles.mainIconFontChoose : '']} name="icon-yaoqing" />
-                    <Text style={[styles.icnText, isFollow ? styles.icnTextChoose : '']}>{isFollow ? '已添加' : '去添加'}</Text>
+                    <Iconfont style={styles.mainIconFont} name="icon-yaoqing" />
+                    <Text style={styles.icnText}>去添加</Text>
                   </View>}
                 onPress={() => this.isFollow(item.memberId)}
               />

@@ -89,5 +89,36 @@ const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
   },
+  HeaderMain: {
+    paddingLeft: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#eee',
+    borderRadius: 5,
+    marginLeft: 10,
+    height: 40,
+  },
+  HeaderIcon: {
+    color: '#666',
+    fontSize: 18,
+  },
+  HeaderInput: {
+    color: '#666',
+    fontSize: 14,
+    borderBottomColor: '#eee',
+  },
+  okBtn: {
+    height: 36,
+    ...st.jacenter,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 5,
+    backgroundColor: Mcolor,
+  },
+  okBtnText: {
+    fontSize: 14,
+    color: '#fff',
+  },
 });
 export default styles;
