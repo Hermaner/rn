@@ -101,7 +101,7 @@ export const fileKey = () => {
   const second = now.getSeconds();
   let ran = parseInt(Math.random() * 888, 10);
   ran += 100;
-  return `${year}${month}${day}${hour}${minute}${second}${ran}`;
+  return `${year}${month}${day}${hour}${minute}${second}${ran}${'.jpg'}`;
 };
 export const getSessionList = () => {
   const { CacheDir } = RNFetchBlob.fs.dirs;

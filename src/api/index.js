@@ -450,3 +450,12 @@ export function GetCallRecordService(data) {
 export function DySmsCallService(data) {
   return get('DySmsCallService', data);
 }
+export function UpdateAccessMemberService(data) {
+  return get('UpdateAccessMemberService', data);
+}
+export function AccessWinXinLoginService(data) {
+  return post('AccessWinXinLoginService', data);
+}
+export function GetMemberExistsService(data) {
+  return get('GetMemberExistsService', data);
+}

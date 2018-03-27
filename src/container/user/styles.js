@@ -121,11 +121,11 @@ const styles = StyleSheet.create({
   },
   otherLists: {
     ...st.frcenter,
-    height: 100,
   },
   otherList: {
     flex: 1,
     ...st.acenter,
+    height: 100,
   },
   otherTop: {
     width: 60,
@@ -141,6 +141,30 @@ const styles = StyleSheet.create({
   otherText: {
     fontSize: 14,
     color: '#444',
+  },
+  bindContent: {
+    marginLeft: 30,
+    marginRight: 30,
+  },
+  infoTop: {
+    height: 110,
+    marginTop: 30,
+    ...st.jacenter,
+  },
+  infoImgView: {
+    width: 80,
+    height: 80,
+    marginBottom: 10,
+    borderRadius: 40,
+    overflow: 'hidden',
+  },
+  infoImg: {
+    width: 80,
+    height: 80,
+  },
+  infoName: {
+    fontSize: 14,
+    color: '#333',
   },
 });
 export default styles;

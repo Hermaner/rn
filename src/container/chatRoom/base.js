@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import RNFetchBlob from 'react-native-fetch-blob';
+import uuid from 'uuid';
 import {
   AppState,
   Platform,
@@ -23,6 +24,7 @@ class Base extends React.Component {
       toUser: props.navigation.state.params.item,
       currentPage: 1,
       pageSize: 15,
+      localSize: 10,
     };
   }
   onLoadEarlier = () => {
@@ -44,14 +46,15 @@ class Base extends React.Component {
     this.socket.emit('sendMessage', items);
     let { messages } = this.state;
     messages = items.concat(messages);
-    // this.writeAllFile(messages);
+    this.writeAllFile(messages);
     this.setState({
       messages,
     });
     this.socket.emit('sendGetChatList');
   }
   getInit = () => {
-    const { toUser: { memberId } } = this.state;
+    this.socket = SocketObser.socket;
+    const { toUser: { memberId, imgUrl, userName } } = this.state;
     const { CacheDir } = RNFetchBlob.fs.dirs;
     const path = `${CacheDir}/${memberId}`;
     // RNFetchBlob.fs.unlink(path);
@@ -60,11 +63,24 @@ class Base extends React.Component {
       if (!exist) {
         const first = [];
         RNFetchBlob.fs.createFile(path, JSON.stringify(first), 'utf8');
+        // this.onSend([{
+        //   status: '3',
+        //   text: '欢迎光临，咨询请留言，或点击我的头像，可致电给我',
+        //   type: '1',
+        //   user: {
+        //     avatar: imgUrl,
+        //     isPush: '0',
+        //     userName,
+        //     _id: memberId,
+        //   },
+        //   createdAt: new Date().getTime(),
+        //   _id: uuid.v4(),
+        // }]);
       } else {
         RNFetchBlob.fs.readFile(path, 'utf8')
         .then((data) => {
           const messages = JSON.parse(data);
-          console.log(messages);
+          // console.log(messages);
           this.setState({
             messages,
           });
@@ -73,7 +89,6 @@ class Base extends React.Component {
     });
     AppState.addEventListener('change', this.appStateChange);
     this.GetUploadTokenService();
-    this.socket = SocketObser.socket;
     this.socket.on('notifyMessageRead', this.notifyMessageRead);  // 别人给我发的文件我看到了
     this.socket.on('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);  // 我接受对方看到消息更改状态
     this.socket.on('notifyMessageSendSuccess', this.notifyMessageSendSuccess);  // 告诉自己我消息发送成功了
@@ -88,7 +103,7 @@ class Base extends React.Component {
     this.socket.off('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);
     this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
     this.socket.off('notifyGetChat', this.notifyGetChat);
-    this.socket = null;
+    // this.socket = null;
   }
   notifyMessageRead = (data) => {
     let { messages } = this.state;
@@ -155,6 +170,7 @@ class Base extends React.Component {
   }
   notifyGetChat = (items) => {
     let { messages } = this.state;
+    const { localSize } = this.state;
     const newItems = [];
     items.forEach((item) => {
       let exist = false;
@@ -182,7 +198,7 @@ class Base extends React.Component {
       this.setState({
         messages,
         isLoadingEarlier: false,
-        loadEarlier: messages.length === 40,
+        loadEarlier: messages.length === localSize,
       });
     } else {  // 如果有图片图片缓存以后再渲染
       let count2 = 0;
@@ -207,7 +223,7 @@ class Base extends React.Component {
               this.setState({
                 messages,
                 isLoadingEarlier: false,
-                loadEarlier: messages.length === 40,
+                loadEarlier: messages.length === localSize,
               });
             }
           });
@@ -216,6 +232,7 @@ class Base extends React.Component {
     }
   }
   notifyGetChatLog = (data) => {
+    console.log(data);
     const { pageSize } = this.state;
     this.setState(previousState => ({
       messages: GiftedChat.prepend(previousState.messages, data),
@@ -229,20 +246,15 @@ class Base extends React.Component {
   }
   appStateChange = (appState) => {
     if (Platform.OS === 'ios' && appState === 'inactive') {
-      if (this.socket) {
-        this.socket.disconnect();
-      }
+      console.log(this.socket);
+      this.socket.disconnect();
     }
     if (Platform.OS === 'android' && appState === 'background') {
-      if (this.socket) {
-        this.socket.disconnect();
-      }
+      this.socket.disconnect();
     }
     if (appState === 'active') {
-      if (this.socket) {
-        this.socket.connect();
-        this.loadNewChat();
-      }
+      this.socket.connect();
+      this.loadNewChat();
     }
   }
   loadNewChat = () => {
@@ -252,20 +264,31 @@ class Base extends React.Component {
     });
   }
   loadMore = () => {
-    const { toUser, currentPage, pageSize } = this.state;
+    const { messages, toUser, currentPage, pageSize } = this.state;
+    console.log(messages[messages.length - 1].createdAt);
     this.socket.emit('sendGetChatLog', { // 发送请求获取分页数据
       toUserId: toUser.memberId,
       currentPage,
       pageSize,
+      createdAt: messages[messages.length - 1].createdAt,
     });
+  }
+  deleteMsgList = (index) => {
+    const { messages } = this.state;
+    messages.splice(index, 1);
+    this.setState({
+      messages,
+    });
+    this.writeAllFile(messages);
   }
   writeNewFile = (messages) => { // 写入新文件，用户数据内部有状态更新
     const { toUser: { memberId } } = this.state;
     writeChatList(memberId, JSON.stringify(messages));
   }
   writeAllFile = (messages) => { // 又更新又写入
-    if (messages.length > 40) {
-      messages.length = 40;
+    const { localSize } = this.state;
+    if (messages.length > localSize) {
+      messages.length = localSize;
     }
     const { toUser: { memberId } } = this.state;
     writeChatList(memberId, JSON.stringify(messages));
@@ -279,8 +302,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((error) => {
-      console.log(error);
+    }).catch((err) => {
+      Toast.show(err);
     });
   }
   renderUser = () => {

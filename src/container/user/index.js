@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Input, Icon, Text } from 'native-base';
+import { Container, Content, Input, Text, Icon } from 'native-base';
 import { connect } from 'react-redux';
-import { popRoute, pushRoute, resetHome } from '../../actions';
-import { Header, Loading, TOpacity } from '../../components';
+import { CachedImage } from 'react-native-img-cache';
+import { popRoute, pushRoute } from '../../actions';
+import { BHeader, Loading, TOpacity } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -35,8 +36,8 @@ class UserPage extends base {
             placeholderTextColor="#999"
             placeholder="输入您的手机号"
             clearButtonMode="while-editing"
-            keyboardType="numeric"
             value={phone}
+            keyboardType="numeric"
             onChangeText={value => this.setState({ phone: value })}
             onSubmitEditing={this.login}
           />
@@ -48,9 +49,9 @@ class UserPage extends base {
                 style={styles.password}
                 placeholderTextColor="#999"
                 placeholder="输入验证码"
-                keyboardType="numeric"
                 clearButtonMode="while-editing"
                 value={code}
+                keyboardType="numeric"
                 onChangeText={value => this.setState({ code: value })}
                 onSubmitEditing={this.login}
               />
@@ -81,6 +82,30 @@ class UserPage extends base {
       </View>
     );
   }
+  renderBindInfo() {
+    const { memberInfo: { imgUrl, nickName } } = this.state;
+    return (
+      <View style={styles.infoTop}>
+        <View style={styles.infoImgView}>
+          <CachedImage source={{ uri: imgUrl }} style={styles.infoImg} />
+        </View>
+        <Text style={styles.infoName}>{nickName}</Text>
+      </View>
+    );
+  }
+  renderSubmit() {
+    return (
+      <View>
+        <TOpacity
+          style={styles.submitBtn}
+          content={
+            <Text style={styles.submitBtnText}>立即绑定</Text>
+          }
+          onPress={this.GetMemberExistsService}
+        />
+      </View>
+    );
+  }
   _renderMid() {
     const { isCode } = this.state;
     const { push } = this.props;
@@ -100,7 +125,7 @@ class UserPage extends base {
               content={
                 <Text style={styles.agreementText}>《服务协议》</Text>
               }
-              onPress={() => push({ key: 'Agreement' })}
+              onPress={() => push({ key: 'UserAgreement' })}
             />
           </View>
           <TOpacity
@@ -144,14 +169,24 @@ class UserPage extends base {
   }
   render() {
     const { pop } = this.props;
+    const { isBind } = this.state;
     return (
       <Container>
-        <Header back={pop} title="注册登陆" />
-        <Content contentContainerStyle={{ flex: 1 }}>
-          {this._renderForm()}
-          {this._renderMid()}
-          {this._renderOther()}
-        </Content>
+        <BHeader back={pop} title={isBind ? '绑定手机号' : '注册登陆'} />
+        {
+          isBind ?
+            <Content style={styles.bindContent}>
+              {this.renderBindInfo()}
+              {this._renderForm()}
+              {this.renderSubmit()}
+            </Content>
+            :
+            <Content contentContainerStyle={{ flex: 1 }}>
+              {this._renderForm()}
+              {this._renderMid()}
+              {this._renderOther()}
+            </Content>
+        }
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );
@@ -162,4 +197,4 @@ UserPage.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute, resetHome })(UserPage);
+export default connect(null, { pop: popRoute, push: pushRoute })(UserPage);

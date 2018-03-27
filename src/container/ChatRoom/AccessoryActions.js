@@ -5,12 +5,12 @@ import {
   StyleSheet,
   View,
   Text,
-  Platform,
 } from 'react-native';
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import Toast from 'react-native-simple-toast';
+import ImageResizer from 'react-native-image-resizer';
 import ImagePicker from 'react-native-image-crop-picker';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
@@ -59,7 +59,7 @@ class AccessoryActions extends React.Component {
     super(props);
     this._images = [];
     this.state = {
-      width: Platform.OS === 'android' ? 400 : 700,
+      width: 700,
       modalVisible: false,
       access: [{
         name: '照片',
@@ -124,9 +124,9 @@ class AccessoryActions extends React.Component {
           newWidth = upWidth;
           newHeight = upHeight;
         }
-        const key = `${fileKey()}.png`;
+        const key = fileKey();
         const urlkey = `${global.buketUrl}${key}`;
-        // const urlkey = `https://img.hbw128.com/${key}`;
+        console.log(urlkey)
         Upload(response.uri, global.uptoken, key, () => {
           const path = `${RNFetchBlob.fs.dirs.DocumentDir}/${key}`;
           RNFetchBlob.config({
@@ -137,6 +137,7 @@ class AccessoryActions extends React.Component {
           .fetch('GET', urlkey, {
           })
           .then(() => {
+            console.log(path);
             images.push({
               text: urlkey,
               path,

@@ -62,7 +62,7 @@ class CallLog extends base {
     const { pop } = this.props;
     return (
       <View style={{ flex: 1 }}>
-        <Header back={pop} title="通话记录" />
+        {/* <Header back={pop} title="通话记录" /> */}
         {/* {this._renderSearch()} */}
         <ScrollableTabView style={{ flex: 1 }} renderTabBar={() => <ScrollableTab />}>
           <Child tabLabel="全部" type="0" />

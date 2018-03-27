@@ -387,6 +387,7 @@ class Base extends React.Component {
       this.props.push({ key: 'User' });
       return;
     }
+    console.log(this.state.userInfo);
     const { userInfo: { memberId, nickName, imgUrl } } = this.state;
     if (memberId.toString() === global.memberId.toString()) {
       Toast.show('无法跟自己聊天');

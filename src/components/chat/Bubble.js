@@ -12,13 +12,13 @@ import {
   View,
   Image,
   ViewPropTypes,
+  TouchableOpacity,
 } from 'react-native';
 import { Icon } from 'native-base';
 import Sound from 'react-native-sound';
 
 import MessageImage from './MessageImage';
 import Color from './Color';
-import TOpacity from '../TOpacity';
 import { st, Mcolor } from '../../utils';
 
 import { isSameUser, isSameDay } from './utils';
@@ -30,9 +30,17 @@ export default class Bubble extends React.Component {
     this.onLongPress = this.onLongPress.bind(this);
   }
 
-  onLongPress() {
-    const options = ['复制', '取消'];
+  onLongPress(type) {
+    let options = [];
+    switch (type) {
+      case 1:
+        options = ['复制', '删除', '取消'];
+        break;
+      default:
+        options = ['删除', '取消'];
+    }
     const cancelButtonIndex = options.length - 1;
+    const { currentMessage, deleteMsgList } = this.props;
     this.context.actionSheet().showActionSheetWithOptions(
       {
         options,
@@ -41,7 +49,14 @@ export default class Bubble extends React.Component {
       (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            Clipboard.setString(this.props.currentMessage.text);
+            if (type === 1) {
+              Clipboard.setString(currentMessage.text);
+            } else {
+              deleteMsgList(currentMessage.index);
+            }
+            break;
+          case 1:
+            deleteMsgList(currentMessage.index);
             break;
           default:
             break;
@@ -76,7 +91,6 @@ export default class Bubble extends React.Component {
   }
   _play = async (url) => {
     if (this.sound) {
-      console.log(this.sound)
       this.sound.stop();
     }
     const index = url.lastIndexOf('/') + 1;
@@ -104,13 +118,11 @@ export default class Bubble extends React.Component {
       if (error) {
         Toast.show('音频读取失败');
       }
-      console.log(1)
     });
     setTimeout(() => {
       this.sound.play((success) => {
         if (success) {
           this.sound = null;
-          console.log(2)
         } else {
           Toast.show('音频播放失败');
         }
@@ -121,11 +133,15 @@ export default class Bubble extends React.Component {
     const { currentMessage: { type }, position } = this.props;
     if (type === '1') {
       return (
-        <View style={[styles.messageTextView, position === 'left' && { backgroundColor: '#fff' }]}>
-          <Text style={styles.left.text}>
-            {this.props.currentMessage.text}
-          </Text>
-        </View>
+        <TouchableWithoutFeedback
+          onLongPress={() => this.onLongPress(1)}
+        >
+          <View style={[styles.messageTextView, position === 'left' && { backgroundColor: '#fff' }]}>
+            <Text style={styles.left.text}>
+              {this.props.currentMessage.text}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
       );
     }
     return null;
@@ -134,7 +150,7 @@ export default class Bubble extends React.Component {
   renderMessageImage() {
     const { type } = this.props.currentMessage;
     if (type === '2') {
-      return <MessageImage {...this.props} />;
+      return <MessageImage {...this.props} onLongPress={this.onLongPress} />;
     }
     return null;
   }
@@ -143,24 +159,24 @@ export default class Bubble extends React.Component {
     if (type === '3') {
       const { order: { id, title, imgUrl, price } } = this.props.currentMessage;
       return (
-        <TOpacity
-          style={styles.productTab}
-          content={
-            <View style={styles.product}>
-              <View style={styles.imageview}>
-                <Image
-                  style={styles.image}
-                  source={{ uri: imgUrl }}
-                />
-              </View>
-              <View style={styles.rightProduct}>
-                <Text numberOfLines={2} style={styles.name}>{title}</Text>
-                <Text style={styles.price}>{price}</Text>
-              </View>
-            </View>
-          }
+        <TouchableOpacity
           onPress={() => this.props.onProductPress(id)}
-        />
+          onLongPress={this.onLongPress}
+          style={styles.productTab}
+        >
+          <View style={styles.product}>
+            <View style={styles.imageview}>
+              <Image
+                style={styles.image}
+                source={{ uri: imgUrl }}
+              />
+            </View>
+            <View style={styles.rightProduct}>
+              <Text numberOfLines={2} style={styles.name}>{title}</Text>
+              <Text style={styles.price}>{price}元</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
       );
     }
     return null;
@@ -174,20 +190,20 @@ export default class Bubble extends React.Component {
       return (
         <View style={[styles.messageAudioView, position === 'left' && { flexDirection: 'row-reverse' }]}>
           <Text style={styles.messageAudioText}>{secend}s</Text>
-          <TOpacity
-            style={[styles.messageAudio, { width: width > 200 ? 200 : width }, position === 'left' && { alignItems: 'flex-start' }]}
-            content={
-              <Icon name="ios-volume-up" style={[styles.messageAudioIcon, { transform: [{ rotate: position === 'left' ? '360deg' : '180deg' }] }]} />
-            }
+          <TouchableOpacity
             onPress={() => this._play(text)}
-          />
+            onLongPress={this.onLongPress}
+            style={[styles.messageAudio, { width: width > 200 ? 200 : width }, position === 'left' && { alignItems: 'flex-start' }]}
+          >
+            <Icon name="ios-volume-up" style={[styles.messageAudioIcon, { transform: [{ rotate: position === 'left' ? '360deg' : '180deg' }] }]} />
+          </TouchableOpacity>
         </View>
       );
     }
     return null;
   }
   render() {
-    const { position, touchableProps, currentMessage: { status } } = this.props;
+    const { position, currentMessage: { status } } = this.props;
     return (
       <View
         style={[
@@ -201,23 +217,13 @@ export default class Bubble extends React.Component {
             this.handleBubbleToPrevious(),
           ]}
         >
-          <TouchableWithoutFeedback
-            onLongPress={this.onLongPress}
-            accessibilityTraits="text"
-            {...touchableProps}
-          >
-            <View
-              style={{
-                ...st.fr,
-              }}
-            >
-              {position === 'right' && <Text style={[styles.unRead, status === '3' && { color: '#888' }]}>{status === '1' ? '发送中' : status === '2' ? '未读' : status === '3' ? '' : '失败'}</Text>}
-              {this.renderMessageImage()}
-              {this.renderMessageText()}
-              {this.renderMessageProduct()}
-              {this.renderMessageAudio()}
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={position === 'right' && { paddingLeft: 45 }}>
+            {this.renderMessageImage()}
+            {this.renderMessageText()}
+            {this.renderMessageProduct()}
+            {this.renderMessageAudio()}
+            {position === 'right' && <Text style={[styles.unRead, status === '3' && { color: '#888' }]}>{status === '1' ? '发送中' : status === '2' ? '未读' : status === '3' ? '' : '失败'}</Text>}
+          </View>
         </View>
       </View>
     );
@@ -247,10 +253,6 @@ const styles = {
       color: '#111',
       fontSize: 14,
       lineHeight: 20,
-      marginTop: 8,
-      marginBottom: 8,
-      marginLeft: 10,
-      marginRight: 10,
     },
   }),
   right: StyleSheet.create({
@@ -260,7 +262,7 @@ const styles = {
     },
     wrapper: {
       borderRadius: 4,
-      marginLeft: 60,
+      marginLeft: 15,
       minHeight: 20,
       justifyContent: 'flex-end',
     },
@@ -274,8 +276,12 @@ const styles = {
   unRead: {
     color: Mcolor,
     fontSize: 12,
-    marginRight: 6,
-    marginTop: 10,
+    position: 'absolute',
+    width: 40,
+    textAlign: 'right',
+    left: 0,
+    top: 4,
+    marginTop: 8,
   },
   messageTextList: {
     ...st.fr,
@@ -283,6 +289,8 @@ const styles = {
   messageTextView: {
     backgroundColor: '#92E649',
     borderRadius: 5,
+    overflow: 'hidden',
+    padding: 8,
   },
   messageAudioView: {
     ...st.fr,
@@ -292,7 +300,6 @@ const styles = {
     fontSize: 12,
     color: '#666',
     marginRight: 5,
-    marginLeft: 5,
   },
   messageAudio: {
     height: 35,
@@ -375,7 +382,6 @@ Bubble.defaultProps = {
 };
 
 Bubble.propTypes = {
-  touchableProps: PropTypes.object,
   position: PropTypes.oneOf(['left', 'right']),
   currentMessage: PropTypes.object,
   nextMessage: PropTypes.object,
@@ -389,4 +395,5 @@ Bubble.propTypes = {
     right: ViewPropTypes.style,
   }),
   onProductPress: PropTypes.func,
+  deleteMsgList: PropTypes.func,
 };

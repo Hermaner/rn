@@ -52,9 +52,9 @@ class ChatRoom extends base {
   }
 
   componentWillUnmount() {
+    this.deleteInit();
     this.phraseEmit.remove();
     this.selectProduct.remove();
-    this.deleteInit();
     this._isMounted = false;
   }
   renderAccessory(props) {
@@ -73,6 +73,7 @@ class ChatRoom extends base {
         <GiftedChat
           messages={messages}
           onSend={this.onSend}
+          deleteMsgList={this.deleteMsgList}
           showImage={this.showImage}
           loadEarlier={this.state.loadEarlier}
           onLoadEarlier={this.onLoadEarlier}

@@ -1,24 +1,26 @@
 import React from 'react';
-import { AsyncStorage, Platform, DeviceEventEmitter } from 'react-native';
+import { AsyncStorage, Platform, DeviceEventEmitter, Alert } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import * as WeChat from 'react-native-wechat';
 import * as QQAPI from 'react-native-qq';
 import { UserSocket, SocketObser } from '../../components';
-import { GetCodeService, RegisterMemberService, LoginForPassWordService } from '../../api';
+import { GetCodeService, RegisterMemberService, LoginForPassWordService, UpdateAccessMemberService, AccessWinXinLoginService, GetMemberExistsService } from '../../api';
 
 class UserBase extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '',
-      sendPhone: '',
+      phone: '13545883079',
+      sendPhone: '13545883079',
       sec: 60,
       passWord: '',
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
       isCode: true,
+      isBind: false,
+      memberInfo: {},
       others: [{
         label: '微信',
         icon: 'md-alarm',
@@ -37,89 +39,22 @@ class UserBase extends React.Component {
   }
   otherLogin = (index) => {
     if (index === 0) {
-      // this.shareToQzone();
-      // return;
       WeChat.sendAuthRequest('snsapi_userinfo', 'App')
       .then((res) => {
-        console.log(res);
+        console.log(res)
+        this.AccessWinXinLoginService(res.code);
       });
     } else {
       this.qqLogin();
     }
-  }
-  wxShareFriend = () => {
-    WeChat.isWXAppInstalled()
-    .then((isInstalled) => {
-      if (isInstalled) {
-        WeChat.shareToSession({
-          title: '分享朋友',
-          description: '分享来领券',
-          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
-          type: 'news',
-          webpageUrl: 'http://www.baidu.com',
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      } else {
-        Toast.show('没有安装微信软件，请您安装微信之后再试');
-      }
-    });
-  }
-  wxShareTimeLine = () => {
-    WeChat.isWXAppInstalled()
-    .then((isInstalled) => {
-      if (isInstalled) {
-        WeChat.shareToTimeline({
-          title: '分享朋友圈',
-          description: '分享来领券',
-          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
-          type: 'news',
-          webpageUrl: 'http://www.baidu.com',
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      } else {
-        Toast.show('没有安装微信软件，请您安装微信之后再试');
-      }
-    });
   }
   qqLogin = () => {
     QQAPI.isQQInstalled().then(() => {
       QQAPI.login('get_simple_userinfo')
       .then((res) => {
         console.log(res);
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
-  }
-  shareToQQ = () => {
-    QQAPI.isQQInstalled().then(() => {
-      QQAPI.shareToQQ({
-        type: 'news',
-        title: '分享好友',
-        description: '分享来领券',
-        webpageUrl: 'http://www.baidu.com',
-        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
-      })
-      .then((res) => {
-        console.log(res);
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
-  }
-  shareToQzone = () => {
-    QQAPI.isQQInstalled().then(() => {
-      QQAPI.shareToQzone({
-        type: 'news',
-        title: '分享好友',
-        description: '分享来领券',
-        webpageUrl: 'http://www.baidu.com',
-        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
-      })
-      .then((res) => {
-        console.log(res);
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
+      }).catch(() => {});
+    }).catch(() => {});
   }
   sendCode = () => {
     if (this.isSend) {
@@ -252,14 +187,107 @@ class UserBase extends React.Component {
       this.sleek.toggle();
     });
   }
-  loginAction = (data) => {
+  UpdateAccessMemberService = () => {
+    const {
+      phone,
+    } = this.state;
+    this.sleek.toggle();
+    UpdateAccessMemberService({
+      phone,
+      phoneType: Platform.OS === 'ios' ? '2' : '1',
+      registration: global.registration || 'ios',
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        console.log(res);
+        this.loginAction(res.data);
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  GetMemberExistsService = () => {
+    this.sleek.toggle();
+    const {
+      phone,
+      code,
+      codeVal,
+      sendPhone,
+    } = this.state;
+    if (phone !== sendPhone) {
+      Toast.show('手机号与发送短信的手机号不一致');
+      return;
+    }
+    if (!code) {
+      Toast.show('请输入验证码');
+      return;
+    }
+    if (code !== codeVal) {
+      Toast.show('验证码错误');
+      return;
+    }
+    this.sleek.toggle();
+    GetMemberExistsService({
+      phone,
+    }).then((res) => {
+      if (res.isSuccess) {
+        if (res.data) {
+          this.sleek.toggle();
+          Alert.alert(
+            '温馨提示', '该手机号已存在，是否将微信信息同步到此账号？',
+            [
+              { text: '取消', onPress: () => { global.memberId = null; } },
+              { text: '确认', onPress: this.UpdateAccessMemberService },
+            ],
+          );
+        } else {
+          this.UpdateAccessMemberService();
+        }
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  AccessWinXinLoginService = (code) => {
+    this.sleek.toggle();
+    AccessWinXinLoginService({
+      code,
+      phoneType: Platform.OS === 'ios' ? '2' : '1',
+      registration: global.registration || 'ios',
+    }).then((res) => {
+      this.sleek.toggle();
+      console.log(res);
+      if (res.isSuccess) {
+        const phone = res.data.phone;
+        if (!phone) {
+          this.setState({
+            isBind: true,
+            memberInfo: res.data,
+          });
+          global.memberId = res.data.memberId;
+          Toast.show('请先绑定手机号');
+        } else {
+          this.loginAction(res.data);
+        }
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  loginAction = async (data) => {
     global.memberId = data.memberId.toString();
     UserSocket.changeData(data);
     SocketObser.getConnect();
-    DeviceEventEmitter.emit('emitUser');
-    DeviceEventEmitter.emit('sessionEmit');
     AsyncStorage.setItem('userData', JSON.stringify(data));
     DeviceEventEmitter.emit('emitGoodsDetailData');
+    DeviceEventEmitter.emit('emitUser');
+    DeviceEventEmitter.emit('sessionEmit');
     global.userData = data;
     Toast.show('登陆成功');
     this.props.pop();

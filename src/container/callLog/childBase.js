@@ -19,7 +19,10 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId || '' }, this.getData);
+    if (!global.memberId) {
+      return;
+    }
+    this.getData();
   }
   getData = () => {
     const { type } = this.props;

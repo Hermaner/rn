@@ -30,7 +30,7 @@ class CgCitys extends base {
     return (
       <View style={styles.maskerContentView}>
         <View style={styles.maskerTitle}>
-          <Text style={styles.maskerTitleText}>省、市</Text>
+          <Text style={styles.maskerTitleText}>省</Text>
         </View>
         <View style={{ flex: 1 }}>
           {
@@ -38,17 +38,30 @@ class CgCitys extends base {
             <View style={[styles.f1, styles.fr]}>
               <View style={[styles.f1, { backgroundColor: '#f2f2f2' }]}>
                 <Content>
+                  <TFeedback
+                    content={
+                      <View
+                        style={styles.addressLeftList}
+                      >
+                        <Text
+                          style={styles.leftNavText}
+                          numberOfLines={1}
+                        >
+                          全国
+                        </Text>
+                      </View>}
+                    onPress={this.changeAll}
+                  />
                   {
                     citys.map((item, index) => (
                       <TFeedback
                         key={index}
                         content={
                           <View
-                            style={[styles.addressLeftList,
-                              item.cur && styles.addressLeftListCur]}
+                            style={styles.addressLeftList}
                           >
                             <Text
-                              style={[styles.leftNavText, item.cur && styles.leftNavTextCur]}
+                              style={styles.leftNavText}
                               numberOfLines={1}
                             >
                               {item.name}
