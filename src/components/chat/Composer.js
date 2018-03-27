@@ -74,7 +74,7 @@ export default class Composer extends React.Component {
     try {
       await AudioRecorder.startRecording();
     } catch (error) {
-      console.log(error);
+      Toast.show(error);
     }
     this.setState({
       isTab: true,
@@ -108,7 +108,7 @@ export default class Composer extends React.Component {
       try {
         await AudioRecorder.stopRecording();
       } catch (error) {
-        console.log(error);
+        Toast.show(error);
       }
       Toast.show('少于1s自动取消');
       return;
@@ -123,7 +123,7 @@ export default class Composer extends React.Component {
           this._finishRecording(filePath);
         }
       } catch (error) {
-        console.log(error);
+        Toast.show(error);
       }
     }
   }

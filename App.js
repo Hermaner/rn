@@ -1,5 +1,5 @@
 import React from 'react';
-import { BackHandler, AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter } from 'react-native';
+import { BackHandler, AppRegistry, AsyncStorage, Platform, NativeAppEventEmitter, DeviceEventEmitter, AppState } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import SplashScreen from 'react-native-splash-screen';
 import Permissions from 'react-native-permissions';
@@ -69,7 +69,12 @@ class App extends React.Component {
       console.log(registrationId);
       global.registration = registrationId;
     });
-    console.log(WeChat)
+    AppState.addEventListener('change', (appState) => {
+      if (appState === 'active') {
+        this.clearIosBadge();
+      }
+    });
+    this.clearIosBadge();
     WeChat.registerApp('wx4d30b0136bad7f7e');
     this.premInit();
     // AsyncStorage.removeItem('userData');
@@ -101,6 +106,11 @@ class App extends React.Component {
     Toast.show('再按一次退出应用');
     return true;
   };
+  clearIosBadge = () => {
+    if (Platform.OS === 'ios') {
+      JPushModule.setBadge(0, () => {});
+    }
+  }
   premInit = () => {
     const types = Permissions.getTypes();
     const canOpenSettings = Permissions.canOpenSettings();

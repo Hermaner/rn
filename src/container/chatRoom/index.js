@@ -28,20 +28,10 @@ class ChatRoom extends base {
     if (Platform.OS === 'ios') {
       KeyboardManager.setEnable(false);
     }
-    this.phraseEmit = DeviceEventEmitter.addListener('phraseEmit', (text) => {
+    DeviceEventEmitter.addListener('phraseEmit', (text) => {
       this.onSend([{
         text,
         type: '1',
-        status: '1',
-        user: this.renderUser(),
-        createdAt: new Date().getTime(),
-        _id: uuid.v4(),
-      }]);
-    });
-    this.selectProduct = DeviceEventEmitter.addListener('selectProduct', (order) => {
-      this.onSend([{
-        order,
-        type: '3',
         status: '1',
         user: this.renderUser(),
         createdAt: new Date().getTime(),
@@ -52,8 +42,6 @@ class ChatRoom extends base {
   }
 
   componentWillUnmount() {
-    this.phraseEmit.remove();
-    this.selectProduct.remove();
     this.deleteInit();
     this._isMounted = false;
   }
@@ -73,6 +61,7 @@ class ChatRoom extends base {
         <GiftedChat
           messages={messages}
           onSend={this.onSend}
+          deleteMsgList={this.deleteMsgList}
           showImage={this.showImage}
           loadEarlier={this.state.loadEarlier}
           onLoadEarlier={this.onLoadEarlier}

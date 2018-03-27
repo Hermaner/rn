@@ -70,9 +70,9 @@ export default class Message extends React.Component {
             styles[position].container,
           ]}
         >
-          {position === 'left' && this.renderAvatar()}
+          {position === 'left' ? this.renderAvatar() : null}
           {this.renderBubble()}
-          {position === 'right' && this.renderAvatar()}
+          {position === 'right' ? this.renderAvatar() : null}
         </View>
       </View>
     );

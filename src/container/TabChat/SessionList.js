@@ -10,6 +10,7 @@
  */
 import { observer } from 'mobx-react/native';
 import RNFetchBlob from 'react-native-fetch-blob';
+import Swipeout from 'react-native-swipeout';
 import React from 'react';
 import {
     StyleSheet,
@@ -110,6 +111,8 @@ class SessionList extends React.Component {
     this.state = {
       items: [],
       hasLogin: false,
+      rowId: '',
+      isAllowScroll: true,
     };
   }
   componentDidMount() {
@@ -127,10 +130,10 @@ class SessionList extends React.Component {
     AppState.removeEventListener('change', this.appStateChange);
     this.sessionEmit.remove();
     this.offSessionEmit.remove();
+    this.socket = null;
     if (this.socket) {
       this.socket.off('notifyMessageRead', this.notifyMessageRead);
     }
-    this.socket = null;
   }
   init = () => {
     if (global.memberId) {
@@ -147,6 +150,9 @@ class SessionList extends React.Component {
         } else {
           RNFetchBlob.fs.readFile(path, 'utf8')
           .then((data) => {
+            if (!data) {
+              return;
+            }
             const items = JSON.parse(data);
             this.setState({
               items,
@@ -174,7 +180,9 @@ class SessionList extends React.Component {
       if (this.socket) {
         this.socket.connect();
       }
-      this.socket.emit('sendGetChatList');
+      if (this.socket) {
+        this.socket.emit('sendGetChatList');
+      }
     }
   }
   notifyMessageRead = () => {
@@ -202,60 +210,96 @@ class SessionList extends React.Component {
       items,
     });
   }
+  del = (index) => {
+    const { items } = this.state;
+    const memberId = items[index].toMemberId;
+    items.splice(index, 1);
+    this.setState({
+      items,
+    });
+    this.socket.emit('sendDeleteChat', {
+      toMemberId: memberId,
+    }); // 删除列表
+    const { CacheDir } = RNFetchBlob.fs.dirs;
+    const path = `${CacheDir}/${memberId}`;
+    RNFetchBlob.fs.unlink(path);
+    writeSessionList(JSON.stringify(items));
+  }
   _renderRow = (data) => {
     const { showMemberNoReadCount, id, lastChatObject:
       { text, type, user:
         { avatar, toAvatar, _id, toId, toUserName, userName } }, latestTime } = data.item;
     const isMine = _id.toString() === global.memberId.toString();
+    // const { rowId } = this.state;
     return (
-      <TOpacity
-        style={styles.list}
-        content={
-          <View style={[styles.con]}>
-            <CachedImage source={{ uri: `${isMine ? toAvatar : avatar}?imageView2/1/w/80` }} style={styles.img} />
-            <View style={styles.right}>
-              <View style={styles.top}>
-                <Text style={styles.name} numberOfLines={1}>
-                  {decodeURI(isMine ? toUserName : userName)}
-                </Text>
-                <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
-              </View>
-              <Text style={styles.msg} numberOfLines={1}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
-            </View>
-            {
-              showMemberNoReadCount && showMemberNoReadCount > 0 &&
-              <View style={styles.badgeView}>
-                <Text style={styles.badgeText}>{showMemberNoReadCount}</Text>
-              </View>
-            }
-          </View>
-        }
-        onPress={() => {
-          const { items } = this.state;
-          global.chatId = id;
-          items[data.index].showMemberNoReadCount = '0';
-          writeSessionList(JSON.stringify(items));
+      <Swipeout
+        // close={data.index !== rowId}
+        onOpen={() => {
           this.setState({
-            items,
-          });
-          this.props.push({ key: 'ChatRoom',
-            params: {
-              item: {
-                memberId: isMine ? toId : _id,
-                userName: isMine ? toUserName : userName,
-                imgUrl: isMine ? toAvatar : avatar,
-              },
-            },
+            isAllowScroll: false,
+            rowId: data.index,
           });
         }}
-      />
+        onClose={() => { this.setState({ isAllowScroll: true }); }}
+        autoClose
+        right={[{
+          text: '删除',
+          backgroundColor: '#ff0000',
+          color: '#fff',
+          underlayColor: '#ff0000',
+          onPress: () => this.del(data.index),
+        }]}
+      >
+        <TOpacity
+          style={styles.list}
+          content={
+            <View style={[styles.con]}>
+              <CachedImage source={{ uri: `${isMine ? toAvatar : avatar}?imageView2/1/w/80` }} style={styles.img} />
+              <View style={styles.right}>
+                <View style={styles.top}>
+                  <Text style={styles.name} numberOfLines={1}>
+                    {decodeURI(isMine ? toUserName : userName)}
+                  </Text>
+                  <Text style={styles.date} numberOfLines={1}>{latestTime}</Text>
+                </View>
+                <Text style={styles.msg} numberOfLines={1}>{type === '1' ? text : type === '2' ? '图片' : type === '3' ? '产品' : '语音'}</Text>
+              </View>
+              {
+                showMemberNoReadCount && showMemberNoReadCount > 0 &&
+                <View style={styles.badgeView}>
+                  <Text style={styles.badgeText}>{showMemberNoReadCount}</Text>
+                </View>
+              }
+            </View>
+          }
+          onPress={() => {
+            const { items } = this.state;
+            global.chatId = id;
+            items[data.index].showMemberNoReadCount = '0';
+            writeSessionList(JSON.stringify(items));
+            this.setState({
+              items,
+            });
+            this.props.push({ key: 'ChatRoom',
+              params: {
+                item: {
+                  memberId: isMine ? toId : _id,
+                  userName: isMine ? toUserName : userName,
+                  imgUrl: isMine ? toAvatar : avatar,
+                },
+              },
+            });
+          }}
+        />
+      </Swipeout>
     );
   }
   _renderContent() {
-    const { items } = this.state;
+    const { items, isAllowScroll } = this.state;
     return (
       <View style={styles.listContent}>
         <FlatList
+          scrollEnabled={isAllowScroll}
           data={items}
           renderItem={this._renderRow}
           ref={(reference) => { this.chatListView = reference; }}

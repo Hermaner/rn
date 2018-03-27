@@ -3,11 +3,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, View, ViewPropTypes, Platform, TouchableOpacity } from 'react-native';
-import Lightbox from 'react-native-lightbox';
+// import Lightbox from 'react-native-lightbox';
 
 export default function MessageImage({
   containerStyle,
-  lightboxProps,
+  onLongPress,
   imageProps,
   currentMessage,
   showImage,
@@ -28,6 +28,7 @@ export default function MessageImage({
         />
       </Lightbox> */}
       <TouchableOpacity
+        onLongPress={() => onLongPress(2)}
         onPress={() => {
           showImage({
             path,
@@ -39,7 +40,8 @@ export default function MessageImage({
       >
         <Image
           {...imageProps}
-          style={[styles.image, { width: parseFloat(pressWidth, 10), height: parseFloat(pressHeight, 10) }]}
+          style={[styles.image,
+            { width: parseFloat(pressWidth, 10), height: parseFloat(pressHeight, 10) }]}
           source={{ uri: path ? (Platform.OS === 'android' ? `file://${path}` : path) : text }}
         />
       </TouchableOpacity>
@@ -74,6 +76,6 @@ MessageImage.propTypes = {
   currentMessage: PropTypes.object,
   containerStyle: ViewPropTypes.style,
   imageProps: PropTypes.object,
-  lightboxProps: PropTypes.object,
   showImage: PropTypes.func,
+  onLongPress: PropTypes.func,
 };

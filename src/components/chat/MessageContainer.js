@@ -29,9 +29,9 @@ export default class MessageContainer extends React.Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.hash !== r2.hash,
     });
-    const messagesData = this.prepareMessages(props.messages);
+    // const messagesData = this.prepareMessages(props.messages);
     this.state = {
-      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
+      dataSource: dataSource.cloneWithRows(props.messages),
     };
   }
 
@@ -63,10 +63,10 @@ export default class MessageContainer extends React.Component {
       blob: messages.reduce((o, m, i) => {
         const previousMessage = messages[i + 1] || {};
         const nextMessage = messages[i - 1] || {};
-        // add next and previous messages to hash to ensure updates
         const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
         o[m._id] = {
           ...m,
+          index: i,
           previousMessage,
           nextMessage,
           hash: md5(toHash),
@@ -104,15 +104,6 @@ export default class MessageContainer extends React.Component {
   }
 
   renderRow(message) {
-    if (!message._id && message._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
-    }
-    if (!message.user) {
-      if (!message.system) {
-        console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
-      }
-      message.user = {};
-    }
     const messageProps = {
       ...this.props,
       key: message._id,
@@ -121,9 +112,6 @@ export default class MessageContainer extends React.Component {
       nextMessage: message.nextMessage,
       position: message.user._id === this.props.user._id ? 'right' : 'left',
     };
-    if (this.props.renderMessage) {
-      return this.props.renderMessage(messageProps);
-    }
     return <Message {...messageProps} />;
   }
 
@@ -190,7 +178,6 @@ MessageContainer.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.object,
   renderFooter: PropTypes.func,
-  renderMessage: PropTypes.func,
   renderLoadEarlier: PropTypes.func,
   listViewProps: PropTypes.object,
   inverted: PropTypes.bool,
