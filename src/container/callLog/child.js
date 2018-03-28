@@ -22,33 +22,38 @@ class Child extends base {
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
     return (
-      <TFeedback
-        content={
-          <View style={styles.box}>
-            <View style={styles.rowBox}>
-              <View style={styles.imgBox}>
-                <CachedImage style={styles.headerImg} source={{ uri: `${item.callMember.imgUrl}?imageView2/1/w/60` }} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.name}>{item.callMember.nickName}</Text>
+      <View>
+        {
+          item.callMember !== null && item.callMember !== '' &&
+          <TFeedback
+            content={
+              <View style={styles.box}>
                 <View style={styles.rowBox}>
-                  <Text style={styles.lable}>{item.call_time}</Text>
-                  <Text style={[styles.lable, { marginLeft: 10 }]}>
-                    {item.status === '1' ? '呼叫失败' : item.status === '2' ? '呼叫成功' : item.status === '3' ? '呼叫未接' : '呼叫已接'}
-                  </Text>
+                  <View style={styles.imgBox}>
+                    <CachedImage style={styles.headerImg} source={{ uri: `${item.callMember.imgUrl}?imageView2/1/w/60` }} />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.name}>{item.callMember.nickName}</Text>
+                    <View style={styles.rowBox}>
+                      <Text style={styles.lable}>{item.call_time}</Text>
+                      <Text style={[styles.lable, { marginLeft: 10 }]}>
+                        {item.status === '1' ? '呼叫失败' : item.status === '2' ? '呼叫成功' : item.status === '3' ? '呼叫未接' : '呼叫已接'}
+                      </Text>
+                    </View>
+                  </View>
+                  <TFeedback
+                    content={
+                      <View style={styles.borderBox}>
+                        <Icon style={styles.mainIconFontChoose} name="call" />
+                      </View>}
+                    onPress={() => this.ModalCall.show(item.callMember.phone, item.callMember.memberId)}
+                  />
                 </View>
-              </View>
-              <TFeedback
-                content={
-                  <View style={styles.borderBox}>
-                    <Icon style={styles.mainIconFontChoose} name="call" />
-                  </View>}
-                onPress={() => this.ModalCall.show(item.callMember.phone, item.callMember.memberId)}
-              />
-            </View>
-          </View>}
-        onPress={() => { push({ key: item.callMember.memberVerifs !== null && item.callMember.memberVerifs !== '' && item.callMember.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.callMember.memberId, name: item.callMember.nickName } }); }}
-      />
+              </View>}
+            onPress={() => { push({ key: item.callMember.memberVerifs !== null && item.callMember.memberVerifs !== '' && item.callMember.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.callMember.memberId, name: item.callMember.nickName } }); }}
+          />
+        }
+      </View>
     );
   }
   render() {
@@ -71,7 +76,8 @@ class Child extends base {
             />
             :
             <NoData
-              label="没有相关数据"
+              label="没有相关数据，点击刷新"
+              onPress={this._onRefresh}
             />
         }
         <ModalCall ref={(o) => { this.ModalCall = o; }} />
