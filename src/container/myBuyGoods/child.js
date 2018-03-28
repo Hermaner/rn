@@ -137,7 +137,7 @@ class Child extends ChildBase {
                 onPress={() => { push({ key: 'OrderLOG', params: { orderId: item.orderId } }); }}
               />
               {
-                item.supplyEvaluat !== null &&
+                item.supplyEvaluat === null &&
                 <TFeedback
                   content={
                     <View style={styles.btnBox1}>

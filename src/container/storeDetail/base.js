@@ -125,6 +125,7 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
+        console.log('BBBBBBBBBBBBBBBBBBBBB', result)
         if (result.memberVerifs !== '' && result.memberVerifs !== null && result.memberVerifs.length > 0) {
           for (let i = 0; i < result.memberVerifs.length; i += 1) {
             if (result.memberVerifs[i].verifFieldId === '6') {
@@ -141,13 +142,19 @@ class Base extends React.Component {
           renzhengInfo[7] = result.entVerifs[0].licenseCode;
           imageData[0].imgUrl = result.entVerifs[0].licenseImgUrl === null ? '' : result.entVerifs[0].licenseImgUrl;
           imageData[1].imgUrl = result.entVerifs[0].organizationImgUrl === null ? '' : result.entVerifs[0].organizationImgUrl;
+          const myQYImgArray = [];
           for (let i = 0; i < imageData.length; i += 1) {
-            if (imageData[i].imgUrl === '') {
-              imageData.splice(i, 1);
+            if (imageData[i].imgUrl !== '') {
+              myQYImgArray.push(imageData[i]);
               this.setState({
-                imageData,
+                imageData: myQYImgArray,
               });
             }
+          }
+          if (myQYImgArray.length === 0) {
+            this.setState({
+              imageData: [],
+            });
           }
         }
         if (result.realRegionVerifs !== null) {
@@ -220,11 +227,12 @@ class Base extends React.Component {
               this.setState({
                 indeedImageData: myArray,
               });
-            } else {
-              this.setState({
-                indeedImageData: [],
-              });
             }
+          }
+          if (myArray.length === 0) {
+            this.setState({
+              indeedImageData: [],
+            });
           }
           this.setState({
             isHaveIndeed: true,

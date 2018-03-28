@@ -60,7 +60,8 @@ class Child1 extends ChildBase1 {
             />
             :
             <NoData
-              label="没有相关数据"
+              label="没有相关数据，点击刷新"
+              onPress={this.getData}
             />
         }
         <Loading ref={(c) => { this.sleek = c; }} />

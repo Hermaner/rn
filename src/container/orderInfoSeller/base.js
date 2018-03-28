@@ -171,7 +171,10 @@ class Base extends React.Component {
   }
   saveRevisePrice = (favorable) => {
     const { orderInfo } = this.state;
-    if (parseFloat(favorable) > parseFloat(orderInfo.amount)) {
+    if (parseFloat(favorable) > parseFloat(orderInfo.unitPrice * orderInfo.buyCount)) {
+      this.setState({
+        favorable: orderInfo.discount || '',
+      });
       Toast.show('优惠金额不能大于商品总价');
       return;
     }
