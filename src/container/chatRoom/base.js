@@ -258,7 +258,6 @@ class Base extends React.Component {
   }
   appStateChange = (appState) => {
     if (Platform.OS === 'ios' && appState === 'inactive') {
-      console.log(this.socket);
       this.socket.disconnect();
     }
     if (Platform.OS === 'android' && appState === 'background') {

@@ -38,7 +38,7 @@ class HuinongGoodsMotif extends base {
             item.supplys !== null && item.supplys !== '' && item.supplys.length > 0 &&
             <View key={index} style={styles.listView}>
               <View style={styles.goodsTypeBox}>
-                <View style={styles.goodsTypeCenter} ref={(o) => { this[`view${index}`] = o; }}>
+                <View style={styles.goodsTypeCenter} renderToHardwareTextureAndroid ref={(o) => { this[`view${index}`] = o; }}>
                   <Text style={styles.goodsTypeText}>{item.name}</Text>
                 </View>
               </View>
