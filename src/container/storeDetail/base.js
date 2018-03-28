@@ -139,8 +139,16 @@ class Base extends React.Component {
           renzhengInfo[3] = result.entVerifs[0].legalName;
           renzhengInfo[5] = result.entVerifs[0].creditCode;
           renzhengInfo[7] = result.entVerifs[0].licenseCode;
-          imageData[0].imgUrl = result.entVerifs[0].licenseImgUrl;
-          imageData[1].imgUrl = result.entVerifs[0].organizationImgUrl;
+          imageData[0].imgUrl = result.entVerifs[0].licenseImgUrl === null ? '' : result.entVerifs[0].licenseImgUrl;
+          imageData[1].imgUrl = result.entVerifs[0].organizationImgUrl === null ? '' : result.entVerifs[0].organizationImgUrl;
+          for (let i = 0; i < imageData.length; i += 1) {
+            if (imageData[i].imgUrl === '') {
+              imageData.splice(i, 1);
+              this.setState({
+                imageData,
+              });
+            }
+          }
         }
         if (result.realRegionVerifs !== null) {
           indeedInfo[1] = result.realRegionVerifs.verifIdentity || '--';
@@ -150,40 +158,76 @@ class Base extends React.Component {
           indeedInfo[9] = result.realRegionVerifs.scale || '--';
           indeedInfo[11] = result.realRegionVerifs.dailySupply || '--';
           if (result.realRegionVerifs.realRegionVerifDetails.objectImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.objectImgUrl !== null) {
-            indeedImageData[0].imgUrl = result.realRegionVerifs.realRegionVerifDetails.objectImgUrl || '';
+            indeedImageData[0].imgUrl = result.realRegionVerifs.realRegionVerifDetails.objectImgUrl;
+          } else {
+            indeedImageData[0].imgUrl = '';
           }
           if (result.realRegionVerifs.realRegionVerifDetails.productionImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.productionImgUrl !== null) {
-            indeedImageData[1].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productionImgUrl || '';
+            indeedImageData[1].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productionImgUrl;
+          } else {
+            indeedImageData[1].imgUrl = '';
           }
           if (result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl !== null) {
-            indeedImageData[2].imgUrl = result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl || '';
+            indeedImageData[2].imgUrl = result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl;
+          } else {
+            indeedImageData[2].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.productImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.productImgUrl !== null) {
-            indeedImageData[3].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productImgUrl || '';
+            indeedImageData[3].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productImgUrl;
+          } else {
+            indeedImageData[3].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.sortImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.sortImgUrl !== null) {
-            indeedImageData[4].imgUrl = result.realRegionVerifs.realRegionVerifDetails.sortImgUrl || '';
+            indeedImageData[4].imgUrl = result.realRegionVerifs.realRegionVerifDetails.sortImgUrl;
+          } else {
+            indeedImageData[4].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.packageImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.packageImgUrl !== null) {
-            indeedImageData[5].imgUrl = result.realRegionVerifs.realRegionVerifDetails.packageImgUrl || '';
+            indeedImageData[5].imgUrl = result.realRegionVerifs.realRegionVerifDetails.packageImgUrl;
+          } else {
+            indeedImageData[5].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.memberImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.memberImgUrl !== null) {
-            indeedImageData[6].imgUrl = result.realRegionVerifs.realRegionVerifDetails.memberImgUrl || '';
+            indeedImageData[6].imgUrl = result.realRegionVerifs.realRegionVerifDetails.memberImgUrl;
+          } else {
+            indeedImageData[6].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl !== null) {
-            indeedImageData[7].imgUrl = result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl || '';
+            indeedImageData[7].imgUrl = result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl;
+          } else {
+            indeedImageData[7].imgUrl = '';
           }
+
           if (result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl !== null) {
-            indeedImageData[8].imgUrl = result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl || '';
+            indeedImageData[8].imgUrl = result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl;
+          } else {
+            indeedImageData[8].imgUrl = '';
           }
           if (result.realRegionVerifs.realRegionVerifDetails.objectDescribe !== '' && result.realRegionVerifs.realRegionVerifDetails.objectDescribe !== null) {
             this.setState({
               myText: result.realRegionVerifs.realRegionVerifDetails.objectDescribe,
             });
           }
+          const myArray = [];
+          for (let i = 0; i < indeedImageData.length; i += 1) {
+            if (indeedImageData[i].imgUrl !== '') {
+              myArray.push(indeedImageData[i]);
+              this.setState({
+                indeedImageData: myArray,
+              });
+            } else {
+              this.setState({
+                indeedImageData: [],
+              });
+            }
+          }
           this.setState({
             isHaveIndeed: true,
-            indeedImageData,
           });
         } else {
           this.setState({
