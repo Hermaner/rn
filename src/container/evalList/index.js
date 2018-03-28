@@ -82,7 +82,7 @@ class MainScreen extends base {
       data: PropTypes.object,
     };
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={styles.tab}>
           {
             tabList.map((item, index) => (
@@ -97,7 +97,7 @@ class MainScreen extends base {
             ))
           }
         </View>
-        <View>
+        <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>
             {
               items.length > 0 ?
@@ -107,13 +107,16 @@ class MainScreen extends base {
                   key={index}
                 />
               )) :
-              <NoData />
+              <View style={{ paddingTop: 50 }}>
+                <NoData />
+              </View>
             }
           </View>
         </View>
         <Modal
           visible={isImageDateShow}
           transparent
+          onRequestClose={() => {}}
         >
           <ImageViewer
             imageUrls={imageViewData}
@@ -132,7 +135,6 @@ class MainScreen extends base {
           back={pop}
           title="评价"
           showRight
-          rightText=""
           rightPress={this.resetState}
         />
         <Content>

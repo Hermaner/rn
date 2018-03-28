@@ -34,7 +34,6 @@ class MainScreen extends base {
   };
   _renderTop() {
     const { userInfo, isFollow } = this.state;
-    console.log('JJJJJJJJJJJJJJJ', isFollow);
     return (
       <View style={styles.topView}>
         <View style={styles.mainImgView}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, BackHandler } from 'react-native';
+import { TouchableOpacity, View, BackHandler, ScrollView, RefreshControl } from 'react-native';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { CachedImage } from 'react-native-img-cache';
@@ -274,11 +274,32 @@ class My extends myBase {
     );
   }
   render() {
+    const { refresh } = this.state;
     return (
       <Container>
-        <Content>
+        {/* <Content>
           {this._renderBody()}
         </Content>
+        {this._renderModal()}
+        <Loading ref={(c) => { this.sleek = c; }} /> */}
+        <ScrollView
+          style={{ flex: 1 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={this._onRefresh}
+              tintColor="#666"
+              title="加载中..."
+              titleColor="#333"
+              colors={['#666', '#666', '#666']}
+              progressBackgroundColor="#ffffff"
+            />
+          }
+          onScroll={this._onScroll}
+          scrollEventThrottle={50}
+        >
+          {this._renderBody()}
+        </ScrollView>
         {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>

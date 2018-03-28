@@ -204,6 +204,7 @@ class MyBase extends React.Component {
       isModalShow: false,
       realName: '',
       myFootCounts: '0',
+      refresh: false, // 是否是刷新
     };
   }
   getInit = () => {
@@ -276,6 +277,9 @@ class MyBase extends React.Component {
       }
     }).catch(() => {
       this.sleek.toggle();
+    });
+    this.setState({
+      refresh: false,
     });
   }
   getDelete = () => {
@@ -421,6 +425,26 @@ class MyBase extends React.Component {
     this.setState({
       isModalShow: false,
     });
+  }
+  _onRefresh= () => {
+    if (!global.memberId) {
+      return;
+    }
+    this.setState({
+      refresh: true,
+    }, () => this.getData());
+  }
+  _onScroll = (event) => {
+    const { loading, nomore } = this.state;
+    if (loading || nomore) {
+      return;
+    }
+    const y = event.nativeEvent.contentOffset.y;
+    const height = event.nativeEvent.layoutMeasurement.height;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    if (y + height >= contentHeight - 20) {
+      this.initData();
+    }
   }
 }
 MyBase.propTypes = {

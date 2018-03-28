@@ -53,7 +53,9 @@ class HuinongGoodsMotif extends base {
                           <View style={styles.goodsItem}>
                             {
                               item2.supplyImages && item2.supplyImages.length > 0 &&
-                              <CachedImage style={styles.goodsImage} source={{ uri: `${item2.supplyImages[0].imgUrl}?imageView2/1/w/200` }} />
+                              <View style={styles.imgBox}>
+                                <CachedImage style={styles.goodsImage} source={{ uri: `${item2.supplyImages[0].imgUrl}?imageView2/1/w/200` }} />
+                              </View>
                             }
                             <View style={{ flex: 1 }}>
                               <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -121,7 +123,9 @@ class HuinongGoodsMotif extends base {
       <View style={styles.pagebody}>
         {
           img !== null && img !== null && img.split(',').length > 0 &&
-          <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
+          <View style={styles.bigImgBox}>
+            <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
+          </View>
         }
         {scrollY < 120 && this.renderTab()}
         {this._renderRow(goodsItems)}

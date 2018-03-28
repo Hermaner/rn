@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   goodsImage: {
     width: width / 2 - 20,
     height: width / 2 - 20,
-    marginRight: 10,
   },
   goodsName: {
     // flex: 1,
@@ -154,6 +153,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginBottom: 4,
+  },
+  bigImgBox: {
+    width,
+    height: 160,
+  },
+  imgBox: {
+    width: width / 2 - 20,
+    height: width / 2 - 20,
+    marginRight: 10,
   },
 });
 export default styles;
