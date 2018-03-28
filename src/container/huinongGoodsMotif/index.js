@@ -8,6 +8,7 @@ import { pushRoute, popRoute } from '../../actions';
 import { BHeader, TFeedback, Loading, TOpacity, NoData } from '../../components';
 import base from './base';
 import styles from './styles';
+import { Mcolor } from '../../utils';
 
 class HuinongGoodsMotif extends base {
   constructor(props) {
@@ -35,13 +36,11 @@ class HuinongGoodsMotif extends base {
           data !== undefined && data !== null && data !== '' && data.length > 0 &&
           data.map((item, index) => (
             item.supplys !== null && item.supplys !== '' && item.supplys.length > 0 &&
-            <View key={index}>
+            <View key={index} style={styles.listView}>
               <View style={styles.goodsTypeBox}>
-                <View style={{ flex: 1 }} />
                 <View style={styles.goodsTypeCenter} ref={(o) => { this[`view${index}`] = o; }}>
                   <Text style={styles.goodsTypeText}>{item.name}</Text>
                 </View>
-                <View style={{ flex: 1 }} />
               </View>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                 {
@@ -61,16 +60,9 @@ class HuinongGoodsMotif extends base {
                                 <Text numberOfLines={2} style={[styles.goodsName, { flex: 1 }]}>
                                   {item2.brandName}{item2.categoryName}
                                 </Text>
-                                {/* {
-                                  item2.supplyItems.map((list, i) => (
-                                    <Text key={i} style={styles.goodsName}>
-                                      {list.specTypeName}{list.specName}
-                                    </Text>
-                                  ))
-                                } */}
                               </View>
                               <View style={styles.priceBox}>
-                                <Text style={{ color: '#B8860B', fontSize: 20 }}>{item2.wholesalePrice}</Text>
+                                <Text style={{ color: Mcolor, fontSize: 20 }}>{item2.wholesalePrice}</Text>
                                 <Text style={styles.unit}>元/{item2.unit}</Text>
                                 <View style={styles.needCount}>
                                   <Text style={{ color: '#fff', fontSize: 12 }}>{item2.wholesaleCount}{item2.unit}起批</Text>
@@ -123,7 +115,7 @@ class HuinongGoodsMotif extends base {
     );
   }
   _renderBody() {
-    const { goodsItems } = this.state;
+    const { goodsItems, scrollY } = this.state;
     const { img } = this.props.navigation.state.params;
     return (
       <View style={styles.pagebody}>
@@ -131,22 +123,24 @@ class HuinongGoodsMotif extends base {
           img !== null && img !== null && img.split(',').length > 0 &&
           <CachedImage style={styles.image} source={{ uri: img.split(',')[0] }} />
         }
+        {scrollY < 120 && this.renderTab()}
         {this._renderRow(goodsItems)}
       </View>
     );
   }
   render() {
     const { pop } = this.props;
-    const { haveData, loading } = this.state;
+    const { haveData, loading, scrollY } = this.state;
     return (
       <Container>
         <BHeader back={pop} title="慧包好货专场" />
         {
-          loading && haveData ?
+          haveData ?
             <View style={{ flex: 1 }}>
-              {this.renderTab()}
+              {scrollY >= 120 && this.renderTab()}
               <ScrollView
                 style={{ flex: 1 }}
+                scrollEventThrottle={10}
                 onScroll={this._onScroll}
                 ref={(o) => { this.ScrollView = o; }}
               >
@@ -154,6 +148,7 @@ class HuinongGoodsMotif extends base {
               </ScrollView>
             </View>
             :
+            loading &&
             <View style={{ flex: 1 }}>
               <NoData
                 label="没有相关数据,请联系客服添加"

@@ -79,9 +79,9 @@ class Base extends React.Component {
     });
   }
   select = (item) => {
-    const { supplyId, brandName, categoryName, wholesalePrice, unit, imgUrl } = item;
+    const { supplyId, memberId, brandName, categoryName, wholesalePrice, unit, imgUrl } = item;
     DeviceEventEmitter.emit('selectProduct', {
-      id: supplyId,
+      id: `${supplyId},${memberId}`,
       imgUrl,
       title: `${brandName}${categoryName}`,
       price: `${wholesalePrice}元/${unit}`,

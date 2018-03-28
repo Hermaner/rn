@@ -36,14 +36,16 @@ class Base extends React.Component {
       this.loadMore();
     }
   }
-  onProductPress = (supplyId) => {
-    this.props.push({ key: 'GoodDetail', params: { supplyId, memberId: global.memberId } });
+  onProductPress = (id) => {
+    const ar = id.split(',');
+    this.props.push({ key: 'GoodDetail', params: { supplyId: ar[0], memberId: ar[1] } });
   }
   onPressAvatar = (memberId) => {
     console.log(memberId);
     this.props.push({ key: 'MyInfo', params: { memberId } });
   }
   onSend = (items = []) => {
+    console.log(items);
     this.socket.emit('sendMessage', items);
     let { messages } = this.state;
     messages = items.concat(messages);
@@ -318,10 +320,10 @@ class Base extends React.Component {
   }
   renderUser = () => {
     const { toUser } = this.state;
-    const { memberId, imgUrl, userName } = global.userData;
+    const { memberId, imgUrl, nickName } = global.userData;
     return {
       _id: memberId.toString(),
-      userName,
+      userName: nickName,
       avatar: imgUrl,
       toId: toUser.memberId.toString(),
       toUserName: toUser.userName,
