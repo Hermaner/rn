@@ -51,7 +51,6 @@ class Base extends React.Component {
         break;
       default:
     }
-    this.ModalView.closeModal();
   }
 }
 Base.propTypes = {

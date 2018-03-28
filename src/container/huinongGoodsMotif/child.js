@@ -53,13 +53,6 @@ class Child extends base {
                                 <Text numberOfLines={2} style={[styles.goodsName, { flex: 1 }]}>
                                   {item2.brandName}{item2.categoryName}
                                 </Text>
-                                {/* {
-                                  item2.supplyItems.map((list, i) => (
-                                    <Text key={i} style={styles.goodsName}>
-                                      {list.specTypeName}{list.specName}
-                                    </Text>
-                                  ))
-                                } */}
                               </View>
                               <View style={styles.priceBox}>
                                 <Text style={{ color: '#B8860B', fontSize: 20 }}>{item2.wholesalePrice}</Text>
@@ -96,14 +89,14 @@ class Child extends base {
     );
   }
   render() {
-    const { data, haveData } = this.props;
+    const { haveData } = this.props;
     return (
       <View style={{ flex: 1 }}>
         {
           haveData ?
           this._renderRow()
           :
-          <View style={{ marginTop: 40 }}>
+          <View style={{ flex: 1 }}>
             <NoData
               label="没有相关数据"
             />

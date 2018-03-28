@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { GetChildSeasonCategoryService } from '../../api';
 
@@ -12,7 +13,7 @@ class Base extends React.Component {
       pageSize: '5',
       isSleekShow: false,
       isRefreshing: false, // 是否是刷新
-      loading: true, // 是否加载中
+      loading: false, // 是否加载中
       loadMore: false,
       refresh: false,
       nomore: false, // 是否没有更多
@@ -22,10 +23,12 @@ class Base extends React.Component {
       name: '',
       isTabOne: 0,
       categoryId: '',
+      goodsItems: [],
       seasonCategoryId: '',
       backGround1: require('../../assets/img/haohuo.jpg'),
       haveData: false,
     };
+    this.scrollY = 0;
   }
   getInit = () => {
     const { seasonCategoryId } = this.props.navigation.state.params;
@@ -47,6 +50,7 @@ class Base extends React.Component {
           if (result[i].supplys !== null && result[i].supplys !== '' && result[i].supplys.length > 0) {
             this.setState({
               haveData: true,
+              loading: true,
             });
           }
         }
@@ -84,6 +88,14 @@ class Base extends React.Component {
     this.setState({
       refresh: true,
     }, () => this.getData());
+  }
+  changeTab = (index) => {
+    this[`view${index}`].measure((fx, fy, width, height, px, py) => {
+      this.ScrollView.scrollTo({ y: py - (Platform.OS === 'android' ? 110 : 130) + this.scrollY, animated: true }, 1);
+    });
+  }
+  _onScroll = (event) => {
+    this.scrollY = event.nativeEvent.contentOffset.y;
   }
   tabChange = (isTabOne, seasonCategoryId) => {
     this.setState({

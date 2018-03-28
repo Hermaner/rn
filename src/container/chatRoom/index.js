@@ -10,7 +10,7 @@ import KeyboardManager from 'react-native-keyboard-manager';
 import PropTypes from 'prop-types';
 import { popRoute, pushRoute } from '../../actions';
 import AccessoryActions from './AccessoryActions';
-import { Chat, Header } from '../../components';
+import { Chat, ChatHeader } from '../../components';
 import base from './base';
 
 const { GiftedChat } = Chat;
@@ -66,10 +66,10 @@ class ChatRoom extends base {
   }
   render() {
     const { pop } = this.props;
-    const { toUser, messages } = this.state;
+    const { toUser, messages, chatStatus } = this.state;
     return (
       <Container>
-        <Header back={pop} title={decodeURI(toUser.userName)} />
+        <ChatHeader titleLabel={chatStatus === '1'} back={pop} title={decodeURI(toUser.userName)} />
         <GiftedChat
           messages={messages}
           onSend={this.onSend}

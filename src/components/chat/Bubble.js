@@ -124,7 +124,7 @@ export default class Bubble extends React.Component {
         if (success) {
           this.sound = null;
         } else {
-          Toast.show('音频播放失败');
+          this.sound.reset();
         }
       });
     }, 100);

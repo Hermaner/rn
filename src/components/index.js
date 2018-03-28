@@ -32,6 +32,7 @@ import ScrollableStatusTab from './ScrollableStatusTab';
 import Upload from './Upload';
 import BHeader from './BHeader';
 import ModalCall from './ModalCall';
+import ChatHeader from './ChatHeader';
 import Chat from './chat/GiftedChat';
 import SocketStore from './socket/SocketStore';
 
@@ -40,6 +41,7 @@ const SocketObser = new SocketStore();
 
 export {
   ModalCall,
+  ChatHeader,
   TLight,
   BHeader,
   Chat,
