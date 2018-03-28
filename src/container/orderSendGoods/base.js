@@ -105,12 +105,15 @@ class Base extends React.Component {
     }
     if (!deliverOrderNumber) {
       Toast.show('请填写单号！');
+      return;
     }
     if (!optionType) {
       Toast.show('请选择物流公司！');
+      return;
     }
     if (!frontImgUrl) {
       Toast.show('请添加发货凭证图片！');
+      return;
     }
     CreateDeliverOrderService({
       orderId: orderInfo.orderId,

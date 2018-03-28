@@ -213,13 +213,13 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         console.log(res);
+        DeviceEventEmitter.emit('emitUser');
         push({ key: 'OrderInfo', params: { orderInfo: res.data, supplyInfo, emit: 'reset' } });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   tabSer = (index) => {
