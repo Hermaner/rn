@@ -22,6 +22,7 @@ class Base extends React.Component {
       brands: null,
       name: '',
       isTabOne: 0,
+      scrollY: 0,
       categoryId: '',
       goodsItems: [],
       seasonCategoryId: '',
@@ -50,12 +51,12 @@ class Base extends React.Component {
           if (result[i].supplys !== null && result[i].supplys !== '' && result[i].supplys.length > 0) {
             this.setState({
               haveData: true,
-              loading: true,
             });
           }
         }
         this.setState({
           goodsItems: result,
+          loading: true,
         });
       } else {
         Toast.show(res.msg);
@@ -91,11 +92,13 @@ class Base extends React.Component {
   }
   changeTab = (index) => {
     this[`view${index}`].measure((fx, fy, width, height, px, py) => {
-      this.ScrollView.scrollTo({ y: py - (Platform.OS === 'android' ? 110 : 130) + this.scrollY, animated: true }, 1);
+      this.ScrollView.scrollTo({ y: py - (Platform.OS === 'android' ? 110 : 130) + this.state.scrollY, animated: true }, 1);
     });
   }
   _onScroll = (event) => {
-    this.scrollY = event.nativeEvent.contentOffset.y;
+    this.setState({
+      scrollY: event.nativeEvent.contentOffset.y,
+    });
   }
   tabChange = (isTabOne, seasonCategoryId) => {
     this.setState({

@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
   },
+  listView: {
+    backgroundColor: '#fff',
+    marginTop: 10,
+  },
   publicBorder: {
     marginBottom: 0,
     paddingBottom: 0,
@@ -22,7 +26,8 @@ const styles = StyleSheet.create({
   tabs: {
     ...st.frcenter,
     height: 45,
-    backgroundColor: '#B8860B',
+    marginTop: 5,
+    backgroundColor: Mcolor,
   },
   tabView: {
     flex: 1,
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
   goodsName: {
     // flex: 1,
     color: '#333',
-    fontSize: 18,
+    fontSize: 14,
     marginTop: 5,
   },
   userName: {
@@ -104,30 +109,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   goodsTypeBox: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...st.frcenter,
+    borderBottomColor: '#e4e4e4',
+    borderBottomWidth: 1,
   },
   goodsTypeCenter: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Mcolor,
-    borderRadius: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    marginTop: 15,
-    marginBottom: 15,
+    height: 50,
+    ...st.jacenter,
   },
   goodsTypeText: {
     fontSize: 18,
-    color: '#fff',
+    color: Mcolor,
+    fontWeight: 'bold',
   },
   chatBox: {
     height: 35,
     ...st.jacenter,
-    backgroundColor: '#B8860B',
+    backgroundColor: Mcolor,
   },
   chatText: {
     fontSize: 14,
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: Sgreen,
   },
   unit: {
-    color: '#B8860B',
+    color: Mcolor,
     fontSize: 14,
     marginRight: 10,
   },
