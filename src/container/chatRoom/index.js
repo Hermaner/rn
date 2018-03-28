@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Platform,
   DeviceEventEmitter,
+  BackHandler,
 } from 'react-native';
 import { Container } from 'native-base';
 import { connect } from 'react-redux';
@@ -22,9 +23,9 @@ class ChatRoom extends base {
     };
     this._isMounted = false;
   }
-
   componentWillMount() {
     this._isMounted = true;
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     if (Platform.OS === 'ios') {
       KeyboardManager.setEnable(false);
     }
@@ -52,11 +53,16 @@ class ChatRoom extends base {
   }
 
   componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
     this.deleteInit();
     this.phraseEmit.remove();
     this.selectProduct.remove();
     this._isMounted = false;
   }
+  onBackPress = () => {
+    this.props.pop();
+    return true;
+  };
   renderAccessory(props) {
     return (
       <AccessoryActions
