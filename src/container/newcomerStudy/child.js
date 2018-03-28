@@ -81,11 +81,11 @@ class Child extends React.Component {
           :
           <View style={{ marginTop: 40 }}>
             <NoData
-              label="没有相关数据"
+              label="没有相关资源，请联系客服上传教程"
             />
           </View>
         }
-        <Loading ref={(c) => { this.sleek = c; }} />
+        {/* <Loading ref={(c) => { this.sleek = c; }} /> */}
       </View>
     );
   }

@@ -181,11 +181,7 @@ class Base extends React.Component {
       AsyncStorage.setItem('searchHistorys', JSON.stringify(historys));
     }
 
-    const data = {
-      categoryId,
-      firstName,
-      name: '',
-    };
+    const data = categoryId === '' ? { categoryId, firstName: '', name: firstName } : { name: firstName, categoryId, firstName };
     const { type } = this.props.navigation.state.params;
     let emit;
     switch (type) {
