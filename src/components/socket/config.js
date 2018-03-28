@@ -14,8 +14,8 @@ const config = {
     server: 'https://chat.lede.hbw128.com?memberId=',
   },
   dev: {
-    server: 'http://192.168.50.57:9092?memberId=',
+    server: 'http://192.168.50.57:9091?memberId=',
   },
 };
 
-export default config.dev;
+export default config.local;

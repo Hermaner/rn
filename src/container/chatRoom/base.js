@@ -25,6 +25,7 @@ class Base extends React.Component {
       currentPage: 1,
       pageSize: 45,
       localSize: 45,
+      chatStatus: '0',
     };
   }
   onLoadEarlier = () => {
@@ -94,6 +95,7 @@ class Base extends React.Component {
     this.socket.on('notifyMessageSendSuccess', this.notifyMessageSendSuccess);  // 告诉自己我消息发送成功了
     this.socket.on('notifyGetChatLog', this.notifyGetChatLog);  // 获取分页聊天记录
     this.socket.on('notifyGetChat', this.notifyGetChat);  // 获取最新的聊天记录
+    this.socket.on('notifyGetChatStatus', this.notifyGetChatStatus);  // 获取对方是否登录
     this.loadNewChat();// 发送请求获取最新的聊天记录
   }
   deleteInit = () => {
@@ -103,6 +105,7 @@ class Base extends React.Component {
     this.socket.off('notifyMessageToReadSuccess', this.notifyMessageToReadSuccess);
     this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
     this.socket.off('notifyGetChat', this.notifyGetChat);
+    this.socket.off('notifyGetChatStatus', this.notifyGetChatStatus);
     // this.socket = null;
   }
   notifyMessageRead = (data) => {
@@ -241,6 +244,12 @@ class Base extends React.Component {
       isLoadingEarlier: false,
       loadEarlier: data.length === pageSize,
     }));
+  }
+  notifyGetChatStatus = (chatStatus) => {
+    console.log(chatStatus);
+    this.setState({
+      chatStatus,
+    });
   }
   showImage = (params) => {
     this.props.push({ key: 'ChatImage', params });
