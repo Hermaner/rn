@@ -10,13 +10,12 @@ import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 import RNFetchBlob from 'react-native-fetch-blob';
 import Toast from 'react-native-simple-toast';
-import ImageResizer from 'react-native-image-resizer';
 import ImagePicker from 'react-native-image-crop-picker';
 import CameraRollPicker from 'react-native-camera-roll-picker';
 import { pushRoute } from '../../actions';
 import { Header, TOpacity, Upload } from '../../components';
 
-import { st, fileKey, ImageCompress } from '../../utils';
+import { st, fileKey, ImageCompress, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
   access: {
@@ -52,6 +51,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     ...st.frcenter,
     backgroundColor: '#fff',
+  },
+  selectedView: {
+    position: 'absolute',
+    right: 8,
+    top: 8,
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: Mcolor,
   },
 });
 class AccessoryActions extends React.Component {
@@ -100,6 +108,7 @@ class AccessoryActions extends React.Component {
     this.setModalVisible(false);
     const { width } = this.state;
     const images = [];
+    console.log(getImages)
     getImages.forEach((image) => {
       let upHeight = '';
       let upWidth = '';
@@ -219,6 +228,7 @@ class AccessoryActions extends React.Component {
           <CameraRollPicker
             maximum={10}
             imagesPerRow={4}
+            selectedMarker={<View style={styles.selectedView} />}
             callback={this.selectImages}
             selected={[]}
           />

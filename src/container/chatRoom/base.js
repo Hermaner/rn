@@ -23,8 +23,8 @@ class Base extends React.Component {
       items: [],
       toUser: props.navigation.state.params.item,
       currentPage: 1,
-      pageSize: 15,
-      localSize: 10,
+      pageSize: 45,
+      localSize: 45,
     };
   }
   onLoadEarlier = () => {
@@ -169,6 +169,7 @@ class Base extends React.Component {
     this.writeNewFile(messages);
   }
   notifyGetChat = (items) => {
+    console.log(items);
     let { messages } = this.state;
     const { localSize } = this.state;
     const newItems = [];

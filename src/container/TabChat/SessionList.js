@@ -188,6 +188,7 @@ class SessionList extends React.Component {
     }
   }
   notifyMessageRead = () => {
+    console.log(111231312)
     this.socket.emit('sendGetChatList');
   }
   notifyGetChatList = (lists) => {

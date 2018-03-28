@@ -70,12 +70,9 @@ export default class Composer extends React.Component {
   }
   _handlePanResponderGrant = async () => {
     this.props.audioTipShow(true);
+    console.log(this.state.audioPath);
     this.prepareRecordingPath(this.state.audioPath);
-    try {
-      await AudioRecorder.startRecording();
-    } catch (error) {
-      Toast.show(error);
-    }
+    await AudioRecorder.startRecording();
     this.setState({
       isTab: true,
     });
@@ -84,8 +81,7 @@ export default class Composer extends React.Component {
     const key = fileKey();
     const urlkey = `${global.buketUrl}${key}`;
     Upload(filePath, global.uptoken, key, () => {
-      RNFetchBlob.fs.unlink(this.state.audioPath)
-      .then(() => {});
+      RNFetchBlob.fs.unlink(this.state.audioPath);
     });
     this.props.onSend({ text: urlkey, type: '4', status: '1', secend: this.state.currentTime }, true);
   }
@@ -105,25 +101,18 @@ export default class Composer extends React.Component {
       isTab: false,
     });
     if (this.state.currentTime < 1) {
-      try {
-        await AudioRecorder.stopRecording();
-      } catch (error) {
-        Toast.show(error);
-      }
+      await AudioRecorder.stopRecording();
       Toast.show('少于1s自动取消');
       return;
     }
     if (dy < -50) {
-      RNFetchBlob.fs.unlink(this.state.audioPath)
-      .then(() => {});
+      await AudioRecorder.stopRecording();
+      console.log(this.state.audioPath);
+      RNFetchBlob.fs.unlink(this.state.audioPath);
     } else {
-      try {
-        const filePath = await AudioRecorder.stopRecording();
-        if (Platform.OS === 'android') {
-          this._finishRecording(filePath);
-        }
-      } catch (error) {
-        Toast.show(error);
+      const filePath = await AudioRecorder.stopRecording();
+      if (Platform.OS === 'android') {
+        this._finishRecording(filePath);
       }
     }
   }
