@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   userName: {
+    flex: 1,
     fontSize: 13,
     marginBottom: 5,
     color: '#888',

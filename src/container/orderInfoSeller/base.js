@@ -40,6 +40,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { orderInfo, supplyInfo, type } = this.props.navigation.state.params;
+    console.log('BBBBBBBBBBBBBBBBBBBB', orderInfo);
     this.setState({
       orderInfo,
       supplyInfo,
@@ -137,8 +138,17 @@ class Base extends React.Component {
   }
   reviseOrder = () => {
     const { favorable, orderInfo, type, freight } = this.state;
+    const reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^0(\.\d{1,2})?$)/;
+    if (!reg.test(favorable) && favorable !== '') {
+      Toast.show('优惠格式错误');
+      return;
+    }
+    if (!reg.test(freight) && freight !== '') {
+      Toast.show('运费格式错误');
+      return;
+    }
     const newAllMoney = (parseFloat(orderInfo.unitPrice * orderInfo.buyCount)
-    - parseFloat(favorable)) + parseFloat(freight);
+    - parseFloat(favorable || 0)) + parseFloat(freight || 0);
     this.setState({
       revisePrice: newAllMoney,
     });
@@ -146,8 +156,8 @@ class Base extends React.Component {
     UpdateOrderService({
       memberId: global.memberId,
       orderId: orderInfo.orderId,
-      freight,
-      discount: favorable,
+      freight: freight || '0',
+      discount: favorable || '0',
       amount: Math.round(parseFloat(newAllMoney) * 1000) / 1000,
       status: '2',
     }).then((res) => {

@@ -218,7 +218,7 @@ class Base extends React.Component {
     this.emitCfyService.remove();
   }
   goPage = (index) => {
-    const { items, memo, wholesalePrice, wholesaleCount, unit, categoryId } = this.state;
+    const { items, memo, wholesalePrice, wholesaleCount, unit, categoryId, supplyMode, logisticsMode, renderServices } = this.state;
     if (index === 0) {
       return;
     }
@@ -244,7 +244,7 @@ class Base extends React.Component {
       this.props.push({ key: items[index].page, params: { memo } });
       return;
     }
-    this.props.push({ key: items[index].page });
+    this.props.push({ key: items[index].page, params: { supplyMode, logisticsMode, renderServices } });
   }
   saveData = () => {
     const {

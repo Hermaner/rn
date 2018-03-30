@@ -55,7 +55,7 @@ class Base extends React.Component {
       skuCount: count,
       supplyInfo,
     }, this.getData);
-    if (supplyInfo.renderServices !== '') {
+    if (supplyInfo.renderServices !== '' && supplyInfo.renderServices !== null) {
       const renderServicesItems = supplyInfo.renderServices.split(',');
       const NewRenderServicesItems = [];
       for (let i = 0; i < renderServicesItems.length; i += 1) {

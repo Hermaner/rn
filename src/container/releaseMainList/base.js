@@ -41,6 +41,7 @@ class Base extends React.Component {
     }, this._onRefresh);
   }
   getInit = () => {
+    this.hideMasker();
     if (!this.props.navigation.state.params) {
       this.setState({
         memberId: '',
@@ -53,9 +54,11 @@ class Base extends React.Component {
       }, this._onRefresh);
     }
     this.EmitReleaseMainListName = DeviceEventEmitter.addListener('getReleaseMainListName', (data) => {
+      this.hideMasker();
       this.getReleaseMainListName(data);
     });
     this.emitCitys = DeviceEventEmitter.addListener('emitCitys', (data) => {
+      this.hideMasker();
       this.selectCity(data);
     });
     this.GetAppCategoryService();
@@ -193,10 +196,17 @@ class Base extends React.Component {
     this.hideMasker();
   }
   changeLeftGoods = (index) => {
-    const { goods, goodsLeftIndex } = this.state;
-    console.log(goods);
+    const { goods, goodsLeftIndex, goodsRightIndex } = this.state;
     if (goodsLeftIndex === index) {
       return;
+    }
+    if (goodsLeftIndex !== index) {
+      if (goodsRightIndex !== null) {
+        goods[parseFloat(goodsLeftIndex)].childs[goodsRightIndex].cur = false;
+        this.setState({
+          goodsRightIndex: null,
+        });
+      }
     }
     goods[index].cur = true;
     goods[goodsLeftIndex].cur = false;
@@ -223,6 +233,7 @@ class Base extends React.Component {
       specTypes: childgoods[index].specTypes || [],
       goodsRightIndex: index,
       categoryId: childgoods[index].categoryId,
+      name: '',
     }, this._onRefresh);
   }
   brandTab = (index) => {

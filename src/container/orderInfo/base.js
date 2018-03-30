@@ -32,13 +32,14 @@ class Base extends React.Component {
         title: '买家已支付，等待卖家发货',
         lable: '需要卖家确认发货，您可以通过下方的‘聊生意’或‘打电话’，与之联系',
       }, {
-        title: '卖家已发货，等待买家收货',
-        lable: '请您在收到货物后，进行确认',
+        title: '卖家已发货，等待买家确认收货',
+        lable: '请确保已收到货品，再进行"确认收货"操作。您确认收货，卖家才会收到货款',
       }],
     };
   }
   getInit = () => {
     const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
+    console.log('999999999999', orderInfo);
     this.setState({
       orderInfo,
       supplyInfo,

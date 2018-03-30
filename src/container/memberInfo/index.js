@@ -31,26 +31,21 @@ class MemberInfo extends memberInfo {
   };
   _renderBody() {
     const { push } = this.props;
-    const { userInfo, set, myAdress, role, identityName, sex, name, realName } = this.state;
+    const { userInfo, set, myAdress, role, identityName, sex, name } = this.state;
     const type = role === '1' ? '买家' : role === '2' ? '卖家' : '';
     return (
       <View style={styles.pagebody}>
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>姓名</Text>
-          {
-            realName !== '' ?
-              <Text style={styles.realNameText}>{realName}</Text>
-            :
-              <Input
-                value={name}
-                onChangeText={(text) => {
-                  this.setState({
-                    name: text,
-                  });
-                }}
-                style={styles.inputs}
-              />
-          }
+          <Input
+            value={name}
+            onChangeText={(text) => {
+              this.setState({
+                name: text,
+              });
+            }}
+            style={styles.inputs}
+          />
         </View>
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>性别</Text>

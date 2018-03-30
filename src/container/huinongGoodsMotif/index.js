@@ -72,7 +72,7 @@ class HuinongGoodsMotif extends base {
                                 <View style={{ flex: 1 }} />
                               </View>
                               <Text style={styles.name}>{item2.nickName}</Text>
-                              <Text style={styles.userName}>
+                              <Text numberOfLines={1} style={styles.userName}>
                                 {item2.sendProvinceName}{item2.sendCityName}{item2.sendDistrictName}
                               </Text>
                             </View>
