@@ -59,7 +59,7 @@ class Base extends React.Component {
     this.socket = SocketObser.socket;
     const { toUser: { memberId, imgUrl, userName } } = this.state;
     const { CacheDir } = RNFetchBlob.fs.dirs;
-    const path = `${CacheDir}/${memberId}`;
+    const path = `${CacheDir}/${global.memberId}${memberId}`;
     // RNFetchBlob.fs.unlink(path);
     RNFetchBlob.fs.exists(path)
     .then((exist) => {
@@ -99,6 +99,7 @@ class Base extends React.Component {
     this.socket.on('notifyGetChat', this.notifyGetChat);  // 获取最新的聊天记录
     this.socket.on('notifyGetChatStatus', this.notifyGetChatStatus);  // 获取对方是否登录
     this.loadNewChat();// 发送请求获取最新的聊天记录
+    this.socket.emit('sendGetNoReadCount');
   }
   deleteInit = () => {
     global.chatId = null;
@@ -248,7 +249,6 @@ class Base extends React.Component {
     }));
   }
   notifyGetChatStatus = (chatStatus) => {
-    console.log(chatStatus);
     this.setState({
       chatStatus,
     });

@@ -143,7 +143,7 @@ class SessionList extends React.Component {
         this.socket = await SocketObser.socket;
       }
       const { CacheDir } = RNFetchBlob.fs.dirs;
-      const path = `${CacheDir}/sessionList`;
+      const path = `${CacheDir}/${global.memberId}sessionList`;
       // RNFetchBlob.fs.unlink(path);
       RNFetchBlob.fs.exists(path)
       .then((exist) => {
@@ -188,7 +188,6 @@ class SessionList extends React.Component {
     }
   }
   notifyMessageRead = () => {
-    console.log(111231312)
     this.socket.emit('sendGetChatList');
   }
   notifyGetChatList = (lists) => {
@@ -217,25 +216,22 @@ class SessionList extends React.Component {
   }
   del = (index) => {
     const { items } = this.state;
-    const memberId = items[index].toMemberId;
+    const showMemberId = items[index].showMemberId;
     items.splice(index, 1);
     this.setState({
       items,
     });
     this.socket.emit('sendDeleteChat', {
-      toMemberId: memberId,
+      toMemberId: showMemberId,
     }); // 删除列表
     const { CacheDir } = RNFetchBlob.fs.dirs;
-    const path = `${CacheDir}/${memberId}`;
+    const path = `${CacheDir}/${showMemberId}`;
     RNFetchBlob.fs.unlink(path);
     writeSessionList(JSON.stringify(items));
   }
   _renderRow = (data) => {
     const { showMemberNoReadCount, id, lastChatObject:
-      { text, createdAt, type, user:
-        { avatar, toAvatar, _id, toId, toUserName, userName } } } = data.item;
-    const isMine = _id.toString() === global.memberId.toString();
-    // const { rowId } = this.state;
+      { text, createdAt, type }, showImgUrl, showMemberId, showUserName } = data.item;
     return (
       <Swipeout
         // close={data.index !== rowId}
@@ -259,11 +255,11 @@ class SessionList extends React.Component {
           style={styles.list}
           content={
             <View style={[styles.con]}>
-              <CachedImage source={{ uri: `${isMine ? toAvatar : avatar}?imageView2/1/w/80` }} style={styles.img} />
+              <CachedImage source={{ uri: `${showImgUrl}?imageView2/1/w/80` }} style={styles.img} />
               <View style={styles.right}>
                 <View style={styles.top}>
                   <Text style={styles.name} numberOfLines={1}>
-                    {decodeURI(isMine ? toUserName : userName)}
+                    {decodeURI(showUserName)}
                   </Text>
                   <Text style={styles.date} numberOfLines={1}>{moment(createdAt).startOf('minute').fromNow()}</Text>
                 </View>
@@ -288,9 +284,9 @@ class SessionList extends React.Component {
             this.props.push({ key: 'ChatRoom',
               params: {
                 item: {
-                  memberId: isMine ? toId : _id,
-                  userName: isMine ? toUserName : userName,
-                  imgUrl: isMine ? toAvatar : avatar,
+                  memberId: showMemberId,
+                  userName: showUserName,
+                  imgUrl: showImgUrl,
                 },
               },
             });

@@ -24,15 +24,15 @@ class HomeScreen extends base {
   }
   async componentDidMount() {
     this.getInit();
-    await Location.stop();
     await Location.init();
     await Location.setOptions({ gps: true });
     this.listener = Location.addLocationListener(location => this.GetLocation(location));
     Location.start();
   }
   componentWillUnmount() {
-    Location.stop();
-    this.listener.remove();
+    // Location.stop();
+    // console.log()
+    // this.listener.remove();
   }
   renderHeader() {
     const { backGround1, backgroundImg } = this.state;

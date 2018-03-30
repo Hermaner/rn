@@ -72,12 +72,14 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
+    console.log('aaaa')
     this.getData();
     this.emitPushHome = DeviceEventEmitter.addListener('pushHome', (data) => {
       this.props.push(data);
     });
   }
   getData = () => {
+    console.log('bbbb')
     const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {

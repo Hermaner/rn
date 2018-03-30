@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { DeviceEventEmitter, View, Platform, Dimensions } from 'react-native';
 import { Root } from 'native-base';
 import { Initializer } from 'react-native-baidumap-sdk';
 import {
@@ -8,6 +9,7 @@ import {
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { SocketObser } from '../components';
 
 import LoginScreen from '../container/LoginScreen';
 import Main from '../container/Main';
@@ -295,23 +297,75 @@ export const AppNavigator = StackNavigator({
     header: null,
   }),
 });
-// Initializer.init('NGe39sDcxR1CywyfIw9TCktq14lvGkxM').catch(e => console.error(e));
+Initializer.init('NGe39sDcxR1CywyfIw9TCktq14lvGkxM').catch(e => console.error(e));
 createReactNavigationReduxMiddleware(
   'root',
   state => state.nav,
 );
+const platform = Platform.OS;
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
+const isIphoneX = platform === 'ios' && deviceHeight === 812 && deviceWidth === 375;
+
 const addListener = createReduxBoundAddListener('root');
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <Root>
-    <AppNavigator
-      navigation={addNavigationHelpers({
-        dispatch,
-        state: nav,
-        addListener,
-      })}
-    />
-  </Root>
-);
+// const AppWithNavigationState = ({ dispatch, nav }) => (
+//   <Root>
+//     <AppNavigator
+//       navigation={addNavigationHelpers({
+//         dispatch,
+//         state: nav,
+//         addListener,
+//       })}
+//     />
+//   </Root>
+// );
+class AppWithNavigationState extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDot: false,
+    };
+  }
+  componentDidMount() {
+    DeviceEventEmitter.addListener('notifyGetNoReadCount', () => {
+      SocketObser.socket.on('notifyGetNoReadCount', (data) => {
+        this.setState({
+          isDot: data > 0,
+        });
+      });
+    });
+  }
+  render() {
+    const { dispatch, nav } = this.props;
+    const { isDot } = this.state;
+    console.log(isDot);
+    return (
+      <Root>
+        <AppNavigator
+          navigation={addNavigationHelpers({
+            dispatch,
+            state: nav,
+            addListener,
+          })}
+        />
+        {
+          isDot &&
+          <View
+            style={{
+              position: 'absolute',
+              right: '30%',
+              bottom: isIphoneX ? 64 : 30,
+              backgroundColor: '#ff0000',
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+            }}
+          />
+        }
+      </Root>
+    );
+  }
+}
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,

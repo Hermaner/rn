@@ -1,6 +1,7 @@
 
 import { observable, computed } from 'mobx';
 import io from 'socket.io-client';
+import { DeviceEventEmitter } from 'react-native';
 import config from './config';
 
 require('moment/locale/zh-cn');
@@ -12,6 +13,7 @@ export default class SocketStore {
   @observable socketId = null;
   @observable sessionLists = [];
   @observable chatLists = [];
+  @observable isDot = false;
   // 非监听对象
   socket: Object;
   getConnect = () => {
@@ -25,6 +27,8 @@ export default class SocketStore {
     });
     this.socket.on('disconnect', () => {
     });
+    this.socket.emit('sendGetNoReadCount');
+    DeviceEventEmitter.emit('notifyGetNoReadCount');
   }
   @computed get sessionList(): Array<Object> {
     return this.sessionLists.map((item) => {

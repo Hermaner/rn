@@ -12,12 +12,12 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '', // 13545883079
-      sendPhone: '',
+      phone: '18621524679', // 13545883079
+      sendPhone: '18621524679',
       sec: 60,
       passWord: '',
-      code: '',
-      codeVal: '',
+      code: '111111',
+      codeVal: '111111',
       isCode: true,
       isBind: false,
       memberInfo: {},
