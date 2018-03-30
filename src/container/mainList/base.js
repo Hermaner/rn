@@ -93,12 +93,15 @@ class Base extends React.Component {
       }, this._onRefresh);
     }
     this.EmitMainList = DeviceEventEmitter.addListener('getMainList', (data) => {
+      this.hideMasker();
       this.getMainList(data);
     });
     this.EmitMainListName = DeviceEventEmitter.addListener('getMainListName', (data) => {
+      this.hideMasker();
       this.getMainListName(data);
     });
     this.emitCitys = DeviceEventEmitter.addListener('emitCitys', (data) => {
+      this.hideMasker();
       this.selectCity(data);
     });
     this.GetAppCategoryService();
@@ -161,18 +164,21 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         console.log(res);
+        if (JSON.stringify(res.map) !== '{}') {
+          this.setState({
+            firstName: res.map.category.name,
+          });
+        }
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
             this.setState({
               noData: true,
-              // dataSource: ds.cloneWithRows(result),
             });
           } else {
             this.setState({
               nomore: true,
               loading: false,
-              // dataSource: ds.cloneWithRows(result),
             });
           }
           return;
@@ -205,8 +211,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetAppCategoryService = () => {
@@ -284,9 +289,17 @@ class Base extends React.Component {
     this.hideMasker();
   }
   changeLeftGoods = (index) => {
-    const { goods, goodsLeftIndex } = this.state;
+    const { goods, goodsLeftIndex, goodsRightIndex } = this.state;
     if (goodsLeftIndex === index) {
       return;
+    }
+    if (goodsLeftIndex !== index) {
+      if (goodsRightIndex !== null) {
+        goods[parseFloat(goodsLeftIndex)].childs[goodsRightIndex].cur = false;
+        this.setState({
+          goodsRightIndex: null,
+        });
+      }
     }
     goods[index].cur = true;
     goods[goodsLeftIndex].cur = false;

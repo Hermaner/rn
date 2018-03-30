@@ -224,13 +224,26 @@ class OrderInfo extends base {
           </View>
         </View>
         <View style={styles.orderInfoBox}>
-          {
-            myStatus !== '6' &&
-            <Text style={[styles.sixText, { marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
-          }
+          <Text style={[styles.sixText, { marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
           <Text style={[styles.sixText, { marginBottom: 6 }]}>订单创建：{orderInfo.postDate}</Text>
           {
-            myStatus === '6' &&
+            orderInfo.updateAmountTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>订单修改：{orderInfo.updateAmountTime}</Text>
+          }
+          {
+            orderInfo.payTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>支 付：{orderInfo.payTime}</Text>
+          }
+          {
+            orderInfo.sendTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>发 货：{orderInfo.sendTime}</Text>
+          }
+          {
+            orderInfo.receiveTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>收 货：{orderInfo.receiveTime}</Text>
+          }
+          {
+            myStatus === '8' &&
             <Text style={styles.sixText}>取消订单：{removeInfo.postDate}</Text>
           }
         </View>

@@ -205,10 +205,34 @@ class OrderInfoSeller extends base {
               <Text style={{ fontSize: 16, color: Mcolor }}>
                 ￥{Math.round(parseFloat(orderInfo.amount) * 1000) / 1000}</Text>
             </View>
+            {
+              orderInfo.payTypeId !== '' && orderInfo.payTypeId !== null &&
+              <View style={[styles.flexRow, { borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 10 }]}>
+                <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>支付方式</Text>
+                <Text style={{ fontSize: 16, color: Mcolor }}>{orderInfo.payTypeId === '1' ? '微信' : '支付宝'}</Text>
+              </View>
+            }
           </View>
         </View>
         <View style={styles.orderInfoBox}>
-          <Text style={styles.norText}>下单时间：{orderInfo.postDate}</Text>
+          <Text style={[styles.sixText, { marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
+          <Text style={[styles.sixText, { marginBottom: 6 }]}>下单时间：{orderInfo.postDate}</Text>
+          {
+            orderInfo.updateAmountTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>订单修改：{orderInfo.updateAmountTime}</Text>
+          }
+          {
+            orderInfo.payTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>支 付：{orderInfo.payTime}</Text>
+          }
+          {
+            orderInfo.sendTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>发 货：{orderInfo.sendTime}</Text>
+          }
+          {
+            orderInfo.receiveTime !== null &&
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>收 货：{orderInfo.receiveTime}</Text>
+          }
           {
             myStatus === '6' &&
             <Text style={styles.norText}>取消时间：{orderInfo.postDate}</Text>

@@ -55,8 +55,11 @@ class MainScreen extends base {
     const { detail, distance } = this.state;
     const { push } = this.props;
     const { detail: { logisticsMode, renderServices, supplyMode } } = this.state;
+    const newLogisticsMode = logisticsMode === null ? '' : logisticsMode;
+    const newRenderServices = renderServices === null ? '' : renderServices;
+    const newSupplyMode = supplyMode === null ? '' : supplyMode;
     let ptems = [];
-    ptems = ptems.concat(logisticsMode.split(',') : [], renderServices.split(',') : [], supplyMode.split(',') : []);
+    ptems = ptems.concat(newLogisticsMode.split(',') : [], newRenderServices.split(',') : [], newSupplyMode.split(',') : []);
     return (
       <View style={styles.nameAPView}>
         <View style={styles.nameOneView}>

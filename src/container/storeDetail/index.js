@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, Modal, BackHandler, ScrollView, RefreshControl } from 'react-native';
+import { View, TouchableWithoutFeedback, BackHandler, ScrollView, RefreshControl } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import StarRating from 'react-native-star-rating';
 import PropTypes from 'prop-types';
 import { Container, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
-import ImageViewer from 'react-native-image-zoom-viewer';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, TFeedback, MyModalView, Loading, LoadMore, LoadNoMore, ImageLook, TOpacity, ModalCall } from '../../components';
 import base from './base';
@@ -153,8 +152,14 @@ class MainScreen extends base {
   }
   _renderSkuTable() {
     const { push } = this.props;
-    const { renzhengInfo, imageData, isHaveIndeed, indeedInfo, indeedImageData, memberId, myText } = this.state;
-    const { certifIndex, isCertifShow, imageViewData, imageViewDataIndeed } = this.state;
+    const {
+      renzhengInfo,
+      imageData,
+      isHaveIndeed,
+      indeedInfo,
+      indeedImageData,
+      memberId,
+      myText } = this.state;
     return (
       <View style={styles.skuTable}>
         <View style={styles.skuTableTitle}>

@@ -158,10 +158,10 @@ class MemberInfoBase extends React.Component {
       homeImgUrls,
       realName,
       sex } = this.state;
-    let myRealName = '';
-    if (realName !== '') {
-      myRealName = userInfo.nickName;
-    }
+    // let myRealName = '';
+    // if (realName !== '') {
+    //   myRealName = userInfo.nickName;
+    // }
     const member = {
       homeImgUrls,
       imgUrl: upImages ? upImages.key : '',
@@ -171,7 +171,7 @@ class MemberInfoBase extends React.Component {
       cityCode,
       districtCode,
       address: address || '',
-      nickName: myRealName || name,
+      nickName: name,
     };
     this.sleek.toggle();
     console.log(member);

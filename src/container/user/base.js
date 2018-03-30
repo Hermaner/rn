@@ -12,8 +12,8 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '18621524679', // 13545883079
-      sendPhone: '18621524679',
+      phone: '', // 13545883079 18702111649
+      sendPhone: '',
       sec: 60,
       passWord: '',
       code: '111111',
@@ -41,7 +41,6 @@ class UserBase extends React.Component {
     if (index === 0) {
       WeChat.sendAuthRequest('snsapi_userinfo', 'App')
       .then((res) => {
-        console.log(res)
         this.AccessWinXinLoginService(res.code);
       });
     } else {

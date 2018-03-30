@@ -163,7 +163,7 @@ class MyBase extends React.Component {
           push: '',
           icn: 'icon-renyuanxiaozu',
         },
-        // , {
+        // {
         //   id: '1',
         //   title: '我的好友',
         //   last: true,
