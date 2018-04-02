@@ -72,17 +72,16 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    console.log('aaaa')
     this.getData();
     this.emitPushHome = DeviceEventEmitter.addListener('pushHome', (data) => {
       this.props.push(data);
     });
   }
   getData = () => {
-    console.log('bbbb')
     const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {
+      console.log('yyyyyyyyyyy', res)
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
         let categorysArray = [];
@@ -114,12 +113,16 @@ class Base extends React.Component {
     this.GetPlatformInfoService();
   }
   GetBackgroundImgService = () => {
+    const { imgList } = this.state;
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
+      console.log('111111111111', res)
       if (res.isSuccess) {
         const result = res.data;
-        if (result.imgUrl !== '') {
+        let newImgArray = [];
+        if (result.imgUrls !== '' && result.imgUrls !== null) {
+          // newImgArray = 
           this.setState({
             backgroundImg: result.imgUrl,
           });

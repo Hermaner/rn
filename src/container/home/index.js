@@ -221,7 +221,7 @@ class HomeScreen extends base {
           onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
-          {this.renderHeader()}
+          {/* {this.renderHeader()} */}
           {this.renderHeaderNavigation()}
           {this.renderGoodsType()}
           {this.renderSampleCenter()}
@@ -229,7 +229,7 @@ class HomeScreen extends base {
             seasonals.length > 0 &&
             this.renderSeasonalGoods()
           }
-          {/* {this.renderSwiper()} */}
+          {this.renderSwiper()}
           {this.renderForYou()}
           {loading && <LoadMore />}
           {nomore && <LoadNoMore />}
