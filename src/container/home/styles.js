@@ -194,15 +194,15 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   slide: {
+    flex: 1,
     height: 150,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
-    width,
+    flex: 1,
     height: 150,
     backgroundColor: 'transparent',
-    resizeMode: 'stretch',
   },
   forYou: {
     marginTop: 5,

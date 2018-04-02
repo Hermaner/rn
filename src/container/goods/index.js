@@ -172,7 +172,7 @@ class Goods extends base {
                 key={i}
                 content={
                   <View style={styles.slide}>
-                    <CachedImage style={styles.swiperImage} source={{ uri: `${item}?imageView2/1/h/150` }} />
+                    <CachedImage style={styles.swiperImage} source={{ uri: item.img }} />
                   </View>}
                 onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
               />

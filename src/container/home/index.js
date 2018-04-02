@@ -165,7 +165,7 @@ class HomeScreen extends base {
       <View style={{ height: 150, marginTop: 10 }}>
         <Swiper
           style={styles.wrapper}
-          height={200}
+          height={150}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
@@ -175,7 +175,7 @@ class HomeScreen extends base {
                 key={i}
                 content={
                   <View style={styles.slide}>
-                    <CachedImage resizeMode="stretch" style={styles.swiperImage} source={{ uri: `${item.img}?imageView2/1/h/150` }} />
+                    <CachedImage resizeMode="stretch" style={styles.swiperImage} source={{ uri: item.img }} />
                   </View>}
                 onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
               />
