@@ -80,7 +80,6 @@
 		D88EE043C18C475AA9297E95 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A174F40A19E14207A5BB2623 /* SystemConfiguration.framework */; };
 		D95841342E9A44F08409918F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D7002291A6C4340B81E604C /* SimpleLineIcons.ttf */; };
 		DA5150AC50434986A786902B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29DB579156AA4A2E859A763F /* MaterialIcons.ttf */; };
-		DA645E5887B54930A88DEB56 /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C216A673163A424EB29DE4EE /* libRCTQQAPI.a */; };
 		DBD8754FE49C4D64B4CB7F8A /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E87E179752A473F94E3785F /* Entypo.ttf */; };
 		DF00D8B32064D6CD006C2310 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF00D8B42064D6CD006C2310 /* libRNSound.a */; };
 		DF2656CF205A5EC400C61DAE /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF2656CE205A5D4F00C61DAE /* libRCTCameraRoll.a */; };
@@ -92,6 +91,7 @@
 		DF432D672025948400F14621 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF432D622025948400F14621 /* AlipaySDK.framework */; };
 		DF48A18D2066697A00037017 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF48A170206657CA00037017 /* libRCTWeChat.a */; };
 		DF48A1F420666C6500037017 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DF48A1F320666C6500037017 /* libiconv.tbd */; };
+		DF50E49320720ACB00CD619A /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF48A1F220666C0C00037017 /* libRCTQQAPI.a */; };
 		DF65B7B42056A8F4005D5C81 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF65B7B52056A8F4005D5C81 /* libReactNativePermissions.a */; };
 		DF771C8C2057B6F400A9FF55 /* libReactNativeKeyboardManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BD061FD107D700877EF2 /* libReactNativeKeyboardManager.a */; };
 		DF771C8D2057B73500A9FF55 /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF39BCF21FD107D700877EF2 /* libRCTJPushModule.a */; };
@@ -686,6 +686,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF50E49320720ACB00CD619A /* libRCTQQAPI.a in Frameworks */,
 				DF48A1F420666C6500037017 /* libiconv.tbd in Frameworks */,
 				DF48A18D2066697A00037017 /* libRCTWeChat.a in Frameworks */,
 				DF00D8B32064D6CD006C2310 /* libRNSound.a in Frameworks */,
@@ -746,7 +747,6 @@
 				B8202B965BCC41328AEBC064 /* libthird-party.a in Frameworks */,
 				38CB44289C414F02BE965C98 /* libdouble-conversion.a in Frameworks */,
 				A47ED8B65509505D5990AACE /* libPods-App.a in Frameworks */,
-				DA645E5887B54930A88DEB56 /* libRCTQQAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
