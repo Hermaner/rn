@@ -150,6 +150,7 @@ import ChatSupply from '../container/ChatSupply';
 import NewcomerStudy from '../container/newcomerStudy';
 import CallLog from '../container/callLog';
 import BuyerProtection from '../container/buyerProtection';
+import ImgInfo from '../container/imgInfo';
 
 export const AppNavigator = StackNavigator({
   ChatSupply: { screen: ChatSupply },
@@ -291,6 +292,7 @@ export const AppNavigator = StackNavigator({
   NewcomerStudy: { screen: NewcomerStudy },
   CallLog: { screen: CallLog },
   BuyerProtection: { screen: BuyerProtection },
+  ImgInfo: { screen: ImgInfo },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

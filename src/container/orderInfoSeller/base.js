@@ -199,6 +199,13 @@ class Base extends React.Component {
       `联系人:${orderInfo.receiveName} 联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`
     );
   }
+  copyOrderNumber = () => {
+    const { orderInfo } = this.state;
+    Toast.show('复制成功！');
+    Clipboard.setString(
+      `订单编号:${orderInfo.orderNumber}`,
+    );
+  }
   saveFreight = (freight) => {
     if (parseFloat(freight) < 0) {
       Toast.show('运费不能为负数！');

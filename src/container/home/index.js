@@ -91,9 +91,9 @@ class HomeScreen extends base {
                     <View
                       style={[styles.icnBoxTwo, { backgroundColor: item.color }]}
                     >
-                      <Text style={{ fontSize: 16, textAlign: 'center', color: '#fff' }}>{item.text}</Text>
+                      <Text numberOfLines={1} style={{ flex: 1, fontSize: 16, textAlign: 'center', color: '#fff' }}>{item.text}</Text>
                     </View>
-                    <Text style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
+                    <Text numberOfLines={1} style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
                   </View>}
                 onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
               />
@@ -133,7 +133,7 @@ class HomeScreen extends base {
     const { push } = this.props;
     return (
       <View style={styles.seasonalGoods}>
-        <Text style={styles.goodsTypeTitle}>- 应季好货 -</Text>
+        <Text style={styles.goodsTypeTitle}>- 好货直达 -</Text>
         <View style={styles.seasonalGoodsBox}>
           {
             seasonals.map((item, index) => (
@@ -146,7 +146,7 @@ class HomeScreen extends base {
                     ]}
                   >
                     <View style={styles.imageBox}>
-                      <CachedImage style={styles.image} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/40` }} />
+                      <CachedImage style={styles.image} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/50` }} />
                     </View>
                     <Text numberOfLines={1} style={[styles.headerNavigationText, { textAlign: 'center' }]}>{item.name}</Text>
                   </View>}
@@ -159,19 +159,26 @@ class HomeScreen extends base {
     );
   }
   renderSwiper() {
-    const { imgList } = this.state;
+    const { push } = this.props;
+    const { imgList, swiperImgInfo } = this.state;
     return (
-      <View style={{ height: 120, marginTop: 10 }}>
+      <View style={{ height: 150, marginTop: 10 }}>
         <Swiper
           style={styles.wrapper}
           height={200}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
+            imgList !== [] &&
             imgList.map((item, i) => (
-              <View key={i} style={styles.slide}>
-                <CachedImage style={styles.swiperImage} source={{ uri: `${item.img}?imageView2/1/h/120` }} />
-              </View>
+              <TFeedback
+                key={i}
+                content={
+                  <View style={styles.slide}>
+                    <CachedImage resizeMode="stretch" style={styles.swiperImage} source={{ uri: `${item.img}?imageView2/1/h/150` }} />
+                  </View>}
+                onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
+              />
             ))
           }
         </Swiper>

@@ -215,7 +215,16 @@ class OrderInfoSeller extends base {
           </View>
         </View>
         <View style={styles.orderInfoBox}>
-          <Text style={[styles.sixText, { marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={[styles.sixText, { flex: 1, marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
+            <TOpacity
+              style={styles.copyBox}
+              content={
+                <Text style={styles.copyText}>复制</Text>
+              }
+              onPress={() => this.copyOrderNumber()}
+            />
+          </View>
           <Text style={[styles.sixText, { marginBottom: 6 }]}>下单时间：{orderInfo.postDate}</Text>
           {
             orderInfo.updateAmountTime !== null &&

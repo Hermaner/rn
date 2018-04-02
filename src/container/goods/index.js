@@ -156,19 +156,26 @@ class Goods extends base {
     );
   }
   renderSwiper() {
-    const { imgList } = this.state;
+    const { push } = this.props;
+    const { imgList, swiperImgInfo } = this.state;
     return (
-      <View style={{ height: 120, marginTop: 5, marginBottom: 5 }}>
+      <View style={{ height: 150, marginTop: 5, marginBottom: 5 }}>
         <Swiper
           style={styles.wrapper}
-          height={120}
+          height={150}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
+            imgList.length > 0 &&
             imgList.map((item, i) => (
-              <View key={i} style={styles.slide}>
-                <CachedImage style={styles.swiperImage} source={{ uri: `${item}?imageView2/1/h/120` }} />
-              </View>
+              <TFeedback
+                key={i}
+                content={
+                  <View style={styles.slide}>
+                    <CachedImage style={styles.swiperImage} source={{ uri: `${item}?imageView2/1/h/150` }} />
+                  </View>}
+                onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
+              />
             ))
           }
         </Swiper>
@@ -213,7 +220,7 @@ class Goods extends base {
           onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
-          {this.renderHeader()}
+          {/* {this.renderHeader()} */}
           {this.renderHeaderNavigation()}
           {this.renderSecend()}
           {this.renderNews()}

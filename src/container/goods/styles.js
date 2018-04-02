@@ -253,13 +253,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   slide: {
-    height: 120,
+    height: 150,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
     width,
-    height: 120,
+    height: 150,
     backgroundColor: 'transparent',
     resizeMode: 'stretch',
   },

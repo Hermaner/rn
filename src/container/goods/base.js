@@ -51,6 +51,7 @@ class Base extends React.Component {
         icon: 'icon-qunfengfuwushang',
         label: '产地服务商',
         color: '#6098f9',
+        swiperImgInfo: [],
       }],
       imgList: [],
       goodGoodsList: [],
@@ -102,7 +103,6 @@ class Base extends React.Component {
         this.setState({
           twoNewsList: newTwo,
           threeNewsList: three,
-          imgList: img,
         });
       } else {
         Toast.show(res.msg);
@@ -173,11 +173,21 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        if (result.imgUrl !== '') {
-          this.setState({
-            backgroundImg: result.imgUrl,
-          });
+        const newImgArray = [];
+        if (result !== '' && result !== null && result.length > 0) {
+          for (let i = 0; i < result.length; i += 1) {
+            if (result[i].imgUrl !== '' && result[i].imgUrl !== null) {
+              newImgArray.push({
+                imgKey: i,
+                img: result[i].imgUrl,
+              });
+            }
+          }
         }
+        this.setState({
+          imgList: newImgArray,
+          swiperImgInfo: result,
+        });
       } else {
         Toast.show(res.msg);
       }

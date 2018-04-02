@@ -69,6 +69,7 @@ class Base extends React.Component {
       seasonals: [],
       backGround1: require('../../assets/img/bn1.png'),
       backgroundImg: '',
+      swiperImgInfo: [],
     };
   }
   getInit = () => {
@@ -113,20 +114,26 @@ class Base extends React.Component {
     this.GetPlatformInfoService();
   }
   GetBackgroundImgService = () => {
-    const { imgList } = this.state;
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
-      console.log('111111111111', res)
       if (res.isSuccess) {
         const result = res.data;
-        let newImgArray = [];
-        if (result.imgUrls !== '' && result.imgUrls !== null) {
-          // newImgArray = 
-          this.setState({
-            backgroundImg: result.imgUrl,
-          });
+        const newImgArray = [];
+        if (result !== '' && result !== null && result.length > 0) {
+          for (let i = 0; i < result.length; i += 1) {
+            if (result[i].imgUrl !== '' && result[i].imgUrl !== null) {
+              newImgArray.push({
+                imgKey: i,
+                img: result[i].imgUrl,
+              });
+            }
+          }
         }
+        this.setState({
+          imgList: newImgArray,
+          swiperImgInfo: result,
+        });
       } else {
         Toast.show(res.msg);
       }
