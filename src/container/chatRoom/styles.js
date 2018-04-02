@@ -2,72 +2,52 @@ import { StyleSheet } from 'react-native';
 import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
-  listContent: {
-    flex: 1,
-  },
-  bottomToolBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    backgroundColor: '#f8f8f8',
-  },
-  sendButton: {
-    borderColor: '#ccc',
-    width: 60,
-    height: 40,
-    marginLeft: 8,
-    borderRadius: 4,
-    ...st.jacenter,
-    borderWidth: 1,
-  },
-  sendButtonText: {
-    color: '#333',
-    fontSize: 14,
-  },
-  input: {
-    flex: 1,
-    color: '#444',
-    backgroundColor: '#fff',
-    fontSize: 13,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
-    paddingTop: 10,
-  },
-  list: {
-    marginTop: 5,
-    marginBottom: 5,
-    ...st.fr,
-  },
-  message: {
-    color: '#333',
-    fontSize: 14,
-  },
-  avatar: {
-    borderRadius: 4,
-    margin: 8,
-    width: 40,
-    height: 40,
-  },
-  sepView: {
+  chatTop: {
     ...st.frcenter,
-    flex: 1,
-  },
-  sepViewEnd: {
-    flex: 1,
-  },
-  contentView: {
-    borderRadius: 4,
-    padding: 8,
-    margin: 5,
-    justifyContent: 'center',
+    height: 80,
     backgroundColor: '#fff',
-  },
-  endBlankBlock: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
     margin: 5,
-    width: 30,
-    height: 40,
   },
+  chatTopImgView: {
+    width: 60,
+    height: 60,
+    marginRight: 10,
+  },
+  chatTopImg: {
+    width: 60,
+    height: 60,
+  },
+  topName: {
+    marginBottom: 10,
+  },
+  topNameText: {
+    color: '#333',
+    fontSize: 14,
+  },
+  topPrice: {
+    ...st.frcenter,
+    height: 28,
+  },
+  topPriceText: {
+    color: Mcolor,
+    fontSize: 14,
+    flex: 1,
+  },
+  topBtn: {
+    backgroundColor: Mcolor,
+    height: 26,
+    width: 60,
+    borderRadius: 4,
+    marginLeft: 20,
+    ...st.jacenter,
+  },
+  topBtnText: {
+    color: '#fff',
+    fontSize: 12,
+  },
+
 });
 export default styles;

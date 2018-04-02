@@ -174,6 +174,20 @@ class My extends myBase {
         {
           list.map((item, index) => (
             <View style={styles.detailInfo} key={index}>
+              {
+                index === 0 &&
+                <View style={styles.mmDot}>
+                  <Text style={styles.mmDotText}>买</Text>
+                  <Text style={styles.mmDotText}>家</Text>
+                </View>
+              }
+              {
+                index === 1 &&
+                <View style={styles.mmDot}>
+                  <Text style={styles.mmDotText}>卖</Text>
+                  <Text style={styles.mmDotText}>家</Text>
+                </View>
+              }
               <View style={styles.myBox}>
                 {
                   item[1].map((item2, index2) => (
@@ -181,7 +195,7 @@ class My extends myBase {
                       key={index2}
                       content={
                         <View
-                          style={[item2.isLast ? styles.myWidth : styles.flexOne, item2.isBorder ? styles.border : '']}
+                          style={[item2.isLast ? styles.myWidth : styles.flexOne]}
                         >
                           {
                             !item2.isLast ?

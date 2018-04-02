@@ -272,7 +272,13 @@ class Base extends React.Component {
       this.props.push({ key: 'User' });
       return;
     }
-    const { detail: { memberId, nickName, imgUrl } } = this.state;
+    const { detail: {
+      supplyId,
+      memberId,
+      nickName,
+      imgUrl,
+      categoryName,
+      brandName, supplyItems, supplyImages, wholesalePrice, unit } } = this.state;
     if (memberId.toString() === global.memberId.toString()) {
       Toast.show('无法跟自己聊天');
       return;
@@ -283,6 +289,15 @@ class Base extends React.Component {
           memberId,
           userName: nickName,
           imgUrl,
+        },
+        product: {
+          memberId,
+          supplyId,
+          userName: nickName,
+          imgUrl,
+          productImgUrl: supplyImages[0].imgUrl,
+          name: `${categoryName}${brandName}${supplyItems.map((item => item.specName)).join(' ')}`,
+          price: `${wholesalePrice}元/${unit}`,
         },
       },
     });

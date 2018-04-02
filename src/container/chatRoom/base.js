@@ -16,12 +16,15 @@ const { GiftedChat } = Chat;
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { item, product } = props.navigation.state.params;
     this.state = {
       messages: [],
       loadEarlier: false,
       isLoadingEarlier: false,
       items: [],
-      toUser: props.navigation.state.params.item,
+      toUser: item,
+      product: product || null,
+      isProductSend: true,
       currentPage: 1,
       pageSize: 45,
       localSize: 45,
@@ -267,6 +270,25 @@ class Base extends React.Component {
       this.socket.connect();
       this.loadNewChat();
     }
+  }
+  sendProduct = () => {
+    const { product: { supplyId, memberId, imgUrl, name, price } } = this.state;
+    this.onSend([{
+      order: {
+        id: `${supplyId},${memberId}`,
+        imgUrl,
+        title: name,
+        price,
+      },
+      type: '3',
+      status: '1',
+      user: this.renderUser(),
+      createdAt: new Date().getTime(),
+      _id: uuid.v4(),
+    }]);
+    this.setState({
+      isProductSend: false,
+    });
   }
   loadNewChat = () => {
     const { toUser } = this.state;
