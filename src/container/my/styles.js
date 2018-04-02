@@ -276,5 +276,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexWrap: 'wrap',
   },
+  mmDot: {
+    width: 18,
+    height: 60,
+    backgroundColor: Mcolor,
+    ...st.jacenter,
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+  },
+  mmDotText: {
+    color: '#fff',
+    fontSize: 13,
+  },
 });
 export default styles;
