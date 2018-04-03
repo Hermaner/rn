@@ -1,7 +1,8 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
+import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
-import { GetIdentityService, SaveMemberRoleService } from '../../api';
+import { GetIdentityService, SaveMemberRoleService, GetMemberByNickNameOrPhone } from '../../api';
 
 class AdjectiveInfoBase extends React.Component {
   constructor(props) {
@@ -70,5 +71,15 @@ class AdjectiveInfoBase extends React.Component {
       this.sleek.toggle();
     });
   }
+  search = () => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    this.props.push({ key: 'SearchPeople' });
+  }
 }
+AdjectiveInfoBase.propTypes = {
+  push: PropTypes.func,
+};
 export default AdjectiveInfoBase;

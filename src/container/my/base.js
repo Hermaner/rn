@@ -436,18 +436,6 @@ class MyBase extends React.Component {
       refresh: true,
     }, () => this.getData());
   }
-  _onScroll = (event) => {
-    const { loading, nomore } = this.state;
-    if (loading || nomore) {
-      return;
-    }
-    const y = event.nativeEvent.contentOffset.y;
-    const height = event.nativeEvent.layoutMeasurement.height;
-    const contentHeight = event.nativeEvent.contentSize.height;
-    if (y + height >= contentHeight - 20) {
-      this.initData();
-    }
-  }
 }
 MyBase.propTypes = {
   push: PropTypes.func,

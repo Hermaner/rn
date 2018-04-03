@@ -3,6 +3,7 @@ import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Header, Icon } from 'native-base';
 import { Mcolor, st } from '../utils';
+import { Iconfont } from '../components';
 
 const styles = StyleSheet.create({
   header: {
@@ -39,13 +40,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
+  rightIcon: {
+    color: '#fff',
+    fontSize: 18,
+  },
   backIcon: {
     fontSize: 24,
     marginLeft: 15,
     color: '#fff',
   },
 });
-const headerBar = ({ back, title, rightText, rightPress, hideLeft, rightContent }) => (
+const headerBar = ({ back, title, rightText, rightPress, hideLeft, rightContent, rightIcon }) => (
   <Header style={styles.header}>
     {
       !hideLeft &&
@@ -63,6 +68,12 @@ const headerBar = ({ back, title, rightText, rightPress, hideLeft, rightContent 
       </TouchableOpacity>
     }
     {
+      rightIcon &&
+      <TouchableOpacity onPress={rightPress} style={styles.right}>
+        <Iconfont style={styles.rightIcon} name={rightIcon} />
+      </TouchableOpacity>
+    }
+    {
       rightContent &&
       <TouchableOpacity onPress={rightPress} style={styles.right}>
         {rightContent}
@@ -76,6 +87,7 @@ headerBar.propTypes = {
   title: PropTypes.string,
   rightPress: PropTypes.func,
   rightText: PropTypes.string,
+  rightIcon: PropTypes.string,
   rightContent: PropTypes.any,
   hideLeft: PropTypes.bool,
 };

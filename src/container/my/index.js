@@ -309,7 +309,6 @@ class My extends myBase {
               progressBackgroundColor="#ffffff"
             />
           }
-          onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
           {this._renderBody()}

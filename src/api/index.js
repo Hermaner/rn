@@ -459,3 +459,6 @@ export function AccessWinXinLoginService(data) {
 export function GetMemberExistsService(data) {
   return get('GetMemberExistsService', data);
 }
+export function GetMemberByNickNameOrPhone(data) {
+  return get('GetMemberByNickNameOrPhone', data);
+}

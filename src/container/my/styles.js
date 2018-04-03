@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
   mmDot: {
     width: 18,
     height: 60,
+    borderRadius: 6,
     backgroundColor: Mcolor,
     ...st.jacenter,
     position: 'absolute',
