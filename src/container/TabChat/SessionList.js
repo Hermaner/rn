@@ -149,22 +149,25 @@ class SessionList extends React.Component {
       .then((exist) => {
         if (!exist) {
           RNFetchBlob.fs.createFile(path, '', 'utf8');
+          this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
         } else {
           RNFetchBlob.fs.readFile(path, 'utf8')
           .then((data) => {
             if (!data) {
+              this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
               return;
             }
             const items = JSON.parse(data);
             this.setState({
               items,
+            }, () => {
+              this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
             });
           });
         }
       });
       this.socket.on('notifyGetChatList', this.notifyGetChatList); // 获取当前聊天列表
       this.socket.on('notifyMessageRead', this.notifyMessageRead); // 有人给我发了新消息
-      this.socket.emit('sendGetChatList'); // 发送请求获取当前聊天列表
     }
   }
   appStateChange = (appState) => {
