@@ -69,6 +69,8 @@ class Base extends React.Component {
       if (!exist) {
         const first = [];
         RNFetchBlob.fs.createFile(path, JSON.stringify(first), 'utf8');
+        this.loadNewChat();// 发送请求获取最新的聊天记录
+        this.socket.emit('sendGetNoReadCount');
         // this.onSend([{
         //   status: '3',
         //   text: '欢迎光临，咨询请留言，或点击我的头像，可致电给我',
@@ -89,6 +91,9 @@ class Base extends React.Component {
           console.log(messages);
           this.setState({
             messages,
+          }, () => {
+            this.loadNewChat();// 发送请求获取最新的聊天记录
+            this.socket.emit('sendGetNoReadCount');
           });
         });
       }
@@ -101,8 +106,6 @@ class Base extends React.Component {
     this.socket.on('notifyGetChatLog', this.notifyGetChatLog);  // 获取分页聊天记录
     this.socket.on('notifyGetChat', this.notifyGetChat);  // 获取最新的聊天记录
     this.socket.on('notifyGetChatStatus', this.notifyGetChatStatus);  // 获取对方是否登录
-    this.loadNewChat();// 发送请求获取最新的聊天记录
-    this.socket.emit('sendGetNoReadCount');
   }
   deleteInit = () => {
     global.chatId = null;
