@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, Text, FlatList } from 'react-native';
+import { View, TouchableWithoutFeedback, Text, FlatList, DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
@@ -17,6 +17,12 @@ class Child extends ChildBase {
   componentDidMount() {
     this.getInit();
     this._onRefresh();
+    DeviceEventEmitter.addListener('emitMySupply', (status) => {
+      const { type } = this.props;
+      if (status === type) {
+        this._onRefresh();
+      }
+    });
   }
   componentWillUnmount() {
     this.getDelete();
@@ -35,7 +41,7 @@ class Child extends ChildBase {
                   <Text style={{ fontSize: 16, color: '#333' }}>{item.brandName} {item.categoryName}</Text>
                   {
                     item.supplyItems.map((item2, index2) => (
-                      <Text key={index2} style={{ fontSize: 16, color: '#333' }}> {item2.specName} </Text>
+                      <Text key={index2} numberOfLines={1} style={{ flex: 1, fontSize: 16, color: '#333' }}> {item2.specName} </Text>
                     ))
                   }
                 </View>
@@ -69,7 +75,6 @@ class Child extends ChildBase {
                           {btnType.title}
                         </Text>
                       </View>}
-                    // onPress={() => this.undercarriage(item.supplyId)}
                     onPress={() => this.btnChange(btnType.title, item.supplyId, index)}
                   />
                 ))
@@ -87,7 +92,6 @@ class Child extends ChildBase {
                           {btnType.title}
                         </Text>
                       </View>}
-                    // onPress={() => this.undercarriage(item.supplyId)}
                     onPress={() => this.btnChange(btnType.title, item.supplyId, index)}
                   />
                 ))
@@ -148,6 +152,8 @@ class Child extends ChildBase {
   }
 }
 Child.propTypes = {
+  type: PropTypes.string,
+  status: PropTypes.number,
   push: PropTypes.func,
 };
 export default connect(null, { push: pushRoute })(Child);

@@ -39,7 +39,6 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
-    console.log('999999999999', orderInfo);
     this.setState({
       orderInfo,
       supplyInfo,
