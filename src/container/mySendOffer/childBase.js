@@ -99,6 +99,25 @@ class Base extends React.Component {
       this.setState({ loading: true }, () => this.getData());
     }
   }
+  chatPeople = (item) => {
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (item.purchase.memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId: item.purchase.memberId,
+          userName: item.purchase.nickName,
+          imgUrl: item.purchase.imgUrl,
+        },
+      },
+    });
+  }
   StopPurchaseService = (purchaseId) => {
     ActionSheet.show(
       {

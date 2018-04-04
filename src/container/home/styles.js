@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#333',
     marginTop: 3,
-    marginBottom: 6,
   },
   mainIcon: {
     width: 70,

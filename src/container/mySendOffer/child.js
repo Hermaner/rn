@@ -18,8 +18,8 @@ class Child extends ChildBase {
     this.getInit();
   }
   _renderRow = ({ item, index }) => {
+    console.log('77777777777777777777777', item)
     const { push } = this.props;
-    console.log('777777777777777777', item);
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
         <View style={styles.listItem}>
@@ -46,7 +46,7 @@ class Child extends ChildBase {
                 <View style={[styles.rightBtn, styles.btnTotal]}>
                   <Text style={styles.btnText}>在线咨询</Text>
                 </View>}
-              onPress={() => {}}
+              onPress={() => this.chatPeople(item)}
             />
           </View>
         </View>
