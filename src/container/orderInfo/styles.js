@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // justifyContent: 'center',
     // alignItems: 'center',
-    height: 180,
+    // height: 180,
     backgroundColor: Mcolor,
     paddingLeft: 10,
     paddingRight: 10,
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 4,
+    borderWidth: 4,
   },
   nowBox: {
     position: 'absolute',

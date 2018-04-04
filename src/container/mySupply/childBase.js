@@ -135,6 +135,14 @@ class Base extends React.Component {
       console.log(err);
     });
   }
+  emitMySupply = () => {
+    this._onRefresh();
+  }
+  initData = () => {
+    this.emitMineMySupply = DeviceEventEmitter.addListener('emitMySupply', () => {
+      this.emitMySupply();
+    });
+  }
   undercarriage = (supplyId) => {
     this.sleek.toggle();
     StopSupplyService({
@@ -225,6 +233,7 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   type: PropTypes.string,
+  status: PropTypes.string,
   push: PropTypes.func,
 };
 export default Base;
