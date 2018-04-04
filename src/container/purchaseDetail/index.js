@@ -81,11 +81,16 @@ class PurchaseDetail extends purchaseDetailBase {
             </View>
             <View style={styles.boderTwo}>
               {
-                item.purchaseItems.map((list, index) => (
-                  <Text key={index} style={[styles.flexTwo, styles.text6]}>
-                    {list.specTypeName}{list.specName}
+                item.purchaseItems.length > 0 ?
+                  item.purchaseItems.map((list, index) => (
+                    <Text key={index} style={[styles.flexTwo, styles.text6]}>
+                      {list.specTypeName}{list.specName}
+                    </Text>
+                  ))
+                :
+                  <Text style={[styles.flexTwo, styles.text6]}>
+                    暂无规格
                   </Text>
-                ))
               }
             </View>
           </View>

@@ -92,7 +92,7 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const items = res.data.pageData;
         if (items.length === 0) {
-          global.Toast.show('没有相关供应单');
+          global.Toast.show('发布同类货品后即可报价');
         } else {
           this.props.push({ key: 'CbjConfirm', params: { items, purchaseId, unit: item.unit } });
         }
