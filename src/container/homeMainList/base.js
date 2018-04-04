@@ -83,7 +83,6 @@ class Base extends React.Component {
       this.selectCity(data);
     });
     this.GetAppCategoryService();
-    console.log(global.position);
   }
   getDelete = () => {
     this.EmitMainList.remove();
@@ -144,7 +143,6 @@ class Base extends React.Component {
       specs,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -191,8 +189,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   selectCity = (data) => {
@@ -206,7 +203,6 @@ class Base extends React.Component {
     const { categoryId } = this.props.navigation.state.params;
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
         for (let i = 0; i < goods.length; i += 1) {
@@ -225,8 +221,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   changeCityTab = (index) => {
@@ -283,7 +278,6 @@ class Base extends React.Component {
   }
   changeLeftGoods = (index) => {
     const { goods, goodsLeftIndex } = this.state;
-    console.log(goods);
     if (goodsLeftIndex === index) {
       return;
     }
@@ -316,7 +310,6 @@ class Base extends React.Component {
   }
   brandTab = (index) => {
     const { brands } = this.state;
-    console.log(brands[index]);
     this.setState({
       brandId: brands[index].brandId,
     }, this._onRefresh);
@@ -324,7 +317,6 @@ class Base extends React.Component {
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;
-    console.log(specTypes[index].specs[i]);
     this.setState({
       specTypeId: specTypes[index].specs[i].specTypeId,
       specId: specTypes[index].specs[i].specId,

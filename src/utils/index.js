@@ -105,7 +105,7 @@ export const fileKey = () => {
 };
 export const getSessionList = () => {
   const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/sessionList`;
+  const path = `${CacheDir}/${global.memberId}sessionList`;
   RNFetchBlob.fs.exists(path)
   .then((exist) => {
     if (!exist) {
