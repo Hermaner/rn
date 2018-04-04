@@ -75,7 +75,6 @@ class Child extends ChildBase {
                           {btnType.title}
                         </Text>
                       </View>}
-                    // onPress={() => this.undercarriage(item.supplyId)}
                     onPress={() => this.btnChange(btnType.title, item.supplyId, index)}
                   />
                 ))
@@ -93,7 +92,6 @@ class Child extends ChildBase {
                           {btnType.title}
                         </Text>
                       </View>}
-                    // onPress={() => this.undercarriage(item.supplyId)}
                     onPress={() => this.btnChange(btnType.title, item.supplyId, index)}
                   />
                 ))

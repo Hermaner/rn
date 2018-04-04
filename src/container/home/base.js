@@ -35,9 +35,7 @@ class Base extends React.Component {
         color: '#f85554',
       }],
       colorArray: ['#ff6a54', '#f96b57', '#eeba57', '#febf27', '#f2a050', '#9191d4', '#b1c26a', '#FD6300'],
-      imgList: [{
-        img: 'https://imgsa.baidu.com/forum/w%3D580/sign=85648f46875494ee87220f111df4e0e1/bd19970a304e251fe370ea01ac86c9177e3e5375.jpg',
-      }],
+      imgList: [],
       SampleCenterList: [{
         icn: 'ios-archive',
         text: '样品中心',
