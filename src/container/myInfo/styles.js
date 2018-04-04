@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, Mcolor } from '../../utils';
+import { st, Mcolor, Mred } from '../../utils';
 
 const styles = StyleSheet.create({
   topPart: {
@@ -19,6 +19,36 @@ const styles = StyleSheet.create({
   QRCode: {
     width: 70,
     height: 70,
+  },
+  fotBtn1: {
+    flex: 0.5,
+    backgroundColor: '#fff',
+    ...st.jacenter,
+  },
+  fotChatIcon: {
+    color: '#666',
+    marginRight: 8,
+    fontSize: 14,
+  },
+  fotChatText: {
+    color: '#666',
+    fontSize: 14,
+  },
+  fotChatText1: {
+    color: Mred,
+    fontSize: 14,
+  },
+  topIcon1: {
+    color: Mred,
+  },
+  fotBtn2: {
+    flex: 1,
+    backgroundColor: Mcolor,
+    ...st.jacenter,
+  },
+  fotText: {
+    color: '#fff',
+    fontSize: 14,
   },
   name: {
     color: '#333',

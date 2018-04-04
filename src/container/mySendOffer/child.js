@@ -19,6 +19,7 @@ class Child extends ChildBase {
   }
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
+    console.log('777777777777777777', item);
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: item.purchaseId }); }}>
         <View style={styles.listItem}>
@@ -27,7 +28,7 @@ class Child extends ChildBase {
             <Text style={[styles.textRight, item.isRead && styles.alreadyChooseColor]}>{item.isRead ? '已读' : '未读'}</Text>
           </View>
           <View style={styles.rowBox}>
-            <Text style={styles.normalText}>采购人：{item.nickName}</Text>
+            <Text style={styles.normalText}>采购人：{item.purchase.nickName}</Text>
           </View>
           <View style={styles.rowBox}>
             <Text style={styles.normalText}>报价时间：{item.modiDate}</Text>

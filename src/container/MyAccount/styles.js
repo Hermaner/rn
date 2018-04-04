@@ -29,9 +29,20 @@ const styles = StyleSheet.create({
     width: 100,
     ...st.jacenter,
   },
+  btn1: {
+    backgroundColor: '#eee',
+    marginTop: 5,
+    height: 40,
+    width: 100,
+    ...st.jacenter,
+  },
   btnText: {
     fontSize: 16,
     color: '#fff',
+  },
+  btnText1: {
+    fontSize: 16,
+    color: '#333',
   },
   list: {
     height: 50,

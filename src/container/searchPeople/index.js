@@ -78,9 +78,13 @@ class SearchPeople extends base {
                             <Text style={styles.myText}>({item.phone})</Text>
                           }
                         </View>
-                        <Text style={[styles.myText]}>
-                          {item.provinceName}{item.cityName}{item.districtName}
-                        </Text>
+                        {
+                          item.provinceName !== null &&
+                          item.provinceName.length > 0 &&
+                          <Text style={[styles.myText]}>
+                            {item.provinceName}{item.cityName}{item.districtName}
+                          </Text>
+                        }
                       </View>
                     }
                     onPress={() => push({ key: item.memberVerifs !== null && item.memberVerifs !== '' && item.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item.memberId } })}

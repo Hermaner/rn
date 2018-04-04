@@ -18,27 +18,36 @@ class MyAccount extends base {
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     this.getData();
+    this.initData();
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
+    this.getDelete();
   }
   onBackPress = () => {
     this.props.pop();
     return true;
   };
   _renderTop() {
-    const { amount } = this.state;
+    const { amount, status } = this.state;
     return (
       <View style={styles.top}>
         <Text style={styles.account}>{amount}</Text>
         <Text style={styles.topLabel}>余额(元)</Text>
-        <TOpacity
-          style={styles.btn}
-          content={
-            <Text style={styles.btnText}>提现</Text>
-          }
-          onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
-        />
+        {
+          status === '1' ?
+            <View style={styles.btn1}>
+              <Text style={styles.btnText1}>提现中..</Text>
+            </View>
+          :
+            <TOpacity
+              style={styles.btn}
+              content={
+                <Text style={styles.btnText}>提现</Text>
+              }
+              onPress={() => this.props.push({ key: 'MyTixian', params: { amount } })}
+            />
+        }
       </View>
     );
   }

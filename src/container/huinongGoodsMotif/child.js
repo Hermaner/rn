@@ -60,7 +60,7 @@ class Child extends base {
                                 <Text style={{ color: '#B8860B', fontSize: 20 }}>{item2.wholesalePrice}</Text>
                                 <Text style={styles.unit}>元/{item2.unit}</Text>
                                 <View style={styles.needCount}>
-                                  <Text style={{ color: '#fff', fontSize: 12 }}>{item2.wholesaleCount}{item2.unit}起批</Text>
+                                  <Text numberOfLines={1} style={{ color: '#fff', fontSize: 12 }}>{item2.wholesaleCount}{item2.unit}起批</Text>
                                 </View>
                                 <View style={{ flex: 1 }} />
                               </View>

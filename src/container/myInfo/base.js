@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
-import { GetSupplyService, GetPurchaseService, GetMemberInfoService } from '../../api';
+import { GetSupplyService, GetPurchaseService, GetMemberInfoService, CreateMemberFollowService, GetMemberFollowService, DeleteMemberFollowService } from '../../api';
 
 let canEnd = false;
 class Base extends React.Component {
@@ -65,6 +65,8 @@ class Base extends React.Component {
       supplys: [],
       purchase: [],
       realName: '', // 完成个人认证后的真实姓名
+      isFollow: false, // 关注列表
+      memberId: '',
     };
   }
   getInit = () => {
@@ -102,6 +104,9 @@ class Base extends React.Component {
     });
     this._onRefreshSupply();
     this._onRefreshPurchase();
+    if (global.memberId) {
+      this.GetMemberFollowService();
+    }
   }
   GetSupplyService = () => {
     const {
@@ -218,6 +223,26 @@ class Base extends React.Component {
       console.log(err);
     });
   }
+  goChat = () => {
+    const { memberId, info } = this.state;
+    if (!global.memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
+    if (memberId.toString() === global.memberId.toString()) {
+      Toast.show('无法跟自己聊天');
+      return;
+    }
+    this.props.push({ key: 'ChatRoom',
+      params: {
+        item: {
+          memberId,
+          userName: info.nickName,
+          imgUrl: info.imgUrl,
+        },
+      },
+    });
+  }
   _onRefreshSupply = () => {
     this.setState({
       refresh: true,
@@ -254,6 +279,86 @@ class Base extends React.Component {
       default:
     }
     this.ModalView.closeModal();
+  }
+  GetMemberFollowService = () => {
+    const { memberId } = this.state;
+    GetMemberFollowService({
+      memberId: global.memberId,
+    }).then((res) => {
+      console.log(res);
+      if (res.isSuccess) {
+        const result = res.data;
+        for (let i = 0; i < result.length; i += 1) {
+          if (result[i].memberId === memberId) {
+            this.setState({
+              isFollow: true,
+            });
+            return;
+          }
+        }
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  CreateMemberFollowService = () => {
+    const { push } = this.props;
+    const { info, isFollow } = this.state;
+    if (!global.memberId) {
+      push({ key: 'User' });
+      return;
+    }
+    if (info.memberId === global.memberId) {
+      Toast.show('请不要关注自己！');
+      return;
+    }
+    if (isFollow) {
+      this.DeleteFollow();
+    } else {
+      this.CreateFollow();
+    }
+  }
+  CreateFollow = () => {
+    const { memberId } = this.state;
+    const otherMemeber = parseFloat(memberId);
+    this.sleek.toggle();
+    CreateMemberFollowService({
+      memberId: global.memberId,
+      byFollowMemberId: otherMemeber,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.setState({
+          isFollow: true,
+        }, this.getInit);
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  DeleteFollow = () => {
+    const { memberId } = this.state;
+    const otherMemeber = parseFloat(memberId);
+    this.sleek.toggle();
+    DeleteMemberFollowService({
+      memberId: global.memberId,
+      byFollowMemberId: otherMemeber,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.setState({
+          isFollow: false,
+        }, this.getInit);
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   }
   tabChangeOne = () => {
     this.setState({

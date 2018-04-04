@@ -76,53 +76,62 @@ class Base extends React.Component {
     this.setState({ visible: false });
     if (myPayPassword !== '' && myPayPassword !== null) {
       if (!password) {
-        Toast.show('请输入支付密码');
+        this.setState({ visible: false });
+        setTimeout(() => { Toast.show('请输入支付密码'); }, 500);
         return;
       }
       if (parseFloat(password) !== parseFloat(myPayPassword)) {
-        Toast.show('支付密码不正确');
+        this.setState({ visible: false });
+        setTimeout(() => { Toast.show('支付密码不正确'); }, 500);
         return;
       }
     }
     if (!value) {
-      Toast.show('请输入提现金额');
+      this.setState({ visible: false });
+      setTimeout(() => { Toast.show('请输入提现金额'); }, 500);
       return;
     }
     const reg = /(^[1-9]\d*(\.\d{1,2})?$)|(^0(\.\d{1,2})?$)/;
     if (!reg.test(value)) {
-      Toast.show('提现金额格式错误');
+      this.setState({ visible: false });
+      setTimeout(() => { Toast.show('提现金额格式错误'); }, 500);
       return;
     }
     if (value < 10) {
-      Toast.show('小于10元不能提现');
+      this.setState({ visible: false });
+      setTimeout(() => { Toast.show('小于10元不能提现'); }, 500);
       return;
     }
     if (parseFloat(value) > parseFloat(amount)) {
-      Toast.show('提现金额不能大于提现余额');
+      this.setState({ visible: false });
+      setTimeout(() => { Toast.show('提现金额不能大于提现余额'); }, 500);
       return;
     }
     if (listIndex === null) {
-      Toast.show('请选择提现账户');
+      this.setState({ visible: false });
+      setTimeout(() => { Toast.show('请选择提现账户'); }, 500);
       return;
     }
-    console.log(items, listIndex);
     this.sleek.toggle();
     CreateWithdrawalsOrderService({
+      memberId: global.memberId,
       amount: value,
-      withdrawalsNumberId: items[listIndex].info.id,
+      withdrawalsNumberId: items[listIndex].info.withdrawalsNumberId,
     }).then((res) => {
       console.log(res);
       this.sleek.toggle();
+      this.setState({ password: '' });
       if (res.isSuccess) {
-        Toast.show('提现申请成功');
+        this.setState({ visible: false });
+        setTimeout(() => { Toast.show('提现申请成功'); }, 500);
         DeviceEventEmitter.emit('emitMasterLoad');
+        DeviceEventEmitter.emit('emitAccount');
         this.props.pop();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   GetWithdrawalsNumberService = () => {

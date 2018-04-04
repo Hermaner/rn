@@ -39,7 +39,12 @@ const styles = StyleSheet.create({
   purchaseCount: {
     color: '#666',
     fontSize: 14,
-    marginTop: 24,
+    marginTop: 15,
+  },
+  purchaseCount1: {
+    marginTop: 5,
+    color: '#666',
+    fontSize: 14,
   },
   needGoodsDetail: {
     backgroundColor: '#fff',

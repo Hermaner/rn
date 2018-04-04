@@ -121,12 +121,12 @@ export const getSessionList = () => {
 };
 export const writeSessionList = (data) => {
   const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/sessionList`;
+  const path = `${CacheDir}/${global.memberId}sessionList`;
   RNFetchBlob.fs.writeFile(path, data, 'utf8');
 };
 export const writeChatList = (memberId, data) => {
   const { CacheDir } = RNFetchBlob.fs.dirs;
-  const path = `${CacheDir}/${memberId}`;
+  const path = `${CacheDir}/${global.memberId}${memberId}`;
   RNFetchBlob.fs.writeFile(path, data, 'utf8');
 };
 export const ImageCompress = (url, upWidth, upHeight) => {

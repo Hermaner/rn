@@ -130,12 +130,15 @@ class OrderDetail extends base {
               />
             </View>
           </View>
-          <View style={styles.flexRowInfo}>
-            <View style={[styles.flexRow, { flex: 1 }]}>
-              <Text style={{ fontSize: 16, color: '#333', marginRight: 2 }}>服务方式</Text>
-              <Text style={{ fontSize: 16, color: '#666' }}>(非必填)</Text>
+          {
+            (renderServicesItems.length > 0 || logisticsModeItems.length > 0 || supplyModeItems.length > 0) &&
+            <View style={styles.flexRowInfo}>
+              <View style={[styles.flexRow, { flex: 1 }]}>
+                <Text style={{ fontSize: 16, color: '#333', marginRight: 2 }}>服务方式</Text>
+                <Text style={{ fontSize: 16, color: '#666' }}>(非必填)</Text>
+              </View>
             </View>
-          </View>
+          }
           <View style={styles.typeChoose}>
             <View style={styles.typeChooseBox}>
               {
@@ -165,7 +168,7 @@ class OrderDetail extends base {
             </View>
             <View style={styles.typeChooseBox}>
               {
-                supplyInfo.logisticsMode !== '' &&
+                supplyInfo.logisticsMode !== '' && supplyInfo.logisticsMode !== null &&
                 <View>
                   <View style={styles.typeView}>
                     <Text style={styles.typeText}>物流方式</Text>

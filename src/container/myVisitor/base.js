@@ -50,7 +50,7 @@ class MyVisitorBase extends React.Component {
     GetVisitorService({
       memberId,
       pageSize: '10000',
-      currentPage,
+      currentPage: '1',
     }).then((res) => {
       if (res.isSuccess) {
         console.log(res);

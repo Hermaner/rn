@@ -28,7 +28,6 @@ class PurchaseDetail extends purchaseDetailBase {
   };
   _renderBody() {
     const { item, tipShow, hasBjShow } = this.state;
-    console.log(item);
     return (
       <View style={styles.pagebody}>
         {
@@ -57,6 +56,9 @@ class PurchaseDetail extends purchaseDetailBase {
         <View style={styles.userImg}>
           <Image style={styles.img} source={item.member.imgUrl ? { uri: item.member.imgUrl } : require('../app/resource/imgs/avatar.jpg')} />
           <View style={styles.userInfo}>
+            <Text style={styles.purchaseCount1}>
+              {item.nickName}
+            </Text>
             <Text style={styles.purchaseCount}>
               {item.receiveProvinceName}{item.receiveCityName}
             </Text>
@@ -137,27 +139,24 @@ class PurchaseDetail extends purchaseDetailBase {
   }
   render() {
     const { pop } = this.props;
-    const { item, hasBj } = this.state;
+    const { item } = this.state;
     return (
       <Container>
         <Header back={pop} title="采购详情" />
         <Content>
           {item && this._renderBody()}
         </Content>
-        {
-          !hasBj &&
-          <View style={styles.btnList}>
-            <TOpacity
-              style={[styles.btnListOne, styles.leftBtn]}
-              content={
-                <View>
-                  <Text style={styles.footerBtnText}>立即报价</Text>
-                </View>
-              }
-              onPress={this.goCbjPage}
-            />
-          </View>
-        }
+        <View style={styles.btnList}>
+          <TOpacity
+            style={[styles.btnListOne, styles.leftBtn]}
+            content={
+              <View>
+                <Text style={styles.footerBtnText}>立即报价</Text>
+              </View>
+            }
+            onPress={this.goCbjPage}
+          />
+        </View>
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

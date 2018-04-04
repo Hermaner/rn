@@ -125,7 +125,6 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        console.log('BBBBBBBBBBBBBBBBBBBBB', result)
         if (result.memberVerifs !== '' && result.memberVerifs !== null && result.memberVerifs.length > 0) {
           for (let i = 0; i < result.memberVerifs.length; i += 1) {
             if (result.memberVerifs[i].verifFieldId === '6') {

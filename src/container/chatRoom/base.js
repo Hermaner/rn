@@ -86,7 +86,7 @@ class Base extends React.Component {
         RNFetchBlob.fs.readFile(path, 'utf8')
         .then((data) => {
           const messages = JSON.parse(data);
-          // console.log(messages);
+          console.log(messages);
           this.setState({
             messages,
           });

@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { GetMemberSurplusAmountService, GetMemberInfoService } from '../../api';
@@ -9,6 +10,7 @@ class Base extends React.Component {
     this.state = {
       amount: '0.00',
       isPassword: false, // 是否有支付密码
+      status: '',
     };
   }
   getData = () => {
@@ -37,12 +39,24 @@ class Base extends React.Component {
         console.log(res);
         this.setState({
           amount: res.data,
+          status: res.map.isWithdrawals,
         });
       } else {
         Toast.show(res.msg);
       }
     }).catch((err) => {
       console.log(err);
+    });
+  }
+  getDelete = () => {
+    this.emitMyAccount.remove();
+  }
+  emitAccount = () => {
+    this.getData();
+  }
+  initData = () => {
+    this.emitMyAccount = DeviceEventEmitter.addListener('emitAccount', () => {
+      this.emitAccount();
     });
   }
   goSetPassword = () => {

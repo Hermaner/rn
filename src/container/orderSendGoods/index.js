@@ -86,7 +86,7 @@ class OrderPay extends myBase {
       <View style={styles.imgBox}>
         <UploadFile
           getImages={this.getImages}
-          label="最多上传4张照片"
+          label="最多上传4张物流照片"
           imageCount={4}
         />
       </View>

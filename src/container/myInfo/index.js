@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Animated, ScrollView, RefreshControl, BackHandler } from 'react-native';
-import { Container, Icon, Text } from 'native-base';
+import { Container, Icon, Text, Footer } from 'native-base';
 import PropTypes from 'prop-types';
 import { CachedImage } from 'react-native-img-cache';
 import { connect } from 'react-redux';
 import { observer } from 'mobx-react/native';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore, Loading } from '../../components';
+import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore, Loading, ModalCall } from '../../components';
 import base from './base';
 import styles from './styles';
 import Child1 from './child1';
@@ -163,6 +163,41 @@ class MyInfo extends base {
       />
     );
   }
+  _renderFooter() {
+    const { info, memberId, isFollow } = this.state;
+    return (
+      <Footer>
+        <TFeedback
+          content={
+            <View style={[styles.fotBtn1, { borderRightWidth: 1, borderRightColor: '#eee' }]}>
+              <Icon name="heart" style={[styles.fotChatIcon, isFollow ? styles.topIcon1 : '']} />
+              {
+                isFollow ?
+                  <Text style={styles.fotChatText1}>已关注</Text>
+                :
+                  <Text style={styles.fotChatText}>关注</Text>
+              }
+            </View>}
+          onPress={() => { this.CreateMemberFollowService(); }}
+        />
+        <TFeedback
+          content={
+            <View style={styles.fotBtn1}>
+              <Icon name="chatboxes" style={styles.fotChatIcon} />
+              <Text style={styles.fotChatText}>聊生意</Text>
+            </View>}
+          onPress={this.goChat}
+        />
+        <TFeedback
+          content={
+            <View style={styles.fotBtn2}>
+              <Text style={styles.fotText}>打电话</Text>
+            </View>}
+          onPress={() => this.ModalCall.show(info.phone, memberId)}
+        />
+      </Footer>
+    );
+  }
   render() {
     const { pop } = this.props;
     const { loading, refresh, isTabOne, nomore, info } = this.state;
@@ -194,6 +229,8 @@ class MyInfo extends base {
           {loading && <LoadMore />}
           {nomore && <LoadNoMore />}
         </ScrollView>
+        {this._renderFooter()}
+        <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />
       </Container>
     );

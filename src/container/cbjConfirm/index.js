@@ -125,7 +125,7 @@ class cgyPrice extends base {
     const { memo } = this.state;
     return (
       <View style={styles.memoView}>
-        <Text style={styles.memoViewTitle}>货品所在地</Text>
+        <Text style={styles.memoViewTitle}>货品详细描述</Text>
         <Input
           style={styles.memoInput}
           clearButtonMode="while-editing"
