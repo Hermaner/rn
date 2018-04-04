@@ -217,7 +217,6 @@ class Base extends React.Component {
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
         goods[0].cur = true;
@@ -229,8 +228,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   selectCity = (data) => {

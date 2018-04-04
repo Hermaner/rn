@@ -36,6 +36,9 @@ export default class Composer extends React.Component {
 
     AudioRecorder.onFinished = (data) => {
       if (Platform.OS === 'ios') {
+        if (this.state.currentTime < 1) {
+          return;
+        }
         this._finishRecording(data.audioFileURL);
       }
     };
@@ -101,8 +104,8 @@ export default class Composer extends React.Component {
       isTab: false,
     });
     if (this.state.currentTime < 1) {
-      await AudioRecorder.stopRecording();
       Toast.show('少于1s自动取消');
+      AudioRecorder.stopRecording();
       return;
     }
     if (dy < -50) {

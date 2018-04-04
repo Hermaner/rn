@@ -191,6 +191,7 @@ class SessionList extends React.Component {
     this.socket.emit('sendGetChatList');
   }
   notifyGetChatList = (lists) => {
+    console.log(lists);
     let { items } = this.state;
     const newLists = [];
     lists.forEach((list) => {
@@ -225,7 +226,7 @@ class SessionList extends React.Component {
       toMemberId: showMemberId,
     }); // 删除列表
     const { CacheDir } = RNFetchBlob.fs.dirs;
-    const path = `${CacheDir}/${showMemberId}`;
+    const path = `${CacheDir}/${global.memberId}${showMemberId}`;
     RNFetchBlob.fs.unlink(path);
     writeSessionList(JSON.stringify(items));
   }

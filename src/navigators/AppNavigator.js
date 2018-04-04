@@ -333,6 +333,7 @@ class AppWithNavigationState extends React.Component {
   componentDidMount() {
     DeviceEventEmitter.addListener('notifyGetNoReadCount', () => {
       SocketObser.socket.on('notifyGetNoReadCount', (data) => {
+        console.log(data)
         this.setState({
           isDot: data > 0,
         });
@@ -342,7 +343,6 @@ class AppWithNavigationState extends React.Component {
   render() {
     const { dispatch, nav } = this.props;
     const { isDot } = this.state;
-    console.log(isDot);
     return (
       <Root>
         <AppNavigator
@@ -353,11 +353,11 @@ class AppWithNavigationState extends React.Component {
           })}
         />
         {
-          isDot &&
+          isDot && nav.index === 0 &&
           <View
             style={{
               position: 'absolute',
-              right: '30%',
+              right: '32%',
               bottom: isIphoneX ? 64 : 30,
               backgroundColor: '#ff0000',
               width: 10,

@@ -184,7 +184,7 @@ class UserPage extends base {
             <Content contentContainerStyle={{ flex: 1 }}>
               {this._renderForm()}
               {this._renderMid()}
-              {/* {this._renderOther()} */}
+              {this._renderOther()}
             </Content>
         }
         <Loading ref={(c) => { this.sleek = c; }} />
