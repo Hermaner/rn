@@ -5,8 +5,8 @@ import { DeviceEventEmitter } from 'react-native';
 import XPay from 'react-native-puti-pay';
 import { PayAliService, PayAppWeiXinService } from '../../api';
 
-XPay.setWxId('wx4d30b0136bad7f7e');
-XPay.setAlipayScheme('alipay2017070607661320');
+XPay.setWxId('wx3b280438f5c9f74c');
+XPay.setAlipayScheme('alipay2018030102295384');
 class Base extends React.Component {
   constructor(props) {
     super(props);

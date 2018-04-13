@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 4,
-    borderWidth: 4,
+    // borderWidth: 4,
   },
   nowBox: {
     position: 'absolute',

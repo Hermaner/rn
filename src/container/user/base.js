@@ -12,12 +12,12 @@ class UserBase extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '', // 13545883079 18702111649
-      sendPhone: '',
+      phone: '15666666666', // 13545883079 18702111649 13407156848 15666666666
+      sendPhone: '15666666666',
       sec: 60,
       passWord: '',
-      code: '',
-      codeVal: '',
+      code: '1111',
+      codeVal: '1111',
       isCode: true,
       isBind: false,
       memberInfo: {},
@@ -141,7 +141,7 @@ class UserBase extends React.Component {
     RegisterMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration || '12313',
+      registration: global.registration || '',
     }).then((res) => {
       // console.log(res);
       this.sleek.toggle();
@@ -194,7 +194,7 @@ class UserBase extends React.Component {
     UpdateAccessMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration || 'ios',
+      registration: global.registration || '',
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
@@ -256,7 +256,7 @@ class UserBase extends React.Component {
     AccessWinXinLoginService({
       code,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration || 'ios',
+      registration: global.registration || '',
     }).then((res) => {
       this.sleek.toggle();
       console.log(res);

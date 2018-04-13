@@ -1,11 +1,11 @@
-package com.afanti.monkeydoor;
+package com.lelan.huibao;
 
 import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.afanti.monkeydoor.update.UpdatePackage;
+import com.lelan.huibao.update.UpdatePackage;
 import com.facebook.react.ReactApplication;
 import cn.reactnative.modules.qq.QQPackage;
 import com.theweflex.react.WeChatPackage;

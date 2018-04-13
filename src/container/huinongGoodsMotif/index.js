@@ -103,6 +103,7 @@ class HuinongGoodsMotif extends base {
       <View style={styles.tabs}>
         {
           goodsItems.map((item, index) => (
+            item.supplys.length > 0 &&
             <TOpacity
               key={index}
               style={styles.tabView}

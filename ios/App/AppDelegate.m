@@ -34,7 +34,10 @@ sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [JPUSHService setupWithOption:launchOptions appKey:@"d5ab514dd37a028d4cc0835c"
+  JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
+     entity.types = UNAuthorizationOptionAlert|UNAuthorizationOptionBadge|UNAuthorizationOptionSound;
+     [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
+  [JPUSHService setupWithOption:launchOptions appKey:@"052c277451146a2398548cea"
                         channel:nil apsForProduction:nil];
   NSURL *jsCodeLocation;
 

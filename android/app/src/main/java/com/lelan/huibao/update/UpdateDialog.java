@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Html;
-import com.afanti.monkeydoor.R;
+import com.lelan.huibao.R;
 
 class UpdateDialog {
 

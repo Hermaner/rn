@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.afanti.monkeydoor.R;
+import com.lelan.huibao.R;
 
 /**
  * @author feicien (ithcheng@gmail.com)

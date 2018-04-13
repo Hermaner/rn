@@ -1,11 +1,11 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.afanti.monkeydoor.update.UpdateChecker;
-import com.afanti.monkeydoor.MainActivity;
+import com.lelan.huibao.update.UpdateChecker;
+import com.lelan.huibao.MainActivity;
 
 /**
  * Created by lj on 2017/5/6.

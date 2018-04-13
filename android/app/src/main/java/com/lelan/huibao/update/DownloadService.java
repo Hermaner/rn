@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import com.afanti.monkeydoor.R;
+import com.lelan.huibao.R;
 
 public class DownloadService extends IntentService {
     // 10-10 19:14:32.618: D/DownloadService(1926): 测试缓存：41234 32kb

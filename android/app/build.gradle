@@ -98,13 +98,13 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.afanti.monkeydoor"
+        applicationId "com.lelan.huibao"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                JPUSH_APPKEY: "de0af63626de1e41a17ae452",
+                JPUSH_APPKEY: "052c277451146a2398548cea",
                 APP_CHANNEL : "default",
                 QQ_APPID: "1106292962"
         ]

@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

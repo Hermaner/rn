@@ -59,15 +59,20 @@ class App extends React.Component {
         // console.log(token);
       });
       NativeAppEventEmitter.addListener('networkDidLogin', () => {
-        // console.log(token);
+        JPushModule.getRegistrationID((registrationId) => {
+          if (registrationId) {
+            global.registration = registrationId;
+          }
+        });
       });
       NativeAppEventEmitter.addListener('ReceiveNotification', () => {
         // console.log(notification)
       });
     }
     JPushModule.getRegistrationID((registrationId) => {
-      console.log(registrationId);
-      global.registration = registrationId;
+      if (registrationId) {
+        global.registration = registrationId;
+      }
     });
     AppState.addEventListener('change', (appState) => {
       if (appState === 'active') {
@@ -75,7 +80,7 @@ class App extends React.Component {
       }
     });
     this.clearIosBadge();
-    WeChat.registerApp('wx4d30b0136bad7f7e');
+    WeChat.registerApp('wx3b280438f5c9f74c');
     this.premInit();
     // AsyncStorage.removeItem('userData');
     AsyncStorage.getItem('userData', (error, res) => {

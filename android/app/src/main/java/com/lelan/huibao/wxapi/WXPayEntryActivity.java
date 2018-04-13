@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.wxapi;
+package com.lelan.huibao.wxapi;
 
 import com.puti.paylib.XWXPayEntryActivity;
 

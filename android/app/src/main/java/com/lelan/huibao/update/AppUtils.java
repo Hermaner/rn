@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.update;
+package com.lelan.huibao.update;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

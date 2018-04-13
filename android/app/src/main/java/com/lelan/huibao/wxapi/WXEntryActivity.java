@@ -1,4 +1,4 @@
-package com.afanti.monkeydoor.wxapi;
+package com.lelan.huibao.wxapi;
 
 import android.app.Activity;
 import android.os.Bundle;
