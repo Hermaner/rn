@@ -1,11 +1,8 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import XPay from 'react-native-puti-pay';
 import { GetLogisticsService, CreateDeliverOrderService } from '../../api';
 
-XPay.setWxId('wx4d30b0136bad7f7e');
-XPay.setAlipayScheme('alipay');
 class Base extends React.Component {
   constructor(props) {
     super(props);
