@@ -20,7 +20,7 @@ class Base extends React.Component {
     GetUnitsService({
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         if (res.data && res.data.length > 0) {
           for (let i = 0; i < res.data.length; i += 1) {
             options.push({
@@ -36,8 +36,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   saveData = () => {

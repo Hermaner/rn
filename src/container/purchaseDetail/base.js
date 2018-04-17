@@ -42,7 +42,7 @@ class Base extends React.Component {
       memberId,
       purchaseId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         DeviceEventEmitter.emit('emitUser');
@@ -61,7 +61,7 @@ class Base extends React.Component {
       purchaseId,
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -72,9 +72,8 @@ class Base extends React.Component {
       } else {
         global.Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      global.console.log(err);
     });
   }
   goCbjPage = () => {
@@ -87,7 +86,7 @@ class Base extends React.Component {
       currentPage: '1',
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const items = res.data.pageData;
@@ -102,9 +101,8 @@ class Base extends React.Component {
       } else {
         global.Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      global.console.log(err);
     });
   }
 }

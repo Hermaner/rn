@@ -44,11 +44,9 @@ class Base extends React.Component {
     this.props.push({ key: 'GoodDetail', params: { supplyId: ar[0], memberId: ar[1] } });
   }
   onPressAvatar = (memberId) => {
-    console.log(memberId);
     this.props.push({ key: 'MyInfo', params: { memberId } });
   }
   onSend = (items = []) => {
-    console.log(items);
     this.socket.emit('sendMessage', items);
     let { messages } = this.state;
     messages = items.concat(messages);
@@ -88,7 +86,7 @@ class Base extends React.Component {
         RNFetchBlob.fs.readFile(path, 'utf8')
         .then((data) => {
           const messages = JSON.parse(data);
-          console.log(messages);
+          // console.log(messages);
           this.setState({
             messages,
           }, () => {
@@ -181,7 +179,7 @@ class Base extends React.Component {
     this.writeNewFile(messages);
   }
   notifyGetChat = (items) => {
-    console.log(items);
+    // console.log(items);
     let { messages } = this.state;
     const { localSize } = this.state;
     const newItems = [];
@@ -245,7 +243,7 @@ class Base extends React.Component {
     }
   }
   notifyGetChatLog = (data) => {
-    console.log(data);
+    // console.log(data);
     const { pageSize } = this.state;
     this.setState(previousState => ({
       messages: GiftedChat.prepend(previousState.messages, data),
@@ -301,7 +299,7 @@ class Base extends React.Component {
   }
   loadMore = () => {
     const { messages, toUser, currentPage, pageSize } = this.state;
-    console.log(messages[messages.length - 1].createdAt);
+    // console.log(messages[messages.length - 1].createdAt);
     this.socket.emit('sendGetChatLog', { // 发送请求获取分页数据
       toUserId: toUser.memberId,
       currentPage,

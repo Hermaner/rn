@@ -29,7 +29,7 @@ class MyBase extends React.Component {
     const { identityList } = this.state;
     GetDemoRoleService({
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < result.length; i += 1) {
@@ -44,9 +44,8 @@ class MyBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   getImages1 = (upImages) => {
@@ -116,15 +115,14 @@ class MyBase extends React.Component {
       memo,
       imgUrls: imgArray.toString(),
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         Toast.show('申请拿样成功！');
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

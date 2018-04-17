@@ -21,7 +21,7 @@ class GatheringAccountBase extends React.Component {
     GetWithdrawalsNumberService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < result.length; i += 1) {
@@ -52,7 +52,7 @@ class GatheringAccountBase extends React.Component {
       withdrawalsNumberId: cardInfo[index].withdrawalsNumberId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         this.setState({
           items: [],

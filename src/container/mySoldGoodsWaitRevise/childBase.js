@@ -65,9 +65,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   removeOrder = (supplyInfo) => {
@@ -80,7 +79,7 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        console.log(result);
+        // console.log(result);
         this.setState({
           myStatus: result.status,
           removeInfo: result,
@@ -88,9 +87,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   deleteOrder = (orderId) => {
@@ -107,9 +105,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

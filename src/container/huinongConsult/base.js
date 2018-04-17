@@ -15,15 +15,14 @@ class Base extends React.Component {
   GetNewsTypeService = () => {
     GetNewsTypeService().then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         this.setState({
           items: res.data,
         });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
 }

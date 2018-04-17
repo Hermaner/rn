@@ -45,7 +45,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data.realRegionVerifs;
         if (result.realRegionVerifDetails.objectImgUrl !== '' && result.realRegionVerifDetails.objectImgUrl !== null) {
@@ -101,6 +101,5 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
-  push: PropTypes.func,
 };
 export default Base;

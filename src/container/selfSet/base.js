@@ -34,9 +34,8 @@ class SelfSetBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   logOut = () => {
@@ -66,7 +65,6 @@ class SelfSetBase extends React.Component {
   }
 }
 SelfSetBase.propTypes = {
-  push: PropTypes.func,
   pop: PropTypes.func,
 };
 export default SelfSetBase;

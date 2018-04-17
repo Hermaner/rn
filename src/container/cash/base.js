@@ -31,8 +31,7 @@ class CashBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   getMoney = () => {
@@ -52,7 +51,6 @@ class CashBase extends React.Component {
       withdrawalsNumberId: item.withdrawalsNumberId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log('VVVVVVVVVVVVVVVVVV', res);
       if (res.isSuccess) {
         Toast.show('取现成功！');
         DeviceEventEmitter.emit('emitUser');
@@ -62,8 +60,8 @@ class CashBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   saveMoney = (value) => {

@@ -23,7 +23,7 @@ class Base extends React.Component {
     GetPurchaseByOneLevelCategoryService({
       categoryId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const items = res.data;
         if (items.length > 0) {
@@ -39,8 +39,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
 }

@@ -130,7 +130,7 @@ class MyBase extends React.Component {
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

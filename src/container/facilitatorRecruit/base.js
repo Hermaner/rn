@@ -20,7 +20,7 @@ class Base extends React.Component {
     GetEnlistImgService({
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -29,8 +29,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   tellPhone = () => {

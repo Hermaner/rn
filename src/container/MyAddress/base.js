@@ -27,7 +27,7 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const items = res.data.receiveAddresss;
@@ -46,9 +46,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   SetDefaultService = (receiveAddressId) => {
@@ -57,7 +56,7 @@ class Base extends React.Component {
       receiveAddressId,
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -67,9 +66,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   DeleteReceiveAddressService = (receiveAddressId) => {
@@ -78,7 +76,7 @@ class Base extends React.Component {
       receiveAddressId,
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.GetMemberInfoService();
@@ -86,9 +84,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   backCheck = (index) => {

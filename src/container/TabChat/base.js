@@ -2,7 +2,7 @@ import React from 'react';
 import { AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
-import { GetIdentityService, SaveMemberRoleService, GetMemberByNickNameOrPhone } from '../../api';
+import { GetIdentityService, SaveMemberRoleService } from '../../api';
 
 class AdjectiveInfoBase extends React.Component {
   constructor(props) {

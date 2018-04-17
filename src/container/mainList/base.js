@@ -163,7 +163,7 @@ class Base extends React.Component {
       specs,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         if (JSON.stringify(res.map) !== '{}') {
           this.setState({
             firstName: res.map.category.name,
@@ -329,7 +329,6 @@ class Base extends React.Component {
   }
   brandTab = (index) => {
     const { brands } = this.state;
-    console.log(brands[index]);
     this.setState({
       thirdShow: true,
       brandId: brands[index].brandId,

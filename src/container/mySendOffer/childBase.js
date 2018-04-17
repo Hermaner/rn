@@ -33,7 +33,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res.data.pageData);
+        // console.log(res.data.pageData);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -74,8 +74,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   pushPriceInfo = (item) => {
@@ -134,7 +133,7 @@ class Base extends React.Component {
           StopPurchaseService({
             purchaseId,
           }).then((res) => {
-            console.log(res);
+            // console.log(res);
             this.sleek.toggle();
             if (res.isSuccess) {
               Toast.show('操作成功');
@@ -142,9 +141,8 @@ class Base extends React.Component {
             } else {
               Toast.show(res.msg);
             }
-          }).catch((err) => {
+          }).catch(() => {
             this.sleek.toggle();
-            console.log(err);
           });
         }
       },

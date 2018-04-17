@@ -133,7 +133,7 @@ class PurchaseHomebase extends React.Component {
           });
         }
       } else {
-        Toast.show(res.msg);
+        Toast.show(lists.msg);
       }
     });
   }
@@ -179,9 +179,8 @@ class PurchaseHomebase extends React.Component {
   saveMasker = () => {
     this.hideMasker();
   }
-  selectCity = (index) => {
+  selectCity = () => {
     this.hideMasker();
-    console.log(index);
   }
   changeLeftTab = (index) => {
     const { leftLists, leftIndex } = this.state;
@@ -194,9 +193,6 @@ class PurchaseHomebase extends React.Component {
       leftLists,
       leftIndex: index,
     });
-  }
-  goGoodDetail(item) {
-    this.props.push()
   }
   _onRefresh = () => {
     this.setState({

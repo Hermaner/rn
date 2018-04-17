@@ -22,7 +22,7 @@ class Base extends React.Component {
     GetSpecService({
       categoryId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         if (res.data && res.data.length > 0) {

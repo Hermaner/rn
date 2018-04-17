@@ -43,7 +43,7 @@ class Base extends React.Component {
     GetChildSeasonCategoryService({
       seasonCategoryId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;
@@ -61,9 +61,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   goChat = (item) => {

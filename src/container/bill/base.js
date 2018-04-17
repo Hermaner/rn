@@ -18,10 +18,10 @@ class BillBase extends React.Component {
     GetMemberAmountLogService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
-        const result = res.data;
-        console.log('44444444446666666666', result);
+        // const result = res.data;
+        // console.log('44444444446666666666', result);
       } else {
         Toast.show(res.msg);
       }

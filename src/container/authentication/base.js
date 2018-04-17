@@ -35,7 +35,7 @@ class AuthenticationBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -55,7 +55,6 @@ class AuthenticationBase extends React.Component {
   enterSetPassword = () => {
     const { push } = this.props;
     const { code, codeVal } = this.state;
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!')
     if (code !== codeVal) {
       Toast.show('验证码错误');
       return;

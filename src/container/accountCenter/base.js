@@ -32,15 +32,14 @@ class AccountCenterBase extends React.Component {
       memberId: global.memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         this.setState({
           money: res.data,
         });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   initData = () => {
@@ -48,6 +47,9 @@ class AccountCenterBase extends React.Component {
       this.emitCash();
     });
     this.getData();
+  }
+  deleteInit = () => {
+    this.emitMineUser.remove();
   }
   emitCash = () => {
     this.getData();

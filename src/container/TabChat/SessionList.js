@@ -194,7 +194,7 @@ class SessionList extends React.Component {
     this.socket.emit('sendGetChatList');
   }
   notifyGetChatList = (lists) => {
-    console.log(lists);
+    // console.log(lists);
     let { items } = this.state;
     const newLists = [];
     lists.forEach((list) => {

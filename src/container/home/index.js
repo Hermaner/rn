@@ -30,6 +30,7 @@ class HomeScreen extends base {
     Location.start();
   }
   componentWillUnmount() {
+    this.deleteInit();
     // Location.stop();
     // console.log()
     // this.listener.remove();

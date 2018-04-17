@@ -3,12 +3,12 @@ import { View, BackHandler, Platform, DeviceEventEmitter, AppState } from 'react
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import RNAndroidNotificationPermission from 'react-native-android-notification-permission';
-import { Container, Text, Content, Switch } from 'native-base';
+import { Container, Text, Content } from 'native-base';
 import { connect } from 'react-redux';
 import Permissions from 'react-native-permissions';
 import { observer } from 'mobx-react/native';
 import { popRoute, pushRoute } from '../../actions';
-import { Loading, Header, UserSocket } from '../../components';
+import { Loading, Header } from '../../components';
 import { SetMemberAnIsPushService } from '../../api';
 import styles from './styles';
 
@@ -65,7 +65,6 @@ class MessageSet extends React.Component {
   }
   permiss = () => {
     const types = Permissions.getTypes();
-    console.log(types);
     if (types.join('').indexOf('notification') > -1) {
       Permissions.request('notification').then((response) => {
         this.setState({
@@ -83,7 +82,7 @@ class MessageSet extends React.Component {
       anIsPush: isStart ? '1' : '0',
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         DeviceEventEmitter.emit('emitUser');
         Toast.show(isStart ? '已开启消息通知' : '已关闭消息通知');
@@ -140,6 +139,5 @@ class MessageSet extends React.Component {
 
 MessageSet.propTypes = {
   pop: PropTypes.func,
-  push: PropTypes.func,
 };
 export default connect(null, { pop: popRoute, push: pushRoute })(MessageSet);

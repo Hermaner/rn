@@ -19,7 +19,7 @@ class Base extends React.Component {
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
         goods[0].cur = true;
@@ -31,8 +31,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   leftTab = (index) => {
@@ -56,7 +55,6 @@ class Base extends React.Component {
   }
 }
 Base.propTypes = {
-  push: PropTypes.func,
   pop: PropTypes.func,
 };
 export default Base;

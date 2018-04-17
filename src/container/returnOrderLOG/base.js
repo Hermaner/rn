@@ -1,7 +1,5 @@
 import React from 'react';
-import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { GetDeliverOrderService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {

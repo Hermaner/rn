@@ -22,6 +22,7 @@ class AccountCenter extends AccountCenterBase {
     this.initData();
   }
   componentWillUnmount() {
+    this.deleteInit();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

@@ -75,7 +75,7 @@ class Base extends React.Component {
       role: userType,
       identityId: items[typeIndex].identityId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         AsyncStorage.setItem('userData', JSON.stringify(res.data));
@@ -95,9 +95,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

@@ -25,13 +25,12 @@ class NotificationSystemDetailBase extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         DeviceEventEmitter.emit('notificationSystem');
-        console.log(res);
+        // console.log(res);
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

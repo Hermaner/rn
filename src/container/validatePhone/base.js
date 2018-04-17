@@ -23,7 +23,7 @@ class RevisePhoneBase extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -60,7 +60,7 @@ class RevisePhoneBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -105,14 +105,12 @@ class RevisePhoneBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }
 RevisePhoneBase.propTypes = {
-  navigation: PropTypes.object,
   pop: PropTypes.func,
 };
 export default RevisePhoneBase;

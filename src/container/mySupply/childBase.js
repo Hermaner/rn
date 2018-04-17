@@ -73,7 +73,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -114,8 +114,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   renovate = (supplyId) => {
@@ -125,14 +124,13 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         this._onRefresh();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   emitMySupply = () => {
@@ -150,14 +148,13 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         this._onRefresh();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   ShelfSupplyService = (supplyId) => {
@@ -167,14 +164,12 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         this._onRefresh();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   DeleteSupplyService = (supplyId) => {
@@ -184,14 +179,12 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         this._onRefresh();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   btnChange = (btnName, supplyId, index) => {
@@ -201,7 +194,6 @@ class Base extends React.Component {
         this.undercarriage(supplyId);
         break;
       case '修改':
-        console.log(items[index]);
         this.props.push({ key: 'CgyxComfirm', params: { item: items[index] } });
         break;
       case '刷新':
@@ -233,7 +225,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   type: PropTypes.string,
-  status: PropTypes.string,
   push: PropTypes.func,
 };
 export default Base;

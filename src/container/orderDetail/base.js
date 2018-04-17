@@ -105,10 +105,8 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         const result = res.data.receiveAddresss;
         if (result.length === 0) {
           return;
@@ -121,9 +119,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   initData = () => {
@@ -212,7 +209,6 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         DeviceEventEmitter.emit('emitUser');
         push({ key: 'OrderInfo', params: { orderInfo: res.data, supplyInfo, emit: 'reset' } });
       } else {

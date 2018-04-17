@@ -26,7 +26,7 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        console.log(result);
+        // console.log(result);
         const newResult = [];
         for (let i = 0; i < result.length; i += 1) {
           newResult.push({
@@ -40,9 +40,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   setSelect = (optionType) => {
@@ -128,9 +127,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

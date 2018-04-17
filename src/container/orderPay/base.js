@@ -1,7 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { DeviceEventEmitter } from 'react-native';
 import XPay from 'react-native-puti-pay';
 import { PayAliService, PayAppWeiXinService } from '../../api';
 
@@ -44,20 +43,18 @@ class Base extends React.Component {
       orderId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         XPay.alipay(res.data, (json) => {
-          console.log(json);
           const { resultStatus } = json;
           if (resultStatus === '9000') {
             Toast.show('支付成功！');
             this.props.push({ key: 'MyBuyGoods', params: { type: 'reset' } });
           }
-        }).catch(err => console.log(err));
+        }).catch(() => { });
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   goWXpay(orderId) {
@@ -65,11 +62,10 @@ class Base extends React.Component {
     PayAppWeiXinService({
       orderId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const parmas = res.data;
-        console.log(parmas)
         XPay.wxPay({
           partnerId: parmas.partnerid,
           prepayId: parmas.prepayid,
@@ -78,7 +74,7 @@ class Base extends React.Component {
           timeStamp: parmas.timestamp,
           sign: parmas.sign,
         }, (json) => {
-          console.log(json);
+          // console.log(json);
           const { errCode } = json;
           if (errCode === '0' || errCode === 0) {
             Toast.show('支付成功！');
@@ -86,9 +82,8 @@ class Base extends React.Component {
           }
         });
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   choosePay = (index) => {

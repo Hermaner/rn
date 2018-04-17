@@ -40,6 +40,9 @@ class Base extends React.Component {
       this.getBuyGoodsCount();
     });
   }
+  deleteInit = () => {
+    this.EmitBuyGoodsCount.remove();
+  }
 }
 Base.propTypes = {
   status: PropTypes.string,

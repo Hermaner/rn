@@ -98,12 +98,11 @@ class Base extends React.Component {
       memo,
       supplyId: items[itemIndex].supplyId.toString(),
     };
-    console.log(purchaseQuote);
     CreatePurchaseQuoteService({
       purchaseQuote: JSON.stringify(purchaseQuote),
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('报价成功');
@@ -112,9 +111,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

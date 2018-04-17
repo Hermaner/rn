@@ -24,7 +24,6 @@ class Child extends Base {
   componentWillUnmount() {
   }
   _renderRow = ({ item, index }) => {
-    const { push } = this.props;
     return (
       <View style={styles.evalView}>
         <View style={styles.evalViewBom}>

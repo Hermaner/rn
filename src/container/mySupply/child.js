@@ -17,7 +17,7 @@ class Child extends ChildBase {
   componentDidMount() {
     this.getInit();
     this._onRefresh();
-    DeviceEventEmitter.addListener('emitMySupply', (status) => {
+    this.emitMySupply = DeviceEventEmitter.addListener('emitMySupply', (status) => {
       const { type } = this.props;
       if (status === type) {
         this._onRefresh();

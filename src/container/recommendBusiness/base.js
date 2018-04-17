@@ -31,7 +31,7 @@ class Base extends React.Component {
       pageSize,
       currentPage,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
@@ -77,8 +77,7 @@ class Base extends React.Component {
         });
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   tabChange = (isTabOne) => {

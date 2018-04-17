@@ -31,7 +31,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;
-        console.log(result);
+        // console.log(result);
         const province = result.provinceCode;
         const city = result.cityCode;
         const district = result.districtCode;
@@ -46,9 +46,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   getImages1 = (upImages) => {
@@ -70,7 +69,6 @@ class Base extends React.Component {
     this.setState({
       userName: value,
     });
-    console.log(this.state.userName);
   }
   saveUserCredentials = (value) => {
     this.setState({
@@ -133,17 +131,15 @@ class Base extends React.Component {
     PersonVerifService({
       personVerif: JSON.stringify(personVerif),
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         Toast.show('个人认证信息已上传，请等待认证');
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   _onRefresh = () => {

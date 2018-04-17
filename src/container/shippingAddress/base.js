@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetMemberInfoService, DeleteReceiveAddressService, SetDefaultService } from '../../api';
 
-let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +48,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.receiveAddresss;
         this.setState({
           name: result[0].name,
@@ -89,7 +88,6 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -99,9 +97,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   deleteAdress = (receiveAddressId) => {
@@ -112,14 +109,12 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         this._onRefresh();
-        console.log(res);
-        setTimeout(() => { canEnd = true; }, 0);
+        // console.log(res);
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   defaultAdress = (receiveAddressId) => {
@@ -132,14 +127,11 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         this._onRefresh();
-        console.log(res);
-        setTimeout(() => { canEnd = true; }, 0);
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   _onRefresh = () => {

@@ -48,7 +48,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
@@ -91,9 +91,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   _onRefresh = () => {

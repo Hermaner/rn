@@ -298,6 +298,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
     marginTop: 6,
+    marginBottom: 5,
   },
   nowBox: {
     position: 'absolute',

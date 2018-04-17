@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListView, DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import Toast from 'react-native-simple-toast';
 import { GetMessageService } from '../../api';
@@ -25,6 +25,9 @@ class NotificationSystemBase extends React.Component {
       this.notificationSystem();
     });
   }
+  getDelete = () => {
+    this.emitMineUser.remove();
+  }
   getData = () => {
     const { currentPage, pageSize, items, refresh, memberId } = this.state;
     const { type } = this.props;
@@ -35,7 +38,7 @@ class NotificationSystemBase extends React.Component {
       type,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -76,8 +79,7 @@ class NotificationSystemBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   notificationSystem = () => {

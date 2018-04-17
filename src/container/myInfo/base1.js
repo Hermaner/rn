@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { GetSupplyService } from '../../api';
 
@@ -43,7 +42,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (supplyGoodsList.length === 0) {
@@ -85,8 +84,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   _onRefresh = () => {

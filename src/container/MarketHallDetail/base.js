@@ -35,7 +35,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         const newItems = items.concat(result);
         this.setState({
@@ -44,9 +44,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   GetDistrictMarketInfo = () => {
@@ -56,7 +55,7 @@ class Base extends React.Component {
     GetDistrictMarketInfo({
       marketId: item.marketId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         this.setState({
           info: res.data,
@@ -64,8 +63,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
 }

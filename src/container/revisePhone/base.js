@@ -55,7 +55,7 @@ class RevisePhoneBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -74,7 +74,6 @@ class RevisePhoneBase extends React.Component {
   }
   reviseUserInfo = () => {
     const { memberId, phone, code, codeVal } = this.state;
-    const { push } = this.props;
     if (!code) {
       Toast.show('请输入验证码');
       return;
@@ -93,20 +92,18 @@ class RevisePhoneBase extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         DeviceEventEmitter.emit('emitPhone');
         this.props.pop();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }
 RevisePhoneBase.propTypes = {
-  push: PropTypes.func,
   pop: PropTypes.func,
 };
 export default RevisePhoneBase;

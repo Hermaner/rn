@@ -112,7 +112,7 @@ class Base extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -174,7 +174,7 @@ class Base extends React.Component {
     AddOrUpdateReceiveAddressService({
       receiveAddress: JSON.stringify(receiveAddress),
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('保存成功');
@@ -185,9 +185,8 @@ class Base extends React.Component {
         Toast.show(res.msg);
         this.props.pop();
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }
