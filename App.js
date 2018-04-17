@@ -88,7 +88,7 @@ class App extends React.Component {
         global.userData = JSON.parse(res);
         UserSocket.changeData(global.userData);
         global.memberId = JSON.parse(res).memberId;
-        console.log(global.userData);
+        // console.log(global.userData);
         SocketObser.getConnect();
       }
     });
@@ -121,12 +121,12 @@ class App extends React.Component {
     const canOpenSettings = Permissions.canOpenSettings();
     this.setState({ types, canOpenSettings });
     Permissions.request('location').then((response) => {
-      console.log(response)
+      // console.log(response)
       global.reqLocation = response;
     });
     if (types.join('').indexOf('notification') > -1) {
       Permissions.request('notification').then((response) => {
-        console.log(response)
+        // console.log(response)
         global.reqNotification = response;
       });
     }
