@@ -152,6 +152,8 @@ import CallLog from '../container/callLog';
 import BuyerProtection from '../container/buyerProtection';
 import ImgInfo from '../container/imgInfo';
 import SearchPeople from '../container/searchPeople';
+import ReturnGoods from '../container/returnGoods';
+import ReturnOrderLOG from '../container/returnOrderLOG';
 
 export const AppNavigator = StackNavigator({
   ChatSupply: { screen: ChatSupply },
@@ -295,6 +297,8 @@ export const AppNavigator = StackNavigator({
   BuyerProtection: { screen: BuyerProtection },
   ImgInfo: { screen: ImgInfo },
   SearchPeople: { screen: SearchPeople },
+  ReturnGoods: { screen: ReturnGoods },
+  ReturnOrderLOG: { screen: ReturnOrderLOG },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

@@ -92,6 +92,18 @@ class Child extends ChildBase {
             </View>
           }
           {
+            (item.status === '6') &&
+            <View style={styles.footerBox}>
+              <TFeedback
+                content={
+                  <View style={styles.btnBox}>
+                    <Text style={{ color: '#444', fontSize: 14 }}>同意退款</Text>
+                  </View>}
+                onPress={() => { this.deleteOrder(item.orderId); }}
+              />
+            </View>
+          }
+          {
             (item.status === '8') &&
             <View style={styles.footerBox}>
               <TFeedback

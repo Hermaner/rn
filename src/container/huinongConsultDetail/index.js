@@ -205,14 +205,6 @@ class HuinongConsultDetail extends base {
                           onPress={() => { this.setState({ visible: false }); }}
                         />
                       </View>
-                      {/* <Input
-                        style={styles.inputText}
-                        value={label}
-                        onChangeText={text => this.saveLabel(text)}
-                        multiline
-                        placeholder="我来说两句"
-                        placeholderTextColor="#777"
-                      /> */}
                       <View style={{ height: 100 }}>
                         <Input
                           style={styles.inputText}

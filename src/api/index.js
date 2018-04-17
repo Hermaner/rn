@@ -462,3 +462,21 @@ export function GetMemberExistsService(data) {
 export function GetMemberByNickNameOrPhone(data) {
   return get('GetMemberByNickNameOrPhone', data);
 }
+export function CreateRefundOrderService(data) {
+  return get('CreateRefundOrderService', data);
+}
+export function CancelRefundOrder(data) {
+  return get('CancelRefundOrder', data);
+}
+export function ConfirmRefundOrder(data) {
+  return get('ConfirmRefundOrder', data);
+}
+export function WeiXinRefundService(data) {
+  return post('WeiXinRefundService', data);
+}
+export function AliRefundService(data) {
+  return post('AliRefundService', data);
+}
+export function CreateRefundInfoService(data) {
+  return get('CreateRefundInfoService', data);
+}

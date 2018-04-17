@@ -105,6 +105,13 @@ class Child extends ChildBase {
                   </View>}
                 onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListBuyGoods' } }); }}
               />
+              <TFeedback
+                content={
+                  <View style={styles.btnBox}>
+                    <Text style={{ color: '#444', fontSize: 14 }}>退货退款</Text>
+                  </View>}
+                onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListBuyGoods' } }); }}
+              />
             </View>
           }
           {

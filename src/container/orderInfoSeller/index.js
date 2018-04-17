@@ -330,6 +330,54 @@ class OrderInfoSeller extends base {
           </View>
         }
         {
+          orderInfo.refundOrder &&
+          !orderInfo.refundOrder.refundOrderNumber &&
+          orderInfo.status === '6' && orderInfo.refundOrder.type === '1' &&
+          <View style={styles.footerBox}>
+            <TFeedback
+              content={
+                <View style={styles.btnBox1}>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>同意退款</Text>
+                </View>}
+              onPress={() => { this.returnMoneyOk(); }}
+            />
+          </View>
+        }
+        {
+          orderInfo.refundOrder &&
+          !orderInfo.refundOrder.refundOrderNumber &&
+          orderInfo.status === '6' && orderInfo.refundOrder.type === '2' &&
+          <View style={styles.footerBox}>
+            <TFeedback
+              content={
+                <View style={styles.btnBox1}>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>同意退货申请</Text>
+                </View>}
+              onPress={() => { this.ConfirmRefundOrder(); }}
+            />
+          </View>
+        }
+        {
+          orderInfo.refundOrder &&
+          orderInfo.refundOrder.refundOrderNumber &&
+          <View style={styles.footerBox}>
+            <TFeedback
+              content={
+                <View style={styles.btnBox}>
+                  <Text style={{ color: '#444', fontSize: 16 }}>查看退货物流</Text>
+                </View>}
+              onPress={() => { push({ key: 'ReturnOrderLOG', params: { info: orderInfo.refundOrder.refundInfo } }); }}
+            />
+            <TFeedback
+              content={
+                <View style={styles.btnBox1}>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>确认退款</Text>
+                </View>}
+              onPress={() => { this.returnMoneyOk(); }}
+            />
+          </View>
+        }
+        {
           orderInfo.status === '8' &&
           <View style={styles.footerBox}>
             <TFeedback

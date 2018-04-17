@@ -2,7 +2,13 @@ import React from 'react';
 import { DeviceEventEmitter, Alert, Clipboard } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService } from '../../api';
+import {
+  UpdateOrderService,
+  DeleteOrderService,
+  GetDeliverOrderService,
+  WeiXinRefundService,
+  AliRefundService,
+ConfirmRefundOrder } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -135,6 +141,95 @@ class Base extends React.Component {
           } },
       ],
     );
+  }
+  ConfirmRefundOrder = () => {
+    const { orderInfo } = this.state;
+    const { type } = this.props.navigation.state.params;
+    Alert.alert(
+      '温馨提示', '确认同意退货退款申请？',
+      [
+        { text: '取消', onPress: () => {} },
+        { text: '确认',
+          onPress: () => {
+            this.sleek.toggle();
+            ConfirmRefundOrder({
+              memberId: global.memberId,
+              refundOrderId: orderInfo.refundOrder.refundOrderId,
+            }).then((res) => {
+              this.sleek.toggle();
+              if (res.isSuccess) {
+                Toast.show('已同意退货退款申请！');
+                DeviceEventEmitter.emit(type);
+                DeviceEventEmitter.emit('getSoldGoodsCount');
+                this.props.pop();
+              } else {
+                Toast.show(res.msg);
+              }
+            }).catch(() => {
+              this.sleek.toggle();
+            });
+          } },
+      ],
+    );
+  }
+  returnMoneyOk = () => {
+    const { orderInfo } = this.state;
+    Alert.alert(
+      '温馨提示', '确认同意退款？',
+      [
+        { text: '取消', onPress: () => {} },
+        { text: '确认',
+          onPress: () => {
+            if (orderInfo.payTypeId === '1') {
+              this.weixinReturnMoney();
+              return;
+            }
+            if (orderInfo.payTypeId === '2') {
+              this.zhifubaoReturnMoney();
+            }
+          } },
+      ],
+    );
+  }
+  weixinReturnMoney = () => {
+    const { orderInfo } = this.state;
+    const { type } = this.props.navigation.state.params;
+    this.sleek.toggle();
+    WeiXinRefundService({
+      refundOrderId: orderInfo.refundOrder.refundOrderId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        Toast.show('退款成功！');
+        DeviceEventEmitter.emit(type);
+        DeviceEventEmitter.emit('getSoldGoodsCount');
+        this.props.pop();
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  zhifubaoReturnMoney = () => {
+    const { orderInfo } = this.state;
+    const { type } = this.props.navigation.state.params;
+    this.sleek.toggle();
+    AliRefundService({
+      refundOrderId: orderInfo.refundOrder.refundOrderId,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        Toast.show('退款成功！');
+        DeviceEventEmitter.emit(type);
+        DeviceEventEmitter.emit('getSoldGoodsCount');
+        this.props.pop();
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
   }
   reviseOrder = () => {
     const { favorable, orderInfo, type, freight } = this.state;

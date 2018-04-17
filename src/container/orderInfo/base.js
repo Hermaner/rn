@@ -2,7 +2,7 @@ import React from 'react';
 import { DeviceEventEmitter, Alert, Clipboard } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService } from '../../api';
+import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService, CreateRefundOrderService, CancelRefundOrder } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -19,6 +19,9 @@ class Base extends React.Component {
       type: '',
       freight: 0, // 运费
       LOGInfo: '', // 快递信息
+      visible: false,
+      visible2: false,
+      message: '',
       statusInfo: [{
         title: '买家下单成功，等待卖家修改',
         lable: '需要卖家修改运费，优惠等。您可以通过下方的‘聊生意’或‘打电话’，与之联系',
@@ -39,6 +42,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
+    console.log('11111111111111111111111111', orderInfo);
     this.setState({
       orderInfo,
       supplyInfo,
@@ -106,6 +110,87 @@ class Base extends React.Component {
           } },
       ],
     );
+  }
+  saveLabel = (message) => {
+    this.setState({
+      message,
+    });
+  }
+  returnMoneyService = () => {
+    const { message, orderInfo } = this.state;
+    if (!message) {
+      Toast.show('请输入申请理由！');
+      return;
+    }
+    this.sleek.toggle();
+    CreateRefundOrderService({
+      orderId: orderInfo.orderId,
+      message,
+      type: '1',
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.setState({ visible: false }, Toast.show('申请退款消息已发送！'));
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  returnMoneyAndGoods = () => {
+    const { message, orderInfo } = this.state;
+    if (!message) {
+      Toast.show('请输入申请理由！');
+      return;
+    }
+    this.sleek.toggle();
+    CreateRefundOrderService({
+      orderId: orderInfo.orderId,
+      message,
+      type: '2',
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        this.setState({ visible2: false }, Toast.show('申请退货退款已发送！'));
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
+  }
+  CancelRefundOrder = () => {
+    const { orderInfo } = this.state;
+    Alert.alert(
+      '温馨提示', '确认取消退款？',
+      [
+        { text: '取消', onPress: () => {} },
+        { text: '确认',
+          onPress: () => {
+            this.sleek.toggle();
+            CancelRefundOrder({
+              memberId: global.memberId,
+              refundOrderId: orderInfo.refundOrder.refundOrderId,
+            }).then((res) => {
+              this.sleek.toggle();
+              if (res.isSuccess) {
+                Toast.show('取消退款成功！');
+              } else {
+                Toast.show(res.msg);
+              }
+            }).catch(() => {
+              this.sleek.toggle();
+            });
+          } },
+      ],
+    );
+  }
+  returnMoneyBtn = () => {
+    this.setState({ visible: true });
+  }
+  returnMoneyAndGoodsBtn = () => {
+    this.setState({ visible2: true });
   }
   goChat = () => {
     const { supplyInfo } = this.state;

@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { st, Mcolor, deviceW } from '../../utils';
 
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   firstBox: {
     flexDirection: 'row',
@@ -357,6 +358,47 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginRight: 10,
+  },
+  modalBox: {
+    height: 200,
+    width: width - 20,
+    backgroundColor: 'white',
+    borderRadius: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  modalTitleBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalTitleText: {
+    flex: 2,
+    color: '#666',
+    fontSize: 18,
+    textAlign: 'right',
+    marginRight: 40,
+  },
+  inputText: {
+    borderWidth: 1,
+    borderColor: '#eee',
+    borderRadius: 4,
+    fontSize: 14,
+    flex: 1,
+    color: '#666',
+    textAlignVertical: 'top',
+  },
+  submitBox: {
+    backgroundColor: Mcolor,
+    marginTop: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 4,
+  },
+  submitText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
 export default styles;
