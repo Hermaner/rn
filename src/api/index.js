@@ -45,7 +45,7 @@ export function post(path, data) {
 }
 export function get(path, data) {
   const purl = `${httpurl}${path}?${obj2form(systemParam(data))}`;
-  console.log(purl);
+  // console.log(purl);
   return request(purl, {
     method: 'GET',
     headers: {
@@ -55,7 +55,7 @@ export function get(path, data) {
 }
 export function ampGet(data) {
   const purl = `https://restapi.amap.com/v3/geocode/regeo?${obj2form(data)}`;
-  console.log(purl);
+  // console.log(purl);
   return request(purl, {
     method: 'GET',
   });
