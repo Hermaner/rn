@@ -31,7 +31,6 @@ class Base extends React.Component {
     if (orderInfo.status === '4') {
       btnType[0].isChoose = true;
     }
-    console.log('EEEEEEEEEEEEe', orderInfo);
     this.setState({
       orderInfo,
       status: orderInfo.status,
