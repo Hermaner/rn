@@ -163,6 +163,7 @@ class Goods extends base {
         <Swiper
           style={styles.wrapper}
           height={150}
+          key={imgList.length}
           loop
           autoplay
           autoplayTimeout={2}

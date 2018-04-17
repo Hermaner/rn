@@ -59,6 +59,9 @@ class Child extends ChildBase {
       <Swiper
         style={styles.wrapper}
         height={200}
+        loop
+        autoplay
+        key={imgLists.length}
         paginationStyle={{ justifyContent: 'center', bottom: 10 }}
       >
         {

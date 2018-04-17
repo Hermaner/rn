@@ -47,6 +47,9 @@ class StrengthBusiness extends Base {
           <Swiper
             style={styles.wrapper}
             height={200}
+            loop
+            autoplay
+            key={bodyImgUrls.length}
             paginationStyle={{ justifyContent: 'center', bottom: 0 }}
           >
             {
