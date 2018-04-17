@@ -99,7 +99,7 @@ class Child extends ChildBase {
                   <View style={styles.btnBox}>
                     <Text style={{ color: '#444', fontSize: 14 }}>同意退款</Text>
                   </View>}
-                onPress={() => { this.deleteOrder(item.orderId); }}
+                onPress={() => { this.props.push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
               />
             </View>
           }
