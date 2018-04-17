@@ -29,7 +29,7 @@ class CollectiveAuthenticationBase extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;
@@ -46,9 +46,8 @@ class CollectiveAuthenticationBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   getImages1 = (upImages) => {
@@ -76,7 +75,6 @@ class CollectiveAuthenticationBase extends React.Component {
       organizationImg: upImages[upImages.length - 1].uri,
       organizationImgUrl: upImages[upImages.length - 1].key,
     });
-    console.log('^^', upImages);
   }
   submit = (type) => {
     const {
@@ -151,15 +149,15 @@ class CollectiveAuthenticationBase extends React.Component {
     EntVerifService({
       entVerif: JSON.stringify(entVerif),
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('企业认证信息已上传，请等待认证');
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
 }

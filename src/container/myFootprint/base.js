@@ -30,7 +30,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const timeList = [];
@@ -43,7 +43,8 @@ class Base extends React.Component {
           const allTime =
           ((result[i].purchaseTime) * 86400000) + (new Date(result[i].postDate)).getTime();
           if (allTime > myDate) {
-            result[i].surplusTime = JSON.stringify(Math.floor((allTime - myDate) / 1000 / 60 / 60 / 24));
+            result[i].surplusTime =
+            JSON.stringify(Math.floor((allTime - myDate) / 1000 / 60 / 60 / 24));
           } else {
             result[i].surplusTime = '0';
           }
@@ -77,8 +78,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
 }

@@ -3,6 +3,7 @@ import { View, BackHandler } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
+import CountDownTimer from 'react_native_countdowntimer';
 import { connect } from 'react-redux';
 import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
@@ -30,7 +31,7 @@ class OrderInfoSeller extends base {
   };
   _renderBody() {
     const { push } = this.props;
-    const { orderInfo, supplyInfo, tu, myStatus, LOGInfo, statusInfo } = this.state;
+    const { orderInfo, supplyInfo, tu, myStatus, LOGInfo, statusInfo, getTime } = this.state;
     return (
       <View style={styles.pagebody}>
         {
@@ -44,6 +45,15 @@ class OrderInfoSeller extends base {
                 <Text style={styles.noticeLabel}>
                   {statusInfo[parseFloat(orderInfo.status) - 1].lable}
                 </Text>
+                {
+                  getTime && <CountDownTimer
+                    date={getTime}
+                    days={{ plural: '天 ', singular: 'day ' }}
+                    hours=":"
+                    mins=":"
+                    segs=""
+                  />
+                }
               </View>
               <View style={styles.nowBox}>
                 <Text style={styles.boxText}>当前</Text>
@@ -52,11 +62,26 @@ class OrderInfoSeller extends base {
             <View style={styles.displayBox}>
               <View>
                 <View style={styles.distanceLabel}>
-                  <View style={parseFloat(orderInfo.status) === 1 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 2 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 3 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 4 ? styles.labelBoxNow : styles.labelBox} />
-                  <View style={parseFloat(orderInfo.status) === 5 ? styles.labelBoxNow : styles.labelBox} />
+                  <View
+                    style={parseFloat(orderInfo.status) === 1 ?
+                      styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 2 ?
+                      styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 3 ?
+                      styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 4 ?
+                      styles.labelBoxNow : styles.labelBox}
+                  />
+                  <View
+                    style={parseFloat(orderInfo.status) === 5 ?
+                      styles.labelBoxNow : styles.labelBox}
+                  />
                 </View>
                 <View style={styles.line} />
               </View>
@@ -216,7 +241,8 @@ class OrderInfoSeller extends base {
         </View>
         <View style={styles.orderInfoBox}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={[styles.sixText, { flex: 1, marginBottom: 6 }]}>订单编号：{orderInfo.orderNumber}</Text>
+            <Text style={[styles.sixText, { flex: 1, marginBottom: 6 }]}>
+              订单编号：{orderInfo.orderNumber}</Text>
             <TOpacity
               style={styles.copyBox}
               content={
@@ -228,7 +254,8 @@ class OrderInfoSeller extends base {
           <Text style={[styles.sixText, { marginBottom: 6 }]}>下单时间：{orderInfo.postDate}</Text>
           {
             orderInfo.updateAmountTime !== null &&
-            <Text style={[styles.sixText, { marginBottom: 6 }]}>订单修改：{orderInfo.updateAmountTime}</Text>
+            <Text style={[styles.sixText, { marginBottom: 6 }]}>
+              订单修改：{orderInfo.updateAmountTime}</Text>
           }
           {
             orderInfo.payTime !== null &&

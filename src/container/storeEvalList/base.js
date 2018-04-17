@@ -33,7 +33,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -49,7 +49,7 @@ class Base extends React.Component {
           return;
         }
         if (refresh) {
-          console.log('@@@@@@@@@@@@', result);
+          // console.log('@@@@@@@@@@@@', result);
           this.setState({
             items: result,
             currentPage: currentPage + 1,
@@ -75,8 +75,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   showImageDate = (imageDateIndex, imageData) => {

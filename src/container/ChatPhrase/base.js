@@ -28,7 +28,7 @@ class Base extends React.Component {
   }
   GetPhraseService = () => {
     GetPhraseService().then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const { systemPhrases, memberPhrases } = res.data;
         const items = memberPhrases.concat(systemPhrases);
@@ -39,8 +39,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   CreateMemberPhraseService = (title) => {
@@ -48,7 +47,7 @@ class Base extends React.Component {
     CreateMemberPhraseService({
       title,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('添加成功');
@@ -56,8 +55,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
       this.sleek.toggle();
     });
   }
@@ -66,15 +64,14 @@ class Base extends React.Component {
       title,
       id,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         Toast.show('修改成功');
         this.GetPhraseService();
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   add = () => {
@@ -94,7 +91,7 @@ class Base extends React.Component {
     DeleteMemberPhraseService({
       id: items[index].id,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.GetPhraseService();
@@ -102,9 +99,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   select = (text) => {
@@ -113,7 +109,6 @@ class Base extends React.Component {
   }
 }
 Base.propTypes = {
-  navigation: PropTypes.object,
   pop: PropTypes.func,
   push: PropTypes.func,
 };

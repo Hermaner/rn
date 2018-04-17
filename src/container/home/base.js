@@ -80,7 +80,7 @@ class Base extends React.Component {
     const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {
-      console.log('yyyyyyyyyyy', res)
+      // console.log('yyyyyyyyyyy', res)
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
         let categorysArray = [];
@@ -110,6 +110,9 @@ class Base extends React.Component {
     this.GetBackgroundImgService();
     this._onRefreshSupply();
     this.GetPlatformInfoService();
+  }
+  deleteInit = () => {
+    this.emitPushHome.remove();
   }
   GetBackgroundImgService = () => {
     GetBackgroundImgService({

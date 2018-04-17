@@ -33,7 +33,7 @@ class Base extends React.Component {
     GetWithdrawalsNumberService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const cards = res.data;
@@ -48,9 +48,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   goPage = (type) => {

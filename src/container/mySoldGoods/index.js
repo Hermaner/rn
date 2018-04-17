@@ -23,6 +23,7 @@ class MySoldGoods extends myBuyGoodsBase {
     this.getInit();
   }
   componentWillUnmount() {
+    this.deleteInit();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

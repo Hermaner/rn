@@ -31,7 +31,7 @@ class Base extends React.Component {
       type,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

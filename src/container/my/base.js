@@ -381,8 +381,7 @@ class MyBase extends React.Component {
           type: 'news',
           webpageUrl: 'http://www.baidu.com',
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       } else {
         Toast.show('没有安装微信软件，请您安装微信之后再试');

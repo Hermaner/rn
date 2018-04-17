@@ -97,7 +97,7 @@ class Base extends React.Component {
       memberId: global.memberId,
       type: '1',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -133,7 +133,6 @@ class Base extends React.Component {
     this.setState({
       upImages,
     });
-    console.log(upImages)
   }
   cityCgyGet = (data) => {
     const { items } = this.state;
@@ -232,7 +231,8 @@ class Base extends React.Component {
       this.props.push({ key: items[index].page, params: { memo } });
       return;
     }
-    this.props.push({ key: items[index].page, params: { supplyMode, logisticsMode, renderServices } });
+    this.props.push({ key: items[index].page,
+      params: { supplyMode, logisticsMode, renderServices } });
   }
   saveData = () => {
     const {
@@ -312,7 +312,7 @@ class Base extends React.Component {
       isRepeat: '1',
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
@@ -320,9 +320,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

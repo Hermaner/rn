@@ -17,7 +17,7 @@ class CertificationBase extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

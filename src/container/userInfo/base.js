@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeviceEventEmitter, Alert, AsyncStorage } from 'react-native';
+import { DeviceEventEmitter, Alert } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react/native';
@@ -36,10 +36,8 @@ class UserInfoBase extends React.Component {
       licenseImg: upImages[upImages.length - 1].uri,
       licenseImgUrl: upImages[upImages.length - 1].key,
     });
-    console.log('^^', upImages[upImages.length - 1].key);
   }
   userInfoEmit = (data) => {
-    console.log(data);
     this.setState({
       provinceCode: data.sendProvinceCode,
       cityCode: data.sendCityCode,
@@ -112,16 +110,14 @@ class UserInfoBase extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
         UserSocket.changeData(res.data);
         DeviceEventEmitter.emit('emitUser');
         push({ key: 'SelfSet' });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

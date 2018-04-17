@@ -47,7 +47,7 @@ class Base extends React.Component {
     GetSpreadFieldService({
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const activityType = result.activityType || '';
@@ -110,7 +110,7 @@ class Base extends React.Component {
   }
   AmapGeocode = (longitude, latitude) => {
     AmapGeocode(`${longitude},${latitude}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.info === 'OK') {
         const {
           formatted_address,
@@ -119,8 +119,7 @@ class Base extends React.Component {
           address: formatted_address,
         });
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   chooseType = (index, i) => {
@@ -312,7 +311,7 @@ class Base extends React.Component {
     CreateSpreadEnterForService({
       spreadEnterFor,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         Toast.show('您的报名信息已提交！');
       } else {

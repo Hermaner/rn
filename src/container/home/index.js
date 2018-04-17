@@ -30,6 +30,7 @@ class HomeScreen extends base {
     Location.start();
   }
   componentWillUnmount() {
+    this.deleteInit();
     // Location.stop();
     // console.log()
     // this.listener.remove();
@@ -166,9 +167,9 @@ class HomeScreen extends base {
         <Swiper
           style={styles.wrapper}
           height={150}
+          key={imgList.length}
           loop
           autoplay
-          autoplayTimeout={2}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {

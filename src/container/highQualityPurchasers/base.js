@@ -15,7 +15,7 @@ class Base extends React.Component {
   GetAppCategoryService = () => {
     this.sleek.toggle();
     GetAppCategoryService().then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
@@ -24,8 +24,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
 }

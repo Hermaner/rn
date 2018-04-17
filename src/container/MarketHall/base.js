@@ -46,7 +46,7 @@ class Base extends React.Component {
       brandId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -89,8 +89,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   showAction = () => {
@@ -146,7 +145,7 @@ class Base extends React.Component {
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
         goods[0].cur = true;
@@ -157,8 +156,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   _onRefresh = () => {

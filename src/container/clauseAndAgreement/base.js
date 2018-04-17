@@ -13,17 +13,15 @@ class ClauseAndAgreementBase extends React.Component {
     GetServicesTermService({
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
           info: result,
         });
-      } else {
-        console.log(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
 }

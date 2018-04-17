@@ -27,7 +27,7 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        console.log(result);
+        // console.log(result);
         const newResult = [];
         for (let i = 0; i < result.length; i += 1) {
           newResult.push({
@@ -41,9 +41,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   setSelect = (optionType) => {
@@ -101,7 +100,7 @@ class Base extends React.Component {
   }
   CreateRefundInfoService = () => {
     const { push } = this.props;
-    const { deliverOrderNumber, optionType, logisticsType, frontImgUrl, orderInfo, logisticsName } = this.state;
+    const { deliverOrderNumber, optionType, frontImgUrl, orderInfo, logisticsName } = this.state;
     const imgArray = [];
     for (let i = 0; i < frontImgUrl.length; i += 1) {
       imgArray.push(frontImgUrl[i].key);
@@ -118,7 +117,6 @@ class Base extends React.Component {
       Toast.show('请添加发货凭证图片！');
       return;
     }
-    console.log('999999999999999', optionType);
     this.sleek.toggle();
     CreateRefundInfoService({
       refundOrderId: orderInfo.refundOrder.refundOrderId,
@@ -136,9 +134,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

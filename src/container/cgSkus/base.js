@@ -73,7 +73,7 @@ class Base extends React.Component {
     });
   }
   goCgComfirm = async () => {
-    const { isBtnGray, items } = this.state;
+    const { items } = this.state;
     // if (isBtnGray) {
     //   return;
     // }

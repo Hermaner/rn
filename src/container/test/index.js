@@ -41,7 +41,9 @@ class HomeScreen extends base {
         nextButton={<Text style={styles.buttonText}>›</Text>}
         prevButton={<Text style={styles.buttonText}>‹</Text>}
         height={180}
+        loop
         autoplay
+        key={swiperData.length}
         paginationStyle={{ bottom: 10 }}
         dotStyle={{ backgroundColor: 'rgba(0,0,0,.2)', width: 6, height: 6 }}
         activeDotStyle={{ backgroundColor: '#fff', width: 6, height: 6 }}

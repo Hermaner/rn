@@ -66,7 +66,6 @@ class Base extends React.Component {
       this.selectCity(data);
     });
     this.GetAppCategoryService();
-    console.log(global.position);
   }
   getDelete = () => {
     this.EmitMainList.remove();
@@ -92,7 +91,7 @@ class Base extends React.Component {
       cityCode,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -137,14 +136,13 @@ class Base extends React.Component {
         });
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const goods = res.data;
         goods[0].cur = true;
@@ -156,8 +154,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   changeCityTab = (index) => {
@@ -211,7 +208,6 @@ class Base extends React.Component {
       isSpecTypesShow: index === 2,
       isMaskerShow: true,
     });
-    console.log(this.state.isCategoryShow);
   }
   hideMasker = () => {
     this.setState({
@@ -267,7 +263,6 @@ class Base extends React.Component {
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;
-    console.log(specTypes[index].specs[i]);
     this.setState({
       specTypeId: specTypes[index].specs[i].specTypeId,
       specId: specTypes[index].specs[i].specId,

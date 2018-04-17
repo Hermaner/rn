@@ -15,7 +15,7 @@ class Base extends React.Component {
     this.sleek.toggle();
     GetIdentityService({
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;

@@ -25,7 +25,7 @@ class Base extends React.Component {
       memberId: global.memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -66,8 +66,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   removeCollect = (supplyId, collectId) => {
@@ -78,7 +77,7 @@ class Base extends React.Component {
       collectId,
     }).then((res) => {
       this.sleek.toggle();
-      console.log('55555555555', res);
+      // console.log('55555555555', res);
       if (res.isSuccess) {
         this._onRefresh();
       } else {

@@ -28,7 +28,7 @@ class Base extends React.Component {
     GetMemberSellOrderCountService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         countList[0] = '0';
@@ -44,6 +44,9 @@ class Base extends React.Component {
     }).catch(() => {
       this.sleek.toggle();
     });
+  }
+  deleteInit = () => {
+    this.EmitSoldGoodsCount.remove();
   }
 }
 Base.propTypes = {

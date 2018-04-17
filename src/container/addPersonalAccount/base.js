@@ -32,7 +32,6 @@ class AddPersonalAccountBase extends React.Component {
     const { push } = this.props;
     const { name, number, bankName } = this.state;
     const { type, where } = this.props.navigation.state.params;
-    const reg = /^\d{19}$/g;
     if (name === '') {
       Alert.alert(
         '提交失败',
@@ -59,7 +58,7 @@ class AddPersonalAccountBase extends React.Component {
       type,
       isDefault: '0',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         Toast.show('添加账号成功！');
         if (where === '1') {

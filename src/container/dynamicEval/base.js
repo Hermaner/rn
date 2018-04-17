@@ -22,7 +22,7 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -38,7 +38,7 @@ class Base extends React.Component {
     GetScoreInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const result = res.data;
@@ -48,8 +48,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   tellPhone = () => {

@@ -55,7 +55,7 @@ class Base extends React.Component {
     GetCategoryByNameService({
       name: value,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -64,8 +64,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   getData = () => {
@@ -76,7 +75,7 @@ class Base extends React.Component {
     GetHotSearchService({
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

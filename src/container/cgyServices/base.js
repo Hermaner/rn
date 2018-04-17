@@ -29,7 +29,7 @@ class Base extends React.Component {
     const items3 = [];
     GetServiceModeService({
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result && result.length > 0) {

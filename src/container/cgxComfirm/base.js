@@ -160,7 +160,6 @@ class Base extends React.Component {
     });
   }
   getImages = (upImages) => {
-    console.log(upImages);
     this.setState({
       upImages,
     });
@@ -198,7 +197,6 @@ class Base extends React.Component {
   getEmitSkus = () => {
     const { items } = this.state;
     const skus = Global.skus;
-    console.log(skus)
     const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
     const typeName = main.name;
     let brandName = '';
@@ -393,7 +391,7 @@ class Base extends React.Component {
       isRepeat: '1',
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('发布成功');
@@ -401,9 +399,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

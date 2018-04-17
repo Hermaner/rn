@@ -23,7 +23,6 @@ class Base extends React.Component {
     };
   }
   getAddressEmit = (data) => {
-    console.log(data);
     this.setState({
       receiveProvinceCode: data.sendProvinceCode,
       receiveCityCode: data.sendCityCode,
@@ -137,7 +136,7 @@ class Base extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         // let emit;
         // switch (type) {
         //   case 'getEmitAdress':
@@ -150,9 +149,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

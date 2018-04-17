@@ -18,6 +18,7 @@ class Child extends Base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
   }
   _renderRow = ({ item, index }) => {
     const { push } = this.props;

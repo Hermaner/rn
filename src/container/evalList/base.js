@@ -27,7 +27,6 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { thinkInfo } = this.props.navigation.state.params;
-    console.log('000000000000000000000000000', thinkInfo);
     const all = [];
     const good = [];
     const bad = [];

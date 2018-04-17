@@ -29,7 +29,7 @@ class Base extends React.Component {
       newsTypeId: type,
       title,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const imgList = [];
@@ -43,7 +43,6 @@ class Base extends React.Component {
             newsId: result[i].newsId,
           });
         }
-        console.log(imgList);
         if (result.length > 0) {
           this.setState({
             items: result,
@@ -60,8 +59,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   _onRefresh = () => {

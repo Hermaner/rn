@@ -52,7 +52,7 @@ class Base extends React.Component {
               type,
               isDefault: '1',
             }).then((res) => {
-              console.log(res);
+              // console.log(res);
               this.sleek.toggle();
               if (res.isSuccess) {
                 Toast.show('保存成功');
@@ -62,9 +62,8 @@ class Base extends React.Component {
                 Toast.show(res.msg);
                 this.props.pop();
               }
-            }).catch((err) => {
+            }).catch(() => {
               this.sleek.toggle();
-              console.log(err);
             });
           } },
       ],

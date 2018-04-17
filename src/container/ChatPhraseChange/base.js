@@ -7,7 +7,6 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     const { label, value, id } = this.props.navigation.state.params;
-    console.log(label, value, id)
     this.state = {
       label,
       value,
@@ -17,7 +16,6 @@ class Base extends React.Component {
   getInit = () => {
   }
   getImages = (upImages) => {
-    console.log(upImages);
     this.setState({
       upImages,
     });

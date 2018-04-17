@@ -22,7 +22,7 @@ class Base extends React.Component {
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const items = res.data;
         items[0].cur = true;
@@ -35,8 +35,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   changeLeftTab = (index) => {

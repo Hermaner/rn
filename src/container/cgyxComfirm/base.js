@@ -148,7 +148,6 @@ class Base extends React.Component {
     this.setState({
       upImages,
     });
-    console.log(upImages);
   }
   cityCgyGet = (data) => {
     const { items } = this.state;
@@ -218,7 +217,8 @@ class Base extends React.Component {
     this.emitCfyService.remove();
   }
   goPage = (index) => {
-    const { items, memo, wholesalePrice, wholesaleCount, unit, categoryId, supplyMode, logisticsMode, renderServices } = this.state;
+    const { items, memo, wholesalePrice, wholesaleCount,
+      unit, categoryId, supplyMode, logisticsMode, renderServices } = this.state;
     if (index === 0) {
       return;
     }
@@ -244,7 +244,8 @@ class Base extends React.Component {
       this.props.push({ key: items[index].page, params: { memo } });
       return;
     }
-    this.props.push({ key: items[index].page, params: { supplyMode, logisticsMode, renderServices } });
+    this.props.push({ key: items[index].page,
+      params: { supplyMode, logisticsMode, renderServices } });
   }
   saveData = () => {
     const {
@@ -307,7 +308,6 @@ class Base extends React.Component {
       supplyId,
       renderServices,
     };
-    console.log(supply);
     this.sleek.toggle();
     UpdateSupplyService({
       supply: JSON.stringify(supply),
@@ -316,7 +316,7 @@ class Base extends React.Component {
       isRepeat: '1',
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('修改成功');
@@ -325,9 +325,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

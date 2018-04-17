@@ -5204,6 +5204,10 @@ react@16.0.0-alpha.12:
     object-assign "^4.1.0"
     prop-types "^15.5.6"
 
+react_native_countdowntimer@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react_native_countdowntimer/-/react_native_countdowntimer-1.0.5.tgz#e99cbc1b0beccfb693520e1a815df7d2b0e9d156"
+
 read-pkg-up@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-1.0.1.tgz#9d63c13276c065918d57f002a57f40a1b643fb02"

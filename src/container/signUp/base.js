@@ -2,7 +2,6 @@ import React from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import Communications from 'react-native-communications';
 import { GetMemberInfoService, CreateEnterForService } from '../../api';
 
 class Base extends React.Component {
@@ -40,7 +39,7 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < list.length; i += 1) {
@@ -98,7 +97,6 @@ class Base extends React.Component {
     });
   }
   saveInfo = (value, index) => {
-    console.log(index);
     switch (index) {
       case 0:
         this.saveName(value);
@@ -151,7 +149,6 @@ class Base extends React.Component {
       type,
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
       if (res.isSuccess) {
         Toast.show('您的报名信息已提交！');
         this.props.pop();

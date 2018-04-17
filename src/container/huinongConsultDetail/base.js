@@ -32,7 +32,7 @@ class Base extends React.Component {
     GetNewsInfoService({
       newsId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const firstPL = [];
@@ -50,9 +50,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
 
     GetNewsService({
@@ -60,7 +59,7 @@ class Base extends React.Component {
       title,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result1 = res.data;
         const newsList = [];
         const newsLength = result1.length > 5 ? 5 : result1.length;
@@ -73,8 +72,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   saveLabel = (label) => {
@@ -108,9 +106,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
     this.setState({ visible: false });
   }
@@ -145,16 +142,15 @@ class Base extends React.Component {
       this.getData();
       if (res.isSuccess) {
         const result = res.data;
-        console.log(res);
+        // console.log(res);
         this.setState({
           newsInfo: result,
         });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   CreateNewsPraiseService = (newsId) => {
@@ -181,16 +177,15 @@ class Base extends React.Component {
       this.getData();
       if (res.isSuccess) {
         const result = res.data;
-        console.log(res);
+        // console.log(res);
         this.setState({
           newsInfo: result,
         });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

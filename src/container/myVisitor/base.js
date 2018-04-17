@@ -53,7 +53,7 @@ class MyVisitorBase extends React.Component {
       currentPage: '1',
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = [];
         const aaa = [];
         const time = [];
@@ -118,8 +118,7 @@ class MyVisitorBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   tellPhone = (index) => {

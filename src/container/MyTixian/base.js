@@ -36,7 +36,7 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -118,7 +118,7 @@ class Base extends React.Component {
       amount: value,
       withdrawalsNumberId: items[listIndex].info.withdrawalsNumberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       this.setState({ password: '' });
       if (res.isSuccess) {
@@ -139,7 +139,7 @@ class Base extends React.Component {
     GetWithdrawalsNumberService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         const cards = res.data;
@@ -161,9 +161,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   tabCard = (index) => {

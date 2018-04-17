@@ -43,7 +43,7 @@ class Base extends React.Component {
     GetDeliverOrderService({
       orderId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const myImg = [];
@@ -68,8 +68,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
 }

@@ -17,6 +17,7 @@ class Base extends React.Component {
     this.state = {
       orderInfo: '',
       supplyInfo: '',
+      getTime: null,
       tu: require('../../assets/img/no.png'),
       amount: '',
       status: '',
@@ -47,10 +48,26 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { orderInfo, supplyInfo, type } = this.props.navigation.state.params;
-    console.log('AAAAAAAAAAAAAA', orderInfo)
+    let getTime = null;
+    if (orderInfo.sendTime) {
+      let dateTemp = orderInfo.sendTime.substr(0, 10);
+      const days = 10;
+      dateTemp = dateTemp.split('-');
+      const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
+      const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+      const rDate = new Date(millSeconds);
+      const year = rDate.getFullYear();
+      let month = rDate.getMonth() + 1;
+      if (month < 10) month = `0${month}`;
+      let date = rDate.getDate();
+      if (date < 10) date = `0${date}`;
+      const str = orderInfo.modiDate.substr(10);
+      getTime = `${year}-${month}-${date} ${str}`;
+    }
     this.setState({
       orderInfo,
       supplyInfo,
+      getTime,
       favorable: orderInfo.discount || '',
       freight: orderInfo.freight || '',
       type,
@@ -322,8 +339,8 @@ class Base extends React.Component {
     const { orderInfo } = this.state;
     Toast.show('复制成功！');
     Clipboard.setString(
-      `联系人:${orderInfo.receiveName} 联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`
-    );
+      `联系人:${orderInfo.receiveName}
+      联系电话:${orderInfo.receivePhone} 联系地址:${orderInfo.receiveProvinceName}${orderInfo.receiveCityName}${orderInfo.receiveDistrictName}`);
   }
   copyOrderNumber = () => {
     const { orderInfo } = this.state;

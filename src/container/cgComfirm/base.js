@@ -120,7 +120,7 @@ class Base extends React.Component {
       memberId: global.memberId,
       type: '2',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
@@ -246,7 +246,8 @@ class Base extends React.Component {
       default:
         break;
     }
-    this.props.push({ key: items[index].page, params: { demand, unit, wantStarPrice, wantEndPrice, frequencyLabel: frequency } });
+    this.props.push({ key: items[index].page,
+      params: { demand, unit, wantStarPrice, wantEndPrice, frequencyLabel: frequency } });
   }
   selectModel = (optionType) => {
     const { items2, options } = this.state;
@@ -328,7 +329,7 @@ class Base extends React.Component {
       isRepeat: '1',
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         if (res.map.isHave === '1') {
@@ -345,7 +346,7 @@ class Base extends React.Component {
                     isRepeat: '1',
                   })
                   .then((res2) => {
-                    console.log(res2);
+                    // console.log(res2);
                     this.sleek.toggle();
                     if (res2.isSuccess) {
                       Toast.show('发布成功');
@@ -353,9 +354,8 @@ class Base extends React.Component {
                     } else {
                       Toast.show(res2.msg);
                     }
-                  }).catch((err2) => {
+                  }).catch(() => {
                     this.sleek.toggle();
-                    console.log(err2);
                   });
                 } },
             ],
@@ -366,9 +366,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

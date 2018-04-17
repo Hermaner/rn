@@ -162,6 +162,9 @@ class Base extends React.Component {
       this.emitGoodsDetailData();
     });
   }
+  deleteInit = () => {
+    this.emitGoodsDetail.remove();
+  }
   keepGoods = () => {
     const { haveCollect } = this.state;
     if (!global.memberId) {

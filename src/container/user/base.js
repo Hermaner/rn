@@ -50,8 +50,8 @@ class UserBase extends React.Component {
   qqLogin = () => {
     QQAPI.isQQInstalled().then(() => {
       QQAPI.login('get_simple_userinfo')
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        // console.log(res);
       }).catch(() => {});
     }).catch(() => {});
   }
@@ -175,7 +175,7 @@ class UserBase extends React.Component {
       phoneType: Platform.OS === 'ios' ? '2' : '1',
       registration: global.registration,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.loginAction(res.data);
@@ -198,7 +198,7 @@ class UserBase extends React.Component {
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         this.loginAction(res.data);
       } else {
         Toast.show(res.msg);
@@ -259,7 +259,7 @@ class UserBase extends React.Component {
       registration: global.registration || '',
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const phone = res.data.phone;
         if (!phone) {

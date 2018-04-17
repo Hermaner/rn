@@ -92,7 +92,7 @@ class Base extends React.Component {
       cityCode,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -138,12 +138,11 @@ class Base extends React.Component {
         });
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   emitCategory = (data) => {
-    console.log(data);
+    // console.log(data);
     const { name, categoryId } = data;
     this.setState({
       categoryName: name,
@@ -151,7 +150,7 @@ class Base extends React.Component {
     }, this._onRefresh);
   }
   emitBrands = (data) => {
-    console.log(data);
+    // console.log(data);
     const { brandName, brandId } = data;
     this.setState({
       brandName,
@@ -223,7 +222,6 @@ class Base extends React.Component {
   }
   specsTab = (index, i) => {
     const { specTypes } = this.state;
-    console.log(specTypes[index].specs[i]);
     this.setState({
       specTypeId: specTypes[index].specs[i].specTypeId,
       specId: specTypes[index].specs[i].specId,

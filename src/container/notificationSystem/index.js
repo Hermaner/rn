@@ -1,16 +1,14 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container } from 'native-base';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { popRoute, pushRoute } from '../../actions';
 import { Header, ScrollableTab, Loading } from '../../components';
-import notificationSystemBase from './base';
 
 import Child from './child';
 
-class NotificationSystem extends notificationSystemBase {
+class NotificationSystem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -4,7 +4,6 @@ import { ListView } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import { GetSupplyService, GetPurchaseService, GetMemberInfoService, CreateMemberFollowService, GetMemberFollowService, DeleteMemberFollowService } from '../../api';
 
-let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
@@ -82,7 +81,7 @@ class Base extends React.Component {
     GetMemberInfoService({
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < items.length; i += 1) {
@@ -123,7 +122,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           this.setState({
@@ -147,7 +146,6 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -157,8 +155,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   GetPurchaseService = () => {
@@ -175,7 +172,7 @@ class Base extends React.Component {
       type,
       memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {
@@ -208,7 +205,6 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -218,9 +214,8 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
   goChat = () => {
@@ -285,7 +280,7 @@ class Base extends React.Component {
     GetMemberFollowService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < result.length; i += 1) {
@@ -299,8 +294,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   CreateMemberFollowService = () => {
@@ -336,8 +330,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   DeleteFollow = () => {
@@ -356,8 +349,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   tabChangeOne = () => {

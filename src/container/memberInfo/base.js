@@ -44,7 +44,7 @@ class MemberInfoBase extends React.Component {
     GetMemberInfoService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         const province = result.provinceCode;
@@ -91,6 +91,7 @@ class MemberInfoBase extends React.Component {
   getDelete = () => {
     this.EmitgetAddress.remove();
     this.EmitgetUserType.remove();
+    this.emitMineUser.remove();
   }
   emitPhone = () => {
     this.getData();
@@ -127,8 +128,7 @@ class MemberInfoBase extends React.Component {
       myAdress: data.text,
     });
   }
-  memberInfoEmitUserType = (data) => {
-    console.log(data);
+  memberInfoEmitUserType = () => {
     this.getData();
   }
   saveName = (value) => {
@@ -148,7 +148,6 @@ class MemberInfoBase extends React.Component {
   }
   reviseUserInfo = () => {
     const {
-      userInfo,
       address,
       name,
       upImages,
@@ -156,7 +155,6 @@ class MemberInfoBase extends React.Component {
       cityCode,
       districtCode,
       homeImgUrls,
-      realName,
       sex } = this.state;
     // let myRealName = '';
     // if (realName !== '') {
@@ -174,12 +172,11 @@ class MemberInfoBase extends React.Component {
       nickName: name,
     };
     this.sleek.toggle();
-    console.log(member);
     UpdateMemberInfoService({
       member: JSON.stringify(member),
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         // UserSocket.changeData(res.data);
         Toast.show('您的信息修改成功！');
@@ -188,9 +185,8 @@ class MemberInfoBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
+    }).catch(() => {
       this.sleek.toggle();
-      console.log(err);
     });
   }
 }

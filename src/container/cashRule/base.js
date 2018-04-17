@@ -18,7 +18,6 @@ class CashRuleBase extends React.Component {
     });
   }
   tellPhone = () => {
-    const { detail } = this.state;
     Communications.phonecall(global.phone, false);
   }
 }
