@@ -29,7 +29,6 @@ class OrderPay extends myBase {
     return true;
   };
   _renderHeader() {
-    // const { orderInfo } = this.props.navigation.state.params;
     const { btnType, orderInfo, message } = this.state;
     return (
       <View>
@@ -39,7 +38,9 @@ class OrderPay extends myBase {
           <View style={styles.headerBox}>
             <CachedImage resizeMode="contain" style={styles.headerImg} source={{ uri: orderInfo.supply.supplyImages[0].imgUrl }} />
             <View style={styles.headerTextBox}>
-              <Text style={styles.headerText}>{orderInfo.supply.brandName}{orderInfo.supply.categoryName}</Text>
+              <Text style={styles.headerText}>
+                {orderInfo.supply.brandName}{orderInfo.supply.categoryName}
+              </Text>
               <View style={styles.pricesBox}>
                 <Text>{orderInfo.supply.wholesalePrice}/{orderInfo.supply.unit}</Text>
               </View>

@@ -6,36 +6,25 @@ import { CreateRefundOrderService } from '../../api';
 class Base extends React.Component {
   constructor(props) {
     super(props);
+    const { orderInfo } = this.props.navigation.state.params;
     this.state = {
       isOk: true,
+      orderInfo,
       logisticsName: '',
       btnType: [{
         btnName: '仅退款',
-        isChoose: false,
         type: '1',
+        isChoose: orderInfo.status === '4',
       }, {
         btnName: '退货退款',
-        isChoose: false,
+        isChoose: orderInfo.status === '5' || orderInfo.status === '6',
         type: '2',
       }],
       message: '',
-      orderInfo: '',
+      status: orderInfo.status,
     };
   }
   getInit = () => {
-    const { btnType } = this.state;
-    const { orderInfo } = this.props.navigation.state.params;
-    if (orderInfo.status === '5' || orderInfo.status === '6') {
-      btnType[1].isChoose = true;
-    }
-    if (orderInfo.status === '4') {
-      btnType[0].isChoose = true;
-    }
-    this.setState({
-      orderInfo,
-      status: orderInfo.status,
-      btnType,
-    });
   }
   chooseOne = (index) => {
     const { btnType } = this.state;
