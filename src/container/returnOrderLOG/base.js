@@ -37,47 +37,20 @@ class Base extends React.Component {
     const { list } = this.state;
     const { info } = this.props.navigation.state.params;
     list[1].label = info.logisticsName;
-    list[2].label = info.refundOrderNumber; // deliverNumber
+    list[2].label = info.deliverNumber; // deliverNumber
+    const imgArray = [];
+    const img = info.imgUrls.split(',');
+    for (let i = 0; i < img.length; i += 1) {
+      imgArray.push({
+        imgUrl: img[i],
+      });
+    }
     this.setState({
       info,
       list,
-      imgList: info.imgUrls.split(','),
+      imgList: imgArray,
     });
   }
-  // getData = () => {
-  //   const { orderId, list } = this.state;
-  //   GetDeliverOrderService({
-  //     orderId,
-  //   }).then((res) => {
-  //     console.log(res);
-  //     if (res.isSuccess) {
-  //       const result = res.data;
-  //       const myImg = [];
-  //       for (let i = 0; i < list.length; i += 1) {
-  //         list[1].label = result.logisticsName;
-  //         list[2].label = result.deliverOrderNumber;
-  //       }
-  //       if (result.imgUrls) {
-  //         const img = result.imgUrls.split(',');
-  //         for (let i = 0; i < img.length; i += 1) {
-  //           myImg.push({
-  //             imgUrl: img[i],
-  //           });
-  //         }
-  //         this.setState({
-  //           imgList: myImg,
-  //         });
-  //       }
-  //       this.setState({
-  //         LOGInfo: result,
-  //       });
-  //     } else {
-  //       Toast.show(res.msg);
-  //     }
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
 }
 Base.propTypes = {
   navigation: PropTypes.object,

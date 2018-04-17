@@ -268,114 +268,6 @@ class OrderInfo extends base {
       </View>
     );
   }
-  renderModal() {
-    const { message } = this.state;
-    return (
-      <View>
-        <Modal
-          visible={this.state.visible}
-          transparent={this.state.transparent}
-          onRequestClose={() => {
-            console.log('Modal has been closed.');
-          }}
-        >
-          <TFeedback
-            content={
-              <View
-                style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
-              >
-                <TFeedback
-                  content={
-                    <View style={styles.modalBox}>
-                      <View style={styles.modalTitleBox}>
-                        <Text style={styles.modalTitleText}>退款原因</Text>
-                        <TFeedback
-                          content={
-                            <Icon style={{ fontSize: 34, color: '#333', flex: 1, textAlign: 'right' }} name="close" />}
-                          onPress={() => { this.setState({ visible: false }); }}
-                        />
-                      </View>
-                      <View style={{ height: 100 }}>
-                        <Input
-                          style={styles.inputText}
-                          value={message}
-                          onChangeText={text => this.saveLabel(text)}
-                          multiline
-                          placeholder="请输入申请理由"
-                          placeholderTextColor="#777"
-                        />
-                      </View>
-                      <TFeedback
-                        content={
-                          <View style={styles.submitBox}>
-                            <Text style={styles.submitText}>申请退款</Text>
-                          </View>}
-                        onPress={() => this.returnMoneyService()}
-                      />
-                    </View>}
-                  onPress={() => { console.log('modal'); }}
-                />
-              </View>}
-            onPress={() => { this.setState({ visible: false }); }}
-          />
-        </Modal>
-      </View>
-    );
-  }
-  renderModal2() {
-    const { message } = this.state;
-    return (
-      <View>
-        <Modal
-          visible={this.state.visible2}
-          transparent={this.state.transparent}
-          onRequestClose={() => {
-            console.log('Modal has been closed.');
-          }}
-        >
-          <TFeedback
-            content={
-              <View
-                style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
-              >
-                <TFeedback
-                  content={
-                    <View style={styles.modalBox}>
-                      <View style={styles.modalTitleBox}>
-                        <Text style={styles.modalTitleText}>退款退货原因</Text>
-                        <TFeedback
-                          content={
-                            <Icon style={{ fontSize: 34, color: '#333', flex: 1, textAlign: 'right' }} name="close" />}
-                          onPress={() => { this.setState({ visible: false }); }}
-                        />
-                      </View>
-                      <View style={{ height: 100 }}>
-                        <Input
-                          style={styles.inputText}
-                          value={message}
-                          onChangeText={text => this.saveLabel(text)}
-                          multiline
-                          placeholder="请输入申请理由"
-                          placeholderTextColor="#777"
-                        />
-                      </View>
-                      <TFeedback
-                        content={
-                          <View style={styles.submitBox}>
-                            <Text style={styles.submitText}>申请退款退货</Text>
-                          </View>}
-                        onPress={() => this.returnMoneyAndGoods()}
-                      />
-                    </View>}
-                  onPress={() => { console.log('modal'); }}
-                />
-              </View>}
-            onPress={() => { this.setState({ visible: false }); }}
-          />
-        </Modal>
-      </View>
-    );
-  }
   renderFooter() {
     const { orderInfo } = this.state;
     const { push } = this.props;
@@ -429,9 +321,9 @@ class OrderInfo extends base {
             <TFeedback
               content={
                 <View style={styles.btnBox1}>
-                  <Text style={{ color: '#fff', fontSize: 14 }}>申请退款</Text>
+                  <Text style={{ color: '#fff', fontSize: 14 }}>申请售后</Text>
                 </View>}
-              onPress={() => { this.returnMoneyAndGoodsBtn(); }}
+              onPress={() => { push({ key: 'ReturnPage', params: { orderInfo } }); }}
             />
           </View>
         }
@@ -448,14 +340,14 @@ class OrderInfo extends base {
             <TFeedback
               content={
                 <View style={styles.btnBox}>
-                  <Text style={{ color: '#444', fontSize: 14 }}>申请退货退款</Text>
+                  <Text style={{ color: '#444', fontSize: 14 }}>申请售后</Text>
                 </View>}
-              onPress={() => { this.returnMoneyAndGoodsBtn(); }}
+              onPress={() => { push({ key: 'ReturnPage', params: { orderInfo } }); }}
             />
           </View>
         }
         {
-          orderInfo.status === '6' && !orderInfo.refundOrder.refundOrderNumber &&
+          orderInfo.status === '6' && orderInfo.refundOrder.refundInfo === null &&
           <View style={styles.footerBox}>
             <TFeedback
               content={
@@ -501,8 +393,6 @@ class OrderInfo extends base {
         <Content>
           {this._renderBody()}
         </Content>
-        {this.renderModal()}
-        {this.renderModal2()}
         {this.renderFooter()}
         <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />

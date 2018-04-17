@@ -71,7 +71,7 @@ class OrderInfoSeller extends base {
                   待支付
                 </Text>
                 <Text style={styles.labelText2} >
-                  代发货
+                  待发货
                 </Text>
                 <Text style={styles.labelText2} >
                   待收货
@@ -331,7 +331,7 @@ class OrderInfoSeller extends base {
         }
         {
           orderInfo.refundOrder &&
-          !orderInfo.refundOrder.refundOrderNumber &&
+          !orderInfo.refundOrder.refundInfo &&
           orderInfo.status === '6' && orderInfo.refundOrder.type === '1' &&
           <View style={styles.footerBox}>
             <TFeedback
@@ -341,12 +341,19 @@ class OrderInfoSeller extends base {
                 </View>}
               onPress={() => { this.returnMoneyOk(); }}
             />
+            <TFeedback
+              content={
+                <View style={styles.btnBox1}>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>拒绝申请</Text>
+                </View>}
+              onPress={() => { this.RefuseRefundOrder(); }}
+            />
           </View>
         }
         {
           orderInfo.refundOrder &&
-          !orderInfo.refundOrder.refundOrderNumber &&
-          orderInfo.status === '6' && orderInfo.refundOrder.type === '2' &&
+          !orderInfo.refundOrder.refundInfo &&
+          orderInfo.status === '6' && orderInfo.refundOrder.status === '1' && orderInfo.refundOrder.type === '2' &&
           <View style={styles.footerBox}>
             <TFeedback
               content={
@@ -355,11 +362,18 @@ class OrderInfoSeller extends base {
                 </View>}
               onPress={() => { this.ConfirmRefundOrder(); }}
             />
+            <TFeedback
+              content={
+                <View style={styles.btnBox1}>
+                  <Text style={{ color: '#fff', fontSize: 16 }}>拒绝申请</Text>
+                </View>}
+              onPress={() => { this.RefuseRefundOrder(); }}
+            />
           </View>
         }
         {
           orderInfo.refundOrder &&
-          orderInfo.refundOrder.refundOrderNumber &&
+          orderInfo.refundOrder.refundInfo !== null &&
           <View style={styles.footerBox}>
             <TFeedback
               content={

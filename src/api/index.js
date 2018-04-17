@@ -480,3 +480,6 @@ export function AliRefundService(data) {
 export function CreateRefundInfoService(data) {
   return get('CreateRefundInfoService', data);
 }
+export function RefuseRefundOrder(data) {
+  return get('RefuseRefundOrder', data);
+}

@@ -154,6 +154,7 @@ import ImgInfo from '../container/imgInfo';
 import SearchPeople from '../container/searchPeople';
 import ReturnGoods from '../container/returnGoods';
 import ReturnOrderLOG from '../container/returnOrderLOG';
+import ReturnPage from '../container/returnPage';
 
 export const AppNavigator = StackNavigator({
   ChatSupply: { screen: ChatSupply },
@@ -299,6 +300,7 @@ export const AppNavigator = StackNavigator({
   SearchPeople: { screen: SearchPeople },
   ReturnGoods: { screen: ReturnGoods },
   ReturnOrderLOG: { screen: ReturnOrderLOG },
+  ReturnPage: { screen: ReturnPage },
 }, {
   headerMode: 'screen',
   navigationOptions: () => ({

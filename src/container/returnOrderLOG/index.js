@@ -9,7 +9,7 @@ import { pushRoute, popRoute } from '../../actions';
 import styles from './styles';
 import myBase from './base';
 
-class OrderLOG extends myBase {
+class ReturnOrderLOG extends myBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,9 +63,6 @@ class OrderLOG extends myBase {
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
               {
                 imgList.length > 0 &&
-                // imgList.map((item, index) => (
-                //   <CachedImage style={styles.img} key={index} source={{ uri: item }} />
-                // ))
                 <ImageLook
                   images={imgList}
                 />
@@ -93,8 +90,8 @@ class OrderLOG extends myBase {
   }
 }
 
-OrderLOG.propTypes = {
+ReturnOrderLOG.propTypes = {
   pop: PropTypes.func,
   push: PropTypes.func,
 };
-export default connect(null, { pop: popRoute, push: pushRoute })(OrderLOG);
+export default connect(null, { pop: popRoute, push: pushRoute })(ReturnOrderLOG);

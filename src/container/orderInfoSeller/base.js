@@ -8,7 +8,8 @@ import {
   GetDeliverOrderService,
   WeiXinRefundService,
   AliRefundService,
-ConfirmRefundOrder } from '../../api';
+ConfirmRefundOrder,
+RefuseRefundOrder } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { orderInfo, supplyInfo, type } = this.props.navigation.state.params;
+    console.log('AAAAAAAAAAAAAA', orderInfo)
     this.setState({
       orderInfo,
       supplyInfo,
@@ -128,6 +130,36 @@ class Base extends React.Component {
               this.sleek.toggle();
               if (res.isSuccess) {
                 Toast.show('订单已删除！');
+                DeviceEventEmitter.emit(type);
+                DeviceEventEmitter.emit('getSoldGoodsCount');
+                this.props.pop();
+              } else {
+                Toast.show(res.msg);
+              }
+            }).catch(() => {
+              this.sleek.toggle();
+            });
+          } },
+      ],
+    );
+  }
+  RefuseRefundOrder = () => {
+    const { orderInfo } = this.state;
+    const { type } = this.props.navigation.state.params;
+    Alert.alert(
+      '温馨提示', '确认拒绝申请？',
+      [
+        { text: '取消', onPress: () => {} },
+        { text: '确认',
+          onPress: () => {
+            this.sleek.toggle();
+            RefuseRefundOrder({
+              memberId: global.memberId,
+              refundOrderId: orderInfo.refundOrder.refundOrderId,
+            }).then((res) => {
+              this.sleek.toggle();
+              if (res.isSuccess) {
+                Toast.show('已成功拒绝申请！');
                 DeviceEventEmitter.emit(type);
                 DeviceEventEmitter.emit('getSoldGoodsCount');
                 this.props.pop();
