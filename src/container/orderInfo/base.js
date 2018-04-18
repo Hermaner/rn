@@ -43,7 +43,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
-    console.log('55555555555555555', orderInfo)
+    console.log('3333333333', orderInfo)
     let getTime = null;
     if (orderInfo.sendTime) {
       let dateTemp = orderInfo.sendTime.substr(0, 10);
