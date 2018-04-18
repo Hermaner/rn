@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, BackHandler } from 'react-native';
+import { View, BackHandler, Modal } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
@@ -326,6 +326,60 @@ class OrderInfoSeller extends base {
       />
     );
   }
+  renderModal() {
+    const { label } = this.state;
+    return (
+      <View>
+        <Modal
+          visible={this.state.visible}
+          transparent={this.state.transparent}
+          onRequestClose={() => {
+            console.log('Modal has been closed.');
+          }}
+        >
+          <TFeedback
+            content={
+              <View
+                style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+              >
+                <TFeedback
+                  content={
+                    <View style={styles.modalBox1}>
+                      <View style={styles.modalTitleBox}>
+                        <Text style={styles.modalTitleText}>拒绝原因</Text>
+                        <TFeedback
+                          content={
+                            <Icon style={{ fontSize: 34, color: '#333', flex: 1, textAlign: 'right' }} name="close" />}
+                          onPress={() => { this.setState({ visible: false }); }}
+                        />
+                      </View>
+                      <View style={{ height: 100 }}>
+                        <Input
+                          style={styles.inputText}
+                          value={label}
+                          onChangeText={text => this.saveLabel(text)}
+                          multiline
+                          placeholder="拒绝原因"
+                          placeholderTextColor="#777"
+                        />
+                      </View>
+                      <TFeedback
+                        content={
+                          <View style={styles.submitBox}>
+                            <Text style={styles.submitText}>提交</Text>
+                          </View>}
+                        onPress={() => this.RefuseRefundOrder()}
+                      />
+                    </View>}
+                  onPress={() => { console.log('modal'); }}
+                />
+              </View>}
+            onPress={() => { this.setState({ visible: false }); }}
+          />
+        </Modal>
+      </View>
+    );
+  }
   renderFooter() {
     const { orderInfo } = this.state;
     const { push } = this.props;
@@ -372,7 +426,8 @@ class OrderInfoSeller extends base {
                 <View style={styles.btnBox1}>
                   <Text style={{ color: '#fff', fontSize: 16 }}>拒绝申请</Text>
                 </View>}
-              onPress={() => { this.RefuseRefundOrder(); }}
+              // onPress={() => { this.RefuseRefundOrder(); }}
+              onPress={() => { this.openModal(); }}
             />
           </View>
         }
@@ -393,7 +448,7 @@ class OrderInfoSeller extends base {
                 <View style={styles.btnBox1}>
                   <Text style={{ color: '#fff', fontSize: 16 }}>拒绝申请</Text>
                 </View>}
-              onPress={() => { this.RefuseRefundOrder(); }}
+              onPress={() => { this.openModal(); }}
             />
           </View>
         }
@@ -444,6 +499,7 @@ class OrderInfoSeller extends base {
           {this._renderBody()}
         </Content>
         {this.renderFooter()}
+        {this.renderModal()}
         {this._renderModalView()}
         <ModalCall ref={(o) => { this.ModalCall = o; }} />
         <Loading ref={(c) => { this.sleek = c; }} />

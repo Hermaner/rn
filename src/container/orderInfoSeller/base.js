@@ -28,6 +28,9 @@ class Base extends React.Component {
       type: '',
       freight: '', // 运费
       LOGInfo: '', // 快递信息
+      visible: false,
+      transparent: true, // 是否透明显示
+      checkMemo: '',
       statusInfo: [{
         title: '买家下单成功，等待卖家修改',
         lable: '买家已下单，请尽快修改优惠金额，运费及其他，可以通过电话，聊天与对方联系',
@@ -89,6 +92,11 @@ class Base extends React.Component {
     }).catch(() => {
     });
   }
+  saveLabel = (checkMemo) => {
+    this.setState({
+      checkMemo,
+    });
+  }
   removeOrder = () => {
     this.sleek.toggle();
     const { amount, orderInfo, type } = this.state;
@@ -131,6 +139,11 @@ class Base extends React.Component {
       },
     });
   }
+  openModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
   deleteOrder = (orderId) => {
     const { type } = this.props.navigation.state.params;
     Alert.alert(
@@ -161,34 +174,30 @@ class Base extends React.Component {
     );
   }
   RefuseRefundOrder = () => {
-    const { orderInfo } = this.state;
+    const { orderInfo, checkMemo } = this.state;
     const { type } = this.props.navigation.state.params;
-    Alert.alert(
-      '温馨提示', '确认拒绝申请？',
-      [
-        { text: '取消', onPress: () => {} },
-        { text: '确认',
-          onPress: () => {
-            this.sleek.toggle();
-            RefuseRefundOrder({
-              memberId: global.memberId,
-              refundOrderId: orderInfo.refundOrder.refundOrderId,
-            }).then((res) => {
-              this.sleek.toggle();
-              if (res.isSuccess) {
-                Toast.show('已成功拒绝申请！');
-                DeviceEventEmitter.emit(type);
-                DeviceEventEmitter.emit('getSoldGoodsCount');
-                this.props.pop();
-              } else {
-                Toast.show(res.msg);
-              }
-            }).catch(() => {
-              this.sleek.toggle();
-            });
-          } },
-      ],
-    );
+    this.sleek.toggle();
+    if (!checkMemo) {
+      Toast.show('请输入拒绝原因！');
+      return;
+    }
+    RefuseRefundOrder({
+      memberId: global.memberId,
+      refundOrderId: orderInfo.refundOrder.refundOrderId,
+      checkMemo,
+    }).then((res) => {
+      this.sleek.toggle();
+      if (res.isSuccess) {
+        Toast.show('已成功拒绝申请！');
+        DeviceEventEmitter.emit(type);
+        DeviceEventEmitter.emit('getSoldGoodsCount');
+        this.props.pop();
+      } else {
+        Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
+    });
   }
   ConfirmRefundOrder = () => {
     const { orderInfo } = this.state;
