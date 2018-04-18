@@ -70,7 +70,9 @@ class Base extends React.Component {
       if (res.isSuccess) {
         this.setState({ visible: false }, Toast.show('申请退款消息已发送！'));
         DeviceEventEmitter.emit('getBuyGoodsCount');
-        this.props.push({ key: 'MyBuyGoods' });
+        DeviceEventEmitter.emit('getMainListBuyGoods');
+        DeviceEventEmitter.emit('reloadDetail');
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }
@@ -81,6 +83,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
-  push: PropTypes.func,
+  pop: PropTypes.func,
 };
 export default Base;

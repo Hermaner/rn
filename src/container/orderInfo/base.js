@@ -2,7 +2,7 @@ import React from 'react';
 import { DeviceEventEmitter, Alert, Clipboard } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
-import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService, CreateRefundOrderService, CancelRefundOrder } from '../../api';
+import { UpdateOrderService, DeleteOrderService, GetDeliverOrderService, CreateRefundOrderService, CancelRefundOrder, GetOrderInfoService } from '../../api';
 
 class Base extends React.Component {
   constructor(props) {
@@ -42,41 +42,65 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
-    console.log('55555555555555555', orderInfo)
-    let getTime = null;
-    if (orderInfo.sendTime) {
-      let dateTemp = orderInfo.sendTime.substr(0, 10);
-      const days = 10;
-      dateTemp = dateTemp.split('-');
-      const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
-      const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
-      const rDate = new Date(millSeconds);
-      const year = rDate.getFullYear();
-      let month = rDate.getMonth() + 1;
-      if (month < 10) month = `0${month}`;
-      let date = rDate.getDate();
-      if (date < 10) date = `0${date}`;
-      const str = orderInfo.modiDate.substr(10);
-      getTime = `${year}-${month}-${date} ${str}`;
-    }
+    const { emit, orderId, supplyInfo, type } = this.props.navigation.state.params;
     this.setState({
-      orderInfo,
+      orderId,
       supplyInfo,
-      getTime,
       emit,
       type,
-    }, this.getWuLiuData);
+    }, () => {
+      this.getWuLiuData();
+      this.GetOrderInfoService();
+    });
+    this.reloadDetail = DeviceEventEmitter.addListener('reloadDetail', () => {
+      this.getBuyGoodsCount();
+    });
+  }
+  getDelete = () => {
+    this.reloadDetail.remove();
   }
   getWuLiuData = () => {
-    const { orderInfo } = this.state;
+    const { orderId } = this.state;
     GetDeliverOrderService({
-      orderId: orderInfo.orderId,
+      orderId,
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
         this.setState({
           LOGInfo: result,
+        });
+      } else {
+        // Toast.show(res.msg);
+      }
+    }).catch(() => {
+    });
+  }
+  GetOrderInfoService = () => {
+    const { orderId } = this.state;
+    GetOrderInfoService({
+      orderId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        const orderInfo = res.data;
+        let getTime = null;
+        if (orderInfo.sendTime) {
+          let dateTemp = orderInfo.sendTime.substr(0, 10);
+          const days = 10;
+          dateTemp = dateTemp.split('-');
+          const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
+          const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+          const rDate = new Date(millSeconds);
+          const year = rDate.getFullYear();
+          let month = rDate.getMonth() + 1;
+          if (month < 10) month = `0${month}`;
+          let date = rDate.getDate();
+          if (date < 10) date = `0${date}`;
+          const str = orderInfo.modiDate.substr(10);
+          getTime = `${year}-${month}-${date} ${str}`;
+        }
+        this.setState({
+          getTime,
+          orderInfo,
         });
       } else {
         // Toast.show(res.msg);

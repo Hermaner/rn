@@ -483,3 +483,6 @@ export function CreateRefundInfoService(data) {
 export function RefuseRefundOrder(data) {
   return get('RefuseRefundOrder', data);
 }
+export function GetOrderInfoService(data) {
+  return get('GetOrderInfoService', data);
+}
