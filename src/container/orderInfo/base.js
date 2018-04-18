@@ -48,7 +48,7 @@ class Base extends React.Component {
       let dateTemp = orderInfo.sendTime.substr(0, 10);
       const days = 10;
       dateTemp = dateTemp.split('-');
-      const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
+      const nDate = new Date(`${dateTemp[1]}/${dateTemp[2]}/${dateTemp[0]}`);
       const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
       const rDate = new Date(millSeconds);
       const year = rDate.getFullYear();
@@ -56,8 +56,8 @@ class Base extends React.Component {
       if (month < 10) month = `0${month}`;
       let date = rDate.getDate();
       if (date < 10) date = `0${date}`;
-      const str = orderInfo.modiDate.substr(10);
-      getTime = `${year}-${month}-${date} ${str}`;
+      const str = orderInfo.sendTime.substr(10);
+      getTime = `${year}/${month}/${date} ${str}`;
     }
     this.setState({
       orderInfo,

@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, BackHandler, Modal } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
-import { Container, Content, Icon, Text, Input } from 'native-base';
+import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
-import CountDownTimer from 'react_native_countdowntimer';
 import { connect } from 'react-redux';
-import { Loading, Header, TFeedback, Iconfont, TOpacity, ModalCall } from '../../components';
+import { Loading, Header, TFeedback, Iconfont, TOpacity, ModalCall, CountDownTimer } from '../../components';
 import { pushRoute, popRoute, resetHome } from '../../actions';
 import base from './base';
 import styles from './styles';

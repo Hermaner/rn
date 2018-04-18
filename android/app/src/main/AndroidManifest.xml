@@ -41,7 +41,7 @@
       <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"/>
       <meta-data
         android:name="com.baidu.lbsapi.API_KEY"
-        android:value="aiPltUNd7Oqgc2QeCNAzonGZk2WRuQi6" />
+        android:value="6KgNHTQdsQNGRkGLHDllFK5OF3aZ6dSO" />
       <activity
         android:name=".wxapi.WXPayEntryActivity"
         android:exported="true" />

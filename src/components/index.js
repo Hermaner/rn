@@ -33,6 +33,7 @@ import Upload from './Upload';
 import BHeader from './BHeader';
 import ModalCall from './ModalCall';
 import ChatHeader from './ChatHeader';
+import CountDownTimer from './CountDownTimer';
 import Chat from './chat/GiftedChat';
 import SocketStore from './socket/SocketStore';
 
@@ -40,6 +41,7 @@ const UserSocket = new UserObser();
 const SocketObser = new SocketStore();
 
 export {
+  CountDownTimer,
   ModalCall,
   ChatHeader,
   TLight,
