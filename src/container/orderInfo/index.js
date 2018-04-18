@@ -285,19 +285,19 @@ class OrderInfo extends base {
       <View style={[styles.flexOne, styles.boxStyle]}>
         <View style={[styles.rowBox, styles.flexOne]}>
           <Text style={styles.myText}>申请售后时间：</Text>
-          <Text style={styles.myText}>12-2-3</Text>
+          <Text style={[styles.myText, styles.flexOne]}>12-2-3</Text>
         </View>
         <View style={[styles.rowBox, styles.flexOne]}>
           <Text style={styles.myText}>申请售后原因：</Text>
-          <Text style={styles.myText}>rrrrrrrrrrr</Text>
+          <Text style={[styles.myText, styles.flexOne]}>rrrrrrrrrrr</Text>
         </View>
         <View style={[styles.rowBox, styles.flexOne]}>
           <Text style={styles.myText}>拒绝退款时间：</Text>
-          <Text style={styles.myText}>12-2-3</Text>
+          <Text style={[styles.myText, styles.flexOne]}>12-2-3</Text>
         </View>
         <View style={[styles.rowBox, styles.flexOne]}>
           <Text style={styles.myText}>拒绝退款原因：</Text>
-          <Text style={styles.myText}>rrrrrrrrrrr</Text>
+          <Text style={[styles.myText, styles.flexOne]}>rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</Text>
         </View>
       </View>
     );
