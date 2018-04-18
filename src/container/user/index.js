@@ -89,7 +89,7 @@ class UserPage extends base {
         <View style={styles.infoImgView}>
           <CachedImage source={{ uri: imgUrl }} style={styles.infoImg} />
         </View>
-        <Text style={styles.infoName}>{nickName}</Text>
+        <Text style={styles.infoName}>{decodeURI(nickName)}</Text>
       </View>
     );
   }

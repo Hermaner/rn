@@ -71,12 +71,12 @@ class My extends myBase {
                   <View style={{ marginLeft: 10, paddingTop: 10 }}>
                     <View>
                       <Text style={{ backgroundColor: 'transparent', color: '#333', fontSize: 16, textAlign: 'left' }}>
-                        {UserSocket.userData.nickName}
+                        {decodeURI(UserSocket.userData.nickName)}
                       </Text>
                       {
                         UserSocket.userData.personVerifStatus === '1' &&
                         <Text style={{ backgroundColor: 'transparent', color: '#999', fontSize: 14, marginTop: 4 }}>
-                          (真实姓名：{UserSocket.userData.personVerifs[0].realName})
+                          (真实姓名：{decodeURI(UserSocket.userData.personVerifs[0].realName)})
                         </Text>
                       }
                     </View>
