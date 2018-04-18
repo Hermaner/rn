@@ -54,7 +54,7 @@ class RevisePhoneBase extends React.Component {
     GetCodeService({
       phone,
     }).then((res) => {
-      // console.log(res);
+      console.log(res);
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({
