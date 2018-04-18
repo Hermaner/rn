@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     height: 60,
     borderWidth: 1,
     borderColor: '#eee',
+    textAlignVertical: 'top',
   },
   chooseTypeBtnText: {
     color: '#fff',

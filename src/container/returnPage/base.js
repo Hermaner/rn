@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
+import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 import { CreateRefundOrderService } from '../../api';
 
@@ -68,6 +69,8 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         this.setState({ visible: false }, Toast.show('申请退款消息已发送！'));
+        DeviceEventEmitter.emit('getBuyGoodsCount');
+        this.props.push({ key: 'MyBuyGoods' });
       } else {
         Toast.show(res.msg);
       }
@@ -78,5 +81,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
+  push: PropTypes.func,
 };
 export default Base;

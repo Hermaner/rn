@@ -381,6 +381,18 @@ class OrderInfo extends base {
           </View>
         }
         {
+          orderInfo.status === '7' &&
+          <View style={styles.footerBox}>
+            <TFeedback
+              content={
+                <View style={styles.btnBox}>
+                  <Text style={{ color: '#444', fontSize: 14 }}>申请售后</Text>
+                </View>}
+              onPress={() => { push({ key: 'ReturnPage', params: { orderInfo } }); }}
+            />
+          </View>
+        }
+        {
           orderInfo.status === '8' &&
           <View style={styles.footerBox}>
             <TFeedback

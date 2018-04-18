@@ -43,12 +43,13 @@ class Base extends React.Component {
   }
   getInit = () => {
     const { emit, orderInfo, supplyInfo, type } = this.props.navigation.state.params;
+    console.log('55555555555555555', orderInfo)
     let getTime = null;
     if (orderInfo.sendTime) {
       let dateTemp = orderInfo.sendTime.substr(0, 10);
       const days = 10;
       dateTemp = dateTemp.split('-');
-      const nDate = new Date(`${dateTemp[1]}/${dateTemp[2]}/${dateTemp[0]}`);
+      const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
       const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
       const rDate = new Date(millSeconds);
       const year = rDate.getFullYear();
@@ -56,8 +57,8 @@ class Base extends React.Component {
       if (month < 10) month = `0${month}`;
       let date = rDate.getDate();
       if (date < 10) date = `0${date}`;
-      const str = orderInfo.sendTime.substr(10);
-      getTime = `${year}/${month}/${date} ${str}`;
+      const str = orderInfo.modiDate.substr(10);
+      getTime = `${year}-${month}-${date} ${str}`;
     }
     this.setState({
       orderInfo,
@@ -133,50 +134,6 @@ class Base extends React.Component {
       message,
     });
   }
-  returnMoneyService = () => {
-    const { message, orderInfo } = this.state;
-    if (!message) {
-      Toast.show('请输入申请理由！');
-      return;
-    }
-    this.sleek.toggle();
-    CreateRefundOrderService({
-      orderId: orderInfo.orderId,
-      message,
-      type: '1',
-    }).then((res) => {
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        this.setState({ visible: false }, Toast.show('申请退款消息已发送！'));
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch(() => {
-      this.sleek.toggle();
-    });
-  }
-  returnMoneyAndGoods = () => {
-    const { message, orderInfo } = this.state;
-    if (!message) {
-      Toast.show('请输入申请理由！');
-      return;
-    }
-    this.sleek.toggle();
-    CreateRefundOrderService({
-      orderId: orderInfo.orderId,
-      message,
-      type: '2',
-    }).then((res) => {
-      this.sleek.toggle();
-      if (res.isSuccess) {
-        this.setState({ visible2: false }, Toast.show('申请退货退款已发送！'));
-      } else {
-        Toast.show(res.msg);
-      }
-    }).catch(() => {
-      this.sleek.toggle();
-    });
-  }
   CancelRefundOrder = () => {
     const { orderInfo } = this.state;
     Alert.alert(
@@ -193,6 +150,8 @@ class Base extends React.Component {
               this.sleek.toggle();
               if (res.isSuccess) {
                 Toast.show('取消退款成功！');
+                DeviceEventEmitter.emit('getBuyGoodsCount');
+                this.props.push({ key: 'MyBuyGoods' });
               } else {
                 Toast.show(res.msg);
               }
@@ -202,12 +161,6 @@ class Base extends React.Component {
           } },
       ],
     );
-  }
-  returnMoneyBtn = () => {
-    this.setState({ visible: true });
-  }
-  returnMoneyAndGoodsBtn = () => {
-    this.setState({ visible2: true });
   }
   goChat = () => {
     const { supplyInfo } = this.state;
