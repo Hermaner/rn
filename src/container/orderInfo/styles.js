@@ -400,5 +400,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  boxStyle: {
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 10,
+  },
+  myText: {
+    fontSize: 14,
+    color: '#666',
+  },
 });
 export default styles;
