@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
-import { Container, Content, Input, Text, Icon } from 'native-base';
+import { Container, Content, Input, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
-import { TFeedback, Loading, Header, UploadFile, Select } from '../../components';
+import { TFeedback, Loading, Header } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import styles from './styles';
 import { Mcolor } from '../../utils';
@@ -29,8 +29,7 @@ class OrderPay extends myBase {
     return true;
   };
   _renderHeader() {
-    // const { orderInfo } = this.props.navigation.state.params;
-    const { btnType, orderInfo } = this.state;
+    const { btnType, orderInfo, message } = this.state;
     return (
       <View>
         {
@@ -39,7 +38,9 @@ class OrderPay extends myBase {
           <View style={styles.headerBox}>
             <CachedImage resizeMode="contain" style={styles.headerImg} source={{ uri: orderInfo.supply.supplyImages[0].imgUrl }} />
             <View style={styles.headerTextBox}>
-              <Text style={styles.headerText}>{orderInfo.supply.brandName}{orderInfo.supply.categoryName}</Text>
+              <Text style={styles.headerText}>
+                {orderInfo.supply.brandName}{orderInfo.supply.categoryName}
+              </Text>
               <View style={styles.pricesBox}>
                 <Text>{orderInfo.supply.wholesalePrice}/{orderInfo.supply.unit}</Text>
               </View>
@@ -69,7 +70,7 @@ class OrderPay extends myBase {
           <View style={styles.typeBox}>
             <Input
               style={styles.inputText}
-              // value={message}
+              value={message}
               onChangeText={text => this.saveLabel(text)}
               multiline
               placeholder="请输入申请理由"
