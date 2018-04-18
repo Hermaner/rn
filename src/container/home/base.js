@@ -153,6 +153,20 @@ class Base extends React.Component {
     }).catch(() => {
     });
   }
+  imgPush = (index) => {
+    const { swiperImgInfo } = this.state;
+    if (swiperImgInfo[index].sourceTypeId === '1') {
+      this.props.push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[index].imgUrls } });
+      return;
+    }
+    if (swiperImgInfo[index].sourceTypeId === '2') {
+      this.props.push({ key: 'HuinongConsultDetail', params: { newsId: swiperImgInfo[index].sourceId } });
+      return;
+    }
+    if (swiperImgInfo[index].sourceTypeId === '3') {
+      this.props.push({ key: 'GoodDetail', params: { supplyId: swiperImgInfo[index].sourceId, memberId: swiperImgInfo[index].supplyMemberId } });
+    }
+  }
   GetRecomSupplyService = () => {
     const { scurrentPage, pageSize, supplys, refresh } = this.state;
     GetRecomSupplyService({

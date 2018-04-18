@@ -182,7 +182,7 @@ class HomeScreen extends base {
                   <View style={styles.slide}>
                     <CachedImage resizeMode="stretch" style={styles.swiperImage} source={{ uri: item.img }} />
                   </View>}
-                onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
+                onPress={() => { this.imgPush(i); }}
               />
             ))
           }
