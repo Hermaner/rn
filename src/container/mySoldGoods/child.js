@@ -28,7 +28,7 @@ class Child extends ChildBase {
     return (
       <TouchableWithoutFeedback
         key={index}
-        onPress={() => { push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
+        onPress={() => { push({ key: 'OrderInfoSeller', params: { orderId: item.orderId, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
       >
         <View style={{ marginBottom: 10 }}>
           <View style={styles.flexRowBox}>

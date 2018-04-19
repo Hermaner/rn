@@ -4,7 +4,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall, CountDownTimer } from '../../components';
+import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall, CountDownTimer, TitleItem } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import base from './base';
 import styles from './styles';
@@ -130,14 +130,11 @@ class OrderInfoSeller extends base {
                 </View>
                 <View style={{ flex: 1 }}>
                   <View style={styles.addNameLine1}>
-                    <Text style={{ fontSize: 16, color: '#333', marginBottom: 10 }}>物流公司：{LOGInfo.logisticsName}</Text>
-                    <Text style={{ fontSize: 16, color: '#666' }}>物流单号：{LOGInfo.deliverOrderNumber}</Text>
+                    <Text style={{ fontSize: 14, color: '#333', marginBottom: 10 }}>物流公司:{LOGInfo.logisticsName}</Text>
+                    <Text style={{ fontSize: 14, color: '#666' }}>物流单号:{LOGInfo.deliverOrderNumber}</Text>
                   </View>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 16, color: '#666' }}>物流详情</Text>
-                  <Icon style={{ fontSize: 18, color: '#666', marginLeft: 10 }} name="md-arrow-dropright" />
-                </View>
+                <Icon style={{ fontSize: 18, color: '#666', marginLeft: 10 }} name="md-arrow-dropright" />
               </View>
             }
             onPress={() => { push({ key: 'OrderLOG', params: { orderId: orderInfo.orderId } }); }}
@@ -210,21 +207,21 @@ class OrderInfoSeller extends base {
             </View>
           </View>
           <View style={styles.infoBox}>
-            <View style={[styles.flexRow, { marginBottom: 10 }]}>
+            <View style={[styles.flexRow, { marginBottom: 6 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>购买数量</Text>
               <Text style={styles.norText}>x{orderInfo.buyCount}</Text>
             </View>
-            <View style={[styles.flexRow, { marginBottom: 10 }]}>
+            <View style={[styles.flexRow, { marginBottom: 6 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>运费</Text>
               <Text style={styles.norText}>￥{orderInfo.freight || '0.0'}</Text>
             </View>
-            <View style={[styles.flexRow, { marginBottom: 10 }]}>
+            <View style={[styles.flexRow, { marginBottom: 6 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>优惠</Text>
-              <Text style={styles.norText}>
-                ￥{orderInfo.discount || '0.0'}
+              <Text style={[styles.norText, { color: 'green' }]}>
+                -￥{orderInfo.discount || '0.0'}
               </Text>
             </View>
-            <View style={[styles.flexRow, { borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 10 }]}>
+            <View style={[styles.flexRow, { borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 10, paddingBottom: 8 }]}>
               <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>合计</Text>
               <Text style={{ fontSize: 16, color: Mcolor }}>
                 ￥{Math.round(parseFloat(orderInfo.amount) * 1000) / 1000}</Text>
@@ -233,7 +230,7 @@ class OrderInfoSeller extends base {
               orderInfo.payTypeId !== '' && orderInfo.payTypeId !== null &&
               <View style={[styles.flexRow, { borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 10 }]}>
                 <Text style={{ flex: 1, fontSize: 16, color: '#333' }}>支付方式</Text>
-                <Text style={{ fontSize: 16, color: Mcolor }}>{orderInfo.payTypeId === '1' ? '微信' : '支付宝'}</Text>
+                <Text style={{ fontSize: 16, color: 'green' }}>{orderInfo.payTypeId === '1' ? '微信' : '支付宝'}</Text>
               </View>
             }
           </View>
@@ -273,6 +270,59 @@ class OrderInfoSeller extends base {
             <Text style={styles.norText}>取消时间：{orderInfo.postDate}</Text>
           }
         </View>
+      </View>
+    );
+  }
+  renderCustomerervice() {
+    const { orderInfo: { refundOrder: { status, postDate, message, modiDate, checkMemo } } } = this.state;
+    return (
+      <View style={[styles.flexOne, styles.boxStyle]}>
+        <TitleItem
+          text="售后信息"
+        />
+        <View style={[styles.rowBox, styles.flexOne, { marginTop: 10 }]}>
+          <Text style={styles.myText}>申请售后时间：</Text>
+          <Text style={[styles.myText, styles.flexOne]}>{postDate}</Text>
+        </View>
+        <View style={[styles.rowBox, styles.flexOne]}>
+          <Text style={styles.myText}>申请售后原因：</Text>
+          <Text style={[styles.myText, styles.flexOne]}>{message}</Text>
+        </View>
+        {
+          status === '2' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>订单退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '3' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>拒绝退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '3' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>拒绝退款原因：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{checkMemo}</Text>
+          </View>
+        }
+        {
+          status === '4' &&
+          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+            <Text style={styles.myText}>取消退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '5' &&
+          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+            <Text style={styles.myText}>同意退货时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
       </View>
     );
   }
@@ -359,7 +409,7 @@ class OrderInfoSeller extends base {
                           value={label}
                           onChangeText={text => this.saveLabel(text)}
                           multiline
-                          placeholder="拒绝原因"
+                          placeholder="请输入拒绝原因"
                           placeholderTextColor="#777"
                         />
                       </View>
@@ -489,6 +539,7 @@ class OrderInfoSeller extends base {
   }
   render() {
     const { pop } = this.props;
+    const { orderInfo } = this.state;
     return (
       <Container>
         <Header
@@ -497,6 +548,7 @@ class OrderInfoSeller extends base {
         />
         <Content>
           {this._renderBody()}
+          {orderInfo.refundOrder && this.renderCustomerervice()}
         </Content>
         {this.renderFooter()}
         {this.renderModal()}

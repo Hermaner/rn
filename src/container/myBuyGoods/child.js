@@ -79,39 +79,23 @@ class Child extends ChildBase {
           {
             (item.status === '2' || item.status === '3') &&
             <View style={styles.footerBox}>
-              <TFeedback
-                content={
-                  <View style={styles.btnBox}>
-                    <Text style={{ color: '#444', fontSize: 14 }}>取消订单</Text>
-                  </View>}
-                onPress={() => { this.removeOrder(item); }}
-              />
-              <TFeedback
-                content={
-                  <View style={styles.btnBox1}>
-                    <Text style={{ color: '#fff', fontSize: 14 }}>去支付</Text>
-                  </View>}
-                onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListBuyGoods' } }); }}
-              />
+              <View style={styles.btnBox}>
+                <Text style={{ color: '#444', fontSize: 14 }}>取消订单</Text>
+              </View>
+              <View style={styles.btnBox1}>
+                <Text style={{ color: '#fff', fontSize: 14 }}>去支付</Text>
+              </View>
             </View>
           }
           {
             item.status === '5' &&
             <View style={styles.footerBox}>
-              <TFeedback
-                content={
-                  <View style={styles.btnBox1}>
-                    <Text style={{ color: '#fff', fontSize: 14 }}>确认收货</Text>
-                  </View>}
-                onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListBuyGoods' } }); }}
-              />
-              <TFeedback
-                content={
-                  <View style={styles.btnBox}>
-                    <Text style={{ color: '#444', fontSize: 14 }}>退货退款</Text>
-                  </View>}
-                onPress={() => { push({ key: 'OrderInfo', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListBuyGoods' } }); }}
-              />
+              <View style={styles.btnBox1}>
+                <Text style={{ color: '#fff', fontSize: 14 }}>确认收货</Text>
+              </View>
+              <View style={styles.btnBox}>
+                <Text style={{ color: '#444', fontSize: 14 }}>退货退款</Text>
+              </View>
             </View>
           }
           {

@@ -354,10 +354,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 7,
   },
-  rowBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   phoneText: {
     fontSize: 16,
     color: '#333',
@@ -393,6 +389,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 45,
   },
   modalTitleText: {
     flex: 2,
@@ -413,14 +410,29 @@ const styles = StyleSheet.create({
   submitBox: {
     backgroundColor: Mcolor,
     marginTop: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    height: 40,
+    ...st.jacenter,
     borderRadius: 4,
   },
   submitText: {
     color: '#fff',
     fontSize: 18,
     textAlign: 'center',
+  },
+  rowBox: {
+    flexDirection: 'row',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  boxStyle: {
+    backgroundColor: '#fff',
+    marginTop: 10,
+    paddingBottom: 10,
+  },
+  myText: {
+    fontSize: 14,
+    lineHeight: 22,
+    color: '#666',
   },
 });
 export default styles;

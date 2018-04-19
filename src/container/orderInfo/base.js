@@ -53,7 +53,7 @@ class Base extends React.Component {
       this.GetOrderInfoService();
     });
     this.reloadDetail = DeviceEventEmitter.addListener('reloadDetail', () => {
-      this.getBuyGoodsCount();
+      this.GetOrderInfoService();
     });
   }
   getDelete = () => {
@@ -77,11 +77,14 @@ class Base extends React.Component {
   }
   GetOrderInfoService = () => {
     const { orderId } = this.state;
+    this.sleek.toggle();
     GetOrderInfoService({
       orderId,
     }).then((res) => {
+      this.sleek.toggle();
       if (res.isSuccess) {
         const orderInfo = res.data;
+        console.log(orderInfo);
         let getTime = null;
         if (orderInfo.sendTime) {
           let dateTemp = orderInfo.sendTime.substr(0, 10);
@@ -106,6 +109,7 @@ class Base extends React.Component {
         // Toast.show(res.msg);
       }
     }).catch(() => {
+      this.sleek.toggle();
     });
   }
   removeOrder = () => { // 取消订单
@@ -175,7 +179,8 @@ class Base extends React.Component {
               if (res.isSuccess) {
                 Toast.show('取消退款成功！');
                 DeviceEventEmitter.emit('getBuyGoodsCount');
-                this.props.push({ key: 'MyBuyGoods' });
+                DeviceEventEmitter.emit('getMainListBuyGoods');
+                this.props.pop();
               } else {
                 Toast.show(res.msg);
               }
@@ -310,11 +315,11 @@ class Base extends React.Component {
   }
   orderOk = () => { // 收货成功
     this.sleek.toggle();
-    const { orderInfo, type } = this.state;
+    const { orderId, type } = this.state;
     const status = '7';
     UpdateOrderService({
       memberId: global.memberId,
-      orderId: orderInfo.orderId,
+      orderId,
       status,
     }).then((res) => {
       this.sleek.toggle();

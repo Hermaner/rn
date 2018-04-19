@@ -28,9 +28,8 @@ class ReturnOrderLOG extends myBase {
     return true;
   };
   _renderHeader() {
-    const { push } = this.props;
+    // const { push } = this.props;
     const { info, list, imgList } = this.state;
-    console.log('9999999', imgList)
     return (
       <View>
         <View style={styles.firstBox}>
@@ -46,14 +45,14 @@ class ReturnOrderLOG extends myBase {
                     <Text style={{ flex: 1, color: '#333' }}>{item.name}</Text>
                     <View style={styles.rowBox}>
                       <Text style={{ flex: 1, color: '#666', textAlign: 'right' }}>{item.label}</Text>
-                      {
+                      {/* {
                         item.haveIcn &&
                         <Icon name="md-arrow-dropright" style={styles.icn} />
-                      }
+                      } */}
                     </View>
                   </View>
                 </View>}
-              onPress={() => {}}
+              onPress={() => { }}
             />
           ))
         }

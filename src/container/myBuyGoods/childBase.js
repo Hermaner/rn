@@ -127,6 +127,7 @@ class Base extends React.Component {
                   removeInfo: result,
                 }, this.getInit);
                 DeviceEventEmitter.emit('getBuyGoodsCount');
+                DeviceEventEmitter.emit('getMainListBuyGoods');
                 DeviceEventEmitter.emit('emitUser');
               } else {
                 Toast.show(res.msg);

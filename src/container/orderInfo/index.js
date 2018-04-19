@@ -4,7 +4,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, TFeedback, Iconfont, TOpacity, ModalCall, CountDownTimer } from '../../components';
+import { Loading, Header, TFeedback, Iconfont, TOpacity, ModalCall, CountDownTimer, TitleItem } from '../../components';
 import { pushRoute, popRoute, resetHome } from '../../actions';
 import base from './base';
 import styles from './styles';
@@ -141,14 +141,11 @@ class OrderInfo extends base {
                 </View>
                 <View style={{ flex: 1 }}>
                   <View style={styles.addNameLine1}>
-                    <Text style={{ fontSize: 16, color: '#333', marginBottom: 10 }}>物流公司：{LOGInfo.logisticsName}</Text>
-                    <Text style={{ fontSize: 16, color: '#666' }}>物流单号：{LOGInfo.deliverOrderNumber}</Text>
+                    <Text style={{ fontSize: 14, color: '#333', marginBottom: 10 }}>物流公司：{LOGInfo.logisticsName}</Text>
+                    <Text style={{ fontSize: 14, color: '#666' }}>物流单号：{LOGInfo.deliverOrderNumber}</Text>
                   </View>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 16, color: '#666' }}>物流详情</Text>
-                  <Icon style={{ fontSize: 18, color: '#666', marginLeft: 10 }} name="md-arrow-dropright" />
-                </View>
+                <Icon style={{ fontSize: 14, color: '#666', marginLeft: 5 }} name="md-arrow-dropright" />
               </View>
             }
             onPress={() => { push({ key: 'OrderLOG', params: { orderId: orderInfo.orderId } }); }}
@@ -233,8 +230,8 @@ class OrderInfo extends base {
             </View>
             <View style={[styles.flexRow, { marginBottom: 10 }]}>
               <Text style={[styles.sixText, { flex: 1 }]}>优惠</Text>
-              <Text style={styles.sixText}>
-                ￥{orderInfo.discount || '0.0'}
+              <Text style={[styles.sixText, { color: 'green' }]}>
+                -￥{orderInfo.discount || '0.0'}
               </Text>
             </View>
             <View style={[styles.flexRow, { borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 10 }]}>
@@ -282,24 +279,55 @@ class OrderInfo extends base {
     );
   }
   renderCustomerervice() {
+    const { orderInfo: { refundOrder: { status, postDate, message, modiDate, checkMemo } } } = this.state;
     return (
       <View style={[styles.flexOne, styles.boxStyle]}>
-        <View style={[styles.rowBox, styles.flexOne]}>
+        <TitleItem
+          text="售后信息"
+        />
+        <View style={[styles.rowBox, styles.flexOne, { marginTop: 10 }]}>
           <Text style={styles.myText}>申请售后时间：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>12-2-3</Text>
+          <Text style={[styles.myText, styles.flexOne]}>{postDate}</Text>
         </View>
         <View style={[styles.rowBox, styles.flexOne]}>
           <Text style={styles.myText}>申请售后原因：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>rrrrrrrrrrr</Text>
+          <Text style={[styles.myText, styles.flexOne]}>{message}</Text>
         </View>
-        <View style={[styles.rowBox, styles.flexOne]}>
-          <Text style={styles.myText}>拒绝退款时间：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>12-2-3</Text>
-        </View>
-        <View style={[styles.rowBox, styles.flexOne]}>
-          <Text style={styles.myText}>拒绝退款原因：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</Text>
-        </View>
+        {
+          status === '2' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>订单退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '3' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>拒绝退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '3' &&
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>拒绝退款原因：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{checkMemo}</Text>
+          </View>
+        }
+        {
+          status === '4' &&
+          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+            <Text style={styles.myText}>取消退款时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
+        {
+          status === '5' &&
+          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+            <Text style={styles.myText}>同意退货时间：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
+          </View>
+        }
       </View>
     );
   }
@@ -431,6 +459,7 @@ class OrderInfo extends base {
     );
   }
   render() {
+    const { orderInfo } = this.state;
     return (
       <Container>
         <Header
@@ -439,9 +468,7 @@ class OrderInfo extends base {
         />
         <Content>
           {this._renderBody()}
-          {
-            this.renderCustomerervice()
-          }
+          {orderInfo.refundOrder && this.renderCustomerervice()}
         </Content>
         {this.renderFooter()}
         <ModalCall ref={(o) => { this.ModalCall = o; }} />

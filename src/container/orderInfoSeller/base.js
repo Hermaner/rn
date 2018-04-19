@@ -9,6 +9,7 @@ import {
   WeiXinRefundService,
   AliRefundService,
 ConfirmRefundOrder,
+GetOrderInfoService,
 RefuseRefundOrder } from '../../api';
 
 class Base extends React.Component {
@@ -50,36 +51,20 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    const { orderInfo, supplyInfo, type } = this.props.navigation.state.params;
-    let getTime = null;
-    if (orderInfo.sendTime) {
-      let dateTemp = orderInfo.sendTime.substr(0, 10);
-      const days = 10;
-      dateTemp = dateTemp.split('-');
-      const nDate = new Date(`${dateTemp[1]}/${dateTemp[2]}/${dateTemp[0]}`);
-      const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
-      const rDate = new Date(millSeconds);
-      const year = rDate.getFullYear();
-      let month = rDate.getMonth() + 1;
-      if (month < 10) month = `0${month}`;
-      let date = rDate.getDate();
-      if (date < 10) date = `0${date}`;
-      const str = orderInfo.sendTime.substr(10);
-      getTime = `${year}/${month}/${date} ${str}`;
-    }
+    const { orderId, supplyInfo, type } = this.props.navigation.state.params;
     this.setState({
-      orderInfo,
+      orderId,
       supplyInfo,
-      getTime,
-      favorable: orderInfo.discount || '',
-      freight: orderInfo.freight || '',
       type,
-    }, this.getWuLiuData);
+    }, () => {
+      this.getWuLiuData();
+      this.GetOrderInfoService();
+    });
   }
   getWuLiuData = () => {
-    const { orderInfo } = this.state;
+    const { orderId } = this.state;
     GetDeliverOrderService({
-      orderId: orderInfo.orderId,
+      orderId,
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
@@ -90,6 +75,45 @@ class Base extends React.Component {
         // Toast.show(res.msg);
       }
     }).catch(() => {
+    });
+  }
+  GetOrderInfoService = () => {
+    const { orderId } = this.state;
+    this.sleek.toggle();
+    GetOrderInfoService({
+      orderId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        this.sleek.toggle();
+        const orderInfo = res.data;
+        console.log(orderInfo);
+        let getTime = null;
+        if (orderInfo.sendTime) {
+          let dateTemp = orderInfo.sendTime.substr(0, 10);
+          const days = 10;
+          dateTemp = dateTemp.split('-');
+          const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
+          const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
+          const rDate = new Date(millSeconds);
+          const year = rDate.getFullYear();
+          let month = rDate.getMonth() + 1;
+          if (month < 10) month = `0${month}`;
+          let date = rDate.getDate();
+          if (date < 10) date = `0${date}`;
+          const str = orderInfo.modiDate.substr(10);
+          getTime = `${year}-${month}-${date} ${str}`;
+        }
+        this.setState({
+          getTime,
+          orderInfo,
+          favorable: orderInfo.discount || '',
+          freight: orderInfo.freight || '',
+        });
+      } else {
+        // Toast.show(res.msg);
+      }
+    }).catch(() => {
+      this.sleek.toggle();
     });
   }
   saveLabel = (checkMemo) => {
@@ -176,11 +200,14 @@ class Base extends React.Component {
   RefuseRefundOrder = () => {
     const { orderInfo, checkMemo } = this.state;
     const { type } = this.props.navigation.state.params;
-    this.sleek.toggle();
     if (!checkMemo) {
       Toast.show('请输入拒绝原因！');
       return;
     }
+    this.sleek.toggle();
+    this.setState({
+      visible: false,
+    });
     RefuseRefundOrder({
       memberId: global.memberId,
       refundOrderId: orderInfo.refundOrder.refundOrderId,

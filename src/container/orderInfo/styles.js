@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   },
   addNameLine1: {
     flex: 1,
-    paddingRight: 10,
   },
   addNameLine: {
     ...st.frcenter,
@@ -347,7 +346,8 @@ const styles = StyleSheet.create({
   },
   rowBox: {
     flexDirection: 'row',
-    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
   },
   copyText: {
     fontSize: 13,
@@ -402,14 +402,12 @@ const styles = StyleSheet.create({
   },
   boxStyle: {
     backgroundColor: '#fff',
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
     marginTop: 10,
+    paddingBottom: 10,
   },
   myText: {
     fontSize: 14,
+    lineHeight: 22,
     color: '#666',
   },
 });
