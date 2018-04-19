@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { DeviceEventEmitter } from 'react-native';
 import { GetLogisticsService, CreateDeliverOrderService } from '../../api';
 
 class Base extends React.Component {
@@ -120,10 +121,8 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         Toast.show('发货成功！');
-        this.setState({
-          isOk: false,
-        });
-        push({ key: 'MySoldGoods', params: { initialPage: 0 } });
+        DeviceEventEmitter.emit('reloadDetail');
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }
@@ -135,5 +134,6 @@ class Base extends React.Component {
 Base.propTypes = {
   navigation: PropTypes.object,
   push: PropTypes.func,
+  pop: PropTypes.func,
 };
 export default Base;

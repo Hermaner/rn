@@ -4,7 +4,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { Container, Content, Icon, Text, Input } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall, CountDownTimer, TitleItem } from '../../components';
+import { Loading, Header, TFeedback, ModalView, Iconfont, TOpacity, ModalCall, CountDownTimer, TitleItem, ImageLook } from '../../components';
 import { pushRoute, popRoute } from '../../actions';
 import base from './base';
 import styles from './styles';
@@ -22,6 +22,7 @@ class OrderInfoSeller extends base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {
@@ -274,55 +275,90 @@ class OrderInfoSeller extends base {
     );
   }
   renderCustomerervice() {
-    const { orderInfo: { refundOrder: { status, postDate, message, modiDate, checkMemo } } } = this.state;
+    const { refundItems } = this.state;
     return (
       <View style={[styles.flexOne, styles.boxStyle]}>
         <TitleItem
           text="售后信息"
         />
-        <View style={[styles.rowBox, styles.flexOne, { marginTop: 10 }]}>
-          <Text style={styles.myText}>申请售后时间：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>{postDate}</Text>
+        {
+          refundItems.map((list, index) => (
+            <View key={index}>
+              <View style={[styles.rowBox, styles.flexOne, { marginTop: 10 }]}>
+                <Text style={styles.myText}>申请售后时间：</Text>
+                <Text style={[styles.myText, styles.flexOne]}>{list.postDate}</Text>
+              </View>
+              <View style={[styles.rowBox, styles.flexOne]}>
+                <Text style={styles.myText}>申请售后原因：</Text>
+                <Text style={[styles.myText, styles.flexOne]}>{list.message}</Text>
+              </View>
+              {
+                list.status === '2' &&
+                <View style={[styles.rowBox, styles.flexOne]}>
+                  <Text style={styles.myText}>订单退款时间：</Text>
+                  <Text style={[styles.myText, styles.flexOne]}>{list.modiDate}</Text>
+                </View>
+              }
+              {
+                list.status === '3' &&
+                <View style={[styles.rowBox, styles.flexOne]}>
+                  <Text style={styles.myText}>拒绝退款时间：</Text>
+                  <Text style={[styles.myText, styles.flexOne]}>{list.modiDate}</Text>
+                </View>
+              }
+              {
+                list.status === '3' &&
+                <View style={[styles.rowBox, styles.flexOne]}>
+                  <Text style={styles.myText}>拒绝退款原因：</Text>
+                  <Text style={[styles.myText, styles.flexOne]}>{list.checkMemo}</Text>
+                </View>
+              }
+              {
+                list.status === '4' &&
+                <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+                  <Text style={styles.myText}>取消退款时间：</Text>
+                  <Text style={[styles.myText, styles.flexOne]}>{list.modiDate}</Text>
+                </View>
+              }
+              {
+                list.status === '5' &&
+                <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
+                  <Text style={styles.myText}>同意退货时间：</Text>
+                  <Text style={[styles.myText, styles.flexOne]}>{list.modiDate}</Text>
+                </View>
+              }
+            </View>
+          ))
+        }
+      </View>
+    );
+  }
+  renderReturnCert() {
+    const { orderInfo: { refundOrder: { refundInfo } } } = this.state;
+    const images = [];
+    refundInfo.imgUrls.split(',').forEach((item) => {
+      images.push({
+        imgUrl: item,
+      });
+    });
+    return (
+      <View style={[styles.flexOne, styles.boxStyle]}>
+        <TitleItem
+          text="退货凭证"
+        />
+        <View>
+          <View style={[styles.rowBox, styles.flexOne, { marginTop: 10 }]}>
+            <Text style={styles.myText}>物流名称：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{refundInfo.logisticsName}</Text>
+          </View>
+          <View style={[styles.rowBox, styles.flexOne]}>
+            <Text style={styles.myText}>快递单号：</Text>
+            <Text style={[styles.myText, styles.flexOne]}>{refundInfo.deliverNumber}</Text>
+          </View>
+          <ImageLook
+            images={images}
+          />
         </View>
-        <View style={[styles.rowBox, styles.flexOne]}>
-          <Text style={styles.myText}>申请售后原因：</Text>
-          <Text style={[styles.myText, styles.flexOne]}>{message}</Text>
-        </View>
-        {
-          status === '2' &&
-          <View style={[styles.rowBox, styles.flexOne]}>
-            <Text style={styles.myText}>订单退款时间：</Text>
-            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
-          </View>
-        }
-        {
-          status === '3' &&
-          <View style={[styles.rowBox, styles.flexOne]}>
-            <Text style={styles.myText}>拒绝退款时间：</Text>
-            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
-          </View>
-        }
-        {
-          status === '3' &&
-          <View style={[styles.rowBox, styles.flexOne]}>
-            <Text style={styles.myText}>拒绝退款原因：</Text>
-            <Text style={[styles.myText, styles.flexOne]}>{checkMemo}</Text>
-          </View>
-        }
-        {
-          status === '4' &&
-          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
-            <Text style={styles.myText}>取消退款时间：</Text>
-            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
-          </View>
-        }
-        {
-          status === '5' &&
-          <View style={[styles.rowBox, styles.flexOne]} v-if="orderInfo==2">
-            <Text style={styles.myText}>同意退货时间：</Text>
-            <Text style={[styles.myText, styles.flexOne]}>{modiDate}</Text>
-          </View>
-        }
       </View>
     );
   }
@@ -539,7 +575,7 @@ class OrderInfoSeller extends base {
   }
   render() {
     const { pop } = this.props;
-    const { orderInfo } = this.state;
+    const { refundItems, orderInfo } = this.state;
     return (
       <Container>
         <Header
@@ -548,7 +584,8 @@ class OrderInfoSeller extends base {
         />
         <Content>
           {this._renderBody()}
-          {orderInfo.refundOrder && this.renderCustomerervice()}
+          {refundItems && refundItems.length > 0 && this.renderCustomerervice()}
+          {orderInfo.refundOrder && orderInfo.refundOrder.refundInfo && this.renderReturnCert()}
         </Content>
         {this.renderFooter()}
         {this.renderModal()}

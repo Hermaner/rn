@@ -210,7 +210,7 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         DeviceEventEmitter.emit('emitUser');
-        push({ key: 'OrderInfo', params: { orderInfo: res.data, supplyInfo, emit: 'reset' } });
+        push({ key: 'OrderInfo', params: { orderId: res.data.orderId, supplyInfo, emit: 'reset' } });
       } else {
         Toast.show(res.msg);
       }

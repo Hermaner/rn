@@ -339,7 +339,6 @@ class AppWithNavigationState extends React.Component {
   componentDidMount() {
     DeviceEventEmitter.addListener('notifyGetNoReadCount', () => {
       SocketObser.socket.on('notifyGetNoReadCount', (data) => {
-        console.log(data)
         this.setState({
           isDot: data > 0,
         });

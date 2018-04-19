@@ -43,7 +43,7 @@ class OrderPay extends myBase {
             </View>
           </View>
           <View style={[styles.twoBox, { borderBottomWidth: 1, borderBottomColor: '#ddd' }]}>
-            <Text style={{ fontSize: 14, color: '#333' }}>公司名称</Text>
+            <Text style={{ fontSize: 14, color: '#333' }}>物流名称</Text>
             <Input
               style={styles.inputLabel}
               value={logisticsName}

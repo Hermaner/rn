@@ -56,7 +56,6 @@ export default class ScrollableTab extends React.Component {
     count: PropTypes.array,
   };
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       isDisable: false,

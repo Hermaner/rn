@@ -60,8 +60,9 @@ class Base extends React.Component {
           item.status === '4' ? '待发货' :
           item.status === '5' ? '待收货' :
           item.status === '6' ? '退款中' :
-          item.status === '7' ? '订单完成' :
-          item.status === '9' ? '已退款' : '订单取消';
+          item.status === '7' ? '已收货' :
+          item.status === '8' ? '订单取消' :
+          item.status === '9' ? '已退款' : '订单完成';
           item.statusName = statusName;
         });
         if (result.length === 0) {

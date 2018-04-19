@@ -10,6 +10,7 @@ import {
   AliRefundService,
 ConfirmRefundOrder,
 GetOrderInfoService,
+GetRefundOrderService,
 RefuseRefundOrder } from '../../api';
 
 class Base extends React.Component {
@@ -19,6 +20,7 @@ class Base extends React.Component {
       orderInfo: '',
       supplyInfo: '',
       getTime: null,
+      refundItems: [],
       tu: require('../../assets/img/no.png'),
       amount: '',
       status: '',
@@ -59,7 +61,15 @@ class Base extends React.Component {
     }, () => {
       this.getWuLiuData();
       this.GetOrderInfoService();
+      this.GetRefundOrderService();
     });
+    this.reloadDetail = DeviceEventEmitter.addListener('reloadDetail', () => {
+      this.GetOrderInfoService();
+      this.GetRefundOrderService();
+    });
+  }
+  getDelete = () => {
+    this.reloadDetail.remove();
   }
   getWuLiuData = () => {
     const { orderId } = this.state;
@@ -92,7 +102,7 @@ class Base extends React.Component {
           let dateTemp = orderInfo.sendTime.substr(0, 10);
           const days = 10;
           dateTemp = dateTemp.split('-');
-          const nDate = new Date(`${dateTemp[1]}-${dateTemp[2]}-${dateTemp[0]}`);
+          const nDate = new Date(`${dateTemp[1]}/${dateTemp[2]}/${dateTemp[0]}`);
           const millSeconds = Math.abs(nDate) + (days * 24 * 60 * 60 * 1000);
           const rDate = new Date(millSeconds);
           const year = rDate.getFullYear();
@@ -101,7 +111,7 @@ class Base extends React.Component {
           let date = rDate.getDate();
           if (date < 10) date = `0${date}`;
           const str = orderInfo.modiDate.substr(10);
-          getTime = `${year}-${month}-${date} ${str}`;
+          getTime = `${year}/${month}/${date} ${str}`;
         }
         this.setState({
           getTime,
@@ -114,6 +124,19 @@ class Base extends React.Component {
       }
     }).catch(() => {
       this.sleek.toggle();
+    });
+  }
+  GetRefundOrderService = () => {
+    const { orderId } = this.state;
+    GetRefundOrderService({
+      orderId,
+    }).then((res) => {
+      if (res.isSuccess) {
+        this.setState({
+          refundItems: res.data,
+        });
+      }
+    }).catch(() => {
     });
   }
   saveLabel = (checkMemo) => {

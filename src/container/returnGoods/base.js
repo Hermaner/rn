@@ -1,6 +1,7 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
+import { DeviceEventEmitter } from 'react-native';
 import { GetLogisticsService, CreateRefundInfoService } from '../../api';
 
 class Base extends React.Component {
@@ -99,7 +100,6 @@ class Base extends React.Component {
     }
   }
   CreateRefundInfoService = () => {
-    const { push } = this.props;
     const { deliverOrderNumber, optionType, frontImgUrl, orderInfo, logisticsName } = this.state;
     const imgArray = [];
     for (let i = 0; i < frontImgUrl.length; i += 1) {
@@ -127,10 +127,10 @@ class Base extends React.Component {
       this.sleek.toggle();
       if (res.isSuccess) {
         Toast.show('退货成功！');
-        this.setState({
-          isOk: false,
-        });
-        push({ key: 'MyBuyGoods' });
+        DeviceEventEmitter.emit('getBuyGoodsCount');
+        DeviceEventEmitter.emit('getMainListBuyGoods');
+        DeviceEventEmitter.emit('reloadDetail');
+        this.props.pop();
       } else {
         Toast.show(res.msg);
       }
@@ -142,5 +142,6 @@ class Base extends React.Component {
 Base.propTypes = {
   navigation: PropTypes.object,
   push: PropTypes.func,
+  pop: PropTypes.func,
 };
 export default Base;

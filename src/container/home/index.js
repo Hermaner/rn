@@ -160,9 +160,7 @@ class HomeScreen extends base {
     );
   }
   renderSwiper() {
-    const { push } = this.props;
-    const { imgList, swiperImgInfo } = this.state;
-    console.log('&&&&&&&&&&&&&&', swiperImgInfo)
+    const { imgList } = this.state;
     return (
       <View style={{ height: 150, marginTop: 10 }}>
         <Swiper

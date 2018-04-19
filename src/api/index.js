@@ -1,7 +1,7 @@
 
-const httpurl = 'http://192.168.50.61:8084/api/lede/';
+// const httpurl = 'http://192.168.50.61:8084/api/lede/';
 // const httpurl = 'http://192.168.0.15:8084/api/lede/';
-// const httpurl = 'https://lede.hbw128.com/api/lede/';
+const httpurl = 'https://lede.hbw128.com/api/lede/';
 function parseJSON(response) {
   return response.json();
 }
@@ -485,4 +485,7 @@ export function RefuseRefundOrder(data) {
 }
 export function GetOrderInfoService(data) {
   return get('GetOrderInfoService', data);
+}
+export function GetRefundOrderService(data) {
+  return get('GetRefundOrderService', data);
 }

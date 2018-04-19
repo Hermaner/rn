@@ -70,37 +70,25 @@ class Child extends ChildBase {
           {
             (item.status === '1' || item.status === '2') &&
             <View style={styles.footerBox}>
-              <TFeedback
-                content={
-                  <View style={styles.btnBox1}>
-                    <Text style={{ color: '#fff', fontSize: 14 }}>修改</Text>
-                  </View>}
-                onPress={() => { this.props.push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
-              />
+              <View style={styles.btnBox1}>
+                <Text style={{ color: '#fff', fontSize: 14 }}>修改</Text>
+              </View>
             </View>
           }
           {
             (item.status === '4') &&
             <View style={styles.footerBox}>
-              <TFeedback
-                content={
-                  <View style={styles.btnBox1}>
-                    <Text style={{ color: '#fff', fontSize: 14 }}>去发货</Text>
-                  </View>}
-                onPress={() => { this.props.push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
-              />
+              <View style={styles.btnBox1}>
+                <Text style={{ color: '#fff', fontSize: 14 }}>去发货</Text>
+              </View>
             </View>
           }
           {
             (item.status === '6') &&
             <View style={styles.footerBox}>
-              <TFeedback
-                content={
-                  <View style={styles.btnBox}>
-                    <Text style={{ color: '#444', fontSize: 14 }}>同意退款</Text>
-                  </View>}
-                onPress={() => { this.props.push({ key: 'OrderInfoSeller', params: { orderInfo: item, supplyInfo: item.supply, type: 'getMainListSoldGoods' } }); }}
-              />
+              <View style={styles.btnBox}>
+                <Text style={{ color: '#444', fontSize: 14 }}>同意退款</Text>
+              </View>
             </View>
           }
           {

@@ -18,7 +18,7 @@ class Base extends React.Component {
         isChoose: orderInfo.status === '4',
       }, {
         btnName: '退货退款',
-        isChoose: orderInfo.status === '5' || orderInfo.status === '6',
+        isChoose: orderInfo.status === '5' || orderInfo.status === '6' || orderInfo.status === '7',
         type: '2',
       }],
       message: '',
