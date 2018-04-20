@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, FlatList, BackHandler } from 'react-native';
+import { View, BackHandler } from 'react-native';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import PropTypes from 'prop-types';
 import { Container, Text } from 'native-base';
 import Swipeout from 'react-native-swipeout';
@@ -64,7 +65,7 @@ class ChatPhrase extends base {
     return (
       <View style={styles.listContent}>
         {
-          <FlatList
+          <OptimizedFlatList
             data={items}
             renderItem={this._renderRow}
             keyExtractor={(item, index) => index}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Container, Content, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute } from '../../actions';
-import { Header, TFeedback, TOpacity } from '../../components';
+import { Header, TFeedback } from '../../components';
 import base from './base';
 import styles from './styles';
 
@@ -19,6 +19,7 @@ class CgCitys extends base {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

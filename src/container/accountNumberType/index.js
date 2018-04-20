@@ -22,6 +22,7 @@ class AccountNumberType extends accountNumberTypeBase {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

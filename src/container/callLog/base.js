@@ -27,6 +27,9 @@ class Base extends React.Component {
   getInit = () => {
     this.setState({ memberId: global.memberId || '' }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { type } = this.props;
     this.sleek.toggle();

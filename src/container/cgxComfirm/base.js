@@ -87,28 +87,6 @@ class Base extends React.Component {
   getData = () => {
     const { item } = this.props.navigation.state.params;
     const { items } = this.state;
-    // const skus = Global.skus;
-    // const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
-    // const typeName = main.name;
-    // let brandName = '';
-    // let brandId = '';
-    // if (Global.thirdIndex === 0 || Global.thirdIndex) {
-    //   brandName = main.brands[Global.thirdIndex].brandName;
-    //   brandId = main.brands[Global.thirdIndex].brandId.toString();
-    // }
-    // items[0].label = `${typeName}${brandName}`;
-    // const skuString = [];
-    // const purchaseItems = [];
-    // skus.forEach((item) => {
-    //   if (item.itemIndex !== undefined) {
-    //     skuString.push(item.specs[item.itemIndex].specName);
-    //     purchaseItems.push({
-    //       specTypeId: item.specTypeId.toString(),
-    //       specId: item.specs[item.itemIndex].specId.toString(),
-    //     });
-    //   }
-    // });
-    // items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
     const skuString = [];
     const purchaseItems = [];
     item.purchaseItems.forEach((list) => {
@@ -298,6 +276,7 @@ class Base extends React.Component {
     this.emitGetDemand.remove();
     this.emitGetCity.remove();
     this.emitGetACity.remove();
+    this.state = null;
   }
   goPage = (index, type) => {
     const { items, items2, categoryId } = this.state;

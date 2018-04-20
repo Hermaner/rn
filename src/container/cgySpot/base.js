@@ -24,6 +24,9 @@ class Base extends React.Component {
       endDate: '',
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   tabBtn = (index) => {
     const { items, tabIndex } = this.state;
     if (index === tabIndex) {

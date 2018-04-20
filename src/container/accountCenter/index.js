@@ -14,7 +14,6 @@ class AccountCenter extends AccountCenterBase {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {

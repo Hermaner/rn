@@ -13,13 +13,13 @@ class EnlistBusiness extends accountNumberTypeBase {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

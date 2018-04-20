@@ -20,8 +20,8 @@ class Base extends React.Component {
       upImages,
     });
   }
-  deleteInit = () => {
-    this.emitAmout.remove();
+  getDelete = () => {
+    this.state = null;
   }
   save = () => {
     const { value, id } = this.state;

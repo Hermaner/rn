@@ -20,6 +20,9 @@ class CashBase extends React.Component {
       item,
     }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     GetMemberSurplusAmountService({
       memberId: global.memberId,

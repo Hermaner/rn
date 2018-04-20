@@ -23,6 +23,7 @@ class Base extends React.Component {
     this._onRefresh();
   }
   getDelete = () => {
+    this.state = null;
   }
   getData = () => {
     const { currentPage, pageSize, items, refresh } = this.state;

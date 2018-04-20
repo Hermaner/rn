@@ -15,6 +15,9 @@ class Base extends React.Component {
       selectShow: false,
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { options } = this.state;
     GetUnitsService({

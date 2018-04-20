@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { TFeedback, Loading, NoData, Iconfont } from '../../components';
@@ -52,7 +53,7 @@ class Child1 extends ChildBase1 {
       <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
         {
           items.length > 0 ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

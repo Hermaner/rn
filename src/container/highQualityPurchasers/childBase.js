@@ -18,6 +18,9 @@ class Base extends React.Component {
   getInit = () => {
     this.getData();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { categoryId } = this.props;
     GetPurchaseByOneLevelCategoryService({

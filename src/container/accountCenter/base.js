@@ -8,13 +8,6 @@ class AccountCenterBase extends React.Component {
     super(props);
     this.state = {
       items: [
-      //   {
-      //   id: '1',
-      //   title: '账单',
-      //   label: '收支记录',
-      //   leftIcn: 'arrow-back',
-      //   push: 'Bill',
-      // },
         {
           id: '1',
           title: '收款账号',
@@ -50,6 +43,7 @@ class AccountCenterBase extends React.Component {
   }
   deleteInit = () => {
     this.emitMineUser.remove();
+    this.state = null;
   }
   emitCash = () => {
     this.getData();

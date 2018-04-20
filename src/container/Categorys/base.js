@@ -16,6 +16,9 @@ class Base extends React.Component {
   getInit = () => {
     this.GetAppCategoryService();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   GetAppCategoryService = () => {
     GetAppCategoryService()
     .then((res) => {

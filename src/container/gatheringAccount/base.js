@@ -16,6 +16,9 @@ class GatheringAccountBase extends React.Component {
   getInit = () => {
     this.setState({ memberId: global.memberId || '' }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { memberId, items } = this.state;
     GetWithdrawalsNumberService({

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, TouchableWithoutFeedback, Text, FlatList } from 'react-native';
+import { View, TouchableWithoutFeedback, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { pushRoute, popRoute } from '../../actions';
 import { Loading, NoData, Header } from '../../components';
 import base from './base';
@@ -59,7 +60,7 @@ class ChatSupply extends base {
         />
         {
           !noData ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

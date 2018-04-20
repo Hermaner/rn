@@ -19,6 +19,7 @@ class CgCitys extends base {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {
@@ -27,7 +28,6 @@ class CgCitys extends base {
   };
   _renderAddressContent() {
     const { citys, leftIndex, midIndex } = this.state;
-    console.log(global.provinceName)
     return (
       <View style={styles.maskerContentView}>
         <View style={styles.maskerTitle}>

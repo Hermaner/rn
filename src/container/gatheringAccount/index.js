@@ -21,6 +21,7 @@ class GatheringAccount extends gatheringAccountBase {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

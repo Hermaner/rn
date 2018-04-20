@@ -20,6 +20,7 @@ class Categorys extends base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

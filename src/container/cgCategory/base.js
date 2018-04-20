@@ -24,6 +24,9 @@ class CgCategoryBase extends React.Component {
       brandName: '',
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   goNextWidthOut = () => {
     const { itemIndex, items } = this.state;
     const { push } = this.props;

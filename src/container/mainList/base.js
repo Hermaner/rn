@@ -110,6 +110,7 @@ class Base extends React.Component {
     this.EmitMainList.remove();
     this.EmitMainListName.remove();
     this.emitCitys.remove();
+    this.state = null;
   }
   getData = () => {
     const {

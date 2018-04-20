@@ -13,7 +13,6 @@ class AdjectiveInfo extends Base {
   constructor(props) {
     super(props);
     const { userType } = this.props.navigation.state.params;
-    console.log(userType);
     this.state = {
       ...this.state,
       userType,
@@ -24,6 +23,7 @@ class AdjectiveInfo extends Base {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

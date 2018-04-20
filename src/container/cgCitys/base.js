@@ -13,6 +13,9 @@ class Base extends React.Component {
       leftIndex: 0,
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   selectCity = (index) => {
     const { citys, leftIndex } = this.state;
 

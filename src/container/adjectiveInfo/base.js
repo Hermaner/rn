@@ -26,6 +26,9 @@ class Base extends React.Component {
       identityName,
     }, this.GetIdentityService);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   GetIdentityService = () => {
     const { identityName } = this.state;
     GetIdentityService()

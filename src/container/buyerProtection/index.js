@@ -26,6 +26,7 @@ class StrengthBusiness extends Base {
     this.getData();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

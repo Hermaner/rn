@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { CachedImage } from 'react-native-img-cache';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
@@ -23,7 +24,6 @@ class Child extends Base {
   }
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
-    console.log('66666666666666666666666', item)
     return (
       <TouchableWithoutFeedback onPress={() => { push({ key: 'GoodDetail', params: { supplyId: item.supply.supplyId, memberId: item.supply.memberId } }); }}>
         <View style={styles.goodsItem}>
@@ -93,7 +93,7 @@ class Child extends Base {
       <View>
         {
           !noData ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

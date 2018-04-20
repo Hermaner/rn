@@ -11,6 +11,9 @@ class Base extends React.Component {
       citys: DeepClone(citysJson),
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   locationDistrict = () => {
     const { type } = this.props.navigation.state.params;
     const data = {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, BackHandler, Text, FlatList } from 'react-native';
+import { View, BackHandler, Text } from 'react-native';
 import { Container } from 'native-base';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute, popRoute } from '../../actions';
@@ -41,7 +42,7 @@ class RecommendBusiness extends base {
       <View style={styles.listContent}>
         {
           !noData ?
-            <FlatList
+            <OptimizedFlatList
               data={business}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

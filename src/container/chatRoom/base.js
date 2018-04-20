@@ -113,7 +113,7 @@ class Base extends React.Component {
     this.socket.off('notifyMessageSendSuccess', this.notifyMessageSendSuccess);
     this.socket.off('notifyGetChat', this.notifyGetChat);
     this.socket.off('notifyGetChatStatus', this.notifyGetChatStatus);
-    // this.socket = null;
+    this.state = null;
   }
   notifyMessageRead = (data) => {
     let { messages } = this.state;

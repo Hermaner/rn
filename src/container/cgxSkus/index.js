@@ -20,6 +20,7 @@ class CgxSkus extends base {
     this.GetSpecService();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

@@ -16,6 +16,9 @@ class Base extends React.Component {
       chooseOne: '',
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   GetSpecService = () => {
     const { categoryId } = this.props.navigation.state.params;
     this.sleek.toggle();

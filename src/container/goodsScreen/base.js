@@ -52,6 +52,9 @@ class Base extends React.Component {
   getInit = () => {
     this.setState({ memberId: global.memberId || '' });
   }
+  getDelete = () => {
+    this.state = null;
+  }
   resetState = () => {
     this.setState({
       ...DeepClone(this.resetData),

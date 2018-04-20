@@ -23,6 +23,7 @@ class HighQualityPurchasers extends Base {
     this.GetAppCategoryService();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

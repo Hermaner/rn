@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import PropTypes from 'prop-types';
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
@@ -18,6 +19,9 @@ class Child extends base {
   }
   componentDidMount() {
     this.getInit();
+  }
+  componentWillUnmount() {
+    this.getDelete();
   }
   _renderRow = ({ item, index }) => {
     const { push } = this.props;
@@ -64,7 +68,7 @@ class Child extends base {
           items !== '' &&
           items !== null &&
           items.length > 0 ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

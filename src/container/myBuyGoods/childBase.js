@@ -4,11 +4,11 @@ import Toast from 'react-native-simple-toast';
 import PropTypes from 'prop-types';
 import { UpdateOrderService, GetMemberBuyOrderService, DeleteOrderService } from '../../api';
 
-let canEnd = false;
 class Base extends React.Component {
   constructor(props) {
     super(props);
     this.isSend = false;
+    this.canEnd = false;
     this.state = {
       memberId: '',
       currentPage: 1,
@@ -40,6 +40,9 @@ class Base extends React.Component {
   getDelete = () => {
     this.EmitMainListBuyGoods.remove();
     this.EmitBuyGoodsGoThink.remove();
+    this.isSend = null;
+    this.canEnd = null;
+    this.state = null;
   }
   getData = () => {
     const { currentPage, pageSize, items, refresh } = this.state;
@@ -94,7 +97,7 @@ class Base extends React.Component {
             loading: false,
           });
         }
-        setTimeout(() => { canEnd = true; }, 0);
+        setTimeout(() => { this.canEnd = true; }, 0);
         if (result.length < pageSize) {
           this.setState({
             loading: false,
@@ -176,8 +179,8 @@ class Base extends React.Component {
   }
   _reachEnd = () => {
     const { nomore } = this.state;
-    if (canEnd && !nomore) {
-      canEnd = false;
+    if (this.canEnd && !nomore) {
+      this.canEnd = false;
       this.setState({ loading: true }, () => this.getData());
     }
   }

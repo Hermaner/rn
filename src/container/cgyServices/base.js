@@ -22,6 +22,9 @@ class Base extends React.Component {
       renderServices: renderServices.split(','),
     }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { data, supplyMode, logisticsMode, renderServices } = this.state;
     const items1 = [];

@@ -24,6 +24,9 @@ class Goods extends base {
   componentDidMount() {
     this.getInit();
   }
+  componentWillUnmount() {
+    this.getDelete();
+  }
   renderHeader() {
     const { backGround1, backgroundImg } = this.state;
     return (

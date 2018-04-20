@@ -15,6 +15,9 @@ class Base extends React.Component {
       midIndex: 0,
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   selectCity = (index) => {
     const { citys, leftIndex, midIndex } = this.state;
     citys[leftIndex].citys[midIndex].cur = false;

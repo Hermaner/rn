@@ -42,6 +42,7 @@ class Base extends React.Component {
   }
   deleteData = () => {
     this.EmitgetAddress.remove();
+    this.state = null;
   }
   saveName = (value) => {
     this.setState({

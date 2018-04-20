@@ -12,6 +12,9 @@ class Base extends React.Component {
       mySpecName: '',
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   tabView = (index, i) => {
     const { items } = this.state;
     this.setState({

@@ -16,6 +16,9 @@ class Base extends React.Component {
     const { memberId } = this.props.navigation.state.params;
     this.setState({ memberId }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { memberId } = this.state;
     this.sleek.toggle();

@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, BackHandler, TouchableOpacity, TouchableWithoutFeedback, FlatList } from 'react-native';
+import { View, BackHandler, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { Container, Content, Text, Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
@@ -269,7 +270,7 @@ class ReleaseMainList extends base {
       <View style={styles.listContent}>
         {
           !noData ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

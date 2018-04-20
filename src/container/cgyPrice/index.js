@@ -24,6 +24,7 @@ class cgyPrice extends base {
     this.getData();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

@@ -16,11 +16,11 @@ import {
     StyleSheet,
     View,
     Text,
-    FlatList,
     AppState,
     Platform,
     DeviceEventEmitter,
 } from 'react-native';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { Container } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -305,7 +305,7 @@ class SessionList extends React.Component {
       <View style={styles.listContent}>
         {
           items.length > 0 ?
-            <FlatList
+            <OptimizedFlatList
               scrollEnabled={isAllowScroll}
               data={items}
               renderItem={this._renderRow}

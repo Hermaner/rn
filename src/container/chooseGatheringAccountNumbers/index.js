@@ -22,6 +22,7 @@ class ChooseGatheringAccountNumbers extends chooseGatheringAccountNumbersBase {
     this.getInit();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

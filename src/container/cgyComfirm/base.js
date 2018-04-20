@@ -198,6 +198,7 @@ class Base extends React.Component {
     this.emitGetCity.remove();
     this.emitCfyMemo.remove();
     this.emitCfyService.remove();
+    this.state = null;
   }
   goPage = (index) => {
     const {

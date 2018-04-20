@@ -15,6 +15,9 @@ class Base extends React.Component {
   getInit = () => {
     this.setState({ memberId: global.memberId || '' }, this.getData);
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     this.sleek.toggle();
     GetEnlistImgService({

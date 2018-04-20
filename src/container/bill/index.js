@@ -21,6 +21,7 @@ class Bill extends billBase {
     this.getData();
   }
   componentWillUnmount() {
+    this.getDelete();
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
   onBackPress = () => {

@@ -31,6 +31,9 @@ class CertificationBase extends React.Component {
       this.sleek.toggle();
     });
   }
+  getDelete = () => {
+    this.state = null;
+  }
   goPersonPage = () => {
     const { push } = this.props;
     const { havePerson } = this.state;

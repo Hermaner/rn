@@ -14,6 +14,9 @@ class BillBase extends React.Component {
       card: require('../../assets/img/dg.png'),
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     GetMemberAmountLogService({
       memberId: global.memberId,

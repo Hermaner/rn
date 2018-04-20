@@ -43,6 +43,7 @@ class Base extends React.Component {
   }
   deleteData = () => {
     this.emitBjCity.remove();
+    this.state = null;
   }
   selestItem = (index) => {
     const { items, itemIndex } = this.state;

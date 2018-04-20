@@ -19,6 +19,9 @@ class Child2 extends collectiveAuthenticationBase {
   componentDidMount() {
     this.getInit();
   }
+  componentWillUnmount() {
+    this.getDelete();
+  }
   _renderBusinessInput = () => {
     const { businessName } = this.state;
     return (

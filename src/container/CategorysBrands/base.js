@@ -11,6 +11,9 @@ class Base extends React.Component {
   }
   getInit = () => {
   }
+  getDelete = () => {
+    this.state = null;
+  }
   brandTab = (index) => {
     const { brands } = this.state;
     DeviceEventEmitter.emit('emitBrands', brands[index]);

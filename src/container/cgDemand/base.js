@@ -56,6 +56,9 @@ class Base extends React.Component {
     }
     this.getData();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { options } = this.state;
     GetUnitsService({

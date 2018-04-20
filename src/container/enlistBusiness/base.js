@@ -32,6 +32,9 @@ class AccountNumberTypeBase extends React.Component {
       }],
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   whichClick = (index) => {
     switch (index) {
       case 0:

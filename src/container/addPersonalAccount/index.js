@@ -13,7 +13,6 @@ class AddPersonalAccount extends addPersonalAccountBase {
     super(props);
     this.state = {
       ...this.state,
-      swiperData: [],
     };
   }
   componentDidMount() {

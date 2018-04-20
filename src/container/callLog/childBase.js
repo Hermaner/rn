@@ -24,6 +24,9 @@ class Base extends React.Component {
     }
     this.getData();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     const { type } = this.props;
     this.sleek.toggle();

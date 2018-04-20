@@ -27,6 +27,9 @@ class AccountNumberTypeBase extends React.Component {
       where,
     });
   }
+  getDelete = () => {
+    this.state = null;
+  }
   personalAccount = (index) => {
     const { push } = this.props;
     const { where } = this.state;

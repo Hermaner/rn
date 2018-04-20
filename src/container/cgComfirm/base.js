@@ -218,6 +218,7 @@ class Base extends React.Component {
     this.emitGetDemand.remove();
     this.emitGetCity.remove();
     this.emitGetACity.remove();
+    this.state = null;
   }
   goPage = (index, type) => {
     const { items, items2, demand, unit, wantStarPrice, wantEndPrice, frequency } = this.state;

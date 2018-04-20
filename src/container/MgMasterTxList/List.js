@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import { Container, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
@@ -46,7 +47,7 @@ class MasterOrder extends base {
       <View style={styles.listContent}>
         {
           !noData ?
-            <FlatList
+            <OptimizedFlatList
               data={items}
               renderItem={this._renderRow}
               keyExtractor={(item, index) => index}

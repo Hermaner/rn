@@ -12,6 +12,9 @@ class Base extends React.Component {
   getInit = () => {
     this.GetAppCategoryService();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   GetAppCategoryService = () => {
     this.sleek.toggle();
     GetAppCategoryService().then((res) => {

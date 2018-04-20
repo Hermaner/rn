@@ -8,6 +8,9 @@ class ClauseAndAgreementBase extends React.Component {
       info: '',
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     this.sleek.toggle();
     GetServicesTermService({

@@ -25,6 +25,9 @@ class Base extends React.Component {
       haveImg: [],
     };
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getInit = () => {
     const { thinkInfo } = this.props.navigation.state.params;
     const all = [];

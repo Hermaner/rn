@@ -23,7 +23,7 @@ class CallLog extends base {
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
-    // this.getDelete();
+    this.getDelete();
   }
   onBackPress = () => {
     this.props.pop();

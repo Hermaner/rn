@@ -24,6 +24,9 @@ class CollectiveAuthenticationBase extends React.Component {
   getInit = () => {
     this.getData();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   getData = () => {
     this.sleek.toggle();
     GetMemberInfoService({

@@ -25,6 +25,7 @@ class Base extends React.Component {
   }
   deleteInit = () => {
     this.emitPhrase.remove();
+    this.state = null;
   }
   GetPhraseService = () => {
     GetPhraseService().then((res) => {

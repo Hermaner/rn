@@ -71,6 +71,9 @@ class Base extends React.Component {
     this.GetHomeNewsService();
     this.GetBackgroundImgService();
   }
+  getDelete = () => {
+    this.state = null;
+  }
   imgPush = (index) => {
     const { swiperImgInfo } = this.state;
     if (swiperImgInfo[index].sourceTypeId === '1') {
