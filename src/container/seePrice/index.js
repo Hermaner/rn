@@ -36,7 +36,7 @@ class SeePrice extends seePriceBase {
           info.map((item, index) => (
             <View key={index} style={styles.listInem}>
               <View style={styles.rowBox}>
-                <Text style={styles.normalText}>{item.nickName}</Text>
+                <Text style={styles.normalText}>{decodeURI(item.nickName)}</Text>
                 <Text style={[styles.normalText, styles.textRight]}>{item.postDate}</Text>
               </View>
               <View style={styles.rowBox}>

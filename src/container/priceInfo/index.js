@@ -28,7 +28,6 @@ class PriceDetail extends base {
   };
   _renderBody() {
     const { items } = this.props.navigation.state.params;
-    console.log('TTTTTTTTTTTT', items)
     const timestamp = new Date().getTime();
     const endTimeTimestamp = (parseFloat(items.purchase.purchaseTime) * 86400000)
     + parseFloat(new Date(items.purchase.postDate).getTime());
@@ -41,7 +40,7 @@ class PriceDetail extends base {
             <Text style={[styles.normalText, { color: Mcolor }]}>
               {items.purchase.brandName}/{items.purchase.categoryName}</Text>
           </View>
-          <Text style={styles.normalText}>采购人：{items.purchase.nickName}</Text>
+          <Text style={styles.normalText}>采购人：{decodeURI(items.purchase.nickName)}</Text>
           <Text style={styles.normalText}>
             采购地：{items.purchase.receiveProvinceName}{items.purchase.receiveCityName}</Text>
           <Text style={styles.normalText}>采购截止日期：{endTime}</Text>

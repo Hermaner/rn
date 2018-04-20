@@ -72,7 +72,7 @@ class SearchPeople extends base {
                     content={
                       <View>
                         <View style={styles.flexRow}>
-                          <Text style={styles.myText}>{item.nickName}</Text>
+                          <Text style={styles.myText}>{decodeURI(item.nickName)}</Text>
                           {
                             item.phone !== null && item.phone !== '' &&
                             <Text style={styles.myText}>({item.phone})</Text>

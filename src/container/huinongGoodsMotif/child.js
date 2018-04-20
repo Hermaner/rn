@@ -64,7 +64,7 @@ class Child extends base {
                                 </View>
                                 <View style={{ flex: 1 }} />
                               </View>
-                              <Text style={styles.name}>{item2.nickName}</Text>
+                              <Text style={styles.name}>{decodeURI(item2.nickName)}</Text>
                               <Text style={styles.userName}>
                                 {item2.sendProvinceName}{item2.sendCityName}{item2.sendDistrictName}
                               </Text>

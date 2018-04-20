@@ -118,6 +118,7 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
+      console.log(res)
       if (res.isSuccess) {
         const result = res.data;
         const newImgArray = [];
@@ -144,6 +145,7 @@ class Base extends React.Component {
   GetPlatformInfoService = () => {
     GetPlatformInfoService({
     }).then((res) => {
+      // console.log(res)
       if (res.isSuccess) {
         const result = res.data;
         global.phone = result[0].phone;
@@ -173,6 +175,7 @@ class Base extends React.Component {
       pageSize,
       currentPage: scurrentPage,
     }).then((res) => {
+      // console.log(res)
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {

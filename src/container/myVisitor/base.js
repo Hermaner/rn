@@ -160,7 +160,7 @@ class MyVisitorBase extends React.Component {
       params: {
         item: {
           memberId: item.member.memberId,
-          userName: item.member.nickName,
+          userName: decodeURI(item.member.nickName),
           imgUrl: item.member.imgUrl,
         },
       },

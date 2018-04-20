@@ -182,7 +182,7 @@ class OrderInfo extends base {
             content={
               <View style={styles.mai}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={styles.sellerText}>卖家: {supplyInfo.nickName}</Text>
+                  <Text style={styles.sellerText}>卖家: {decodeURI(supplyInfo.nickName)}</Text>
                   <TOpacity
                     style={styles.copyBox}
                     content={

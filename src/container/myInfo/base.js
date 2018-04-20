@@ -232,7 +232,7 @@ class Base extends React.Component {
       params: {
         item: {
           memberId,
-          userName: info.nickName,
+          userName: decodeURI(info.nickName),
           imgUrl: info.imgUrl,
         },
       },

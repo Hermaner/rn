@@ -36,7 +36,7 @@ class VisitDetail extends visitDetailBase {
       <View style={styles.pagebody}>
         <View style={styles.rowBox}>
           <Icon style={styles.leftIcn} name="arrow-back" />
-          <Text style={styles.visitText}>访客姓名:{data.member.nickName}</Text>
+          <Text style={styles.visitText}>访客姓名:{decodeURI(data.member.nickName)}</Text>
           {/* <Icon style={styles.rightIcn} name="arrow-back" /> */}
         </View>
         <View style={styles.rowBox}>

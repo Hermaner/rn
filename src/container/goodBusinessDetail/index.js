@@ -184,7 +184,7 @@ class GoodBusinessDetail extends base {
             <View style={styles.storeMid}>
               <View style={styles.storeMidName}>
                 <Icon name="ios-ribbon" style={styles.storeMidIcon} />
-                <Text style={styles.storeMidNameText}>{detail.member.nickName}</Text>
+                <Text style={styles.storeMidNameText}>{decodeURI(detail.member.nickName)}</Text>
               </View>
               <View style={[{ justifyContent: 'space-between' }, styles.fr]}>
                 <View style={styles.storeMidLabel}>

@@ -98,7 +98,7 @@ const BusinessList = ({ onPress, data }) => (
         <CachedImage source={{ uri: `${data.imgUrl}?imageView2/1/w/80` }} style={styles.img} />
       </View>
       <View style={styles.right}>
-        <Text style={styles.name} numberOfLines={1}>{data.nickName}</Text>
+        <Text style={styles.name} numberOfLines={1}>{decodeURI(data.nickName)}</Text>
         <Text style={styles.label}>
           {data.provinceName}{data.cityName}{data.districtName}
         </Text>

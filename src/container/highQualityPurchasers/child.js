@@ -50,7 +50,7 @@ class Child extends ChildBase {
             </View>
             <View style={styles.btnBox}>
               <View style={styles.leftBtn}>
-                <Text style={styles.leftBtnText}>{item.nickName}</Text>
+                <Text style={styles.leftBtnText}>{decodeURI(item.nickName)}</Text>
               </View>
               <View style={styles.rightBtn}>
                 <Text style={styles.rightBtnText}>我要报价</Text>

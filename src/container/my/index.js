@@ -124,7 +124,7 @@ class My extends myBase {
                     </View>}
                   onPress={() => {
                     push({
-                      key: UserSocket.userData.memberId ? item.push : 'User', params: { info: UserSocket.userData, name: UserSocket.userData.nickName } });
+                      key: UserSocket.userData.memberId ? item.push : 'User', params: { info: UserSocket.userData, name: decodeURI(UserSocket.userData.nickName) } });
                   }}
                 />
               ))

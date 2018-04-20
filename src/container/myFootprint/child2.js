@@ -109,7 +109,7 @@ class Child2 extends Base {
                     </View>
                     <View style={[styles.flexRow, styles.flexOne]}>
                       <Icon style={{ fontSize: 18, color: '#999', marginRight: 6 }} name="pin" />
-                      <Text numberOfLines={1} style={{ flex: 1, fontSize: 14, color: '#666' }}>{item1.sendProvinceName} {item1.sendCityName} {item1.sendDistrictName} {item1.nickName}</Text>
+                      <Text numberOfLines={1} style={{ flex: 1, fontSize: 14, color: '#666' }}>{item1.sendProvinceName} {item1.sendCityName} {item1.sendDistrictName} {decodeURI(item1.nickName)}</Text>
                     </View>
                   </View>
                 </View>}

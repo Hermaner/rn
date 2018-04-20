@@ -27,7 +27,7 @@ class UserInfoBase extends React.Component {
     this.GetIdentityService();
     this.setState({
       memberId: UserSocket.userData.memberId,
-      nickName: UserSocket.userData.nickName,
+      nickName: decodeURI(UserSocket.userData.nickName),
       phone: UserSocket.userData.phone,
     });
   }

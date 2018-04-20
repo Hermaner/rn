@@ -180,7 +180,7 @@ class Base extends React.Component {
       params: {
         item: {
           memberId: orderInfo.memberId,
-          userName: orderInfo.nickName,
+          userName: decodeURI(orderInfo.nickName),
           imgUrl: orderInfo.imgUrl,
         },
       },

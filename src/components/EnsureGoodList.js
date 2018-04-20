@@ -168,7 +168,7 @@ const EnsureGoodList = ({ onPress, data }) => (
           </View>
           <View style={{ flex: 1, flexDirection: 'row' }}>
             <Text style={styles.label}>
-              {data.sendProvinceName}{data.sendCityName} {data.nickName}
+              {data.sendProvinceName}{data.sendCityName} {decodeURI(data.nickName)}
             </Text>
             <Text style={{ fontSize: 11, color: '#666', textAlign: 'right' }}>{data.postDate.substring(5, 15)}</Text>
           </View>

@@ -37,7 +37,7 @@ class DynamicEval extends Base {
         <View style={styles.topBox}>
           <CachedImage source={{ uri: `${userInfo.imgUrl}?imageView2/1/w/80` }} style={styles.storeImg} />
           <Text style={styles.name}>
-            {userInfo.personVerifStatus === '1' ? userInfo.personVerifs[0].realName : userInfo.nickName}
+            {userInfo.personVerifStatus === '1' ? userInfo.personVerifs[0].realName : decodeURI(userInfo.nickName)}
           </Text>
           <Text style={styles.label}>值得信赖的生意伙伴</Text>
           <TOpacity

@@ -33,7 +33,7 @@ class Child extends ChildBase {
       >
         <View style={{ marginBottom: 10 }}>
           <View style={styles.flexRowBox}>
-            <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>卖家: {item.sellNickName}</Text>
+            <Text style={{ flex: 1, color: '#666', fontSize: 14 }}>卖家: {decodeURI(item.sellNickName)}</Text>
             <Text style={{ color: '#FF8711', fontSize: 14 }}>
               {item.statusName}
             </Text>

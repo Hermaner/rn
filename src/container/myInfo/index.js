@@ -47,7 +47,7 @@ class MyInfo extends base {
               <CachedImage style={styles.userImg} source={{ uri: `${info.imgUrl}?imageView2/1/w/60` }} />
               <View style={{ flex: 1, marginTop: 5 }}>
                 <View>
-                  <Text style={styles.name}>{info.nickName}</Text>
+                  <Text style={styles.name}>{decodeURI(info.nickName)}</Text>
                   {
                     realName !== '' &&
                     <Text style={styles.nameReal}>(真实姓名：{realName})</Text>
@@ -205,7 +205,7 @@ class MyInfo extends base {
       <Container>
         {
           info &&
-          <Header back={pop} title={info.nickName} />
+          <Header back={pop} title={decodeURI(info.nickName)} />
         }
         <ScrollView
           style={{ flex: 1 }}

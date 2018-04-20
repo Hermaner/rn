@@ -196,7 +196,7 @@ class Base extends React.Component {
       params: {
         item: {
           memberId: item.memberId,
-          userName: item.nickName,
+          userName: decodeURI(item.nickName),
           imgUrl: item.imgUrl,
         },
       },

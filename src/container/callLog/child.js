@@ -33,7 +33,7 @@ class Child extends base {
                     <CachedImage style={styles.headerImg} source={{ uri: `${item.callMember.imgUrl}?imageView2/1/w/60` }} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={styles.name}>{item.callMember.nickName}</Text>
+                    <Text style={styles.name}>{decodeURI(item.callMember.nickName)}</Text>
                     <View style={styles.rowBox}>
                       <Text style={styles.lable}>{item.call_time}</Text>
                       <Text style={[styles.lable, { marginLeft: 10 }]}>

@@ -60,7 +60,7 @@ class MemberInfoBase extends React.Component {
         }
         this.setState({
           userInfo: result,
-          name: result.nickName,
+          name: decodeURI(result.nickName),
           set: isHave,
           role,
           identityName,

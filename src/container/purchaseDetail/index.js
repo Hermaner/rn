@@ -57,7 +57,7 @@ class PurchaseDetail extends purchaseDetailBase {
           <Image style={styles.img} source={item.member.imgUrl ? { uri: item.member.imgUrl } : require('../app/resource/imgs/avatar.jpg')} />
           <View style={styles.userInfo}>
             <Text style={styles.purchaseCount1}>
-              {item.nickName}
+              {decodeURI(item.nickName)}
             </Text>
             <Text style={styles.purchaseCount}>
               {item.receiveProvinceName}{item.receiveCityName}

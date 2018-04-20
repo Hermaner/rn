@@ -52,7 +52,7 @@ class UserInfo extends userInfoBase {
             onChangeText={text => this.saveName(text)}
             placeholderTextColor="#999"
             style={styles.inputs}
-            placeholder={info.nickName}
+            placeholder={decodeURI(info.nickName)}
           />
         </View>
         <View style={styles.rowBox}>

@@ -87,7 +87,7 @@ class OrderDetail extends base {
             content={
               <View style={styles.mai}>
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 14, color: '#666', marginRight: 10 }}>卖家: {supplyInfo.nickName}</Text>
+                  <Text style={{ fontSize: 14, color: '#666', marginRight: 10 }}>卖家: {decodeURI(supplyInfo.nickName)}</Text>
                 </View>
               </View>}
             // onPress={() => { push({ key: 'StoreDetail',

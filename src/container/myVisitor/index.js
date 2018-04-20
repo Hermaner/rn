@@ -79,7 +79,7 @@ class MyVisitor extends myVisitorBase {
                         {
                           item.member &&
                           <Text style={styles.flexOneCenter} numberOfLines={1}>
-                            {item.member.nickName}
+                            {decodeURI(item.member.nickName)}
                           </Text>
                         }
                         {
@@ -105,7 +105,7 @@ class MyVisitor extends myVisitorBase {
                                 />
                                 <View>
                                   <View style={styles.flexRow}>
-                                    <Text style={styles.userName}>{item.member.nickName}</Text>
+                                    <Text style={styles.userName}>{decodeURI(item.member.nickName)}</Text>
                                   </View>
                                   <Text style={styles.time}>
                                     注册时间:

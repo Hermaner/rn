@@ -36,7 +36,7 @@ class Child3 extends Base {
                   <CachedImage style={styles.exampleImg} source={{ uri: `${item1.imgUrl}?imageView2/1/w/120` }} />
                   <View style={{ flex: 1, flexDirection: 'column' }}>
                     <View style={{ flex: 1 }}>
-                      <Text style={styles.name}>{item1.nickName}</Text>
+                      <Text style={styles.name}>{decodeURI(item1.nickName)}</Text>
                       <View style={{ flexDirection: 'row', flex: 1 }}>
                         <Text style={{ fontSize: 14, color: '#666' }}>认证信息: </Text>
                         {
@@ -53,7 +53,7 @@ class Child3 extends Base {
                     <Text style={{ fontSize: 14, color: '#666' }}>地址: {item1.address}</Text>
                   </View>
                 </View>}
-              onPress={() => { push({ key: item1.memberVerifs !== null && item1.memberVerifs !== '' && item1.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item1.memberId, name: item1.nickName } }); }}
+              onPress={() => { push({ key: item1.memberVerifs !== null && item1.memberVerifs !== '' && item1.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item1.memberId, name: decodeURI(item1.nickName) } }); }}
             />
           ))
         }

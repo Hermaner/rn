@@ -81,7 +81,7 @@ class MainScreen extends base {
               ))
             }
             <View>
-              <Text style={styles.nameText}>{userInfo.nickName}</Text>
+              <Text style={styles.nameText}>{decodeURI(userInfo.nickName)}</Text>
               {
                 realName !== '' &&
                 <Text style={styles.nameTextReal}>(真实姓名：{realName})</Text>

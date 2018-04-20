@@ -322,7 +322,7 @@ class MyBase extends React.Component {
       key: UserSocket.userData.memberId ? list[index][1][index2].push : 'User',
       params: {
         info: UserSocket.userData,
-        name: UserSocket.userData.nickName,
+        name: decodeURI(UserSocket.userData.nickName),
         memberId: UserSocket.userData.memberId,
         userType: UserSocket.userData.role,
         identityName: UserSocket.userData.identityName,

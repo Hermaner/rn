@@ -43,7 +43,7 @@ class Base extends React.Component {
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < list.length; i += 1) {
-          list[0].label = result.nickName;
+          list[0].label = decodeURI(result.nickName);
           list[1].label = result.phone;
         }
         this.setState({

@@ -29,7 +29,7 @@ class Child1 extends ChildBase1 {
                 <CachedImage style={styles.headerImg} source={{ uri: `${item.imgUrl}?imageView2/1/w/60` }} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={styles.name}>{item.nickName}</Text>
+                <Text style={styles.name}>{decodeURI(item.nickName)}</Text>
                 <Text style={styles.lable}>TA留意过你的货品</Text>
               </View>
               <TFeedback

@@ -32,7 +32,7 @@ class Child2 extends ChildBase2 {
               <CachedImage style={styles.headerImg} source={{ uri: `${item.imgUrl}?imageView2/1/w/60` }} />
             </View>
             <View>
-              <Text style={styles.name}>{item.nickName}</Text>
+              <Text style={styles.name}>{decodeURI(item.nickName)}</Text>
               <Text style={styles.lable}>{item.identityName}</Text>
             </View>
           </View>

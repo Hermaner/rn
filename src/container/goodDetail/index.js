@@ -248,7 +248,7 @@ class MainScreen extends base {
                 <View style={[styles.storeMidName, { marginBottom: 6 }]}>
                   <Icon name="ios-ribbon" style={styles.storeMidIcon} />
                   <View>
-                    <Text numberOfLines={1} style={styles.storeMidNameText}>{detail.member.nickName}</Text>
+                    <Text numberOfLines={1} style={styles.storeMidNameText}>{decodeURI(detail.member.nickName)}</Text>
                     {
                       realName !== '' &&
                       <Text style={styles.storeMidNameTextReal}>(真实姓名：{realName})</Text>

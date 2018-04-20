@@ -290,13 +290,13 @@ class Base extends React.Component {
       params: {
         item: {
           memberId,
-          userName: nickName,
+          userName: decodeURI(nickName),
           imgUrl,
         },
         product: {
           memberId,
           supplyId,
-          userName: nickName,
+          userName: decodeURI(nickName),
           imgUrl,
           productImgUrl: supplyImages[0].imgUrl,
           name: `${categoryName}${brandName}${supplyItems.map((item => item.specName)).join(' ')}`,
