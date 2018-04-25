@@ -17,7 +17,6 @@ class UserPage extends base {
     };
   }
   componentDidMount() {
-    this.getInit();
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
   }
   componentWillUnmount() {

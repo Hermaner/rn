@@ -23,7 +23,6 @@ class UserBase extends React.Component {
       memberInfo: {},
       isWechatExist: false,
       isQQExist: false,
-      authId: '',
       others: [{
         label: '微信',
         icon: 'icon-weixin',
@@ -38,7 +37,6 @@ class UserBase extends React.Component {
   getInit = () => {
     WeChat.isWXAppInstalled()
     .then((isInstalled) => {
-      console.log(isInstalled)
       if (isInstalled) {
         this.setState({
           isWechatExist: true,
@@ -51,7 +49,6 @@ class UserBase extends React.Component {
     });
     QQAPI.isQQInstalled()
     .then((isInstalled) => {
-      console.log(isInstalled)
       if (isInstalled) {
         this.setState({
           isQQExist: true,
@@ -81,7 +78,6 @@ class UserBase extends React.Component {
   qqLogin = () => {
     QQAPI.login('get_simple_userinfo')
     .then((res) => {
-      console.log(res)
       this.AccessQQService(res);
     }).catch(() => {});
   }
@@ -238,12 +234,12 @@ class UserBase extends React.Component {
     });
   }
   GetMemberExistsService = () => {
+    this.sleek.toggle();
     const {
       phone,
       code,
       codeVal,
       sendPhone,
-      authId,
     } = this.state;
     if (phone !== sendPhone) {
       Toast.show('手机号与发送短信的手机号不一致');
@@ -258,14 +254,11 @@ class UserBase extends React.Component {
       return;
     }
     this.sleek.toggle();
-    global.memberId = authId;
     GetMemberExistsService({
       phone,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         if (res.data) {
-          global.memberId = res.data = res.data.memberId;
           this.sleek.toggle();
           Alert.alert(
             '温馨提示', '该手机号已存在，是否将微信信息同步到此账号？',
@@ -294,7 +287,7 @@ class UserBase extends React.Component {
       registration: global.registration || 'ios',
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const phone = res.data.phone;
         if (!phone) {
@@ -310,8 +303,7 @@ class UserBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
       this.sleek.toggle();
     });
   }

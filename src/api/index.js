@@ -489,3 +489,6 @@ export function GetOrderInfoService(data) {
 export function GetRefundOrderService(data) {
   return get('GetRefundOrderService', data);
 }
+export function AccessQQService(data) {
+  return post('AccessQQService', data);
+}

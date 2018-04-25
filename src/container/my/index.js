@@ -40,6 +40,7 @@ class My extends myBase {
     soldInfoList[1].count = UserSocket.countData.update;
     soldInfoList[2].count = UserSocket.countData.send;
     soldInfoList[3].count = UserSocket.countData.refund;
+    console.log(UserSocket.userData)
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerBackground} />
@@ -74,7 +75,7 @@ class My extends myBase {
                         {decodeURI(UserSocket.userData.nickName)}
                       </Text>
                       {
-                        UserSocket.userData.personVerifStatus === '1' &&
+                        UserSocket.userData.personVerifStatus === '1' && UserSocket.userData.personVerifs &&
                         <Text style={{ backgroundColor: 'transparent', color: '#999', fontSize: 14, marginTop: 4 }}>
                           (真实姓名：{decodeURI(UserSocket.userData.personVerifs[0].realName)})
                         </Text>
