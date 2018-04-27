@@ -11,6 +11,7 @@ import { TFeedback, TOpacity, HomeSearch, LoadMore, UserSocket, LoadNoMore, Icon
 import { DeepClone } from '../../api';
 import base from './base';
 import styles from './styles';
+import { deviceW } from '../../utils';
 import Child from './child';
 
 @observer
@@ -159,17 +160,16 @@ class Goods extends base {
     );
   }
   renderSwiper() {
-    const { push } = this.props;
-    const { imgList, swiperImgInfo } = this.state;
+    const { imgList } = this.state;
     return (
-      <View style={{ height: 150, marginTop: 5, marginBottom: 5 }}>
+      <View style={{ height: deviceW * 0.4, marginTop: 5, marginBottom: 5 }}>
         <Swiper
           style={styles.wrapper}
-          height={150}
+          height={deviceW * 0.4}
           key={imgList.length}
           loop
+          autoplayTimeout={4}
           autoplay
-          autoplayTimeout={2}
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
@@ -181,7 +181,6 @@ class Goods extends base {
                   <View style={styles.slide}>
                     <CachedImage style={styles.swiperImage} source={{ uri: item.img }} />
                   </View>}
-                // onPress={() => { push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[item.imgKey].imgUrls } }); }}
                 onPress={() => { this.imgPush(i); }}
               />
             ))

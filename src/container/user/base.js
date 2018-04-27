@@ -221,6 +221,7 @@ class UserBase extends React.Component {
       phone,
     } = this.state;
     this.sleek.toggle();
+    console.log(global.memberId)
     UpdateAccessMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
@@ -265,7 +266,6 @@ class UserBase extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         if (res.data) {
-          global.memberId = res.data = res.data.memberId;
           this.sleek.toggle();
           Alert.alert(
             '温馨提示', '该手机号已存在，是否将微信信息同步到此账号？',
@@ -310,8 +310,7 @@ class UserBase extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
       this.sleek.toggle();
     });
   }
@@ -323,15 +322,15 @@ class UserBase extends React.Component {
       registration: global.registration || '',
     }).then((res) => {
       this.sleek.toggle();
-      // console.log(res);
+      console.log(res);
       if (res.isSuccess) {
         const phone = res.data.phone;
         if (!phone) {
           this.setState({
             isBind: true,
+            authId: res.data.memberId,
             memberInfo: res.data,
           });
-          global.memberId = res.data.memberId;
           Toast.show('请先绑定手机号');
         } else {
           this.loginAction(res.data);

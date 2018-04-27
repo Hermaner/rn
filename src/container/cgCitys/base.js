@@ -31,10 +31,10 @@ class Base extends React.Component {
       case 'cbj':
         emit = 'getBjCity';
         break;
-      case 'cga':
+      case 'getACity':
         emit = 'getACity';
         break;
-      case 'cgb':
+      case 'getCity':
         emit = 'getCity';
         break;
       default:
@@ -45,6 +45,7 @@ class Base extends React.Component {
   locationDistrict = () => {
     const { type } = this.props.navigation.state.params;
     const data = {
+      text: `${global.provinceName}${global.districtName}`,
       ProvinceCode: global.provinceCode,
       CityCode: global.cityCode,
       CityName: global.cityName,

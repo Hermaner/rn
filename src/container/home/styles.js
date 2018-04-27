@@ -1,7 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { st, Mcolor, deviceW } from '../../utils';
 
-const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   ...st,
   headerNavigation: {
@@ -194,13 +193,13 @@ const styles = StyleSheet.create({
   },
   slide: {
     flex: 1,
-    height: 150,
+    height: deviceW * 0.4,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
     flex: 1,
-    height: 150,
+    height: deviceW * 0.4,
     backgroundColor: 'transparent',
   },
   forYou: {

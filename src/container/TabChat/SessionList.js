@@ -173,19 +173,17 @@ class SessionList extends React.Component {
   appStateChange = (appState) => {
     if (Platform.OS === 'ios' && appState === 'inactive') {
       if (this.socket) {
-        this.socket.disconnect();
+        // this.socket.disconnect();
       }
     }
     if (Platform.OS === 'android' && appState === 'background') {
       if (this.socket) {
-        this.socket.disconnect();
+        // this.socket.disconnect();
       }
     }
     if (appState === 'active') {
       if (this.socket) {
         this.socket.connect();
-      }
-      if (this.socket) {
         this.socket.emit('sendGetChatList');
       }
     }

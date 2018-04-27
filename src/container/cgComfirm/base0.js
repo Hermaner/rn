@@ -11,15 +11,21 @@ import { CreatePurchaseService, JudgeMemberIsPersonVerif } from '../../api';
 class Base extends React.Component {
   constructor(props) {
     super(props);
-    const { categoryId, name } = this.props.navigation.state.params;
     this.state = {
       items: [{
         id: '1',
         title: '采购货品',
         must: true,
         last: true,
-        label: name,
+        label: '水果',
         page: 'MainSearch',
+      }, {
+        id: '1',
+        title: '规格要求',
+        must: false,
+        last: false,
+        label: '不限',
+        page: 'CgSkus',
       }, {
         id: '1',
         title: '需求量',
@@ -62,7 +68,7 @@ class Base extends React.Component {
       { value: '180', label: '6个月' }],
       uptoken: '',
       memberId: '',
-      categoryId,
+      categoryId: '',
       brandId: '',
       demand: '',
       frequency: '',
@@ -81,6 +87,35 @@ class Base extends React.Component {
     };
   }
   getData = () => {
+    const { items } = this.state;
+    const skus = Global.skus || [];
+    const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
+    const typeName = main.name;
+    // let brandName = '';
+    // let brandId = '';
+    // if (Global.thirdIndex === 0 || Global.thirdIndex) {
+    //   brandName = main.brands[Global.thirdIndex].brandName;
+    //   brandId = main.brands[Global.thirdIndex].brandId.toString();
+    // }
+    // items[0].label = `${typeName}${brandName}`;
+    items[0].label = typeName;
+    const skuString = [];
+    const purchaseItems = [];
+    skus.forEach((item) => {
+      if (item.itemIndex !== undefined) {
+        skuString.push(item.specs[item.itemIndex].specName);
+        purchaseItems.push({
+          specTypeId: item.specTypeId.toString(),
+          specId: item.specs[item.itemIndex].specId.toString(),
+        });
+      }
+    });
+    items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
+    this.setState({
+      items,
+      purchaseItems,
+      categoryId: main.categoryId.toString(),
+    });
     JudgeMemberIsPersonVerif({
       memberId: global.memberId,
       type: '2',
@@ -105,7 +140,7 @@ class Base extends React.Component {
   }
   getDemand = (data) => {
     const { items } = this.state;
-    items[1].label = `${data.demand}${data.optionType}`;
+    items[2].label = `${data.demand}${data.optionType}`;
     this.setState({
       items,
       demand: data.demand,
@@ -117,7 +152,7 @@ class Base extends React.Component {
   }
   getCity = (data) => {
     const { items } = this.state;
-    items[2].label = data.text;
+    items[3].label = data.text;
     this.setState({
       items,
       wantProvinceCode: data.ProvinceCode,
@@ -165,12 +200,13 @@ class Base extends React.Component {
       memberId: UserSocket.userData.memberId,
       phone: UserSocket.userData.phone,
     });
-    this.getData();
+    this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
+      this.getData();
+    });
     this.emitGetDemand = DeviceEventEmitter.addListener('getDemand', (data) => {
       this.getDemand(data);
     });
     this.emitGetCity = DeviceEventEmitter.addListener('getCity', (data) => {
-      console.log(data)
       this.getCity(data);
     });
     this.emitGetACity = DeviceEventEmitter.addListener('getACity', (data) => {
@@ -178,6 +214,7 @@ class Base extends React.Component {
     });
   }
   deleteData = () => {
+    this.emitGetSku.remove();
     this.emitGetDemand.remove();
     this.emitGetCity.remove();
     this.emitGetACity.remove();
@@ -193,18 +230,19 @@ class Base extends React.Component {
           });
           return;
         }
+
         Global.skuType = '1';
-        this.props.pop();
+        this.props.push({ key: items[index].page, params: { type: '2' } });
         return;
       case 1:
         if (type === 'cga') {
-          this.props.push({ key: items2[index].page, params: { type: 'getACity' } });
+          this.props.push({ key: items2[index].page, params: { type: 'cga' } });
           return;
         }
         Global.skuType = '2';
         break;
-      case 2:
-        this.props.push({ key: items[index].page, params: { type: 'getCity' } });
+      case 3:
+        this.props.push({ key: items[index].page, params: { type: 'cgb' } });
         return;
       default:
         break;
@@ -337,8 +375,6 @@ class Base extends React.Component {
 
 Base.propTypes = {
   push: PropTypes.func,
-  navigation: PropTypes.object,
   resetHome: PropTypes.func,
-  pop: PropTypes.func,
 };
 export default Base;

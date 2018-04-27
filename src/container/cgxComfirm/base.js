@@ -18,13 +18,6 @@ class Base extends React.Component {
         page: 'MainSearch',
       }, {
         id: '1',
-        title: '规格要求',
-        must: false,
-        last: false,
-        label: '不限',
-        page: 'CgxSkus',
-      }, {
-        id: '1',
         title: '需求量',
         must: true,
         last: false,
@@ -87,19 +80,9 @@ class Base extends React.Component {
   getData = () => {
     const { item } = this.props.navigation.state.params;
     const { items } = this.state;
-    const skuString = [];
-    const purchaseItems = [];
-    item.purchaseItems.forEach((list) => {
-      skuString.push(list.specName);
-      purchaseItems.push({
-        specTypeId: list.specTypeId.toString(),
-        specId: list.specId.toString(),
-      });
-    });
-    items[0].label = `${item.categoryName}${item.brandName}`;
-    items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
-    items[2].label = `${item.demand}${item.unit}`;
-    items[3].label = item.wantProvinceId ? `${item.wantProvinceName}${item.wantCityName}` : '全国';
+    items[0].label = item.categoryName;
+    items[1].label = `${item.demand}${item.unit}`;
+    items[2].label = item.wantProvinceId ? `${item.wantProvinceName}${item.wantCityName}` : '全国';
     const { items2, options } = this.state;
     items2[1].label = `${item.receiveProvinceName}${item.receiveCityName}`;
     options.forEach((list) => {
@@ -119,7 +102,6 @@ class Base extends React.Component {
       items2,
       purchaseId: item.purchaseId,
       categoryId: item.categoryId,
-      brandId: item.brandId,
       demand: item.demand,
       initImages,
       frequency: item.frequency || '',
@@ -133,7 +115,6 @@ class Base extends React.Component {
       receiveProvinceCode: item.receiveProvinceCode,
       receiveCityCode: item.receiveCityCode,
       memo: item.memo,
-      purchaseItems,
       upImages: item.upImages,
     });
   }
@@ -144,7 +125,7 @@ class Base extends React.Component {
   }
   getDemand = (data) => {
     const { items } = this.state;
-    items[2].label = `${data.demand}${data.optionType}`;
+    items[1].label = `${data.demand}${data.optionType}`;
     this.setState({
       items,
       demand: data.demand,
@@ -156,7 +137,7 @@ class Base extends React.Component {
   }
   getCity = (data) => {
     const { items } = this.state;
-    items[3].label = data.text;
+    items[2].label = data.text;
     this.setState({
       items,
       wantProvinceCode: data.ProvinceCode,
@@ -170,56 +151,6 @@ class Base extends React.Component {
       items2,
       receiveProvinceCode: data.ProvinceCode,
       receiveCityCode: data.CityCode,
-    });
-  }
-  getEmitSkus = () => {
-    const { items } = this.state;
-    const skus = Global.skus;
-    const main = Global.items[Global.firstIndex].childs[Global.secondIndex];
-    const typeName = main.name;
-    let brandName = '';
-    let brandId = '';
-    if (Global.thirdIndex === 0 || Global.thirdIndex) {
-      brandName = main.brands[Global.thirdIndex].brandName;
-      brandId = main.brands[Global.thirdIndex].brandId.toString();
-    }
-    items[0].label = `${typeName}${brandName}`;
-    const skuString = [];
-    const purchaseItems = [];
-    skus.forEach((item) => {
-      if (item.itemIndex !== undefined) {
-        skuString.push(item.specs[item.itemIndex].specName);
-        purchaseItems.push({
-          specTypeId: item.specTypeId.toString(),
-          specId: item.specs[item.itemIndex].specId.toString(),
-        });
-      }
-    });
-    items[1].label = skuString.length > 0 ? skuString.join('') : '不限';
-    this.setState({
-      items,
-      purchaseItems,
-      categoryId: main.categoryId.toString(),
-      brandId,
-    });
-  }
-  getCgyxSku = (data) => {
-    const { items } = this.state;
-    const skuString = [];
-    const purchaseItems = [];
-    data.forEach((item) => {
-      if (item.itemIndex !== undefined) {
-        skuString.push(item.specs[item.itemIndex].specName);
-        purchaseItems.push({
-          specTypeId: item.specTypeId.toString(),
-          specId: item.specs[item.itemIndex].specId.toString(),
-        });
-      }
-    });
-    items[1].label = skuString.join('');
-    this.setState({
-      items,
-      purchaseItems,
     });
   }
   selectModel = (optionType) => {
@@ -254,12 +185,6 @@ class Base extends React.Component {
     this.setState({
       memberId: global.memberId || '',
     });
-    this.emitgetCgyxSku = DeviceEventEmitter.addListener('getCgyxSku', (data) => {
-      this.getCgyxSku(data);
-    });
-    this.emitGetSku = DeviceEventEmitter.addListener('getSku', () => {
-      this.getEmitSkus();
-    });
     this.emitGetDemand = DeviceEventEmitter.addListener('getDemand', (data) => {
       this.getDemand(data);
     });
@@ -269,17 +194,25 @@ class Base extends React.Component {
     this.emitGetACity = DeviceEventEmitter.addListener('getACity', (data) => {
       this.getACity(data);
     });
+    this.cgxName = DeviceEventEmitter.addListener('cgxName', (data) => {
+      const { items } = this.state;
+      const { categoryId, name } = data;
+      items[0].label = name;
+      this.setState({
+        categoryId,
+        items,
+      });
+    });
   }
   deleteData = () => {
-    this.emitgetCgyxSku.remove();
-    this.emitGetSku.remove();
+    this.cgxName.remove();
     this.emitGetDemand.remove();
     this.emitGetCity.remove();
     this.emitGetACity.remove();
     this.state = null;
   }
   goPage = (index, type) => {
-    const { items, items2, categoryId } = this.state;
+    const { items, items2, demand, unit, wantStarPrice, wantEndPrice, frequency } = this.state;
     switch (index) {
       case 0:
         if (type === 'cga') {
@@ -293,13 +226,14 @@ class Base extends React.Component {
         return;
       case 1:
         if (type === 'cga') {
-          this.props.push({ key: items2[index].page, params: { type: 'cga' } });
+          this.props.push({ key: items2[index].page, params: { type: 'getACity' } });
           return;
         }
-        this.props.push({ key: items[index].page, params: { categoryId } });
+        this.props.push({ key: items[index].page,
+          params: { demand, unit, wantStarPrice, wantEndPrice, frequencyLabel: frequency } });
         return;
-      case 3:
-        this.props.push({ key: items[index].page, params: { type: 'cgb' } });
+      case 2:
+        this.props.push({ key: items[index].page, params: { type: 'getCity' } });
         return;
       default:
         break;
@@ -362,6 +296,7 @@ class Base extends React.Component {
       receiveCityCode,
       memo,
     };
+    console.log(purchase)
     this.sleek.toggle();
     RepeatPurchaseService({
       purchase: JSON.stringify(purchase),

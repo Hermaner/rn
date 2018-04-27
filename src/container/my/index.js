@@ -40,7 +40,7 @@ class My extends myBase {
     soldInfoList[1].count = UserSocket.countData.update;
     soldInfoList[2].count = UserSocket.countData.send;
     soldInfoList[3].count = UserSocket.countData.refund;
-    console.log(UserSocket.userData)
+    // console.log(UserSocket.userData)
     return (
       <View style={styles.pagebody}>
         <View style={styles.headerBackground} />

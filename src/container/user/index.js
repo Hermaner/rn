@@ -85,6 +85,7 @@ class UserPage extends base {
   }
   renderBindInfo() {
     const { memberInfo: { imgUrl, nickName } } = this.state;
+    console.log(imgUrl);
     return (
       <View style={styles.infoTop}>
         <View style={styles.infoImgView}>

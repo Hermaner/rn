@@ -80,7 +80,7 @@ class Base extends React.Component {
     const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {
-      console.log('yyyyyyyyyyy', res)
+      // console.log('yyyyyyyyyyy', res)
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
         let categorysArray = [];
@@ -118,7 +118,7 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
       if (res.isSuccess) {
         const result = res.data;
         const newImgArray = [];
@@ -175,7 +175,7 @@ class Base extends React.Component {
       pageSize,
       currentPage: scurrentPage,
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
       if (res.isSuccess) {
         const result = res.data.pageData;
         if (result.length === 0) {

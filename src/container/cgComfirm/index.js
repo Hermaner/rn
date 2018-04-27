@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
-import { Container, Content, Text, Button, Icon, Input } from 'native-base';
+import { Container, Content, Text, Icon, Input } from 'native-base';
 import { connect } from 'react-redux';
-import { pushRoute, resetHome } from '../../actions';
+import { pushRoute, popRoute, resetHome } from '../../actions';
 import { Header, TFeedback, UploadFile, Loading, Select } from '../../components';
 import base from './base';
 import styles from './styles';
@@ -169,8 +169,8 @@ class CgCategory extends base {
 }
 
 CgCategory.propTypes = {
-  navigation: PropTypes.object,
   push: PropTypes.func,
   resetHome: PropTypes.func,
+  pop: PropTypes.func,
 };
-export default connect(null, { push: pushRoute, resetHome })(CgCategory);
+export default connect(null, { push: pushRoute, pop: popRoute, resetHome })(CgCategory);

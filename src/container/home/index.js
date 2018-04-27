@@ -11,7 +11,7 @@ import { pushRoute } from '../../actions';
 import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
 import base from './base';
 import styles from './styles';
-import { Mcolor } from '../../utils';
+import { Mcolor, deviceW } from '../../utils';
 import Child1 from './child1';
 
 @observer
@@ -94,7 +94,8 @@ class HomeScreen extends base {
                     >
                       <Text numberOfLines={1} style={{ flex: 1, fontSize: 16, textAlign: 'center', color: '#fff' }}>{item.text}</Text>
                     </View>
-                    <Text numberOfLines={1} style={[styles.goodsTypeText, styles.textCenter]}>{item.name}</Text>
+                    <Text numberOfLines={1} style={[styles.goodsTypeText, styles.textCenter]}>
+                      {item.name}</Text>
                   </View>}
                 onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
               />
@@ -143,7 +144,9 @@ class HomeScreen extends base {
                 content={
                   <View
                     style={[
-                      seasonals.length > 3 ? styles.goodsTypeOneWidth : styles.goodsTypeOneWidthFlexOne, styles.goodsTypeOne2, styles.seasonalGoodsItem
+                      seasonals.length > 3 ? styles.goodsTypeOneWidth :
+                      styles.goodsTypeOneWidthFlexOne,
+                      styles.goodsTypeOne2, styles.seasonalGoodsItem,
                     ]}
                   >
                     <View style={styles.imageBox}>
@@ -162,12 +165,13 @@ class HomeScreen extends base {
   renderSwiper() {
     const { imgList } = this.state;
     return (
-      <View style={{ height: 150, marginTop: 10 }}>
+      <View style={{ height: deviceW * 0.4, marginTop: 10 }}>
         <Swiper
           style={styles.wrapper}
-          height={150}
+          height={deviceW * 0.4}
           key={imgList.length}
           loop
+          autoplayTimeout={4}
           autoplay
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >

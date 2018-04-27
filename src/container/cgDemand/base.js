@@ -40,8 +40,8 @@ class Base extends React.Component {
       this.setState({
         demand,
         unit,
-        wantStarPrice,
-        wantEndPrice,
+        wantStarPrice: parseInt(wantStarPrice, 10).toString(),
+        wantEndPrice: parseInt(wantEndPrice, 10).toString(),
         frequencyLabel,
         optionType: unit === '' ? '点击选择单位' : unit,
       });

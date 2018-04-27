@@ -57,13 +57,14 @@ class Base extends React.Component {
     const { type } = this.props.navigation.state.params;
     const { childItems } = this.state;
     const data = childItems[index];
-    const { categoryId, name } = data;
     switch (type) {
       case '1':
         this.props.push({ key: 'MainList' });
         break;
       case '2':
-        this.props.push({ key: 'CgComfirm', params: { categoryId, name } });
+        Global.skuType = '0';
+        Global.secondIndex = index;
+        this.props.push({ key: 'CgCategory' });
         break;
       case '3': // 供应默认进入
         Global.skuType = '3';
@@ -76,10 +77,9 @@ class Base extends React.Component {
         this.props.push({ key: 'CgCategory' });
         break;
       case '5': // 重发采购
-        DeviceEventEmitter.emit('cgxName', {
-          categoryId, name,
-        });
-        this.props.pop();
+        Global.skuType = '5';
+        Global.secondIndex = index;
+        this.props.push({ key: 'CgCategory' });
         break;
       case '6': // 选择类目
         DeviceEventEmitter.emit('signUpGetGoodsTypeEmit', data);
