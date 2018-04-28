@@ -372,7 +372,7 @@ class OrderInfo extends base {
     return (
       <View>
         {
-          orderInfo.status === '1' &&
+          orderInfo.status < 4 &&
           <View style={styles.footerBox}>
             <TFeedback
               content={

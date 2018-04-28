@@ -36,6 +36,9 @@ class Base extends React.Component {
         wantEndPrice,
         frequencyLabel,
       } = this.props.navigation.state.params;
+      if (!demand) {
+        return;
+      }
       const { frequency } = this.state;
       this.setState({
         demand,
