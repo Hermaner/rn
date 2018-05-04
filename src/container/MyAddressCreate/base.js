@@ -9,11 +9,11 @@ class Base extends React.Component {
     super(props);
     this.isSend = false;
     this.state = {
-      phone: '15766665555',
-      sendPhone: '15766665555',
+      phone: '',
+      sendPhone: '',
       sec: 60,
-      code: '1111',
-      codeVal: '1111',
+      code: '',
+      codeVal: '',
       addressTitle: '',
       fullAddress: '',
       postalCode: '',

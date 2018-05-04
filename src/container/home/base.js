@@ -1,6 +1,6 @@
 import React from 'react';
 import Toast from 'react-native-simple-toast';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, NetInfo } from 'react-native';
 import { observer } from 'mobx-react/native';
 import PropTypes from 'prop-types';
 import { UserSocket } from '../../components';
@@ -71,7 +71,10 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
-    this.getData();
+    NetInfo.addEventListener(
+       'change',
+       this._handleConnectionInfoChange,
+   );
     this.emitPushHome = DeviceEventEmitter.addListener('pushHome', (data) => {
       this.props.push(data);
     });
@@ -113,6 +116,15 @@ class Base extends React.Component {
   }
   deleteInit = () => {
     this.emitPushHome.remove();
+    NetInfo.removeEventListener(
+        'change',
+        this._handleConnectionInfoChange,
+    );
+  }
+  _handleConnectionInfoChange = (status) => {
+    if (status === 'wifi' || status === 'cell') {
+      this.getData();
+    }
   }
   GetBackgroundImgService = () => {
     GetBackgroundImgService({
