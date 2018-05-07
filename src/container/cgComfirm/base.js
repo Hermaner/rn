@@ -85,7 +85,7 @@ class Base extends React.Component {
       memberId: global.memberId,
       type: '2',
     }).then((res) => {
-      // console.log(res);
+      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

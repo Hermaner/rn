@@ -72,7 +72,7 @@ class Base extends React.Component {
   }
   getInit = () => {
     NetInfo.addEventListener(
-       'change',
+       'connectionChange',
        this._handleConnectionInfoChange,
    );
     this.emitPushHome = DeviceEventEmitter.addListener('pushHome', (data) => {
@@ -117,7 +117,7 @@ class Base extends React.Component {
   deleteInit = () => {
     this.emitPushHome.remove();
     NetInfo.removeEventListener(
-        'change',
+        'connectionChange',
         this._handleConnectionInfoChange,
     );
   }

@@ -21,13 +21,14 @@ class Base extends React.Component {
       wantStarPrice: '',
       wantEndPrice: '',
       demand: '',
-      optionType: '',
+      optionType: '选择单位',
       options: [],
       selectShow: false,
       frequencyLabel: '',
     };
   }
   getInit = () => {
+    this.getData();
     if (this.props.navigation.state.params) {
       const {
         demand,
@@ -46,7 +47,7 @@ class Base extends React.Component {
         wantStarPrice: parseInt(wantStarPrice, 10).toString(),
         wantEndPrice: parseInt(wantEndPrice, 10).toString(),
         frequencyLabel,
-        optionType: unit === '' ? '点击选择单位' : unit,
+        optionType: unit === '' ? '选择单位' : unit,
       });
       for (let i = 0; i < frequency.length; i += 1) {
         if (frequency[i].label === frequencyLabel) {
@@ -57,26 +58,25 @@ class Base extends React.Component {
         }
       }
     }
-    this.getData();
   }
   getDelete = () => {
     this.state = null;
   }
   getData = () => {
-    const { options } = this.state;
     GetUnitsService({
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         if (res.data && res.data.length > 0) {
+          const options = [];
           for (let i = 0; i < res.data.length; i += 1) {
             options.push({
               value: res.data[i].name,
               label: res.data[i].name,
             });
           }
-        } else {
           this.setState({
-            options: [],
+            options,
           });
         }
       } else {
