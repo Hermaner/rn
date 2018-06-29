@@ -59,6 +59,7 @@ class Base extends React.Component {
       categorys: [], // 应季好货
       seasonalsMain: [],
       seasonals: [],
+      backgroundTopImg: '',
       backGround1: require('../../assets/img/bn1.png'),
       backgroundImg: '',
     };
@@ -120,8 +121,10 @@ class Base extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         const imgList = res.data;
+        const backgroundTopImg = res.map.backgroundTopImg.imgUrl;
         this.setState({
           imgList,
+          backgroundTopImg,
         });
       } else {
         Toast.show(res.msg);

@@ -103,27 +103,27 @@ class Goods extends base {
     const { threeNewsList } = this.state;
     const { push } = this.props;
     return (
-      <View style={styles.news}>
+      <View style={[styles.studyRow, styles.marginView]}>
+        <View style={styles.titleView}>
+          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Text style={styles.titleText}>每日新闻</Text>
+        </View>
         {
-          threeNewsList.length > 0 &&
           threeNewsList.map((item, index) => (
             <TFeedback
               key={index}
               content={
-                <View style={[styles.flexRow, styles.rowBox]}>
-                  <View style={styles.newsImgView}>
-                    {
-                      item.newsImages.length > 0 &&
-                        <CachedImage
-                          style={styles.goodsImg}
-                          source={{ uri: `${item.newsImages[0].imgUrl}?imageView2/1/w/60` }}
-                        />
-                    }
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.goodsTitle} numberOfLines={1}>{item.title}</Text>
-                    <Text style={styles.normalSixText} numberOfLines={1}>{item.introduction}</Text>
-                  </View>
+                <View style={styles.newsView}>
+                  <CachedImage
+                    style={styles.newsImg}
+                    source={{ uri: `${item.newsImages[0].imgUrl}?imageView2/1/w/60` }}
+                  />
+                  <Text
+                    style={styles.newsText}
+                    numberOfLines={1}
+                  >
+                    {item.title}
+                  </Text>
                 </View>}
               onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item.newsId } }); }}
             />
@@ -150,7 +150,7 @@ class Goods extends base {
                   <View style={styles.newsView}>
                     <CachedImage
                       style={styles.newsImg}
-                      source={{ uri: item.newsImages[0].imgUrl }}
+                      source={{ uri: `${item.newsImages[0].imgUrl}?imageView2/1/w/60` }}
                     />
                     <Text
                       style={styles.newsText}
@@ -211,7 +211,7 @@ class Goods extends base {
       refresh,
       loading,
       nomore,
-      backGround1,
+      backgroundTopImg,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
@@ -233,7 +233,7 @@ class Goods extends base {
           scrollEventThrottle={50}
         >
           <HomeSearch
-            image={backGround1}
+            image={backgroundTopImg}
             label={districtName}
             push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'goods' } }); }}
           />

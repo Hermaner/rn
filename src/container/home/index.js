@@ -222,7 +222,7 @@ class HomeScreen extends base {
       loading,
       nomore,
       seasonals,
-      backGround1,
+      backgroundTopImg,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
@@ -245,7 +245,7 @@ class HomeScreen extends base {
         >
           <HomeSearch
             label={districtName}
-            image={backGround1}
+            image={backgroundTopImg}
             push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'home' } }); }}
           />
           {this.renderHeaderNavigation()}

@@ -43,7 +43,7 @@ class Base extends React.Component {
         icon: 'icon-qunfengfuwushang',
         label: '产地服务商',
         color: '#6098f9',
-        swiperImgInfo: [],
+        imgList: [],
       }],
       imgList: [],
       goodGoodsList: [],
@@ -56,6 +56,7 @@ class Base extends React.Component {
       newThree: [],
       img: [],
       backgroundImg: '',
+      backgroundTopImg: '',
     };
   }
   getInit = () => {
@@ -67,17 +68,17 @@ class Base extends React.Component {
     this.state = null;
   }
   imgPush = (index) => {
-    const { swiperImgInfo } = this.state;
-    if (swiperImgInfo[index].sourceTypeId === '1') {
-      this.props.push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[index].imgUrls } });
+    const { imgList } = this.state;
+    if (imgList[index].sourceTypeId === '1') {
+      this.props.push({ key: 'ImgInfo', params: { imgDetail: imgList[index].imgUrls } });
       return;
     }
-    if (swiperImgInfo[index].sourceTypeId === '2') {
-      this.props.push({ key: 'HuinongConsultDetail', params: { newsId: swiperImgInfo[index].sourceId } });
+    if (imgList[index].sourceTypeId === '2') {
+      this.props.push({ key: 'HuinongConsultDetail', params: { newsId: imgList[index].sourceId } });
       return;
     }
-    if (swiperImgInfo[index].sourceTypeId === '3') {
-      this.props.push({ key: 'GoodDetail', params: { supplyId: swiperImgInfo[index].sourceId, memberId: swiperImgInfo[index].supplyMemberId } });
+    if (imgList[index].sourceTypeId === '3') {
+      this.props.push({ key: 'GoodDetail', params: { supplyId: imgList[index].sourceId, memberId: imgList[index].supplyMemberId } });
     }
   }
   GetHomeNewsService = () => {
@@ -184,21 +185,11 @@ class Base extends React.Component {
       type: '2',
     }).then((res) => {
       if (res.isSuccess) {
-        const result = res.data;
-        const newImgArray = [];
-        if (result !== '' && result !== null && result.length > 0) {
-          for (let i = 0; i < result.length; i += 1) {
-            if (result[i].imgUrl !== '' && result[i].imgUrl !== null) {
-              newImgArray.push({
-                imgKey: i,
-                img: result[i].imgUrl,
-              });
-            }
-          }
-        }
+        const imgList = res.data;
+        const backgroundTopImg = res.map.backgroundTopImg.imgUrl;
         this.setState({
-          imgList: newImgArray,
-          swiperImgInfo: result,
+          imgList,
+          backgroundTopImg,
         });
       } else {
         Toast.show(res.msg);

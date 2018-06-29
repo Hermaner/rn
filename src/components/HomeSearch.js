@@ -73,7 +73,10 @@ const styles = StyleSheet.create({
 });
 const headerBar = ({ push, label, image }) => (
   <Header style={styles.header}>
-    <CachedImage style={styles.headerImg} source={image} />
+    {
+      image.length > 0 &&
+      <CachedImage style={styles.headerImg} source={{ uri: image }} />
+    }
     <View style={styles.left}>
       <Icon name="ios-arrow-down-outline" style={styles.leftIcon} />
       <Text style={styles.leftText}>{label}</Text>
