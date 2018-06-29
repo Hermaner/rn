@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback } from '../../components';
-import styles from './styles';
+import { ReleaseList } from '../../components';
 
 class Child extends React.Component {
   constructor(props) {
@@ -22,48 +21,10 @@ class Child extends React.Component {
       <View>
         {
           data.map((item, index) => (
-            <TFeedback
+            <ReleaseList
+              item={item}
+              rowID={index}
               key={index}
-              content={
-                <View style={styles.buyGoodsItems}>
-                  <View style={styles.buyGoodsItem}>
-                    <View style={styles.itemNameLine}>
-                      <Text style={styles.buyGoodsName}>{item.categoryName}</Text>
-                      <Text style={styles.buyGoodsVariety}>
-                        ({item.brandName}{item.categoryName})
-                      </Text>
-                      <Text style={styles.flexRight}>{item.demand}{item.unit}</Text>
-                    </View>
-                    <View style={[styles.itemNameLine, { justifyContent: 'space-between', height: 30 }]}>
-                      <View style={styles.userDoBox}>
-                        <Text style={styles.userDo}>{item.member.identityName}</Text>
-                      </View>
-                      <View style={styles.flexRow}>
-                        {
-                          item.frequency !== '' &&
-                          <View style={styles.everyWeekBox}>
-                            <Text style={styles.everyWeek}>
-                              {item.frequency}
-                            </Text>
-                          </View>
-                        }
-                        <View style={styles.flexRow}>
-                          <Text style={styles.howLong}>距截止</Text>
-                          <Text style={styles.howLongDay}>{item.purchaseTime}</Text>
-                          <Text style={styles.howLong}>天</Text>
-                        </View>
-                      </View>
-                    </View>
-                    <View style={styles.flexRow}>
-                      <Text style={styles.buyGoodsPlace}>
-                        所在地: {item.receiveProvinceName}{item.receiveCityName}
-                      </Text>
-                      <View style={styles.goBuyBtnBox}>
-                        <Text style={styles.goBuyBtn}>去报价</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>}
               onPress={() => { push({ key: global.memberId ? 'PurchaseDetail' : 'User', params: { item, purchaseId: item.purchaseId } }); }}
             />
           ))

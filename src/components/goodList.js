@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'native-base';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
-import { Mred, ColorList } from '../utils';
+import { Mred, Fcolor, st } from '../utils';
 
 const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     padding: 8,
-    marginBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
     backgroundColor: '#fff',
   },
   imgView: {
@@ -19,6 +21,7 @@ const styles = StyleSheet.create({
   img: {
     width: 80,
     height: 80,
+    borderRadius: 6,
   },
   right: {
     flex: 1,
@@ -82,30 +85,36 @@ const styles = StyleSheet.create({
     marginRight: 2,
   },
   priceLabel: {
-    fontSize: 12,
-    color: Mred,
+    fontSize: 14,
+    color: Fcolor,
   },
   priceRightText: {
     fontSize: 12,
     color: '#999',
   },
   aaBox: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingLeft: 4,
-    paddingRight: 4,
-    borderWidth: 0.6,
-    borderRadius: 3,
-    marginRight: 4,
-    marginBottom: 2,
+    marginRight: 6,
+    ...st.fr,
+    ...st.acenter,
   },
   aa: {
-    color: '#777',
-    fontSize: 10,
+    color: '#666',
+    fontSize: 12,
   },
   flexRow: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  verList: {
+    ...st.fr,
+    ...st.acenter,
+    height: 18,
+    overflow: 'hidden',
+  },
+  ckIcon: {
+    fontSize: 18,
+    marginRight: 3,
+    color: '#5CBE74',
   },
 });
 
@@ -124,19 +133,17 @@ const GoodList = ({ onPress, data }) => (
         <Text style={styles.label}>
           {data.sendProvinceName}{data.sendCityName}{data.sendDistrictName}
         </Text>
-        <View style={[styles.flexRow, { flexWrap: 'wrap', maxHeight: 50 }]}>
+        <View style={styles.verList}>
           {
             data.member &&
             data.member.memberVerifs &&
             data.member.memberVerifs.map((item3, index3) => (
               <View
-                style={[
-                  styles.aaBox,
-                  { borderColor: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }
-                ]}
+                style={styles.aaBox}
                 key={index3}
               >
-                <Text style={[styles.aa, { color: ColorList[index3 > ColorList.length ? index3 % ColorList.length : index3] }]}>
+                <Icon name="ios-checkmark-circle" style={styles.ckIcon} />
+                <Text style={styles.aa}>
                   {item3.verifFieldName}
                 </Text>
               </View>

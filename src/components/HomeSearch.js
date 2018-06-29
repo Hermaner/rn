@@ -3,42 +3,54 @@ import { View, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
+import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../actions';
 import { Mcolor, st } from '../utils';
 import TFeedback from './TFeedback';
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#f8f8f8',
-    ...st.jacenter,
+    backgroundColor: 'transparent',
+    ...st.fr,
+    height: 200,
+    position: 'relative',
+  },
+  headerImg: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 200,
   },
   HeaderMain: {
     flex: 1,
     paddingLeft: 8,
     ...st.fr,
     ...st.jacenter,
-    backgroundColor: '#eee',
-    borderRadius: 15,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 5,
     marginLeft: 10,
     overflow: 'hidden',
-    height: 30,
+    height: 35,
   },
   HeaderMainText: {
-    color: '#666',
+    color: '#333',
     fontSize: 14,
     flex: 1,
     marginLeft: 8,
   },
   HeaderIcon: {
-    color: '#444',
+    color: '#333',
     fontSize: 18,
   },
   left: {
     ...st.frcenter,
+    height: 35,
+    width: 80,
   },
   leftText: {
-    color: '#666',
-    fontSize: 13,
+    color: '#fff',
+    fontSize: 14,
   },
   right: {
     position: 'absolute',
@@ -55,21 +67,22 @@ const styles = StyleSheet.create({
   },
   leftIcon: {
     fontSize: 18,
-    color: '#444',
-    marginLeft: 4,
+    color: '#fff',
+    marginRight: 4,
   },
 });
-const headerBar = ({ push, label }) => (
+const headerBar = ({ push, label, image }) => (
   <Header style={styles.header}>
+    <CachedImage style={styles.headerImg} source={image} />
     <View style={styles.left}>
+      <Icon name="ios-arrow-down-outline" style={styles.leftIcon} />
       <Text style={styles.leftText}>{label}</Text>
-      {/* <Icon name="ios-arrow-down-outline" style={styles.leftIcon} /> */}
     </View>
     <TFeedback
       content={
         <View style={styles.HeaderMain}>
           <Icon name="ios-search-outline" style={styles.HeaderIcon} />
-          <Text style={styles.HeaderMainText}>点击搜索</Text>
+          <Text style={styles.HeaderMainText}>点击搜索货品</Text>
         </View>
       }
       onPress={push}
@@ -80,5 +93,6 @@ const headerBar = ({ push, label }) => (
 headerBar.propTypes = {
   label: PropTypes.string,
   push: PropTypes.func,
+  image: PropTypes.any,
 };
 export default connect(null, { pushR: pushRoute })(headerBar);

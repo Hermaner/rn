@@ -26,7 +26,26 @@ class UserPage extends base {
   onBackPress = () => {
     this.props.pop();
     return true;
-  };
+  }
+  _renderTop() {
+    const { push } = this.props;
+    return (
+      <View style={styles.topView}>
+        <Text style={styles.topLabel}>
+          登陆注册更精彩
+        </Text>
+        <View style={styles.agreementView}>
+          <Text style={styles.agreementLabel}>登陆即表示同意</Text>
+          <TOpacity
+            content={
+              <Text style={styles.agreementText}>用户协议、隐私条款</Text>
+            }
+            onPress={() => push({ key: 'ClauseAndAgreement' })}
+          />
+        </View>
+      </View>
+    );
+  }
   _renderForm() {
     const { phone, passWord, code, sec, isCode } = this.state;
     return (
@@ -85,7 +104,6 @@ class UserPage extends base {
   }
   renderBindInfo() {
     const { memberInfo: { imgUrl, nickName } } = this.state;
-    console.log(imgUrl);
     return (
       <View style={styles.infoTop}>
         <View style={styles.infoImgView}>
@@ -110,7 +128,6 @@ class UserPage extends base {
   }
   _renderMid() {
     const { isCode } = this.state;
-    const { push } = this.props;
     return (
       <View>
         <TOpacity
@@ -121,15 +138,7 @@ class UserPage extends base {
           onPress={this.login}
         />
         <View style={styles.bottomView}>
-          <View style={styles.agreementView}>
-            <Text style={styles.agreementLabel}>登陆即表示同意</Text>
-            <TOpacity
-              content={
-                <Text style={styles.agreementText}>《服务协议》</Text>
-              }
-              onPress={() => push({ key: 'ClauseAndAgreement' })}
-            />
-          </View>
+          <View style={styles.agreementView} />
           <TOpacity
             content={
               <Text style={styles.changeText}>切换至{!isCode ? '验证码' : '密码'}登陆</Text>
@@ -154,9 +163,10 @@ class UserPage extends base {
               style={styles.otherList}
               content={
                 <View style={styles.otherList}>
-                  <View style={[styles.otherTop, { backgroundColor: others[0].color }]}>
-                    <Iconfont name={others[0].icon} style={styles.otherIcon} />
-                  </View>
+                  <Iconfont
+                    name={others[0].icon}
+                    style={[styles.otherIcon, { color: others[0].color }]}
+                  />
                   <Text style={styles.otherText}>{others[0].label}</Text>
                 </View>
               }
@@ -169,9 +179,10 @@ class UserPage extends base {
               style={styles.otherList}
               content={
                 <View style={styles.otherList}>
-                  <View style={[styles.otherTop, { backgroundColor: others[1].color }]}>
-                    <Iconfont name={others[1].icon} style={styles.otherIcon} />
-                  </View>
+                  <Iconfont
+                    name={others[1].icon}
+                    style={[styles.otherIcon, { color: others[1].color }]}
+                  />
                   <Text style={styles.otherText}>{others[1].label}</Text>
                 </View>
               }
@@ -186,17 +197,19 @@ class UserPage extends base {
     const { pop } = this.props;
     const { isBind, isWechatExist, isQQExist } = this.state;
     return (
-      <Container>
+      <Container style={{ backgroundColor: '#fff' }}>
         <BHeader back={pop} title={isBind ? '绑定手机号' : '注册登陆'} />
         {
           isBind ?
             <Content style={styles.bindContent}>
+              {this._renderTop()}
               {this.renderBindInfo()}
               {this._renderForm()}
               {this.renderSubmit()}
             </Content>
             :
             <Content contentContainerStyle={{ flex: 1 }}>
+              {this._renderTop()}
               {this._renderForm()}
               {this._renderMid()}
               {(isWechatExist || isQQExist) && this._renderOther()}

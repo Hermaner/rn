@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, Mred, Mcolor, deviceW } from '../../utils';
+import { st, Mred, Mcolor, deviceW, Bcolor, Fcolor, Bcolor2, Bcolor3 } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -71,8 +71,9 @@ const styles = StyleSheet.create({
   },
   nameOneView: {
     padding: 10,
-    ...st.fr,
-    ...st.jacenter,
+    ...st.frcenter,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
   },
   nameTextView: {
     flex: 1,
@@ -80,15 +81,15 @@ const styles = StyleSheet.create({
   },
   nameText: {
     fontSize: 16,
-    color: '#333',
-    marginBottom: 3,
+    color: '#000',
+    fontWeight: 'bold',
   },
   nameIconView: {
     ...st.jacenter,
   },
   jcIcon: {
-    color: Mred,
-    fontSize: 16,
+    color: Bcolor,
+    fontSize: 18,
   },
   grayText: {
     color: '#666',
@@ -109,28 +110,26 @@ const styles = StyleSheet.create({
     ...st.acenter,
   },
   priceText: {
-    color: Mred,
+    color: Fcolor,
     fontSize: 22,
     fontWeight: 'bold',
   },
   pricelabel: {
-    color: Mred,
-    fontSize: 13,
-    marginLeft: 8,
+    color: Fcolor,
+    fontSize: 15,
+    marginLeft: 3,
     marginRight: 8,
   },
   priceLabelView: {
-    padding: 3,
-    borderRadius: 4,
-    backgroundColor: Mred,
+    // backgroundColor: Mred,
   },
   priceLabelText: {
-    color: '#fff',
-    fontSize: 10,
+    color: '#333',
+    fontSize: 14,
   },
   positionIcn: {
-    fontSize: 18,
-    color: '#999',
+    fontSize: 16,
+    color: '#666',
   },
   positionText: {
     fontSize: 14,
@@ -138,10 +137,20 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   nameTipsView: {
-    backgroundColor: '#f6f6f6',
-    padding: 10,
-    ...st.fr,
-    ...st.acenter,
+    backgroundColor: '#fff',
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  nameTipsList: {
+    minHeight: 40,
+    ...st.frcenter,
+  },
+  tipsLabel: {
+    fontSize: 14,
+    width: 45,
+    color: '#888',
   },
   nameTipsicon: {
     marginRight: 10,
@@ -165,20 +174,19 @@ const styles = StyleSheet.create({
     ...st.fr,
     flex: 1,
     flexWrap: 'wrap',
-    paddingLeft: 10,
-    paddingRight: 10,
   },
   ptlList: {
-    // width: '25%',
-    paddingLeft: 3,
-    marginBottom: 8,
-    ...st.fr,
-    ...st.jacenter,
-    borderWidth: 1,
-    paddingTop: 2,
-    paddingBottom: 2,
-    paddingRight: 3,
-    marginRight: 6,
+    marginBottom: 3,
+    marginTop: 3,
+    ...st.frcenter,
+    marginRight: 8,
+  },
+  ptlListDot: {
+    width: 4,
+    height: 4,
+    backgroundColor: '#555',
+    borderRadius: 2,
+    marginLeft: 4,
   },
   ptlIcon: {
     fontSize: 16,
@@ -186,8 +194,8 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   ptlText: {
-    fontSize: 11,
-    color: '#666',
+    fontSize: 13,
+    color: '#444',
   },
   ptrIcon: {
     fontSize: 16,
@@ -208,9 +216,9 @@ const styles = StyleSheet.create({
   },
   storeViewBottom: {
     borderTopWidth: 1,
-    borderTopColor: '#ddd',
-    paddingTop: 15,
-    paddingBottom: 10,
+    borderTopColor: '#eee',
+    paddingTop: 10,
+    paddingBottom: 5,
     ...st.fr,
     ...st.jacenter,
   },
@@ -218,12 +226,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 16,
     ...st.jcenter,
-  },
-  storeImg: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginBottom: 5,
   },
   storeLeftView: {
     borderWidth: 1,
@@ -249,14 +251,13 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   storeMidNameText: {
-    flex: 1,
-    color: '#555',
+    color: '#333',
     fontSize: 14,
     fontWeight: 'bold',
   },
   storeMidNameTextReal: {
-    color: '#999',
-    fontSize: 14,
+    color: '#888',
+    fontSize: 12,
     marginTop: 4,
   },
   storeMidLabel: {
@@ -298,23 +299,25 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   noIdView: {
-    backgroundColor: '#f6f6f6',
-    height: 45,
+    height: 40,
     ...st.jacenter,
   },
   noIdText: {
-    color: Mcolor,
-    fontSize: 10,
+    color: Fcolor,
+    fontSize: 12,
+  },
+  footer: {
+    backgroundColor: '#fff',
+    ...st.frcenter,
   },
   fotBtn1: {
-    flex: 0.5,
+    width: 55,
     backgroundColor: '#fff',
     ...st.jacenter,
   },
   fotChatIcon: {
-    color: '#666',
-    marginRight: 8,
-    fontSize: 14,
+    color: '#333',
+    fontSize: 18,
   },
   fotChatText: {
     color: '#666',
@@ -322,8 +325,17 @@ const styles = StyleSheet.create({
   },
   fotBtn2: {
     flex: 1,
-    backgroundColor: Mcolor,
+    backgroundColor: Bcolor2,
     ...st.jacenter,
+  },
+  btnView: {
+    flex: 1,
+    height: 40,
+    marginRight: 10,
+    marginLeft: 10,
+    overflow: 'hidden',
+    borderRadius: 20,
+    ...st.fr,
   },
   fotText: {
     color: '#fff',
@@ -331,7 +343,7 @@ const styles = StyleSheet.create({
   },
   fotBtn3: {
     flex: 1,
-    backgroundColor: Mred,
+    backgroundColor: Bcolor3,
     ...st.jacenter,
   },
   detialView: {
@@ -621,18 +633,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   baozhangBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // borderWidth: 1,
-    // borderColor: Mcolor,
-    // borderRadius: 4,
+    ...st.frcenter,
+    marginBottom: 10,
   },
   leftBox: {
     paddingLeft: 10,
     paddingRight: 10,
     height: 40,
     ...st.jacenter,
-    backgroundColor: Mcolor,
+    backgroundColor: Bcolor,
   },
   rightBox: {
     height: 40,
@@ -640,7 +649,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 20,
     borderWidth: 1,
-    borderColor: Mcolor,
+    borderColor: Bcolor,
   },
   bottomBox: {
     flex: 1,
@@ -675,6 +684,41 @@ const styles = StyleSheet.create({
   maskerNumTextRight: {
     fontSize: 14,
     color: Mcolor,
+  },
+  storeMain: {
+    ...st.frcenter,
+    height: 70,
+    paddingLeft: 6,
+    paddingRight: 6,
+  },
+  storeImgUrlView: {
+    width: 60,
+    height: 50,
+  },
+  storeImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 6,
+  },
+  storeScore: {
+    width: 80,
+  },
+  storeScoreText: {
+    fontSize: 12,
+    color: '#333',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  storeIdentity: {
+    width: 65,
+    backgroundColor: Bcolor,
+    height: 30,
+    borderRadius: 15,
+    ...st.jacenter,
+  },
+  storeIdentityText: {
+    fontSize: 14,
+    color: '#fff',
   },
 });
 export default styles;

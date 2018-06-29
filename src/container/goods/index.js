@@ -55,10 +55,8 @@ class Goods extends base {
               style={styles.flexOne}
               key={index}
               content={
-                <View style={[styles.flexOne, { justifyContent: 'center', alignItems: 'center' }]}>
-                  <View style={[styles.mainIcon, { backgroundColor: item.color }]}>
-                    <Iconfont style={styles.mainIconFont} name={item.icon} />
-                  </View>
+                <View style={[styles.flexOne, styles.jacenter]}>
+                  <CachedImage style={styles.navImg} source={item.image} />
                   <Text style={[styles.headerNavigationText, styles.textCenter]}>{item.label}</Text>
                 </View>
               }
@@ -72,8 +70,11 @@ class Goods extends base {
   renderSecend() {
     const { secendList } = this.state;
     return (
-      <View style={styles.goodsType}>
-        <Text style={styles.goodsTypeTitle}>- 优质推选 -</Text>
+      <View style={[styles.goodsType, styles.marginView]}>
+        <View style={styles.titleView}>
+          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Text style={styles.titleText}>优质推选</Text>
+        </View>
         <View style={[styles.flexRow, styles.headerNavigationTwo]}>
           {
             secendList.map((item, index) => (
@@ -135,26 +136,33 @@ class Goods extends base {
     const { twoNewsList } = this.state;
     const { push } = this.props;
     return (
-      <View style={styles.studyBox}>
-        <View style={[styles.studyRow]}>
-          <Text style={styles.leftText} numberOfLines={2}>每日技能</Text>
-          <View style={{ flex: 1 }}>
-            {
-              twoNewsList.map((item, index) => (
-                <TFeedback
-                  key={index}
-                  content={
+      <View style={[styles.studyRow, styles.marginView]}>
+        <View style={styles.titleView}>
+          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Text style={styles.titleText}>每日技能</Text>
+        </View>
+        <View>
+          {
+            twoNewsList.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={styles.newsView}>
+                    <CachedImage
+                      style={styles.newsImg}
+                      source={{ uri: item.newsImages[0].imgUrl }}
+                    />
                     <Text
-                      style={[styles.normalThreeText, styles.flexOne]}
+                      style={styles.newsText}
                       numberOfLines={1}
                     >
                       {item.title}
-                    </Text>}
-                  onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item.newsId } }); }}
-                />
-              ))
-            }
-          </View>
+                    </Text>
+                  </View>}
+                onPress={() => { push({ key: 'HuinongConsultDetail', params: { newsId: item.newsId } }); }}
+              />
+            ))
+          }
         </View>
       </View>
     );
@@ -162,10 +170,9 @@ class Goods extends base {
   renderSwiper() {
     const { imgList } = this.state;
     return (
-      <View style={{ height: deviceW * 0.4, marginTop: 5, marginBottom: 5 }}>
+      <View style={styles.marginView}>
         <Swiper
-          style={styles.wrapper}
-          height={deviceW * 0.4}
+          height={(deviceW - 20) * 0.3}
           key={imgList.length}
           loop
           autoplayTimeout={4}
@@ -173,7 +180,6 @@ class Goods extends base {
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
-            imgList.length > 0 &&
             imgList.map((item, i) => (
               <TFeedback
                 key={i}
@@ -192,8 +198,10 @@ class Goods extends base {
   renderAllGoods() {
     const { items } = this.state;
     return (
-      <View style={styles.allGoods}>
-        <Text style={styles.forYouText}>- 为你推荐 -</Text>
+      <View style={styles.forYou}>
+        <View style={styles.forTitleView}>
+          <CachedImage style={styles.forTitleImg} source={require('../../assets/img/x8.png')} /><Text style={styles.forTitle}>为您推荐</Text>
+        </View>
         <Child data={items} />
       </View>
     );
@@ -203,14 +211,11 @@ class Goods extends base {
       refresh,
       loading,
       nomore,
+      backGround1,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
       <Container>
-        <HomeSearch
-          label={districtName}
-          push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'goods' } }); }}
-        />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={
@@ -227,7 +232,11 @@ class Goods extends base {
           onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
-          {/* {this.renderHeader()} */}
+          <HomeSearch
+            image={backGround1}
+            label={districtName}
+            push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'goods' } }); }}
+          />
           {this.renderHeaderNavigation()}
           {this.renderSecend()}
           {this.renderNews()}

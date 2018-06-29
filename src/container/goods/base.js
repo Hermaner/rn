@@ -15,25 +15,17 @@ class Base extends React.Component {
       noData: false, // 是否没有数据
       items: [],
       mainIcons: [{
-        icon: 'icon-fasong',
         label: '发供应',
-        color: '#f4bc22',
-        page: { key: global.memberId ? 'MainSearch' : 'User', params: { type: '3' } },
+        image: require('../../assets/img/x1.png'),
       }, {
-        icon: 'icon-dingdanwuliaocaigouruku',
         label: '采购大厅',
-        color: '#51cd73',
-        page: { key: 'ReleaseMainList' },
+        image: require('../../assets/img/x2.png'),
       }, {
-        icon: 'icon--nav-hangqing',
         label: '行情大厅',
-        color: '#6098f9',
-        page: { key: 'MainSearch', params: { type: '3' } },
+        image: require('../../assets/img/x3.png'),
       }, {
-        icon: 'icon-wode',
         label: '我的供应',
-        color: '#f85554',
-        page: { key: 'MySupply' },
+        image: require('../../assets/img/x4.png'),
       }],
       secendList: [{
         icon: 'icon-homepage',
@@ -137,9 +129,12 @@ class Base extends React.Component {
       name: '',
       categoryId: '',
       provinceCode: '',
+      currentPage,
+      pageSize,
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
-        const result = res.data;
+        const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
             this.setState({

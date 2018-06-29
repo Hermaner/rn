@@ -1,17 +1,17 @@
 import React from 'react';
 import { View, ScrollView, RefreshControl } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { Container, Text, Icon } from 'native-base';
+import { Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Location } from 'react-native-baidumap-sdk';
 import { observer } from 'mobx-react/native';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
-import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
+import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch } from '../../components';
 import base from './base';
 import styles from './styles';
-import { Mcolor, deviceW } from '../../utils';
+import { deviceW } from '../../utils';
 import Child1 from './child1';
 
 @observer
@@ -36,19 +36,12 @@ class HomeScreen extends base {
     // this.listener.remove();
   }
   renderHeader() {
-    const { backGround1, backgroundImg } = this.state;
+    const { backGround1 } = this.state;
     return (
       <View>
-        {
-          backgroundImg !== '' ?
-            <View style={styles.headerImgBox}>
-              <CachedImage resizeMode="contain" style={styles.headerImg} source={{ uri: backgroundImg }} />
-            </View>
-          :
-            <View style={styles.headerImgBox}>
-              <CachedImage resizeMode="stretch" style={styles.headerImg} source={backGround1} />
-            </View>
-        }
+        <View style={styles.headerImgBox}>
+          <CachedImage resizeMode="stretch" style={styles.headerImg} source={backGround1} />
+        </View>
       </View>
     );
   }
@@ -63,9 +56,7 @@ class HomeScreen extends base {
               key={index}
               content={
                 <View style={[styles.flexOne, styles.jacenter]}>
-                  <View style={[styles.mainIcon, { backgroundColor: item.color }]}>
-                    <Iconfont style={styles.mainIconFont} name={item.icon} />
-                  </View>
+                  <CachedImage style={styles.navImg} source={item.image} />
                   <Text style={[styles.headerNavigationText, styles.textCenter]}>{item.label}</Text>
                 </View>
               }
@@ -81,7 +72,6 @@ class HomeScreen extends base {
     const { push } = this.props;
     return (
       <View style={styles.goodsType}>
-        <Text style={styles.goodsTypeTitle}>- 货品分类 -</Text>
         <View style={styles.flexRow}>
           {
             categorys.map((item, index) => (
@@ -90,14 +80,14 @@ class HomeScreen extends base {
                 content={
                   <View style={styles.goodsTypeOne}>
                     <View
-                      style={[styles.icnBoxTwo, { backgroundColor: item.color }]}
+                      style={styles.icnBoxTwo}
                     >
-                      <Text numberOfLines={1} style={{ flex: 1, fontSize: 16, textAlign: 'center', color: '#fff' }}>{item.text}</Text>
+                      <CachedImage style={styles.icnBoxImg} source={{ uri: item.imgUrl || 'https://avatars0.githubusercontent.com/u/12965639?s=40&v=4' }} />
                     </View>
                     <Text numberOfLines={1} style={[styles.goodsTypeText, styles.textCenter]}>
                       {item.name}</Text>
                   </View>}
-                onPress={() => { push({ key: index === 0 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === 0 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
+                onPress={() => { push({ key: index === categorys.length - 1 ? 'MainList' : 'HomeMainList', params: { categoryId: item.categoryId, name: index === categorys.length - 1 ? '' : item.name } }); }} // MainSearch MainSearcher MainList
               />
             ))
           }
@@ -110,65 +100,87 @@ class HomeScreen extends base {
     const { SampleCenterList } = this.state;
     return (
       <View style={styles.SampleCenter}>
-        <View style={[styles.flexRow, { paddingTop: 10, paddingBottom: 10 }]}>
-          {
-            SampleCenterList.map((item, index) => (
-              <TFeedback
-                key={index}
-                content={
-                  <View style={[styles.flexOne, styles.jacenter]}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', width: 50, height: 50, borderRadius: 25, backgroundColor: Mcolor, marginBottom: 5 }}>
-                      <Icon style={{ color: '#fff', fontSize: 30 }} name={item.icn} />
-                    </View>
-                    <Text style={[styles.SampleCenterText, styles.textCenter]}>{item.text}</Text>
-                  </View>}
-                onPress={() => { push({ key: item.push }); }}
-              />
-            ))
-          }
-        </View>
+        {
+          SampleCenterList.map((item, index) => (
+            <TFeedback
+              key={index}
+              content={
+                <View style={styles.SampleCenterList}>
+                  <CachedImage style={styles.sampleImg} source={item.image} />
+                  <Text style={styles.SampleCenterText}>{item.text}</Text>
+                </View>}
+              onPress={() => { push({ key: item.push }); }}
+            />
+          ))
+        }
       </View>
     );
   }
   renderSeasonalGoods() {
-    const { seasonals } = this.state;
+    const { seasonals, seasonalsMain } = this.state;
     const { push } = this.props;
     return (
-      <View style={styles.seasonalGoods}>
-        <Text style={styles.goodsTypeTitle}>- 好货直达 -</Text>
-        <View style={styles.seasonalGoodsBox}>
+      <View style={styles.seasonalGoodsBox}>
+        <View style={[styles.sgView, styles.sgViewRight]}>
+          <CachedImage style={styles.sgBigImg} source={require('../../assets/img/x8.png')} />
+          <View style={styles.sgViewText}>
+            <Text style={styles.sgViewText1}>好货直达</Text>
+            <Text style={styles.sgViewText2}>百里挑一，总有一样您喜欢</Text>
+          </View>
+        </View>
+        <View style={styles.sgView}>
           {
-            seasonals.map((item, index) => (
-              <TFeedback
+            seasonalsMain.map((item, index) => (
+              <TOpacity
                 key={index}
+                style={styles.sgItemsBtn}
                 content={
                   <View
-                    style={[
-                      seasonals.length > 3 ? styles.goodsTypeOneWidth :
-                      styles.goodsTypeOneWidthFlexOne,
-                      styles.goodsTypeOne2, styles.seasonalGoodsItem,
-                    ]}
+                    style={styles.sgItems}
                   >
-                    <View style={styles.imageBox}>
-                      <CachedImage style={styles.image} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/50` }} />
+                    <View style={styles.sgItemText}>
+                      <Text style={styles.sgItemText1}>{item.name}</Text>
+                      <Text style={styles.sgItemText2}>{item.detail || '好货直达'}</Text>
                     </View>
-                    <Text numberOfLines={1} style={[styles.headerNavigationText, { textAlign: 'center' }]}>{item.name}</Text>
+                    <View style={styles.sgImgView}>
+                      <CachedImage style={styles.sgImg} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/50` }} />
+                    </View>
                   </View>}
                 onPress={() => { push({ key: 'HuinongGoodsMotif', params: { seasonCategoryId: item.seasonCategoryId, img: item.backgroundImgUrls } }); }}
               />
             ))
           }
         </View>
+        {
+          seasonals.map((item, index) => (
+            <TOpacity
+              key={index}
+              style={[styles.sgItemsBtn, index % 2 === 0 && styles.sgViewRight]}
+              content={
+                <View
+                  style={styles.sgItems}
+                >
+                  <View style={styles.sgItemText}>
+                    <Text style={styles.sgItemText1}>{item.name}</Text>
+                    <Text style={styles.sgItemText2}>{item.detail || '好货直达'}</Text>
+                  </View>
+                  <View style={styles.sgImgView}>
+                    <CachedImage style={styles.sgImg} source={{ uri: `${item.logoImgUrl}?imageView2/1/w/50` }} />
+                  </View>
+                </View>}
+              onPress={() => { push({ key: 'HuinongGoodsMotif', params: { seasonCategoryId: item.seasonCategoryId, img: item.backgroundImgUrls } }); }}
+            />
+          ))
+        }
       </View>
     );
   }
   renderSwiper() {
     const { imgList } = this.state;
     return (
-      <View style={{ height: deviceW * 0.4, marginTop: 10 }}>
+      <View style={styles.swiperWrapper}>
         <Swiper
-          style={styles.wrapper}
-          height={deviceW * 0.4}
+          height={(deviceW - 20) * 0.3}
           key={imgList.length}
           loop
           autoplayTimeout={4}
@@ -176,13 +188,12 @@ class HomeScreen extends base {
           paginationStyle={{ justifyContent: 'center', bottom: 10 }}
         >
           {
-            imgList !== [] &&
             imgList.map((item, i) => (
               <TFeedback
                 key={i}
                 content={
                   <View style={styles.slide}>
-                    <CachedImage resizeMode="stretch" style={styles.swiperImage} source={{ uri: item.img }} />
+                    <CachedImage style={styles.swiperImage} source={{ uri: item.imgUrl }} />
                   </View>}
                 onPress={() => { this.imgPush(i); }}
               />
@@ -196,8 +207,8 @@ class HomeScreen extends base {
     const { supplys } = this.state;
     return (
       <View style={styles.forYou}>
-        <View style={{ borderBottomWidth: 1, borderBottomColor: '#eee' }}>
-          <Text style={styles.forYouTitle}>- 推荐货品 -</Text>
+        <View style={styles.forTitleView}>
+          <CachedImage style={styles.forTitleImg} source={require('../../assets/img/x8.png')} /><Text style={styles.forTitle}>推荐货品</Text>
         </View>
         <View>
           <Child1 type="1" data={supplys} />
@@ -211,14 +222,11 @@ class HomeScreen extends base {
       loading,
       nomore,
       seasonals,
+      backGround1,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
       <Container>
-        <HomeSearch
-          label={districtName}
-          push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'home' } }); }}
-        />
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={
@@ -235,7 +243,11 @@ class HomeScreen extends base {
           onScroll={this._onScroll}
           scrollEventThrottle={50}
         >
-          {/* {this.renderHeader()} */}
+          <HomeSearch
+            label={districtName}
+            image={backGround1}
+            push={() => { this.props.push({ key: 'MainSearcher', params: { type: 'home' } }); }}
+          />
           {this.renderHeaderNavigation()}
           {this.renderGoodsType()}
           {this.renderSampleCenter()}

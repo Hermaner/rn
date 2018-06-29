@@ -80,10 +80,12 @@ class Base extends React.Component {
       name,
       categoryId,
       provinceCode,
+      currentPage,
+      pageSize,
     }).then((res) => {
       if (res.isSuccess) {
         // console.log(res);
-        const result = res.data;
+        const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
             this.setState({

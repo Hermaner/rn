@@ -27,18 +27,17 @@ class UserBase extends React.Component {
       others: [{
         label: '微信',
         icon: 'icon-weixin',
-        color: '#62b900',
+        color: '#00d22a',
       }, {
         label: 'QQ',
         icon: 'icon-QQ',
-        color: '#68a5e1',
+        color: '#00addc',
       }],
     };
   }
   getInit = () => {
     WeChat.isWXAppInstalled()
     .then((isInstalled) => {
-      console.log(isInstalled)
       if (isInstalled) {
         this.setState({
           isWechatExist: true,
@@ -51,7 +50,6 @@ class UserBase extends React.Component {
     });
     QQAPI.isQQInstalled()
     .then((isInstalled) => {
-      console.log(isInstalled)
       if (isInstalled) {
         this.setState({
           isQQExist: true,
@@ -81,7 +79,6 @@ class UserBase extends React.Component {
   qqLogin = () => {
     QQAPI.login('get_simple_userinfo')
     .then((res) => {
-      console.log(res)
       this.AccessQQService(res);
     }).catch(() => {});
   }
@@ -221,7 +218,6 @@ class UserBase extends React.Component {
       phone,
     } = this.state;
     this.sleek.toggle();
-    console.log(global.memberId)
     UpdateAccessMemberService({
       phone,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
@@ -263,7 +259,6 @@ class UserBase extends React.Component {
     GetMemberExistsService({
       phone,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         if (res.data) {
           this.sleek.toggle();
@@ -294,7 +289,6 @@ class UserBase extends React.Component {
       registration: global.registration || 'ios',
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
       if (res.isSuccess) {
         const phone = res.data.phone;
         if (!phone) {
@@ -322,7 +316,6 @@ class UserBase extends React.Component {
       registration: global.registration || '',
     }).then((res) => {
       this.sleek.toggle();
-      console.log(res);
       if (res.isSuccess) {
         const phone = res.data.phone;
         if (!phone) {

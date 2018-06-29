@@ -32,6 +32,7 @@ import ScrollableStatusTab from './ScrollableStatusTab';
 import Upload from './Upload';
 import BHeader from './BHeader';
 import ModalCall from './ModalCall';
+import ReleaseList from './ReleaseList';
 import ChatHeader from './ChatHeader';
 import CountDownTimer from './CountDownTimer';
 import Chat from './chat/GiftedChat';
@@ -41,6 +42,7 @@ const UserSocket = new UserObser();
 const SocketObser = new SocketStore();
 
 export {
+  ReleaseList,
   CountDownTimer,
   ModalCall,
   ChatHeader,

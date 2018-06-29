@@ -55,12 +55,6 @@ class MainScreen extends base {
   _renderNameAP() {
     const { detail, distance } = this.state;
     const { push } = this.props;
-    const { detail: { logisticsMode, renderServices, supplyMode } } = this.state;
-    const newLogisticsMode = logisticsMode === null ? '' : logisticsMode;
-    const newRenderServices = renderServices === null ? '' : renderServices;
-    const newSupplyMode = supplyMode === null ? '' : supplyMode;
-    let ptems = [];
-    ptems = ptems.concat(newLogisticsMode.split(',') : [], newRenderServices.split(',') : [], newSupplyMode.split(',') : []);
     return (
       <View style={styles.nameAPView}>
         <View style={styles.nameOneView}>
@@ -68,6 +62,15 @@ class MainScreen extends base {
             <Text style={styles.nameText} numberOfLines={2}>
               {detail.categoryName}{detail.brandName}{detail.supplyItems.map((item => item.specName)).join(' ')}
             </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+              <Text numberOfLines={1} style={styles.grayText}>
+                {detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}
+              </Text>
+              <View style={[styles.flexRow, { marginLeft: 10 }]}>
+                <Icon style={styles.positionIcn} name="pin" />
+                <Text numberOfLines={1} style={styles.positionText}>{distance}km</Text>
+              </View>
+            </View>
           </View>
           <TFeedback
             content={
@@ -77,15 +80,6 @@ class MainScreen extends base {
               </View>}
             onPress={() => { push({ key: UserSocket.userData.memberId ? 'ReportPage' : 'User', params: { beMemberId: detail.memberId, supplyId: detail.supplyId } }); }}
           />
-        </View>
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-          <Text numberOfLines={1} style={[styles.grayText, { marginLeft: 10 }]}>
-            {detail.sendProvinceName}{detail.sendCityName}{detail.sendDistrictName}
-          </Text>
-          <View style={[styles.flexRow, { marginLeft: 10 }]}>
-            <Icon style={styles.positionIcn} name="pin" />
-            <Text numberOfLines={1} style={styles.positionText}>{distance}km</Text>
-          </View>
         </View>
         <View style={styles.priceView}>
           <Text style={styles.priceText}>{detail.wholesalePrice}</Text>
@@ -101,22 +95,41 @@ class MainScreen extends base {
             onPress={() => this.setState({ visible: true })}
           />
         </View>
-        <View style={styles.nameTipsView}>
-          <Icon name="md-volume-down" style={styles.nameTipsicon} />
-          <View>
-            <Text style={styles.grayText}>
-              私自打款有风险!
-              <Text style={styles.nameColorText}>了解</Text>
-            </Text>
-          </View>
+      </View>
+    );
+  }
+  _renderTips() {
+    const { detail: { logisticsMode, renderServices, supplyMode } } = this.state;
+    const newLogisticsMode = logisticsMode === null ? '' : logisticsMode;
+    const newRenderServices = renderServices === null ? '' : renderServices;
+    const newSupplyMode = supplyMode === null ? '' : supplyMode;
+    let ptems = [];
+    ptems = ptems.concat(newLogisticsMode.split(',') : [], newRenderServices.split(',') : [], newSupplyMode.split(',') : []);
+    return (
+      <View style={styles.nameTipsView}>
+        <View style={styles.nameTipsList}>
+          <Text style={styles.tipsLabel}>
+            通知
+          </Text>
+          <Text style={[styles.ptlText, { flex: 1 }]}>
+            私自打款有风险!
+            <Text style={styles.nameColorText}>了解</Text>
+          </Text>
         </View>
-        <View style={[styles.provideTypes, { marginTop: 10, borderBottomWidth: 1, borderBottomColor: '#ddd' }]}>
+        <View style={styles.nameTipsList}>
+          <Text style={styles.tipsLabel}>
+            服务
+          </Text>
           <View style={styles.provideTypesLeft2}>
             {
               ptems.map((item, index) => (
                   item !== '' &&
-                  <View style={[styles.ptlList, { borderColor: ColorList[index > ColorList.length ? index % ColorList.length : index] }]} key={index}>
+                  <View style={styles.ptlList} key={index}>
                     <Text style={styles.ptlText}>{item}</Text>
+                    {
+                      index !== ptems.length - 1 &&
+                      <View style={styles.ptlListDot} />
+                    }
                   </View>
               ))
             }
@@ -237,52 +250,40 @@ class MainScreen extends base {
       <View style={styles.storeView}>
         <TouchableWithoutFeedback onPress={() => { push({ key: 'StoreDetail', params: { memberId } }); }}>
           <View>
-            <View style={styles.storeViewTop}>
-              <View style={styles.storeLeft}>
+            <View style={styles.storeMain}>
+              <View style={styles.storeImgUrlView}>
                 <CachedImage source={{ uri: `${detail.member.imgUrl}?imageView2/1/w/50` }} style={styles.storeImg} />
-                <View style={styles.storeLeftView}>
-                  <Text style={styles.storeImgText}>{detail.member.identityName}</Text>
-                </View>
               </View>
               <View style={styles.storeMid}>
-                <View style={[styles.storeMidName, { marginBottom: 6 }]}>
-                  <Icon name="ios-ribbon" style={styles.storeMidIcon} />
-                  <View>
-                    <Text numberOfLines={1} style={styles.storeMidNameText}>{decodeURI(detail.member.nickName)}</Text>
-                    {
-                      realName !== '' &&
-                      <Text style={styles.storeMidNameTextReal}>(真实姓名：{realName})</Text>
-                    }
-                  </View>
-                </View>
+                <Text numberOfLines={1} style={styles.storeMidNameText}>{decodeURI(detail.member.nickName)}</Text>
                 {
-                  memo !== '' &&
-                  <View style={styles.baozhangBox}>
-                    <View style={styles.leftBox}>
-                      <Text style={styles.storeMidTextLeft}>买家</Text>
-                      <Text style={styles.storeMidTextLeft}>保障</Text>
-                    </View>
-                    <View style={styles.rightBox}>
-                      <Text style={styles.storeMidText}>
-                        {memo}
-                      </Text>
-                      <Text style={styles.storeMidText}>延时发货,货不对板可赔付</Text>
-                    </View>
-                    <View style={{ flex: 1 }} />
-                  </View>
+                  realName !== '' &&
+                  <Text style={styles.storeMidNameTextReal}>姓名：{realName}</Text>
                 }
               </View>
-            </View>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
-              <View style={{ flex: 1, justifyContent: 'center' }}>
-                <Text style={{ textAlign: 'center', color: '#333', fontSize: 14 }}>{sellGoodsCount + 1}</Text>
-                <Text style={{ textAlign: 'center', color: '#666', fontSize: 14 }}>全部商品</Text>
+              <View style={styles.storeScore}>
+                <Text style={styles.storeScoreText}>全部商品:{sellGoodsCount + 1}</Text>
+                <Text style={styles.storeScoreText}>综合评分:{goodsScore}</Text>
               </View>
-              <View style={{ flex: 1, justifyContent: 'center', borderLeftWidth: 1, borderLeftColor: '#eee' }}>
-                <Text style={{ textAlign: 'center', color: '#333', fontSize: 14 }}>{goodsScore}</Text>
-                <Text style={{ textAlign: 'center', color: '#666', fontSize: 14 }}>综合评分</Text>
+              <View style={styles.storeIdentity}>
+                <Text style={styles.storeIdentityText}>{detail.member.identityName}</Text>
               </View>
             </View>
+            {
+              memo !== '' &&
+              <View style={styles.baozhangBox}>
+                <View style={styles.leftBox}>
+                  <Text style={styles.storeMidTextLeft}>买家</Text>
+                  <Text style={styles.storeMidTextLeft}>保障</Text>
+                </View>
+                <View style={styles.rightBox}>
+                  <Text style={styles.storeMidText}>
+                    {memo}
+                  </Text>
+                  <Text style={styles.storeMidText}>延时发货,货不对板可赔付</Text>
+                </View>
+              </View>
+            }
           </View>
         </TouchableWithoutFeedback>
         {
@@ -293,31 +294,21 @@ class MainScreen extends base {
               </Text>
             </View>
             :
-            <View style={styles.storeViewBottom}>
-              <View style={styles.provideTypesLeft}>
-                {
-                  detail.member.memberVerifs &&
-                  detail.member.memberVerifs.map((item, index) => (
-                    <View key={index} style={[styles.ptlList, { borderColor: '#ddd' }]}>
-                      <CachedImage
-                        source={{ uri: `${item.verifFieldLogo}?imageView2/1/w/16` }}
-                        style={styles.logoImg}
-                      />
-                      <Text style={styles.ptlText}>{item.verifFieldName}</Text>
-                    </View>
-                  ))
-                }
-              </View>
-              {/* <Icon name="md-arrow-dropright" style={styles.ptrIcon} /> */}
+            <View style={styles.provideTypesLeft}>
+              {
+                detail.member.memberVerifs &&
+                detail.member.memberVerifs.map((item, index) => (
+                  <View key={index} style={[styles.ptlList, { borderColor: '#ddd' }]}>
+                    <CachedImage
+                      source={{ uri: `${item.verifFieldLogo}?imageView2/1/w/16` }}
+                      style={styles.logoImg}
+                    />
+                    <Text style={styles.ptlText}>{item.verifFieldName}</Text>
+                  </View>
+                ))
+              }
             </View>
         }
-        <TFeedback
-          content={
-            <View style={styles.storeRight}>
-              <Text style={styles.storeRightText}>进店铺</Text>
-            </View>}
-          onPress={() => { push({ key: UserSocket.userData.memberId ? 'StoreDetail' : 'User', params: { memberId } }); }}
-        />
       </View>
     );
   }
@@ -392,7 +383,7 @@ class MainScreen extends base {
   _renderFooter() {
     const { haveCollect, detail } = this.state;
     return (
-      <Footer>
+      <Footer style={styles.footer}>
         <TOpacity
           style={styles.fotBtn1}
           content={
@@ -413,16 +404,18 @@ class MainScreen extends base {
             </View>}
           onPress={this.goChat}
         />
-        <TFeedback
-          content={
-            <View style={styles.fotBtn2}>
-              <Text style={styles.fotText}>打电话</Text>
-            </View>}
-          onPress={() => this.ModalCall.show(detail.phone, detail.memberId)}
-        />
-        <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
-          <Text style={styles.fotText}>立即购买</Text>
-        </TouchableOpacity>
+        <View style={styles.btnView}>
+          <TFeedback
+            content={
+              <View style={styles.fotBtn2}>
+                <Text style={styles.fotText}>打电话</Text>
+              </View>}
+            onPress={() => this.ModalCall.show(detail.phone, detail.memberId)}
+          />
+          <TouchableOpacity style={styles.fotBtn3} onPress={this.openBuyMasker}>
+            <Text style={styles.fotText}>立即购买</Text>
+          </TouchableOpacity>
+        </View>
       </Footer>
     );
   }
@@ -558,6 +551,7 @@ class MainScreen extends base {
           >
             {this._renderTop()}
             {this._renderNameAP()}
+            {this._renderTips()}
             {this._renderEval()}
             {
               (DTgoodsScore !== '--' || DTsellScore !== '--' || DTlogisticsScore !== '--') &&

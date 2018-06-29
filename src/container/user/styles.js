@@ -7,32 +7,42 @@ const styles = StyleSheet.create({
     ...st.font24,
     fontWeight: 'bold',
   },
+  topView: {
+    padding: 20,
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  topLabel: {
+    fontSize: 20,
+    color: '#000',
+    marginBottom: 20,
+  },
   form: {
     backgroundColor: '#fff',
     marginTop: 20,
     paddingLeft: 15,
+    paddingRight: 15,
   },
   accountView: {
-    height: 50,
-    borderBottomColor: '#eee',
+    height: 60,
+    borderBottomColor: '#ccc',
     borderBottomWidth: 1,
   },
   account: {
     color: '#666',
     ...st.font14,
-    borderBottomColor: '#eee',
   },
   password: {
     color: '#666', ...st.font14, height: 40,
   },
   formBom: {
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 60,
+    ...st.frcenter,
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
   },
   sendBtn: {
-    height: 35,
+    height: 40,
     width: 110,
     padding: 0,
     ...st.jacenter,
@@ -92,10 +102,12 @@ const styles = StyleSheet.create({
     color: Mcolor,
   },
   agreementLabel: {
-    color: '#888', ...st.font12,
+    color: '#666',
+    fontSize: 14,
   },
   agreementText: {
-    color: Mcolor, ...st.font12,
+    color: Mcolor,
+    fontSize: 14,
   },
   bottomTipsView: {
     flexDirection: 'row',
@@ -128,14 +140,15 @@ const styles = StyleSheet.create({
     height: 100,
   },
   otherTop: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
     ...st.jacenter,
-    borderRadius: 30,
+    borderRadius: 20,
+    overflow: 'hidden',
     marginBottom: 10,
   },
   otherIcon: {
-    fontSize: 30,
+    fontSize: 40,
     color: '#fff',
   },
   otherText: {

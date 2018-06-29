@@ -18,38 +18,31 @@ class Base extends React.Component {
     super(props);
     this.state = {
       mainIcons: [{
-        icon: 'icon-fasong',
         label: '发采购',
-        color: '#f4bc22',
+        image: require('../../assets/img/x1.png'),
       }, {
-        icon: 'icon-supplier',
         label: '供应大厅',
-        color: '#51cd73',
+        image: require('../../assets/img/x2.png'),
       }, {
-        icon: 'icon--nav-hangqing',
         label: '行情大厅',
-        color: '#6098f9',
+        image: require('../../assets/img/x3.png'),
       }, {
-        icon: 'icon-qunfengyijianfankui',
         label: '行情咨询',
-        color: '#f85554',
+        image: require('../../assets/img/x4.png'),
       }],
-      colorArray: ['#ff6a54', '#f96b57', '#eeba57', '#febf27', '#f2a050', '#9191d4', '#b1c26a', '#FD6300'],
       imgList: [],
       SampleCenterList: [{
-        icn: 'ios-archive',
         text: '样品中心',
         push: 'SampleMainList',
-        name: '全部分类',
+        image: require('../../assets/img/x5.png'),
       }, {
-        icn: 'ios-checkmark-circle',
         text: '保障货源',
         push: 'EnsureMainList',
-        name: '全部分类',
+        image: require('../../assets/img/x6.png'),
       }, {
-        icn: 'logo-buffer',
         text: '推荐商家',
         push: 'RecommendBusiness',
+        image: require('../../assets/img/x7.png'),
       }],
       loadQueue: [0, 0, 0, 0],
       isRefreshing: false,
@@ -64,10 +57,10 @@ class Base extends React.Component {
       items: [],
       supplys: [],
       categorys: [], // 应季好货
+      seasonalsMain: [],
       seasonals: [],
       backGround1: require('../../assets/img/bn1.png'),
       backgroundImg: '',
-      swiperImgInfo: [],
     };
   }
   getInit = () => {
@@ -80,29 +73,22 @@ class Base extends React.Component {
     });
   }
   getData = () => {
-    const { colorArray } = this.state;
     GetHomeCategoryService({
     }).then((res) => {
-      // console.log('yyyyyyyyyyy', res)
+      console.log(res);
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
-        let categorysArray = [];
-        categorys.forEach((item, index) => {
-          item.text = item.name.substr(0, 1);
-          item.color = colorArray[index + 1];
-        });
-        categorys.unshift({
-          text: '全',
-          name: '全部',
-          color: colorArray[0],
+        categorys.push({
+          name: '全部分类',
+          imgUrl: '',
         });
         if (categorys.length > 8) {
-          categorysArray = categorys.slice(0, 8);
-        } else {
-          categorysArray = categorys;
+          categorys.length = 8;
         }
+        const seasonalsMain = seasonals.splice(0, 2);
         this.setState({
-          categorys: categorysArray,
+          seasonalsMain,
+          categorys,
           seasonals,
         });
       } else {
@@ -122,7 +108,8 @@ class Base extends React.Component {
     );
   }
   _handleConnectionInfoChange = (status) => {
-    if (status === 'wifi' || status === 'cell') {
+    const { type } = status;
+    if (type === 'wifi' || type === 'cell') {
       this.getData();
     }
   }
@@ -130,23 +117,11 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
-      // console.log(res)
+      console.log(res);
       if (res.isSuccess) {
-        const result = res.data;
-        const newImgArray = [];
-        if (result !== '' && result !== null && result.length > 0) {
-          for (let i = 0; i < result.length; i += 1) {
-            if (result[i].imgUrl !== '' && result[i].imgUrl !== null) {
-              newImgArray.push({
-                imgKey: i,
-                img: result[i].imgUrl,
-              });
-            }
-          }
-        }
+        const imgList = res.data;
         this.setState({
-          imgList: newImgArray,
-          swiperImgInfo: result,
+          imgList,
         });
       } else {
         Toast.show(res.msg);
@@ -168,17 +143,19 @@ class Base extends React.Component {
     });
   }
   imgPush = (index) => {
-    const { swiperImgInfo } = this.state;
-    if (swiperImgInfo[index].sourceTypeId === '1') {
-      this.props.push({ key: 'ImgInfo', params: { imgDetail: swiperImgInfo[index].imgUrls } });
-      return;
-    }
-    if (swiperImgInfo[index].sourceTypeId === '2') {
-      this.props.push({ key: 'HuinongConsultDetail', params: { newsId: swiperImgInfo[index].sourceId } });
-      return;
-    }
-    if (swiperImgInfo[index].sourceTypeId === '3') {
-      this.props.push({ key: 'GoodDetail', params: { supplyId: swiperImgInfo[index].sourceId, memberId: swiperImgInfo[index].supplyMemberId } });
+    const { imgList } = this.state;
+    const { push } = this.props;
+    switch (imgList[index].sourceTypeId) {
+      case '1':
+        push({ key: 'ImgInfo', params: { imgDetail: imgList[index].imgUrls } });
+        break;
+      case '2':
+        push({ key: 'HuinongConsultDetail', params: { newsId: imgList[index].sourceId } });
+        break;
+      case '3':
+        push({ key: 'GoodDetail', params: { supplyId: imgList[index].sourceId, memberId: imgList[index].supplyMemberId } });
+        break;
+      default:
     }
   }
   GetRecomSupplyService = () => {

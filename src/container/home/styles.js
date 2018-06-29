@@ -1,18 +1,29 @@
 import { StyleSheet } from 'react-native';
-import { st, Mcolor, deviceW } from '../../utils';
+import { st, Mcolor, deviceW, Bcolor } from '../../utils';
 
+const swiperHeight = (deviceW - 20) * 0.3;
 const styles = StyleSheet.create({
   ...st,
   headerNavigation: {
-    paddingTop: 20,
-    marginTop: 4,
-    paddingBottom: 20,
     backgroundColor: '#fff',
+    marginTop: -20,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    position: 'relative',
+    zIndex: 999,
+    height: 100,
+    ...st.frcenter,
   },
   headerNavigationText: {
     fontSize: 13,
     color: '#333',
     marginTop: 3,
+  },
+  navImg: {
+    width: 40,
+    height: 40,
+    marginBottom: 6,
   },
   mainIcon: {
     width: 70,
@@ -80,15 +91,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   goodsType: {
-    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingTop: 15,
+    marginBottom: 10,
+    height: 180,
+    borderRadius: 6,
     backgroundColor: '#fff',
-  },
-  goodsTypeTitle: {
-    fontSize: 16,
-    color: '#333',
-    paddingTop: 10,
-    paddingBottom: 10,
-    textAlign: 'center',
   },
   goodsTypeIcn: {
     fontSize: 30,
@@ -99,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#333',
     marginTop: 5,
-    marginBottom: 20,
+    marginBottom: 15,
   },
   goodsTypeOne: {
     width: '25%',
@@ -122,17 +131,36 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   icnBoxTwo: {
-    width: 50,
-    height: 50,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    alignItems: 'center',
-    borderRadius: 25,
+    width: 44,
+    height: 44,
+    ...st.jacenter,
+    backgroundColor: '#F4F6FF',
+    marginBottom: 5,
+    borderRadius: 22,
+  },
+  icnBoxImg: {
+    width: 32,
+    height: 32,
   },
   SampleCenter: {
-    marginTop: 5,
+    ...st.fr,
+    marginLeft: 10,
+    marginBottom: 10,
+    justifyContent: 'space-between',
+    ...st.acenter,
+  },
+  SampleCenterList: {
+    flex: 1,
+    ...st.jacenter,
+    padding: 10,
+    borderRadius: 6,
     backgroundColor: '#fff',
+    marginRight: 10,
+  },
+  sampleImg: {
+    width: '100%',
+    height: 70,
+    marginBottom: 6,
   },
   SampleCenterBorder: {
     borderLeftWidth: 1,
@@ -155,14 +183,81 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 80,
   },
-  seasonalGoods: {
-    backgroundColor: '#fff',
-    marginTop: 5,
-  },
   seasonalGoodsBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...st.fr,
+    backgroundColor: '#fff',
+    marginLeft: 10,
+    marginRight: 10,
     flexWrap: 'wrap',
+  },
+  sgView: {
+    minWidth: '42%',
+    flex: 1,
+    height: 160,
+  },
+  sgBigImg: {
+    position: 'absolute',
+    width: '100%',
+    height: 160,
+  },
+  sgViewText: {
+    position: 'relative',
+    padding: 5,
+  },
+  sgViewText1: {
+    fontSize: 18,
+    color: '#5C9AE5',
+    marginBottom: 6,
+    backgroundColor: 'transparent',
+  },
+  sgViewText2: {
+    fontSize: 12,
+    backgroundColor: 'transparent',
+    color: '#333',
+  },
+  sgViewRight: {
+    borderRightColor: '#eee',
+    borderRightWidth: 1,
+  },
+  sgItemsBtn: {
+    minWidth: '42%',
+    flex: 1,
+    height: 80,
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+    backgroundColor: '#fff',
+  },
+  sgItems: {
+    flex: 1,
+    height: 90,
+    ...st.frcenter,
+  },
+  sgImgView: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#EEF9FF',
+    borderRadius: 30,
+    ...st.jacenter,
+    marginRight: 10,
+  },
+  sgImg: {
+    width: 40,
+    height: 40,
+  },
+  sgItemText: {
+    paddingLeft: 10,
+    flex: 1,
+  },
+  sgItemText1: {
+    fontSize: 16,
+    backgroundColor: 'transparent',
+    color: '#333',
+    marginBottom: 6,
+  },
+  sgItemText2: {
+    fontSize: 12,
+    backgroundColor: 'transparent',
+    color: '#999',
   },
   seasonalGoodsItem: {
     borderTopWidth: 1,
@@ -193,24 +288,36 @@ const styles = StyleSheet.create({
   },
   slide: {
     flex: 1,
-    height: deviceW * 0.4,
+    height: swiperHeight,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
     flex: 1,
-    height: deviceW * 0.4,
+    height: swiperHeight,
     backgroundColor: 'transparent',
   },
   forYou: {
-    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: '#fff',
+    borderRadius: 8,
   },
-  forYouTitle: {
-    fontSize: 14,
-    color: Mcolor,
-    paddingTop: 10,
-    paddingBottom: 10,
-    textAlign: 'center',
+  forTitleView: {
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    marginBottom: 6,
+    ...st.frcenter,
+  },
+  forTitleImg: {
+    width: 30,
+    height: 30,
+    marginRight: 10,
+  },
+  forTitle: {
+    fontSize: 18,
+    color: Bcolor,
   },
   bomFixedView: {
     height: 0,
@@ -292,6 +399,11 @@ const styles = StyleSheet.create({
   headerIcn: {
     fontSize: 18,
     color: '#666',
+  },
+  swiperWrapper: {
+    margin: 10,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
 export default styles;

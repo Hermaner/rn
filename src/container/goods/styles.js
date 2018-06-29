@@ -1,8 +1,49 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { st, Mcolor, deviceW } from '../../utils';
+import { st, Mcolor, Bcolor, Fcolor, deviceW } from '../../utils';
 
 const { width } = Dimensions.get('window');
+const swiperHeight = (deviceW - 20) * 0.3;
 const styles = StyleSheet.create({
+  ...st,
+  titleView: {
+    height: 40,
+    ...st.frcenter,
+  },
+  titleViewIcon: {
+    fontSize: 22,
+    marginRight: 10,
+    color: Bcolor,
+  },
+  titleText: {
+    fontSize: 14,
+    color: '#000',
+  },
+  marginView: {
+    backgroundColor: '#fff',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  newsView: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 60,
+    ...st.frcenter,
+  },
+  newsImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 6,
+    marginRight: 10,
+  },
+  newsText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 24,
+  },
   headerImgBox: {
     // marginTop: 2,
   },
@@ -29,6 +70,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#666',
   },
+  navImg: {
+    width: 40,
+    height: 40,
+    marginBottom: 6,
+  },
   inputText: {
     flex: 1,
     flexDirection: 'row',
@@ -39,15 +85,18 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
   },
   headerNavigation: {
-    paddingTop: 20,
-    marginTop: 4,
-    paddingBottom: 20,
     backgroundColor: '#fff',
+    marginTop: -20,
+    marginLeft: 10,
+    marginRight: 10,
+    position: 'relative',
+    zIndex: 999,
+    height: 100,
+    ...st.frcenter,
   },
   headerNavigationTwo: {
+    paddingBottom: 10,
     paddingTop: 10,
-    paddingBottom: 20,
-    backgroundColor: '#fff',
   },
   goodsTypeTitle: {
     fontSize: 16,
@@ -248,18 +297,39 @@ const styles = StyleSheet.create({
     color: '#FC8521',
     marginRight: 6,
   },
+  forYou: {
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+  },
+  forTitleView: {
+    height: 50,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    marginBottom: 6,
+    ...st.frcenter,
+  },
+  forTitleImg: {
+    width: 30,
+    height: 30,
+    marginRight: 10,
+  },
+  forTitle: {
+    fontSize: 18,
+    color: Bcolor,
+  },
   studyRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   slide: {
-    height: deviceW * 0.4,
+    height: swiperHeight,
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   swiperImage: {
     width,
-    height: deviceW * 0.4,
+    height: swiperHeight,
     backgroundColor: 'transparent',
     resizeMode: 'stretch',
   },
@@ -300,7 +370,7 @@ const styles = StyleSheet.create({
   flexRight: {
     flex: 1,
     textAlign: 'right',
-    color: '#FC8521',
+    color: Fcolor,
     fontSize: 14,
   },
   buyGoodsPlace: {
@@ -313,7 +383,7 @@ const styles = StyleSheet.create({
     paddingBottom: 6,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: '#FC8521',
+    backgroundColor: Bcolor,
     borderRadius: 5,
   },
   goBuyBtn: {
