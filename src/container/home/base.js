@@ -121,10 +121,13 @@ class Base extends React.Component {
       console.log(res);
       if (res.isSuccess) {
         const imgList = res.data;
-        const backgroundTopImg = res.map.backgroundTopImg.imgUrl;
+        if (res.map.backgroundTopImg) {
+          this.setState({
+            backgroundTopImg: res.map.backgroundTopImg.imgUrl,
+          });
+        }
         this.setState({
           imgList,
-          backgroundTopImg,
         });
       } else {
         Toast.show(res.msg);
