@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   titleViewIcon: {
     fontSize: 22,
-    marginRight: 10,
+    marginRight: 6,
     color: Bcolor,
   },
   titleText: {
@@ -75,6 +75,11 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 6,
   },
+  navsImg: {
+    height: 26,
+    resizeMode: 'contain',
+    marginBottom: 8,
+  },
   inputText: {
     flex: 1,
     flexDirection: 'row',
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
   },
   headerNavigationTwo: {
     paddingBottom: 10,
-    paddingTop: 10,
+    paddingTop: 6,
   },
   goodsTypeTitle: {
     fontSize: 16,

@@ -8,7 +8,7 @@ import { Location } from 'react-native-baidumap-sdk';
 import { observer } from 'mobx-react/native';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../../actions';
-import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch } from '../../components';
+import { TOpacity, TFeedback, LoadMore, LoadNoMore, UserSocket, HomeSearch, Iconfont } from '../../components';
 import base from './base';
 import styles from './styles';
 import { deviceW } from '../../utils';
@@ -208,7 +208,7 @@ class HomeScreen extends base {
     return (
       <View style={styles.forYou}>
         <View style={styles.forTitleView}>
-          <CachedImage style={styles.forTitleImg} source={require('../../assets/img/x8.png')} /><Text style={styles.forTitle}>推荐货品</Text>
+          <Iconfont style={styles.titleViewIcon} name="icon-baoguofahuo" /><Text style={styles.forTitle}>推荐货品</Text>
         </View>
         <View>
           <Child1 type="1" data={supplys} />

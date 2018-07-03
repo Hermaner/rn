@@ -8,8 +8,8 @@ import { CachedImage } from 'react-native-img-cache';
 import { observer } from 'mobx-react/native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, GoodhList, ModalView, InputNumber, Loading, TFeedback, UserSocket, NoData, TOpacity, ModalCall } from '../../components';
-import { Mred, deviceW, ColorList } from '../../utils';
+import { Header, GoodhList, ModalView, InputNumber, Loading, TFeedback, UserSocket, NoData, TOpacity, ModalCall, Iconfont } from '../../components';
+import { Mred, deviceW } from '../../utils';
 import base from './base';
 import styles from './styles';
 
@@ -388,7 +388,8 @@ class MainScreen extends base {
           style={styles.fotBtn1}
           content={
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Icon name="heart" style={[styles.fotChatIcon, haveCollect ? styles.tabTextChoose : '']} />
+              <Iconfont style={[styles.fotChatIcon, haveCollect ? styles.tabTextChoose : '']} name="icon-wodeshoucang" />
+              {/* <Icon name="heart" style={[styles.fotChatIcon, haveCollect ? styles.tabTextChoose : '']} /> */}
               <Text style={[styles.fotChatText, haveCollect ? styles.tabTextChoose : '']}>
                 { haveCollect ? '已收藏' : '收藏'}
               </Text>
@@ -399,7 +400,8 @@ class MainScreen extends base {
         <TFeedback
           content={
             <View style={styles.fotBtn1}>
-              <Icon name="chatboxes" style={styles.fotChatIcon} />
+              <Iconfont style={styles.fotChatIcon} name="icon-liaotianduihua" />
+              {/* <Icon name="chatboxes" style={styles.fotChatIcon} /> */}
               <Text style={styles.fotChatText}>聊生意</Text>
             </View>}
           onPress={this.goChat}

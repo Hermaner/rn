@@ -77,7 +77,7 @@ class UserPage extends base {
               />
               <View>
                 <TOpacity
-                  style={styles.sendBtn}
+                  style={[styles.sendBtn, this.isSend && { backgroundColor: '#aaa' }]}
                   content={
                     <Text style={styles.sendBtnText}>{this.isSend ? `${sec}s可重发` : '获取验证码'}</Text>
                   }

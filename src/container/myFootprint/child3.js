@@ -5,7 +5,7 @@ import { OptimizedFlatList } from 'react-native-optimized-flatlist';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData, Loading } from '../../components';
+import { TFeedback, NoData, Loading, BusinessList } from '../../components';
 import Base from './base';
 import styles from './styles';
 
@@ -21,7 +21,7 @@ class Child3 extends Base {
   }
   componentWillUnmount() {
   }
-  _renderRow = ({ item, index }) => {
+  _renderRow = ({ item }) => {
     const { push } = this.props;
     return (
       <View>
@@ -30,31 +30,12 @@ class Child3 extends Base {
         </View>
         {
           item.map((item1, i) => (
-            <TFeedback
+            <BusinessList
+              data={item1}
               key={i}
-              content={
-                <View style={styles.goodsDetail2}>
-                  <CachedImage style={styles.exampleImg} source={{ uri: `${item1.imgUrl}?imageView2/1/w/120` }} />
-                  <View style={{ flex: 1, flexDirection: 'column' }}>
-                    <View style={{ flex: 1 }}>
-                      <Text style={styles.name}>{decodeURI(item1.nickName)}</Text>
-                      <View style={{ flexDirection: 'row', flex: 1 }}>
-                        <Text style={{ fontSize: 14, color: '#666' }}>认证信息: </Text>
-                        {
-                          item1.memberVerifs.map((item2, index2) => (
-                            <CachedImage
-                              style={styles.logoImg}
-                              key={index2}
-                              source={{ uri: `${item2.verifFieldLogo}?imageView2/1/w/18` }}
-                            />
-                          ))
-                        }
-                      </View>
-                    </View>
-                    <Text style={{ fontSize: 14, color: '#666' }}>地址: {item1.address}</Text>
-                  </View>
-                </View>}
-              onPress={() => { push({ key: item1.memberVerifs !== null && item1.memberVerifs !== '' && item1.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item1.memberId, name: decodeURI(item1.nickName) } }); }}
+              onPress={() => {
+                push({ key: item1.memberVerifs !== null && item1.memberVerifs !== '' && item1.memberVerifs.length > 0 ? 'StoreDetail' : 'MyInfo', params: { memberId: item1.memberId } });
+              }}
             />
           ))
         }

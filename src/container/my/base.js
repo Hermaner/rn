@@ -16,171 +16,103 @@ class MyBase extends React.Component {
     this.state = {
       firstList: [{
         id: '1',
+        icon: 'icon-follow',
         title: '我的关注',
         count: 0,
         push: '',
       }, {
         id: '1',
+        icon: 'icon-wodezuji',
         title: '我的足迹',
         count: 0,
         push: 'MyFootprint',
       }, {
         id: '1',
+        icon: 'icon-fangwenliuliang',
         title: '我的访客',
         count: 0,
         push: 'MyVisitor',
       }],
       soldInfoList: [{
         title: '全部',
+        icon: 'icon-baobei',
         type: '',
       }, {
         title: '待修改',
+        icon: 'icon-daifahuo',
         type: '1',
       }, {
         title: '待发货',
+        icon: 'icon-daishouhuo',
         type: '4',
       }, {
         title: '待退款',
+        icon: 'icon-daifukuan',
         type: '6',
       }],
-      list: [
-        ['', [{
-          id: '1',
+      roles: [
+        [{
           title: '发布的采购',
-          last: false,
-          isBorder: true,
-          isLast: false,
-          icnColor: '#64BD46',
+          imgUrl: require('../../assets/img/m1.png'),
           push: 'MyRelease',
-          isHaveBuy: false,
-          icn: 'icon-caigoudingdan',
         }, {
-          id: '1',
           title: '买到的货品',
-          last: true,
-          isBorder: false,
-          isLast: false,
-          icnColor: '#64BD46',
+          imgUrl: require('../../assets/img/m2.png'),
+          cur: false,
           push: 'MyBuyGoods',
-          isHaveBuy: false,
-          icn: 'icon-shangpin-tianchong',
-        }]], ['', [{
-          id: '1',
+        }],
+        [{
           title: '我的供应单',
-          last: false,
-          isBorder: true,
-          isLast: false,
-          icnColor: '#10B1F1',
+          imgUrl: require('../../assets/img/m3.png'),
           push: 'MySupply',
-          icn: 'icon-homepage',
         }, {
-          id: '1',
           title: '发出的报价',
-          last: false,
-          isBorder: false,
-          isLast: false,
-          icnColor: '#FC8521',
+          imgUrl: require('../../assets/img/m4.png'),
           push: 'MySendOffer',
-          icn: 'icon-zixun',
-        }]], ['其他', [{
-          id: '1',
+        }],
+      ],
+      list: [
+        {
           title: '账户中心',
-          last: true,
-          isLast: true,
-          icnColor: '#64BD46',
           push: 'MyAccount',
-          icn: 'icon-zhanghu',
+          icn: 'icon-zhanghuzhongxinbangqiachenggongicon',
         }, {
-          id: '1',
           title: '我要认证',
-          last: true,
-          isLast: true,
-          icnColor: '#10B1F1',
           push: 'Certification',
-          icn: 'icon-renzheng-tianchong',
+          icn: 'icon-authentication',
         }, {
-          id: '1',
           title: '个人信息',
-          last: true,
-          icnColor: '#FC8521',
-          isLast: true,
           push: 'MemberInfo',
-          icn: 'icon-homepage',
+          icn: 'icon-gerenxinxi',
         }, {
-          id: '1',
           title: '收货地址',
-          last: true,
-          icnColor: '#FC8521',
-          isLast: true,
           push: 'MyAddress',
-          icn: 'icon-4',
+          icn: 'icon-shouhuodizhi',
         }, {
-          id: '1',
           title: '我的主页',
-          last: true,
-          icnColor: '#64BD46',
-          isLast: true,
           push: 'MyInfo',
-          icn: 'icon-4',
+          icn: 'icon-wodezhuye-gongzuotai',
         }, {
-          id: '1',
           title: '我的收藏',
-          last: true,
-          icnColor: '#FC8521',
-          isLast: true,
           push: 'MyCollect',
-          icn: 'icon-shangpin-tianchong',
+          icn: 'icon-wodeshoucang',
         }, {
-          id: '1',
           title: '我的身份',
-          last: true,
-          icnColor: '#FC8521',
-          isLast: true,
           push: 'AdjectiveInfo',
-          icn: 'icon-wode',
+          icn: 'icon-identity',
         }, {
-          id: '1',
           title: '意见反馈',
-          last: true,
-          isLast: true,
-          icnColor: '#64BD46',
           push: 'AboutUs',
-          icn: 'icon-qunfengyijianfankui',
+          icn: 'icon-fankuijianyi',
         }, {
-          id: '1',
           title: '联系客服',
-          last: true,
-          icnColor: '#FC8521',
-          isLast: true,
           push: 'tel',
-          icn: 'icon-kefu',
+          icn: 'icon-lianxikefu',
         }, {
-          id: '1',
           title: '邀请好友',
-          last: true,
-          icnColor: '#64BD46',
-          isLast: true,
-          push: '',
-          icn: 'icon-renyuanxiaozu',
-        },
-        // {
-        //   id: '1',
-        //   title: '我的好友',
-        //   last: true,
-        //   icnColor: '#64BD46',
-        //   isLast: true,
-        //   push: 'MyFriend',
-        //   icn: 'icon-renyuanxiaozu',
-        // }, {
-        //   id: '1',
-        //   title: '通话记录',
-        //   last: true,
-        //   icnColor: '#64BD46',
-        //   isLast: true,
-        //   push: 'CallLog',
-        //   icn: 'icon-renyuanxiaozu',
-        // }
-        ]]],
+          push: 'share',
+          icn: 'icon-yaoqinghaoyou',
+        }],
       shares: [{
         label: '微信',
         icon: 'md-alarm',
@@ -210,13 +142,14 @@ class MyBase extends React.Component {
     };
   }
   getInit = () => {
-    this.setState({ memberId: global.memberId || '' }, this.getData);
+    this.getData();
   }
   getData = () => {
-    const { memberId, firstList, list } = this.state;
+    const { memberId, firstList, roles } = this.state;
     GetMemberInfoService({
       memberId,
     }).then((res) => {
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         UserSocket.changeData(res.data);
@@ -228,42 +161,40 @@ class MyBase extends React.Component {
         Toast.show(res.msg);
       }
     }).catch(() => {
-      this.sleek.toggle();
     });
-
     GetMemberSellOrderCountService({
       memberId,
     }).then((res) => {
+      // console.log(res);
       if (res.isSuccess) {
         UserSocket.changeCount(res.data);
       } else {
         Toast.show(res.msg);
       }
     }).catch(() => {
-      this.sleek.toggle();
     });
 
     GetMemberBuyOrderCountService({
       memberId,
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result.confirm !== '0' || result.pay !== '0' || result.receive !== '0') {
-          list[0][1][1].isHaveBuy = true;
+          roles[0][1].cur = true;
           this.setState({
-            list,
+            roles,
           });
         } else {
-          list[0][1][1].isHaveBuy = false;
+          roles[0][1].cur = false;
           this.setState({
-            list,
+            roles,
           });
         }
       } else {
         Toast.show(res.msg);
       }
     }).catch(() => {
-      this.sleek.toggle();
     });
 
     GetMemberFootCountsService({
@@ -278,7 +209,6 @@ class MyBase extends React.Component {
         Toast.show(res.msg);
       }
     }).catch(() => {
-      this.sleek.toggle();
     });
     this.setState({
       refresh: false,
@@ -289,7 +219,9 @@ class MyBase extends React.Component {
   }
   initData = () => {
     if (global.memberId) {
-      this.getInit();
+      this.setState({
+        memberId: global.memberId,
+      }, this.getInit);
     }
     this.emitMineUser = DeviceEventEmitter.addListener('emitUser', () => {
       this.emitUser();
@@ -307,19 +239,20 @@ class MyBase extends React.Component {
       ],
     );
   }
-  choseOne = (index, index2) => {
-    const { push } = this.props;
-    const { list } = this.state;
-    if (index === 2 && index2 === 8) {
+  goPage = (page) => {
+    this.props.push({ key: global.memberId ? page : 'User' });
+  }
+  goListPage = (page) => {
+    if (page === 'tel') {
       this.tellPhone();
       return;
     }
-    if (index === 2 && index2 === 9) {
+    if (page === 'share') {
       this.showModal();
       return;
     }
-    push({
-      key: UserSocket.userData.memberId ? list[index][1][index2].push : 'User',
+    this.props.push({
+      key: global.memberId ? page : 'User',
       params: {
         info: UserSocket.userData,
         name: decodeURI(UserSocket.userData.nickName),

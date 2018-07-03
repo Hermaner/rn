@@ -1,6 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, View, BackHandler, ScrollView, RefreshControl } from 'react-native';
-import { Container, Content, Icon, Text } from 'native-base';
+import { TouchableOpacity, View, BackHandler, ScrollView, RefreshControl, Image } from 'react-native';
+import { Container, Icon, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import { CachedImage } from 'react-native-img-cache';
 import { connect } from 'react-redux';
@@ -31,23 +31,29 @@ class My extends myBase {
     this.props.pop();
     return true;
   };
-  _renderBody() {
+  _renderTop() {
+    const {
+      memberId,
+      imgUrl,
+      nickName,
+      personVerifStatus,
+      personVerifs,
+      identityName,
+      followCounts,
+      visitorCounts,
+    } = UserSocket.userData;
     const { push } = this.props;
-    const { list, firstList, soldInfoList, myFootCounts } = this.state;
-    firstList[0].count = UserSocket.userData.followCounts || 0;
+    const { firstList, myFootCounts } = this.state;
+    firstList[0].count = followCounts || 0;
     firstList[1].count = myFootCounts || 0;
-    firstList[2].count = UserSocket.userData.visitorCounts || 0;
-    soldInfoList[1].count = UserSocket.countData.update;
-    soldInfoList[2].count = UserSocket.countData.send;
-    soldInfoList[3].count = UserSocket.countData.refund;
-    // console.log(UserSocket.userData)
+    firstList[2].count = visitorCounts || 0;
     return (
-      <View style={styles.pagebody}>
-        <View style={styles.headerBackground} />
+      <View style={styles.topView}>
+        <Image source={require('../../assets/img/topbg.png')} style={styles.headerBackground} />
         <View style={styles.accountMoney}>
           <TFeedback
             content={
-              <Icon style={[styles.textBackground, { fontSize: 26, color: '#fff', marginRight: 15 }]} name="text" />}
+              <Icon style={[styles.textBackground, { fontSize: 26, color: '#fff', marginRight: 5 }]} name="text" />}
             onPress={() => { push({ key: UserSocket.userData.memberId ? 'NotificationSystem' : 'User' }); }}
           />
           <TFeedback
@@ -60,49 +66,52 @@ class My extends myBase {
         </View>
         <View style={styles.firstBox}>
           {
-            UserSocket.userData.memberId ?
+            memberId ?
               <TouchableOpacity onPress={() => { push({ key: 'MemberInfo' }); }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10 }}>
                   <View style={styles.headerImgBox}>
                     <CachedImage
                       style={styles.userImg}
-                      source={{ uri: UserSocket.userData.imgUrl }}
+                      source={{ uri: imgUrl }}
                     />
                   </View>
-                  <View style={{ marginLeft: 10, paddingTop: 10 }}>
-                    <View>
-                      <Text style={{ backgroundColor: 'transparent', color: '#333', fontSize: 16, textAlign: 'left' }}>
-                        {decodeURI(UserSocket.userData.nickName)}
+                  <View style={{ flex: 1 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Text style={{ backgroundColor: 'transparent', color: '#fff', fontSize: 14 }}>
+                        {decodeURI(nickName)}
                       </Text>
                       {
-                        UserSocket.userData.personVerifStatus === '1' && UserSocket.userData.personVerifs &&
-                        <Text style={{ backgroundColor: 'transparent', color: '#999', fontSize: 14, marginTop: 4 }}>
-                          (真实姓名：{decodeURI(UserSocket.userData.personVerifs[0].realName)})
+                        personVerifStatus === '1' && personVerifs &&
+                        <Text style={{ backgroundColor: 'transparent', color: '#fff', fontSize: 12 }}>
+                          ({decodeURI(personVerifs[0].realName)})
                         </Text>
                       }
                     </View>
-                    <Text style={[styles.textBackground, styles.textSmall]}>
-                      {UserSocket.userData.identityName}
-                    </Text>
-                  </View>
-                  <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <Icon style={{ fontSize: 20, color: '#666' }} name="md-arrow-dropright" />
+                    {
+                      identityName &&
+                      <View style={{ flexDirection: 'row' }}>
+                        <View style={styles.idView}>
+                          <Iconfont
+                            style={{ fontSize: 14, color: '#fff' }}
+                            name="icon-yaoqinghaoyou"
+                          />
+                          <Text style={[styles.textBackground, styles.textSmall]}>
+                            {identityName}
+                          </Text>
+                        </View>
+                      </View>
+                    }
                   </View>
                 </View>
               </TouchableOpacity>
               :
               <TOpacity
-                style={{ flex: 1 }}
                 content={
-                  <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, paddingTop: 10 }}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', paddingLeft: 10 }}>
                     <View style={styles.headerImgBox}>
-                      <View style={styles.imgBox}>
-                        <CachedImage style={styles.userImg} source={require('../../assets/img/tx1.png')} />
-                      </View>
+                      <CachedImage style={styles.userImg} source={require('../../assets/img/tx1.png')} />
                     </View>
-                    <View style={{ marginLeft: 10, paddingTop: 10 }}>
-                      <Text style={styles.userText}>立即登录</Text>
-                    </View>
+                    <Text style={styles.userText}>立即登录</Text>
                   </View>
                 }
                 onPress={() => push({ key: 'User' })}
@@ -114,132 +123,144 @@ class My extends myBase {
                 <TFeedback
                   key={index}
                   content={
-                    <View style={{ flex: 1 }}>
-                      {
-                        index === 1 ?
-                          <Text style={[styles.firstBottomCount]}>{UserSocket.userData.memberId ? item.count : '0'}</Text>
-                        :
-                          <Text style={[styles.firstBottomCount]}>{item.count}</Text>
-                      }
-                      <Text style={styles.firstBottomLabel}>{item.title}</Text>
+                    <View style={styles.topMlist}>
+                      <Iconfont
+                        style={styles.topMlistIcon}
+                        name={item.icon}
+                      />
+                      <Text style={styles.topMlistText}>{item.title}</Text>
+                      <Text style={[styles.topMlistCount]}>{item.count}</Text>
                     </View>}
                   onPress={() => {
                     push({
-                      key: UserSocket.userData.memberId ? item.push : 'User', params: { info: UserSocket.userData, name: decodeURI(UserSocket.userData.nickName) } });
+                      key: UserSocket.userData.memberId ? item.push : 'User', params: { info: UserSocket.userData, name: decodeURI(nickName) } });
                   }}
                 />
               ))
             }
           </View>
         </View>
-        <View>
-          <View style={styles.soldList}>
-            <Text style={{ fontSize: 16, color: '#666' }}>卖出的货品</Text>
-            <TFeedback
-              content={
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <Text style={{ fontSize: 12, color: '#666', marginRight: 10 }}>全部信息</Text>
-                  <Icon style={{ fontSize: 20, color: '#666' }} name="md-arrow-dropright" />
-                </View>}
-              onPress={() => { push({ key: UserSocket.userData.memberId ? 'MySoldGoods' : 'User', params: { initialPage: 0 } }); }}
+      </View>
+    );
+  }
+  renderSale() {
+    const { push } = this.props;
+    const { soldInfoList } = this.state;
+    const { update, send, refund } = UserSocket.countData;
+    soldInfoList[1].count = update ? parseInt(update, 10) : 0;
+    soldInfoList[2].count = update ? parseInt(send, 10) : 0;
+    soldInfoList[3].count = update ? parseInt(refund, 10) : 0;
+    return (
+      <View style={styles.saleView}>
+        <View style={styles.soldListRow}>
+          <View style={[styles.soldListRowOne, styles.saleTitle]}>
+            <Iconfont
+              style={styles.saleIcon}
+              name="icon-daifahuo"
             />
+            <Text style={styles.saleText}>卖出的货品</Text>
           </View>
-          <View style={styles.soldListRow}>
-            {
-              soldInfoList.map((item, index) => (
-                <TFeedback
-                  key={index}
-                  content={
-                    <View style={[styles.soldListRowOne]}>
-                      <View>
-                        <Iconfont
-                          style={{ fontSize: 28, color: '#666', textAlign: 'center', marginBottom: 4 }}
-                          name="icon-waimai"
-                        />
-                        {
-                          item.count &&
-                          item.count !== '' && item.count !== '0' && UserSocket.userData.memberId &&
-                          <View style={styles.displayCountBox}>
-                            <Text style={{ fontSize: 10, color: '#fff' }}>{item.count}</Text>
-                          </View>
-                        }
-                      </View>
-                      <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item.title}</Text>
-                    </View>}
-                  onPress={() => { push({ key: UserSocket.userData.memberId ? 'MySoldGoods' : 'User', params: { initialPage: index } }); }}
-                />
-              ))
-            }
-          </View>
+          {
+            soldInfoList.map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={[styles.soldListRowOne]}>
+                    <View>
+                      <Iconfont
+                        style={{ fontSize: 28, color: '#333', marginBottom: 4 }}
+                        name={item.icon}
+                      />
+                      {
+                        item.count > 0 && global.memberId &&
+                        <View style={styles.displayCountBox}>
+                          <Text style={{ fontSize: 10, color: '#fff' }}>{item.count}</Text>
+                        </View>
+                      }
+                    </View>
+                    <Text style={{ color: '#333', fontSize: 12 }}>{item.title}</Text>
+                  </View>}
+                onPress={() => { push({ key: UserSocket.userData.memberId ? 'MySoldGoods' : 'User', params: { initialPage: index } }); }}
+              />
+            ))
+          }
         </View>
+      </View>
+    );
+  }
+  renderRole() {
+    const { roles } = this.state;
+    return (
+      <View style={styles.rolesView}>
+        <View style={styles.rolesViewList}>
+          <View style={styles.rolesTitleView}>
+            <Iconfont
+              style={styles.roleIcon}
+              name="icon-maijiaxiu"
+            />
+            <Text style={styles.roleText}>我的买家</Text>
+          </View>
+          {
+            roles[0].map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={styles.rolesList}>
+                    <Image source={item.imgUrl} style={styles.rolesImage} />
+                    <Text style={styles.roleText}>{item.title}</Text>
+                    {
+                      item.cur && global.memberId &&
+                      <View style={styles.prompt} />
+                    }
+                  </View>}
+                onPress={() => { this.goPage(item.push); }}
+              />
+            ))
+          }
+        </View>
+        <View style={styles.rolesViewList}>
+          <View style={styles.rolesTitleView}>
+            <Iconfont
+              style={[styles.roleIcon, { color: '#1295EB' }]}
+              name="icon-maijiazhongxin"
+            />
+            <Text style={styles.roleText}>我的卖家</Text>
+          </View>
+          {
+            roles[1].map((item, index) => (
+              <TFeedback
+                key={index}
+                content={
+                  <View style={styles.rolesList}>
+                    <Image source={item.imgUrl} style={styles.rolesImage} />
+                    <Text style={styles.roleText}>{item.title}</Text>
+                  </View>}
+                onPress={() => { this.goPage(item.push); }}
+              />
+            ))
+          }
+        </View>
+      </View>
+    );
+  }
+  _renderList() {
+    const { list } = this.state;
+    return (
+      <View style={styles.lister}>
         {
           list.map((item, index) => (
-            <View style={styles.detailInfo} key={index}>
-              {
-                index === 0 &&
-                <View style={styles.mmDot}>
-                  <Text style={styles.mmDotText}>买</Text>
-                  <Text style={styles.mmDotText}>家</Text>
-                </View>
-              }
-              {
-                index === 1 &&
-                <View style={styles.mmDot}>
-                  <Text style={styles.mmDotText}>卖</Text>
-                  <Text style={styles.mmDotText}>家</Text>
-                </View>
-              }
-              <View style={styles.myBox}>
-                {
-                  item[1].map((item2, index2) => (
-                    <TFeedback
-                      key={index2}
-                      content={
-                        <View
-                          style={[item2.isLast ? styles.myWidth : styles.flexOne]}
-                        >
-                          {
-                            !item2.isLast ?
-                              <View style={styles.infoBox}>
-                                <View style={styles.aa}>
-                                  <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item2.title}</Text>
-                                  <View
-                                    style={[styles.icnBox, { backgroundColor: item2.icnColor }]}
-                                  >
-                                    <Iconfont
-                                      style={{ fontSize: 20, color: '#fff', textAlign: 'center' }}
-                                      name={item2.icn}
-                                    />
-                                  </View>
-                                  {
-                                    item2.isHaveBuy && UserSocket.userData.memberId &&
-                                    <View style={styles.prompt} />
-                                  }
-                                </View>
-                              </View>
-                            :
-                              <View style={styles.infoBox2}>
-                                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                  <View />
-                                  <View
-                                    style={[styles.icnBoxl, { backgroundColor: item2.icnColor }]}
-                                  >
-                                    <Iconfont
-                                      style={{ fontSize: 20, color: '#fff', textAlign: 'center' }}
-                                      name={item2.icn}
-                                    />
-                                  </View>
-                                </View>
-                                <Text style={{ color: '#666', fontSize: 14, textAlign: 'center' }}>{item2.title}</Text>
-                              </View>
-                          }
-                        </View>}
-                      onPress={() => { this.choseOne(index, index2); }}
-                    />
-                  ))
-                }
-              </View>
-            </View>
+            <TFeedback
+              key={index}
+              content={
+                <View style={styles.list}>
+                  <Iconfont
+                    style={styles.listIcon}
+                    name={item.icn}
+                  />
+                  <Text style={styles.listText}>{item.title}</Text>
+                </View>}
+              onPress={() => { this.goListPage(item.push); }}
+            />
           ))
         }
       </View>
@@ -292,11 +313,6 @@ class My extends myBase {
     const { refresh } = this.state;
     return (
       <Container>
-        {/* <Content>
-          {this._renderBody()}
-        </Content>
-        {this._renderModal()}
-        <Loading ref={(c) => { this.sleek = c; }} /> */}
         <ScrollView
           style={{ flex: 1 }}
           refreshControl={
@@ -312,7 +328,10 @@ class My extends myBase {
           }
           scrollEventThrottle={50}
         >
-          {this._renderBody()}
+          {this._renderTop()}
+          {this.renderSale()}
+          {this.renderRole()}
+          {this._renderList()}
         </ScrollView>
         {this._renderModal()}
         <Loading ref={(c) => { this.sleek = c; }} />

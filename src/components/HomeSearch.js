@@ -7,6 +7,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../actions';
 import { Mcolor, st } from '../utils';
 import TFeedback from './TFeedback';
+import Iconfont from './Iconfont';
 
 const styles = StyleSheet.create({
   header: {
@@ -77,7 +78,7 @@ const headerBar = ({ push, label, image }) => (
       <CachedImage style={styles.headerImg} source={image.length > 0 ? { uri: image } : require('../assets/img/x8.png')} />
     }
     <View style={styles.left}>
-      <Icon name="ios-arrow-down-outline" style={styles.leftIcon} />
+      <Iconfont style={styles.leftIcon} name="icon-shouhuodizhi" />
       <Text style={styles.leftText}>{label}</Text>
     </View>
     <TFeedback

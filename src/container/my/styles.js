@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st, px, spx, Mcolor } from '../../utils';
+import { st, px, Mcolor, Bcolor3, deviceW } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -10,18 +10,20 @@ const styles = StyleSheet.create({
     ...st.jcenter,
   },
   userText: {
-    fontSize: 18,
-    color: '#333',
+    fontSize: 14,
+    color: '#fff',
     backgroundColor: 'transparent',
   },
   noText: {
     color: 'transparent',
   },
+  topView: {
+    height: 175,
+  },
   headerBackground: {
     flex: 1,
-    height: spx(140),
-    backgroundColor: Mcolor,
-    flexDirection: 'row',
+    width: deviceW,
+    height: 175,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -34,14 +36,8 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
   firstBox: {
-    flex: 1,
-    height: 160,
     marginLeft: 10,
     marginRight: 10,
-    borderWidth: 1,
-    borderColor: '#eee',
-    backgroundColor: '#fff',
-    borderRadius: 5,
   },
   backGroundImg: {
     width: '100%',
@@ -50,13 +46,33 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   firstBottom: {
+    height: 30,
+    ...st.frcenter,
+    paddingTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  topMlist: {
+    ...st.frcenter,
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 20,
-    left: 10,
+  },
+  topMlistIcon: {
+    fontSize: 14,
+    color: '#fff',
+    marginRight: 5,
+    backgroundColor: 'transparent',
+  },
+  topMlistText: {
+    fontSize: 12,
+    color: '#fff',
+    backgroundColor: 'transparent',
+  },
+  topMlistCount: {
+    fontSize: 14,
+    marginLeft: 4,
+    fontWeight: 'bold',
+    color: '#fff',
+    backgroundColor: 'transparent',
   },
   firstBottomCount: {
     textAlign: 'center',
@@ -88,7 +104,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginTop: 30,
-    marginBottom: 10,
   },
   textBackground: {
     backgroundColor: 'transparent',
@@ -96,9 +111,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   textSmall: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'left',
+    fontSize: 12,
+    color: '#fff',
   },
   textMoney: {
     fontSize: px(22),
@@ -129,9 +143,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerImgBox: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10,
   },
   imgBox: {
     width: 80,
@@ -156,10 +171,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#666',
   },
   userImg: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginRight: 15,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10,
   },
   myIdentity: {
     paddingTop: 15,
@@ -197,8 +212,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
   },
   border: {
     borderRightWidth: 1,
@@ -252,21 +265,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 18,
     top: -4,
-    height: 20,
+    height: 18,
     ...st.jacenter,
     borderRadius: 10,
-    backgroundColor: Mcolor,
-    paddingLeft: 6,
-    paddingRight: 6,
+    backgroundColor: '#ff0000',
+    paddingLeft: 5,
+    paddingRight: 5,
   },
   prompt: {
-    width: 10,
-    height: 10,
+    width: 8,
+    height: 8,
     borderRadius: 5,
-    backgroundColor: Mcolor,
+    backgroundColor: '#ff0000',
     position: 'absolute',
-    right: 0,
-    top: 15,
+    right: 10,
+    top: 10,
   },
   myBox: {
     borderTopWidth: 1,
@@ -289,6 +302,93 @@ const styles = StyleSheet.create({
   mmDotText: {
     color: '#fff',
     fontSize: 13,
+  },
+  idView: {
+    backgroundColor: Bcolor3,
+    paddingLeft: 5,
+    paddingRight: 5,
+    height: 20,
+    ...st.fr,
+    ...st.acenter,
+    marginTop: 6,
+    borderRadius: 10,
+  },
+  saleView: {
+    margin: 10,
+    backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  saleTitle: {
+    borderRightColor: '#ddd',
+    borderRightWidth: 1,
+    paddingRight: 10,
+    paddingLeft: 5,
+  },
+  saleIcon: {
+    fontSize: 28, color: Bcolor3, marginBottom: 4,
+  },
+  saleText: {
+    color: Bcolor3, fontSize: 12,
+  },
+  rolesView: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    ...st.fr,
+    justifyContent: 'space-between',
+  },
+  rolesViewList: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    marginLeft: 5,
+    marginRight: 5,
+    overflow: 'hidden',
+  },
+  rolesTitleView: {
+    height: 40,
+    ...st.frcenter,
+    borderBottomColor: '#ddd',
+    borderBottomWidth: 1,
+  },
+  roleIcon: {
+    fontSize: 18,
+    color: '#FC5E00',
+    marginRight: 4,
+  },
+  roleText: {
+    fontSize: 14,
+    color: '#333',
+  },
+  rolesList: {
+    height: 50,
+    ...st.frcenter,
+  },
+  rolesImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 10,
+  },
+  lister: {
+    margin: 10,
+    backgroundColor: '#fff',
+    ...st.fr,
+    flexWrap: 'wrap',
+  },
+  list: {
+    width: '25%',
+    height: 70,
+    ...st.jacenter,
+  },
+  listIcon: {
+    fontSize: 24,
+    color: Mcolor,
+    marginBottom: 6,
+  },
+  listText: {
+    fontSize: 12,
+    color: '#333',
   },
 });
 export default styles;

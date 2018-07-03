@@ -316,12 +316,12 @@ const styles = StyleSheet.create({
     ...st.jacenter,
   },
   fotChatIcon: {
-    color: '#333',
+    color: '#555',
     fontSize: 18,
   },
   fotChatText: {
-    color: '#666',
-    fontSize: 14,
+    color: '#333',
+    fontSize: 13,
   },
   fotBtn2: {
     flex: 1,

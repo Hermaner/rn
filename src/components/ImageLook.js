@@ -9,7 +9,7 @@ import {
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { CachedImage } from 'react-native-img-cache';
 import PropTypes from 'prop-types';
-import { st, deviceW } from '../utils';
+import { st } from '../utils';
 
 const styles = StyleSheet.create({
   imagesView: {
@@ -20,16 +20,18 @@ const styles = StyleSheet.create({
   },
   imageListView: {
     position: 'relative',
+    marginLeft: 10,
+    ...st.acenter,
   },
   imageList: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
   },
   cachedView: {
     marginTop: 10,
-    marginLeft: 10,
-    width: 60,
-    height: 60,
+    width: 80,
+    marginBottom: 8,
+    height: 80,
   },
 });
 export default class ImageLook extends React.Component {

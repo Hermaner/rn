@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     height: 100,
     ...st.frcenter,
   },
+  titleViewIcon: {
+    fontSize: 22,
+    marginRight: 6,
+    color: Bcolor,
+  },
   headerNavigationText: {
     fontSize: 13,
     color: '#333',

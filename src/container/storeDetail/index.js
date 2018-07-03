@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Container, Text, Icon, Footer } from 'native-base';
 import { connect } from 'react-redux';
 import { popRoute, pushRoute } from '../../actions';
-import { Header, TFeedback, MyModalView, Loading, LoadMore, LoadNoMore, ImageLook, TOpacity, ModalCall } from '../../components';
+import { Header, TFeedback, MyModalView, Loading, LoadMore, LoadNoMore, ImageLook, TOpacity, ModalCall, Iconfont } from '../../components';
 import base from './base';
 import { Mred } from '../../utils';
 import styles from './styles';
@@ -128,8 +128,8 @@ class MainScreen extends base {
               {
                 userInfo.memberVerifs ?
                 userInfo.memberVerifs.map((item, index) => (
-                  <View style={styles.ptlList} key={index}>
-                    <Icon name="checkmark" style={styles.ptlIcon} />
+                  <View key={index} style={[styles.ptlList, { borderColor: '#ddd' }]}>
+                    <Iconfont style={styles.ckIcon} name="icon-shimingrenzheng" />
                     <Text style={styles.ptlText}>{item.verifFieldName}</Text>
                   </View>
                 ))
@@ -351,7 +351,7 @@ class MainScreen extends base {
   _renderFooter() {
     const { isFollow, userInfo } = this.state;
     return (
-      <Footer>
+      <Footer style={styles.footer}>
         <TFeedback
           content={
             <View style={styles.fotBtn1}>
@@ -365,20 +365,22 @@ class MainScreen extends base {
             </View>}
           onPress={() => { this.CreateMemberFollowService(); }}
         />
-        <TFeedback
-          content={
-            <View style={styles.fotBtn2}>
-              <Text style={styles.fotText}>聊生意</Text>
-            </View>}
-          onPress={this.goChat}
-        />
-        <TFeedback
-          content={
-            <View style={styles.fotBtn3}>
-              <Text style={styles.fotText}>打电话</Text>
-            </View>}
-          onPress={() => this.ModalCall.show(userInfo.phone, userInfo.memberId)}
-        />
+        <View style={styles.btnView}>
+          <TFeedback
+            content={
+              <View style={styles.fotBtn2}>
+                <Text style={styles.fotText}>聊生意</Text>
+              </View>}
+            onPress={this.goChat}
+          />
+          <TFeedback
+            content={
+              <View style={styles.fotBtn3}>
+                <Text style={styles.fotText}>打电话</Text>
+              </View>}
+            onPress={() => this.ModalCall.show(userInfo.phone, userInfo.memberId)}
+          />
+        </View>
       </Footer>
     );
   }

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
-import { Mred, ColorList } from '../utils';
+import { Mred, st } from '../utils';
+import Iconfont from './Iconfont';
 
 const styles = StyleSheet.create({
   list: {
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
   img: {
     width: 80,
     height: 80,
+    borderRadius: 40,
   },
   right: {
     flex: 1,
@@ -84,6 +86,21 @@ const styles = StyleSheet.create({
   imgBox: {
     width: 80,
     marginRight: 8,
+    borderRadius: 40,
+  },
+  aaBox: {
+    marginRight: 6,
+    ...st.fr,
+    ...st.acenter,
+  },
+  aa: {
+    color: '#666',
+    fontSize: 12,
+  },
+  ckIcon: {
+    fontSize: 18,
+    marginRight: 2,
+    color: '#5CBE74',
   },
 });
 
@@ -103,20 +120,17 @@ const BusinessList = ({ onPress, data }) => (
           {data.provinceName}{data.cityName}{data.districtName}
         </Text>
         <View style={styles.iconView}>
-          {/* <View style={[styles.icon, styles.icon1]}>
-            <Text style={[styles.iconText, styles.iconText1]}>lllll</Text>
-          </View>
-          <View style={[styles.icon, styles.icon2]}>
-            <Text style={[styles.iconText, styles.iconText2]}>买家保障</Text>
-          </View>
-          <View style={[styles.icon, styles.icon3]}>
-            <Text style={[styles.iconText, styles.iconText3]}>实名</Text>
-          </View> */}
           {
             data.memberVerifs &&
             data.memberVerifs.map((item, index) => (
-              <View style={[styles.icon, { borderColor: ColorList[index > ColorList.length ? index % ColorList.length : index] }]} key={index}>
-                <Text style={[styles.iconText, styles.iconText1]}>{item.verifFieldName}</Text>
+              <View
+                style={styles.aaBox}
+                key={index}
+              >
+                <Iconfont style={styles.ckIcon} name="icon-shimingrenzheng" />
+                <Text style={styles.aa}>
+                  {item.verifFieldName}
+                </Text>
               </View>
             ))
           }

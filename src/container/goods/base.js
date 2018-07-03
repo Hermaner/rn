@@ -16,31 +16,31 @@ class Base extends React.Component {
       items: [],
       mainIcons: [{
         label: '发供应',
-        image: require('../../assets/img/x1.png'),
+        image: require('../../assets/img/g1.png'),
       }, {
         label: '采购大厅',
         image: require('../../assets/img/x2.png'),
       }, {
         label: '行情大厅',
-        image: require('../../assets/img/x3.png'),
+        image: require('../../assets/img/g3.png'),
       }, {
         label: '我的供应',
-        image: require('../../assets/img/x4.png'),
+        image: require('../../assets/img/g4.png'),
       }],
       secendList: [{
-        icon: 'icon-homepage',
+        image: require('../../assets/img/g5.png'),
         label: '实力商家',
         color: '#f4bc22',
       }, {
-        icon: 'icon-201',
+        image: require('../../assets/img/g6.png'),
         label: '优质采购商',
         color: '#51cd73',
       }, {
-        icon: 'icon-zizhutuiguang',
+        image: require('../../assets/img/g7.png'),
         label: '享免费推广',
         color: '#f85554',
       }, {
-        icon: 'icon-qunfengfuwushang',
+        image: require('../../assets/img/g8.png'),
         label: '产地服务商',
         color: '#6098f9',
         imgList: [],

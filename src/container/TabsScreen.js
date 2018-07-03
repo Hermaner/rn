@@ -7,6 +7,8 @@ import home from '../container/home';
 import goods from '../container/goods';
 import TabChat from './TabChat';
 import mine from '../container/my';
+import { Iconfont } from '../components';
+
 import { Mcolor } from '../utils';
 
 const styles = StyleSheet.create({
@@ -45,19 +47,19 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         let name;
         switch (routeName) {
           case 'Home':
-            iconName = 'md-cloud-download';
+            iconName = 'icon-baoguofahuo';
             name = '我要买';
             break;
           case 'Goods':
-            iconName = 'md-cloud-upload';
+            iconName = 'icon-peizaizhuangche';
             name = '我要卖';
             break;
           case 'Carts':
-            iconName = 'ios-chatbubbles';
+            iconName = 'icon-liaotianduihua';
             name = '聊生意';
             break;
           case 'Mine':
-            iconName = 'ios-person';
+            iconName = 'icon-yonghu';
             name = '我的';
             break;
           default:
@@ -65,7 +67,7 @@ const TabsScreen = (navigationOptions = {}) => TabNavigator(
         }
         return (
           <View style={styles.tabView}>
-            <Icon style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
+            <Iconfont style={[styles.tabViewIcon, { color: focused ? Mcolor : '#666' }]} name={iconName} />
             <Text style={[styles.tabViewText, { color: focused ? Mcolor : '#666' }]}>{name}</Text>
           </View>
         );

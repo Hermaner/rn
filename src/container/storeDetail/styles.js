@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { deviceW, st, Mred, Mcolor } from '../../utils';
+import { deviceW, st, Mred, Mcolor, Bcolor2, Bcolor3 } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -198,8 +198,17 @@ const styles = StyleSheet.create({
   },
   fotBtn2: {
     flex: 1,
-    backgroundColor: Mcolor,
+    backgroundColor: Bcolor2,
     ...st.jacenter,
+  },
+  btnView: {
+    flex: 1,
+    height: 40,
+    marginRight: 10,
+    marginLeft: 10,
+    overflow: 'hidden',
+    borderRadius: 20,
+    ...st.fr,
   },
   fotText: {
     color: '#fff',
@@ -207,7 +216,7 @@ const styles = StyleSheet.create({
   },
   fotBtn3: {
     flex: 1,
-    backgroundColor: Mred,
+    backgroundColor: Bcolor3,
     ...st.jacenter,
   },
   detialView: {
@@ -502,6 +511,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Mcolor,
     textAlign: 'center',
+  },
+  footer: {
+    backgroundColor: '#fff',
+    ...st.frcenter,
+  },
+  ckIcon: {
+    fontSize: 18,
+    marginRight: 2,
+    color: '#5CBE74',
   },
 });
 export default styles;

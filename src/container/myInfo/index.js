@@ -6,7 +6,7 @@ import { CachedImage } from 'react-native-img-cache';
 import { connect } from 'react-redux';
 import { observer } from 'mobx-react/native';
 import { pushRoute, popRoute } from '../../actions';
-import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore, Loading, ModalCall } from '../../components';
+import { Header, MyModalView, TFeedback, LoadMore, LoadNoMore, Loading, ModalCall, Iconfont } from '../../components';
 import base from './base';
 import styles from './styles';
 import Child1 from './child1';
@@ -64,7 +64,7 @@ class MyInfo extends base {
                       info.memberVerifs.length > 0 ?
                       info.memberVerifs.map((item, index) => (
                         <View style={styles.accreditationBox} key={index}>
-                          <Icon style={{ fontSize: 24, color: '#8ECD24' }} name="checkmark" />
+                          <Iconfont style={styles.ckIcon} name="icon-shimingrenzheng" />
                           <Text style={styles.accreditationText}>{item.verifFieldName}</Text>
                         </View>
                       ))

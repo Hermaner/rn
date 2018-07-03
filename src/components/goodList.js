@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'native-base';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import { Mred, Fcolor, st } from '../utils';
+import Iconfont from './Iconfont';
 
 const styles = StyleSheet.create({
   list: {
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   ckIcon: {
     fontSize: 18,
-    marginRight: 3,
+    marginRight: 2,
     color: '#5CBE74',
   },
 });
@@ -142,7 +142,7 @@ const GoodList = ({ onPress, data }) => (
                 style={styles.aaBox}
                 key={index3}
               >
-                <Icon name="ios-checkmark-circle" style={styles.ckIcon} />
+                <Iconfont style={styles.ckIcon} name="icon-shimingrenzheng" />
                 <Text style={styles.aa}>
                   {item3.verifFieldName}
                 </Text>

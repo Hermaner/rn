@@ -53,13 +53,12 @@ const styles = StyleSheet.create({
   name: {
     color: '#333',
     fontSize: 14,
-    marginBottom: 10,
+    marginBottom: 4,
   },
   nameReal: {
-    marginTop: 4,
     color: '#999',
     fontSize: 14,
-    marginBottom: 10,
+    marginBottom: 4,
   },
   aa: {
     color: '#666',
@@ -328,6 +327,11 @@ const styles = StyleSheet.create({
   },
   tabTextChoose: {
     color: Mcolor,
+  },
+  ckIcon: {
+    fontSize: 18,
+    marginRight: 2,
+    color: '#5CBE74',
   },
 });
 export default styles;

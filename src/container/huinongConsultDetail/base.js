@@ -93,7 +93,8 @@ class Base extends React.Component {
     });
   }
   CreateNewsCommentService= () => {
-    const { label, newsId, memberId } = this.state;
+    const { label, newsId } = this.state;
+    const { memberId } = UserSocket.userData;
     this.sleek.toggle();
     CreateNewsCommentService({
       newsId,
@@ -113,14 +114,20 @@ class Base extends React.Component {
   }
   writeThink = () => {
     const { push } = this.props;
-    if (!UserSocket.userData.memberId) {
+    const { memberId } = UserSocket.userData;
+    if (!memberId) {
       push({ key: 'User' });
       return;
     }
     this.setState({ visible: true });
   }
   CreateCommentPraiseService = (newsCommentId) => {
-    const { memberId, newsInfo } = this.state;
+    const { newsInfo } = this.state;
+    const { memberId } = UserSocket.userData;
+    if (!memberId) {
+      this.props.push({ key: 'User' });
+      return;
+    }
     if (newsInfo.newsComments.length > 0) {
       for (let i = 0; i < newsInfo.newsComments.length; i += 1) {
         if (newsCommentId === newsInfo.newsComments[i].newsCommentId) {
@@ -155,8 +162,9 @@ class Base extends React.Component {
   }
   CreateNewsPraiseService = (newsId) => {
     const { push } = this.props;
-    const { memberId, newsInfo } = this.state;
-    if (!UserSocket.userData.memberId) {
+    const { newsInfo } = this.state;
+    const { memberId } = UserSocket.userData;
+    if (!memberId) {
       push({ key: 'User' });
       return;
     }

@@ -72,7 +72,7 @@ class Goods extends base {
     return (
       <View style={[styles.goodsType, styles.marginView]}>
         <View style={styles.titleView}>
-          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Iconfont style={styles.titleViewIcon} name="icon-youzhi" />
           <Text style={styles.titleText}>优质推选</Text>
         </View>
         <View style={[styles.flexRow, styles.headerNavigationTwo]}>
@@ -83,9 +83,7 @@ class Goods extends base {
                 key={index}
                 content={
                   <View style={[styles.flexOne, { justifyContent: 'center', alignItems: 'center' }]}>
-                    <View style={[styles.mainIconTwo, { backgroundColor: item.color }]}>
-                      <Iconfont style={styles.mainIconFontSecend} name={item.icon} />
-                    </View>
+                    <CachedImage style={styles.navsImg} source={item.image} />
                     <Text style={[styles.headerNavigationText, styles.textCenter]}>
                       {item.label}
                     </Text>
@@ -105,7 +103,7 @@ class Goods extends base {
     return (
       <View style={[styles.studyRow, styles.marginView]}>
         <View style={styles.titleView}>
-          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Iconfont style={styles.titleViewIcon} name="icon-zixun" />
           <Text style={styles.titleText}>每日新闻</Text>
         </View>
         {
@@ -138,7 +136,7 @@ class Goods extends base {
     return (
       <View style={[styles.studyRow, styles.marginView]}>
         <View style={styles.titleView}>
-          <Iconfont style={styles.titleViewIcon} name="icon-homepage" />
+          <Iconfont style={styles.titleViewIcon} name="icon-xiaoxi1" />
           <Text style={styles.titleText}>每日技能</Text>
         </View>
         <View>
@@ -200,7 +198,7 @@ class Goods extends base {
     return (
       <View style={styles.forYou}>
         <View style={styles.forTitleView}>
-          <CachedImage style={styles.forTitleImg} source={require('../../assets/img/x8.png')} /><Text style={styles.forTitle}>为您推荐</Text>
+          <Iconfont style={styles.titleViewIcon} name="icon-peizaizhuangche" /><Text style={styles.forTitle}>为您推荐</Text>
         </View>
         <Child data={items} />
       </View>
@@ -212,6 +210,7 @@ class Goods extends base {
       loading,
       nomore,
       backgroundTopImg,
+      threeNewsList,
     } = this.state;
     const { localData: { districtName } } = UserSocket;
     return (
@@ -239,7 +238,7 @@ class Goods extends base {
           />
           {this.renderHeaderNavigation()}
           {this.renderSecend()}
-          {this.renderNews()}
+          {threeNewsList.length > 0 && this.renderNews()}
           {this.renderHuiNongStudy()}
           {this.renderSwiper()}
           {this.renderAllGoods()}
