@@ -1,14 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { OptimizedFlatList } from 'react-native-optimized-flatlist';
-import { CachedImage } from 'react-native-img-cache';
-import { Icon } from 'native-base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { pushRoute } from '../../actions';
-import { TFeedback, NoData, Loading, GoodList } from '../../components';
+import { NoData, Loading, GoodList } from '../../components';
 import Base from './base';
-import { ColorList } from '../../utils';
 import styles from './styles';
 
 class Child2 extends Base {
@@ -25,7 +22,6 @@ class Child2 extends Base {
   }
   _renderRow = ({ item }) => {
     const { push } = this.props;
-    const { tu } = this.state;
     return (
       <View>
         <View style={styles.buyTime}>
