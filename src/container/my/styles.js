@@ -243,8 +243,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   shareIcon: {
-    fontSize: 20,
+    fontSize: 40,
     color: '#fff',
+    marginBottom: 6,
   },
   shareText: {
     fontSize: 12,

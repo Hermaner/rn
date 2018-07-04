@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
   },
+  listOp: {
+    flex: 1,
+    ...st.jcenter,
+    height: 50,
+  },
   storeRowBox: {
     borderBottomWidth: 1,
     borderBottomColor: '#eee',

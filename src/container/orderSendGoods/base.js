@@ -94,7 +94,6 @@ class Base extends React.Component {
     }
   }
   CreateDeliverOrderService = () => {
-    const { push } = this.props;
     const { deliverOrderNumber, optionType, logisticsType, frontImgUrl, orderInfo } = this.state;
     const imgArray = [];
     for (let i = 0; i < frontImgUrl.length; i += 1) {

@@ -30,9 +30,6 @@ class App extends React.Component {
     if (Platform.OS === 'android') {
       JPushModule.notifyJSDidLoad(() => {});
       JPushModule.addReceiveNotificationListener(() => {
-        // DeviceEventEmitter.emit('pushHome', {
-        //   key: 'NotificationSystem',
-        // });
       });
       JPushModule.addReceiveOpenNotificationListener((map) => {
         const { type } = JSON.parse(map.extras);
@@ -48,25 +45,12 @@ class App extends React.Component {
         });
       });
     } else {
-      JPushModule.setLocalNotification(234341234242424243, '2342342342342432423', 5, 'dfsa', 'dfaas', null, null);
-      NativeAppEventEmitter.addListener('networkDidSetup', () => {
-        // console.log(token);
-      });
-      NativeAppEventEmitter.addListener('networkDidClose', () => {
-        // console.log(token);
-      });
-      NativeAppEventEmitter.addListener('networkDidRegister', () => {
-        // console.log(token);
-      });
       NativeAppEventEmitter.addListener('networkDidLogin', () => {
         JPushModule.getRegistrationID((registrationId) => {
           if (registrationId) {
             global.registration = registrationId;
           }
         });
-      });
-      NativeAppEventEmitter.addListener('ReceiveNotification', () => {
-        // console.log(notification)
       });
     }
     JPushModule.getRegistrationID((registrationId) => {

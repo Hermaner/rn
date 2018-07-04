@@ -313,7 +313,7 @@ class UserBase extends React.Component {
     AccessWinXinLoginService({
       code,
       phoneType: Platform.OS === 'ios' ? '2' : '1',
-      registration: global.registration || '',
+      registration: global.registration || 'noPermiss',
     }).then((res) => {
       this.sleek.toggle();
       if (res.isSuccess) {

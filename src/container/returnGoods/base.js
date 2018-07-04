@@ -141,7 +141,6 @@ class Base extends React.Component {
 }
 Base.propTypes = {
   navigation: PropTypes.object,
-  push: PropTypes.func,
   pop: PropTypes.func,
 };
 export default Base;

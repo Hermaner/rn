@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { st } from '../../utils';
+import { st, Mcolor } from '../../utils';
 
 const styles = StyleSheet.create({
   ...st,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   text7: {
-    color: '#FC801B',
+    color: '#ff0000',
   },
   boderOne: {
     flex: 1,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   leftBtn: {
-    backgroundColor: '#FE8822',
+    backgroundColor: Mcolor,
   },
   rightBtn: {
     backgroundColor: '#16B6F6',

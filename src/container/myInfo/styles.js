@@ -21,28 +21,27 @@ const styles = StyleSheet.create({
     height: 70,
   },
   fotBtn1: {
-    flex: 0.5,
-    backgroundColor: '#fff',
+    width: 50,
     ...st.jacenter,
   },
   fotChatIcon: {
     color: '#666',
-    marginRight: 8,
-    fontSize: 14,
+    fontSize: 20,
   },
   fotChatText: {
     color: '#666',
-    fontSize: 14,
+    fontSize: 12,
   },
   fotChatText1: {
-    color: Mred,
-    fontSize: 14,
+    color: '#ff0000',
+    fontSize: 12,
   },
   topIcon1: {
     color: Mred,
   },
   fotBtn2: {
     flex: 1,
+    marginLeft: 50,
     backgroundColor: Mcolor,
     ...st.jacenter,
   },
@@ -332,6 +331,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginRight: 2,
     color: '#5CBE74',
+  },
+  footer: {
+    backgroundColor: '#fff',
+    ...st.fr,
   },
 });
 export default styles;

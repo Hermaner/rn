@@ -184,6 +184,7 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '2',
     }).then((res) => {
+      console.log(res);
       if (res.isSuccess) {
         const imgList = res.data;
         if (res.map.backgroundTopImg) {

@@ -47,7 +47,7 @@ class MainScreen extends base {
         <View style={styles.toplogo}>
           <CachedImage source={{ uri: `${userInfo.imgUrl}?imageView2/1/w/60` }} style={styles.mainLogo} />
         </View>
-        <TFeedback
+        {/* <TFeedback
           content={
             <View style={styles.topBtn}>
               {
@@ -64,7 +64,7 @@ class MainScreen extends base {
               }
             </View>}
           onPress={() => { this.CreateMemberFollowService(); }}
-        />
+        /> */}
       </View>
     );
   }
@@ -355,7 +355,7 @@ class MainScreen extends base {
         <TFeedback
           content={
             <View style={styles.fotBtn1}>
-              <Icon name="heart" style={[styles.fotChatIcon, isFollow ? styles.topIcon1 : '']} />
+              <Iconfont style={[styles.fotChatIcon, isFollow ? styles.topIcon1 : '']} name="icon-wodeshoucang" />
               {
                 isFollow ?
                   <Text style={styles.topText}>已关注</Text>
@@ -403,19 +403,6 @@ class MainScreen extends base {
           userInfo &&
           <ScrollView
             style={{ flex: 1 }}
-            refreshControl={
-              <RefreshControl
-                refreshing={refresh}
-                onRefresh={this._onRefresh}
-                tintColor="#666"
-                title="加载中..."
-                titleColor="#333"
-                colors={['#666', '#666', '#666']}
-                progressBackgroundColor="#ffffff"
-              />
-            }
-            onScroll={this._onScroll}
-            scrollEventThrottle={50}
           >
             {this._renderTop()}
             {this._renderNameAP()}

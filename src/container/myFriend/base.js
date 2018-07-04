@@ -1,5 +1,4 @@
 import React from 'react';
-import { DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 
 class Base extends React.Component {

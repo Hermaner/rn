@@ -82,7 +82,7 @@ class HomeScreen extends base {
                     <View
                       style={styles.icnBoxTwo}
                     >
-                      <CachedImage style={styles.icnBoxImg} source={{ uri: item.imgUrl || 'https://avatars0.githubusercontent.com/u/12965639?s=40&v=4' }} />
+                      <CachedImage style={styles.icnBoxImg} source={item.imgUrl ? { uri: item.imgUrl } : require('../../assets/img/x9.png')} />
                     </View>
                     <Text numberOfLines={1} style={[styles.goodsTypeText, styles.textCenter]}>
                       {item.name}</Text>

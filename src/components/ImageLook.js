@@ -43,7 +43,6 @@ export default class ImageLook extends React.Component {
     super(props);
     const images = [];
     props.images.forEach((item) => {
-      console.log(item);
       images.push({ uri: `${item.imgUrl}?imageView2/1/w/200`, imgUrl: item.imgUrl, name: item.name });
     });
     this.state = {
@@ -59,7 +58,6 @@ export default class ImageLook extends React.Component {
     const { images } = this.state;
     const imageViewData = [];
     images.forEach(item => imageViewData.push({ url: item.imgUrl }));
-    console.log(imageViewData);
     this.setState({
       imageDateIndex,
       isImageDateShow: true,

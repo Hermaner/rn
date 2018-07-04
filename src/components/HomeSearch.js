@@ -5,7 +5,7 @@ import { Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../actions';
-import { Mcolor, st } from '../utils';
+import { Mcolor, st, deviceW } from '../utils';
 import TFeedback from './TFeedback';
 import Iconfont from './Iconfont';
 
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent',
     ...st.fr,
-    height: 200,
+    height: deviceW * 0.6,
     position: 'relative',
   },
   headerImg: {
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 200,
+    resizeMode: 'contain',
+    height: deviceW * 0.6,
   },
   HeaderMain: {
     flex: 1,

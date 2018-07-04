@@ -18,7 +18,6 @@ class Base extends React.Component {
     GetMemberByNickNameOrPhone({
       criteria: userInfo,
     }).then((res) => {
-      // console.log('11111111111', res)
       if (res.isSuccess) {
         const result = res.data;
         this.setState({

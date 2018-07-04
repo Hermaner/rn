@@ -287,9 +287,10 @@ class My extends myBase {
                   style={styles.shareList}
                   content={
                     <View key={index} style={styles.shareList}>
-                      <View style={[styles.shareTop, { backgroundColor: item.color }]}>
-                        <Icon name={item.icon} style={styles.shareIcon} />
-                      </View>
+                      <Iconfont
+                        name={item.icon}
+                        style={[styles.shareIcon, { color: item.color }]}
+                      />
                       <Text style={styles.shareText}>{item.label}</Text>
                     </View>
                   }

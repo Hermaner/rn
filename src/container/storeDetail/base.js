@@ -125,22 +125,31 @@ class Base extends React.Component {
     }).then((res) => {
       if (res.isSuccess) {
         const result = res.data;
-        if (result.memberVerifs !== '' && result.memberVerifs !== null && result.memberVerifs.length > 0) {
-          for (let i = 0; i < result.memberVerifs.length; i += 1) {
-            if (result.memberVerifs[i].verifFieldId === '6') {
-              result.memoText = result.memberVerifs[i].memo;
+        const { memberVerifs, entVerifs, realRegionVerifs } = result;
+        if (memberVerifs && memberVerifs.length > 0) {
+          for (let i = 0; i < memberVerifs.length; i += 1) {
+            if (memberVerifs[i].verifFieldId === '6') {
+              result.memoText = memberVerifs[i].memo;
             }
           }
         } else {
           result.memoText = '';
         }
-        if (result.entVerifs && result.entVerifs.length > 0) {
-          renzhengInfo[1] = result.entVerifs[0].entName;
-          renzhengInfo[3] = result.entVerifs[0].legalName;
-          renzhengInfo[5] = result.entVerifs[0].creditCode;
-          renzhengInfo[7] = result.entVerifs[0].licenseCode;
-          imageData[0].imgUrl = result.entVerifs[0].licenseImgUrl === null ? '' : result.entVerifs[0].licenseImgUrl;
-          imageData[1].imgUrl = result.entVerifs[0].organizationImgUrl === null ? '' : result.entVerifs[0].organizationImgUrl;
+        if (entVerifs && entVerifs.length > 0) {
+          const {
+            entName,
+            legalName,
+            creditCode,
+            licenseCode,
+            licenseImgUrl,
+            organizationImgUrl,
+          } = result.entVerifs[0];
+          renzhengInfo[1] = entName;
+          renzhengInfo[3] = legalName;
+          renzhengInfo[5] = creditCode;
+          renzhengInfo[7] = licenseCode;
+          imageData[0].imgUrl = licenseImgUrl || '';
+          imageData[1].imgUrl = organizationImgUrl || '';
           const myQYImgArray = [];
           for (let i = 0; i < imageData.length; i += 1) {
             if (imageData[i].imgUrl !== '') {
@@ -156,69 +165,47 @@ class Base extends React.Component {
             });
           }
         }
-        if (result.realRegionVerifs !== null) {
-          indeedInfo[1] = result.realRegionVerifs.verifIdentity || '--';
-          indeedInfo[3] = result.realRegionVerifs.category.name || '--';
-          indeedInfo[5] = result.realRegionVerifs.provinceName + result.realRegionVerifs.cityName || '--';
-          indeedInfo[7] = result.realRegionVerifs.supplyChannel || '--';
-          indeedInfo[9] = result.realRegionVerifs.scale || '--';
-          indeedInfo[11] = result.realRegionVerifs.dailySupply || '--';
-          if (result.realRegionVerifs.realRegionVerifDetails.objectImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.objectImgUrl !== null) {
-            indeedImageData[0].imgUrl = result.realRegionVerifs.realRegionVerifDetails.objectImgUrl;
-          } else {
-            indeedImageData[0].imgUrl = '';
-          }
-          if (result.realRegionVerifs.realRegionVerifDetails.productionImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.productionImgUrl !== null) {
-            indeedImageData[1].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productionImgUrl;
-          } else {
-            indeedImageData[1].imgUrl = '';
-          }
-          if (result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl !== null) {
-            indeedImageData[2].imgUrl = result.realRegionVerifs.realRegionVerifDetails.qualificationImgUrl;
-          } else {
-            indeedImageData[2].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.productImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.productImgUrl !== null) {
-            indeedImageData[3].imgUrl = result.realRegionVerifs.realRegionVerifDetails.productImgUrl;
-          } else {
-            indeedImageData[3].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.sortImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.sortImgUrl !== null) {
-            indeedImageData[4].imgUrl = result.realRegionVerifs.realRegionVerifDetails.sortImgUrl;
-          } else {
-            indeedImageData[4].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.packageImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.packageImgUrl !== null) {
-            indeedImageData[5].imgUrl = result.realRegionVerifs.realRegionVerifDetails.packageImgUrl;
-          } else {
-            indeedImageData[5].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.memberImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.memberImgUrl !== null) {
-            indeedImageData[6].imgUrl = result.realRegionVerifs.realRegionVerifDetails.memberImgUrl;
-          } else {
-            indeedImageData[6].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl !== null) {
-            indeedImageData[7].imgUrl = result.realRegionVerifs.realRegionVerifDetails.promiseImgUrl;
-          } else {
-            indeedImageData[7].imgUrl = '';
-          }
-
-          if (result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl !== '' && result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl !== null) {
-            indeedImageData[8].imgUrl = result.realRegionVerifs.realRegionVerifDetails.factoryImgUrl;
-          } else {
-            indeedImageData[8].imgUrl = '';
-          }
-          if (result.realRegionVerifs.realRegionVerifDetails.objectDescribe !== '' && result.realRegionVerifs.realRegionVerifDetails.objectDescribe !== null) {
-            this.setState({
-              myText: result.realRegionVerifs.realRegionVerifDetails.objectDescribe,
-            });
-          }
+        if (realRegionVerifs) {
+          const {
+            verifIdentity,
+            category,
+            provinceName,
+            cityName,
+            supplyChannel,
+            scale,
+            dailySupply,
+            realRegionVerifDetails,
+          } = realRegionVerifs;
+          const {
+            objectImgUrl,
+            productionImgUrl,
+            qualificationImgUrl,
+            productImgUrl,
+            sortImgUrl,
+            packageImgUrl,
+            memberImgUrl,
+            promiseImgUrl,
+            factoryImgUrl,
+            objectDescribe,
+          } = realRegionVerifDetails;
+          indeedInfo[1] = verifIdentity || '--';
+          indeedInfo[3] = category.name || '--';
+          indeedInfo[5] = provinceName + cityName || '--';
+          indeedInfo[7] = supplyChannel || '--';
+          indeedInfo[9] = scale || '--';
+          indeedInfo[11] = dailySupply || '--';
+          indeedImageData[0].imgUrl = objectImgUrl || '';
+          indeedImageData[1].imgUrl = productionImgUrl || '';
+          indeedImageData[2].imgUrl = qualificationImgUrl || '';
+          indeedImageData[3].imgUrl = productImgUrl || '';
+          indeedImageData[4].imgUrl = sortImgUrl || '';
+          indeedImageData[5].imgUrl = packageImgUrl || '';
+          indeedImageData[6].imgUrl = memberImgUrl || '';
+          indeedImageData[7].imgUrl = promiseImgUrl || '';
+          indeedImageData[8].imgUrl = factoryImgUrl || '';
+          this.setState({
+            myText: objectDescribe || '',
+          });
           const myArray = [];
           for (let i = 0; i < indeedImageData.length; i += 1) {
             if (indeedImageData[i].imgUrl !== '') {
@@ -241,26 +228,26 @@ class Base extends React.Component {
             isHaveIndeed: false,
           });
         }
-        if (result.personVerifStatus === '1' && result.personVerifs !== '' && result.personVerifs !== null && result.personVerifs.length > 0) {
+        const { personVerifStatus, personVerifs, score, allEvaluat } = result;
+        if (personVerifStatus === '1' && personVerifs && personVerifs.length > 0) {
           this.setState({
-            realName: result.personVerifs[0].realName,
+            realName: personVerifs[0].realName,
           });
         }
         this.setState({
           userInfo: result,
           renzhengInfo,
           indeedInfo,
-          DTgoodsScore: result.score.goodsScore || '--',
-          DTlogisticsScore: result.score.logisticsScore || '--',
-          DTsellScore: result.score.sellScore || '--',
-          allComment: result.allEvaluat.evaluatCount || '',
-          allScore: result.allEvaluat.evaluatScore || '',
+          DTgoodsScore: score.goodsScore || '--',
+          DTlogisticsScore: score.logisticsScore || '--',
+          DTsellScore: score.sellScore || '--',
+          allComment: allEvaluat.evaluatCount || '',
+          allScore: allEvaluat.evaluatScore || '',
         });
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
     if (global.memberId) {
       this.GetMemberFollowService();
@@ -271,7 +258,7 @@ class Base extends React.Component {
     GetMemberFollowService({
       memberId: global.memberId,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         for (let i = 0; i < result.length; i += 1) {
@@ -285,8 +272,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   CreateMemberFollowService = () => {
@@ -322,8 +308,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   DeleteFollow = () => {
@@ -342,8 +327,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   listPush = () => {
@@ -386,7 +370,7 @@ class Base extends React.Component {
       memberId,
     }).then((res) => {
       if (res.isSuccess) {
-        console.log(res);
+        // console.log(res);
         const result = res.data.pageData;
         if (result.length === 0) {
           if (refresh) {
@@ -429,8 +413,7 @@ class Base extends React.Component {
       } else {
         Toast.show(res.msg);
       }
-    }).catch((err) => {
-      console.log(err);
+    }).catch(() => {
     });
   }
   goChat = () => {
@@ -438,7 +421,6 @@ class Base extends React.Component {
       this.props.push({ key: 'User' });
       return;
     }
-    console.log(this.state.userInfo);
     const { userInfo: { memberId, nickName, imgUrl } } = this.state;
     if (memberId.toString() === global.memberId.toString()) {
       Toast.show('无法跟自己聊天');

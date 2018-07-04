@@ -76,7 +76,7 @@ class Base extends React.Component {
   getData = () => {
     GetHomeCategoryService({
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const { categorys, seasonals } = res.data;
         categorys.push({
@@ -118,7 +118,7 @@ class Base extends React.Component {
     GetBackgroundImgService({
       type: '1',
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.isSuccess) {
         const imgList = res.data;
         if (res.map.backgroundTopImg) {

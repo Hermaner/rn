@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   topIcon1: {
-    color: Mred,
+    color: '#ff0000',
   },
   topText: {
     fontSize: 12,
@@ -185,11 +185,12 @@ const styles = StyleSheet.create({
     flex: 1,
     ...st.fr,
     backgroundColor: '#fff',
-    ...st.jacenter,
+    ...st.acenter,
+    paddingLeft: 20,
   },
   fotChatIcon: {
     color: '#666',
-    marginRight: 8,
+    marginRight: 4,
     fontSize: 18,
   },
   fotChatText: {

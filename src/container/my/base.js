@@ -115,20 +115,20 @@ class MyBase extends React.Component {
         }],
       shares: [{
         label: '微信',
-        icon: 'md-alarm',
-        color: '#62b900',
+        icon: 'icon-weixin',
+        color: '#00d22a',
       }, {
         label: '朋友圈',
-        icon: 'md-alarm',
-        color: '#556876',
+        icon: 'icon-pengyouquan',
+        color: '#00d22a',
       }, {
         label: 'QQ',
-        icon: 'md-alarm',
-        color: '#fc5e6a',
+        icon: 'icon-QQ',
+        color: '#00addc',
       }, {
         label: 'QQ空间',
-        icon: 'md-alarm',
-        color: '#68a5e1',
+        icon: 'icon-qunfengqqkongjian',
+        color: '#00addc',
       }],
       backGround1: require('../../assets/img/444.png'),
       userInfo: '',
@@ -177,7 +177,6 @@ class MyBase extends React.Component {
     GetMemberBuyOrderCountService({
       memberId,
     }).then((res) => {
-      console.log(res);
       if (res.isSuccess) {
         const result = res.data;
         if (result.confirm !== '0' || result.pay !== '0' || result.receive !== '0') {
@@ -234,7 +233,7 @@ class MyBase extends React.Component {
         { text: '取消', onPress: () => {} },
         { text: '确认',
           onPress: () => {
-            Communications.phonecall(global.phone, false);
+            Communications.phonecall('18916882065', false);
           } },
       ],
     );
@@ -295,8 +294,7 @@ class MyBase extends React.Component {
           type: 'news',
           webpageUrl: 'http://www.baidu.com',
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       } else {
         Toast.show('没有安装微信软件，请您安装微信之后再试');
@@ -330,10 +328,11 @@ class MyBase extends React.Component {
         webpageUrl: 'http://www.baidu.com',
         imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
       })
-      .then((res) => {
-        console.log(res);
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
+      .then(() => {
+      }).catch(() => {});
+    }).catch(() => {
+      Toast.show('没有安装QQ软件，请您安装QQ之后再试');
+    });
   }
   shareToQzone = () => {
     QQAPI.isQQInstalled().then(() => {
@@ -344,10 +343,11 @@ class MyBase extends React.Component {
         webpageUrl: 'http://www.baidu.com',
         imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
       })
-      .then((res) => {
-        console.log(res);
-      }).catch(err => console.log(err));
-    }).catch(err => console.log(err));
+      .then(() => {
+      }).catch(() => {});
+    }).catch(() => {
+      Toast.show('没有安装QQ软件，请您安装QQ之后再试');
+    });
   }
 
   showModal = () => {

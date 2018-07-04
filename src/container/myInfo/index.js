@@ -37,7 +37,6 @@ class MyInfo extends base {
   };
   _renderBody() {
     const { items, info, realName } = this.state;
-    console.log(info);
     return (
       <View style={styles.pagebody}>
         {
@@ -166,11 +165,11 @@ class MyInfo extends base {
   _renderFooter() {
     const { info, memberId, isFollow } = this.state;
     return (
-      <Footer>
+      <Footer style={styles.footer}>
         <TFeedback
           content={
-            <View style={[styles.fotBtn1, { borderRightWidth: 1, borderRightColor: '#eee' }]}>
-              <Icon name="heart" style={[styles.fotChatIcon, isFollow ? styles.topIcon1 : '']} />
+            <View style={styles.fotBtn1}>
+              <Iconfont style={[styles.fotChatIcon, isFollow ? styles.topIcon1 : '']} name="icon-wodeshoucang" />
               {
                 isFollow ?
                   <Text style={styles.fotChatText1}>已关注</Text>
@@ -183,7 +182,7 @@ class MyInfo extends base {
         <TFeedback
           content={
             <View style={styles.fotBtn1}>
-              <Icon name="chatboxes" style={styles.fotChatIcon} />
+              <Iconfont style={styles.fotChatIcon} name="icon-liaotianduihua" />
               <Text style={styles.fotChatText}>聊生意</Text>
             </View>}
           onPress={this.goChat}

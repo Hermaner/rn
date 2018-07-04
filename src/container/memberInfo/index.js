@@ -50,7 +50,7 @@ class MemberInfo extends memberInfo {
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>性别</Text>
           <TOpacity
-            style={{ flex: 1 }}
+            style={styles.listOp}
             content={
               <View style={styles.tabView}>
                 <Text style={sex ? styles.tabTextCur : styles.tabText}>{sex || '请选择性别'}</Text>
@@ -63,7 +63,7 @@ class MemberInfo extends memberInfo {
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>身份</Text>
           <TOpacity
-            style={{ flex: 1 }}
+            style={styles.listOp}
             content={
               <View style={styles.tabView}>
                 {
@@ -81,7 +81,7 @@ class MemberInfo extends memberInfo {
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>绑定手机号</Text>
           <TOpacity
-            style={{ flex: 1 }}
+            style={styles.listOp}
             content={
               <View style={styles.tabView}>
                 <Text style={userInfo.phone ? styles.tabTextCur : styles.tabText}>{userInfo.phone || '点击绑定手机号'}</Text>
@@ -94,7 +94,7 @@ class MemberInfo extends memberInfo {
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>联系地址</Text>
           <TOpacity
-            style={{ flex: 1 }}
+            style={styles.listOp}
             content={
               <View style={styles.tabView}>
                 {
@@ -114,7 +114,7 @@ class MemberInfo extends memberInfo {
         <View style={styles.rowBox}>
           <Text style={styles.leftText}>密码修改</Text>
           <TOpacity
-            style={{ flex: 1 }}
+            style={styles.listOp}
             content={
               <Text style={styles.setPassword}>设置登录密码</Text>
             }
