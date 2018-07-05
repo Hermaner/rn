@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ios": "react-native run-ios",
+    "bdad": "react-native run-ios",
+    "ad": "cd android && ./gradlew assembleRelease",
+    "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
     "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
     "bdios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js  --platform ios --dev false --bundle-output ./ios/bundle/index.ios.jsbundle --assets-dest ./ios/bundle",
     "start": "node node_modules/react-native/local-cli/cli.js start",
