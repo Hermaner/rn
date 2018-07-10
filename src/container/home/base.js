@@ -65,6 +65,7 @@ class Base extends React.Component {
     };
   }
   getInit = () => {
+    this.getData();
     NetInfo.addEventListener(
        'connectionChange',
        this._handleConnectionInfoChange,

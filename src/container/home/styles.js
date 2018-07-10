@@ -164,7 +164,10 @@ const styles = StyleSheet.create({
   },
   sampleImg: {
     width: '100%',
-    height: 70,
+    height: ((deviceW - 10) / 3 - 30) * 132 / 180,
+    // resizeMode: 'contain',
+    borderRadius: 6,
+    overflow: 'hidden',
     marginBottom: 6,
   },
   SampleCenterBorder: {

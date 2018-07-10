@@ -1,20 +1,21 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { Header, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { CachedImage } from 'react-native-img-cache';
 import { pushRoute } from '../actions';
-import { Mcolor, st, deviceW } from '../utils';
+import { Mcolor, st, deviceW, deviceH } from '../utils';
 import TFeedback from './TFeedback';
 import Iconfont from './Iconfont';
 
+const isX = Platform.OS === 'ios' && deviceH === 812;
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'transparent',
     ...st.fr,
+    paddingTop: isX ? 40 : 20,
     height: deviceW * 0.6,
-    position: 'relative',
   },
   headerImg: {
     position: 'absolute',
@@ -74,9 +75,9 @@ const styles = StyleSheet.create({
   },
 });
 const headerBar = ({ push, label, image }) => (
-  <Header style={styles.header}>
+  <View style={styles.header}>
     {
-      <CachedImage style={styles.headerImg} source={image.length > 0 ? { uri: image } : require('../assets/img/x8.png')} />
+      <CachedImage style={styles.headerImg} source={{ uri: image || 'https://img.hbw128.com/FnyZDZQ7KEri2P-PhJmHe0GG3MWt' }} />
     }
     <View style={styles.left}>
       <Iconfont style={styles.leftIcon} name="icon-shouhuodizhi" />
@@ -91,7 +92,7 @@ const headerBar = ({ push, label, image }) => (
       }
       onPress={push}
     />
-  </Header>
+  </View>
 );
 
 headerBar.propTypes = {
