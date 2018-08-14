@@ -288,11 +288,11 @@ class MyBase extends React.Component {
     .then((isInstalled) => {
       if (isInstalled) {
         WeChat.shareToSession({
-          title: '分享朋友',
-          description: '分享来领券',
-          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          title: '手机慧包',
+          description: '手机慧包',
+          thumbImage: 'http://www.hbw128.com/static/img/100.5af1c76.png',
           type: 'news',
-          webpageUrl: 'http://www.baidu.com',
+          webpageUrl: 'http://www.hbw128.com/#/DownLoad',
         })
         .catch(() => {
         });
@@ -306,11 +306,11 @@ class MyBase extends React.Component {
     .then((isInstalled) => {
       if (isInstalled) {
         WeChat.shareToTimeline({
-          title: '分享朋友圈',
-          description: '分享来领券',
-          thumbImage: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+          title: '手机慧包',
+          description: '手机慧包',
+          thumbImage: 'http://www.hbw128.com/static/img/100.5af1c76.png',
           type: 'news',
-          webpageUrl: 'http://www.baidu.com',
+          webpageUrl: 'http://www.hbw128.com/#/DownLoad',
         })
         .catch(() => {
         });
@@ -323,10 +323,10 @@ class MyBase extends React.Component {
     QQAPI.isQQInstalled().then(() => {
       QQAPI.shareToQQ({
         type: 'news',
-        title: '分享好友',
-        description: '分享来领券',
-        webpageUrl: 'http://www.baidu.com',
-        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+        title: '手机慧包',
+        description: '手机慧包',
+        webpageUrl: 'http://www.hbw128.com/#/DownLoad',
+        imageUrl: 'http://www.hbw128.com/static/img/100.5af1c76.png',
       })
       .then(() => {
       }).catch(() => {});
@@ -338,10 +338,10 @@ class MyBase extends React.Component {
     QQAPI.isQQInstalled().then(() => {
       QQAPI.shareToQzone({
         type: 'news',
-        title: '分享好友',
-        description: '分享来领券',
-        webpageUrl: 'http://www.baidu.com',
-        imageUrl: 'https://img.hbw128.com/Fi5qw22CEBs3Wzg9yztZP0QQD0kt',
+        title: '手机慧包',
+        description: '手机慧包',
+        webpageUrl: 'http://www.hbw128.com/#/DownLoad',
+        imageUrl: 'http://www.hbw128.com/static/img/100.5af1c76.png',
       })
       .then(() => {
       }).catch(() => {});
